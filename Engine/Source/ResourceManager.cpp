@@ -63,8 +63,7 @@ void ResourceManager::CreateDefaultResource()
 
 void ResourceManager::CreateDefaultRenderTarget()
 {
-	RenderTarget* renderTarget = new RenderTarget(1920, 1080, D3DFORMAT::D3DFMT_A8R8G8B8, D3DCOLOR_RGBA(0, 0, 0, 255));
-	m_resoucreContainers[typeid(RenderTarget).name()][L"mainCamera"] = renderTarget;
+
 }
 
 void ResourceManager::CreateDefaultMesh()
@@ -126,6 +125,16 @@ void ResourceManager::CreateDefaultShader()
 		};
 		SetShaderInfo(L"default", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
 	}
+	{
+		D3DVERTEXELEMENT9 decl[] =
+		{
+			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+			{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
+			{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+			D3DDECL_END()
+		};
+		SetShaderInfo(L"standard", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
+	}
 	/*{
 	D3DVERTEXELEMENT9 decl[] =
 	{
@@ -160,7 +169,18 @@ void ResourceManager::CreateDefaultShader()
 			decl,
 			sizeof(INPUT_LAYOUT_POSITION_UV));
 	}
-
+	{
+		D3DVERTEXELEMENT9 decl[] =
+		{
+			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+			D3DDECL_END()
+		};
+		SetShaderInfo(L"deferred_lighting",
+			D3DPT_TRIANGLELIST,
+			decl,
+			sizeof(INPUT_LAYOUT_POSITION_UV));
+	}
 	{
 		D3DVERTEXELEMENT9 decl[] =
 		{

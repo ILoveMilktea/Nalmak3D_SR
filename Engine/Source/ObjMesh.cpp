@@ -311,13 +311,13 @@ void ObjMesh::CreateVertexBuffer()
 	}
 	
 
+	D3DXComputeBoundingSphere(&vertices[0].position, (DWORD)vertex.size(), sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV), &m_boundingSphereCenter, &m_boundingSphereRadius);
 	m_vBuffer->Unlock();
 	SetVertexCount((UINT)vertex.size());
 	vertex.clear();
 	uv.clear();
 	vn.clear();
 
-	D3DXComputeBoundingSphere(&vertices[0].position, (DWORD)vertex.size(), sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV), &m_boundingSphereCenter, &m_boundingSphereRadius);
 
 
 }

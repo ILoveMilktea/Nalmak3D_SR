@@ -49,8 +49,8 @@ technique DefaultTechnique
 {
 	Pass DefaultPass
 	{
-		ZEnable = false;
-		ZWriteEnable = false;
+		//ZEnable = false;
+		//ZWriteEnable = false;
 		//CullMode = CW;
 
 		VertexShader = compile vs_3_0 VS_Main_Default();

@@ -103,7 +103,7 @@ public:
 			}
 		}
 	}
-private:
+public:
 	void InitializeComponents();
 private:
 	void OnEnable() override;

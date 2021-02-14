@@ -4,10 +4,10 @@
 
 shader "default"
 
-textureRT "g_mainTex" "mainRenderTarget3"
+textureRT "g_mainTex" "mainRT_diffuse"
 vector4 "g_mainTexColor" "1,1,1,1.f"
 
-renderQueue "2000"
+renderQueue "4000"
 
 renderMode "0"
 

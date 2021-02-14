@@ -14,6 +14,9 @@ void TitleScene::Initialize()
 	{
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>();
 		mainCam->GetComponent<Camera>()->OffLayer(RENDER_LAYER_UI);
+		mainCam->GetComponent<Camera>()->SetRenderTarget(0, L"mainRT_diffuse");
+		mainCam->GetComponent<Camera>()->SetRenderTarget(1, L"mainRT_depth");
+		mainCam->GetComponent<Camera>()->SetRenderTarget(2, L"mainRT_normal");
 	/*	mainCam->GetComponent<Camera>()->SetRenderTarget(0, L"mainRenderTarget1");
 		mainCam->GetComponent<Camera>()->SetRenderTarget(1, L"mainRenderTarget2");
 		mainCam->GetComponent<Camera>()->SetRenderTarget(2, L"mainRenderTarget3");
@@ -34,41 +37,55 @@ void TitleScene::Initialize()
 		uiCam->GetComponent<Camera>()->OnLayer(RENDER_LAYER_UI);
 		uiCam->SetPosition(0, 0, -10);
 	}
-	{
-		Terrain::Desc terrain;
-		terrain.interval = 1.f;
-		terrain.mtrlName = L"debugCollider";
-		terrain.brushPower = 1.f;
-		terrain.brushRadius = 2.f;
-		auto terrainObj = INSTANTIATE()->AddComponent<Terrain>(&terrain);
 
+	
+	{
 		MeshRenderer::Desc render;
-		render.meshName = L"quad";
-		render.mtrlName = L"default";
-		Rigidbody::Desc rigid;
-		rigid.isGravity = false;
-		ClimbTerrain::Desc terrainDesc;
-		terrainDesc.terrain = terrainObj->GetComponent<Terrain>();
+		render.mtrlName = L"standard";
+		render.meshName = L"box";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&render);
 	}
 	{
 		MeshRenderer::Desc render;
-		render.mtrlName = L"default2";
-		render.meshName = L"quad";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 10)->SetScale(10, 10, 10);
+		render.mtrlName = L"standard";
+		render.meshName = L"teapot";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 10)->SetScale(1, 1, 1);
 	}
-	/*{
+
+	{
 		MeshRenderer::Desc renderer;
 		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRenderTarget1";
+		renderer.mtrlName = L"mainRT_diffuse";
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 100, 0);
 	}
 	{
 		MeshRenderer::Desc renderer;
 		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRenderTarget2";
+		renderer.mtrlName = L"mainRT_depth";
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 300, 0);
 	}
 	{
+		MeshRenderer::Desc renderer;
+		renderer.layer = RENDER_LAYER_UI;
+		renderer.mtrlName = L"mainRT_normal";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 500, 0);
+	}
+	{
+		MeshRenderer::Desc renderer;
+		renderer.layer = RENDER_LAYER_UI;
+		renderer.meshName = L"quadNoneNormal";
+		renderer.mtrlName = L"deferredLighting";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);
+	}
+	/*{
+		MeshRenderer::Desc renderer;
+		renderer.layer = RENDER_LAYER_UI;
+		renderer.mtrlName = L"default";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);
+	}*/
+
+
+	/*{
 		MeshRenderer::Desc renderer;
 		renderer.layer = RENDER_LAYER_UI;
 		renderer.mtrlName = L"mainRenderTarget3";

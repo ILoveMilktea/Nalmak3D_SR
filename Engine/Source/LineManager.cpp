@@ -30,7 +30,8 @@ void LineManager::Initialize()
 	{
 		auto line = GameObject::Instantiate(0, L"line")->AddComponent<MeshRenderer>(&desc);
 		line->SetDontDestroy(true);
-		line->SetActive(true);
+		line->SetActive(false);
+		line->InitializeComponents();
 		m_dynamicLine.emplace_back(line);
 	}
 

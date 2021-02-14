@@ -40,11 +40,11 @@ void Box::CreateVertexBuffer()
 	m_vBuffer->Lock(0, 0, (void**)&vertices, 0);
 
 	vertices[0].position = Vector3(-w2, -h2, -d2);
-	vertices[0].normal = Vector3(0.f, 0.f, 1.f);
+	vertices[0].normal = Vector3(0.f, 0.f, -1.f);
 	vertices[0].uv = Vector2(0.f, 1.f);
 
 	vertices[1].position = Vector3(-w2, +h2, -d2);
-	vertices[1].normal = Vector3(0.f, 0.f, 1.f);
+	vertices[1].normal = Vector3(0.f, 0.f, -1.f);
 	vertices[1].uv = Vector2(0.f, 0.f);
 
 	vertices[2].position = Vector3(+w2, +h2, -d2);

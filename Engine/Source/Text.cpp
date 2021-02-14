@@ -48,8 +48,9 @@ void Text::LateUpdate()
 void Text::PreRender()
 {
 	m_render->RenderRequest(this);
-
 }
+
+
 
 void Text::Release()
 {

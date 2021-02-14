@@ -1,0 +1,21 @@
+1. Resource /  Scene 이름 /  Material
+                                   /  Texture
+                                   /  Mesh
+                                  /  Shader
+                                  /  RenderTarget
+2. Resource / Scene 이름 / Plane / 
+                                  / Enemy / 
+
+
+
+
+Texture 이름 양식
+1. 이펙트일 경우 앞에      (fx_)        를 붙인다
+   스프라이트일 경우 앞에 (sprite_ , 뒤에 _숫자를 붙여준다)
+   기본적인 텍스쳐일경우  (diffuse_) 를 붙인다
+    노말 텍스쳐일경우       (normal_) 를 붙인다
+   
+ex)  fx_player_attack1  (플레이어 공격1 이펙트)
+     sprite_player_idle_숫자 (플레이어 idle 애니메이션)
+     diffuse_plane_기체명 
+     diffuse_missle_기체명

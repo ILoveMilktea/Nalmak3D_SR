@@ -36,6 +36,7 @@ BEGIN(Nalmak)
 //http://ozlael.egloos.com/2423070 µðÆÛµå ·»´õ¸µ ÀÚ·á
 //https://portsnake.tistory.com/253
 
+//https://lindenreid.wordpress.com/2017/12/15/simple-water-shader-in-unity/ ¹° Ä«Å÷ ·»´õ¸µ
 
 // Texture coverage 
 class RenderManager
