@@ -9,7 +9,7 @@
 void TitleScene::Initialize()
 {
 	INSTANTIATE()->AddComponent<Grid>();
-
+	//asdfghjkl;
 	
 	{
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>();
