@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Nalmak3D_SR.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Extern.h">
+      <Filter>98.PreCompile\02.Extern</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TitleScene.h">
+      <Filter>01.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageScene.h">
+      <Filter>01.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\NextSceneLoad.h">
+      <Filter>02.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enum.h">
+      <Filter>98.PreCompile\01.Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MainGame.h">
+      <Filter>00.Main</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>98.PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlaneInfo.h">
+      <Filter>02.Component\00.Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlaneController.h">
+      <Filter>02.Component\00.Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ClimbTerrain.h" />
+    <ClInclude Include="..\Include\Define.h">
+      <Filter>98.PreCompile\01.Enum</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Nalmak3D_SR.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TitleScene.cpp">
+      <Filter>01.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageScene.cpp">
+      <Filter>01.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\NextSceneLoad.cpp">
+      <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MainGame.cpp">
+      <Filter>00.Main</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>98.PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlaneInfo.cpp">
+      <Filter>02.Component\00.Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlaneController.cpp">
+      <Filter>02.Component\00.Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ClimbTerrain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Nalmak3D_SR.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>99.Default</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile">
+      <UniqueIdentifier>{2e85a4a7-f68d-4f19-a778-f1c020085930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\00.Define">
+      <UniqueIdentifier>{42d2d585-dfda-4910-b06a-daff2a90e92e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\02.Extern">
+      <UniqueIdentifier>{20451b42-8431-478b-8dc4-8480da0b2211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\01.Enum">
+      <UniqueIdentifier>{44b7a078-bf7a-4213-bfbb-0862d945be3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.Main">
+      <UniqueIdentifier>{f4cde318-699b-4101-ac58-d494b896f71c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene">
+      <UniqueIdentifier>{5f9dbd21-330f-48aa-aad2-4fd421d5366d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component">
+      <UniqueIdentifier>{efc1141f-5a17-40b6-9f6a-58a40e956726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Resource">
+      <UniqueIdentifier>{1ecd7c50-cb74-443e-9a5e-81a35dbd9469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Resource\02.Shader">
+      <UniqueIdentifier>{7ae42d59-6412-4a79-acc3-19e26215e710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Plane">
+      <UniqueIdentifier>{f51a46b1-cb5c-4681-a100-32b6f0f3d97d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Nalmak3D_SR.rc">
+      <Filter>99.Default</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>99.Default</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\default.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\line.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\particle.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\noneNormal.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
