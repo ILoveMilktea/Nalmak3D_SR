@@ -76,6 +76,9 @@ void TitleScene::Initialize()
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);*/
 	}
 
+	{
+	
+	}
 
 	INSTANTIATE(OBJECT_TAG_DEBUG,L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(-HALF_WINCX, HALF_WINCY, 0);
 

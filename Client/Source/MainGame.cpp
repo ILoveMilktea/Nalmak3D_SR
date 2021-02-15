@@ -9,6 +9,8 @@
 #include "PhantomScene.h"
 #include "Stage2Scene.h"
 
+#include "HeeTestScene.h"
+
 TimeManager* g_time;
 // 렌더링 파이프라인 
 // 로컬 - 월드 - 뷰 - 후면추려내기 - 조명 - 투영 - 클리핑 - 뷰포트 - 레스터라이즈
@@ -93,11 +95,14 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"stage", Scene::Instantiate<StageScene>());
 	m_engine->AddScene(L"stage2", Scene::Instantiate<Stage2Scene>());
 
+	
+
 
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
 
-
-	m_engine->SetStartScene(L"title");
+	/*Test*/
+	m_engine->AddScene(L"Hee", Scene::Instantiate<Stage2Scene>());
+	m_engine->SetStartScene(L"Hee");
 }
 
 void MainGame::ReadyResource()

@@ -197,9 +197,12 @@
     <ClInclude Include="..\Include\ClimbTerrain.h" />
     <ClInclude Include="..\Include\Define.h" />
     <ClInclude Include="..\Include\DogFightState.h" />
+    <ClInclude Include="..\Include\Enemy.h" />
+    <ClInclude Include="..\Include\EnemyManager.h" />
     <ClInclude Include="..\Include\Enum.h" />
     <ClInclude Include="..\Include\Extern.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
+    <ClInclude Include="..\Include\HeeTestScene.h" />
     <ClInclude Include="..\Include\MainGame.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlaneController.h" />
@@ -219,7 +222,10 @@
     <ClCompile Include="..\Source\BossState.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp" />
+    <ClCompile Include="..\Source\Enemy.cpp" />
+    <ClCompile Include="..\Source\EnemyManager.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
+    <ClCompile Include="..\Source\HeeTestScene.cpp" />
     <ClCompile Include="..\Source\MainGame.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlaneController.cpp" />
