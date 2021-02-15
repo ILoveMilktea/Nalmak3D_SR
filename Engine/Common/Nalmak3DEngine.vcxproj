@@ -69,6 +69,7 @@
     <ClCompile Include="..\Source\Scene.cpp" />
     <ClCompile Include="..\Source\SceneManager.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
+    <ClCompile Include="..\Source\SkyBox.cpp" />
     <ClCompile Include="..\Source\Sphere.cpp" />
     <ClCompile Include="..\Source\SphereCollider.cpp" />
     <ClCompile Include="..\Source\StateControl.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="..\Include\Scene.h" />
     <ClInclude Include="..\Include\SceneManager.h" />
     <ClInclude Include="..\Include\Shader.h" />
+    <ClInclude Include="..\Include\SkyBox.h" />
     <ClInclude Include="..\Include\Sphere.h" />
     <ClInclude Include="..\Include\SphereCollider.h" />
     <ClInclude Include="..\Include\StateControl.h" />

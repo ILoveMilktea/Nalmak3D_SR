@@ -193,15 +193,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Include\BossState.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
     <ClInclude Include="..\Include\Define.h" />
+    <ClInclude Include="..\Include\DogFightState.h" />
     <ClInclude Include="..\Include\Enum.h" />
     <ClInclude Include="..\Include\Extern.h" />
+    <ClInclude Include="..\Include\GarageScene.h" />
     <ClInclude Include="..\Include\MainGame.h" />
-    <ClInclude Include="..\Include\NextSceneLoad.h" />
+    <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlaneController.h" />
     <ClInclude Include="..\Include\PlaneInfo.h" />
+    <ClInclude Include="..\Include\ShootingState.h" />
+    <ClInclude Include="..\Include\Stage2Scene.h" />
+    <ClInclude Include="..\Include\StageManager.h" />
     <ClInclude Include="..\Include\StageScene.h" />
+    <ClInclude Include="..\Include\StageSelectScene.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
@@ -209,12 +216,19 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\BossState.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
+    <ClCompile Include="..\Source\DogFightState.cpp" />
+    <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\MainGame.cpp" />
-    <ClCompile Include="..\Source\NextSceneLoad.cpp" />
+    <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlaneController.cpp" />
     <ClCompile Include="..\Source\PlaneInfo.cpp" />
+    <ClCompile Include="..\Source\ShootingState.cpp" />
+    <ClCompile Include="..\Source\Stage2Scene.cpp" />
+    <ClCompile Include="..\Source\StageManager.cpp" />
     <ClCompile Include="..\Source\StageScene.cpp" />
+    <ClCompile Include="..\Source\StageSelectScene.cpp" />
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">

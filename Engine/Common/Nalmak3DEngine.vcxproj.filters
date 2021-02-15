@@ -178,6 +178,9 @@
     <Filter Include="99.PreCompile\07.MFC_Utility">
       <UniqueIdentifier>{8465da1c-f85b-4cdd-8f4e-4b58d5bd1cb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Resource\01.VIBuffer\08.SkyBox">
+      <UniqueIdentifier>{29347aa3-bc85-4d30-88b0-6caa7e659da8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -366,6 +369,7 @@
     <ClCompile Include="..\Source\Bezier.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\SkyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -575,5 +579,6 @@
     <ClInclude Include="..\Include\Bezier.h">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\SkyBox.h" />
   </ItemGroup>
 </Project>

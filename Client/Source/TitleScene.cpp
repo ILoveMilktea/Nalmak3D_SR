@@ -17,14 +17,9 @@ void TitleScene::Initialize()
 		mainCam->GetComponent<Camera>()->SetRenderTarget(0, L"mainRT_diffuse");
 		mainCam->GetComponent<Camera>()->SetRenderTarget(1, L"mainRT_depth");
 		mainCam->GetComponent<Camera>()->SetRenderTarget(2, L"mainRT_normal");
-	/*	mainCam->GetComponent<Camera>()->SetRenderTarget(0, L"mainRenderTarget1");
-		mainCam->GetComponent<Camera>()->SetRenderTarget(1, L"mainRenderTarget2");
-		mainCam->GetComponent<Camera>()->SetRenderTarget(2, L"mainRenderTarget3");
-		mainCam->GetComponent<Camera>()->SetRenderTarget(3, L"mainRenderTarget4");*/
-
-
 		mainCam->SetPosition(0, 4, -6);
 		mainCam->SetRotation(30, 0, 0);
+		mainCam->SetDontDestroy(true);
 	}
 	
 	{
@@ -36,6 +31,7 @@ void TitleScene::Initialize()
 		uiCam->GetComponent<Camera>()->AllOffLayer();
 		uiCam->GetComponent<Camera>()->OnLayer(RENDER_LAYER_UI);
 		uiCam->SetPosition(0, 0, -10);
+		uiCam->SetDontDestroy(true);
 	}
 
 	
@@ -77,26 +73,7 @@ void TitleScene::Initialize()
 		renderer.mtrlName = L"deferredLighting";
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);
 	}
-	/*{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"default";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);
-	}*/
 
-
-	/*{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRenderTarget3";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 500, 0);
-	}
-	{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRenderTarget4";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 700, 0);
-	}*/
 
 	INSTANTIATE(OBJECT_TAG_DEBUG,L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(-HALF_WINCX, HALF_WINCY, 0);
 

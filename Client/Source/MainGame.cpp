@@ -4,6 +4,10 @@
 #include "TitleScene.h"
 #include "StageScene.h"
 #include "NextSceneLoad.h"
+#include "GarageScene.h"
+#include "StageSelectScene.h"
+#include "PhantomScene.h"
+#include "Stage2Scene.h"
 
 TimeManager* g_time;
 // 렌더링 파이프라인 
@@ -84,7 +88,14 @@ void MainGame::SystemSetting()
 	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_DEFAULT, COLLISION_LAYER_DEFAULT);
 
 	m_engine->AddScene(L"title", Scene::Instantiate<TitleScene>());
+	m_engine->AddScene(L"garage", Scene::Instantiate<GarageScene>());
+	m_engine->AddScene(L"stageSelect", Scene::Instantiate<StageSelectScene>());
 	m_engine->AddScene(L"stage", Scene::Instantiate<StageScene>());
+	m_engine->AddScene(L"stage2", Scene::Instantiate<Stage2Scene>());
+
+
+	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
+
 
 	m_engine->SetStartScene(L"title");
 }

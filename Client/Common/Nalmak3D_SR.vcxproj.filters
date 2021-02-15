@@ -19,9 +19,6 @@
     <ClInclude Include="..\Include\StageScene.h">
       <Filter>01.Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\NextSceneLoad.h">
-      <Filter>02.Component</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Enum.h">
       <Filter>98.PreCompile\01.Enum</Filter>
     </ClInclude>
@@ -37,9 +34,35 @@
     <ClInclude Include="..\Include\PlaneController.h">
       <Filter>02.Component\00.Plane</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\ClimbTerrain.h" />
     <ClInclude Include="..\Include\Define.h">
       <Filter>98.PreCompile\01.Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ClimbTerrain.h">
+      <Filter>02.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageManager.h">
+      <Filter>02.Component\00.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\BossState.h">
+      <Filter>04.State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState.h">
+      <Filter>04.State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ShootingState.h">
+      <Filter>04.State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GarageScene.h">
+      <Filter>01.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PhantomScene.h">
+      <Filter>01.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage2Scene.h">
+      <Filter>01.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectScene.h">
+      <Filter>01.Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +74,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\StageScene.cpp">
       <Filter>01.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\NextSceneLoad.cpp">
-      <Filter>02.Component</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MainGame.cpp">
       <Filter>00.Main</Filter>
@@ -67,7 +87,33 @@
     <ClCompile Include="..\Source\PlaneController.cpp">
       <Filter>02.Component\00.Plane</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ClimbTerrain.cpp" />
+    <ClCompile Include="..\Source\ClimbTerrain.cpp">
+      <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageManager.cpp">
+      <Filter>02.Component\00.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\BossState.cpp">
+      <Filter>04.State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFightState.cpp">
+      <Filter>04.State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ShootingState.cpp">
+      <Filter>04.State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GarageScene.cpp">
+      <Filter>01.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PhantomScene.cpp">
+      <Filter>01.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Stage2Scene.cpp">
+      <Filter>01.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectScene.cpp">
+      <Filter>01.Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -110,6 +156,12 @@
     </Filter>
     <Filter Include="02.Component\00.Plane">
       <UniqueIdentifier>{f51a46b1-cb5c-4681-a100-32b6f0f3d97d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager">
+      <UniqueIdentifier>{620004b3-601d-458e-9e74-70f98e3743b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.State">
+      <UniqueIdentifier>{dea952e2-3812-4031-99e4-5366973e199d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ texture g_diffuse;
 texture g_depth;
 texture g_normal;
 
-float3 g_lightDirection = (0, -0.5f, 0.3f);
+float3 g_lightDirection = (0, -0.6f, 0.3f);
 sampler DiffuseSampler = sampler_state
 {
 	texture = g_diffuse;

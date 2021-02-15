@@ -50,7 +50,6 @@ void RenderManager::Initialize(UINT _wincx, UINT _wincy)
 	D3DVIEWPORT9 vp = { 0,0,m_wincx,m_wincy,0,1 };
 	m_device->SetViewport(&vp);
 
-	
 }
 
 void RenderManager::Render()
