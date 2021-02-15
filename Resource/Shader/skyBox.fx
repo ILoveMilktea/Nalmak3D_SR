@@ -1,7 +1,8 @@
 
-matrix g_cameraMatrix;
+#include "common.fx"
+
 matrix g_world;
-matrix g_viewProj;
+
 
 texture g_skyBox;
 
@@ -20,17 +21,18 @@ samplerCUBE skyBoxSampler = sampler_state
 struct VS_INPUT
 {
 	float3 position : POSITION;
+	float3 uvw : TEXCOORD0;
 };
 
 struct VS_OUTPUT
 {
 	float4 position : POSITION;
-	float3 texCoord : TEXCOORD0;
+	float3 uvw : TEXCOORD0;
 };
 
 struct PS_INPUT
 {
-	float3 texCoord : TEXCOORD0;
+	float3 uvw : TEXCOORD0;
 };
 
 struct PS_OUTPUT
@@ -42,16 +44,19 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; 
 
-	float4 camPos = 1;
-	camPos.x = g_cameraMatrix._41;
-	camPos.y = g_cameraMatrix._42;
-	camPos.z = g_cameraMatrix._43;
+	matrix matWorld = 0;
+	matWorld._11 = 1;
+	matWorld._22 = 1;
+	matWorld._33 = 1;
+	matWorld._44 = 1;
 
-	matrix wvp = mul(g_cameraMatrix, g_viewProj);
-	o.position = mul(float4(_input.position,1), wvp);
+	matWorld._41 = g_cBuffer.worldCamPos.x;
+	matWorld._42 = g_cBuffer.worldCamPos.y;
+	matWorld._43 = g_cBuffer.worldCamPos.z;
 
-	float4 texCoord = mul(float4(_input.position, 1), g_world);
-	o.texCoord = normalize(texCoord - camPos).xyz;
+	matrix wvp = mul(matWorld, g_cBuffer.viewProj);
+	o.position = mul(float4(_input.position,1), wvp).xyww;
+	o.uvw = _input.uvw;
 	
 	
 	return o;
@@ -61,7 +66,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 PS_OUTPUT PS_Main_Default(PS_INPUT  _input) 
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
-	o.diffuse =texCUBE(skyBoxSampler, _input.texCoord);
+	o.diffuse =texCUBE(skyBoxSampler, _input.uvw);
 	return o;
 }
 
@@ -73,9 +78,9 @@ technique DefaultTechnique
 	{
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z 값에대한 활용
 
-		ZEnable = false;
-		ZWriteEnable = false;
-		CullMode = NONE;
+		//ZEnable = false;
+		//ZWriteEnable = false;
+		CullMode = CW;
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

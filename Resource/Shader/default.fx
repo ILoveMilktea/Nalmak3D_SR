@@ -1,7 +1,6 @@
-matrix g_cameraMatrix;
-matrix g_world;
-matrix g_viewProj;
+#include "common.fx"
 
+matrix g_world;
 texture g_mainTex;
 
 float4 g_mainTexColor;
@@ -43,7 +42,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; // 초기???�수!
 
-	float4x4 wvp = mul(g_world, g_viewProj);
+	float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
 	o.uv = _input.uv;
 	//o.normal = float3(0, 0, 1);
@@ -76,7 +75,7 @@ technique DefaultTechnique
 
 		//ZEnable = true;
 		//ZWriteEnable = true;
-		CullMode = NONE;
+		//CullMode = NONE;
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

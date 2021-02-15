@@ -1,6 +1,5 @@
-matrix g_cameraMatrix;
+#include "common.fx"
 matrix g_world;
-matrix g_viewProj;
 
 texture g_diffuse;
 texture g_depth;
@@ -47,7 +46,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; 
 
-	float4x4 wvp = mul(g_world, g_viewProj);
+	float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
 	o.uv = _input.uv;
 	
@@ -62,9 +61,14 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	float4 diffuse = tex2D(DiffuseSampler, _input.uv);
 	float3 normal = tex2D(NormalSampler, _input.uv).xyz;
 
-	float light = max(dot(normal, g_lightDirection),0.0);
+	
+	float light;
+	if (normal.x == 0 && normal.y == 0 && normal.z == 0)
+		light = 1.f;
+	else
+		light = max(dot(normal, g_lightDirection), 0.0);
 
-	o.color = light;
+	o.color.xyz = diffuse * light;
 	o.color.w = 1;
 	return o;
 }

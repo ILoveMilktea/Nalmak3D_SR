@@ -16,9 +16,9 @@ void TitleScene::Initialize()
 	{
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>();
 		mainCam->GetComponent<Camera>()->OffLayer(RENDER_LAYER_UI);
-		//mainCam->GetComponent<Camera>()->SetRenderTarget(0, L"mainRT_diffuse");
-		//mainCam->GetComponent<Camera>()->SetRenderTarget(1, L"mainRT_depth");
-		//mainCam->GetComponent<Camera>()->SetRenderTarget(2, L"mainRT_normal");
+		mainCam->GetComponent<Camera>()->SetRenderTarget(0, L"mainRT_diffuse");
+		mainCam->GetComponent<Camera>()->SetRenderTarget(1, L"mainRT_depth");
+		mainCam->GetComponent<Camera>()->SetRenderTarget(2, L"mainRT_normal");
 		mainCam->SetPosition(0, 4, -6);
 		mainCam->SetRotation(30, 0, 0);
 		mainCam->SetDontDestroy(true);
@@ -69,11 +69,11 @@ void TitleScene::Initialize()
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 500, 0);
 	}
 	{
-	/*	MeshRenderer::Desc renderer;
+		MeshRenderer::Desc renderer;
 		renderer.layer = RENDER_LAYER_UI;
 		renderer.meshName = L"quadNoneNormal";
 		renderer.mtrlName = L"deferredLighting";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);*/
+		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);
 	}
 
 	{

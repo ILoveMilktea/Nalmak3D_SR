@@ -102,7 +102,7 @@ void MainGame::SystemSetting()
 
 	/*Test*/
 	m_engine->AddScene(L"Hee", Scene::Instantiate<Stage2Scene>());
-	m_engine->SetStartScene(L"Hee");
+	m_engine->SetStartScene(L"title");
 }
 
 void MainGame::ReadyResource()

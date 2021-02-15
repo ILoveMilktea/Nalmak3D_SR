@@ -76,9 +76,11 @@ void RenderManager::Render(Camera * _cam)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
-	Matrix matViewProj = _cam->GetViewMatrix() * _cam->GetProjMatrix();
-	Matrix worldMat = _cam->GetTransform()->GetWorldMatrix();
-	Vector4 camWorldPos = Vector4(worldMat._41, worldMat._42, worldMat._43,1);
+	ConstantBuffer cBuffer;
+
+	cBuffer.viewProj = _cam->GetViewMatrix() * _cam->GetProjMatrix();
+	cBuffer.worldCamPos = _cam->GetTransform()->GetWorldPosition();
+
 	_cam->RecordRenderTarget();
 	
 	ThrowIfFailed(m_device->BeginScene());
@@ -95,8 +97,8 @@ void RenderManager::Render(Camera * _cam)
 				{
 
 					Material* material = renderer->GetMaterial();
-					UpdateMaterial(material, matViewProj, worldMat);
-					UpdateShader(material->GetShader());
+					UpdateMaterial(material);
+					UpdateShader(material->GetShader(), cBuffer);
 					UpdateVIBuffer(renderer);
 
 					renderer->Render();
@@ -170,13 +172,11 @@ void RenderManager::AddCamera(GameObject * _cam)
 	AddCamera(_cam->GetComponent<Camera>());
 }
 
-void RenderManager::UpdateMaterial(Material * _material, const Matrix & _viewProj,const Matrix& _camPos)
+void RenderManager::UpdateMaterial(Material * _material)
 {
 	if (m_currentMaterial != _material)
 	{
 		m_currentMaterial = _material;
-		_material->SetMatrix("g_viewProj", _viewProj);
-		_material->SetMatrix("g_cameraMatrix", _camPos);
 
 		UpdateRenderingMode(_material);
 		UpdateBlendingMode(_material);
@@ -286,7 +286,7 @@ void RenderManager::UpdateVIBuffer(IRenderer * _renderer)
 	_renderer->BindingStreamSource();
 }
 
-void RenderManager::UpdateShader(Shader * _shader)
+void RenderManager::UpdateShader(Shader * _shader,ConstantBuffer& _cBuffer)
 {
 	if (m_currentShader != _shader)
 	{
@@ -294,6 +294,7 @@ void RenderManager::UpdateShader(Shader * _shader)
 			m_currentShader->EndPass();
 
 		m_currentShader = _shader;
+		m_currentShader->SetValue("g_cBuffer", &_cBuffer, sizeof(ConstantBuffer));
 		m_currentShader->BeginPass();
 
 		ThrowIfFailed(m_device->SetVertexDeclaration(m_currentShader->GetDeclartion()));

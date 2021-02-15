@@ -23,7 +23,7 @@ void SkyBox::Initialize(wstring _fp)
 void SkyBox::CreateVertexBuffer()
 {
 	ThrowIfFailed(m_device->CreateVertexBuffer(
-		sizeof(INPUT_LAYOUT_POSITION) * 8,
+		sizeof(INPUT_LAYOUT_SKYBOX) * 8,
 		0, // 파티클이나 각종 옵션 조절
 		NULL, //D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1 | D3DFVF_TEXCOORDSIZE2(0),
 		D3DPOOL_MANAGED,
@@ -31,24 +31,32 @@ void SkyBox::CreateVertexBuffer()
 		nullptr
 	));
 
-	INPUT_LAYOUT_POSITION* vertices = nullptr;
+	INPUT_LAYOUT_SKYBOX* vertices = nullptr;
 	m_vBuffer->Lock(0, 0, (void**)&vertices, 0);
 
 	vertices[0].position = Vector3(-0.5f, 0.5f, -0.5f);
+	vertices[0].uvw = vertices[0].position;
 
 	vertices[1].position = Vector3(0.5f, 0.5f, -0.5f);
+	vertices[1].uvw = vertices[1].position;
 
 	vertices[2].position = Vector3(0.5f, -0.5f, -0.5f);
+	vertices[2].uvw = vertices[2].position;
 
 	vertices[3].position = Vector3(-0.5f, -0.5f, -0.5f);
+	vertices[3].uvw = vertices[3].position;
 
 	vertices[4].position = Vector3(-0.5f, 0.5f, 0.5f);
+	vertices[4].uvw = vertices[4].position;
 
 	vertices[5].position = Vector3(0.5f, 0.5f, 0.5f);
+	vertices[5].uvw = vertices[5].position;
 
 	vertices[6].position = Vector3(0.5f, -0.5f, 0.5f);
+	vertices[6].uvw = vertices[6].position;
 
 	vertices[7].position = Vector3(-0.5f, -0.5f, 0.5f);
+	vertices[7].uvw = vertices[7].position;
 
 	m_vBuffer->Unlock();
 

@@ -76,12 +76,12 @@ private:
 	FILL_MODE m_fillMode;
 
 private:
-	void UpdateMaterial(Material* _material, const Matrix& _viewProj, const Matrix& _camMat);
+	void UpdateMaterial(Material* _material);
 	void UpdateRenderingMode(Material * _material);
 	void UpdateBlendingMode(Material * _material);
 	void UpdateFillMode(Material* _material);
 	void UpdateVIBuffer(IRenderer* _renderer);
-	void UpdateShader(Shader* _shader);
+	void UpdateShader(Shader* _shader, ConstantBuffer& _cBuffer);
 
 	void SetWindowSize(UINT _x, UINT _y);
 public:

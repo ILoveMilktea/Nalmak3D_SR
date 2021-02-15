@@ -1,6 +1,6 @@
-matrix g_cameraMatrix;
+#include "common.fx"
+
 matrix g_world;
-matrix g_viewProj;
 
 texture g_mainTex;
 float4 g_mainTexColor;
@@ -22,14 +22,14 @@ struct VS_OUTPUT
 {
 	float4 position : POSITION;
 	float3 normal :NORMAL;
-	float3 uvAndDepth : COLOR; // x,y = uv  z = depth
+	float3 uvAndDepth : TEXCOORD0; // x,y = uv  z = depth
 	
 };
 
 struct PS_INPUT
 {
 	float3 normal :NORMAL;
-	float3 uvAndDepth : COLOR;
+	float3 uvAndDepth : TEXCOORD0;
 };
 
 struct PS_OUTPUT
@@ -44,7 +44,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; // 
 
-	float4x4 wvp = mul(g_world, g_viewProj);
+	float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
 	o.normal = _input.normal;
 	o.uvAndDepth.xy = _input.uv;
@@ -76,9 +76,9 @@ technique DefaultTechnique
 	{
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z 값에대한 활용
 
-		//ZEnable = true;
-		//ZWriteEnable = true;
-		CullMode = CCW;
+	/*	ZEnable = true;
+		ZWriteEnable = true;
+		CullMode = CCW;*/
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

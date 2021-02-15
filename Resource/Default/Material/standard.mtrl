@@ -4,7 +4,7 @@
 
 shader "standard"
 
-texture "g_mainTex" "default"
+texture "g_mainTex" "niniz"
 vector4 "g_mainTexColor" "1,1,1,1.f"
 
 renderQueue "2000"

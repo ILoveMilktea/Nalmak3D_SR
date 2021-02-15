@@ -138,11 +138,19 @@ void ResourceManager::CreateDefaultShader()
 	{
 		D3DVERTEXELEMENT9 decl[] =
 		{
+			D3DDECL_END()
+		};
+		SetShaderInfo(L"common", D3DPT_TRIANGLELIST, decl, 0);
+	}
+	{
+		D3DVERTEXELEMENT9 decl[] =
+		{
 			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+			{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
 
 			D3DDECL_END()
 		};
-		SetShaderInfo(L"skyBox", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION));
+		SetShaderInfo(L"skyBox", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_SKYBOX));
 	}
 	{
 		D3DVERTEXELEMENT9 decl[] =

@@ -162,7 +162,7 @@ void RenderTarget::Initialize(wstring _fp)
 
 	// D3DPOOL_DEFAULT 만 지원 , D3DPOOL_MANAGED 사용불가
 	D3DFORMAT d3dformat;
-    m_color = RGB((DWORD)(color.x * 255), (DWORD)(color.y * 255), (DWORD)(color.z * 255));
+    m_color = RGB((DWORD)(color.z * 255), (DWORD)(color.y * 255), (DWORD)(color.x * 255));
 	switch (format)
 	{
 	case TEXTURE_FORMAT_A8R8G8B8:
@@ -195,6 +195,7 @@ void RenderTarget::Release()
 
 void RenderTarget::StartRecord(UINT _index)
 {
+
 	m_device->GetRenderTarget(_index, &m_originSurface);
 	ThrowIfFailed(m_device->SetRenderTarget(_index, m_captureSurface));
 	ThrowIfFailed(m_device->Clear(0, nullptr, D3DCLEAR_TARGET, m_color, 1.f, 0));

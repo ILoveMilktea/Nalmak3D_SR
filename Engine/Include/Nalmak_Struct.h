@@ -5,13 +5,23 @@
 
 #include "Nalmak_Include.h"
 
+struct ConstantBuffer
+{
+	Matrix viewProj;
+	Vector3 worldCamPos;
+};
+
 struct INPUT_LAYOUT_POSITION_UV
 {
 	Vector3 position;
 	Vector2 uv;
 };
 
-
+struct INPUT_LAYOUT_SKYBOX
+{
+	Vector3 position;
+	Vector3 uvw;
+};
 
 struct INPUT_LAYOUT_POSITION
 {

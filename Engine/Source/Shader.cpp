@@ -40,13 +40,13 @@ void Shader::Initialize(wstring _fp)
 	);
 
 
-	if (error)
-	{
-		void* ack = error->GetBufferPointer();
-		MessageBoxA(nullptr, (char*)ack, "Shader Compile Fail", MB_OK);
+	//if (error)
+	//{
+	//	void* ack = error->GetBufferPointer();
+	//	MessageBoxA(nullptr, (char*)ack, "Shader Compile Fail", MB_OK);
 
-		assert(!error);
-	}
+	//	assert(!error);
+	//}
 }
 
 HRESULT Shader::CheckShaderInitialize()

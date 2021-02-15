@@ -1,6 +1,7 @@
-matrix g_cameraMatrix;
+#include "common.fx"
+
 matrix g_world;
-matrix g_viewProj;
+
 
 float4 g_color;
 
@@ -28,7 +29,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; // 초기???�수!
 	
-	float4x4 wvp = mul(g_world, g_viewProj);
+	float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
 	
 	return o;

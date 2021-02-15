@@ -21,7 +21,7 @@ public:
 		// for perspective
 		float fovY = D3DX_PI * 0.3f;
 		float aspect = 0;
-		float zNear = 0.1f;
+		float zNear = 1.f;
 		float zFar = 1000.f;
 		// for orthographic
 		UINT width = 0;
