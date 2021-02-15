@@ -60,6 +60,11 @@ void EnemyManager::Update()
 {
 }
 
+const int & EnemyManager::Get_EnemyCount() const
+{
+	// TODO: 여기에 반환 구문을 삽입합니다.
+}
+
 void EnemyManager::Enemy_Spawn(Vector3 _pos)
 {
 	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
@@ -74,7 +79,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos)
 	Enemy_Mesh.mtrlName = L"default";
 	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 
-	list_Enemies.emplace_back(Enemy_obj);
+	//list_Enemies.emplace_back(Enemy_obj);
 
 	
 

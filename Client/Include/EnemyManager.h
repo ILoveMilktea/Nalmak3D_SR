@@ -36,6 +36,7 @@ public:
 public: /* Gettttt */
 	//void Get_CurHp();
 	//void Get_Transform();
+	const int& Get_EnemyCount() const;
 
 public: /* Settttt */
 
@@ -43,8 +44,9 @@ public: /* Settttt */
 public: /* Funcs */
 	void Enemy_Spawn(Vector3 _pos);
 
+
 private:
-	list<GameObject*> list_Enemies;
+	//list<GameObject*> list_Enemies;
 
 };
 
