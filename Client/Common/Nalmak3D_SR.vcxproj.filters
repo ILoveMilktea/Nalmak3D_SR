@@ -64,6 +64,15 @@
     <ClInclude Include="..\Include\StageSelectScene.h">
       <Filter>01.Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\HeeTestScene.h">
+      <Filter>01.Scene\99%29GeunHeeTestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy.h">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EnemyManager.h">
+      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -114,6 +123,15 @@
     <ClCompile Include="..\Source\StageSelectScene.cpp">
       <Filter>01.Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\HeeTestScene.cpp">
+      <Filter>01.Scene\99%29GeunHeeTestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy.cpp">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EnemyManager.cpp">
+      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -162,6 +180,21 @@
     </Filter>
     <Filter Include="04.State">
       <UniqueIdentifier>{dea952e2-3812-4031-99e4-5366973e199d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\99%29GeunHeeTestScene">
+      <UniqueIdentifier>{f9b0f39f-1586-41e3-92e5-c0cce9aaad1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy">
+      <UniqueIdentifier>{88c15850-b344-4d77-b46d-6ed376456930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\00%29EnemyManager">
+      <UniqueIdentifier>{74a4154a-e67a-4131-afa2-e0fd522637e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\01%29Enemy">
+      <UniqueIdentifier>{471371f4-d5fc-408a-9393-b9a42789b616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern">
+      <UniqueIdentifier>{68e9b2a4-58d6-4e4c-a3a1-54069dc961b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
