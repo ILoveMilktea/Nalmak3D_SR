@@ -1,4 +1,4 @@
-
+matrix g_cameraMatrix;
 matrix g_viewProj;
 
 texture g_mainTex;

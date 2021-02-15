@@ -582,7 +582,7 @@ void Material::SetMatrix(const string& _parameter, const Matrix & _value)
 	m_matrixValues.emplace_back(pair<string, Matrix>(_parameter, _value));
 }
 
-void Material::SetTexture(const string& _parameter, PDIRECT3DTEXTURE9 _value)
+void Material::SetTexture(const string& _parameter, IDirect3DBaseTexture9* _value)
 {
 	for (auto& value : m_texValues)
 	{
@@ -593,7 +593,7 @@ void Material::SetTexture(const string& _parameter, PDIRECT3DTEXTURE9 _value)
 		}
 	}
 
-	m_texValues.emplace_back(pair<string, PDIRECT3DTEXTURE9>(_parameter, _value));
+	m_texValues.emplace_back(pair<string, IDirect3DBaseTexture9*>(_parameter, _value));
 }
 
 void Material::SetTexture(const string & _parameter, const wstring & _texName)
@@ -608,13 +608,13 @@ void Material::SetTexture(const string & _parameter, const wstring & _texName)
 		}
 	}
 
-	m_texValues.emplace_back(pair<string, PDIRECT3DTEXTURE9>(_parameter, tex));
+	m_texValues.emplace_back(pair<string, IDirect3DBaseTexture9*>(_parameter, tex));
 }
 
 
 
 
-void Material::SetTexture(int _index, PDIRECT3DTEXTURE9 _value)
+void Material::SetTexture(int _index, IDirect3DBaseTexture9* _value)
 {
 	assert(m_texValues.size() > _index && L"At least one texture is required");
 

@@ -181,6 +181,9 @@
     <Filter Include="06.Resource\01.VIBuffer\08.SkyBox">
       <UniqueIdentifier>{29347aa3-bc85-4d30-88b0-6caa7e659da8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Manager\12.LightManager">
+      <UniqueIdentifier>{a3590445-3030-4860-bf28-eec37194c003}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -318,9 +321,6 @@
     <ClCompile Include="..\Source\StateControl.cpp">
       <Filter>05.Component\07.StateControl</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\CubeTexture.cpp">
-      <Filter>06.Resource\00.Texture</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\DynamicInstanceBuffer.cpp">
       <Filter>06.Resource\01.VIBuffer\05.DynamicInstance</Filter>
     </ClCompile>
@@ -370,6 +370,7 @@
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\SkyBox.cpp" />
+    <ClCompile Include="..\Source\LightManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -528,9 +529,6 @@
     <ClInclude Include="..\Include\StateControl.h">
       <Filter>05.Component\07.StateControl</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\CubeTexture.h">
-      <Filter>06.Resource\00.Texture</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\DynamicInstanceBuffer.h">
       <Filter>06.Resource\01.VIBuffer\05.DynamicInstance</Filter>
     </ClInclude>
@@ -580,5 +578,6 @@
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\SkyBox.h" />
+    <ClInclude Include="..\Include\LightManager.h" />
   </ItemGroup>
 </Project>

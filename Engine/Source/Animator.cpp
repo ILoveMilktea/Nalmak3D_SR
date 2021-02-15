@@ -82,12 +82,12 @@ void Animator::Resume()
 	m_isSleep = false;
 }
 
-LPDIRECT3DTEXTURE9 Animator::GetDiffuseSprite()
+IDirect3DBaseTexture9* Animator::GetDiffuseSprite()
 {
 	return m_spriteDiffuseData->GetTexure(m_currentIndex);
 }
 
-LPDIRECT3DTEXTURE9 Animator::GetNormalSprite()
+IDirect3DBaseTexture9* Animator::GetNormalSprite()
 {
 	return  m_spriteNormalData->GetTexure(m_currentIndex);
 }

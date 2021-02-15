@@ -31,6 +31,7 @@ Core::Core()
 	m_systemManager = SystemManager::GetInstance();
 	m_debugManager = DebugManager::GetInstance();
 	m_collisionManager = CollisionManager::GetInstance();
+	m_lightManager = LightManager::GetInstance();
 }
 
 
@@ -48,6 +49,7 @@ Core::~Core()
 	SystemManager::DestroyInstance();
 	DebugManager::DestroyInstance();
 	CollisionManager::DestroyInstance();
+	LightManager::DestroyInstance();
 }
 
 
@@ -137,6 +139,11 @@ GameObject * Core::FindObjectByName(_OBJECT_TAG _tag, wstring name)
 const wstring & Core::GetResourceDirectoryPath()
 {
 	return m_resourceManager->GetResourceDirectoryPath();
+}
+
+void Core::SetSkyBox(const wstring & _skyBoxName)
+{
+	m_lightManager->SetSkyBox(_skyBoxName);
 }
 
 

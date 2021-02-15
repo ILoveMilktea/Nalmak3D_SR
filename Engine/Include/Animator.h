@@ -53,8 +53,8 @@ public:
 	bool IsPlay() { return m_isPlay; }
 	void SetLoop(bool _loop) { m_loop = _loop; }
 	wstring GetAnimationName()const { return m_animName; }
-	LPDIRECT3DTEXTURE9 GetDiffuseSprite();
-	LPDIRECT3DTEXTURE9 GetNormalSprite();
+	IDirect3DBaseTexture9* GetDiffuseSprite();
+	IDirect3DBaseTexture9* GetNormalSprite();
 	size_t GetAnimationIndex() { return m_currentIndex; }
 
 private:

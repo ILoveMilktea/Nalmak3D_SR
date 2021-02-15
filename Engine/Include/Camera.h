@@ -21,7 +21,7 @@ public:
 		// for perspective
 		float fovY = D3DX_PI * 0.3f;
 		float aspect = 0;
-		float zNear = 1.f;
+		float zNear = 0.1f;
 		float zFar = 1000.f;
 		// for orthographic
 		UINT width = 0;
@@ -31,6 +31,7 @@ public:
 
 		// for clear solidColor
 		D3DXCOLOR clearColor = D3DCOLOR_RGBA(40, 40, 110, 1);
+		wstring skyBoxName = L"";
 	};
 public:
 	Camera(Desc* _desc);
@@ -58,7 +59,9 @@ public:
 	const Matrix& GetProjMatrix() { return m_projMatrix; }
 	const Matrix GetViewportMatrix() const;
 	Vector2 WorldToScreenPos(const Vector3& _pos);
-	
+
+	void SetSkyBox(wstring _skyBoxName);
+
 	vector<RenderTarget*>& GetRenderTargets() { return m_renderTargets; }
 	bool CompareLayer(_RENDER_LAYER _layer) { return m_layer.Check(_layer); }
 	bool IsInFrustumCulling(IRenderer* _transform);

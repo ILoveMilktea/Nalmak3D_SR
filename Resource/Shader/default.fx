@@ -1,8 +1,9 @@
-
+matrix g_cameraMatrix;
 matrix g_world;
 matrix g_viewProj;
 
 texture g_mainTex;
+
 float4 g_mainTexColor;
 
 sampler mainSampler = sampler_state

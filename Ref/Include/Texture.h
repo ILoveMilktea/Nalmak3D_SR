@@ -19,10 +19,10 @@ private:
 	virtual void Release() override;
 
 public:
-	PDIRECT3DTEXTURE9 GetTexure(size_t _index);
+	IDirect3DBaseTexture9* GetTexure(size_t _index);
 	size_t GetSpriteCount()const { return m_textures.size(); }
 private:
-	vector<PDIRECT3DTEXTURE9> m_textures;
+	vector<IDirect3DBaseTexture9*> m_textures;
 };
 END
 #endif // !__TEXTURE_H__

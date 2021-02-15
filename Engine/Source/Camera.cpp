@@ -123,9 +123,12 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 {
 	if (m_mode != CAMERA_PROJECTION_MODE_PERSPECTIVE)
 		return true;
+	float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius();
+	if (radius == 0)
+		return true;
 	Transform* trs = _renderer->GetTransform();	
 	Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
-	float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
+	radius = radius * 2;
 	float scale = max(trs->scale.z,max(trs->scale.x, trs->scale.y));
 	radius *= scale;
 	for (int i = 0; i < 6; ++i)

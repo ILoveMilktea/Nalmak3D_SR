@@ -193,5 +193,8 @@
     <FxCompile Include="..\..\Resource\Shader\deferred_lighting.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\skyBox.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

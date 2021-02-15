@@ -77,7 +77,8 @@ void RenderManager::Render(Camera * _cam)
 	m_currentMaterial = nullptr;
 
 	Matrix matViewProj = _cam->GetViewMatrix() * _cam->GetProjMatrix();
-
+	Matrix worldMat = _cam->GetTransform()->GetWorldMatrix();
+	Vector4 camWorldPos = Vector4(worldMat._41, worldMat._42, worldMat._43,1);
 	_cam->RecordRenderTarget();
 	
 	ThrowIfFailed(m_device->BeginScene());
@@ -94,7 +95,7 @@ void RenderManager::Render(Camera * _cam)
 				{
 
 					Material* material = renderer->GetMaterial();
-					UpdateMaterial(material, matViewProj);
+					UpdateMaterial(material, matViewProj, worldMat);
 					UpdateShader(material->GetShader());
 					UpdateVIBuffer(renderer);
 
@@ -169,12 +170,13 @@ void RenderManager::AddCamera(GameObject * _cam)
 	AddCamera(_cam->GetComponent<Camera>());
 }
 
-void RenderManager::UpdateMaterial(Material * _material, const Matrix & _viewProj)
+void RenderManager::UpdateMaterial(Material * _material, const Matrix & _viewProj,const Matrix& _camPos)
 {
 	if (m_currentMaterial != _material)
 	{
 		m_currentMaterial = _material;
 		_material->SetMatrix("g_viewProj", _viewProj);
+		_material->SetMatrix("g_cameraMatrix", _camPos);
 
 		UpdateRenderingMode(_material);
 		UpdateBlendingMode(_material);

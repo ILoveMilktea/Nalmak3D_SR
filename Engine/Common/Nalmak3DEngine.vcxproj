@@ -32,7 +32,6 @@
     <ClCompile Include="..\Source\Component.cpp" />
     <ClCompile Include="..\Source\Core.cpp" />
     <ClCompile Include="..\Source\CubeMap.cpp" />
-    <ClCompile Include="..\Source\CubeTexture.cpp" />
     <ClCompile Include="..\Source\DebugManager.cpp" />
     <ClCompile Include="..\Source\DeviceManager.cpp" />
     <ClCompile Include="..\Source\DrawGizmo.cpp" />
@@ -49,6 +48,7 @@
     <ClCompile Include="..\Source\IRenderer.cpp" />
     <ClCompile Include="..\Source\IResource.cpp" />
     <ClCompile Include="..\Source\IState.cpp" />
+    <ClCompile Include="..\Source\LightManager.cpp" />
     <ClCompile Include="..\Source\LineManager.cpp" />
     <ClCompile Include="..\Source\LineVI.cpp" />
     <ClCompile Include="..\Source\Material.cpp" />
@@ -96,7 +96,6 @@
     <ClInclude Include="..\Include\Component.h" />
     <ClInclude Include="..\Include\Core.h" />
     <ClInclude Include="..\Include\CubeMap.h" />
-    <ClInclude Include="..\Include\CubeTexture.h" />
     <ClInclude Include="..\Include\DebugManager.h" />
     <ClInclude Include="..\Include\DeviceManager.h" />
     <ClInclude Include="..\Include\DrawGizmo.h" />
@@ -113,6 +112,7 @@
     <ClInclude Include="..\Include\IRenderer.h" />
     <ClInclude Include="..\Include\IResource.h" />
     <ClInclude Include="..\Include\IState.h" />
+    <ClInclude Include="..\Include\LightManager.h" />
     <ClInclude Include="..\Include\LineManager.h" />
     <ClInclude Include="..\Include\LineVI.h" />
     <ClInclude Include="..\Include\Material.h" />

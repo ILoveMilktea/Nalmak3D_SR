@@ -88,7 +88,7 @@ void Shader::SetMatrix(const string& _parameter, const Matrix & _value)
 	ThrowIfFailed(m_effect->SetMatrix(_parameter.c_str(), &_value));
 }
 
-void Shader::SetTexture(const string& _parameter, PDIRECT3DTEXTURE9 _value)
+void Shader::SetTexture(const string& _parameter, IDirect3DBaseTexture9* _value)
 {
 	ThrowIfFailed(m_effect->SetTexture(_parameter.c_str(), _value));
 }

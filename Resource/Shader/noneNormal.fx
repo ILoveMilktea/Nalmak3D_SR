@@ -1,4 +1,4 @@
-
+matrix g_cameraMatrix;
 matrix g_world;
 matrix g_viewProj;
 

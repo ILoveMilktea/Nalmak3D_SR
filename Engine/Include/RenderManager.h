@@ -76,7 +76,7 @@ private:
 	FILL_MODE m_fillMode;
 
 private:
-	void UpdateMaterial(Material* _material, const Matrix& _viewProj);
+	void UpdateMaterial(Material* _material, const Matrix& _viewProj, const Matrix& _camMat);
 	void UpdateRenderingMode(Material * _material);
 	void UpdateBlendingMode(Material * _material);
 	void UpdateFillMode(Material* _material);

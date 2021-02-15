@@ -20,6 +20,8 @@
 #include "GameObject.h"
 #include "LineManager.h"
 #include "DebugManager.h"
+#include "LightManager.h"
+
 
 #pragma region Component
 #include "MeshRenderer.h"
@@ -91,6 +93,10 @@ public:
 	GameObject* FindObjectByName(_OBJECT_TAG _tag, wstring name);
 public:
 	const wstring& GetResourceDirectoryPath();
+
+	// Environment Setting
+public:
+	void SetSkyBox(const wstring& _skyBoxName);
 private:
 	SceneManager* m_sceneManager;
 	PrototypeManager* m_prototypeManager;
@@ -101,6 +107,7 @@ private:
 	SystemManager* m_systemManager;
 	DebugManager* m_debugManager;
 	CollisionManager* m_collisionManager;
+	LightManager* m_lightManager;
 	TimeManager* m_timeManager;
 
 public:

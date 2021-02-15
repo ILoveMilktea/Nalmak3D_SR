@@ -7,6 +7,7 @@
 #include "Sphere.h"
 #include "Plane.h"
 #include "ObjMesh.h"
+#include "SkyBox.h"
 USING(Nalmak)
 IMPLEMENT_SINGLETON(ResourceManager)
 ResourceManager::ResourceManager()
@@ -25,6 +26,8 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	LoadMeshes<ObjMesh>(L"obj");
 	LoadResources<Shader>(L"fx");
 	LoadTextures(L"png");
+	LoadTextures(L"dds");
+
 
 	return S_OK;
 }
@@ -81,6 +84,13 @@ void ResourceManager::CreateDefaultMesh()
 		m_resoucreContainers[typeid(VIBuffer).name()][L"triangle"] = mesh;
 	}
 	{
+		VIBuffer* mesh = new SkyBox();
+		assert("Fail to Create Mesh!" && mesh);
+		mesh->OnInitialize();
+		m_resoucreContainers[typeid(VIBuffer).name()][L"skyBox"] = mesh;
+	}
+
+	{
 		VIBuffer* mesh = new LineVI();
 		assert("Fail to Create Mesh!" && mesh);
 		mesh->OnInitialize();
@@ -124,6 +134,15 @@ void ResourceManager::CreateDefaultShader()
 			D3DDECL_END()
 		};
 		SetShaderInfo(L"default", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
+	}
+	{
+		D3DVERTEXELEMENT9 decl[] =
+		{
+			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+
+			D3DDECL_END()
+		};
+		SetShaderInfo(L"skyBox", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION));
 	}
 	{
 		D3DVERTEXELEMENT9 decl[] =

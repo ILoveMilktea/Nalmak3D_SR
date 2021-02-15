@@ -22,7 +22,7 @@ public:
 	void SetInt(const string& _parameter, int _value);
 	void SetFloat(const string& _parameter, float _value);
 	void SetMatrix(const string& _parameter, const Matrix& _value);
-	void SetTexture(const string& _parameter, PDIRECT3DTEXTURE9 _value);
+	void SetTexture(const string& _parameter, IDirect3DBaseTexture9* _value);
 	void SetVector(const string& _parameter, const Vector4& _vec);
 	void SetVector(const string& _parameter, const Vector2& _vec);
 	void SetValue(const string& _parameter, void* value, UINT _size);

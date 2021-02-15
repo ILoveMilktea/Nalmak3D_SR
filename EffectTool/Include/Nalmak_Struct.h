@@ -11,11 +11,7 @@ struct INPUT_LAYOUT_POSITION_UV
 	Vector2 uv;
 };
 
-struct INPUT_LAYOUT_SKYBOX
-{
-	Vector3 position;
-	Vector3 uv;
-};
+
 
 struct INPUT_LAYOUT_POSITION
 {
