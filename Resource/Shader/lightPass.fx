@@ -2,17 +2,16 @@
 matrix g_world;
 
 texture g_diffuse;
-texture g_depth;
+texture g_depthStencil;
 texture g_normal;
 
-float3 g_lightDirection = (0, -0.6f, 0.3f);
 sampler DiffuseSampler = sampler_state
 {
 	texture = g_diffuse;
 };
 sampler DepthSampler = sampler_state
 {
-	texture = g_depth;
+	texture = g_depthStencil;
 };
 sampler NormalSampler = sampler_state
 {
@@ -61,12 +60,25 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	float4 diffuse = tex2D(DiffuseSampler, _input.uv);
 	float3 normal = tex2D(NormalSampler, _input.uv).xyz;
 
+	float3 light = 0.3f;
+	float intensity;
+	if (g_cBuffer.isDirectionalLight == 1)
+	{
 	
-	float light;
-	if (normal.x == 0 && normal.y == 0 && normal.z == 0)
-		light = 1.f;
-	else
-		light = max(dot(normal, g_lightDirection), 0.0);
+		if (normal.x == 0 && normal.y == 0 && normal.z == 0)
+		{
+			intensity = max(dot(float3(0,1,0), g_cBuffer.directionalLight.direction), 0.) + 0.2f;
+			light = intensity;
+		}
+		else
+		{
+			intensity = max(dot(normal, g_cBuffer.directionalLight.direction), 0.0) + 0.2f;
+			intensity *=  g_cBuffer.directionalLight.intensity;
+			light = g_cBuffer.directionalLight.color * intensity;
+		}
+
+	}
+
 
 	o.color.xyz = diffuse * light;
 	o.color.w = 1;

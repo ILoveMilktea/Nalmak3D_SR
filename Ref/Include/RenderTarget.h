@@ -17,7 +17,7 @@ public:
 	RenderTarget();
 	~RenderTarget();
 private:
-	RenderTarget(UINT _width, UINT _height, D3DFORMAT _format, DWORD _color);
+	RenderTarget(UINT _width, UINT _height, D3DFORMAT _format, const Vector4& _color);
 private:
 	// IResource을(를) 통해 상속됨
 	virtual void Initialize(wstring _fp) override;
@@ -28,12 +28,13 @@ public:
 	void StartRecord(UINT _index);
 	void EndRecord();
 	UINT GetTargetIndex() { return m_targetIndex; }
+	Vector4 GetColor() { return m_color; }
 private:
 	PDIRECT3DTEXTURE9 m_texture = nullptr;
 	LPDIRECT3DSURFACE9 m_captureSurface = nullptr; // 밉맵 하나당 하나의 서피스
 	LPDIRECT3DSURFACE9 m_originSurface = nullptr;
 	UINT m_targetIndex;
-	DWORD m_color;
+	Vector4 m_color;
 };
 END
 #endif // !__RENDERTARGET_H__

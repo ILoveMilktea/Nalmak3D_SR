@@ -13,7 +13,7 @@ RenderTarget::~RenderTarget()
 	Release();
 }
 
-RenderTarget::RenderTarget(UINT _width, UINT _height, D3DFORMAT _format, DWORD _color)
+RenderTarget::RenderTarget(UINT _width, UINT _height, D3DFORMAT _format, const Vector4& _color)
 {
 	m_color = _color;
 	// D3DPOOL_DEFAULT 만 지원 , D3DPOOL_MANAGED 사용불가
@@ -138,7 +138,8 @@ void RenderTarget::Initialize(wstring _fp)
 
 			color = vec;
 		}
-	
+		
+
 #pragma endregion
 		// 3. renderQueue
 		if (strcmp(memberName.c_str(), "format") == 0)
@@ -151,9 +152,9 @@ void RenderTarget::Initialize(wstring _fp)
 					break;
 			}
 
-			string renderQueue = buffer.substr(firstWordEnd, valueEnd - firstWordEnd);
+			string str = buffer.substr(firstWordEnd, valueEnd - firstWordEnd);
 
-			int value = atoi(renderQueue.c_str());
+			int value = atoi(str.c_str());
 			format = (TEXTURE_FORMAT)value;
 
 			break;
@@ -162,7 +163,8 @@ void RenderTarget::Initialize(wstring _fp)
 
 	// D3DPOOL_DEFAULT 만 지원 , D3DPOOL_MANAGED 사용불가
 	D3DFORMAT d3dformat;
-    m_color = RGB((DWORD)(color.z * 255), (DWORD)(color.y * 255), (DWORD)(color.x * 255));
+
+	m_color = color;
 	switch (format)
 	{
 	case TEXTURE_FORMAT_A8R8G8B8:
@@ -180,6 +182,7 @@ void RenderTarget::Initialize(wstring _fp)
 	default:
 		break;
 	}
+
 	ThrowIfFailed(D3DXCreateTexture(m_device, width, height, 1, D3DUSAGE_RENDERTARGET, d3dformat, D3DPOOL_DEFAULT, &m_texture));
 	ThrowIfFailed(m_texture->GetSurfaceLevel(0, &m_captureSurface));
 
@@ -198,7 +201,7 @@ void RenderTarget::StartRecord(UINT _index)
 
 	m_device->GetRenderTarget(_index, &m_originSurface);
 	ThrowIfFailed(m_device->SetRenderTarget(_index, m_captureSurface));
-	ThrowIfFailed(m_device->Clear(0, nullptr, D3DCLEAR_TARGET, m_color, 1.f, 0));
+	//ThrowIfFailed(m_device->Clear(0, nullptr, D3DCLEAR_TARGET, m_color, 1.f, 0));
 	m_targetIndex = _index;
 }
 

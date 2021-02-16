@@ -30,13 +30,15 @@ struct PS_INPUT
 {
 	float3 normal :NORMAL;
 	float3 uvAndDepth : TEXCOORD0;
+	float4 position :TEXCOORD1;
 };
 
 struct PS_OUTPUT
 {
 	float4 diffuse : COLOR0;
-	float4 depth : COLOR1;
-	float4 normal : COLOR2;
+	float4 normal : COLOR1;
+	//float4 motionNSpec : COLOR2;
+	float4 depth : COLOR2;
 
 };
 
@@ -60,11 +62,13 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
 	float4 diffuse = tex2D(mainSampler, _input.uvAndDepth.xy);
-	float4 final = diffuse * g_mainTexColor;
-	o.diffuse = final;
-	o.depth = _input.uvAndDepth.z;
+	o.diffuse = diffuse * g_mainTexColor;
+
 	o.normal.xyz = ((_input.normal + 1) * 0.5f);
 	o.normal.w = 1;
+
+	o.depth = _input.uvAndDepth.z;
+	//o.motionNSpec = 1;
 	return o;
 }
 

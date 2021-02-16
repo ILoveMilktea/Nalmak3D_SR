@@ -34,7 +34,7 @@ protected:
 	virtual void OnTriggerStay(Collisions& _collision)override;
 	virtual void OnTriggerExit(Collisions& _collision)override;
 
-private:
+public:
 	template <typename T>
 	static Component* Create(typename T::Desc* _desc)
 	{

@@ -12,7 +12,7 @@ BEGIN(Nalmak)
 class NALMAK_DLL IRenderer :
 	public Component
 {
-protected:
+public:
 	IRenderer();
 	virtual ~IRenderer() = default;
 private:

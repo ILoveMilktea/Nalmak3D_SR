@@ -39,6 +39,8 @@
 #include "Rigidbody.h"
 #include "Animator.h"
 #include "Terrain.h"
+#include "DirectionalLight.h"
+#include "AutoRotate.h"
 
 #pragma endregion
 

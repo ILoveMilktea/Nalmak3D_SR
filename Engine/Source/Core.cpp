@@ -56,13 +56,16 @@ Core::~Core()
 
 void Core::Initialize(HWND handle, Desc * _desc)
 {
+	RenderManager::GetInstance()->SetWindowSize(_desc->wincx, _desc->wincx);
 	ObjectManager::GetInstance()->Initialize(_desc->OBJECT_TAG_COUNT);
 	DeviceManager::GetInstance()->Initialize(_desc->wincx, _desc->wincy, handle, _desc->windowMode);
-	RenderManager::GetInstance()->Initialize(_desc->wincx, _desc->wincy);
 
 	m_collisionManager->Initialize(_desc->COLLISION_LAYER_COUNT);
 	m_resourceManager->Initialize(_desc->resourceDirectoryPath);
 	m_resourceManager->CreateDefaultResource();
+
+	RenderManager::GetInstance()->Initialize();
+
 	m_inputManager->Initialize();
 	m_lineManager->Initialize();
 

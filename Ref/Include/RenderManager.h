@@ -14,6 +14,8 @@ class VIBuffer;
 class Text;
 class Camera;
 class DebugManager;
+class MeshRenderer;
+class LightManager;
 BEGIN(Nalmak)
 
 // 렌더 담당 
@@ -38,6 +40,8 @@ BEGIN(Nalmak)
 
 //https://lindenreid.wordpress.com/2017/12/15/simple-water-shader-in-unity/ 물 카툰 렌더링
 
+//https://aker.tistory.com/549 최적화 나중에 구현해보기
+//https://www.slideshare.net/cagetu/kgc2012-deferred-forward 라이팅에관한 참고자료 
 // Texture coverage 
 class RenderManager
 {
@@ -48,11 +52,13 @@ public:
 
 public:
 	void Release();
-	void Initialize(UINT _wincx,UINT _wincy);
+	void Initialize();
 	void Render();
 	void Render(Camera* _cam);
 	void RenderText();
 	void Reset();
+private:
+	void ClearRT(Camera * _cam, ConstantBuffer& _cBuffer);
 private:
 	map<int, vector<IRenderer*>> m_renderLists;
 	vector<Text*> m_textRenderList;
@@ -82,7 +88,7 @@ private:
 	void UpdateFillMode(Material* _material);
 	void UpdateVIBuffer(IRenderer* _renderer);
 	void UpdateShader(Shader* _shader, ConstantBuffer& _cBuffer);
-
+public:
 	void SetWindowSize(UINT _x, UINT _y);
 public:
 	UINT GetWindowWidth() { return m_wincx; }
@@ -99,6 +105,9 @@ private:
 	UINT m_halfWincy;
 private:
 	DebugManager* m_debugManager;
+	LightManager* m_lightManager;
+	Shader* m_clearRTShader;
+	VIBuffer* m_viBuffer;
 };
 
 END

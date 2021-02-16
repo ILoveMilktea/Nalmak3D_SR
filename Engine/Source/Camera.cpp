@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "ResourceManager.h"
 #include "IRenderer.h"
+#include "DepthStencil.h"
 USING(Nalmak)
 
 Camera::Camera(Desc * _desc)
@@ -27,6 +28,11 @@ Camera::Camera(Desc * _desc)
 	
 	m_aspect = m_width / m_height;
 	m_renderTargets.assign(4, nullptr);
+	m_renderingMode = _desc->renderMode;
+	if (m_renderingMode == CAMERA_RENDERING_MODE_DEFERRED)
+	{
+			
+	}
 	RenderManager::GetInstance()->AddCamera(this);
 }
 
@@ -176,6 +182,7 @@ void Camera::SetRenderTarget(UINT _index, wstring  _rtName)
 	}
 	m_renderTargets[_index] = ResourceManager::GetInstance()->GetResource<RenderTarget>(_rtName);
 }
+
 
 void Camera::RecordRenderTarget()
 {
