@@ -4,6 +4,7 @@
 #define __LIGHTMANAGER_H__
 
 #include "Nalmak_Include.h"
+class DirectionalLight;
 class GameObject;
 
 class LightManager
@@ -14,8 +15,14 @@ private:
 	~LightManager();
 public:
 	void SetSkyBox(const wstring& _skyBoxName);
+	void SetDirectionalLightInfo(DirectionalLight* _light);
+	void DeleteDirectionalLight();
+	bool GetDirectionalLightInfo(DirectionalLightInfo& _info);
 private:
 	GameObject* m_skyBox = nullptr;
+
+private:
+	DirectionalLight* m_directionalLigth = nullptr;
 };
 #endif
 

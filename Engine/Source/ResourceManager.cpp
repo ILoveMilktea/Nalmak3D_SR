@@ -8,6 +8,8 @@
 #include "Plane.h"
 #include "ObjMesh.h"
 #include "SkyBox.h"
+#include "DepthStencil.h"
+#include "RenderManager.h"
 USING(Nalmak)
 IMPLEMENT_SINGLETON(ResourceManager)
 ResourceManager::ResourceManager()
@@ -61,6 +63,7 @@ void ResourceManager::CreateDefaultResource()
 	CreateDefaultRenderTarget();
 
 	LoadResources<RenderTarget>(L"rtd");
+	LoadResources<DepthStencil>(L"dsd");
 	LoadResources<Material>(L"mtrl");
 }
 
@@ -68,6 +71,8 @@ void ResourceManager::CreateDefaultRenderTarget()
 {
 
 }
+
+
 
 void ResourceManager::CreateDefaultMesh()
 {
@@ -203,7 +208,20 @@ void ResourceManager::CreateDefaultShader()
 			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
 			D3DDECL_END()
 		};
-		SetShaderInfo(L"deferred_lighting",
+		SetShaderInfo(L"clearRT",
+			D3DPT_TRIANGLELIST,
+			decl,
+			sizeof(INPUT_LAYOUT_POSITION_UV));
+	}
+	
+	{
+		D3DVERTEXELEMENT9 decl[] =
+		{
+			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+			D3DDECL_END()
+		};
+		SetShaderInfo(L"lightPass",
 			D3DPT_TRIANGLELIST,
 			decl,
 			sizeof(INPUT_LAYOUT_POSITION_UV));

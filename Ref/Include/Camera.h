@@ -10,6 +10,7 @@
 BEGIN(Nalmak)
 class RenderTarget;
 class IRenderer;
+class DepthStencil;
 
 class NALMAK_DLL Camera :
 	public Component
@@ -28,7 +29,7 @@ public:
 		UINT height = 0; 
 		// for common
 		CAMERA_PROJECTION_MODE  mode = CAMERA_PROJECTION_MODE_PERSPECTIVE;
-
+		CAMERA_RENDERING_MODE renderMode = CAMERA_RENDERING_MODE_FORWARD;
 		// for clear solidColor
 		D3DXCOLOR clearColor = D3DCOLOR_RGBA(40, 40, 110, 1);
 		wstring skyBoxName = L"";
@@ -53,6 +54,7 @@ private:
 	Matrix m_projMatrix;
 
 	CAMERA_PROJECTION_MODE m_mode;
+	CAMERA_RENDERING_MODE m_renderingMode;
 	BitFlag<_RENDER_LAYER> m_layer;
 public:
 	const Matrix GetViewMatrix() const;
@@ -60,7 +62,6 @@ public:
 	const Matrix GetViewportMatrix() const;
 	Vector2 WorldToScreenPos(const Vector3& _pos);
 
-	void SetSkyBox(wstring _skyBoxName);
 
 	vector<RenderTarget*>& GetRenderTargets() { return m_renderTargets; }
 	bool CompareLayer(_RENDER_LAYER _layer) { return m_layer.Check(_layer); }
@@ -69,8 +70,11 @@ public:
 	Vector3 GetCamToMouseWorldDirection();
 public:
 	void SetRenderTarget(UINT _index,wstring  _rtName);
+
 	void RecordRenderTarget();
 	void EndRenderTarget();	
+
+	CAMERA_RENDERING_MODE GetRenderingMode() { return m_renderingMode; }
 public:
 	void AllOnLayer();
 	void AllOffLayer();
@@ -82,6 +86,7 @@ private:
 private:
 	void UpdateFrustumPlane();
 	void UpdateProjMatrix();
+
 private:
 	HWND m_handle;
 	// Component을(를) 통해 상속됨

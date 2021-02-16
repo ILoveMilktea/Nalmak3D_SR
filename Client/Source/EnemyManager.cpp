@@ -60,9 +60,9 @@ void EnemyManager::Update()
 {
 }
 
-const int & EnemyManager::Get_EnemyCount() const
+int EnemyManager::Get_EnemyCount() const
 {
-	// TODO: 여기에 반환 구문을 삽입합니다.
+	return 0;// TODO: 여기에 반환 구문을 삽입합니다.
 }
 
 void EnemyManager::Enemy_Spawn(Vector3 _pos)

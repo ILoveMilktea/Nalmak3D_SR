@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\Include\Nalmak_String.cpp" />
     <ClCompile Include="..\Source\Animator.cpp" />
+    <ClCompile Include="..\Source\AutoRotate.cpp" />
     <ClCompile Include="..\Source\Bezier.cpp" />
     <ClCompile Include="..\Source\BitFlag.cpp" />
     <ClCompile Include="..\Source\Box.cpp" />
@@ -33,7 +34,9 @@
     <ClCompile Include="..\Source\Core.cpp" />
     <ClCompile Include="..\Source\CubeMap.cpp" />
     <ClCompile Include="..\Source\DebugManager.cpp" />
+    <ClCompile Include="..\Source\DepthStencil.cpp" />
     <ClCompile Include="..\Source\DeviceManager.cpp" />
+    <ClCompile Include="..\Source\DirectionalLight.cpp" />
     <ClCompile Include="..\Source\DrawGizmo.cpp" />
     <ClCompile Include="..\Source\DynamicInstanceBuffer.cpp" />
     <ClCompile Include="..\Source\Event.cpp" />
@@ -85,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Animator.h" />
+    <ClInclude Include="..\Include\AutoRotate.h" />
     <ClInclude Include="..\Include\Bezier.h" />
     <ClInclude Include="..\Include\BitFlag.h" />
     <ClInclude Include="..\Include\Box.h" />
@@ -97,7 +101,9 @@
     <ClInclude Include="..\Include\Core.h" />
     <ClInclude Include="..\Include\CubeMap.h" />
     <ClInclude Include="..\Include\DebugManager.h" />
+    <ClInclude Include="..\Include\DepthStencil.h" />
     <ClInclude Include="..\Include\DeviceManager.h" />
+    <ClInclude Include="..\Include\DirectionalLight.h" />
     <ClInclude Include="..\Include\DrawGizmo.h" />
     <ClInclude Include="..\Include\DynamicInstanceBuffer.h" />
     <ClInclude Include="..\Include\Event.h" />

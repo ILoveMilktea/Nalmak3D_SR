@@ -12,6 +12,9 @@
 #include "GameObject.h"
 #include "Text.h"
 #include "DebugManager.h"
+#include "MeshRenderer.h"
+#include "LightManager.h"
+
 USING(Nalmak)
 IMPLEMENT_SINGLETON(RenderManager)
 RenderManager::RenderManager()
@@ -30,26 +33,31 @@ void RenderManager::Release()
 	m_cameraList.clear();
 }
 
-void RenderManager::Initialize(UINT _wincx, UINT _wincy)
+void RenderManager::Initialize()
 {
 	m_device = DeviceManager::GetInstance()->GetDevice();
 	m_debugManager = DebugManager::GetInstance();
+	m_lightManager = LightManager::GetInstance();
+
 	m_renderingMode = RENDERING_MODE_MAX;
 	m_blendingMode = BLENDING_MODE_MAX;
-
+	
 	m_currentMaterial = nullptr;
 	m_currentShader = nullptr;
 	m_currentVIBuffer = nullptr;
 
 	m_cameraList.clear();
-	m_wincx = _wincx;
-	m_wincy = _wincy;
+
 	m_halfWincx = (UINT)(m_wincx * 0.5f);
 	m_halfWincy = (UINT)(m_wincy * 0.5f);
 
 	D3DVIEWPORT9 vp = { 0,0,m_wincx,m_wincy,0,1 };
 	m_device->SetViewport(&vp);
 
+	m_clearRTShader = ResourceManager::GetInstance()->GetResource<Shader>(L"clearRT");
+
+
+	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
 }
 
 void RenderManager::Render()
@@ -72,20 +80,35 @@ void RenderManager::Render()
 
 void RenderManager::Render(Camera * _cam)
 {
-	
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
+	///////////////////////////////////////////////////////
+	// 공용 상수버퍼
 	ConstantBuffer cBuffer;
 
 	cBuffer.viewProj = _cam->GetViewMatrix() * _cam->GetProjMatrix();
 	cBuffer.worldCamPos = _cam->GetTransform()->GetWorldPosition();
 
-	_cam->RecordRenderTarget();
-	
+	DirectionalLightInfo info;
+	if (m_lightManager->GetDirectionalLightInfo(info))
+	{
+		cBuffer.isDirectionalLight = 1;
+		cBuffer.directionalLight = info;
+	}
+	else
+	{
+		cBuffer.isDirectionalLight = 0;
+	}
+	////////////////////////////////////////////////////////
+
+
 	ThrowIfFailed(m_device->BeginScene());
 
+	ClearRT(_cam, cBuffer);
 
+
+	_cam->RecordRenderTarget();
 
 	for (auto& MeshRendererList : m_renderLists)
 	{
@@ -112,9 +135,8 @@ void RenderManager::Render(Camera * _cam)
 
 
 
-
-	ThrowIfFailed(m_device->EndScene());
 	_cam->EndRenderTarget();
+	ThrowIfFailed(m_device->EndScene());
 
 }
 
@@ -148,6 +170,49 @@ void RenderManager::Reset()
 	m_cameraList.clear();
 	for (auto& renderList : m_renderLists)
 		renderList.second.clear();
+}
+
+void RenderManager::ClearRT(Camera * _cam, ConstantBuffer& _cBuffer)
+{
+	BYTE i = 0;
+	Matrix mat;
+	D3DXMatrixScaling(&mat,2,2,2);
+
+
+
+	bool isExistRenderTarget = false;
+	for (auto& rt : _cam->GetRenderTargets())
+	{
+		if (rt)
+		{
+			if (!isExistRenderTarget)
+			{
+				isExistRenderTarget = true;
+				m_clearRTShader->BeginPass();
+
+				ThrowIfFailed(m_device->SetIndices(m_viBuffer->GetIndexBuffer()));
+				ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_clearRTShader->GetInputLayoutSize()));
+				ThrowIfFailed(m_device->SetVertexDeclaration(m_clearRTShader->GetDeclartion()));
+				m_clearRTShader->SetValue("g_cBuffer", &_cBuffer, sizeof(ConstantBuffer));
+				m_clearRTShader->SetMatrix("g_world", mat);
+			}
+			rt->StartRecord(0);
+
+			Vector4 color = rt->GetColor();
+			m_clearRTShader->SetVector("g_rtColor", rt->GetColor());
+			m_clearRTShader->CommitChanges();
+			ThrowIfFailed(m_device->DrawIndexedPrimitive(m_clearRTShader->GetPrimitiveType(), 0, 0, m_viBuffer->GetVertexCount(), 0, m_viBuffer->GetFigureCount()));
+
+			rt->EndRecord();
+		}
+		++i;
+	}
+
+	if (isExistRenderTarget)
+	{
+		m_clearRTShader->EndPass();
+	}
+
 }
 
 void RenderManager::RenderRequest(IRenderer * _render)

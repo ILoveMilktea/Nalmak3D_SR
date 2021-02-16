@@ -39,7 +39,8 @@ void MeshRenderer::Render()
 	Shader* currentShader = m_material->GetShader();
 	assert("Current Shader is nullptr! " && currentShader);
 
-	currentShader->SetMatrix("g_world", GetTransform()->GetWorldMatrix());
+	currentShader->SetMatrix("g_world", m_transform->GetWorldMatrix());
+
 
 	if (m_animator)
 		GetMaterial()->SetTexture(0, m_animator->GetDiffuseSprite());

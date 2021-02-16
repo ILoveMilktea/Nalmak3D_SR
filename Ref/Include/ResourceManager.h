@@ -47,6 +47,7 @@ public:
 	void CreateDefaultResource();
 private:
 	void CreateDefaultRenderTarget(); // ·»´õÅ¸°Ù »ý¼º
+	void CreateDefaultDepthStencil();
 	void CreateDefaultMesh();
 	void CreateDefaultShader();
 

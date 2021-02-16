@@ -127,9 +127,6 @@
     <Filter Include="05.Component\06.CubeMap">
       <UniqueIdentifier>{86869034-662c-4e8b-be58-595a834807d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="06.Resource\05.CubeTexture">
-      <UniqueIdentifier>{bdc490b2-fd97-4ebf-98d2-b80c76b1486a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Component\07.StateControl">
       <UniqueIdentifier>{4f578033-6a72-4492-86d2-09320ccf9815}</UniqueIdentifier>
     </Filter>
@@ -184,6 +181,12 @@
     <Filter Include="02.Manager\12.LightManager">
       <UniqueIdentifier>{a3590445-3030-4860-bf28-eec37194c003}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Resource\05.DepthStencil">
+      <UniqueIdentifier>{bdc490b2-fd97-4ebf-98d2-b80c76b1486a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\09.Light">
+      <UniqueIdentifier>{683fd8ec-cef5-4888-9abb-eac595ddf414}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -230,9 +233,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Shader.cpp">
       <Filter>06.Resource\03.Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\RenderTarget.cpp">
-      <Filter>06.Resource\04.RenderTarget</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Camera.cpp">
       <Filter>05.Component\02.Camera</Filter>
@@ -369,8 +369,22 @@
     <ClCompile Include="..\Source\Bezier.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\SkyBox.cpp" />
-    <ClCompile Include="..\Source\LightManager.cpp" />
+    <ClCompile Include="..\Source\RenderTarget.cpp">
+      <Filter>06.Resource\04.RenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DepthStencil.cpp">
+      <Filter>06.Resource\05.DepthStencil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DirectionalLight.cpp">
+      <Filter>05.Component\09.Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\LightManager.cpp">
+      <Filter>02.Manager\12.LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SkyBox.cpp">
+      <Filter>06.Resource\01.VIBuffer\08.SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AutoRotate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -432,9 +446,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\Shader.h">
       <Filter>06.Resource\03.Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\RenderTarget.h">
-      <Filter>06.Resource\04.RenderTarget</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Camera.h">
       <Filter>05.Component\02.Camera</Filter>
@@ -577,7 +588,21 @@
     <ClInclude Include="..\Include\Bezier.h">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\SkyBox.h" />
-    <ClInclude Include="..\Include\LightManager.h" />
+    <ClInclude Include="..\Include\RenderTarget.h">
+      <Filter>06.Resource\04.RenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DepthStencil.h">
+      <Filter>06.Resource\05.DepthStencil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DirectionalLight.h">
+      <Filter>05.Component\09.Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\LightManager.h">
+      <Filter>02.Manager\12.LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SkyBox.h">
+      <Filter>06.Resource\01.VIBuffer\08.SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AutoRotate.h" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "Material.h"
 #include "ResourceManager.h"
 #include "Shader.h"
+#include "DepthStencil.h"
 
 #include <fstream>
 
@@ -157,6 +158,41 @@ void Material::Initialize(wstring _fp)
 			wstring name;
 			name.assign(textureName.begin(), textureName.end());
 			auto rt = ResourceManager::GetInstance()->GetResource<RenderTarget>(name);
+			SetTexture(handleName, rt->GetTexture());
+		}
+		if (strcmp(memberName.c_str(), "textureDS") == 0)
+		{
+			// handle name
+			size_t handleNameEnd;
+			for (handleNameEnd = firstWordEnd; handleNameEnd < buffer.size(); ++handleNameEnd)
+			{
+				if ('\"' == buffer[handleNameEnd])
+					break;
+			}
+
+			string handleName = buffer.substr(firstWordEnd, handleNameEnd - firstWordEnd);
+
+			// 다음 " 찾기
+			++handleNameEnd;
+			while ('\"' != buffer[handleNameEnd])
+			{
+				++handleNameEnd;
+			}
+			++handleNameEnd;
+
+			// texture name
+			size_t nameEnd;
+			for (nameEnd = handleNameEnd; nameEnd < buffer.size(); ++nameEnd)
+			{
+				if ('\"' == buffer[nameEnd])
+					break;
+			}
+
+			string textureName = buffer.substr(handleNameEnd, nameEnd - handleNameEnd);
+
+			wstring name;
+			name.assign(textureName.begin(), textureName.end());
+			auto rt = ResourceManager::GetInstance()->GetResource<DepthStencil>(name);
 			SetTexture(handleName, rt->GetTexture());
 		}
 #pragma region shaderMember

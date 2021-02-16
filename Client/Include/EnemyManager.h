@@ -36,7 +36,7 @@ public:
 public: /* Gettttt */
 	//void Get_CurHp();
 	//void Get_Transform();
-	const int& Get_EnemyCount() const;
+	int Get_EnemyCount() const;
 
 public: /* Settttt */
 

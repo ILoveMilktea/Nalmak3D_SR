@@ -4,7 +4,7 @@
 
 shader "default"
 
-textureRT "g_mainTex" "mainRT_depth"
+textureRT "g_mainTex" "mainRT_motionNSpec"
 vector4 "g_mainTexColor" "1,1,1,1.f"
 
 renderQueue "4000"
