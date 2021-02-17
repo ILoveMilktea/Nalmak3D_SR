@@ -40,6 +40,7 @@
 #include "Animator.h"
 #include "Terrain.h"
 #include "DirectionalLight.h"
+#include "PointLight.h"
 #include "AutoRotate.h"
 
 #pragma endregion

@@ -58,9 +58,19 @@ public:
 	void RenderText();
 	void Reset();
 private:
-	void ClearRT(Camera * _cam, ConstantBuffer& _cBuffer);
+	void DeferredRender(Camera * _cam, ConstantBuffer& _cBuffer);
+	void GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer);
+	void ShadingPass(Camera * _cam, ConstantBuffer& _cBuffer);
+	void LightingPass(Camera * _cam, ConstantBuffer& _cBuffer);
+	void TransparentPass(Camera * _cam, ConstantBuffer& _cBuffer);
 private:
-	map<int, vector<IRenderer*>> m_renderLists;
+	void RenderByMaterial(const wstring& _materialName, ConstantBuffer& _cBuffer);
+	void RenderImageToScreen(IDirect3DBaseTexture9* _tex, ConstantBuffer& _cBuffer);
+private:
+	VIBuffer* m_imageVIBuffer;
+private:
+	map<int, vector<IRenderer*>> m_renderOpaqueLists;
+	map<int, vector<IRenderer*>> m_renderTransparentLists;
 	vector<Text*> m_textRenderList;
 public:
 	void RenderRequest(IRenderer* _render);
@@ -82,12 +92,17 @@ private:
 	FILL_MODE m_fillMode;
 
 private:
+	Material* m_currentUIMaterial;
+private:
 	void UpdateMaterial(Material* _material);
 	void UpdateRenderingMode(Material * _material);
 	void UpdateBlendingMode(Material * _material);
 	void UpdateFillMode(Material* _material);
 	void UpdateVIBuffer(IRenderer* _renderer);
 	void UpdateShader(Shader* _shader, ConstantBuffer& _cBuffer);
+private:
+	void RecordRenderTarget(UINT _index, const wstring& _name);
+	void EndRenderTarget(const wstring& _name);
 public:
 	void SetWindowSize(UINT _x, UINT _y);
 public:
@@ -106,8 +121,11 @@ private:
 private:
 	DebugManager* m_debugManager;
 	LightManager* m_lightManager;
-	Shader* m_clearRTShader;
-	VIBuffer* m_viBuffer;
+	ResourceManager* m_resourceManager;
+
+private:
+	void ClearRenderTarget(const wstring& _targetName);
+
 };
 
 END

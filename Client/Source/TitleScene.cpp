@@ -14,7 +14,6 @@ void TitleScene::Initialize()
 
 	DirectionalLight::Desc light;
 	light.intensity = 1.f;
-
 	AutoRotate::Desc rot;
 	rot.xAxisSpeed = 0.5f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(50, 20, 0)->AddComponent<AutoRotate>(&rot);
@@ -23,29 +22,35 @@ void TitleScene::Initialize()
 		Camera::Desc cam;
 		cam.renderMode = CAMERA_RENDERING_MODE_DEFERRED;
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>(&cam)->AddComponent<FreeMove>();
-		mainCam->GetComponent<Camera>()->OffLayer(RENDER_LAYER_UI);
-		mainCam->GetComponent<Camera>()->SetRenderTarget(0, L"mainRT_diffuse");
-		mainCam->GetComponent<Camera>()->SetRenderTarget(1, L"mainRT_normal");
-		mainCam->GetComponent<Camera>()->SetRenderTarget(2, L"mainRT_depthStencil");
-		//mainCam->GetComponent<Camera>()->SetRenderTarget(3, L"mainRT_normal");
-
+		//mainCam->GetComponent<Camera>()->OffLayer(RENDER_LAYER_UI);
 		mainCam->SetPosition(0, 4, -6);
 		mainCam->SetRotation(30, 0, 0);
 		mainCam->SetDontDestroy(true);
 	}
-	
-	{
+	/*{
 		Camera::Desc cam;
-		cam.mode = CAMERA_PROJECTION_MODE_ORTHOGRAPHIC;
-		cam.width = WINCX;
-		cam.height = WINCY;
-		auto uiCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"uiCamera")->AddComponent<Camera>(&cam);
-		uiCam->GetComponent<Camera>()->AllOffLayer();
-		uiCam->GetComponent<Camera>()->OnLayer(RENDER_LAYER_UI);
-		uiCam->SetPosition(0, 0, -10);
-		uiCam->SetDontDestroy(true);
-	}
+		cam.renderMode = CAMERA_RENDERING_MODE_DEFERRED;
+		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>(&cam)->AddComponent<FreeMove>();
+		mainCam->GetComponent<Camera>()->AllOffLayer();
+		mainCam->GetComponent<Camera>()->OnLayer(RENDER_LAYER_UI);
 
+		mainCam->SetPosition(0, 0, -6);
+		mainCam->SetDontDestroy(true);
+	}*/
+	{
+		PointLight::Desc point;
+		point.radius = 3;
+		for (int i = 0; i < 30; ++i)
+		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(Nalmak_Math::RandDirection() * Nalmak_Math::Rand(-15.f, 15.f));;
+
+	
+	}
+	{
+		MeshRenderer::Desc mesh;
+		mesh.meshName = L"sphere";
+		mesh.mtrlName = L"standard";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetScale(3, 3, 3)->SetPosition(3,0,0);
+	}
 	
 	{
 		MeshRenderer::Desc render;
@@ -59,47 +64,36 @@ void TitleScene::Initialize()
 		render.meshName = L"teapot";
 		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 10)->SetScale(1, 1, 1);
 	}
-	{
+	/*{
 		MeshRenderer::Desc renderer;
+		renderer.mtrlName = L"GBuffer_diffuse";
 		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_diffuse";
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 100, 0);
 	}
 	{
 		MeshRenderer::Desc renderer;
+		renderer.mtrlName = L"GBuffer_light";
 		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_light";
+
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 300, 0);
 	}
 	{
 		MeshRenderer::Desc renderer;
+		renderer.mtrlName = L"GBuffer_depthStencil";
 		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_depthStencil";
+
 		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 500, 0);
 	}
 	{
 		MeshRenderer::Desc renderer;
+		renderer.mtrlName = L"GBuffer_normal";
 		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_normal";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 700, 0);
-	}
-	/*{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_motionNSpec";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 900, 0);
-	}*/
-	{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.meshName = L"quadNoneNormal";
-		renderer.mtrlName = L"lightPass";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);
-	}
 
-	{
+		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(-HALF_WINCX + 100, HALF_WINCY - 700, 0);
+	}*/
+
+
 	
-	}
 
 	INSTANTIATE(OBJECT_TAG_DEBUG,L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(-HALF_WINCX, HALF_WINCY, 0);
 

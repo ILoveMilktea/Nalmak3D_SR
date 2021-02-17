@@ -1,7 +1,7 @@
 #pragma once
-#include "Component.h"
+#include "Light.h"
 class NALMAK_DLL DirectionalLight :
-	public Component
+	public Light
 {
 public:
 	struct Desc
@@ -21,8 +21,6 @@ public:
 public:
 	DirectionalLightInfo GetDirectionalLightInfo();
 private:
-	Vector3 m_color;
-	float m_intensity;
-	class LightManager* m_lightManager;
+
 };
 

@@ -385,6 +385,12 @@
       <Filter>06.Resource\01.VIBuffer\08.SkyBox</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\AutoRotate.cpp" />
+    <ClCompile Include="..\Source\Light.cpp">
+      <Filter>05.Component\09.Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PointLight.cpp">
+      <Filter>05.Component\09.Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -604,5 +610,11 @@
       <Filter>06.Resource\01.VIBuffer\08.SkyBox</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\AutoRotate.h" />
+    <ClInclude Include="..\Include\Light.h">
+      <Filter>05.Component\09.Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PointLight.h">
+      <Filter>05.Component\09.Light</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
