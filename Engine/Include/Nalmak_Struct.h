@@ -24,6 +24,9 @@ struct ConstantBuffer
 	Matrix viewProj;
 	Vector3 worldCamPos;
 
+	int wincx;
+	int wincy;
+
 	int isDirectionalLight = 0;
 	DirectionalLightInfo directionalLight;
 };

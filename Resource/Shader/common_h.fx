@@ -10,6 +10,9 @@ struct cBuffer
 	matrix viewProj;
 	float3 worldCamPos;
 
+	int wincx;
+	int wincy;
+
 	int isDirectionalLight;
 	DirectionalLight directionalLight;
 

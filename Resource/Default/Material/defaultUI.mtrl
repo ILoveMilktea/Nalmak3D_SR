@@ -2,13 +2,13 @@
 ##  Material Data Setting
 #########################################################
 
-shader "lightPass"
+shader "defaultUI"
 
-textureRT "g_diffuse" "mainRT_diffuse"
-textureRT "g_depthStencil" "mainRT_depthStencil"
-textureRT "g_normal" "mainRT_normal"
+texture "g_mainTex" "default"
+vector4 "g_mainTexColor" "1,1,1,1"
 
-renderQueue "2000"
+
+renderQueue "4000"
 
 renderMode "0"
 

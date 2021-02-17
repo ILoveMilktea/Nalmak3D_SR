@@ -39,6 +39,23 @@ void LightManager::DeleteDirectionalLight()
 	m_directionalLigth = nullptr;
 }
 
+void LightManager::DeletePointLight(PointLight * _light)
+{
+	for (auto iter = m_pointLights.begin(); iter != m_pointLights.end(); ++iter)
+	{
+		if ((*iter) == _light)
+		{
+			m_pointLights.erase(iter);
+			return;
+		}
+	}
+}
+
+void LightManager::AddPointLight(PointLight * _light)
+{
+	m_pointLights.emplace_back(_light);
+}
+
 bool LightManager::GetDirectionalLightInfo(DirectionalLightInfo& _info)
 {
 	if (m_directionalLigth)

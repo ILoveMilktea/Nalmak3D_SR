@@ -38,6 +38,10 @@ public:
 	{
 		return _min + (float)(rand()) / (float)RAND_MAX * (_max - _min);
 	}
+	inline static Vector3 RandDirection()
+	{
+		return Nalmak_Math::Normalize(Vector3(Rand(-1.f, 1.f), Rand(-1.f, 1.f), Rand(-1.f, 1.f)));
+	}
 
 	inline static bool Equal(const float& _a, const float& _b)
 	{

@@ -1,4 +1,4 @@
-#include "common.fx"
+#include "common_h.fx"
 
 matrix g_world;
 

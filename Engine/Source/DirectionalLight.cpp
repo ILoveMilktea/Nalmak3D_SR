@@ -6,6 +6,8 @@ DirectionalLight::DirectionalLight(Desc * _desc)
 {
 	m_color = _desc->color;
 	m_intensity = _desc->intensity;
+
+	m_lightMode = LIGHT_MODE_DIRECTIONAL;
 }
 
 DirectionalLight::~DirectionalLight()
@@ -14,7 +16,6 @@ DirectionalLight::~DirectionalLight()
 
 void DirectionalLight::Initialize()
 {
-	m_lightManager = LightManager::GetInstance();
 	m_lightManager->SetDirectionalLightInfo(this);
 }
 

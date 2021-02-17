@@ -51,6 +51,7 @@
     <ClCompile Include="..\Source\IRenderer.cpp" />
     <ClCompile Include="..\Source\IResource.cpp" />
     <ClCompile Include="..\Source\IState.cpp" />
+    <ClCompile Include="..\Source\Light.cpp" />
     <ClCompile Include="..\Source\LightManager.cpp" />
     <ClCompile Include="..\Source\LineManager.cpp" />
     <ClCompile Include="..\Source\LineVI.cpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="..\Source\Particle.cpp" />
     <ClCompile Include="..\Source\ParticleRenderer.cpp" />
     <ClCompile Include="..\Source\Plane.cpp" />
+    <ClCompile Include="..\Source\PointLight.cpp" />
     <ClCompile Include="..\Source\PrototypeManager.cpp" />
     <ClCompile Include="..\Source\Quad.cpp" />
     <ClCompile Include="..\Source\QuadNoneNormal.cpp" />
@@ -118,6 +120,7 @@
     <ClInclude Include="..\Include\IRenderer.h" />
     <ClInclude Include="..\Include\IResource.h" />
     <ClInclude Include="..\Include\IState.h" />
+    <ClInclude Include="..\Include\Light.h" />
     <ClInclude Include="..\Include\LightManager.h" />
     <ClInclude Include="..\Include\LineManager.h" />
     <ClInclude Include="..\Include\LineVI.h" />
@@ -137,6 +140,7 @@
     <ClInclude Include="..\Include\Particle.h" />
     <ClInclude Include="..\Include\ParticleRenderer.h" />
     <ClInclude Include="..\Include\Plane.h" />
+    <ClInclude Include="..\Include\PointLight.h" />
     <ClInclude Include="..\Include\PrototypeManager.h" />
     <ClInclude Include="..\Include\Quad.h" />
     <ClInclude Include="..\Include\QuadNoneNormal.h" />

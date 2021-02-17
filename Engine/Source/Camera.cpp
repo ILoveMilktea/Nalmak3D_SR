@@ -172,6 +172,8 @@ Vector3 Camera::GetCamToMouseWorldDirection()
 
 	D3DXVec3TransformCoord(&camToScreenDirection_WorldSpace, &camToScreenDirection_ViewSpace, &invView);
 	return Vector::Normalize(camToScreenDirection_WorldSpace - m_transform->GetWorldPosition());
+
+	
 }
 
 void Camera::SetRenderTarget(UINT _index, wstring  _rtName)

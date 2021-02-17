@@ -198,7 +198,6 @@ void RenderTarget::Release()
 
 void RenderTarget::StartRecord(UINT _index)
 {
-
 	m_device->GetRenderTarget(_index, &m_originSurface);
 	ThrowIfFailed(m_device->SetRenderTarget(_index, m_captureSurface));
 	//ThrowIfFailed(m_device->Clear(0, nullptr, D3DCLEAR_TARGET, m_color, 1.f, 0));
