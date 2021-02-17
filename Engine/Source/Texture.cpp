@@ -26,7 +26,7 @@ void Texture::Initialize(wstring _fp)
 			m_device,
 			_fp.c_str(),
 			(LPDIRECT3DCUBETEXTURE9*)&tex
-		))
+		));
 	}
 	else if (info.ResourceType == D3DRTYPE_TEXTURE)
 	{

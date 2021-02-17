@@ -244,5 +244,8 @@
     <FxCompile Include="..\..\Resource\Shader\common_h.fx">
       <Filter>03.Resource</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\light_h.fx">
+      <Filter>03.Resource</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

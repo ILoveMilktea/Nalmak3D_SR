@@ -56,7 +56,7 @@ Core::~Core()
 
 void Core::Initialize(HWND handle, Desc * _desc)
 {
-	RenderManager::GetInstance()->SetWindowSize(_desc->wincx, _desc->wincx);
+	RenderManager::GetInstance()->SetWindowSize(_desc->wincx, _desc->wincy);
 	ObjectManager::GetInstance()->Initialize(_desc->OBJECT_TAG_COUNT);
 	DeviceManager::GetInstance()->Initialize(_desc->wincx, _desc->wincy, handle, _desc->windowMode);
 

@@ -21,7 +21,9 @@ void TitleScene::Initialize()
 	{
 		Camera::Desc cam;
 		cam.renderMode = CAMERA_RENDERING_MODE_DEFERRED;
-		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>(&cam)->AddComponent<FreeMove>();
+		FreeMove::Desc free;
+		free.wheelMoveSpeed = 2.f;
+		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>(&cam)->AddComponent<FreeMove>(&free);
 		//mainCam->GetComponent<Camera>()->OffLayer(RENDER_LAYER_UI);
 		mainCam->SetPosition(0, 4, -6);
 		mainCam->SetRotation(30, 0, 0);
@@ -39,9 +41,8 @@ void TitleScene::Initialize()
 	}*/
 	{
 		PointLight::Desc point;
-		point.radius = 3;
-		for (int i = 0; i < 30; ++i)
-		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(Nalmak_Math::RandDirection() * Nalmak_Math::Rand(-15.f, 15.f));;
+		point.radius = 5;
+			INSTANTIATE()->AddComponent<PointLight>(&point);//->SetPosition(Nalmak_Math::RandDirection() * Nalmak_Math::Rand(-30.f, 30.f));;
 
 	
 	}

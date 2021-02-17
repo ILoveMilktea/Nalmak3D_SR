@@ -19,9 +19,31 @@ struct DirectionalLightInfo
 	float intensity = 1.f;
 };
 
+struct BaseLightInfo
+{
+	Vector3 color = Vector3(1,1,1);
+	float ambientIntensity = 0.01f;
+	float diffuseIntensity = 0.2f;
+};
+
+struct PointLightInfo
+{
+	BaseLightInfo base;
+	Vector3 position;
+};
+
+//struct DirectionalLightInfo
+//{
+//	BaseLightInfo base;
+//	Vector3 Direction;
+//};
+
+
 struct ConstantBuffer
 {
 	Matrix viewProj;
+	Matrix invView;
+	Matrix invProj;
 	Vector3 worldCamPos;
 
 	int wincx;

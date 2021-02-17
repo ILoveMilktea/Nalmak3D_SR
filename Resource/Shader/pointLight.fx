@@ -1,5 +1,9 @@
 #include "common_h.fx"
+#include "light_h.fx"
+
+
 matrix g_world;
+PointLight g_pointLight;
 
 texture g_diffuse;
 texture g_depthStencil;
@@ -48,8 +52,9 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 
 	float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
-	o.screenPos = (o.position.xy + 1.0f) * 0.5f;
-	
+
+	o.screenPos = ComputeScreenPos(o.position);
+
 	return o;
 }
 
@@ -58,9 +63,15 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
 
-	o.diffuse.xy = _input.screenPos;
-	o.diffuse.z = 1;
+	float3 diffuse = tex2D(DiffuseSampler, _input.screenPos).xyz;
+	float3 normal = tex2D(NormalSampler, _input.screenPos).xyz;
+	float depth = tex2D(DepthSampler, _input.screenPos).x;
+	float3 worldPos = GetWorldPosFromDepth(depth, _input.screenPos);
+	normal = normalize(normal);
 
+	float4 light = float4(diffuse,1) * CalcPointLight(g_pointLight.base, g_pointLight.position, g_cBuffer.worldCamPos, worldPos, normal);
+
+	o.diffuse = light;
 
 	return o;
 }

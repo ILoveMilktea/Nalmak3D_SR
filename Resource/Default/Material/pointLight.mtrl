@@ -4,6 +4,10 @@
 
 shader "pointLight"
 
+textureRT "g_diffuse" "GBuffer_diffuse"
+textureRT "g_depthStencil" "GBuffer_depthStencil"
+textureRT "g_normal" "GBuffer_normal"
+
 renderQueue "2000"
 
 renderMode "2"

@@ -51,8 +51,7 @@ void RenderManager::Initialize()
 
 	m_cameraList.clear();
 
-	m_halfWincx = (UINT)(m_wincx * 0.5f);
-	m_halfWincy = (UINT)(m_wincy * 0.5f);
+	
 
 	D3DVIEWPORT9 vp = { 0,0,m_wincx,m_wincy,0,1 };
 	m_device->SetViewport(&vp);
@@ -88,9 +87,16 @@ void RenderManager::Render(Camera * _cam)
 	///////////////////////////////////////////////////////
 	// 공용 상수버퍼
 	ConstantBuffer cBuffer;
-
-	cBuffer.viewProj = _cam->GetViewMatrix() * _cam->GetProjMatrix();
+	Matrix view = _cam->GetViewMatrix();
+	Matrix proj = _cam->GetProjMatrix();
+	Matrix invView;
+	D3DXMatrixInverse(&invView, nullptr, &view);
+	Matrix invProj;
+	D3DXMatrixInverse(&invProj, nullptr, &proj);
+	cBuffer.viewProj = view * proj;
 	cBuffer.worldCamPos = _cam->GetTransform()->GetWorldPosition();
+	cBuffer.invView = invView;
+	cBuffer.invProj = invProj;
 	cBuffer.wincx = m_wincx;
 	cBuffer.wincy = m_wincy;
 
@@ -231,6 +237,9 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
 		D3DXMatrixScaling(&matScale, scale, scale, scale);
 
+		PointLightInfo pointLight;
+		pointLight.position = pos;
+		m_currentShader->SetValue("g_pointLight", &pointLight,sizeof(PointLightInfo));
 		m_currentShader->SetMatrix("g_world", matScale * matTrs);
 
 		m_currentShader->CommitChanges();
@@ -487,6 +496,9 @@ void RenderManager::SetWindowSize(UINT _x, UINT _y)
 {
 	m_wincx = _x;
 	m_wincy = _y;
+
+	m_halfWincx = (UINT)(m_wincx * 0.5f);
+	m_halfWincy = (UINT)(m_wincy * 0.5f);
 }
 
 Camera * RenderManager::GetMainCamera()

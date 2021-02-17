@@ -43,6 +43,8 @@ BEGIN(Nalmak)
 //https://aker.tistory.com/549 최적화 나중에 구현해보기
 //https://www.slideshare.net/cagetu/kgc2012-deferred-forward 라이팅에관한 참고자료 
 // Texture coverage 
+
+//http://ogldev.atspace.co.uk/www/tutorial21/tutorial21.html  deferred 참고!
 class RenderManager
 {
 	DECLARE_SINGLETON(RenderManager)
