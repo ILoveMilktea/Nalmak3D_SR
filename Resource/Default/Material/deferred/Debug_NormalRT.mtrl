@@ -4,7 +4,7 @@
 
 shader "default"
 
-textureRT "g_mainTex" "GBuffer_light"
+textureRT "g_mainTex" "GBuffer_Normal"
 vector4 "g_mainTexColor" "1,1,1,1.f"
 
 renderQueue "4000"

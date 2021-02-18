@@ -3,7 +3,7 @@
 matrix g_world;
 
 texture g_diffuse;
-texture g_depthStencil;
+texture g_depth;
 texture g_normal;
 texture g_light;
 
@@ -13,7 +13,7 @@ sampler DiffuseSampler = sampler_state
 };
 sampler DepthSampler = sampler_state
 {
-	texture = g_depthStencil;
+	texture = g_depth;
 };
 sampler NormalSampler = sampler_state
 {

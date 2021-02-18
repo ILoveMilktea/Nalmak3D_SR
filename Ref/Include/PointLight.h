@@ -9,10 +9,7 @@ public:
 		float diffuseIntensity = 0.2f;
 		float ambientIntensity = 0.05f;
 
-		// for attenuation
-		float constant = 0;
-		float linearRatio = 0;
-		float exp = 0.3f;
+		float radius = 1.f;
 	};
 public:
 	PointLight(Desc* _desc);

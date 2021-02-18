@@ -220,9 +220,6 @@
     <FxCompile Include="..\..\Resource\Shader\noneNormal.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\standard.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
@@ -243,6 +240,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\light_h.fx">
       <Filter>03.Resource</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\standard.fx">
+      <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

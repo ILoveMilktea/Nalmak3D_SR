@@ -286,7 +286,11 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\pointLight.fx" />
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx" />
-    <FxCompile Include="..\..\Resource\Shader\standard.fx" />
+    <FxCompile Include="..\..\Resource\Shader\standard.fx">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

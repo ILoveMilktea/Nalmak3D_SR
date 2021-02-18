@@ -70,7 +70,6 @@ void RenderManager::Render()
 		if (cam->GetActive())
 		{
 			Render(cam);
-
 		}
 	}
 	RenderText();
@@ -159,27 +158,27 @@ void RenderManager::DeferredRender(Camera * _cam, ConstantBuffer& _cBuffer)
 	LightingPass(_cam, _cBuffer);
 	ShadingPass(_cam, _cBuffer);
 
-	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_final")->GetTexture(), _cBuffer);
+	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer);
 
 	TransparentPass(_cam, _cBuffer);
 }
 
 void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 {
-	ClearRenderTarget(L"GBuffer_diffuse");
-	ClearRenderTarget(L"GBuffer_normal");
-	ClearRenderTarget(L"GBuffer_depthStencil");
-	ClearRenderTarget(L"GBuffer_position");
+	ClearRenderTarget(L"GBuffer_Diffuse");
+	ClearRenderTarget(L"GBuffer_Normal");
+	ClearRenderTarget(L"GBuffer_Depth");
+	ClearRenderTarget(L"GBuffer_Position");
 
 
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
 	ThrowIfFailed(m_device->BeginScene());
-	RecordRenderTarget(0, L"GBuffer_diffuse");
-	RecordRenderTarget(1, L"GBuffer_normal");
-	RecordRenderTarget(2, L"GBuffer_depthStencil");
-	RecordRenderTarget(3, L"GBuffer_position");
+	RecordRenderTarget(0, L"GBuffer_Diffuse");
+	RecordRenderTarget(1, L"GBuffer_Normal");
+	RecordRenderTarget(2, L"GBuffer_Depth");
+	RecordRenderTarget(3, L"GBuffer_Position");
 
 	for (auto& MeshRendererList : m_renderOpaqueLists)
 	{
@@ -204,18 +203,16 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 		m_currentShader->EndPass();
 
 
-	EndRenderTarget(L"GBuffer_diffuse");
-	EndRenderTarget(L"GBuffer_normal");
-	EndRenderTarget(L"GBuffer_depthStencil");
-	EndRenderTarget(L"GBuffer_position");
+	EndRenderTarget(L"GBuffer_Diffuse");
+	EndRenderTarget(L"GBuffer_Normal");
+	EndRenderTarget(L"GBuffer_Depth");
+	EndRenderTarget(L"GBuffer_Position");
 
 	ThrowIfFailed(m_device->EndScene());
 }
 
-
 void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 {
-
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 	Material* material = m_resourceManager->GetResource<Material>(L"pointLight");
@@ -224,8 +221,8 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 
 
-	ClearRenderTarget(L"GBuffer_light");
-	RecordRenderTarget(0, L"GBuffer_light");
+	ClearRenderTarget(L"GBuffer_Light");
+	RecordRenderTarget(0, L"GBuffer_Light");
 
 	ThrowIfFailed(m_device->BeginScene());
 
@@ -256,20 +253,20 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	if (m_currentShader)
 		m_currentShader->EndPass();
 
-	EndRenderTarget(L"GBuffer_light");
+	EndRenderTarget(L"GBuffer_Light");
 	ThrowIfFailed(m_device->EndScene());
 
 }
 
 void RenderManager::ShadingPass(Camera * _cam, ConstantBuffer & _cBuffer)
 {
-	ClearRenderTarget(L"GBuffer_final");
+	ClearRenderTarget(L"GBuffer_Shade");
 
-	RecordRenderTarget(0, L"GBuffer_final");
+	RecordRenderTarget(0, L"GBuffer_Shade");
 
-	RenderByMaterial(L"GBuffer_final",_cBuffer);
+	RenderByMaterial(L"GBuffer_Shade",_cBuffer);
 
-	EndRenderTarget(L"GBuffer_final");
+	EndRenderTarget(L"GBuffer_Shade");
 }
 
 void RenderManager::TransparentPass(Camera * _cam, ConstantBuffer& _cBuffer)

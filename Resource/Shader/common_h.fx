@@ -4,6 +4,8 @@ struct DirectionalLight
 	float3 color;
 	float intensity;
 };
+static const float zNear = 1;
+static const float zFar = 1000;
 
 struct cBuffer
 {
@@ -22,7 +24,8 @@ struct cBuffer
 
 cBuffer g_cBuffer;
 
-///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 // 투영행렬까지 곱한 버텍스좌표를 받아 uv공간으로 이동시켜준다
 float2 ComputeScreenPos(float4 _clipPos)
@@ -34,55 +37,38 @@ float2 ComputeScreenPos(float4 _clipPos)
 	return screenPos;
 }
 
-// 1 가장 가까움 (하얀색)
-// 0 가장 멈 (검정색)
-float CalcLinearZ(float _depth)
+float4 GetWorldNormal(float3 _normal, matrix _world)
 {
-	const float zFar = 1000.0;
-	const float zNear = 1.0;
-
-	float linearZ = (zNear * zFar) / (zFar - (1 - _depth) * (zFar - zNear)) ;
-
-	return linearZ;
-	//return (linearZ * 2.0) - 1.0;
+	return  normalize(mul(float4(_normal, 0.f), _world));
 }
 
-float3 GetWorldPosFromDepth(float _depth, float2 _screenUV)
+float4 GetScaleBiasNormal(float3 _normal)
 {
-	float viewZ = CalcLinearZ(_depth);
-
-	float4 clipSpacePos = float4(_screenUV , viewZ, 1) * 2.0 - 1.0;
-
-	float4 viewSpacePos = mul(g_cBuffer.invProj,clipSpacePos);
-
-	viewSpacePos /= viewSpacePos.w;
-
-	float4 worldSpacePos = mul(g_cBuffer.invView, viewSpacePos);
-
-	return worldSpacePos.xyz;
+	return float4(_normal * 0.5f + 0.5f, 0.f);
 }
 
-float3 GetNewWorldPosFromDepth(float _depth, float2 _screenUV)
+float4 GetDepth(float2 _projZW)
 {
-	float x = _screenUV.x * 2 - 1;
-	float y = (1 - _screenUV.y) * 2 - 1;
-	float4 projSpacePos = float4(x, y, _depth, 1.0f);
-
-	float4 viewSpacePos = mul(projSpacePos, g_cBuffer.invProj);
-
-	viewSpacePos /= viewSpacePos.w;
-
-	float4 worldSpacePos = mul(g_cBuffer.invView, viewSpacePos);
-
-	return worldSpacePos.xyz;
-
+	return float4(_projZW.x / _projZW.y, _projZW.y * 0.001f, 0.f, 0.f);
 }
 
-float3 GetWorldPosFromDepth2(float _depth, float2 _screenUV)
-{
-	float4 ndc = float4(_screenUV * 2.0f - 1.0f, _depth, 1.0f);
-	matrix invViewProj = mul( g_cBuffer.invProj, g_cBuffer.invView);
-	float4 wp = mul(ndc, invViewProj);
 
-	return (wp / wp.w).xyz;
+
+float4 GetWorldPosFromDepth(float2 _depth, float2 _screenUV)
+{
+	float linearZ = _depth.y * zFar;
+
+	float4 pos;
+	pos.x = (_screenUV.x * 2.f - 1.f) * linearZ;
+	pos.y = (_screenUV.y * -2.f + 1.f) * linearZ;
+	pos.z = _depth.x * linearZ;
+	pos.w = linearZ;
+
+	pos = mul(pos, g_cBuffer.invProj);
+	pos = mul(pos, g_cBuffer.invView);
+
+	return pos;
 }
+
+
+

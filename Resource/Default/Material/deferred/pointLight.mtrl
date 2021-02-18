@@ -4,9 +4,9 @@
 
 shader "pointLight"
 
-textureRT "g_diffuse" "GBuffer_diffuse"
-textureRT "g_position" "GBuffer_position"
-textureRT "g_normal" "GBuffer_normal"
+textureRT "g_diffuse" "GBuffer_Diffuse"
+textureRT "g_normal" "GBuffer_Normal"
+textureRT "g_depth" "GBuffer_Depth"
 
 renderQueue "2000"
 

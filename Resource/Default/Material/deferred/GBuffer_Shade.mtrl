@@ -2,10 +2,13 @@
 ##  Material Data Setting
 #########################################################
 
-shader "default"
+shader "deferred_geometry"
 
-textureRT "g_mainTex" "GBuffer_depthStencil"
-vector4 "g_mainTexColor" "1,1,1,1.f"
+textureRT "g_diffuse" "GBuffer_Diffuse"
+textureRT "g_depth" "GBuffer_Depth"
+textureRT "g_normal" "GBuffer_Normal"
+textureRT "g_light" "GBuffer_Light"
+
 
 renderQueue "4000"
 

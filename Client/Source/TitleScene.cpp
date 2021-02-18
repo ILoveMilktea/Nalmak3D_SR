@@ -41,12 +41,10 @@ void TitleScene::Initialize()
 	}*/
 	{
 		PointLight::Desc point;
-		point.diffuseIntensity = 0.4f;
+		point.diffuseIntensity = 1.f;
 		point.ambientIntensity = 0.1f;
-		point.exp = 0.1f;
-		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(0,3,0);
-
-	
+		point.radius = 20.f;
+		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(0,0,1);
 	}
 	{
 		for (int i = 0; i < 30; ++i)

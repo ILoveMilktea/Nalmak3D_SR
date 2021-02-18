@@ -2,13 +2,10 @@
 ##  Material Data Setting
 #########################################################
 
-shader "deferred_geometry"
+shader "default"
 
-textureRT "g_diffuse" "GBuffer_diffuse"
-textureRT "g_depthStencil" "GBuffer_depthStencil"
-textureRT "g_normal" "GBuffer_normal"
-textureRT "g_light" "GBuffer_light"
-
+textureRT "g_mainTex" "GBuffer_Diffuse"
+vector4 "g_mainTexColor" "1,1,1,1.f"
 
 renderQueue "4000"
 
@@ -31,6 +28,7 @@ fillMode "0"
 ##    matrix   "handle"   "x,x,x,x,  x,x,x,x,  x,x,x,x,  x,x,x,x"
 ##    texture  "handle"   "tex"
 ##    textureRT "handle" "render target name"
+##    textureDS "handle" "depth stencil name"
 ##    vector4 "handle"   "x,x,x,x"
 ##    vector2 "handle"   "x,x"
 ##  ---------------------------------------------------------------------------------------

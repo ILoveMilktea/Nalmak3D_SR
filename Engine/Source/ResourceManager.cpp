@@ -27,6 +27,8 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	m_directoryPath = _path;
 	LoadMeshes<ObjMesh>(L"obj");
 	LoadResources<Shader>(L"fx");
+	LoadResources<Shader>(L"hpp");
+
 	LoadTextures(L"png");
 	LoadTextures(L"dds");
 

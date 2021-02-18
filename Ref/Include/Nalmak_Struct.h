@@ -18,11 +18,7 @@ struct PointLightInfo
 	BaseLightInfo base;
 
 	Vector3 position;
-
-	float constant;
-	float linearRatio;
-	float exp;
-
+	float radius;
 };
 
 struct DirectionalLightInfo
