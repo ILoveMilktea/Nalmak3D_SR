@@ -76,12 +76,12 @@ void Plane::CreateIndexBuffer()
 		for (int col = 0; col < m_width; ++col)
 		{
 			indices[index] = row * (m_width + 1) + col;
-			indices[index + 1] = row * (m_width + 1) + col + 1;
-			indices[index + 2] = (row + 1) * (m_width + 1) + col;
+			indices[index + 2] = row * (m_width + 1) + col + 1;
+			indices[index + 1] = (row + 1) * (m_width + 1) + col;
 
 			indices[index + 3] = (row + 1) * (m_width + 1) + col;   // index + 2
-			indices[index + 4] = row * (m_width + 1) + col + 1;   // index + 1
-			indices[index + 5] = (row + 1) * (m_width + 1) + col + 1;
+			indices[index + 5] = row * (m_width + 1) + col + 1;   // index + 1
+			indices[index + 4] = (row + 1) * (m_width + 1) + col + 1;
 
 			index += 6; // next quad
 		}

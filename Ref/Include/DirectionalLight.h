@@ -6,7 +6,6 @@ class NALMAK_DLL DirectionalLight :
 public:
 	struct Desc
 	{
-
 		Vector3 color = Vector3(0.97f, 0.95f, 0.8f);
 		float intensity = 1.f;
 	};
@@ -21,6 +20,7 @@ public:
 public:
 	DirectionalLightInfo GetDirectionalLightInfo();
 private:
-
+	Vector3 m_color;
+	float m_intensity;
 };
 

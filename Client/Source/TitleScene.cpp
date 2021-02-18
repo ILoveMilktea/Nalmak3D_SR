@@ -41,16 +41,22 @@ void TitleScene::Initialize()
 	}*/
 	{
 		PointLight::Desc point;
-		point.radius = 5;
-			INSTANTIATE()->AddComponent<PointLight>(&point);//->SetPosition(Nalmak_Math::RandDirection() * Nalmak_Math::Rand(-30.f, 30.f));;
+		point.diffuseIntensity = 0.4f;
+		point.ambientIntensity = 0.1f;
+		point.exp = 0.1f;
+		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(0,3,0);
 
 	
 	}
 	{
-		MeshRenderer::Desc mesh;
-		mesh.meshName = L"sphere";
-		mesh.mtrlName = L"standard";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetScale(3, 3, 3)->SetPosition(3,0,0);
+		for (int i = 0; i < 30; ++i)
+		{
+			MeshRenderer::Desc mesh;
+			mesh.meshName = L"sphere";
+			mesh.mtrlName = L"standard";
+			INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetScale(Vector3(1,1,1) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(Nalmak_Math::RandDirection() * Nalmak_Math::Rand(-30.f, 30.f));
+		}
+		
 	}
 	
 	{
@@ -64,6 +70,12 @@ void TitleScene::Initialize()
 		render.mtrlName = L"standard";
 		render.meshName = L"teapot";
 		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 10)->SetScale(1, 1, 1);
+	}
+	{
+		MeshRenderer::Desc render;
+		render.mtrlName = L"standard";
+		render.meshName = L"plane";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, -1)->SetScale(100, 100, 100);
 	}
 	/*{
 		MeshRenderer::Desc renderer;

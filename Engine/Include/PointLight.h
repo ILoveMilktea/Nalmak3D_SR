@@ -6,8 +6,13 @@ public:
 	struct Desc
 	{
 		Vector3 color = Vector3(0.97f, 0.95f, 0.8f);
-		float intensity = 1.f;
-		float radius = 1.f;
+		float diffuseIntensity = 0.2f;
+		float ambientIntensity = 0.05f;
+
+		// for attenuation
+		float constant = 0;
+		float linearRatio = 0;
+		float exp = 0.3f;
 	};
 public:
 	PointLight(Desc* _desc);
@@ -16,11 +21,15 @@ private:
 	// Light을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
+	virtual void PreRender() override;
 	virtual void Release() override;
+
 public:
-	float GetRadius() { return m_radius; }
+	PointLightInfo GetLightInfo() { return m_lightInfo; }
+	float GetRadius();
 private:
-	float m_radius;
+	PointLightInfo m_lightInfo;
+
 
 };
 

@@ -7,6 +7,7 @@ shader "deferred_geometry"
 textureRT "g_diffuse" "GBuffer_diffuse"
 textureRT "g_depthStencil" "GBuffer_depthStencil"
 textureRT "g_normal" "GBuffer_normal"
+textureRT "g_light" "GBuffer_light"
 
 
 renderQueue "4000"

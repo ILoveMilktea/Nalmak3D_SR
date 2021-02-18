@@ -229,9 +229,6 @@
     <FxCompile Include="..\..\Resource\Shader\clearRT.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\lightPass.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\defaultUI.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>

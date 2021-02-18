@@ -5,6 +5,26 @@
 
 #include "Nalmak_Include.h"
 
+
+struct BaseLightInfo
+{
+	Vector3 color = Vector3(1,1,1);
+	float ambientIntensity = 0.01f;
+	float diffuseIntensity = 0.2f;
+};
+
+struct PointLightInfo
+{
+	BaseLightInfo base;
+
+	Vector3 position;
+
+	float constant;
+	float linearRatio;
+	float exp;
+
+};
+
 struct DirectionalLightInfo
 {
 	DirectionalLightInfo() = default;
@@ -17,19 +37,6 @@ struct DirectionalLightInfo
 	Vector3 direction = Vector3(0, -0.6f, 0.3f);
 	Vector3 color = Vector3(0.97f, 0.95f, 0.85f);
 	float intensity = 1.f;
-};
-
-struct BaseLightInfo
-{
-	Vector3 color = Vector3(1,1,1);
-	float ambientIntensity = 0.01f;
-	float diffuseIntensity = 0.2f;
-};
-
-struct PointLightInfo
-{
-	BaseLightInfo base;
-	Vector3 position;
 };
 
 //struct DirectionalLightInfo

@@ -11,8 +11,6 @@ private:
 	virtual void Initialize() override = 0;
 	virtual void Update() override = 0;
 protected:
-	Vector3 m_color;
-	float m_intensity;
 	class LightManager* m_lightManager;
 	LIGHT_MODE m_lightMode;
 public:

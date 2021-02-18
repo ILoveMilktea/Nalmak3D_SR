@@ -6,16 +6,16 @@ matrix g_world;
 PointLight g_pointLight;
 
 texture g_diffuse;
-texture g_depthStencil;
+texture g_position;
 texture g_normal;
 
 sampler DiffuseSampler = sampler_state
 {
 	texture = g_diffuse;
 };
-sampler DepthSampler = sampler_state
+sampler PositionSampler = sampler_state
 {
-	texture = g_depthStencil;
+	texture = g_position;
 };
 sampler NormalSampler = sampler_state
 {
@@ -65,13 +65,13 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 
 	float3 diffuse = tex2D(DiffuseSampler, _input.screenPos).xyz;
 	float3 normal = tex2D(NormalSampler, _input.screenPos).xyz;
-	float depth = tex2D(DepthSampler, _input.screenPos).x;
-	float3 worldPos = GetWorldPosFromDepth(depth, _input.screenPos);
 	normal = normalize(normal);
 
-	float4 light = float4(diffuse,1) * CalcPointLight(g_pointLight.base, g_pointLight.position, g_cBuffer.worldCamPos, worldPos, normal);
+	float3 worldPos = (tex2D(PositionSampler, _input.screenPos).xyz * 999 + 1);
 
-	o.diffuse = light;
+	float4 light = float4(diffuse,1) * CalcPointLight(g_pointLight, g_pointLight.position, g_cBuffer.worldCamPos, worldPos, normal);
+
+	o.diffuse.xyz = light;
 
 	return o;
 }

@@ -91,8 +91,11 @@ void RenderManager::Render(Camera * _cam)
 	Matrix proj = _cam->GetProjMatrix();
 	Matrix invView;
 	D3DXMatrixInverse(&invView, nullptr, &view);
+	D3DXMatrixTranspose(&invView, &invView);
 	Matrix invProj;
 	D3DXMatrixInverse(&invProj, nullptr, &proj);
+	D3DXMatrixTranspose(&invProj, &invProj);
+
 	cBuffer.viewProj = view * proj;
 	cBuffer.worldCamPos = _cam->GetTransform()->GetWorldPosition();
 	cBuffer.invView = invView;
@@ -156,7 +159,7 @@ void RenderManager::DeferredRender(Camera * _cam, ConstantBuffer& _cBuffer)
 	LightingPass(_cam, _cBuffer);
 	ShadingPass(_cam, _cBuffer);
 
-	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_light")->GetTexture(), _cBuffer);
+	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_final")->GetTexture(), _cBuffer);
 
 	TransparentPass(_cam, _cBuffer);
 }
@@ -165,8 +168,8 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 {
 	ClearRenderTarget(L"GBuffer_diffuse");
 	ClearRenderTarget(L"GBuffer_normal");
-	ClearRenderTarget(L"GBuffer_position");
 	ClearRenderTarget(L"GBuffer_depthStencil");
+	ClearRenderTarget(L"GBuffer_position");
 
 
 	m_currentShader = nullptr;
@@ -218,6 +221,9 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	Material* material = m_resourceManager->GetResource<Material>(L"pointLight");
 	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
 
+
+
+
 	ClearRenderTarget(L"GBuffer_light");
 	RecordRenderTarget(0, L"GBuffer_light");
 
@@ -225,6 +231,7 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 	UpdateMaterial(material);
 	UpdateShader(material->GetShader(), _cBuffer);
+
 
 	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
 	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
@@ -237,9 +244,9 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
 		D3DXMatrixScaling(&matScale, scale, scale, scale);
 
-		PointLightInfo pointLight;
-		pointLight.position = pos;
-		m_currentShader->SetValue("g_pointLight", &pointLight,sizeof(PointLightInfo));
+		PointLightInfo lightInfo = pointLight->GetLightInfo();
+		lightInfo.position = pos;
+		m_currentShader->SetValue("g_pointLight",&lightInfo,sizeof(PointLightInfo));
 		m_currentShader->SetMatrix("g_world", matScale * matTrs);
 
 		m_currentShader->CommitChanges();
@@ -529,20 +536,5 @@ void RenderManager::DeleteCamera(Camera * _cam)
 
 void RenderManager::ClearRenderTarget(const wstring & _targetName)
 {
-	RenderTarget* rt = m_resourceManager->GetResource<RenderTarget>(_targetName);
-	rt->StartRecord(0);
-	IDirect3DSurface9* surface[3];
-	for (int i = 0; i < 3; ++i)
-	{
-		m_device->GetRenderTarget(i + 1, &surface[i]);
-		m_device->SetRenderTarget(i + 1, nullptr);
-	}
-	m_device->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_RGBA(0, 0, 0, 1), 0, 1);
-	
-	for (int i = 0; i < 3; ++i)
-	{
-		m_device->SetRenderTarget(i + 1, surface[i]);
-	}
-
-	rt->EndRecord();
+	m_resourceManager->GetResource<RenderTarget>(_targetName)->Clear();
 }
