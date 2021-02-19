@@ -60,11 +60,13 @@ public:
 	void RenderText();
 	void Reset();
 private:
-	void DeferredRender(Camera * _cam, ConstantBuffer& _cBuffer);
-	void GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer);
-	void ShadingPass(Camera * _cam, ConstantBuffer& _cBuffer);
-	void LightingPass(Camera * _cam, ConstantBuffer& _cBuffer);
-	void TransparentPass(Camera * _cam, ConstantBuffer& _cBuffer);
+	void DeferredRender(Camera* _cam,ConstantBuffer& _cBuffer);
+	void GBufferPass(Camera* _cam,ConstantBuffer& _cBuffer);
+	void ShadePass(ConstantBuffer& _cBuffer);
+	void LightPass(ConstantBuffer& _cBuffer);
+	void PointLightStencilPass(ConstantBuffer& _cBuffer);
+	void PointLightPass(ConstantBuffer& _cBuffer);
+	void TransparentPass(ConstantBuffer& _cBuffer);
 private:
 	void RenderByMaterial(const wstring& _materialName, ConstantBuffer& _cBuffer);
 	void RenderImageToScreen(IDirect3DBaseTexture9* _tex, ConstantBuffer& _cBuffer);

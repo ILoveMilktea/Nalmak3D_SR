@@ -49,7 +49,7 @@ float4 GetScaleBiasNormal(float3 _normal)
 
 float4 GetDepth(float2 _projZW)
 {
-	return float4(_projZW.x / _projZW.y, _projZW.y * 0.001f, 0.f, 0.f);
+	return float4(_projZW.x / _projZW.y, _projZW.y / zFar, 0.f, 0.f);
 }
 
 

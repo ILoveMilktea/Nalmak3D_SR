@@ -90,10 +90,10 @@ void RenderManager::Render(Camera * _cam)
 	Matrix proj = _cam->GetProjMatrix();
 	Matrix invView;
 	D3DXMatrixInverse(&invView, nullptr, &view);
-	D3DXMatrixTranspose(&invView, &invView);
+	//D3DXMatrixTranspose(&invView, &invView);
 	Matrix invProj;
 	D3DXMatrixInverse(&invProj, nullptr, &proj);
-	D3DXMatrixTranspose(&invProj, &invProj);
+	//D3DXMatrixTranspose(&invProj, &invProj);
 
 	cBuffer.viewProj = view * proj;
 	cBuffer.worldCamPos = _cam->GetTransform()->GetWorldPosition();
@@ -152,15 +152,16 @@ void RenderManager::Reset()
 		renderList.second.clear();
 }
 
-void RenderManager::DeferredRender(Camera * _cam, ConstantBuffer& _cBuffer)
+void RenderManager::DeferredRender(Camera* _cam,ConstantBuffer& _cBuffer)
 {
-	GBufferPass(_cam, _cBuffer);
-	LightingPass(_cam, _cBuffer);
-	ShadingPass(_cam, _cBuffer);
+	GBufferPass(_cam,_cBuffer);
+
+	LightPass(_cBuffer);
+	ShadePass(_cBuffer);
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer);
 
-	TransparentPass(_cam, _cBuffer);
+	TransparentPass(_cBuffer);
 }
 
 void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
@@ -211,15 +212,96 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	ThrowIfFailed(m_device->EndScene());
 }
 
-void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
+void RenderManager::LightPass(ConstantBuffer& _cBuffer)
+{
+
+	PointLightStencilPass(_cBuffer);
+	PointLightPass(_cBuffer);
+
+	
+}
+
+void RenderManager::ShadePass(ConstantBuffer & _cBuffer)
+{
+	ClearRenderTarget(L"GBuffer_Shade");
+
+	RecordRenderTarget(0, L"GBuffer_Shade");
+
+	RenderByMaterial(L"GBuffer_Shade",_cBuffer);
+
+	EndRenderTarget(L"GBuffer_Shade");
+}
+
+void RenderManager::PointLightStencilPass(ConstantBuffer & _cBuffer)
+{
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+	Material* material = m_resourceManager->GetResource<Material>(L"PointLight_Stencil");
+	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
+
+	ThrowIfFailed(m_device->BeginScene());
+
+	UpdateMaterial(material);
+	UpdateShader(material->GetShader(), _cBuffer);
+
+
+	m_device->SetRenderState(D3DRS_ZENABLE, true);
+	m_device->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	m_device->SetRenderState(D3DRS_STENCILENABLE, true);
+	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, true);
+
+	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
+
+	m_device->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
+	m_device->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_DECRSAT);
+
+	m_device->SetRenderState(D3DRS_CCW_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
+	m_device->SetRenderState(D3DRS_CCW_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_INCRSAT);
+
+
+	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
+	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
+
+	for (auto& pointLight : m_lightManager->GetPointLights())
+	{
+		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
+		float scale = pointLight->GetRadius();
+		Matrix matTrs, matScale;
+		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
+		D3DXMatrixScaling(&matScale, scale, scale, scale);
+
+		m_currentShader->SetMatrix("g_world", matScale * matTrs);
+
+		m_currentShader->CommitChanges();
+		ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
+
+	}
+	if (m_currentShader)
+		m_currentShader->EndPass();
+
+	m_device->SetRenderState(D3DRS_ZENABLE, true);
+	m_device->SetRenderState(D3DRS_ZWRITEENABLE, true);
+
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	m_device->SetRenderState(D3DRS_STENCILENABLE, false);
+	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, false);
+	m_device->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
+	m_device->SetRenderState(D3DRS_CCW_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
+
+
+	ThrowIfFailed(m_device->EndScene());
+
+}
+
+void RenderManager::PointLightPass(ConstantBuffer & _cBuffer)
 {
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 	Material* material = m_resourceManager->GetResource<Material>(L"pointLight");
 	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
-
-
-
 
 	ClearRenderTarget(L"GBuffer_Light");
 	RecordRenderTarget(0, L"GBuffer_Light");
@@ -228,6 +310,12 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 	UpdateMaterial(material);
 	UpdateShader(material->GetShader(), _cBuffer);
+
+
+	m_device->SetRenderState(D3DRS_ZENABLE, false);
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+	m_device->SetRenderState(D3DRS_STENCILENABLE, true);
+	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_NOTEQUAL);
 
 
 	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
@@ -243,7 +331,7 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 		PointLightInfo lightInfo = pointLight->GetLightInfo();
 		lightInfo.position = pos;
-		m_currentShader->SetValue("g_pointLight",&lightInfo,sizeof(PointLightInfo));
+		m_currentShader->SetValue("g_pointLight", &lightInfo, sizeof(PointLightInfo));
 		m_currentShader->SetMatrix("g_world", matScale * matTrs);
 
 		m_currentShader->CommitChanges();
@@ -253,23 +341,17 @@ void RenderManager::LightingPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	if (m_currentShader)
 		m_currentShader->EndPass();
 
+
+	m_device->SetRenderState(D3DRS_ZENABLE, true);
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	m_device->SetRenderState(D3DRS_STENCILENABLE, false);
+
 	EndRenderTarget(L"GBuffer_Light");
 	ThrowIfFailed(m_device->EndScene());
 
 }
 
-void RenderManager::ShadingPass(Camera * _cam, ConstantBuffer & _cBuffer)
-{
-	ClearRenderTarget(L"GBuffer_Shade");
-
-	RecordRenderTarget(0, L"GBuffer_Shade");
-
-	RenderByMaterial(L"GBuffer_Shade",_cBuffer);
-
-	EndRenderTarget(L"GBuffer_Shade");
-}
-
-void RenderManager::TransparentPass(Camera * _cam, ConstantBuffer& _cBuffer)
+void RenderManager::TransparentPass(ConstantBuffer& _cBuffer)
 {
 }
 

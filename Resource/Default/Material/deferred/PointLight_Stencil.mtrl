@@ -2,18 +2,13 @@
 ##  Material Data Setting
 #########################################################
 
-shader "pointLight"
-
-textureRT "g_diffuse" "GBuffer_Diffuse"
-textureRT "g_normal" "GBuffer_Normal"
-textureRT "g_depth" "GBuffer_Depth"
-textureRT "g_position" "GBuffer_Position"
+shader "D_PointLight_Stencil"
 
 renderQueue "2000"
 
-renderMode "2"
+renderMode "0"
 
-blendingMode "1"
+blendingMode "0"
 
 fillMode "0"
 

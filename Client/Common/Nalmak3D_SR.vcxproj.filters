@@ -244,5 +244,8 @@
     <FxCompile Include="..\..\Resource\Shader\standard.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\D_PointLight_Stencil.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

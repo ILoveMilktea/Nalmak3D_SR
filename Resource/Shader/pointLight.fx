@@ -8,6 +8,7 @@ PointLight g_pointLight;
 texture g_diffuse;
 texture g_normal;
 texture g_depth;
+texture g_position;
 
 sampler DiffuseSampler = sampler_state
 {
@@ -22,6 +23,11 @@ sampler NormalSampler = sampler_state
 sampler DepthSampler = sampler_state
 {
 	texture = g_depth;
+};
+
+sampler PositionSampler = sampler_state
+{
+	texture = g_position;
 };
 
 struct VS_INPUT
@@ -66,23 +72,17 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 	float3 diffuse = tex2D(DiffuseSampler, _in.screenPos).xyz;
 	float3 normal = tex2D(NormalSampler, _in.screenPos).xyz;
-	//normal = normalize(normal);
+	/*normal = normal * 2.f - 1.f;
+	normal = normalize(normal);*/
+
 	float2 depth = tex2D(DepthSampler, _in.screenPos).xy;
+	float4 worldPos = tex2D(PositionSampler, _in.screenPos);
 
 
-	float4 worldPos = GetWorldPosFromDepth(depth, _in.screenPos);
+	float4 light =  CalcPointLight(g_pointLight, g_cBuffer.worldCamPos, worldPos, normal);
 
+	o.diffuse = light;
 
-
-
-
-
-
-	//float4(diffuse, 1) *
-	float4 light = float4(diffuse, 1) * CalcPointLight(g_pointLight, g_pointLight.position, g_cBuffer.worldCamPos, worldPos, normal);
-
-	o.diffuse.xyz = light;
-	o.diffuse.w = 1;
 	return o;
 }
 
@@ -94,9 +94,11 @@ technique DefaultTechnique
 	{
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z 값에대한 활용
 
-		ZEnable = false;
-		ZWriteEnable = false;
-		//CullMode = NONE;
+		/*ZEnable = false;
+		ZWriteEnable = false;*/
+
+
+
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

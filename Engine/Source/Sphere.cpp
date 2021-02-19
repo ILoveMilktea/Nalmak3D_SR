@@ -13,8 +13,8 @@ Sphere::~Sphere()
 
 void Sphere::Initialize(wstring _fp)
 {
-	m_heightSliceCount = 10;
-	m_widthSliceCount = 10;
+	m_heightSliceCount = 50;
+	m_widthSliceCount = 50;
 	m_radius = 1.f;
 
 	CreateVertexBuffer();

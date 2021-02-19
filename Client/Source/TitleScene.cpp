@@ -41,13 +41,18 @@ void TitleScene::Initialize()
 	}*/
 	{
 		PointLight::Desc point;
-		point.diffuseIntensity = 1.f;
+		point.diffuseIntensity = 1.1f;
 		point.ambientIntensity = 0.1f;
-		point.radius = 20.f;
-		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(0,0,1);
+		point.radius = 10.f;
+
+		/*for (int i = 0; i < 20; ++i)
+		{
+			INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(Nalmak_Math::Rand(-60.f, 60.f),1, Nalmak_Math::Rand(-60.f, 60.f));
+		}*/
+		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(3,10,7)->AddComponent<MeshRenderer>();
 	}
 	{
-		for (int i = 0; i < 30; ++i)
+		for (int i = 0; i < 50; ++i)
 		{
 			MeshRenderer::Desc mesh;
 			mesh.meshName = L"sphere";
@@ -56,19 +61,19 @@ void TitleScene::Initialize()
 		}
 		
 	}
-	
-	{
-		MeshRenderer::Desc render;
-		render.mtrlName = L"standard";
-		render.meshName = L"box";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&render);
-	}
-	{
-		MeshRenderer::Desc render;
-		render.mtrlName = L"standard";
-		render.meshName = L"teapot";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 10)->SetScale(1, 1, 1);
-	}
+	MeshRenderer::Desc mesh;
+	mesh.meshName = L"teapot";
+	mesh.mtrlName = L"standard";
+	INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetPosition(0, 0, 2);
+
+
+	//{
+	//	MeshRenderer::Desc render;
+	//	render.mtrlName = L"standard";
+	//	render.meshName = L"box";
+	//	INSTANTIATE()->AddComponent<MeshRenderer>(&render);
+	//}
+
 	{
 		MeshRenderer::Desc render;
 		render.mtrlName = L"standard";
