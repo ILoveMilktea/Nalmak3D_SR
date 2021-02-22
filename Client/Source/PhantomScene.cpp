@@ -24,36 +24,12 @@ PhantomScene::~PhantomScene()
 void PhantomScene::Initialize()
 {
 	GameObject* player;
+	{
+		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
+	}
 
-	Core * core = Core::GetInstance();
-	core->SetSkyBox(L"skyBox_default");
-	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(-HALF_WINCX, HALF_WINCY, 0);
+	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
-	{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_diffuse";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(HALF_WINCX,  - 100, 0);
-	}
-	{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_depth";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(HALF_WINCX,  - 300, 0);
-	}
-	{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.mtrlName = L"mainRT_normal";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(200, 200, 0)->SetPosition(HALF_WINCX,  - 500, 0);
-	}
-	{
-		MeshRenderer::Desc renderer;
-		renderer.layer = RENDER_LAYER_UI;
-		renderer.meshName = L"quadNoneNormal";
-		renderer.mtrlName = L"deferredLighting";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&renderer)->SetScale(WINCX, WINCY, 0);
-	}
 
 	{
 		MeshRenderer::Desc render;

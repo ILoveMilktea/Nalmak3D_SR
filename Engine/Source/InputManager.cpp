@@ -41,10 +41,9 @@ void InputManager::ProcessMouseScreenPosition()
 
 	POINT point = {};
 	GetCursorPos(&point);
-	LONG tempX = point.x, tempY = point.y;
 	ScreenToClient(DeviceManager::GetInstance()->GetHWND(), &point);
-	m_mouseScreenPosition.x += (float)(tempX - RenderManager::GetInstance()->GetWindowWidth() * 0.5f);
-	m_mouseScreenPosition.y += (float)(RenderManager::GetInstance()->GetWindowHeight() * 0.5f - tempY);
+	m_mouseScreenPosition.x = (float)(point.x);
+	m_mouseScreenPosition.y = (float)(point.y);
 }
 
 

@@ -79,7 +79,7 @@ void MainGame::ApplicationSetting()
 	core.wincy = WINCY;
 	core.windowMode = true;
 
-	// 모든 리소스 기본경로 거는거 다 로드함
+	// 모든 리소스 기본경로 거는거 다 로드함
 	core.resourceDirectoryPath;
 
 	m_engine->Initialize(g_hWnd, &core);
