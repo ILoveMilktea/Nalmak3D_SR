@@ -284,12 +284,6 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\Resource\Shader\common_h.fx">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\default.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -300,7 +294,11 @@
     <FxCompile Include="..\..\Resource\Shader\deferred_geometry.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_DirectionalLight.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_PointLight_Stencil.fx" />
-    <FxCompile Include="..\..\Resource\Shader\light_h.fx">
+    <FxCompile Include="..\..\Resource\Shader\H_common.fx">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\H_light.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>

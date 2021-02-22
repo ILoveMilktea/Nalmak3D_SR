@@ -60,6 +60,7 @@ public:
 	void RenderText();
 	void Reset();
 private:
+	void SkyboxPass(ConstantBuffer& _cBuffer);
 	void DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer);
 	void GBufferPass(Camera* _cam, ConstantBuffer& _cBuffer);
 	void ShadePass(ConstantBuffer& _cBuffer);

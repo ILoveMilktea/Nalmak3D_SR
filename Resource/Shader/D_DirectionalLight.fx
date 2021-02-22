@@ -1,6 +1,5 @@
-#include "common_h.fx"
-#include "light_h.fx"
-
+#include "H_common.fx"
+#include "H_light.fx"
 
 matrix g_world;
 DirectionalLight g_directionalLight;
@@ -73,7 +72,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	float2 depth = tex2D(DepthSampler, uvRT).xy;
 	float4 worldPos = GetWorldPosFromDepth(depth, _in.uv);
 
-	float4 light = CalcLightInternal(g_directionalLight.base, g_cBuffer.worldCamPos, g_directionalLight.direction, worldPos, normal);
+	float4 light = CalcLightInternal(g_directionalLight.base, g_cBuffer.worldCamPos, g_directionalLight.direction, worldPos.xyz, normal);
 
 	o.color = light * 2 - 1;
 

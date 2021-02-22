@@ -75,6 +75,7 @@ void Core::Initialize(HWND handle, Desc * _desc)
 	m_resourceManager->CreateDefaultResource();
 
 	RenderManager::GetInstance()->Initialize();
+	LightManager::GetInstance()->Initialize();
 
 	m_inputManager->Initialize();
 	m_lineManager->Initialize();

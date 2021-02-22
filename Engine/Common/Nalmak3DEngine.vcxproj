@@ -33,7 +33,6 @@
     <ClCompile Include="..\Source\CollisionManager.cpp" />
     <ClCompile Include="..\Source\Component.cpp" />
     <ClCompile Include="..\Source\Core.cpp" />
-    <ClCompile Include="..\Source\CubeMap.cpp" />
     <ClCompile Include="..\Source\DebugManager.cpp" />
     <ClCompile Include="..\Source\DepthStencil.cpp" />
     <ClCompile Include="..\Source\DeviceManager.cpp" />
@@ -107,7 +106,6 @@
     <ClInclude Include="..\Include\CollisionManager.h" />
     <ClInclude Include="..\Include\Component.h" />
     <ClInclude Include="..\Include\Core.h" />
-    <ClInclude Include="..\Include\CubeMap.h" />
     <ClInclude Include="..\Include\DebugManager.h" />
     <ClInclude Include="..\Include\DepthStencil.h" />
     <ClInclude Include="..\Include\DeviceManager.h" />

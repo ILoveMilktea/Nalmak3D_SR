@@ -1,7 +1,6 @@
+#include "H_common.fx"
 
 matrix g_world;
-matrix g_viewProj;
-
 texture g_mainTex;
 float4 g_mainTexColor;
 
@@ -35,7 +34,7 @@ struct PS_OUTPUT
 
 VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
-	VS_OUTPUT o = (VS_OUTPUT)0; // 초기???�수!
+	VS_OUTPUT o = (VS_OUTPUT)0;
 
 	o.position = mul(float4(_input.position,1), g_world);
 	o.position.w = 1;

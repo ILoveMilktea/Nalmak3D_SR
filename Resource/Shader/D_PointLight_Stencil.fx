@@ -1,5 +1,5 @@
-#include "common_h.fx"
-#include "light_h.fx"
+#include "H_common.fx"
+
 
 
 matrix g_world;

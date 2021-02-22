@@ -65,7 +65,11 @@ public:
 	void ResetRelative();
 
 
+<<<<<<< HEAD
 	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut); // transform 받는거로 ?�래 추�??
+=======
+	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut); // transform 
+>>>>>>> 30f884e55a351c6da628fb2d2ba6295ed5c10907
 private:
 	list<Transform*>   m_childs;
 	Transform * m_parents = nullptr;
