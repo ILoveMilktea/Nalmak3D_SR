@@ -24,6 +24,11 @@ void SingleImage::SetTexture(wstring _name)
 	m_image = ResourceManager::GetInstance()->GetResource<Texture>(_name);
 }
 
+void SingleImage::SetTexture(IDirect3DBaseTexture9 * _image)
+{
+	m_image->SetTexture(_image);
+}
+
 IDirect3DBaseTexture9* SingleImage::GetTexture()
 { 
 	return m_image->GetTexure(0);

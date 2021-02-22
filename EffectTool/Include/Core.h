@@ -45,7 +45,7 @@
 #include "CanvasRenderer.h"
 #include "SingleImage.h"
 #include "MeshPicking.h"
-
+#include "Toggle.h"
 #pragma endregion
 
 class CollisionManager;

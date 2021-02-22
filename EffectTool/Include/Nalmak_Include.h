@@ -4,6 +4,9 @@
 
 
 
+#pragma warning(disable:4251)
+#pragma warning(disable:4819)
+
 #include <windows.h>
 
 // C 런타임 헤더 파일입니다.
@@ -33,8 +36,6 @@
 #include <queue>
 
 #include <assert.h>
-
-#pragma warning(disable:4251)
 
 #include <DirectXMath.h>
 #include <d3d9.h>

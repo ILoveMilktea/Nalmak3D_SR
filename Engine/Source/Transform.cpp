@@ -96,19 +96,11 @@ void Transform::UpdateMatrix()
 
 void Transform::UpdateUIMatrix()
 {
-	//UpdateMatrix();
 	float wincx = (float)m_renderManager->GetWindowWidth();
 	float wincy = (float)m_renderManager->GetWindowHeight();
 	float halfWincx = wincx * 0.5f;
 	float halfWincy = wincy * 0.5f;
-	//Vector3 correctPos = {
-	//	(position.x - halfWincx) / halfWincx - 1.f,
-	//	-(position.y - halfWincy) / halfWincy + 1.f,
-	//	position.z };
-	Vector3 correctPos = {
-		(position.x - halfWincx) / halfWincx,
-		(halfWincy - position.y) / halfWincy,
-		position.z };
+
 	Vector3 correctScale = { scale.x / halfWincx, scale.y / halfWincy, scale.z };
 
 	Vector3 right = { 1.f,0.f,0.f };
@@ -137,8 +129,20 @@ void Transform::UpdateUIMatrix()
 	memcpy(&worldMatrix.m[0][0], &right, sizeof(Vector3));
 	memcpy(&worldMatrix.m[1][0], &up, sizeof(Vector3));
 	memcpy(&worldMatrix.m[2][0], &look, sizeof(Vector3));
-	memcpy(&worldMatrix.m[3][0], &correctPos, sizeof(Vector3));
+	memcpy(&worldMatrix.m[3][0], &position, sizeof(Vector3));
 
+	if (m_parents)
+		worldMatrix = worldMatrix * m_parents->GetUINoneScaleWorldMatrix();
+
+
+	// position translate (0,0 ~ wincx, wincy) -> (-1,1 ~ 1,-1)
+
+	Vector3 correctPos = {
+		(worldMatrix.m[3][0] - halfWincx) / halfWincx,
+		(halfWincy - worldMatrix.m[3][1]) / halfWincy,
+		worldMatrix.m[3][2] };
+
+	memcpy(&worldMatrix.m[3][0], &correctPos, sizeof(Vector3));
 }
 
 const Matrix & Transform::GetWorldMatrix()
@@ -242,6 +246,40 @@ const Matrix & Transform::GetNoneScaleWorldMatrix()
 
 	if (m_parents)
 		noneScaleWorldMatrix = noneScaleWorldMatrix * m_parents->GetNoneScaleWorldMatrix();
+
+	return noneScaleWorldMatrix;
+}
+
+const Matrix & Transform::GetUINoneScaleWorldMatrix()
+{
+	D3DXMatrixIdentity(&noneScaleWorldMatrix);
+
+	Vector3 right = { 1.f,0.f,0.f };
+	Vector3 up = { 0.f,1.f,0.f };
+	Vector3 look = { 0.f,0.f,1.f };
+
+
+	/* rotate */
+	GetRotationX(&right, right);
+	GetRotationY(&right, right);
+	GetRotationZ(&right, right);
+
+	GetRotationX(&up, up);
+	GetRotationY(&up, up);
+	GetRotationZ(&up, up);
+
+	GetRotationX(&look, look);
+	GetRotationY(&look, look);
+	GetRotationZ(&look, look);
+
+	memcpy(&noneScaleWorldMatrix.m[0][0], &right, sizeof(Vector3));
+	memcpy(&noneScaleWorldMatrix.m[1][0], &up, sizeof(Vector3));
+	memcpy(&noneScaleWorldMatrix.m[2][0], &look, sizeof(Vector3));
+	memcpy(&noneScaleWorldMatrix.m[3][0], &position, sizeof(Vector3));
+
+
+	if (m_parents)
+		noneScaleWorldMatrix = noneScaleWorldMatrix * m_parents->GetUINoneScaleWorldMatrix();
 
 	return noneScaleWorldMatrix;
 }

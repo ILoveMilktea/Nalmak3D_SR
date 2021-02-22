@@ -24,6 +24,7 @@ protected:
 
 public:
 	void SetTexture(wstring _name);
+	void SetTexture(IDirect3DBaseTexture9* _image);
 
 public:
 	IDirect3DBaseTexture9* GetTexture();

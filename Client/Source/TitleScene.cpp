@@ -95,6 +95,9 @@ void TitleScene::Initialize()
 	SceneSelect->AddComponent<SceneChanger>(&SceneToHee);
 
 
+	auto pauseButton = UIFactory::CreatePauseButton();
+	pauseButton->SetPosition(1800.f, 240.f, 0.f);
+
 	
 
 }

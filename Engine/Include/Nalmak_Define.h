@@ -81,4 +81,6 @@ void T::DestroyInstance()							\
 #define RENDER_QUEUE_OVERLAY 4000
 
 
+#define NULLEVENT  EventHandler([]() {})
+
 #endif

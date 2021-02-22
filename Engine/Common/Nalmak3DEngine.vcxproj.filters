@@ -396,6 +396,7 @@
     <ClCompile Include="..\Source\PositionHandle.cpp" />
     <ClCompile Include="..\Source\SingleImage.cpp" />
     <ClCompile Include="..\Source\SplineCurve.cpp" />
+    <ClCompile Include="..\Source\Toggle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -626,5 +627,6 @@
     <ClInclude Include="..\Include\PositionHandle.h" />
     <ClInclude Include="..\Include\SingleImage.h" />
     <ClInclude Include="..\Include\SplineCurve.h" />
+    <ClInclude Include="..\Include\Toggle.h" />
   </ItemGroup>
 </Project>

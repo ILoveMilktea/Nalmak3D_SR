@@ -52,7 +52,7 @@ void Bullet_Manager::Fire(Vector3 _pos, Quaternion _rot)
 	
 	Bullet::Desc Bullet_Desc;
 	Bullet_Desc.fSpd = 50.f;
-	Bullet_Desc.iDmg = 10.f;
+	Bullet_Desc.iDmg = 10;
 	Bullet_obj->AddComponent<Bullet>(&Bullet_Desc);
 
 	MeshRenderer::Desc Bullet_Mesh;

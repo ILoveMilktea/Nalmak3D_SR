@@ -60,6 +60,11 @@ void Texture::Release()
 	m_textures.shrink_to_fit();
 }
 
+void Texture::SetTexture(IDirect3DBaseTexture9 * _image)
+{
+	m_textures[0] = _image;
+}
+
 IDirect3DBaseTexture9* Texture::GetTexure(size_t _index)
 {
 	IDirect3DBaseTexture9* tex = nullptr;

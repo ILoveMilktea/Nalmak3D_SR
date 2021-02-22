@@ -10,7 +10,7 @@ vector4 "g_mainTexColor" "1,1,1,1"
 
 renderQueue "5000"
 
-renderMode "2"
+renderMode "0"
 
 blendingMode "0"
 

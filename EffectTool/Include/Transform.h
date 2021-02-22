@@ -18,7 +18,6 @@ public:
 	Transform(Desc* _desc);
 	~Transform();
 private:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -38,6 +37,7 @@ public: /* For Rendering */
 	const Matrix& GetWorldMatrix();
 	const Matrix& GetUIWorldMatrix();
 	const Matrix& GetNoneScaleWorldMatrix();
+	const Matrix& GetUINoneScaleWorldMatrix();
 	Vector3 GetWorldPosition();
 	Quaternion GetWorldRotation();
 	Vector3 GetForward();

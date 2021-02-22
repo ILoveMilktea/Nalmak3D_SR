@@ -73,13 +73,14 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	float2 depth = tex2D(DepthSampler, uvRT).xy;
 	float4 worldPos = GetWorldPosFromDepth(depth, _in.uv);
 
-	float4 light = CalcLightInternal(g_directionalLight.base, g_cBuffer.worldCamPos, g_directionalLight.direction, worldPos, normal);
+	float4 light = CalcLightInternal(g_directionalLight.base, g_cBuffer.worldCamPos, g_directionalLight.direction, worldPos.xyz, normal);
 
 	o.color = light * 2 - 1;
 
 	return o;
 }
 
+// implicit truncation of vector type
 
 
 technique DefaultTechnique

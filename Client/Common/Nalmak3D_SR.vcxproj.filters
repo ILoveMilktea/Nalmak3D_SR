@@ -34,9 +34,6 @@
     <ClInclude Include="..\Include\DogFightState.h">
       <Filter>04.State</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\ShootingState.h">
-      <Filter>04.State</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\HeeTestScene.h">
       <Filter>01.Scene\01.Test\99%29GeunHeeTestScene</Filter>
     </ClInclude>
@@ -121,6 +118,11 @@
     <ClInclude Include="..\Include\UILabScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\ShootingState.h">
+      <Filter>04.State</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h" />
+    <ClInclude Include="..\Include\UIFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -139,9 +141,6 @@
       <Filter>04.State</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\DogFightState.cpp">
-      <Filter>04.State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ShootingState.cpp">
       <Filter>04.State</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\HeeTestScene.cpp">
@@ -228,6 +227,10 @@
     <ClCompile Include="..\Source\UILabScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\ShootingState.cpp">
+      <Filter>04.State</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
