@@ -66,6 +66,8 @@ public:
 	void ResetRelative();
 
 	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut);
+
+	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut); // transform 받는거로 아래 추가?
 private:
 	list<Transform*>   m_childs;
 	Transform * m_parents = nullptr;

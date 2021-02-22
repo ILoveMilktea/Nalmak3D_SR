@@ -65,6 +65,7 @@ public:
 	Quaternion RotateAxis(const Vector3& _axis, float _angle);
 	void ResetRelative();
 
+
 	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut); // transform 받는거로 아래 추가?
 private:
 	list<Transform*>   m_childs;
