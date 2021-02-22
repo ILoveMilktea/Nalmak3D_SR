@@ -213,8 +213,6 @@
     <ClInclude Include="..\Include\MainGame.h" />
     <ClInclude Include="..\Include\MouseOption.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
-    <ClInclude Include="..\Include\PlaneController.h" />
-    <ClInclude Include="..\Include\PlaneInfo.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
     <ClInclude Include="..\Include\PlayerMove.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
@@ -254,8 +252,6 @@
     <ClCompile Include="..\Source\MainGame.cpp" />
     <ClCompile Include="..\Source\MouseOption.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
-    <ClCompile Include="..\Source\PlaneController.cpp" />
-    <ClCompile Include="..\Source\PlaneInfo.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
     <ClCompile Include="..\Source\PlayerMove.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />

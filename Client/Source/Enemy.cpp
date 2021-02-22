@@ -112,19 +112,19 @@ void Enemy::Damaged(const int & _playerDmg)
 const int & Enemy::Get_Damage()
 {
 	// TODO: 여기에 반환 구문을 삽입합니다.
-	return 0;
+	return int(0);
 }
 
 const int & Enemy::Get_FullHp()
 {
 	// TODO: 여기에 반환 구문을 삽입합니다.
-	return 0;
+	return int(0);
 }
 
 const int & Enemy::Get_CurHp()
 {
 	// TODO: 여기에 반환 구문을 삽입합니다.
-	return 0;
+	return int(0);
 }
 
 void Enemy::Set_Damage(const int & _dmg)

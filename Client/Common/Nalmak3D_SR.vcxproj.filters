@@ -13,12 +13,6 @@
     <ClInclude Include="..\Include\Extern.h">
       <Filter>98.PreCompile\02.Extern</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\TitleScene.h">
-      <Filter>01.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\StageScene.h">
-      <Filter>01.Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Enum.h">
       <Filter>98.PreCompile\01.Enum</Filter>
     </ClInclude>
@@ -28,17 +22,8 @@
     <ClInclude Include="stdafx.h">
       <Filter>98.PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlaneInfo.h">
-      <Filter>02.Component\00.Plane</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\PlaneController.h">
-      <Filter>02.Component\00.Plane</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Define.h">
       <Filter>98.PreCompile\01.Enum</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ClimbTerrain.h">
-      <Filter>02.Component</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\StageManager.h">
       <Filter>02.Component\00.Manager</Filter>
@@ -52,26 +37,11 @@
     <ClInclude Include="..\Include\ShootingState.h">
       <Filter>04.State</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\GarageScene.h">
-      <Filter>01.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\PhantomScene.h">
-      <Filter>01.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Stage2Scene.h">
-      <Filter>01.Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\StageSelectScene.h">
-      <Filter>01.Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\HeeTestScene.h">
-      <Filter>01.Scene\99%29GeunHeeTestScene</Filter>
+      <Filter>01.Scene\01.Test\99%29GeunHeeTestScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\EnemyManager.h">
       <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\SceneChanger.h">
-      <Filter>02.Component</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PlayerInfoManager.h">
       <Filter>02.Component\00.Manager\Player</Filter>
@@ -112,41 +82,55 @@
     <ClInclude Include="..\Include\Bullet.h">
       <Filter>02.Component\00.Manager\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PrintInfo.h" />
+    <ClInclude Include="..\Include\SceneChanger.h">
+      <Filter>02.Component\01.Utility</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\Rader.h">
-      <Filter>02.Component</Filter>
+      <Filter>02.Component\02.UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\SingleLine.h">
-      <Filter>02.Component</Filter>
+      <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ClimbTerrain.h">
+      <Filter>02.Component\01.Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ShootingState.h">
+      <Filter>02.Component\00.Manager\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PrintInfo.h">
+      <Filter>02.Component\01.Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PhantomScene.h">
+      <Filter>01.Scene\01.Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GarageScene.h">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage2Scene.h">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageScene.h">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectScene.h">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TitleScene.h">
+      <Filter>01.Scene\00.Game</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\UILabScene.h">
-      <Filter>01.Scene</Filter>
+      <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
       <Filter>99.Default</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\TitleScene.cpp">
-      <Filter>01.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\StageScene.cpp">
-      <Filter>01.Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\MainGame.cpp">
       <Filter>00.Main</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>98.PreCompile</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PlaneInfo.cpp">
-      <Filter>02.Component\00.Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PlaneController.cpp">
-      <Filter>02.Component\00.Plane</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ClimbTerrain.cpp">
-      <Filter>02.Component</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\StageManager.cpp">
       <Filter>02.Component\00.Manager</Filter>
@@ -160,26 +144,11 @@
     <ClCompile Include="..\Source\ShootingState.cpp">
       <Filter>04.State</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\GarageScene.cpp">
-      <Filter>01.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PhantomScene.cpp">
-      <Filter>01.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Stage2Scene.cpp">
-      <Filter>01.Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\StageSelectScene.cpp">
-      <Filter>01.Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\HeeTestScene.cpp">
-      <Filter>01.Scene\99%29GeunHeeTestScene</Filter>
+      <Filter>01.Scene\01.Test\99%29GeunHeeTestScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\EnemyManager.cpp">
       <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\SceneChanger.cpp">
-      <Filter>02.Component</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PlayerInfoManager.cpp">
       <Filter>02.Component\00.Manager\Player</Filter>
@@ -220,15 +189,44 @@
     <ClCompile Include="..\Source\Bullet.cpp">
       <Filter>02.Component\00.Manager\Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PrintInfo.cpp" />
+    <ClCompile Include="..\Source\SceneChanger.cpp">
+      <Filter>02.Component\01.Utility</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\Rader.cpp">
-      <Filter>02.Component</Filter>
+      <Filter>02.Component\02.UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\SingleLine.cpp">
-      <Filter>02.Component</Filter>
+      <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ClimbTerrain.cpp">
+      <Filter>02.Component\01.Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ShootingState.cpp">
+      <Filter>02.Component\00.Manager\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PrintInfo.cpp">
+      <Filter>02.Component\01.Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PhantomScene.cpp">
+      <Filter>01.Scene\01.Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GarageScene.cpp">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Stage2Scene.cpp">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageScene.cpp">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectScene.cpp">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TitleScene.cpp">
+      <Filter>01.Scene\00.Game</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\UILabScene.cpp">
-      <Filter>01.Scene</Filter>
+      <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,17 +268,11 @@
     <Filter Include="03.Resource\02.Shader">
       <UniqueIdentifier>{7ae42d59-6412-4a79-acc3-19e26215e710}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Plane">
-      <UniqueIdentifier>{f51a46b1-cb5c-4681-a100-32b6f0f3d97d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\00.Manager">
       <UniqueIdentifier>{620004b3-601d-458e-9e74-70f98e3743b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="04.State">
       <UniqueIdentifier>{dea952e2-3812-4031-99e4-5366973e199d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\99%29GeunHeeTestScene">
-      <UniqueIdentifier>{f9b0f39f-1586-41e3-92e5-c0cce9aaad1b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy">
       <UniqueIdentifier>{88c15850-b344-4d77-b46d-6ed376456930}</UniqueIdentifier>
@@ -326,6 +318,21 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Bullet\Missile">
       <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility">
+      <UniqueIdentifier>{e9b71a8c-da3c-4ad5-8464-e03f0375b2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\02.UI">
+      <UniqueIdentifier>{8b11302c-0946-4b14-8367-831fe8789a40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game">
+      <UniqueIdentifier>{c57d9dbe-ffea-4ee8-9e1a-f7a67bf80a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\01.Test">
+      <UniqueIdentifier>{a1dffe79-acc0-4701-bbb6-7528c79728e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\01.Test\99%29GeunHeeTestScene">
+      <UniqueIdentifier>{f9b0f39f-1586-41e3-92e5-c0cce9aaad1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

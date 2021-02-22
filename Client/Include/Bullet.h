@@ -21,7 +21,7 @@ public:
 private:
 	
 	float m_fSpd = 0.f;
-	int m_iDamage = 0.f;
+	int m_iDamage = 0;
 
 	float m_fDeltaTime = 0.f;
 };
