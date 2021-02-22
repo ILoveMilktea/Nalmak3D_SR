@@ -208,12 +208,15 @@
     <ClInclude Include="..\Include\PlaneController.h" />
     <ClInclude Include="..\Include\PlaneInfo.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
+    <ClInclude Include="..\Include\Rader.h" />
     <ClInclude Include="..\Include\ShootingState.h" />
+    <ClInclude Include="..\Include\SingleLine.h" />
     <ClInclude Include="..\Include\Stage2Scene.h" />
     <ClInclude Include="..\Include\StageManager.h" />
     <ClInclude Include="..\Include\StageScene.h" />
     <ClInclude Include="..\Include\StageSelectScene.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
+    <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -232,12 +235,15 @@
     <ClCompile Include="..\Source\PlaneController.cpp" />
     <ClCompile Include="..\Source\PlaneInfo.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
+    <ClCompile Include="..\Source\Rader.cpp" />
     <ClCompile Include="..\Source\ShootingState.cpp" />
+    <ClCompile Include="..\Source\SingleLine.cpp" />
     <ClCompile Include="..\Source\Stage2Scene.cpp" />
     <ClCompile Include="..\Source\StageManager.cpp" />
     <ClCompile Include="..\Source\StageScene.cpp" />
     <ClCompile Include="..\Source\StageSelectScene.cpp" />
     <ClCompile Include="..\Source\TitleScene.cpp" />
+    <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

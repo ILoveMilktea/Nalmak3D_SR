@@ -1,6 +1,7 @@
 #include "..\Include\Text.h"
 #include "RenderManager.h"
-
+#include "Transform.h"
+#include "CanvasRenderer.h"
 
 Text::Text(Desc * _desc)
 {
@@ -10,26 +11,23 @@ Text::Text(Desc * _desc)
 	m_weight = Nalmak_Math::Clamp<UINT>(m_weight, 0, 1000);
 	m_fontName = _desc->fontName;
 	m_option = _desc->option;
-	m_textBoundary.left = _desc->textBoundary.left;
-	m_textBoundary.right = _desc->textBoundary.right;
-	m_textBoundary.top = -_desc->textBoundary.top;
-	m_textBoundary.bottom = -_desc->textBoundary.bottom;
-
 	m_text = _desc->text;
 	m_color = _desc->color;
-	
-
 }
 
 void Text::Initialize()
 {
+	if (!GetComponent<CanvasRenderer>())
+		m_gameObject->AddComponent<CanvasRenderer>();
+	m_renderer = GetComponent<CanvasRenderer>();
+
 	m_render = RenderManager::GetInstance();
 	m_device = DeviceManager::GetInstance()->GetDevice();
 
 	D3DXFONT_DESCW fontDesc;
 	ZeroMemory(&fontDesc, sizeof(D3DXFONT_DESCW));
-	fontDesc.Height = m_height;
 	fontDesc.Width = m_width;
+	fontDesc.Height = m_height;
 	fontDesc.Weight = m_weight;
 	fontDesc.CharSet = HANGUL_CHARSET;
 	lstrcpy(fontDesc.FaceName, m_fontName);
@@ -54,7 +52,11 @@ void Text::PreRender()
 
 void Text::Release()
 {
-	if(m_font)
+	if (m_font)
 		m_font->Release();
 }
 
+RECT* Text::GetBoundary()
+{
+	return m_renderer->GetBoundary();
+}

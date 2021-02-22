@@ -42,6 +42,9 @@
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "AutoRotate.h"
+#include "CanvasRenderer.h"
+#include "SingleImage.h"
+#include "MeshPicking.h"
 
 #pragma endregion
 

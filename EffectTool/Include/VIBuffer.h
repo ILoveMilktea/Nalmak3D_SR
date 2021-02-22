@@ -29,12 +29,18 @@ protected:
 protected:
 	UINT m_vertexCount;
 	UINT m_figureCount;
+
+	INPUT_LAYOUT_POSITION_NORMAL_UV* m_vertices = nullptr;
+	short* m_indices = nullptr;
 public:
 	PDIRECT3DVERTEXBUFFER9 GetVertexBuffer() { assert("Vertex Buffer is Empty!" && m_vBuffer); return m_vBuffer; }
 	PDIRECT3DINDEXBUFFER9 GetIndexBuffer() { assert("Index Buffer is Empty!" && m_iBuffer); return m_iBuffer; }
 
 	UINT GetVertexCount() { return m_vertexCount; }
 	UINT GetFigureCount() { return m_figureCount; }
+
+	INPUT_LAYOUT_POSITION_NORMAL_UV* GetVertices() { return m_vertices; }
+	short* GetIndices() { return m_indices; }
 protected:
 	Vector3 m_boundingSphereCenter;
 	float m_boundingSphereRadius = 0;

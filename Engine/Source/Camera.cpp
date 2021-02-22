@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "IRenderer.h"
 #include "DepthStencil.h"
+#include "CanvasRenderer.h"
 USING(Nalmak)
 
 Camera::Camera(Desc * _desc)
@@ -127,24 +128,37 @@ Vector2 Camera::WorldToScreenPos(const Vector3 & _pos)
 
 bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 {
-	if (m_mode != CAMERA_PROJECTION_MODE_PERSPECTIVE)
-		return true;
-	float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius();
-	if (radius == 0)
-		return true;
-	Transform* trs = _renderer->GetTransform();	
-	Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
-	radius = radius * 2;
-	float scale = max(trs->scale.z,max(trs->scale.x, trs->scale.y));
-	radius *= scale;
-	for (int i = 0; i < 6; ++i)
+	RENDERER_TYPE type = _renderer->GetType();
+	switch (type)
 	{
-		float distance = Vector::Dot(Center, Vector3(m_frustumPlane[i].a, m_frustumPlane[i].b, m_frustumPlane[i].c)) + m_frustumPlane[i].d + radius;
-		if (distance < 0)
+	case RENDERER_TYPE_MESH:
+	case RENDERER_TYPE_PARTICLE:
+	{
+		Transform* trs = _renderer->GetTransform();
+		Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
+		float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
+		float scale = max(trs->scale.z, max(trs->scale.x, trs->scale.y));
+		radius *= scale;
+		for (int i = 0; i < 6; ++i)
 		{
-			return false;
+			float distance = Vector::Dot(Center, Vector3(m_frustumPlane[i].a, m_frustumPlane[i].b, m_frustumPlane[i].c)) + m_frustumPlane[i].d + radius;
+			if (distance < 0)
+			{
+				return false;
+			}
 		}
 	}
+	break;
+	case RENDERER_TYPE_CANVAS:
+		RECT* boundary = _renderer->GetComponent<CanvasRenderer>()->GetBoundary();
+		if (boundary->left >= (LONG)RenderManager::GetInstance()->GetWindowWidth() ||
+			boundary->right <= 0 ||
+			boundary->top >= (LONG)RenderManager::GetInstance()->GetWindowHeight() ||
+			boundary->bottom <= 0)
+			return false;
+		break;
+	}
+
 	return true;
 }
 

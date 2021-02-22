@@ -115,17 +115,11 @@ void RenderManager::RenderText()
 {
 	for (auto& text : m_textRenderList)
 	{
-		RECT newRect = text->m_textBoundary;
-		newRect.left += (LONG)(m_halfWincx + text->GetTransform()->GetNoneScaleWorldMatrix()._41);
-		newRect.right += (LONG)(m_halfWincx + text->GetTransform()->GetNoneScaleWorldMatrix()._41);
-		newRect.top += (LONG)(m_halfWincy - text->GetTransform()->GetNoneScaleWorldMatrix()._42);
-		newRect.bottom += (LONG)(m_halfWincy - text->GetTransform()->GetNoneScaleWorldMatrix()._42);
-
 		text->m_font->DrawTextW(
 			nullptr,
 			text->m_text.c_str(),
 			-1,
-			&newRect,
+			text->GetBoundary(),
 			text->m_option,
 			text->m_color
 		);
@@ -155,15 +149,15 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Shade");
 
 
-	GBufferPass(_cam, _cBuffer);
+	GBufferPass(_cam, _cBuffer); // GBuffer -> Gemotry 를 그림 -> 기하도형
 
-	LightPass(_cam,_cBuffer);
+	LightPass(_cam,_cBuffer); // 위에서 그린정보를 바탕으로 빛 연산 (하나의 텍스쳐)
 
-	ShadePass(_cBuffer);
+	ShadePass(_cBuffer); // GBuffer + Lightpass 합성
 
-	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer);
+	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
-	TransparentPass(_cBuffer);
+	TransparentPass(_cBuffer); // 투명객체를 그림
 }
 
 void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
@@ -238,7 +232,7 @@ void RenderManager::PointLightPass(Camera* _cam, ConstantBuffer & _cBuffer)
 	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV)));
 	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
 
-	for (size_t i = 0; i < count; ++i)
+	for (int i = 0; i < count; ++i)
 	{
 		auto pointLight = m_lightManager->GetPointLight(i);
 

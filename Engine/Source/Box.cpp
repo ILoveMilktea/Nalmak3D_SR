@@ -138,7 +138,8 @@ void Box::CreateVertexBuffer()
 	vertices[23].normal = Vector3(1.f, 0.f, 0.f);
 	vertices[23].uv = Vector2(1.f, 1.f);
 	//////////////////////////////////////////////////////////
-
+	m_vertices = new INPUT_LAYOUT_POSITION_NORMAL_UV[24];
+	memcpy(m_vertices, vertices, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV) * 24);
 	m_vBuffer->Unlock();
 
 
@@ -177,6 +178,9 @@ void Box::CreateIndexBuffer()
 
 	indices[30] = 20; indices[31] = 21; indices[32] = 22;
 	indices[33] = 20; indices[34] = 22; indices[35] = 23;
+
+	m_indices = new short[36];
+	memcpy(m_indices, indices, sizeof(short) * 36);
 
 	m_iBuffer->Unlock();
 }

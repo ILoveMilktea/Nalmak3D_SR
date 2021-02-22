@@ -6,6 +6,7 @@
 
 #include "Component.h"
 
+class CanvasRenderer;
 class NALMAK_DLL Text :
 	public Component
 {
@@ -16,7 +17,6 @@ public:
 		UINT width = 12;
 		UINT height = 21;
 		UINT weight = 500; // 0 ~ 1000
-		RECT textBoundary = { -50,13,50,-13 };
 		DWORD option = DT_CENTER | DT_WORDBREAK;
 		const TCHAR* fontName = L"Consolas";
 		wstring text = L"default";
@@ -34,15 +34,19 @@ public:
 	void SetText(wstring _text) { m_text = _text; }
 	void SetColor(const D3DXCOLOR& _color) { m_color = _color; }
 	void SetAlpha(float _alpha) { m_color.a = _alpha; }
+
+	RECT* GetBoundary();
+
 private:
 	LPD3DXFONT m_font = nullptr;
 	PDIRECT3DDEVICE9 m_device = nullptr;
 	RenderManager* m_render = nullptr;
+	CanvasRenderer* m_renderer = nullptr;
+
 private:
 	UINT m_width;
 	UINT m_height;
 	UINT m_weight;
-	RECT m_textBoundary;
 	DWORD m_option;
 	D3DXCOLOR m_color;
 	const TCHAR* m_fontName;

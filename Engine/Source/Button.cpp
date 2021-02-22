@@ -1,29 +1,66 @@
 #include "..\Include\Button.h"
 #include "Transform.h"
+#include "CanvasRenderer.h"
+#include "ResourceManager.h"
 
 Button::Button(Desc * _desc)
 {
 	m_event += _desc->eventFunc;
+
+	m_normalColor = { 1.f,1.f,1.f,1.f };
+	m_highlightColor = { 0.8f,0.8f,0.8f,1.f };
+	m_pressedColor = { 0.5f,0.5f,0.5f,1.f };
+	m_disableColor = { 0.2f,0.2f,0.2f,1.f };
+
+	m_resource = ResourceManager::GetInstance();
+	m_normalImage = m_resource->GetResource<Texture>(_desc->normalImage);
+	m_highlightImage = m_resource->GetResource<Texture>(_desc->highlightImage);
+	m_pressedImage = m_resource->GetResource<Texture>(_desc->pressedImage);
+	m_disableImage = m_resource->GetResource<Texture>(_desc->disableImage);
 }
 
 void Button::Initialize()
 {
 	m_input = InputManager::GetInstance();
+
+	m_currentTransition = BUTTON_TRANSITION_COLOR;
+	m_currentState = BUTTON_STATE_NORMAL;
+	m_targetImage = &m_normalImage;
+	m_targetColor = &m_normalColor;
+
+	if (!GetComponent<CanvasRenderer>())
+		m_gameObject->AddComponent<CanvasRenderer>();
+	m_renderer = GetComponent<CanvasRenderer>();
+	m_renderer->SetImage(m_normalImage);
+	//m_renderer->SetActive(false);
+
+	m_interactive = true;
 }
 
 void Button::Update()
 {
-	if (m_input->GetKeyDown(KEY_STATE_LEFT_MOUSE))
-	{
-		if (IsClick())
-		{
-			m_event.NotifyHandlers();
-		}
-	}
+	m_isCursorOnButton = CheckCursorPosition();
 }
 
 void Button::LateUpdate()
 {
+	if (!m_interactive)
+		return;
+
+	if (m_input->GetKeyUp(KEY_STATE_LEFT_MOUSE))
+	{
+		if (m_isCursorOnButton)
+			m_event.NotifyHandlers();
+
+		ChangeState(BUTTON_STATE_NORMAL);
+	}
+	else if (m_input->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	{
+		if (m_isCursorOnButton)
+		{
+			ChangeState(BUTTON_STATE_PRESSED);
+		}
+	}
 }
 
 void Button::Release()
@@ -31,15 +68,104 @@ void Button::Release()
 	m_event.Release();
 }
 
-bool Button::IsClick()
+void Button::ChangeTransition(BUTTON_TRANSITION _transition)
 {
+	switch (_transition)
+	{
+	case BUTTON_TRANSITION_NONE:
+		m_renderer->SetActive(false);
+		break;
+	case BUTTON_TRANSITION_COLOR:
+		m_renderer->SetActive(false);
+		break;
+	case BUTTON_TRANSITION_SWAP:
+		m_renderer->SetActive(true);
+		break;
+	}
+	m_currentTransition = _transition;
+	ChangeState(BUTTON_STATE_NORMAL);
+}
+
+void Button::ChangeState(BUTTON_STATE _state)
+{
+	if (m_currentState == _state)
+		return;
+
+	switch (m_currentTransition)
+	{
+	case BUTTON_TRANSITION_NONE:
+		break;
+	case BUTTON_TRANSITION_COLOR:
+		switch (_state)
+		{
+		case BUTTON_STATE_NORMAL:
+			m_targetColor = &m_normalColor;
+			break;
+		case BUTTON_STATE_HIGHLIGHT:
+			m_targetColor = &m_highlightColor;
+			break;
+		case BUTTON_STATE_PRESSED:
+			m_targetColor = &m_pressedColor;
+			break;
+		case BUTTON_STATE_DISABLE:
+			m_targetColor = &m_disableColor;
+			break;
+		}
+		m_renderer->SetColor(*m_targetColor);
+		break;
+	case BUTTON_TRANSITION_SWAP:
+		switch (_state)
+		{
+		case BUTTON_STATE_NORMAL:
+			m_targetImage = &m_normalImage;
+			break;
+		case BUTTON_STATE_HIGHLIGHT:
+			m_targetImage = &m_highlightImage;
+			break;
+		case BUTTON_STATE_PRESSED:
+			m_targetImage = &m_pressedImage;
+			break;
+		case BUTTON_STATE_DISABLE:
+			m_targetImage = &m_disableImage;
+			break;
+		}
+		m_renderer->SetImage(*m_targetImage);
+		break;
+	}
+
+	m_currentState = _state;
+}
+bool Button::CheckCursorPosition()
+{
+	RECT* boundary = m_renderer->GetBoundary();
 	Vector2 mousePos = m_input->GetMouseScreenPos();
 
-	if (m_transform->position.x - m_transform->scale.x * 0.5f < mousePos.x &&
-		m_transform->position.x + m_transform->scale.x  * 0.5f > mousePos.x &&
-		m_transform->position.y - m_transform->scale.y  * 0.5f < mousePos.y &&
-		m_transform->position.y + m_transform->scale.y  * 0.5f > mousePos.y)
+	if (boundary->left < mousePos.x &&
+		boundary->right > mousePos.x &&
+		boundary->top < mousePos.y &&
+		boundary->bottom > mousePos.y)
+	{
+		if (BUTTON_STATE_NORMAL == m_currentState)
+			ChangeState(BUTTON_STATE_HIGHLIGHT);
 		return true;
+	}
 
+	if (BUTTON_STATE_HIGHLIGHT == m_currentState)
+		ChangeState(BUTTON_STATE_NORMAL);
 	return false;
+}
+
+void Button::SetInteraction(bool _value)
+{
+	m_interactive = _value;
+
+	if (m_interactive)
+		ChangeState(BUTTON_STATE_NORMAL);
+	else
+		ChangeState(BUTTON_STATE_DISABLE);
+}
+
+void Button::AddEventHandler(EventHandler _eventFunc)
+{
+	m_event += _eventFunc;
 }

@@ -31,4 +31,7 @@ void VIBuffer::Release()
 {
 	SAFE_RELEASE(m_vBuffer);
 	SAFE_RELEASE(m_iBuffer);
+
+	SAFE_DELETE_ARR(m_indices);
+	SAFE_DELETE_ARR(m_vertices);
 }

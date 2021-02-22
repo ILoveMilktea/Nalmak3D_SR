@@ -19,7 +19,6 @@ void SystemInfo::Initialize()
 	Text::Desc text;
 	text.width = 6;
 	text.height = 12;
-	text.textBoundary = { 0,-10,500,-400 };
 	text.option = DT_LEFT | DT_NOCLIP;
 	text.color = D3DXCOLOR(1, 1, 1, 1);
 	m_gameObject->AddComponent<Text>(&text);

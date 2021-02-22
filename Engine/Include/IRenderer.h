@@ -32,6 +32,7 @@ protected:
 	VIBuffer* m_viBuffer;
 	Material* m_material;
 	PDIRECT3DDEVICE9 m_device;
+	RENDERER_TYPE  m_type;
 	int m_layer;
 public:
 	PDIRECT3DVERTEXBUFFER9 GetVertexBuffer() const;
@@ -43,6 +44,7 @@ public:
 	UINT GetVertexCount();
 	UINT GetFigureCount();
 
+	const RENDERER_TYPE& GetType() { return m_type; }
 public:
 	void SetMaterial(Material* _material);
 	void SetMaterial(wstring _mtrlName);

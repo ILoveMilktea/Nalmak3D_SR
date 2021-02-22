@@ -11,6 +11,12 @@ public:
 public:
 	DrawGizmo(Desc* _desc);
 	~DrawGizmo();
+
+public:
+	void SetActiveHandles(bool _value);
+	bool GetSelected() { return m_selected; }
+	bool CheckHandlePicked();
+
 private:
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -18,5 +24,16 @@ private:
 	virtual void LateUpdate() override;
 private:
 	LineManager* m_line;
+
+	VIBuffer* m_viBuffer_right;
+	VIBuffer* m_viBuffer_up;
+	VIBuffer* m_viBuffer_look;
+
+
+	GameObject* m_rightHandle;
+	GameObject* m_upHandle;
+	GameObject* m_forwardHandle;
+
+	bool m_selected;
 };
 

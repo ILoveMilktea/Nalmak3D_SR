@@ -74,6 +74,15 @@
       <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PrintInfo.h" />
+    <ClInclude Include="..\Include\Rader.h">
+      <Filter>02.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SingleLine.h">
+      <Filter>02.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UILabScene.h">
+      <Filter>01.Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -134,6 +143,15 @@
       <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PrintInfo.cpp" />
+    <ClCompile Include="..\Source\Rader.cpp">
+      <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SingleLine.cpp">
+      <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\UILabScene.cpp">
+      <Filter>01.Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

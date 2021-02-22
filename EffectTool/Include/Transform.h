@@ -6,6 +6,7 @@
 #include "Nalmak_Include.h"
 #include "Component.h"
 BEGIN(Nalmak)
+class RenderManager;
 class NALMAK_DLL Transform : public Component
 {
 public:
@@ -24,6 +25,7 @@ private:
 	virtual void Release() override;
 public:
 	void UpdateMatrix();
+	void UpdateUIMatrix();
 public:
 	Vector3		position = { 0,0,0 };
 	Quaternion	rotation = { 0,0,0,1 };
@@ -32,16 +34,22 @@ private:
 	Matrix		worldMatrix;
 	Matrix		noneScaleWorldMatrix;
 
-public:
+public: /* For Rendering */
 	const Matrix& GetWorldMatrix();
+	const Matrix& GetUIWorldMatrix();
 	const Matrix& GetNoneScaleWorldMatrix();
 	Vector3 GetWorldPosition();
 	Quaternion GetWorldRotation();
 	Vector3 GetForward();
 	Vector3 GetRight();
 	Vector3 GetUp();
+
 public:
-	/* Euler Rotate Set*/
+	void GetRotationX(Vector3* _out, Vector3 _in);	// Radian
+	void GetRotationY(Vector3* _out, Vector3 _in);	// Radian
+	void GetRotationZ(Vector3* _out, Vector3 _in);	// Radian
+
+public:	/* For Rotate*/
 	void SetRotation(float _ex, float _ey, float _ez);
 	void SetRotationX(float _ex);
 	void SetRotationY(float _ey);
@@ -56,7 +64,8 @@ public:
 	void RotateRollPitchYaw(float _x, float _y, float _z);
 	Quaternion RotateAxis(const Vector3& _axis, float _angle);
 	void ResetRelative();
-private:
+
+private: /* For Child */
 	list<Transform*>   m_childs;
 	Transform * m_parents = nullptr;
 public:
@@ -68,9 +77,11 @@ public:
 	void DeleteChild(Transform* _child);
 	void DeleteParent();
 	Transform* GetParents();
+
 private:
 	virtual void SetTransform(Transform* _transform) override;
 
+	RenderManager* m_renderManager;
 
 };
 

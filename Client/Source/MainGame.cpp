@@ -8,7 +8,7 @@
 #include "StageSelectScene.h"
 #include "PhantomScene.h"
 #include "Stage2Scene.h"
-
+#include "UILabScene.h"
 #include "HeeTestScene.h"
 
 TimeManager* g_time;
@@ -95,14 +95,14 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"stage", Scene::Instantiate<StageScene>());
 	m_engine->AddScene(L"stage2", Scene::Instantiate<Stage2Scene>());
 
-	
+	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
 
 
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
 
 	/*Test*/
 	m_engine->AddScene(L"Hee", Scene::Instantiate<Stage2Scene>());
-	m_engine->SetStartScene(L"title");
+	m_engine->SetStartScene(L"UILab");
 }
 
 void MainGame::ReadyResource()

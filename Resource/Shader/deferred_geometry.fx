@@ -83,7 +83,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	//	}
 
 	//}
-	o.color = diffuse * 0.2f+ float4(light, 1);
+	o.color = diffuse + float4(light, 1);
 	//o.color = 1;
 	return o;
 }
