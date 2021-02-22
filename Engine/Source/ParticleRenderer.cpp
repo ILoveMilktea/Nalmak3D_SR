@@ -15,6 +15,9 @@ ParticleRenderer::ParticleRenderer(Desc * _desc)
 	m_currentCount = 0;
 	m_playTime = 0.f;
 
+	m_type = RENDERER_TYPE_PARTICLE;
+
+
 }
 
 void ParticleRenderer::Initialize()

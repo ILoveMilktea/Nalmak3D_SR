@@ -8,7 +8,6 @@ public:
 	struct Desc
 	{
 		bool shadowCheck = false;
-		Vector2 fixMousePos = Vector2(HALF_WINCX, HALF_WINCY);
 	};
 public:
 	MouseOption(Desc* _desc);
@@ -19,9 +18,15 @@ public:
 	virtual void Update() override;
 	virtual void LateUpdate() override;
 
+public:
+	Vector2 GetMouseMoveDir() { return m_curMousePoint - m_preMousePoint; }	/* Ãß°¡ */
 private:
-
 	bool m_mouseShadow = false;
-	Vector2 m_fixMousePos;
+private:
+	Vector2 m_curMousePoint = {};
+	Vector2 m_preMousePoint = {};
+
+	InputManager* m_inputManager;
+	Core* m_core;
 };
 

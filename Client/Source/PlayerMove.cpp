@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\PlayerMove.h"
 #include "PlayerInfoManager.h"
+#include "MouseOption.h"
 
 PlayerMove::PlayerMove()
 {
@@ -29,6 +30,7 @@ void PlayerMove::Initialize()
 	m_playerInfo->GetAddRot().x = Deg2Rad * eulerRot.x;
 	m_playerInfo->GetAddRot().y = Deg2Rad * eulerRot.y;
 	m_playerInfo->GetAddRot().z = Deg2Rad * eulerRot.z;
+	m_mouse = GetComponent<MouseOption>();
 }
 
 void PlayerMove::EnterState()
@@ -39,7 +41,7 @@ void PlayerMove::EnterState()
 void PlayerMove::UpdateState()
 {
 	float speed = 0;
-	D3DXVec2Normalize(&m_inputManager->GetMouseMoveDir(), &m_inputManager->GetMouseMoveDir());
+	D3DXVec2Normalize(&m_mouse->GetMouseMoveDir(), &m_mouse->GetMouseMoveDir());
 	if (m_inputManager->GetKeyPress(KEY_STATE_D))
 		m_playerInfo->SetRollAngle(-15.f);
 	else if (m_inputManager->GetKeyPress(KEY_STATE_A))
@@ -47,8 +49,8 @@ void PlayerMove::UpdateState()
 	else
 		m_playerInfo->SetRollAngle(0.f);
 
-	float dirY = m_inputManager->GetMouseMoveDir().x;
-	float dirX = m_inputManager->GetMouseMoveDir().y;
+	float dirY = m_mouse->GetMouseMoveDir().x;
+	float dirX = m_mouse->GetMouseMoveDir().y;
 	DEBUG_LOG(L"mouse X", dirX);
 	DEBUG_LOG(L"mouse Y", dirY);
 

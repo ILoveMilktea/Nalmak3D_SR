@@ -118,9 +118,13 @@
     <ClInclude Include="..\Include\UILabScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Include\ShootingState.h">
       <Filter>04.State</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="..\Include\ShootingState.h" />
+>>>>>>> 0579131a4def43ac46d68430816dfd5ba2725b8f
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -225,9 +229,13 @@
     <ClCompile Include="..\Source\UILabScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Source\ShootingState.cpp">
       <Filter>04.State</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="..\Source\ShootingState.cpp" />
+>>>>>>> 0579131a4def43ac46d68430816dfd5ba2725b8f
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -334,6 +342,9 @@
     <Filter Include="01.Scene\01.Test\99%29GeunHeeTestScene">
       <UniqueIdentifier>{f9b0f39f-1586-41e3-92e5-c0cce9aaad1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03.Resource\02.Shader\Common">
+      <UniqueIdentifier>{6b5467bb-1bd2-4774-8798-9a69fc77288c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
@@ -367,12 +378,6 @@
     <FxCompile Include="..\..\Resource\Shader\deferred_geometry.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\common_h.fx">
-      <Filter>03.Resource</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\light_h.fx">
-      <Filter>03.Resource</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\standard.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
@@ -384,6 +389,12 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\D_DirectionalLight.fx">
       <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\H_light.fx">
+      <Filter>03.Resource\02.Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\H_common.fx">
+      <Filter>03.Resource\02.Shader\Common</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

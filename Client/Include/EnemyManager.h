@@ -1,5 +1,12 @@
 #pragma once
 
+<<<<<<< HEAD
+=======
+
+#ifndef _ENEMY_MANAGER_H_
+#define _ENEMY_MANAGER_H_
+
+>>>>>>> 0579131a4def43ac46d68430816dfd5ba2725b8f
 #include "Component.h"
 
 class EnemyManager : public Component

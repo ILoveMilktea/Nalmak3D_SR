@@ -14,6 +14,7 @@ MeshRenderer::MeshRenderer(Desc * _desc)
 
 	m_animator = nullptr;
 	m_layer = _desc->layer;
+	m_type = RENDERER_TYPE_MESH;
 }
 
 void MeshRenderer::Initialize()

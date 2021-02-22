@@ -124,9 +124,6 @@
     <Filter Include="05.Component\04.Collider">
       <UniqueIdentifier>{1e1ba7a4-8b30-42e7-a420-4967abbb2007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Component\06.CubeMap">
-      <UniqueIdentifier>{86869034-662c-4e8b-be58-595a834807d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Component\07.StateControl">
       <UniqueIdentifier>{4f578033-6a72-4492-86d2-09320ccf9815}</UniqueIdentifier>
     </Filter>
@@ -311,9 +308,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\SphereCollider.cpp">
       <Filter>05.Component\04.Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\CubeMap.cpp">
-      <Filter>05.Component\06.CubeMap</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\IState.cpp">
       <Filter>03.Interface</Filter>
@@ -541,9 +535,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\SphereCollider.h">
       <Filter>05.Component\04.Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\CubeMap.h">
-      <Filter>05.Component\06.CubeMap</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\IState.h">
       <Filter>03.Interface</Filter>

@@ -46,6 +46,8 @@
 #include "SingleImage.h"
 #include "MeshPicking.h"
 
+#include "DeviceManager.h"
+#include "RenderManager.h"
 #pragma endregion
 
 class CollisionManager;
@@ -100,7 +102,13 @@ public:
 	GameObject* FindFirstObject(_OBJECT_TAG _tag);
 	GameObject* FindObjectByName(_OBJECT_TAG _tag, wstring name);
 public:
+	UINT GetWindowWidth();
+	UINT GetWindowHeight();
+public:
+	HWND GetHWND();
+public:
 	const wstring& GetResourceDirectoryPath();
+
 
 	// Environment Setting
 public:
@@ -117,6 +125,10 @@ private:
 	CollisionManager* m_collisionManager;
 	LightManager* m_lightManager;
 	TimeManager* m_timeManager;
+
+private:
+	DeviceManager* m_deviceManager;
+	RenderManager* m_renderManager;
 
 public:
 	LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);

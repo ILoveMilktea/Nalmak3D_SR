@@ -139,6 +139,33 @@ void RenderManager::Reset()
 		renderList.second.clear();
 }
 
+void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
+{
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
+
+	auto viBuffer = m_lightManager->GetSkyboxVIBuffer();
+
+	UpdateMaterial(m_lightManager->GetSkyboxMaterial(), _cBuffer);
+	UpdateRenderTarget();
+	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
+	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
+
+	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0,sizeof(INPUT_LAYOUT_SKYBOX)));
+	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
+
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
+
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+		EndRenderTarget();
+	}
+
+}
+
 void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 {
 	ClearRenderTarget(L"GBuffer_Diffuse");
@@ -148,6 +175,7 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Light");
 	ClearRenderTarget(L"GBuffer_Shade");
 
+	SkyboxPass(_cBuffer);
 
 	GBufferPass(_cam, _cBuffer); // GBuffer -> Gemotry 를 그림 -> 기하도형
 

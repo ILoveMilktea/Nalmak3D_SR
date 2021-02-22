@@ -1,4 +1,4 @@
-#include "common_h.fx"
+#include "H_common.fx"
 
 matrix g_world;
 texture g_mainTex;
@@ -8,7 +8,6 @@ float4 g_mainTexColor;
 sampler mainSampler = sampler_state
 {
 	texture = g_mainTex;
-
 };
 
 struct VS_INPUT

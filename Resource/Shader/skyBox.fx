@@ -1,7 +1,4 @@
-
-#include "common_h.fx"
-
-matrix g_world;
+#include "H_common.fx"
 
 
 texture g_skyBox;
@@ -54,8 +51,10 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 	matWorld._42 = g_cBuffer.worldCamPos.y;
 	matWorld._43 = g_cBuffer.worldCamPos.z;
 
+
+
 	matrix wvp = mul(matWorld, g_cBuffer.viewProj);
-	o.position = mul(float4(_input.position,1), wvp).xyww;
+	o.position = mul(float4(_input.position ,1), wvp).xyww;
 	o.uvw = _input.uvw;
 	
 	
@@ -80,7 +79,7 @@ technique DefaultTechnique
 
 		//ZEnable = false;
 		//ZWriteEnable = false;
-		CullMode = CW;
+		CullMode = none;
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 
