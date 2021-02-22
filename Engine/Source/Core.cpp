@@ -19,6 +19,12 @@ USING(Nalmak)
 
 IMPLEMENT_SINGLETON(Core)
 
+
+// Core changes 02.22 for.jjy
+// Device Getter Func 1Add;
+// Renderman GetterFunc 2Add;
+
+
 Core::Core()
 {
 	m_sceneManager = SceneManager::GetInstance();
@@ -32,6 +38,10 @@ Core::Core()
 	m_debugManager = DebugManager::GetInstance();
 	m_collisionManager = CollisionManager::GetInstance();
 	m_lightManager = LightManager::GetInstance();
+	//
+	m_deviceManager = DeviceManager::GetInstance();
+	m_renderManager = RenderManager::GetInstance();
+	//
 }
 
 
@@ -139,6 +149,21 @@ GameObject * Core::FindFirstObject(_OBJECT_TAG _tag)
 GameObject * Core::FindObjectByName(_OBJECT_TAG _tag, wstring name)
 {
 	return m_objectManager->Find(_tag, name);
+}
+
+UINT Core::GetWindowWidth()
+{
+	return m_renderManager->GetWindowWidth();
+}
+
+UINT  Core::GetWindowHeight()
+{
+	return m_renderManager->GetWindowHeight();
+}
+
+HWND  Core::GetHWND()
+{
+	return m_deviceManager->GetHWND();
 }
 
 const wstring & Core::GetResourceDirectoryPath()
