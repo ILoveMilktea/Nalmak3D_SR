@@ -13,11 +13,12 @@ struct PointLight
 	float radius;
 };
 
-//struct DirectionalLight
-//{
-//	BaseLight base;
-//	vec3 Direction;
-//};
+struct DirectionalLight
+{
+	BaseLight base;
+
+	float3 direction;
+};
 
 float4 CalcLightInternal(BaseLight _light, float3 _camPos, float3 _direction, float3 _worldPos, float3 _normal)
 {
@@ -25,7 +26,7 @@ float4 CalcLightInternal(BaseLight _light, float3 _camPos, float3 _direction, fl
 	float diffuseFactor = dot(_normal, -_direction);
 
 	float4 diffuseColor = 0;
-	//float4 specularColor = 0;
+
 	if (diffuseFactor > 0.0)
 	{
 		diffuseColor = float4(_light.color * _light.diffuseIntensity * diffuseFactor, 1.0);
@@ -34,7 +35,7 @@ float4 CalcLightInternal(BaseLight _light, float3 _camPos, float3 _direction, fl
 	}
 
 	//return ambientColor + diffuseColor;
-	return diffuseColor;
+	return diffuseColor * diffuseFactor;
 }
 
 float4 CalcPointLight(PointLight _pointLight,float3 _camPos, float3 _worldPos, float3 _normal)
@@ -47,25 +48,11 @@ float4 CalcPointLight(PointLight _pointLight,float3 _camPos, float3 _worldPos, f
 	float4 color = CalcLightInternal(_pointLight.base, _camPos, lightDirection, _worldPos, _normal);
 
 	//float attenuation = (_pointLight.constant) + (_pointLight.linearRatio * distance) + (_pointLight.exp * distance * distance);
-	float attenuation = pow(saturate(1.f - distance / _pointLight.radius),2.f);
+	float attenuation = pow(saturate(1.f - (distance * 1.1f)/ _pointLight.radius),5.f);
+	//float attenuation = 0+ (0 * distance) + (0.3 * distance * distance);
 
 
-
-
-
-
-
-
-
-	/*if (distance > _pointLight.radius)
-		color = 0;*/
-	/*if (distance < _pointLight.radius)
-		color = 1;
-	else
-		color = 0;*/
-	//attenuation = max(1.0, attenuation);
-
-	return  color;
+	return color * attenuation;
 }
 
 //float4 CalcLightInternal(baseLightInfo _light, float3 _lightDir, float3 _normal)

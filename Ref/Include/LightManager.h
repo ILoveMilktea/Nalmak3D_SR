@@ -22,6 +22,8 @@ public:
 	void AddPointLight(PointLight* _light);
 	bool GetDirectionalLightInfo(DirectionalLightInfo& _info);
 	const vector<PointLight*>& GetPointLights() { return m_pointLights; }
+	PointLight* GetPointLight(int _index) { return m_pointLights[_index]; }
+	size_t GetPointLightCount() { return m_pointLights.size(); }
 private:
 	GameObject* m_skyBox = nullptr;
 

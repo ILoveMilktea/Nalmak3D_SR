@@ -5,6 +5,7 @@
 
 #include "Nalmak_Include.h"
 
+#pragma region LIGHT INFO
 
 struct BaseLightInfo
 {
@@ -24,23 +25,25 @@ struct PointLightInfo
 struct DirectionalLightInfo
 {
 	DirectionalLightInfo() = default;
-	DirectionalLightInfo(Vector3 _dir, Vector3 _color, float _intensity)
+	DirectionalLightInfo(Vector3 _direction, Vector3 _color, float _intensity)
 	{
-		direction = _dir;
-		color = _color;
-		intensity = _intensity;
+		direction = _direction;
+
+		base.color = _color;
+		base.diffuseIntensity = _intensity;
 	}
-	Vector3 direction = Vector3(0, -0.6f, 0.3f);
-	Vector3 color = Vector3(0.97f, 0.95f, 0.85f);
-	float intensity = 1.f;
+	BaseLightInfo base;
+
+	Vector3 direction;
 };
+#pragma endregion LIGHT INFO
 
-//struct DirectionalLightInfo
-//{
-//	BaseLightInfo base;
-//	Vector3 Direction;
-//};
 
+
+/////////////////////////////////////////////////////////////////////////////////
+// 공용 상수 버퍼
+// 쉐이더가 바뀔 때 마다 공통적으로 이 데이터는 정보를 보내줌
+#pragma region Constant Buffer
 
 struct ConstantBuffer
 {
@@ -48,29 +51,27 @@ struct ConstantBuffer
 	Matrix invView;
 	Matrix invProj;
 	Vector3 worldCamPos;
+};
+#pragma endregion Constant Buffer
+//
+/////////////////////////////////////////////////////////////////////////////////
 
-	int wincx;
-	int wincy;
 
-	int isDirectionalLight = 0;
-	DirectionalLightInfo directionalLight;
+
+/////////////////////////////////////////////////////////////////////////////////
+// INPUT LAYOUT 추가 시 꼭 해야할것!!
+//  1. VERTEX_INPUT_LAYOUT enum 추가 
+//  2. Shader Initialize inputLayout마다 분기문 추가
+#pragma region INPUT_LAYOUT
+struct INPUT_LAYOUT_POSITION
+{
+	Vector3 position;
 };
 
 struct INPUT_LAYOUT_POSITION_UV
 {
 	Vector3 position;
 	Vector2 uv;
-};
-
-struct INPUT_LAYOUT_SKYBOX
-{
-	Vector3 position;
-	Vector3 uvw;
-};
-
-struct INPUT_LAYOUT_POSITION
-{
-	Vector3 position;
 };
 
 struct INPUT_LAYOUT_POSITION_NORMAL_UV
@@ -80,16 +81,28 @@ struct INPUT_LAYOUT_POSITION_NORMAL_UV
 	Vector2 uv;
 };
 
+struct INPUT_LAYOUT_SKYBOX
+{
+	Vector3 position;
+	Vector3 uvw;
+};
+
 struct INPUT_LAYOUT_PARTICLE
 {
 	Matrix worldMatrix;
 	Vector4 color;
 };
 
-struct INPUT_LAYOUT_STATIC_MESH
-{
-	Matrix worldMatrix;
-};
+
+// 일단 안씀
+//struct INPUT_LAYOUT_STATIC_MESH
+//{
+//	Matrix worldMatrix;
+//};
+
+#pragma endregion INPUT_LAYOUT
+//
+/////////////////////////////////////////////////////////////////////////////////
 
 struct TextureBuffer
 {

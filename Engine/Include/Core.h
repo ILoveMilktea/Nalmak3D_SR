@@ -63,7 +63,7 @@ public:
 		UINT wincy = 1080;
 		bool windowMode = true;
 		wstring startSceneName;
-		wstring resourceDirectoryPath = L"../../Resource/";
+		wstring resourceDirectoryPath = L"../../Resource";
 		_OBJECT_TAG OBJECT_TAG_COUNT = 1;
 		_RENDER_LAYER RENDER_LAYER_COUNT = 1;
 		_COLLISION_LAYER COLLISION_LAYER_COUNT = 1;

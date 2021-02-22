@@ -83,9 +83,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	//	}
 
 	//}
-
-	o.color.xyz = diffuse * 0.2f+ light;
-	o.color.w = 1;
+	o.color = diffuse * 0.2f+ float4(light, 1);
 	//o.color = 1;
 	return o;
 }
@@ -98,9 +96,7 @@ technique DefaultTechnique
 	{
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z 값에대한 활용
 
-		//ZEnable = true;
-		//ZWriteEnable = true;
-		//CullMode = CCW;
+
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

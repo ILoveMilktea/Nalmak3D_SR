@@ -22,8 +22,9 @@ public:
 		// for perspective
 		float fovY = D3DX_PI * 0.3f;
 		float aspect = 0;
+		// 변경시 common shader 상수 값도 바꿔주기!
 		float zNear = 1.f;
-		float zFar = 1000.f;
+		float zFar = 1000.f; 
 		// for orthographic
 		UINT width = 0;
 		UINT height = 0; 
@@ -66,6 +67,8 @@ public:
 	vector<RenderTarget*>& GetRenderTargets() { return m_renderTargets; }
 	bool CompareLayer(_RENDER_LAYER _layer) { return m_layer.Check(_layer); }
 	bool IsInFrustumCulling(IRenderer* _transform);
+	bool IsInFrustumCulling(const Vector3& _pos,float _radius);
+
 	const float GetFovY() const { return m_fovY; }
 	Vector3 GetCamToMouseWorldDirection();
 public:

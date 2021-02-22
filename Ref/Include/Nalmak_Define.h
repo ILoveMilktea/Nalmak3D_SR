@@ -64,6 +64,11 @@ void T::DestroyInstance()							\
 #define COLOR_RGB(r,g,b) RGB((BYTE)(r * 255),(BYTE)(g * 255),(BYTE)(b * 255))
 
 
+#define ERR_MSG(msg)  MessageBoxW(NULL, msg, L"error", 0)  
+
+
+
+
 #define SAFE_DELETE(p) if(p){ delete p; p = nullptr; }
 #define SAFE_DELETE_ARR(p) if(p){ delete[]p; p = nullptr; }		
 #define SAFE_RELEASE(p) if(p){ p->Release(); p = nullptr; }

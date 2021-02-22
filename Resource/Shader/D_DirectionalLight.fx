@@ -3,12 +3,12 @@
 
 
 matrix g_world;
-PointLight g_pointLight;
+DirectionalLight g_directionalLight;
 
 texture g_diffuse;
 texture g_normal;
 texture g_depth;
-texture g_position;
+
 
 sampler DiffuseSampler = sampler_state
 {
@@ -25,42 +25,37 @@ sampler DepthSampler = sampler_state
 	texture = g_depth;
 };
 
-sampler PositionSampler = sampler_state
-{
-	texture = g_position;
-};
+
 
 struct VS_INPUT
 {
 	float3 pos : POSITION;
-	float3 normal : NORMAL;
 	float2 uv : TEXCOORD0;
 };
 
 struct VS_OUTPUT
 {
 	float4 pos : POSITION;
-	float2 screenPos : TEXCOORD0;
+	float2 uv : TEXCOORD0;
 };
 
 struct PS_INPUT
 {
-	float2 screenPos : TEXCOORD0;
+	float2 uv :TEXCOORD0;
 };
 
 struct PS_OUTPUT
 {
-	float4 diffuse : COLOR0;
+	float4 color : COLOR0;
 };
 
 VS_OUTPUT VS_Main_Default(VS_INPUT _in)
 {
-	VS_OUTPUT o = (VS_OUTPUT)0; 
+	VS_OUTPUT o = (VS_OUTPUT)0;
 
-	float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
-	o.pos = mul(float4(_in.pos,1), wvp);
+	o.pos = mul(float4(_in.pos, 1), g_world);
+	o.uv = _in.uv;
 
-	o.screenPos = ComputeScreenPos(o.pos);
 
 	return o;
 }
@@ -70,18 +65,17 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
 
-	float3 diffuse = tex2D(DiffuseSampler, _in.screenPos).xyz;
-	float3 normal = tex2D(NormalSampler, _in.screenPos).xyz;
-	/*normal = normal * 2.f - 1.f;
-	normal = normalize(normal);*/
+	float2 uvRT = _in.uv + float2(0.5f / WINCX, 0.5f / WINCY);
+	
+	float4 diffuse = tex2D(DiffuseSampler, uvRT);
+	float3 normal = tex2D(NormalSampler, uvRT).xyz;
 
-	float2 depth = tex2D(DepthSampler, _in.screenPos).xy;
-	float4 worldPos = tex2D(PositionSampler, _in.screenPos);
+	float2 depth = tex2D(DepthSampler, uvRT).xy;
+	float4 worldPos = GetWorldPosFromDepth(depth, _in.uv);
 
+	float4 light = CalcLightInternal(g_directionalLight.base, g_cBuffer.worldCamPos, g_directionalLight.direction, worldPos, normal);
 
-	float4 light =  CalcPointLight(g_pointLight, g_cBuffer.worldCamPos, worldPos, normal);
-
-	o.diffuse = light;
+	o.color = light * 2 - 1;
 
 	return o;
 }
@@ -93,11 +87,6 @@ technique DefaultTechnique
 	Pass DefaultPass
 	{
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z 값에대한 활용
-
-		/*ZEnable = false;
-		ZWriteEnable = false;*/
-
-
 
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();

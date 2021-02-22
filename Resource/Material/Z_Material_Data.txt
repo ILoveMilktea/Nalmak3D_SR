@@ -2,27 +2,15 @@
 ##  Material Data Setting
 #########################################################
 
-shader "pointLight"
 
-textureRT "g_diffuse" "GBuffer_Diffuse"
-textureRT "g_normal" "GBuffer_Normal"
-textureRT "g_depth" "GBuffer_Depth"
-textureRT "g_position" "GBuffer_Position"
 
-renderQueue "2000"
-
-renderMode "2"
-
-blendingMode "1"
-
-fillMode "0"
 
 #########################################################
 ##   1. Shander
 ##  ---------------------------------------------------------------------------------------
 ##    shader  "name" 
 ##  ---------------------------------------------------------------------------------------
-##   2. Constant Buffer
+##   2. Constant Buffer // 다중 선택 가능
 ##  ---------------------------------------------------------------------------------------
 ##    bool      "handle"   "x"
 ##    int         "handle"   "x"
@@ -59,7 +47,4 @@ fillMode "0"
 ##    FILL_MODE_WIREFRAME : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
-
-
-
 

@@ -60,15 +60,16 @@ public:
 	void RenderText();
 	void Reset();
 private:
-	void DeferredRender(Camera* _cam,ConstantBuffer& _cBuffer);
-	void GBufferPass(Camera* _cam,ConstantBuffer& _cBuffer);
+	void DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer);
+	void GBufferPass(Camera* _cam, ConstantBuffer& _cBuffer);
 	void ShadePass(ConstantBuffer& _cBuffer);
-	void LightPass(ConstantBuffer& _cBuffer);
-	void PointLightStencilPass(ConstantBuffer& _cBuffer);
-	void PointLightPass(ConstantBuffer& _cBuffer);
+	void LightPass(Camera* _cam, ConstantBuffer& _cBuffer);
+	void PointLightPass(Camera* _cam, ConstantBuffer& _cBuffer);
+	void PointLightPass(const Matrix& _matWorld, PointLightInfo _lightInfo, VIBuffer* _viBuffer, ConstantBuffer& _cBuffer, Material* _mtrlStencilLight, Material* _mtrlLight);
+	void DirectionalLightPass(ConstantBuffer& _cBuffer);
 	void TransparentPass(ConstantBuffer& _cBuffer);
 private:
-	void RenderByMaterial(const wstring& _materialName, ConstantBuffer& _cBuffer);
+	void RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer& _cBuffer);
 	void RenderImageToScreen(IDirect3DBaseTexture9* _tex, ConstantBuffer& _cBuffer);
 private:
 	VIBuffer* m_imageVIBuffer;
@@ -91,6 +92,10 @@ private:
 	Material* m_currentMaterial; // 최적화.. Material별로 그리기 설정을 최소화
 	VIBuffer* m_currentVIBuffer; // Mesh별 그리기 최소화
 	Shader* m_currentShader; // Shader별로 그리기 설정 최소화
+	RenderTarget* m_currentRenderTarget[4]; // RenderTarget 별로 그리기 설정 최소화
+
+
+
 	RENDERING_MODE m_renderingMode;
 	BLENDING_MODE m_blendingMode;
 	FILL_MODE m_fillMode;
@@ -98,11 +103,13 @@ private:
 private:
 	Material* m_currentUIMaterial;
 private:
-	void UpdateMaterial(Material* _material);
+	void UpdateMaterial(Material* _material, ConstantBuffer& _cBuffer);
 	void UpdateRenderingMode(Material * _material);
 	void UpdateBlendingMode(Material * _material);
 	void UpdateFillMode(Material* _material);
 	void UpdateVIBuffer(IRenderer* _renderer);
+	void UpdateRenderTarget();
+	void EndRenderTarget();
 	void UpdateShader(Shader* _shader, ConstantBuffer& _cBuffer);
 private:
 	void RecordRenderTarget(UINT _index, const wstring& _name);

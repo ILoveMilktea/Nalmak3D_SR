@@ -30,7 +30,7 @@ void DirectionalLight::Release()
 
 DirectionalLightInfo DirectionalLight::GetDirectionalLightInfo()
 {
-	return DirectionalLightInfo(-m_transform->GetForward(), m_color, m_intensity);
+	return DirectionalLightInfo(m_transform->GetForward(), m_color, m_intensity);
 }
 
 

@@ -9,8 +9,7 @@
 #include "VIBuffer.h"
 #include "Material.h"
 #include "RenderTarget.h"
-
-class IResource;
+#include "IResource.h"
 
 BEGIN(Nalmak)
 class NALMAK_DLL ResourceManager
@@ -28,7 +27,15 @@ public:
 	T* GetResource(const wstring& _name)
 	{
 		IResource* resource = m_resoucreContainers[typeid(T).name()][_name];
-		assert(L"Can't find resource!" && resource);
+		
+#ifdef _DEBUG
+		if (!resource)
+		{
+			ERR_MSG((L"Resource with that name '" + _name + L"' does not exist").c_str());
+			assert(0);
+		}
+#endif // DEBUG
+
 
 		return (T*)resource;
 	}
@@ -46,8 +53,6 @@ private:
 public:
 	void CreateDefaultResource();
 private:
-	void CreateDefaultRenderTarget(); // ·»´õÅ¸°Ù »ý¼º
-	void CreateDefaultDepthStencil();
 	void CreateDefaultMesh();
 	void CreateDefaultShader();
 

@@ -44,14 +44,15 @@ void RenderManager::Initialize()
 
 	m_renderingMode = RENDERING_MODE_MAX;
 	m_blendingMode = BLENDING_MODE_MAX;
-	
+
 	m_currentMaterial = nullptr;
 	m_currentShader = nullptr;
 	m_currentVIBuffer = nullptr;
 
 	m_cameraList.clear();
 
-	
+	for (int i = 0; i < 4; ++i)
+		m_currentRenderTarget[i] = nullptr;
 
 	D3DVIEWPORT9 vp = { 0,0,m_wincx,m_wincy,0,1 };
 	m_device->SetViewport(&vp);
@@ -82,7 +83,9 @@ void RenderManager::Render()
 
 void RenderManager::Render(Camera * _cam)
 {
-	
+
+
+
 	///////////////////////////////////////////////////////
 	// 공용 상수버퍼
 	ConstantBuffer cBuffer;
@@ -99,21 +102,11 @@ void RenderManager::Render(Camera * _cam)
 	cBuffer.worldCamPos = _cam->GetTransform()->GetWorldPosition();
 	cBuffer.invView = invView;
 	cBuffer.invProj = invProj;
-	cBuffer.wincx = m_wincx;
-	cBuffer.wincy = m_wincy;
 
-	DirectionalLightInfo info;
-	if (m_lightManager->GetDirectionalLightInfo(info))
-	{
-		cBuffer.isDirectionalLight = 1;
-		cBuffer.directionalLight = info;
-	}
-	else
-	{
-		cBuffer.isDirectionalLight = 0;
-	}
 	////////////////////////////////////////////////////////
+	ThrowIfFailed(m_device->BeginScene());
 	DeferredRender(_cam, cBuffer);
+	ThrowIfFailed(m_device->EndScene());
 
 
 }
@@ -152,11 +145,20 @@ void RenderManager::Reset()
 		renderList.second.clear();
 }
 
-void RenderManager::DeferredRender(Camera* _cam,ConstantBuffer& _cBuffer)
+void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 {
-	GBufferPass(_cam,_cBuffer);
+	ClearRenderTarget(L"GBuffer_Diffuse");
+	ClearRenderTarget(L"GBuffer_Normal");
+	ClearRenderTarget(L"GBuffer_Depth");
+	ClearRenderTarget(L"GBuffer_Position");
+	ClearRenderTarget(L"GBuffer_Light");
+	ClearRenderTarget(L"GBuffer_Shade");
 
-	LightPass(_cBuffer);
+
+	GBufferPass(_cam, _cBuffer);
+
+	LightPass(_cam,_cBuffer);
+
 	ShadePass(_cBuffer);
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer);
@@ -166,20 +168,8 @@ void RenderManager::DeferredRender(Camera* _cam,ConstantBuffer& _cBuffer)
 
 void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 {
-	ClearRenderTarget(L"GBuffer_Diffuse");
-	ClearRenderTarget(L"GBuffer_Normal");
-	ClearRenderTarget(L"GBuffer_Depth");
-	ClearRenderTarget(L"GBuffer_Position");
-
-
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
-
-	ThrowIfFailed(m_device->BeginScene());
-	RecordRenderTarget(0, L"GBuffer_Diffuse");
-	RecordRenderTarget(1, L"GBuffer_Normal");
-	RecordRenderTarget(2, L"GBuffer_Depth");
-	RecordRenderTarget(3, L"GBuffer_Position");
 
 	for (auto& MeshRendererList : m_renderOpaqueLists)
 	{
@@ -190,8 +180,9 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 				if (_cam->IsInFrustumCulling(renderer))
 				{
 					Material* material = renderer->GetMaterial();
-					UpdateMaterial(material);
-					UpdateShader(material->GetShader(), _cBuffer);
+					UpdateMaterial(material, _cBuffer);
+					UpdateRenderTarget();
+
 					UpdateVIBuffer(renderer);
 
 					renderer->Render();
@@ -201,172 +192,169 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	}
 
 	if (m_currentShader)
+	{
 		m_currentShader->EndPass();
+		EndRenderTarget();
+	}
 
 
-	EndRenderTarget(L"GBuffer_Diffuse");
-	EndRenderTarget(L"GBuffer_Normal");
-	EndRenderTarget(L"GBuffer_Depth");
-	EndRenderTarget(L"GBuffer_Position");
 
-	ThrowIfFailed(m_device->EndScene());
 }
 
-void RenderManager::LightPass(ConstantBuffer& _cBuffer)
+void RenderManager::LightPass(Camera* _cam, ConstantBuffer& _cBuffer)
 {
 
-	PointLightStencilPass(_cBuffer);
-	PointLightPass(_cBuffer);
 
-	
+	PointLightPass(_cam,_cBuffer);
+
+	DirectionalLightPass(_cBuffer);
+
+}
+
+void RenderManager::PointLightPass(Camera* _cam, ConstantBuffer & _cBuffer)
+{
+	size_t count = m_lightManager->GetPointLightCount();
+
+	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
+	Material* mtrlStencilLight = m_resourceManager->GetResource<Material>(L"PointLight_Stencil");
+	Material* mtrlLight = m_resourceManager->GetResource<Material>(L"PointLight");
+
+	mtrlStencilLight->SetDataToShader();
+	mtrlLight->SetDataToShader();
+
+	m_device->SetRenderState(D3DRS_STENCILENABLE, true);
+	m_device->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
+	m_device->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_DECR);
+	m_device->SetRenderState(D3DRS_CCW_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
+	m_device->SetRenderState(D3DRS_CCW_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_INCR);
+
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP::D3DBLENDOP_ADD));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND::D3DBLEND_ONE));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND::D3DBLEND_ONE));
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_FILLMODE, D3DFILLMODE::D3DFILL_SOLID));
+
+	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV)));
+	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
+
+	for (size_t i = 0; i < count; ++i)
+	{
+		auto pointLight = m_lightManager->GetPointLight(i);
+
+		Matrix world;
+		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
+		float scale = pointLight->GetRadius();
+		pointLight->SetLightPosition(pos);
+
+		Matrix matTrs, matScale;
+		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
+		D3DXMatrixScaling(&matScale, scale, scale, scale);
+		world = matScale * matTrs;
+
+		if (_cam->IsInFrustumCulling(pos, scale))
+		{
+			PointLightPass(world, pointLight->GetLightInfo(), viBuffer, _cBuffer, mtrlStencilLight, mtrlLight);
+			m_device->Clear(0, nullptr, D3DCLEAR_STENCIL, 0, 1, 0);
+		}
+	}
+	m_device->SetRenderState(D3DRS_STENCILENABLE, false);
+	m_device->SetRenderState(D3DRS_ZENABLE, true);
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+}
+
+
+
+void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _lightInfo, VIBuffer* _viBuffer, ConstantBuffer & _cBuffer, Material* _mtrlStencilLight, Material* _mtrlLight)
+{
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+
+	UpdateShader(_mtrlStencilLight->GetShader(), _cBuffer);
+
+	UpdateRenderTarget();
+
+	m_device->SetRenderState(D3DRS_ZENABLE, true);
+	m_device->SetRenderState(D3DRS_ZWRITEENABLE, false);
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
+	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, true);
+
+	m_currentShader->SetMatrix("g_world", _matWorld);
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
+
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+		EndRenderTarget();
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
+
+	UpdateShader(_mtrlLight->GetShader(), _cBuffer);
+
+	UpdateRenderTarget();
+
+	m_device->SetRenderState(D3DRS_ZENABLE, false);
+	m_device->SetRenderState(D3DRS_ZWRITEENABLE, true);
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_NOTEQUAL);
+	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, false);
+
+	m_currentShader->SetValue("g_pointLight", &_lightInfo, sizeof(PointLightInfo));
+	m_currentShader->SetMatrix("g_world", _matWorld);
+
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
+
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+		EndRenderTarget();
+	}
 }
 
 void RenderManager::ShadePass(ConstantBuffer & _cBuffer)
 {
-	ClearRenderTarget(L"GBuffer_Shade");
-
 	RecordRenderTarget(0, L"GBuffer_Shade");
 
-	RenderByMaterial(L"GBuffer_Shade",_cBuffer);
+	Material* material = m_resourceManager->GetResource<Material>(L"GBuffer_Shade");
+	RenderByMaterialToScreen(material, _cBuffer);
 
 	EndRenderTarget(L"GBuffer_Shade");
-}
-
-void RenderManager::PointLightStencilPass(ConstantBuffer & _cBuffer)
-{
-	m_currentShader = nullptr;
-	m_currentMaterial = nullptr;
-	Material* material = m_resourceManager->GetResource<Material>(L"PointLight_Stencil");
-	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
-
-	ThrowIfFailed(m_device->BeginScene());
-
-	UpdateMaterial(material);
-	UpdateShader(material->GetShader(), _cBuffer);
-
-
-	m_device->SetRenderState(D3DRS_ZENABLE, true);
-	m_device->SetRenderState(D3DRS_ZWRITEENABLE, false);
-
-	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
-	m_device->SetRenderState(D3DRS_STENCILENABLE, true);
-	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, true);
-
-	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
-
-	m_device->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
-	m_device->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_DECRSAT);
-
-	m_device->SetRenderState(D3DRS_CCW_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
-	m_device->SetRenderState(D3DRS_CCW_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_INCRSAT);
-
-
-	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
-	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
-
-	for (auto& pointLight : m_lightManager->GetPointLights())
-	{
-		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
-		float scale = pointLight->GetRadius();
-		Matrix matTrs, matScale;
-		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
-		D3DXMatrixScaling(&matScale, scale, scale, scale);
-
-		m_currentShader->SetMatrix("g_world", matScale * matTrs);
-
-		m_currentShader->CommitChanges();
-		ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
-
-	}
-	if (m_currentShader)
-		m_currentShader->EndPass();
-
-	m_device->SetRenderState(D3DRS_ZENABLE, true);
-	m_device->SetRenderState(D3DRS_ZWRITEENABLE, true);
-
-	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	m_device->SetRenderState(D3DRS_STENCILENABLE, false);
-	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, false);
-	m_device->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
-	m_device->SetRenderState(D3DRS_CCW_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
-
-
-	ThrowIfFailed(m_device->EndScene());
 
 }
 
-void RenderManager::PointLightPass(ConstantBuffer & _cBuffer)
-{
-	m_currentShader = nullptr;
-	m_currentMaterial = nullptr;
-	Material* material = m_resourceManager->GetResource<Material>(L"pointLight");
-	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
 
-	ClearRenderTarget(L"GBuffer_Light");
+void RenderManager::DirectionalLightPass(ConstantBuffer& _cBuffer)
+{
+	DirectionalLightInfo info;
+	if (!m_lightManager->GetDirectionalLightInfo(info))
+		return;
+	Material* material = m_resourceManager->GetResource<Material>(L"DirectionalLight");
+	material->SetValue("g_directionalLight", &info, sizeof(DirectionalLightInfo));
+
 	RecordRenderTarget(0, L"GBuffer_Light");
 
-	ThrowIfFailed(m_device->BeginScene());
-
-	UpdateMaterial(material);
-	UpdateShader(material->GetShader(), _cBuffer);
-
-
-	m_device->SetRenderState(D3DRS_ZENABLE, false);
-	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
-	m_device->SetRenderState(D3DRS_STENCILENABLE, true);
-	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_NOTEQUAL);
-
-
-	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
-	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
-
-	for (auto& pointLight : m_lightManager->GetPointLights())
-	{
-		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
-		float scale = pointLight->GetRadius();
-		Matrix matTrs, matScale;
-		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
-		D3DXMatrixScaling(&matScale, scale, scale, scale);
-
-		PointLightInfo lightInfo = pointLight->GetLightInfo();
-		lightInfo.position = pos;
-		m_currentShader->SetValue("g_pointLight", &lightInfo, sizeof(PointLightInfo));
-		m_currentShader->SetMatrix("g_world", matScale * matTrs);
-
-		m_currentShader->CommitChanges();
-		ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
-
-	}
-	if (m_currentShader)
-		m_currentShader->EndPass();
-
-
-	m_device->SetRenderState(D3DRS_ZENABLE, true);
-	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	m_device->SetRenderState(D3DRS_STENCILENABLE, false);
+	RenderByMaterialToScreen(material, _cBuffer);
 
 	EndRenderTarget(L"GBuffer_Light");
-	ThrowIfFailed(m_device->EndScene());
-
 }
+
 
 void RenderManager::TransparentPass(ConstantBuffer& _cBuffer)
 {
 }
 
 
-void RenderManager::RenderByMaterial(const wstring & _materialName, ConstantBuffer & _cBuffer)
+void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _cBuffer)
 {
-	Material* material = m_resourceManager->GetResource<Material>(_materialName);
-
-	ThrowIfFailed(m_device->BeginScene());
-
-	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
+	m_currentShader = nullptr;
 
-	UpdateMaterial(material);
-	UpdateShader(material->GetShader(), _cBuffer);
+	UpdateMaterial(_mtrl, _cBuffer);
 
 	Matrix mat;
 	D3DXMatrixScaling(&mat, 2, 2, 2);
@@ -379,9 +367,10 @@ void RenderManager::RenderByMaterial(const wstring & _materialName, ConstantBuff
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
 
 	if (m_currentShader)
+	{
 		m_currentShader->EndPass();
+	}
 
-	ThrowIfFailed(m_device->EndScene());
 }
 
 void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBuffer & _cBuffer)
@@ -389,11 +378,9 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
-	
-	ThrowIfFailed(m_device->BeginScene());
 
-	UpdateMaterial(m_currentUIMaterial);
-	UpdateShader(m_currentUIMaterial->GetShader(), _cBuffer);
+
+	UpdateMaterial(m_currentUIMaterial, _cBuffer);
 	m_currentShader->SetTexture("g_mainTex", _tex);
 	Matrix mat;
 	D3DXMatrixScaling(&mat, 2, 2, 2);
@@ -406,9 +393,10 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
 
 	if (m_currentShader)
+	{
 		m_currentShader->EndPass();
+	}
 
-	ThrowIfFailed(m_device->EndScene());
 }
 
 
@@ -416,7 +404,7 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 void RenderManager::RenderRequest(IRenderer * _render)
 {
 	auto mtrl = _render->GetMaterial();
-	if(mtrl->GetRenderingMode() != RENDERING_MODE_TRANSPARENT)
+	if (mtrl->GetRenderingMode() != RENDERING_MODE_TRANSPARENT)
 		m_renderOpaqueLists[mtrl->GetRenderQueue()].emplace_back(_render);
 	else
 		m_renderTransparentLists[mtrl->GetRenderQueue()].emplace_back(_render);
@@ -440,7 +428,7 @@ void RenderManager::AddCamera(GameObject * _cam)
 	AddCamera(_cam->GetComponent<Camera>());
 }
 
-void RenderManager::UpdateMaterial(Material * _material)
+void RenderManager::UpdateMaterial(Material * _material, ConstantBuffer & _cBuffer)
 {
 	if (m_currentMaterial != _material)
 	{
@@ -450,6 +438,8 @@ void RenderManager::UpdateMaterial(Material * _material)
 		UpdateBlendingMode(_material);
 		UpdateFillMode(_material);
 		_material->SetDataToShader();
+
+		UpdateShader(m_currentMaterial->GetShader(), _cBuffer);
 	}
 }
 
@@ -492,9 +482,9 @@ void RenderManager::UpdateBlendingMode(Material * _material)
 		{
 		case BLENDING_MODE_DEFAULT:
 			ThrowIfFailed(m_device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP::D3DBLENDOP_ADD));
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_SRCBLEND,D3DBLEND::D3DBLEND_SRCALPHA));
+			ThrowIfFailed(m_device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND::D3DBLEND_SRCALPHA));
 			ThrowIfFailed(m_device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND::D3DBLEND_INVSRCALPHA));
-	
+
 			break;
 		case BLENDING_MODE_ADDITIVE:
 			ThrowIfFailed(m_device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP::D3DBLENDOP_ADD));
@@ -527,11 +517,10 @@ void RenderManager::UpdateFillMode(Material * _material)
 		switch (m_fillMode)
 		{
 		case FILL_MODE_SOLID:
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_FILLMODE,D3DFILLMODE::D3DFILL_SOLID));
+			ThrowIfFailed(m_device->SetRenderState(D3DRS_FILLMODE, D3DFILLMODE::D3DFILL_SOLID));
 			break;
 		case FILL_MODE_WIREFRAME:
 			ThrowIfFailed(m_device->SetRenderState(D3DRS_FILLMODE, D3DFILLMODE::D3DFILL_WIREFRAME));
-
 			break;
 		case FILL_MODE_POINT:
 			ThrowIfFailed(m_device->SetRenderState(D3DRS_FILLMODE, D3DFILLMODE::D3DFILL_POINT));
@@ -552,7 +541,42 @@ void RenderManager::UpdateVIBuffer(IRenderer * _renderer)
 	_renderer->BindingStreamSource();
 }
 
-void RenderManager::UpdateShader(Shader * _shader,ConstantBuffer& _cBuffer)
+void RenderManager::UpdateRenderTarget()
+{
+
+	for (int i = 0; i < 4; ++i)
+	{
+		RenderTarget* newRendertarget = m_currentShader->GetRenderTarget(i);
+
+		if (!newRendertarget)
+			return;
+
+		if (m_currentRenderTarget[i] != newRendertarget)
+		{
+			if (m_currentRenderTarget[i])
+				m_currentRenderTarget[i]->EndRecord();
+
+			m_currentRenderTarget[i] = newRendertarget;
+			m_currentRenderTarget[i]->StartRecord(i);
+		}
+
+	}
+}
+
+
+void RenderManager::EndRenderTarget()
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		if (m_currentRenderTarget[i])
+		{
+			m_currentRenderTarget[i]->EndRecord();
+			m_currentRenderTarget[i] = nullptr;
+		}
+	}
+}
+
+void RenderManager::UpdateShader(Shader * _shader, ConstantBuffer& _cBuffer)
 {
 	if (m_currentShader != _shader)
 	{
@@ -560,10 +584,14 @@ void RenderManager::UpdateShader(Shader * _shader,ConstantBuffer& _cBuffer)
 			m_currentShader->EndPass();
 
 		m_currentShader = _shader;
+
+
 		m_currentShader->SetValue("g_cBuffer", &_cBuffer, sizeof(ConstantBuffer));
 		m_currentShader->BeginPass();
 
 		ThrowIfFailed(m_device->SetVertexDeclaration(m_currentShader->GetDeclartion()));
+
+
 
 	}
 }

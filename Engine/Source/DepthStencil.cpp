@@ -112,21 +112,15 @@ void DepthStencil::Initialize(wstring _fp)
 	}
 
 	// D3DPOOL_DEFAULT 만 지원 , D3DPOOL_MANAGED 사용불가
-	D3DFORMAT d3dformat;
-	switch (format)
-	{
-	case TEXTURE_FORMAT_A8R8G8B8:
-		d3dformat = D3DFORMAT::D3DFMT_D16;
-		break;
-	case TEXTURE_FORMAT_D24S8:
-		d3dformat = D3DFORMAT::D3DFMT_D24S8;
-		break;
-	case TEXTURE_FORMAT_A16B16G16R16:
-		d3dformat = D3DFORMAT::D3DFMT_D32;
-		break;
-	default:
-		break;
-	}
+	D3DFORMAT d3dformat = D3DFMT_D24S8;
+	//switch (format)
+	//{
+	//case TEXTURE_FORMAT_D24S8:
+	//	d3dformat = D3DFORMAT::D3DFMT_D24S8;
+	//	break;
+	//default:
+	//	break;
+	//}
 
 	ThrowIfFailed(D3DXCreateTexture(m_device, width, height, 1, D3DUSAGE_DEPTHSTENCIL, d3dformat, D3DPOOL_DEFAULT, &m_texture));
 	ThrowIfFailed(m_texture->GetSurfaceLevel(0, &m_captureSurface));

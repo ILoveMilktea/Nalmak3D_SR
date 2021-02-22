@@ -1,11 +1,9 @@
-struct DirectionalLight
-{
-	float3 direction;
-	float3 color;
-	float intensity;
-};
+
 static const float zNear = 1;
 static const float zFar = 1000;
+static const int WINCX = 1920;
+static const int WINCY = 1080;
+
 
 struct cBuffer
 {
@@ -14,12 +12,6 @@ struct cBuffer
 	matrix invProj;
 	float3 worldCamPos;
 
-	int wincx;
-	int wincy;
-
-	int isDirectionalLight;
-	DirectionalLight directionalLight;
-
 };
 
 cBuffer g_cBuffer;
@@ -27,14 +19,14 @@ cBuffer g_cBuffer;
 
 
 
-// 투영행렬까지 곱한 버텍스좌표를 받아 uv공간으로 이동시켜준다
-float2 ComputeScreenPos(float4 _clipPos)
-{
-	float2 screenPos = _clipPos.xy / _clipPos.w;
-	screenPos = 0.5f * screenPos + 0.5f;
-	screenPos.y = 1 - screenPos.y;
 
-	return screenPos;
+float2 ComputeScreenUV(float4 _clipPos)
+{
+	float2 screenUV = _clipPos.xy / _clipPos.w;
+	screenUV = 0.5f * screenUV + 0.5f;
+	screenUV.y = 1 - screenUV.y;
+
+	return screenUV;
 }
 
 float4 GetWorldNormal(float3 _normal, matrix _world)
@@ -46,17 +38,18 @@ float4 GetScaleBiasNormal(float3 _normal)
 {
 	return float4(_normal * 0.5f + 0.5f, 0.f);
 }
-
+// ( zx , zy , 0~far, z)     ->       z ( near ~ far)
 float4 GetDepth(float2 _projZW)
 {
-	return float4(_projZW.x / _projZW.y, _projZW.y / zFar, 0.f, 0.f);
+	//              0 ~ far / near ~ far,   near ~ far / far    
+	return float4(_projZW.x / _projZW.y,     _projZW.y / zFar,      0.f, 0.f);
 }
 
 
 
 float4 GetWorldPosFromDepth(float2 _depth, float2 _screenUV)
 {
-	float linearZ = _depth.y * zFar;
+	float linearZ = _depth.y * zFar; // near ~ far
 
 	float4 pos;
 	pos.x = (_screenUV.x * 2.f - 1.f) * linearZ;
@@ -70,5 +63,9 @@ float4 GetWorldPosFromDepth(float2 _depth, float2 _screenUV)
 	return pos;
 }
 
+float4 GetWorldPosFromDepth2(float _depth, float2 _screenUV)
+{
+
+}
 
 

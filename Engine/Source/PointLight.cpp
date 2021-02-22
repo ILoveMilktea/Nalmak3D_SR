@@ -28,7 +28,7 @@ void PointLight::Update()
 
 void PointLight::PreRender()
 {
-	//m_lightInfo.position = m_transform->GetWorldPosition();
+	
 }
 
 

@@ -688,12 +688,24 @@ void Material::SetVector(const string& _parameter, const Vector2 & _vector)
 
 void Material::SetValue(const string& _parameter, void* _address, UINT _size)
 {
-	pair<void*, UINT> value;
-	value.first = _address;
-	value.second = _size;
+	pair<void*, UINT> data;
+	data.first = _address;
+	data.second = _size;
+
 	pair<string, pair<void*, UINT>> pair2;
 	pair2.first = _parameter;
-	pair2.second = value;
+	pair2.second = data;
+
+	for (auto& value : m_values)
+	{
+		if (value.first == _parameter)
+		{
+			value.second = data;
+			return;
+		}
+	}
+
+	
 	m_values.emplace_back(pair2);
 
 }

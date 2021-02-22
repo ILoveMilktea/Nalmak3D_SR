@@ -73,6 +73,7 @@
     <ClInclude Include="..\Include\EnemyManager.h">
       <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\PrintInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -132,6 +133,7 @@
     <ClCompile Include="..\Source\EnemyManager.cpp">
       <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\PrintInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -223,16 +225,10 @@
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\clearRT.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\defaultUI.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\deferred_geometry.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\pointLight.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\common_h.fx">
@@ -245,6 +241,12 @@
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\D_PointLight_Stencil.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\D_PointLight.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\D_DirectionalLight.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>

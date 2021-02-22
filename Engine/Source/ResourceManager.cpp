@@ -26,12 +26,14 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 {
 	m_directoryPath = _path;
 	LoadMeshes<ObjMesh>(L"obj");
-	LoadResources<Shader>(L"fx");
-	LoadResources<Shader>(L"hpp");
 
 	LoadTextures(L"png");
 	LoadTextures(L"dds");
 
+	LoadResources<RenderTarget>(L"rtd");
+	LoadResources<DepthStencil>(L"dsd");
+	LoadResources<Shader>(L"sd");
+	LoadResources<Material>(L"mtrl");
 
 	return S_OK;
 }
@@ -61,18 +63,9 @@ void ResourceManager::SetShaderInfo(const wstring& _shaderName, D3DPRIMITIVETYPE
 void ResourceManager::CreateDefaultResource()
 {
 	CreateDefaultMesh();
-	CreateDefaultShader();
-	CreateDefaultRenderTarget();
-
-	LoadResources<RenderTarget>(L"rtd");
-	LoadResources<DepthStencil>(L"dsd");
-	LoadResources<Material>(L"mtrl");
 }
 
-void ResourceManager::CreateDefaultRenderTarget()
-{
 
-}
 
 
 
@@ -132,135 +125,150 @@ void ResourceManager::CreateDefaultMesh()
 
 void ResourceManager::CreateDefaultShader()
 {
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
-			{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"default", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
-	}
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
-			{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"pointLight", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
-	}
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
-			{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"D_PointLight_Stencil", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
-	}
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"defaultUI", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_UV));
-	}
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"deferred_geometry", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_UV));
-	}
 	//{
 	//	D3DVERTEXELEMENT9 decl[] =
 	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
+	//		{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
 	//		D3DDECL_END()
 	//	};
-	//	SetShaderInfo(L"common_h", D3DPT_TRIANGLELIST, decl, 0);
+	//	SetShaderInfo(L"default", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"default")->AddRenderTarget(0, L"GBuffer_Diffuse");
+
 	//}
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
+	//		{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"D_PointLight", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"D_PointLight")->AddRenderTarget(0, L"GBuffer_Light");
 
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"skyBox", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_SKYBOX));
-	}
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
-			{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"standard", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
-	}
+	//}
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
+	//		{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"D_PointLight_Stencil", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
+	//}
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"defaultUI", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_UV));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"defaultUI")->AddRenderTarget(0, L"GBuffer_Diffuse");
+	//}
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"D_DirectionalLight", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_UV));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"D_DirectionalLight")->AddRenderTarget(0, L"GBuffer_Light");
+	//}
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"deferred_geometry", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_UV));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"deferred_geometry")->AddRenderTarget(0, L"GBuffer_Shade");
+	//}
+	////{
+	////	D3DVERTEXELEMENT9 decl[] =
+	////	{
+	////		D3DDECL_END()
+	////	};
+	////	SetShaderInfo(L"common_h", D3DPT_TRIANGLELIST, decl, 0);
+	////}
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"skyBox", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_SKYBOX));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"skyBox")->AddRenderTarget(0, L"GBuffer_Diffuse");
+	//}
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,  0 },
+	//		{ 0,24,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"standard", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"standard")->AddRenderTarget(0, L"GBuffer_Diffuse");
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"standard")->AddRenderTarget(1, L"GBuffer_Normal");
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"standard")->AddRenderTarget(2, L"GBuffer_Depth");
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"standard")->AddRenderTarget(3, L"GBuffer_Position");
+
+	//}
 
 
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"line",
-			D3DPT_LINELIST,
-			decl,
-			sizeof(INPUT_LAYOUT_POSITION));
-	}
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"line",
+	//		D3DPT_LINELIST,
+	//		decl,
+	//		sizeof(INPUT_LAYOUT_POSITION));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"line")->AddRenderTarget(0, L"GBuffer_Diffuse");
 
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"noneNormal",
-			D3DPT_TRIANGLELIST,
-			decl,
-			sizeof(INPUT_LAYOUT_POSITION_UV));
-	}
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"clearRT",
-			D3DPT_TRIANGLELIST,
-			decl,
-			sizeof(INPUT_LAYOUT_POSITION_UV));
-	}
-	
-	
-	{
-		D3DVERTEXELEMENT9 decl[] =
-		{
-			{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-			{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
-			{ 1,0,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
-			{ 1,16,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
-			{ 1,32,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
-			{ 1,48,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
-			{ 1,64,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
-			D3DDECL_END()
-		};
-		SetShaderInfo(L"particle", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_PARTICLE));
-	}
+	//}
+
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"noneNormal",
+	//		D3DPT_TRIANGLELIST,
+	//		decl,
+	//		sizeof(INPUT_LAYOUT_POSITION_UV));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"noneNormal")->AddRenderTarget(0, L"GBuffer_Diffuse");
+	//}
+
+	//
+	//
+	//{
+	//	D3DVERTEXELEMENT9 decl[] =
+	//	{
+	//		{ 0,0,D3DDECLTYPE_FLOAT3,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+	//		{ 0,12,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,0 },
+	//		{ 1,0,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+	//		{ 1,16,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+	//		{ 1,32,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+	//		{ 1,48,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+	//		{ 1,64,D3DDECLTYPE_FLOAT4,D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
+	//		D3DDECL_END()
+	//	};
+	//	SetShaderInfo(L"particle", D3DPT_TRIANGLELIST, decl, sizeof(INPUT_LAYOUT_PARTICLE));
+	//	ResourceManager::GetInstance()->GetResource<Shader>(L"particle")->AddRenderTarget(0, L"GBuffer_Diffuse");
+	//}
 }
 
 

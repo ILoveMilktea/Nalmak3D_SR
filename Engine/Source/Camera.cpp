@@ -148,6 +148,24 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 	return true;
 }
 
+bool Camera::IsInFrustumCulling(const Vector3 & _pos, float _radius)
+{
+	if (m_mode != CAMERA_PROJECTION_MODE_PERSPECTIVE)
+		return true;
+	if (_radius == 0)
+		return true;
+	Vector3 Center = _pos;
+	for (int i = 0; i < 6; ++i)
+	{
+		float distance = Vector::Dot(Center, Vector3(m_frustumPlane[i].a, m_frustumPlane[i].b, m_frustumPlane[i].c)) + m_frustumPlane[i].d + _radius;
+		if (distance < 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 Vector3 Camera::GetCamToMouseWorldDirection()
 {
 	float wincx = (float)RenderManager::GetInstance()->GetWindowWidth();
