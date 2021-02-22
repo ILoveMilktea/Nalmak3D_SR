@@ -1,5 +1,4 @@
-#include "common_h.fx"
-
+#include "H_common.fx"
 texture g_mainTex;
 
 sampler mainSampler = sampler_state

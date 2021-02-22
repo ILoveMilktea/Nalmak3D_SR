@@ -9,6 +9,8 @@
 
 #include "PlayerInfoManager.h"
 #include "SceneChanger.h"
+#include "PrintInfo.h"
+
 
 //////////////////////////////////////////////////////////////////////////////////
 // 2021 02 22
@@ -53,7 +55,7 @@ void TitleScene::Initialize()
 	{
 		FreeMove::Desc free;
 
-		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>(&free);
+		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>(&free)->AddComponent<PrintInfo>()->SetPosition(0,0,-5);
 	}
 
 	{
@@ -80,7 +82,7 @@ void TitleScene::Initialize()
 	}
 
 
-	INSTANTIATE(OBJECT_TAG_DEBUG,L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(-HALF_WINCX, HALF_WINCY, 0);
+	INSTANTIATE(OBJECT_TAG_DEBUG,L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	
 
 	SceneChanger::Desc SceneChangerDescInfo;

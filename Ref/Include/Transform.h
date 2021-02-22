@@ -18,7 +18,6 @@ public:
 	Transform(Desc* _desc);
 	~Transform();
 private:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -66,7 +65,7 @@ public:
 	void ResetRelative();
 
 
-	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut); // transform 받는거로 아래 추가?
+	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut); // transform 
 private:
 	list<Transform*>   m_childs;
 	Transform * m_parents = nullptr;

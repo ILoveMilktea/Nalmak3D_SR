@@ -13,17 +13,15 @@ LightManager::~LightManager()
 {
 }
 
+void LightManager::Initialize()
+{
+	m_skyBoxVIBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"skyBox");
+	m_skyBoxMtrl = ResourceManager::GetInstance()->GetResource<Material>(L"skyBox");
+}
+
 void LightManager::SetSkyBox(const wstring & _skyBoxName)
 {
-	if (!m_skyBox)
-	{
-		MeshRenderer::Desc renderer;
-		renderer.mtrl = ResourceManager::GetInstance()->GetResource<Material>(L"skyBox");
-		renderer.meshName = L"skyBox";
-		m_skyBox = INSTANTIATE()->AddComponent<MeshRenderer>(&renderer);
-		m_skyBox->SetDontDestroy(true);
-	}
-	m_skyBox->GetComponent<MeshRenderer>()->GetMaterial()->SetTexture("g_skyBox", _skyBoxName);
+	m_skyBoxMtrl->SetTexture("g_skyBox", _skyBoxName);
 }
 
 void LightManager::SetDirectionalLightInfo(DirectionalLight * _light)
@@ -65,5 +63,15 @@ bool LightManager::GetDirectionalLightInfo(DirectionalLightInfo& _info)
 	}
 	else
 		return false;
+}
+
+VIBuffer * LightManager::GetSkyboxVIBuffer()
+{
+	return m_skyBoxVIBuffer;
+}
+
+Material * LightManager::GetSkyboxMaterial()
+{
+	return m_skyBoxMtrl;
 }
 
