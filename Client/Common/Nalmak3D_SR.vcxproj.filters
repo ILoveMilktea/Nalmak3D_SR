@@ -67,11 +67,50 @@
     <ClInclude Include="..\Include\HeeTestScene.h">
       <Filter>01.Scene\99%29GeunHeeTestScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\EnemyManager.h">
+      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SceneChanger.h">
+      <Filter>02.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerInfoManager.h">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerIdle.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerMove.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\FixToTarget.h">
+      <Filter>02.Component\00.Manager\FixCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MouseOption.h">
+      <Filter>02.Component\00.Manager\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SmoothFollow.h">
+      <Filter>02.Component\00.Manager\FixCamera</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\Enemy.h">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\EnemyManager.h">
-      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+    <ClInclude Include="..\Include\Enemy_Rush.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Rush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Idle.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Chase.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Chase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Hold.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Bullet_Manager.h">
+      <Filter>02.Component\00.Manager\Bullet\00%29Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Bullet.h">
+      <Filter>02.Component\00.Manager\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h">
@@ -136,11 +175,50 @@
     <ClCompile Include="..\Source\HeeTestScene.cpp">
       <Filter>01.Scene\99%29GeunHeeTestScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\EnemyManager.cpp">
+      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SceneChanger.cpp">
+      <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerInfoManager.cpp">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerIdle.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerMove.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\FixToTarget.cpp">
+      <Filter>02.Component\00.Manager\FixCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MouseOption.cpp">
+      <Filter>02.Component\00.Manager\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SmoothFollow.cpp">
+      <Filter>02.Component\00.Manager\FixCamera</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\Enemy.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\EnemyManager.cpp">
-      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+    <ClCompile Include="..\Source\Enemy_Rush.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Rush</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Idle.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Chase.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Chase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Hold.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Bullet_Manager.cpp">
+      <Filter>02.Component\00.Manager\Bullet\00%29Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Bullet.cpp">
+      <Filter>02.Component\00.Manager\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp">
@@ -215,6 +293,39 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern">
       <UniqueIdentifier>{68e9b2a4-58d6-4e4c-a3a1-54069dc961b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player">
+      <UniqueIdentifier>{5098e947-8ec3-495e-8bb1-bb2273f1e12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM">
+      <UniqueIdentifier>{a323ffc7-d61c-4058-b946-29056b0ca33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\FixCamera">
+      <UniqueIdentifier>{55e4567d-ddb8-4fa2-b78d-65321c051a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Mouse">
+      <UniqueIdentifier>{ff632f15-61fa-4d29-95de-f7e2b4aac73b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Rush">
+      <UniqueIdentifier>{08bc2334-fb03-47f3-8c43-d8b8e74f8631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle">
+      <UniqueIdentifier>{057f3a40-069b-41bf-83d1-769f80e85d03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Chase">
+      <UniqueIdentifier>{2ff71113-836e-4780-bc55-a381acfc1710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold">
+      <UniqueIdentifier>{d0f1736a-3073-4268-b99a-eb82fb56c575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Bullet">
+      <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Bullet\00%29Manager">
+      <UniqueIdentifier>{a62225df-353e-428f-82dd-4d2fca9da824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Bullet\Missile">
+      <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

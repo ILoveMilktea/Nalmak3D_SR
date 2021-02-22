@@ -1,10 +1,10 @@
 #pragma once
 
 /*
-¸ó½ºÅ¸ ¸Å´ÏÁ®
-	¸ó½ºÅ¸ º¸°ü
-	¸ó½ºÅ¸ »ı¼º
-	ÇöÀç ÀüÅõ ½ºÅ×ÀÌÆ® ¹Ş¾Æ¿À±â
+ëª¬ìŠ¤íƒ€ ë§¤ë‹ˆì ¸
+	ëª¬ìŠ¤íƒ€ ë³´ê´€
+	ëª¬ìŠ¤íƒ€ ìƒì„±
+	í˜„ì¬ ì „íˆ¬ ìŠ¤í…Œì´íŠ¸ ë°›ì•„ì˜¤ê¸°
 */
 #ifndef _ENEMY_MANAGER_H_
 #define _ENEMY_MANAGER_H_
@@ -34,19 +34,18 @@ public:
 	virtual void Update() override;
 
 public: /* Gettttt */
-	//void Get_CurHp();
-	//void Get_Transform();
-	int Get_EnemyCount() const;
+	//const int& Get_EnemyCount() const;
 
 public: /* Settttt */
 
 
 public: /* Funcs */
 	void Enemy_Spawn(Vector3 _pos);
-
+	void Spawn_Rush();
+	void Spawn_Chase();
 
 private:
-	//list<GameObject*> list_Enemies;
+
 
 };
 

@@ -30,8 +30,6 @@ void ObjMesh::CreateVertexBuffer()
 	vector<float> uv;
 	vector<float> vn;
 
-
-
 	{
 #pragma region VERTEX POS IMPORT
 

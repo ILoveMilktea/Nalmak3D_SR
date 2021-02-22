@@ -11,16 +11,16 @@ EnemyManager* EnemyManager::m_Instance = nullptr;
 
 
 EnemyManager::EnemyManager(Desc * _Desc)
-{//À¯´ÏÆ¼ÀÇ ¾î¿şÀÌÅ©
+{//ìœ ë‹ˆí‹°ì˜ ì–´ì›¨ì´í¬
 
-	/* ÇöÀç ÀüÅõ »óÈ² 3°¡Áö¸¦ ½ºÅ×ÀÌÆ®·Î °ü¸® ÇÒ ¿¡Á¤ÀÌ´Ù ÀÌ°Å¾ß. */
-	m_gameObject->AddComponent<StateControl>(); 
-	//componentÀÇ m_gameObject => ÇØ´ç ÄÄÆ÷³ÍÆ®¸¦ °¡Áö°í ÀÖ´Â °ÔÀÓ¿É¢h
-	GetComponent<StateControl>()->AddState<DogFightState>(L"dogFight");
-	GetComponent<StateControl>()->AddState<ShootingState>(L"shoot");
-	GetComponent<StateControl>()->AddState<BossState>(L"boss");
-	
-	GetComponent<StateControl>()->InitState(L"dogFight");
+	///* í˜„ì¬ ì „íˆ¬ ìƒí™© 3ê°€ì§€ë¥¼ ìŠ¤í…Œì´íŠ¸ë¡œ ê´€ë¦¬ í•  ì—ì •ì´ë‹¤ ì´ê±°ì•¼. */
+	//m_gameObject->AddComponent<StateControl>(); 
+	////componentì˜ m_gameObject => í•´ë‹¹ ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì§€ê³  ìˆëŠ” ê²Œì„ì˜µh
+	//GetComponent<StateControl>()->AddState<DogFightState>(L"dogFight");
+	//GetComponent<StateControl>()->AddState<ShootingState>(L"shoot");
+	//GetComponent<StateControl>()->AddState<BossState>(L"boss");
+	//
+	//GetComponent<StateControl>()->InitState(L"dogFight");
 
 }
 
@@ -31,13 +31,13 @@ EnemyManager::~EnemyManager()
 EnemyManager * EnemyManager::GetInstance()
 {
 	if (!m_Instance)
-	{//¾÷µ¥ÀÌÆ®¸¦ ¾²±â À§ÇØ¼­ ¾ß¸¦ Component¸¦ »ó¼Ó¹ŞÀº ÄÄÆ÷³ÍÆ® °´Ã¼·ç´Ù°¡ ¸¸µê.
+	{//ì—…ë°ì´íŠ¸ë¥¼ ì“°ê¸° ìœ„í•´ì„œ ì•¼ë¥¼ Componentë¥¼ ìƒì†ë°›ì€ ì»´í¬ë„ŒíŠ¸ ê°ì²´ë£¨ë‹¤ê°€ ë§Œë“¦.
 		
 		auto Instance = INSTANTIATE();
 		Instance->AddComponent<EnemyManager>();
 		m_Instance = Instance->GetComponent<EnemyManager>();
 		
-		Instance->SetDontDestroy(true);//¾À ³Ñ¾î°¡µµ Áö¿ìÁö¸¶¶ó ÀÌ°Å¾ß.
+		Instance->SetDontDestroy(true);//ì”¬ ë„˜ì–´ê°€ë„ ì§€ìš°ì§€ë§ˆë¼ ì´ê±°ì•¼.
 	}
 
 	return m_Instance;
@@ -53,35 +53,86 @@ void EnemyManager::DeleteInstance()
 }
 
 void EnemyManager::Initialize()
-{//À¯´ÏÆ¼ÀÇ ½ºµû¶ß
+{//ìœ ë‹ˆí‹°ì˜ ìŠ¤ë”°ëœ¨
 }
 
 void EnemyManager::Update()
 {
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+	{
+		Enemy_Spawn(Vector3(0, 0, 0));
+	}
 }
 
-int EnemyManager::Get_EnemyCount() const
-{
-	return 0;// TODO: ¿©±â¿¡ ¹İÈ¯ ±¸¹®À» »ğÀÔÇÕ´Ï´Ù.
-}
+//const int & EnemyManager::Get_EnemyCount() const
+//{
+//	// TODO: ì—¬ê¸°ì— ë°˜í™˜ êµ¬ë¬¸ì„ ì‚½ì…í•©ë‹ˆë‹¤.
+//	return 0;
+//}
 
 void EnemyManager::Enemy_Spawn(Vector3 _pos)
 {
 	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
 	Enemy_obj->SetPosition(_pos);
+	Enemy_obj->SetScale(0.1f,0.1f,0.1f);
+
+	//Enemy_obj->AddComponent<StateControl>();
+	
 
 	Enemy::Desc Enemy_desc;
-	/*desc ¼¼ÆÃ*/
+	/*desc ì„¸íŒ…*/
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 	
+	
 	MeshRenderer::Desc Enemy_Mesh;
-	Enemy_Mesh.meshName = L"box";
 	Enemy_Mesh.mtrlName = L"default";
+	Enemy_Mesh.meshName = L"flight";
 	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 
-	//list_Enemies.emplace_back(Enemy_obj);
+
+
 
 	
 
+}
+
+void EnemyManager::Spawn_Rush()
+{
+	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
+	//Enemy_obj->SetPosition(_pos);
+	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
+
+	Enemy_obj->AddComponent<StateControl>();
+
+
+	Enemy::Desc Enemy_desc;
+	/*desc ì„¸íŒ…*/
+	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
+
+
+	MeshRenderer::Desc Enemy_Mesh;
+	Enemy_Mesh.mtrlName = L"default";
+	Enemy_Mesh.meshName = L"flight";
+	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
+}
+
+void EnemyManager::Spawn_Chase()
+{
+	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
+	//Enemy_obj->SetPosition(_pos);
+	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
+
+	Enemy_obj->AddComponent<StateControl>();
+
+
+	Enemy::Desc Enemy_desc;
+	/*desc ì„¸íŒ…*/
+	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
+
+
+	MeshRenderer::Desc Enemy_Mesh;
+	Enemy_Mesh.mtrlName = L"default";
+	Enemy_Mesh.meshName = L"flight";
+	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 }
 

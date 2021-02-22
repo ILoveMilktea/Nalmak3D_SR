@@ -14,6 +14,27 @@ public:
 		return _src + _t * (_dst - _src);
 	}
 
+	inline static Vector3 SLerp(Vector3 _src, Vector3 _dst, float _t)
+	{
+		// 1. dot = _src * _dst.
+		float dot = Nalmak_Math::Dot(_src, _dst);
+
+
+		// 2.dot min max
+		float curDot = Nalmak_Math::Clamp(dot, -1.0f, 1.0f);
+		// 3. acos 세타 
+		float theta = acosf(curDot) * _t; // 증감값
+		// 4. end - start * dot
+		Vector3 TemporyAxisDir = _dst - _src * curDot;
+
+		// 5. num4 Normal
+		Vector3 NormalizeDir = Nalmak_Math::Normalize(TemporyAxisDir);
+
+		// _src * cosf(theta) + normal * sinf(theta);
+
+		return (_src * cosf(theta)) + (NormalizeDir * sinf(theta));
+	}
+
 	inline static int Rand(const int _min, const int _max)
 	{
 		return _min + rand() % ((_max - _min) + 1);

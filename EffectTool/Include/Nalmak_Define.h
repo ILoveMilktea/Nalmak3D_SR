@@ -8,7 +8,8 @@
 #define NALMAK_DLL _declspec(dllexport)
 #endif // NALMAK_ENGINE
 
-
+#define HALF_WINCX 960
+#define HALF_WINCY 540
 
 const float EPSILON = 0.0001f;
 

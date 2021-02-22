@@ -12,8 +12,8 @@
 #include "HeeTestScene.h"
 
 TimeManager* g_time;
-// ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎ 
-// ·ÎÄÃ - ¿ùµå - ºä - ÈÄ¸éÃß·Á³»±â - Á¶¸í - Åõ¿µ - Å¬¸®ÇÎ - ºäÆ÷Æ® - ·¹½ºÅÍ¶óÀÌÁî
+// ë Œë”ë§ íŒŒì´í”„ë¼ì¸ 
+// ë¡œì»¬ - ì›”ë“œ - ë·° - í›„ë©´ì¶”ë ¤ë‚´ê¸° - ì¡°ëª… - íˆ¬ì˜ - í´ë¦¬í•‘ - ë·°í¬íŠ¸ - ë ˆìŠ¤í„°ë¼ì´ì¦ˆ
 
 
 MainGame::MainGame()
@@ -79,7 +79,7 @@ void MainGame::ApplicationSetting()
 	core.wincy = WINCY;
 	core.windowMode = true;
 
-	// ¸ðµç ¸®¼Ò½º ±âº»°æ·Î °Åƒ…´Â°Å ´Ù ·ÎµåÇÔ
+	// ëª¨ë“  ë¦¬ì†ŒìŠ¤ ê¸°ë³¸ê²½ë¡œ ê±°ÂƒÂ…ëŠ”ê±° ë‹¤ ë¡œë“œí•¨
 	core.resourceDirectoryPath;
 
 	m_engine->Initialize(g_hWnd, &core);
@@ -94,15 +94,11 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"stageSelect", Scene::Instantiate<StageSelectScene>());
 	m_engine->AddScene(L"stage", Scene::Instantiate<StageScene>());
 	m_engine->AddScene(L"stage2", Scene::Instantiate<Stage2Scene>());
-
 	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
-
-
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
+	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 
-	/*Test*/
-	m_engine->AddScene(L"Hee", Scene::Instantiate<Stage2Scene>());
-	m_engine->SetStartScene(L"UILab");
+	m_engine->SetStartScene(L"title");
 }
 
 void MainGame::ReadyResource()

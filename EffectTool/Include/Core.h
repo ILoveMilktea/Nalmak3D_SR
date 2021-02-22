@@ -83,6 +83,8 @@ public:
 	void SetInputLayoutToShader(wstring _shaderName, D3DPRIMITIVETYPE _primitive, D3DVERTEXELEMENT9* _decl, UINT _inputLayoutSize);
 public:
 	void DrawLine(const Vector3& _start, const Vector3& _end, DEBUG_COLOR = DEBUG_COLOR_GREEN);
+
+
 public:
 	template <typename T>
 	void AddResource(wstring _name, const T& _resource)

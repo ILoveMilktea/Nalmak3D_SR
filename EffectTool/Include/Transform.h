@@ -18,7 +18,7 @@ public:
 	Transform(Desc* _desc);
 	~Transform();
 private:
-	// Component��(��) ���� ��ӵ�
+	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -65,7 +65,8 @@ public:
 	Quaternion RotateAxis(const Vector3& _axis, float _angle);
 	void ResetRelative();
 
-private: /* For Child */
+	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut); // transform 받는거로 아래 추가?
+private:
 	list<Transform*>   m_childs;
 	Transform * m_parents = nullptr;
 public:

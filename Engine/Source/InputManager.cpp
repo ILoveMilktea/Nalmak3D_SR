@@ -28,6 +28,7 @@ void InputManager::Update()
 {
 	ProcessKeyState();
 	ProcessMouseScreenPosition();
+
 }
 
 void InputManager::Release()
@@ -40,9 +41,10 @@ void InputManager::ProcessMouseScreenPosition()
 
 	POINT point = {};
 	GetCursorPos(&point);
+	LONG tempX = point.x, tempY = point.y;
 	ScreenToClient(DeviceManager::GetInstance()->GetHWND(), &point);
-	m_mouseScreenPosition.x = (float)(point.x - RenderManager::GetInstance()->GetWindowWidth() * 0.5f);
-	m_mouseScreenPosition.y = (float)(RenderManager::GetInstance()->GetWindowHeight() * 0.5f - point.y);
+	m_mouseScreenPosition.x += (float)(tempX - RenderManager::GetInstance()->GetWindowWidth() * 0.5f);
+	m_mouseScreenPosition.y += (float)(RenderManager::GetInstance()->GetWindowHeight() * 0.5f - tempY);
 }
 
 
@@ -131,6 +133,18 @@ void InputManager::ProcessKeyState()
 			break;
 		case KEY_STATE_X:
 			res[KEY_STATE_X] = GetAsyncKeyState('X');
+			break;
+		case KEY_STATE_F1:
+			res[KEY_STATE_F1] = GetAsyncKeyState(VK_F1);
+			break;
+		case KEY_STATE_F2:
+			res[KEY_STATE_F2] = GetAsyncKeyState(VK_F2);
+			break;
+		case KEY_STATE_F3:
+			res[KEY_STATE_F3] = GetAsyncKeyState(VK_F3);
+			break;
+		case KEY_STATE_F4:
+			res[KEY_STATE_F4] = GetAsyncKeyState(VK_F4);
 			break;
 
 

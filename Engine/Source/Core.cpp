@@ -119,6 +119,8 @@ void Core::DrawLine(const Vector3 & _start, const Vector3 & _end, DEBUG_COLOR _d
 
 
 
+
+
 GameObject * Core::GetPrototype(wstring _name)
 {
 	return m_prototypeManager->GetPrototype(_name);

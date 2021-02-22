@@ -194,19 +194,32 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\BossState.h" />
+    <ClInclude Include="..\Include\Bullet.h" />
+    <ClInclude Include="..\Include\Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
     <ClInclude Include="..\Include\Define.h" />
     <ClInclude Include="..\Include\DogFightState.h" />
     <ClInclude Include="..\Include\Enemy.h" />
     <ClInclude Include="..\Include\EnemyManager.h" />
+    <ClInclude Include="..\Include\Enemy_Chase.h" />
+    <ClInclude Include="..\Include\Enemy_Hold.h" />
+    <ClInclude Include="..\Include\Enemy_Idle.h" />
+    <ClInclude Include="..\Include\Enemy_Rush.h" />
     <ClInclude Include="..\Include\Enum.h" />
     <ClInclude Include="..\Include\Extern.h" />
+    <ClInclude Include="..\Include\FixToTarget.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
     <ClInclude Include="..\Include\HeeTestScene.h" />
     <ClInclude Include="..\Include\MainGame.h" />
+    <ClInclude Include="..\Include\MouseOption.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlaneController.h" />
     <ClInclude Include="..\Include\PlaneInfo.h" />
+    <ClInclude Include="..\Include\PlayerInfoManager.h" />
+    <ClInclude Include="..\Include\PlayerMove.h" />
+    <ClInclude Include="..\Include\SceneChanger.h" />
+    <ClInclude Include="..\Include\ShootingState.h" />
+    <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
     <ClInclude Include="..\Include\ShootingState.h" />
@@ -218,22 +231,36 @@
     <ClInclude Include="..\Include\TitleScene.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
+    <ClInclude Include="PlayerIdle.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\BossState.cpp" />
+    <ClCompile Include="..\Source\Bullet.cpp" />
+    <ClCompile Include="..\Source\Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp" />
     <ClCompile Include="..\Source\Enemy.cpp" />
     <ClCompile Include="..\Source\EnemyManager.cpp" />
+    <ClCompile Include="..\Source\Enemy_Chase.cpp" />
+    <ClCompile Include="..\Source\Enemy_Hold.cpp" />
+    <ClCompile Include="..\Source\Enemy_Idle.cpp" />
+    <ClCompile Include="..\Source\Enemy_Rush.cpp" />
+    <ClCompile Include="..\Source\FixToTarget.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\HeeTestScene.cpp" />
     <ClCompile Include="..\Source\MainGame.cpp" />
+    <ClCompile Include="..\Source\MouseOption.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlaneController.cpp" />
     <ClCompile Include="..\Source\PlaneInfo.cpp" />
+    <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
+    <ClCompile Include="..\Source\PlayerMove.cpp" />
+    <ClCompile Include="..\Source\SceneChanger.cpp" />
+    <ClCompile Include="..\Source\ShootingState.cpp" />
+    <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
     <ClCompile Include="..\Source\ShootingState.cpp" />
@@ -245,6 +272,7 @@
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
+    <ClCompile Include="PlayerIdle.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
