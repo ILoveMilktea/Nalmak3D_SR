@@ -57,7 +57,7 @@ private:
 	BUTTON_TRANSITION m_currentTransition;
 	BUTTON_STATE m_currentState;
 
-	Texture** m_targetImage = nullptr;
+	IDirect3DBaseTexture9** m_targetImage = nullptr;
 	Vector4* m_targetColor = nullptr;
 
 	Vector4 m_normalColor;
@@ -65,10 +65,10 @@ private:
 	Vector4 m_pressedColor;
 	Vector4 m_disableColor;
 
-	Texture* m_normalImage = nullptr;
-	Texture* m_highlightImage = nullptr;
-	Texture* m_pressedImage = nullptr;
-	Texture* m_disableImage = nullptr;
+	IDirect3DBaseTexture9* m_normalImage = nullptr;
+	IDirect3DBaseTexture9* m_highlightImage = nullptr;
+	IDirect3DBaseTexture9* m_pressedImage = nullptr;
+	IDirect3DBaseTexture9* m_disableImage = nullptr;
 
 };
 

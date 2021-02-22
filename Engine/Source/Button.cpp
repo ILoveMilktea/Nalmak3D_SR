@@ -13,10 +13,10 @@ Button::Button(Desc * _desc)
 	m_disableColor = { 0.2f,0.2f,0.2f,1.f };
 
 	m_resource = ResourceManager::GetInstance();
-	m_normalImage = m_resource->GetResource<Texture>(_desc->normalImage);
-	m_highlightImage = m_resource->GetResource<Texture>(_desc->highlightImage);
-	m_pressedImage = m_resource->GetResource<Texture>(_desc->pressedImage);
-	m_disableImage = m_resource->GetResource<Texture>(_desc->disableImage);
+	m_normalImage = m_resource->GetResource<Texture>(_desc->normalImage)->GetTexure(0);
+	m_highlightImage = m_resource->GetResource<Texture>(_desc->highlightImage)->GetTexure(0);
+	m_pressedImage = m_resource->GetResource<Texture>(_desc->pressedImage)->GetTexure(0);
+	m_disableImage = m_resource->GetResource<Texture>(_desc->disableImage)->GetTexure(0);
 }
 
 void Button::Initialize()
@@ -129,7 +129,7 @@ void Button::ChangeState(BUTTON_STATE _state)
 			m_targetImage = &m_disableImage;
 			break;
 		}
-		m_renderer->SetImage(*m_targetImage);
+		m_renderer->SetImage((*m_targetImage));
 		break;
 	}
 

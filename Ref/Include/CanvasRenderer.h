@@ -29,13 +29,13 @@ public:
 public:
 	void UpdateBoundary();
 
-	void SetImage(Texture* _Image) { m_targetImage = _Image; }
+	void SetImage(IDirect3DBaseTexture9* _Image) { m_targetImage = _Image; }
 	void SetColor(Vector4 _color) { m_color = _color; }
 	RECT* GetBoundary();
 
 private:
 	Animator* m_animator = nullptr;
-	Texture* m_targetImage = nullptr;
+	IDirect3DBaseTexture9* m_targetImage = nullptr;
 	Vector4 m_color;
 
 	Vector3 m_observedPosition;

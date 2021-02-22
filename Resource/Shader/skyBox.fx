@@ -66,6 +66,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
 	o.diffuse =texCUBE(skyBoxSampler, _input.uvw);
+
 	return o;
 }
 

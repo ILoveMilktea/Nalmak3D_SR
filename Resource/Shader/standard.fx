@@ -65,7 +65,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 	float4 diffuse = tex2D(mainSampler, _in.uvAndDepth.xy);
 	o.diffuse = diffuse * g_mainTexColor;
-
+	
 	o.normal = GetScaleBiasNormal(_in.normal);
 	
 	o.depth = GetDepth(_in.uvAndDepth.zw);

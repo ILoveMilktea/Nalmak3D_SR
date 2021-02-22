@@ -122,6 +122,11 @@
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ShootingState.h" />
+    <ClInclude Include="..\Include\ShootingState.h" />
+    <ClInclude Include="..\Include\NalmakScene.h">
+      <Filter>01.Scene\01.Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ShootingState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -227,6 +232,11 @@
       <Filter>01.Scene\00.Game</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\UILabScene.cpp">
+      <Filter>01.Scene\01.Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ShootingState.cpp" />
+    <ClCompile Include="..\Source\ShootingState.cpp" />
+    <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ShootingState.cpp" />
@@ -389,6 +399,15 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\H_common.fx">
       <Filter>03.Resource\02.Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\D_FullScreen.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\defaultDebug.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\D_Debug.fx">
+      <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

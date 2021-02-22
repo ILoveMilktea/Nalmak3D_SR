@@ -56,7 +56,7 @@ void CanvasRenderer::Render()
 	if (m_animator)
 		GetMaterial()->SetTexture(0, m_animator->GetDiffuseSprite());
 	else if (m_targetImage)
-		currentShader->SetTexture("g_mainTex", m_targetImage->GetTexure(0));
+		currentShader->SetTexture("g_mainTex", m_targetImage);
 	else
 		return;
 

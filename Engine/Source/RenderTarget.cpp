@@ -163,8 +163,9 @@ void RenderTarget::Initialize(wstring _fp)
 
 	// D3DPOOL_DEFAULT 만 지원 , D3DPOOL_MANAGED 사용불가
 	D3DFORMAT d3dformat;
-
-	m_color = RGB(color.x * 255, color.y * 255, color.z * 255);
+	
+	D3DCOLOR d3dxColor = D3DCOLOR_RGBA((int)color.x * 255, (int)color.y * 255, (int)color.z * 255, 255);
+	m_color = d3dxColor;
 
 	switch (format)
 	{
@@ -221,7 +222,6 @@ void RenderTarget::StartRecord(UINT _index)
 	m_device->GetRenderTarget(_index, &m_originSurface);
 	ThrowIfFailed(m_device->SetRenderTarget(_index, m_captureSurface));
 
-	//ThrowIfFailed(m_device->Clear(0, nullptr, D3DCLEAR_TARGET, m_color, 1.f, 0));
 	m_targetIndex = _index;
 }
 

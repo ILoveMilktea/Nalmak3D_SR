@@ -5,7 +5,8 @@
 DirectionalLight::DirectionalLight(Desc * _desc)
 {
 	m_color = _desc->color;
-	m_intensity = _desc->intensity;
+	m_diffuseIntensity = _desc->diffuseIntensity;
+	m_ambientIntensity = _desc->ambientIntensity;
 
 	m_lightMode = LIGHT_MODE_DIRECTIONAL;
 }
@@ -30,7 +31,7 @@ void DirectionalLight::Release()
 
 DirectionalLightInfo DirectionalLight::GetDirectionalLightInfo()
 {
-	return DirectionalLightInfo(m_transform->GetForward(), m_color, m_intensity);
+	return DirectionalLightInfo(m_transform->GetForward(), m_color, m_diffuseIntensity,m_ambientIntensity);
 }
 
 

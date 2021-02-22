@@ -25,12 +25,13 @@ struct PointLightInfo
 struct DirectionalLightInfo
 {
 	DirectionalLightInfo() = default;
-	DirectionalLightInfo(Vector3 _direction, Vector3 _color, float _intensity)
+	DirectionalLightInfo(Vector3 _direction, Vector3 _color, float _intensity ,float _ambientIntensity)
 	{
 		direction = _direction;
 
 		base.color = _color;
 		base.diffuseIntensity = _intensity;
+		base.ambientIntensity = _ambientIntensity;
 	}
 	BaseLightInfo base;
 

@@ -36,7 +36,7 @@ float4 GetWorldNormal(float3 _normal, matrix _world)
 
 float4 GetScaleBiasNormal(float3 _normal)
 {
-	return float4(_normal * 0.5f + 0.5f, 0.f);
+	return float4(_normal * 0.5f + 0.5f, 1.f);
 }
 // ( zx , zy , 0~far, z)     ->       z ( near ~ far)
 float4 GetDepth(float2 _projZW)

@@ -22,7 +22,7 @@ struct DirectionalLight
 
 float4 CalcLightInternal(BaseLight _light, float3 _camPos, float3 _direction, float3 _worldPos, float3 _normal)
 {
-	//float4 ambientColor = float4(_light.color * _light.ambientIntensity, 1.0);
+	float4 ambientColor = float4(_light.color * _light.ambientIntensity, 1.0);
 	float diffuseFactor = dot(_normal, -_direction);
 
 	float4 diffuseColor = 0;
@@ -30,12 +30,11 @@ float4 CalcLightInternal(BaseLight _light, float3 _camPos, float3 _direction, fl
 	if (diffuseFactor > 0.0)
 	{
 		diffuseColor = float4(_light.color * _light.diffuseIntensity * diffuseFactor, 1.0);
-
 		//float3 vertexToEye = normalize(_camPos - _worldPos);
 	}
 
 	//return ambientColor + diffuseColor;
-	return diffuseColor * diffuseFactor;
+	return diffuseColor * diffuseFactor + ambientColor;
 }
 
 float4 CalcPointLight(PointLight _pointLight,float3 _camPos, float3 _worldPos, float3 _normal)

@@ -10,6 +10,7 @@
 #include "Stage2Scene.h"
 #include "UILabScene.h"
 #include "HeeTestScene.h"
+#include "NalmakScene.h"
 
 TimeManager* g_time;
 // 렌더링 파이프라인 
@@ -97,8 +98,9 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
+	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
-	m_engine->SetStartScene(L"title");
+	m_engine->SetStartScene(L"nalmak");
 }
 
 void MainGame::ReadyResource()

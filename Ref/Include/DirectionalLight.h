@@ -7,7 +7,8 @@ public:
 	struct Desc
 	{
 		Vector3 color = Vector3(0.97f, 0.95f, 0.8f);
-		float intensity = 1.f;
+		float diffuseIntensity = 1.f;
+		float ambientIntensity = 0.2f;
 	};
 public:
 	DirectionalLight(Desc* _desc);
@@ -21,6 +22,7 @@ public:
 	DirectionalLightInfo GetDirectionalLightInfo();
 private:
 	Vector3 m_color;
-	float m_intensity;
+	float m_diffuseIntensity;
+	float m_ambientIntensity;
 };
 

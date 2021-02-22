@@ -21,12 +21,17 @@ void SingleImage::Update()
 
 void SingleImage::SetTexture(wstring _name)
 {
-	m_image = ResourceManager::GetInstance()->GetResource<Texture>(_name);
+	m_image = ResourceManager::GetInstance()->GetResource<Texture>(_name)->GetTexure(0);
+}
+
+void SingleImage::SetTexture(IDirect3DBaseTexture9 * _tex)
+{
+	m_image = _tex;
 }
 
 IDirect3DBaseTexture9* SingleImage::GetTexture()
 { 
-	return m_image->GetTexure(0);
+	return m_image;
 }
 
 RECT * SingleImage::GetBoundary()

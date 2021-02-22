@@ -24,6 +24,7 @@ protected:
 
 public:
 	void SetTexture(wstring _name);
+	void SetTexture(IDirect3DBaseTexture9* _tex);
 
 public:
 	IDirect3DBaseTexture9* GetTexture();
@@ -31,7 +32,7 @@ public:
 
 	
 private:
-	Texture* m_image;
+	IDirect3DBaseTexture9* m_image;
 	CanvasRenderer* m_renderer;
 
 };

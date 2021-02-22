@@ -48,9 +48,7 @@ void TitleScene::Initialize()
 	INSTANTIATE()->AddComponent<Grid>();
 
 
-	DirectionalLight::Desc light;
-	light.intensity = 1.f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 20, 0);// ->AddComponent<AutoRotate>(&rot);
+	
 	
 	{
 		FreeMove::Desc free;
@@ -58,16 +56,7 @@ void TitleScene::Initialize()
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>(&free)->AddComponent<PrintInfo>()->SetPosition(0,0,-5);
 	}
 
-	{
-		for (int i = 0; i < 200; ++i)
-		{
-			MeshRenderer::Desc mesh;
-			mesh.meshName = L"sphere";
-			mesh.mtrlName = L"standard";
-			INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetScale(Vector3(1,1,1) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(Nalmak_Math::Rand(-60.f, 60.f), Nalmak_Math::Rand(1.f, 20.f), Nalmak_Math::Rand(-60.f, 60.f));
-		}
-		
-	}
+
 	MeshRenderer::Desc mesh;
 	mesh.meshName = L"teapot";
 	mesh.mtrlName = L"standard";

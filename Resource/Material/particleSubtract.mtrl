@@ -6,9 +6,7 @@ shader "particle"
 
 texture "g_mainTex" "particleDefault"
 
-renderQueue "2999"
-
-renderMode "2"
+renderQueue "3000"
 
 blendingMode "2"
 
@@ -19,44 +17,36 @@ fillMode "0"
 ##  ---------------------------------------------------------------------------------------
 ##    shader  "name" 
 ##  ---------------------------------------------------------------------------------------
-##   2. Constant Buffer
+##   2. Constant Buffer // 다중 선택 가능
 ##  ---------------------------------------------------------------------------------------
 ##    bool      "handle"   "x"
 ##    int         "handle"   "x"
 ##    float      "handle"   "x"
-##    matrix   "handle"   "x,x,x,x,  x,x,x,x,  x,x,x,x,  x,x,x,x"
-##    texture  "handle"   "tex"
+##    matrix    "handle"   "x,x,x,x,  x,x,x,x,  x,x,x,x,  x,x,x,x"
+##    texture   "handle"   "tex"
 ##    textureRT "handle" "render target name"
-##    vector4 "handle"   "x,x,x,x"
-##    vector2 "handle"   "x,x"
+##    vector4   "handle"   "x,x,x,x"
+##    vector2   "handle"   "x,x"
 ##  ---------------------------------------------------------------------------------------
 ##   3. Render Queue
 ##  ---------------------------------------------------------------------------------------
-##    RENDER_QUEUE_BACKGROUND   :    1000
-##    RENDER_QUEUE_GEOMETRY         :    2000
-##    RENDER_QUEUE_TRANSPARENT  :     3000
-##    RENDER_QUEUE_OVERLAY             :    4000
+##    RENDER_QUEUE_BACKGROUND  :    0 
+##    RENDER_QUEUE_OPAQUE          :    1000 
+##    RENDER_QUEUE_CUTOUT          :    2000
+##    RENDER_QUEUE_TRANSPARENT  :    3000
 ##  ---------------------------------------------------------------------------------------
-##   4. RENDERING_MODE
-##  ---------------------------------------------------------------------------------------
-##    RENDERING_MODE_OPAQUE : 0
-##    RENDERING_MODE_CUTOUT : 1
-##    RENDERING_MODE_TRANSPARENT : 2
-##  ---------------------------------------------------------------------------------------
-##   5. BLENDING_MODE
+##   4. BLENDING_MODE 
 ##  ---------------------------------------------------------------------------------------
 ##    BLENDING_MODE_DEFAULT
 ##    BLENDING_MODE_ADDITIVE
 ##    BLENDING_MODE_SUBTRACTIVE
 ##    BLENDING_MODE_MULTIPLY
 ##  ---------------------------------------------------------------------------------------
-##   6. FILL_MODE.
+##   5. FILL_MODE.
 ##  ---------------------------------------------------------------------------------------
 ##    FILL_MODE_SOLID             : 0
-##    FILL_MODE_WIREFRAME : 1
+##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
-
-
 
 

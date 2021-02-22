@@ -75,10 +75,10 @@ void T::DestroyInstance()							\
 #define SAFE_RELEASE(p) if(p){ p->Release(); p = nullptr; }
 
 
-#define RENDER_QUEUE_BACKGROUND 1000
-#define RENDER_QUEUE_GEOMETRY 2000
+#define RENDER_QUEUE_BACKGROUND 0
+#define RENDER_QUEUE_GEOMETRY 1000
+#define RENDER_QUEUE_CUTOUT 2000
 #define RENDER_QUEUE_TRANSPARENT 3000
-#define RENDER_QUEUE_OVERLAY 4000
 
 
 #endif

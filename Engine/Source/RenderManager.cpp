@@ -1,4 +1,4 @@
-#include "RenderManager.h"
+ï»¿#include "RenderManager.h"
 #include "RenderManager.h"
 #include "ResourceManager.h"
 #include "DeviceManager.h"
@@ -42,7 +42,6 @@ void RenderManager::Initialize()
 	m_lightManager = LightManager::GetInstance();
 	m_resourceManager = ResourceManager::GetInstance();
 
-	m_renderingMode = RENDERING_MODE_MAX;
 	m_blendingMode = BLENDING_MODE_MAX;
 
 	m_currentMaterial = nullptr;
@@ -58,12 +57,11 @@ void RenderManager::Initialize()
 	m_device->SetViewport(&vp);
 
 	m_imageVIBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
-	m_currentUIMaterial = ResourceManager::GetInstance()->GetResource<Material>(L"defaultUI");
+	m_fullScreenMtrl = ResourceManager::GetInstance()->GetResource<Material>(L"FullScreen");
 }
 
 void RenderManager::Render()
 {
-
 	ThrowIfFailed(m_device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, m_cameraList.front()->m_clearColor, 1, 0));
 
 	for (auto& cam : m_cameraList)
@@ -75,9 +73,13 @@ void RenderManager::Render()
 	}
 	RenderText();
 	ThrowIfFailed(m_device->Present(nullptr, nullptr, 0, nullptr));
+	for (int i = 0; i < RENDERING_MODE_MAX; ++i)
+	{
+		for (auto& renderList : m_renderLists[i])
+			renderList.second.clear();
+	}
 
-	for (auto& renderList : m_renderOpaqueLists)
-		renderList.second.clear();
+	m_renderUILists.clear();
 
 }
 
@@ -87,7 +89,7 @@ void RenderManager::Render(Camera * _cam)
 
 
 	///////////////////////////////////////////////////////
-	// °ø¿ë »ó¼ö¹öÆÛ
+	// ê³µìš© ìƒìˆ˜ë²„í¼
 	ConstantBuffer cBuffer;
 	Matrix view = _cam->GetViewMatrix();
 	Matrix proj = _cam->GetProjMatrix();
@@ -109,6 +111,318 @@ void RenderManager::Render(Camera * _cam)
 	ThrowIfFailed(m_device->EndScene());
 
 
+}
+
+void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
+{
+	ClearRenderTarget(L"GBuffer_Diffuse");
+	ClearRenderTarget(L"GBuffer_Normal");
+	ClearRenderTarget(L"GBuffer_Depth");
+	ClearRenderTarget(L"GBuffer_Position");
+	ClearRenderTarget(L"GBuffer_Light");
+	ClearRenderTarget(L"GBuffer_Shade");
+	ClearRenderTarget(L"GBuffer_Debug");
+
+	SkyboxPass(_cBuffer);
+
+	GBufferPass(_cam, _cBuffer); 
+
+	LightPass(_cam,_cBuffer); 
+
+	ShadePass(_cBuffer); 
+
+	DebugPass(_cBuffer);
+
+	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // ì›ëž˜í™”ë©´ì— ë„ì›Œì¤Œ
+
+
+	
+
+	TransparentPass(_cam,_cBuffer); 
+
+	UIPass(_cam, _cBuffer);
+}
+
+void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
+{
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
+
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
+	auto viBuffer = m_lightManager->GetSkyboxVIBuffer();
+
+	UpdateMaterial(m_lightManager->GetSkyboxMaterial(), _cBuffer);
+	UpdateRenderTarget();
+
+	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_SKYBOX)));
+	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
+
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
+
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+		EndRenderTarget();
+	}
+}
+
+void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
+{
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
+	RenderNoneAlpha(_cam, _cBuffer, RENDERING_MODE_BACKGROUND);
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+
+	RenderNoneAlpha(_cam, _cBuffer, RENDERING_MODE_OPAQUE);
+
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHAREF, 50));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER));
+
+	RenderNoneAlpha(_cam, _cBuffer, RENDERING_MODE_CUTOUT);
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
+
+	
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+		EndRenderTarget();
+	}
+}
+
+void RenderManager::LightPass(Camera* _cam, ConstantBuffer& _cBuffer)
+{
+
+	DirectionalLightPass(_cBuffer);	
+
+	PointLightPass(_cam,_cBuffer);
+
+}
+
+void RenderManager::PointLightPass(Camera* _cam, ConstantBuffer & _cBuffer)
+{
+	int count = (int)m_lightManager->GetPointLightCount();
+	if (count == 0)
+		return;
+
+	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
+	Material* mtrlStencilLight = m_resourceManager->GetResource<Material>(L"PointLight_Stencil");
+	Material* mtrlLight = m_resourceManager->GetResource<Material>(L"PointLight");
+
+	mtrlStencilLight->SetDataToShader();
+	mtrlLight->SetDataToShader();
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_DECR));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_CCW_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_CCW_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_INCR));
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP::D3DBLENDOP_ADD));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND::D3DBLEND_ONE));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND::D3DBLEND_ONE));
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_FILLMODE, D3DFILLMODE::D3DFILL_SOLID));
+
+	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV)));
+	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
+
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
+	for (int i = 0; i < count; ++i)
+	{
+		auto pointLight = m_lightManager->GetPointLight(i);
+
+		Matrix world;
+		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
+		float scale = pointLight->GetRadius();
+		pointLight->SetLightPosition(pos);
+
+		Matrix matTrs, matScale;
+		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
+		D3DXMatrixScaling(&matScale, scale, scale, scale);
+		world = matScale * matTrs;
+
+		if (_cam->IsInFrustumCulling(pos, scale))
+		{
+			PointLightPass(world, pointLight->GetLightInfo(), viBuffer, _cBuffer, mtrlStencilLight, mtrlLight);
+			m_device->Clear(0, nullptr, D3DCLEAR_STENCIL, 0, 1, 0);
+		}
+	}
+	if(m_currentShader)
+		m_currentShader->EndPass();
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW));
+}
+
+void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _lightInfo, VIBuffer* _viBuffer, ConstantBuffer & _cBuffer, Material* _mtrlStencilLight, Material* _mtrlLight)
+{
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+
+	UpdateShader(_mtrlStencilLight->GetShader(), _cBuffer);
+
+	UpdateRenderTarget();
+
+	m_device->SetRenderState(D3DRS_ZENABLE, true);
+	m_device->SetRenderState(D3DRS_ZWRITEENABLE, false);
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
+	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, true);
+
+	m_currentShader->SetMatrix("g_world", _matWorld);
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
+
+
+	EndRenderTarget();
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
+
+	UpdateShader(_mtrlLight->GetShader(), _cBuffer);
+
+	UpdateRenderTarget();
+
+	m_device->SetRenderState(D3DRS_ZENABLE, false);
+	m_device->SetRenderState(D3DRS_ZWRITEENABLE, true);
+	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_NOTEQUAL);
+	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, false);
+
+	m_currentShader->SetValue("g_pointLight", &_lightInfo, sizeof(PointLightInfo));
+	m_currentShader->SetMatrix("g_world", _matWorld);
+
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
+
+	
+	EndRenderTarget();
+}
+
+void RenderManager::ShadePass(ConstantBuffer & _cBuffer)
+{
+	Material* material = m_resourceManager->GetResource<Material>(L"GBuffer_Shade");
+	RenderByMaterialToScreen(material, _cBuffer);
+}
+
+void RenderManager::DebugPass(ConstantBuffer & _cBuffer)
+{
+	Material* material = m_resourceManager->GetResource<Material>(L"GBuffer_Debug");
+	RenderByMaterialToScreen(material, _cBuffer);
+}
+
+
+void RenderManager::DirectionalLightPass(ConstantBuffer& _cBuffer)
+{
+	DirectionalLightInfo info;
+	if (!m_lightManager->GetDirectionalLightInfo(info))
+		return;
+	Material* material = m_resourceManager->GetResource<Material>(L"DirectionalLight");
+	material->SetValue("g_directionalLight", &info, sizeof(DirectionalLightInfo));
+
+	RenderByMaterialToScreen(material, _cBuffer);
+}
+
+void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
+{
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
+
+	for (auto& MeshRendererList : m_renderLists[RENDERING_MODE_TRANSPARENT])
+	{
+		for (auto& renderer : MeshRendererList.second)
+		{
+			if (_cam->CompareLayer(renderer->GetLayer()))
+			{
+				if (_cam->IsInFrustumCulling(renderer))
+				{
+					Material* material = renderer->GetMaterial();
+					UpdateMaterial(material, _cBuffer);
+					UpdateVIBuffer(renderer);
+
+					renderer->Render();
+				}
+			}
+		}
+	}
+	
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+	}
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW));
+
+}
+
+void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
+{
+
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
+	for (auto& renderer : m_renderUILists)
+	{
+		if (_cam->CompareLayer(renderer->GetLayer()))
+		{
+			if (_cam->IsInFrustumCulling(renderer))
+			{
+				Material* material = renderer->GetMaterial();
+				UpdateMaterial(material, _cBuffer);
+				UpdateVIBuffer(renderer);
+
+				renderer->Render();
+			}
+		}
+	}
+
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+	}
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
+}
+
+void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RENDERING_MODE _mode)
+{
+	for (auto& MeshRendererList : m_renderLists[_mode])
+	{
+		for (auto& renderer : MeshRendererList.second)
+		{
+			if (_cam->CompareLayer(renderer->GetLayer()))
+			{
+				if (_cam->IsInFrustumCulling(renderer))
+				{
+					Material* material = renderer->GetMaterial();
+					UpdateNoneAlphaMaterial(material, _cBuffer);
+					UpdateRenderTarget();
+
+					UpdateVIBuffer(renderer);
+
+					renderer->Render();
+				}
+			}
+		}
+	}
 }
 
 void RenderManager::RenderText()
@@ -133,243 +447,13 @@ void RenderManager::Reset()
 	m_currentMaterial = nullptr;
 
 	m_cameraList.clear();
-	for (auto& renderList : m_renderOpaqueLists)
+	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)
+	for (auto& renderList : m_renderLists[i])
+	{
 		renderList.second.clear();
-	for (auto& renderList : m_renderTransparentLists)
-		renderList.second.clear();
-}
-
-void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
-{
-	m_currentShader = nullptr;
-	m_currentMaterial = nullptr;
-
-
-	auto viBuffer = m_lightManager->GetSkyboxVIBuffer();
-
-	UpdateMaterial(m_lightManager->GetSkyboxMaterial(), _cBuffer);
-	UpdateRenderTarget();
-	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
-	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
-
-	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0,sizeof(INPUT_LAYOUT_SKYBOX)));
-	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
-
-	m_currentShader->CommitChanges();
-	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
-
-	if (m_currentShader)
-	{
-		m_currentShader->EndPass();
-		EndRenderTarget();
 	}
-
+	m_renderUILists.clear();
 }
-
-void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
-{
-	ClearRenderTarget(L"GBuffer_Diffuse");
-	ClearRenderTarget(L"GBuffer_Normal");
-	ClearRenderTarget(L"GBuffer_Depth");
-	ClearRenderTarget(L"GBuffer_Position");
-	ClearRenderTarget(L"GBuffer_Light");
-	ClearRenderTarget(L"GBuffer_Shade");
-
-	SkyboxPass(_cBuffer);
-
-	GBufferPass(_cam, _cBuffer); // GBuffer -> Gemotry ¸¦ ±×¸² -> ±âÇÏµµÇü
-
-	LightPass(_cam,_cBuffer); // À§¿¡¼­ ±×¸°Á¤º¸¸¦ ¹ÙÅÁÀ¸·Î ºû ¿¬»ê (ÇÏ³ªÀÇ ÅØ½ºÃÄ)
-
-	ShadePass(_cBuffer); // GBuffer + Lightpass ÇÕ¼º
-
-	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // ¿ø·¡È­¸é¿¡ ¶ç¿öÁÜ
-
-	TransparentPass(_cBuffer); // Åõ¸í°´Ã¼¸¦ ±×¸²
-}
-
-void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
-{
-	m_currentShader = nullptr;
-	m_currentMaterial = nullptr;
-
-	for (auto& MeshRendererList : m_renderOpaqueLists)
-	{
-		for (auto& renderer : MeshRendererList.second)
-		{
-			if (_cam->CompareLayer(renderer->GetLayer()))
-			{
-				if (_cam->IsInFrustumCulling(renderer))
-				{
-					Material* material = renderer->GetMaterial();
-					UpdateMaterial(material, _cBuffer);
-					UpdateRenderTarget();
-
-					UpdateVIBuffer(renderer);
-
-					renderer->Render();
-				}
-			}
-		}
-	}
-
-	if (m_currentShader)
-	{
-		m_currentShader->EndPass();
-		EndRenderTarget();
-	}
-
-
-
-}
-
-void RenderManager::LightPass(Camera* _cam, ConstantBuffer& _cBuffer)
-{
-
-
-	PointLightPass(_cam,_cBuffer);
-
-	DirectionalLightPass(_cBuffer);
-
-}
-
-void RenderManager::PointLightPass(Camera* _cam, ConstantBuffer & _cBuffer)
-{
-	size_t count = m_lightManager->GetPointLightCount();
-
-	VIBuffer* viBuffer = m_resourceManager->GetResource<VIBuffer>(L"sphere");
-	Material* mtrlStencilLight = m_resourceManager->GetResource<Material>(L"PointLight_Stencil");
-	Material* mtrlLight = m_resourceManager->GetResource<Material>(L"PointLight");
-
-	mtrlStencilLight->SetDataToShader();
-	mtrlLight->SetDataToShader();
-
-	m_device->SetRenderState(D3DRS_STENCILENABLE, true);
-	m_device->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
-	m_device->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_DECR);
-	m_device->SetRenderState(D3DRS_CCW_STENCILPASS, D3DSTENCILOP::D3DSTENCILOP_KEEP);
-	m_device->SetRenderState(D3DRS_CCW_STENCILZFAIL, D3DSTENCILOP::D3DSTENCILOP_INCR);
-
-
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP::D3DBLENDOP_ADD));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND::D3DBLEND_ONE));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND::D3DBLEND_ONE));
-
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_FILLMODE, D3DFILLMODE::D3DFILL_SOLID));
-
-	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_NORMAL_UV)));
-	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
-
-	for (int i = 0; i < count; ++i)
-	{
-		auto pointLight = m_lightManager->GetPointLight(i);
-
-		Matrix world;
-		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
-		float scale = pointLight->GetRadius();
-		pointLight->SetLightPosition(pos);
-
-		Matrix matTrs, matScale;
-		D3DXMatrixTranslation(&matTrs, pos.x, pos.y, pos.z);
-		D3DXMatrixScaling(&matScale, scale, scale, scale);
-		world = matScale * matTrs;
-
-		if (_cam->IsInFrustumCulling(pos, scale))
-		{
-			PointLightPass(world, pointLight->GetLightInfo(), viBuffer, _cBuffer, mtrlStencilLight, mtrlLight);
-			m_device->Clear(0, nullptr, D3DCLEAR_STENCIL, 0, 1, 0);
-		}
-	}
-	m_device->SetRenderState(D3DRS_STENCILENABLE, false);
-	m_device->SetRenderState(D3DRS_ZENABLE, true);
-	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-}
-
-
-
-void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _lightInfo, VIBuffer* _viBuffer, ConstantBuffer & _cBuffer, Material* _mtrlStencilLight, Material* _mtrlLight)
-{
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
-
-	UpdateShader(_mtrlStencilLight->GetShader(), _cBuffer);
-
-	UpdateRenderTarget();
-
-	m_device->SetRenderState(D3DRS_ZENABLE, true);
-	m_device->SetRenderState(D3DRS_ZWRITEENABLE, false);
-	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS);
-	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, true);
-
-	m_currentShader->SetMatrix("g_world", _matWorld);
-	m_currentShader->CommitChanges();
-	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
-
-	if (m_currentShader)
-	{
-		m_currentShader->EndPass();
-		EndRenderTarget();
-	}
-
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
-
-	UpdateShader(_mtrlLight->GetShader(), _cBuffer);
-
-	UpdateRenderTarget();
-
-	m_device->SetRenderState(D3DRS_ZENABLE, false);
-	m_device->SetRenderState(D3DRS_ZWRITEENABLE, true);
-	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
-	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_NOTEQUAL);
-	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, false);
-
-	m_currentShader->SetValue("g_pointLight", &_lightInfo, sizeof(PointLightInfo));
-	m_currentShader->SetMatrix("g_world", _matWorld);
-
-	m_currentShader->CommitChanges();
-	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
-
-	if (m_currentShader)
-	{
-		m_currentShader->EndPass();
-		EndRenderTarget();
-	}
-}
-
-void RenderManager::ShadePass(ConstantBuffer & _cBuffer)
-{
-	RecordRenderTarget(0, L"GBuffer_Shade");
-
-	Material* material = m_resourceManager->GetResource<Material>(L"GBuffer_Shade");
-	RenderByMaterialToScreen(material, _cBuffer);
-
-	EndRenderTarget(L"GBuffer_Shade");
-
-}
-
-
-void RenderManager::DirectionalLightPass(ConstantBuffer& _cBuffer)
-{
-	DirectionalLightInfo info;
-	if (!m_lightManager->GetDirectionalLightInfo(info))
-		return;
-	Material* material = m_resourceManager->GetResource<Material>(L"DirectionalLight");
-	material->SetValue("g_directionalLight", &info, sizeof(DirectionalLightInfo));
-
-	RecordRenderTarget(0, L"GBuffer_Light");
-
-	RenderByMaterialToScreen(material, _cBuffer);
-
-	EndRenderTarget(L"GBuffer_Light");
-}
-
-
-void RenderManager::TransparentPass(ConstantBuffer& _cBuffer)
-{
-}
-
 
 void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _cBuffer)
 {
@@ -377,12 +461,14 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	m_currentShader = nullptr;
 
 	UpdateMaterial(_mtrl, _cBuffer);
+	UpdateRenderTarget();
 
 	Matrix mat;
 	D3DXMatrixScaling(&mat, 2, 2, 2);
 	m_currentShader->SetMatrix("g_world", mat);
 
-	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
+
+	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0,  sizeof(INPUT_LAYOUT_POSITION_UV)));
 	ThrowIfFailed(m_device->SetIndices(m_imageVIBuffer->GetIndexBuffer()));
 
 	m_currentShader->CommitChanges();
@@ -393,22 +479,22 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 		m_currentShader->EndPass();
 	}
 
+	EndRenderTarget();
 }
+
 
 void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBuffer & _cBuffer)
 {
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
-
-
-	UpdateMaterial(m_currentUIMaterial, _cBuffer);
+	UpdateMaterial(m_fullScreenMtrl, _cBuffer);
 	m_currentShader->SetTexture("g_mainTex", _tex);
 	Matrix mat;
 	D3DXMatrixScaling(&mat, 2, 2, 2);
 	m_currentShader->SetMatrix("g_world", mat);
 
-	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0, m_currentShader->GetInputLayoutSize()));
+	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_UV)));
 	ThrowIfFailed(m_device->SetIndices(m_imageVIBuffer->GetIndexBuffer()));
 
 	m_currentShader->CommitChanges();
@@ -426,10 +512,10 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 void RenderManager::RenderRequest(IRenderer * _render)
 {
 	auto mtrl = _render->GetMaterial();
-	if (mtrl->GetRenderingMode() != RENDERING_MODE_TRANSPARENT)
-		m_renderOpaqueLists[mtrl->GetRenderQueue()].emplace_back(_render);
+	if (_render->GetType() == RENDERER_TYPE::RENDERER_TYPE_CANVAS)
+		m_renderUILists.emplace_back(_render);
 	else
-		m_renderTransparentLists[mtrl->GetRenderQueue()].emplace_back(_render);
+		m_renderLists[mtrl->GetRenderingMode()][mtrl->GetRenderQueue()].emplace_back(_render);
 
 }
 
@@ -456,7 +542,6 @@ void RenderManager::UpdateMaterial(Material * _material, ConstantBuffer & _cBuff
 	{
 		m_currentMaterial = _material;
 
-		UpdateRenderingMode(_material);
 		UpdateBlendingMode(_material);
 		UpdateFillMode(_material);
 		_material->SetDataToShader();
@@ -465,31 +550,16 @@ void RenderManager::UpdateMaterial(Material * _material, ConstantBuffer & _cBuff
 	}
 }
 
-void RenderManager::UpdateRenderingMode(Material * _material)
+void RenderManager::UpdateNoneAlphaMaterial(Material * _material, ConstantBuffer & _cBuffer)
 {
-	auto mode = _material->GetRenderingMode();
-	if (m_renderingMode != mode)
+	if (m_currentMaterial != _material)
 	{
-		m_renderingMode = mode;
+		m_currentMaterial = _material;
 
-		switch (mode)
-		{
-		case RENDERING_MODE_OPAQUE:
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
-			break;
-		case RENDERING_MODE_CUTOUT:
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, true));
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHAREF, 50));
-			break;
-		case RENDERING_MODE_TRANSPARENT:
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
-			ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
-			break;
-		default:
-			break;
-		}
+		UpdateFillMode(_material);
+		_material->SetDataToShader();
+
+		UpdateShader(m_currentMaterial->GetShader(), _cBuffer);
 	}
 }
 
@@ -555,8 +625,6 @@ void RenderManager::UpdateFillMode(Material * _material)
 
 }
 
-
-
 void RenderManager::UpdateVIBuffer(IRenderer * _renderer)
 {
 	auto viBuffer = _renderer->GetVIBuffer();
@@ -581,10 +649,8 @@ void RenderManager::UpdateRenderTarget()
 			m_currentRenderTarget[i] = newRendertarget;
 			m_currentRenderTarget[i]->StartRecord(i);
 		}
-
 	}
 }
-
 
 void RenderManager::EndRenderTarget()
 {
@@ -594,6 +660,10 @@ void RenderManager::EndRenderTarget()
 		{
 			m_currentRenderTarget[i]->EndRecord();
 			m_currentRenderTarget[i] = nullptr;
+		}
+		else
+		{
+			return;
 		}
 	}
 }
@@ -612,9 +682,6 @@ void RenderManager::UpdateShader(Shader * _shader, ConstantBuffer& _cBuffer)
 		m_currentShader->BeginPass();
 
 		ThrowIfFailed(m_device->SetVertexDeclaration(m_currentShader->GetDeclartion()));
-
-
-
 	}
 }
 

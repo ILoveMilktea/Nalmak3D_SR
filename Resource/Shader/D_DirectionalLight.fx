@@ -53,6 +53,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _in)
 	VS_OUTPUT o = (VS_OUTPUT)0;
 
 	o.pos = mul(float4(_in.pos, 1), g_world);
+	o.pos.w = 1;
 	o.uv = _in.uv;
 
 
@@ -74,8 +75,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 	float4 light = CalcLightInternal(g_directionalLight.base, g_cBuffer.worldCamPos, g_directionalLight.direction, worldPos.xyz, normal);
 
-	o.color = light * 2 - 1;
-
+	o.color = light;
 	return o;
 }
 
@@ -87,6 +87,7 @@ technique DefaultTechnique
 	{
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z 값에대한 활용
 
+		ZEnable = false;
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

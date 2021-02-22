@@ -60,15 +60,14 @@ private:
 	vector<pair<string, pair<void*, UINT>>> m_values;
 
 private:
-	_RENDER_QUEUE m_renderQueue = RENDER_QUEUE_GEOMETRY;
+	_RENDER_QUEUE m_renderQueue = 0;
 
 public:
-	void SetRenderQueue(_RENDER_QUEUE _renderQueue) { m_renderQueue = _renderQueue; }
+	void SetRenderQueue(_RENDER_QUEUE _renderQueue);
 	_RENDER_QUEUE GetRenderQueue() { return m_renderQueue; }
 
 public:
 	void SetFillMode(FILL_MODE _fillMode) { m_fillMode = _fillMode; }
-	void SetRenderingMode(RENDERING_MODE _renderingMode, float _alphaTest = 0) { m_renderingMode = _renderingMode; }
 	void SetBledingMode(BLENDING_MODE _bledingMode) { m_blendingMode = _bledingMode; }
 public:
 	RENDERING_MODE GetRenderingMode() { return m_renderingMode; }
@@ -77,7 +76,7 @@ public:
 
 	int GetAlphaTest() { return m_alphaTest; }
 private:
-	RENDERING_MODE m_renderingMode;
+	RENDERING_MODE m_renderingMode = RENDERING_MODE_BACKGROUND;
 	BLENDING_MODE m_blendingMode;
 	FILL_MODE m_fillMode;
 

@@ -2,11 +2,11 @@
 ## Shader Data Setting (sd)
 #########################################################
 
-inputLayout "0"
+inputLayout "2"
 
 renderTarget "GBuffer_Debug"
 
-primitive "1"
+primitive "2"
 
 
 #########################################################

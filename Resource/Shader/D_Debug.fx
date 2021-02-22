@@ -2,32 +2,19 @@
 
 matrix g_world;
 
-texture g_diffuse;
-texture g_depth;
-texture g_normal;
-texture g_light;
-texture g_skyBox;
+texture g_shade;
+texture g_debug;
 
-sampler DiffuseSampler = sampler_state
+
+sampler ShadeSampler = sampler_state
 {
-	texture = g_diffuse;
+	texture = g_shade;
 };
-sampler DepthSampler = sampler_state
+sampler DebugSampler = sampler_state
 {
-	texture = g_depth;
+	texture = g_debug;
 };
-sampler NormalSampler = sampler_state
-{
-	texture = g_normal;
-};
-sampler LightSampler = sampler_state
-{
-	texture = g_light;
-};
-sampler SkySampler = sampler_state
-{
-	texture = g_skyBox;
-};
+
 
 struct VS_INPUT
 {
@@ -67,16 +54,10 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 PS_OUTPUT PS_Main_Default(PS_INPUT  _input) 
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
-	float3 diffuse = tex2D(DiffuseSampler, _input.uv).xyz;
-	float3 normal = tex2D(NormalSampler, _input.uv).xyz;
-	float3 light = tex2D(LightSampler, _input.uv).xyz;
-	float3 sky;
-	if (normal.x == 0 && normal.y == 0 && normal.z == 0)
-	{
-		sky = tex2D(SkySampler, _input.uv).xyz;
-	}
+	float3 shade = tex2D(ShadeSampler, _input.uv).xyz;
+	float3 debug = tex2D(DebugSampler, _input.uv).xyz;
 
-	float3 final = light * diffuse + sky;
+	float3 final = shade + debug;
 
 	o.color = float4(final, 1);
 	//o.color = 1;

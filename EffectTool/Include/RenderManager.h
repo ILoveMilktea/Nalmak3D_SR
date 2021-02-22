@@ -48,6 +48,8 @@ BEGIN(Nalmak)
 class RenderManager
 {
 	DECLARE_SINGLETON(RenderManager)
+
+	typedef int RenderQueue;
 public:
 	RenderManager();
 	~RenderManager();
@@ -64,19 +66,25 @@ private:
 	void DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer);
 	void GBufferPass(Camera* _cam, ConstantBuffer& _cBuffer);
 	void ShadePass(ConstantBuffer& _cBuffer);
+	void DebugPass(ConstantBuffer& _cBuffer);
 	void LightPass(Camera* _cam, ConstantBuffer& _cBuffer);
 	void PointLightPass(Camera* _cam, ConstantBuffer& _cBuffer);
 	void PointLightPass(const Matrix& _matWorld, PointLightInfo _lightInfo, VIBuffer* _viBuffer, ConstantBuffer& _cBuffer, Material* _mtrlStencilLight, Material* _mtrlLight);
 	void DirectionalLightPass(ConstantBuffer& _cBuffer);
-	void TransparentPass(ConstantBuffer& _cBuffer);
+	void TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer);
+	void UIPass(Camera* _cam, ConstantBuffer& _cBuffer);
 private:
+	void RenderNoneAlpha(Camera * _cam, ConstantBuffer& _cBuffer, RENDERING_MODE _mode);
+private:
+	// 기존 화면에 텍스쳐를 그려줌
 	void RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer& _cBuffer);
 	void RenderImageToScreen(IDirect3DBaseTexture9* _tex, ConstantBuffer& _cBuffer);
 private:
 	VIBuffer* m_imageVIBuffer;
 private:
-	map<int, vector<IRenderer*>> m_renderOpaqueLists;
-	map<int, vector<IRenderer*>> m_renderTransparentLists;
+	map<RenderQueue, vector<IRenderer*>> m_renderLists[RENDERING_MODE::RENDERING_MODE_MAX];
+	vector<IRenderer*> m_renderUILists;
+
 	vector<Text*> m_textRenderList;
 public:
 	void RenderRequest(IRenderer* _render);
@@ -95,17 +103,14 @@ private:
 	Shader* m_currentShader; // Shader별로 그리기 설정 최소화
 	RenderTarget* m_currentRenderTarget[4]; // RenderTarget 별로 그리기 설정 최소화
 
-
-
-	RENDERING_MODE m_renderingMode;
 	BLENDING_MODE m_blendingMode;
 	FILL_MODE m_fillMode;
 
 private:
-	Material* m_currentUIMaterial;
+	Material* m_fullScreenMtrl;
 private:
 	void UpdateMaterial(Material* _material, ConstantBuffer& _cBuffer);
-	void UpdateRenderingMode(Material * _material);
+	void UpdateNoneAlphaMaterial(Material* _material, ConstantBuffer& _cBuffer);
 	void UpdateBlendingMode(Material * _material);
 	void UpdateFillMode(Material* _material);
 	void UpdateVIBuffer(IRenderer* _renderer);

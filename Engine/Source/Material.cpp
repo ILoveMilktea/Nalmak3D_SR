@@ -469,22 +469,7 @@ void Material::Initialize(wstring _fp)
 			int value = atoi(renderQueue.c_str());
 			SetRenderQueue(value);
 		}
-		// 4. renderMode
-		if (strcmp(memberName.c_str(), "renderMode") == 0)
-		{
-			// render mode value
-			size_t valueEnd;
-			for (valueEnd = firstWordEnd + 2; valueEnd < buffer.size(); ++valueEnd)
-			{
-				if ('\"' == buffer[valueEnd])
-					break;
-			}
-
-			string renderMode = buffer.substr(firstWordEnd, valueEnd - firstWordEnd);
-
-			int value = atoi(renderMode.c_str());
-			SetRenderingMode((RENDERING_MODE)value);
-		}
+	
 		// 5. blendingMode
 		if (strcmp(memberName.c_str(), "blendingMode") == 0)
 		{
@@ -708,6 +693,21 @@ void Material::SetValue(const string& _parameter, void* _address, UINT _size)
 	
 	m_values.emplace_back(pair2);
 
+}
+
+void Material::SetRenderQueue(_RENDER_QUEUE _renderQueue)
+{
+	RENDERING_MODE mode = (RENDERING_MODE)(_renderQueue / 1000);
+#ifdef _DEBUG
+	if (mode >= RENDERING_MODE_MAX)
+	{
+		ERR_MSG(L"Render Queue is overflow!");
+		assert(0);
+	}
+#endif
+	
+	m_renderingMode = mode;
+	m_renderQueue = _renderQueue;
 }
 
 
