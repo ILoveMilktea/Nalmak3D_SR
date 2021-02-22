@@ -41,14 +41,19 @@
 
 void TitleScene::Initialize()
 {
+	Core::GetInstance()->SetSkyBox(L"skyBox_default");
+
 	INSTANTIATE()->AddComponent<Grid>();
+
 
 	DirectionalLight::Desc light;
 	light.intensity = 1.f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 20, 0);// ->AddComponent<AutoRotate>(&rot);
 	
 	{
-		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
+		FreeMove::Desc free;
+
+		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>(&free);
 	}
 
 	{
@@ -77,16 +82,16 @@ void TitleScene::Initialize()
 
 	INSTANTIATE(OBJECT_TAG_DEBUG,L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(-HALF_WINCX, HALF_WINCY, 0);
 	
+
 	SceneChanger::Desc SceneChangerDescInfo;
 	SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
 	SceneChangerDescInfo.sceneName = L"phantom";
-	auto SceneSelect =  INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
+	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 
 
 	SceneChanger::Desc SceneToHee;
 	SceneToHee.keyState = KEY_STATE_SPACE;
 	SceneToHee.sceneName = L"Hee";
-	
 	SceneSelect->AddComponent<SceneChanger>(&SceneToHee);
 
 

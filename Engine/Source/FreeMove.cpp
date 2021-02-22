@@ -127,7 +127,7 @@ void FreeMove::Move(Vector3 _dir)
 
 void FreeMove::Rotate(Vector2 _dir)
 {
-	m_xRot -= Deg2Rad * _dir.y * m_mouseSensitive;
+	m_xRot += Deg2Rad * _dir.y * m_mouseSensitive;
 	m_yRot += Deg2Rad * _dir.x * m_mouseSensitive;
 	Quaternion rot;
 

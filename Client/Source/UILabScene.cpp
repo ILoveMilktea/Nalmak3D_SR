@@ -14,7 +14,6 @@ void UILabScene::Initialize()
 		mainCam->GetComponent<Camera>()->OffLayer(RENDER_LAYER_UI);
 		mainCam->SetPosition(0, 5, -5);
 		mainCam->SetRotation(30, 0, 0);
-		mainCam->SetDontDestroy(true);
 	}
 
 
