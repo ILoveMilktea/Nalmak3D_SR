@@ -6,7 +6,7 @@ class Bullet :
 public:
 	struct Desc
 	{
-		float	fSpd = 50.f;
+		float	fSpd = 150.f;
 		int		iDmg = 10;
 	};
 	

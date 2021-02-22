@@ -204,13 +204,13 @@
     <ClInclude Include="..\Include\Enemy_Chase.h" />
     <ClInclude Include="..\Include\Enemy_Hold.h" />
     <ClInclude Include="..\Include\Enemy_Idle.h" />
-    <ClInclude Include="..\Include\Enemy_Rush.h" />
     <ClInclude Include="..\Include\Enum.h" />
     <ClInclude Include="..\Include\Extern.h" />
     <ClInclude Include="..\Include\FixToTarget.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
     <ClInclude Include="..\Include\HeeTestScene.h" />
     <ClInclude Include="..\Include\MainGame.h" />
+    <ClInclude Include="..\Include\Missile.h" />
     <ClInclude Include="..\Include\MouseOption.h" />
     <ClInclude Include="..\Include\NalmakScene.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
@@ -221,7 +221,6 @@
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
-    <ClInclude Include="..\Include\ShootingState.h" />
     <ClInclude Include="..\Include\SingleLine.h" />
     <ClInclude Include="..\Include\Stage2Scene.h" />
     <ClInclude Include="..\Include\StageManager.h" />
@@ -246,11 +245,11 @@
     <ClCompile Include="..\Source\Enemy_Chase.cpp" />
     <ClCompile Include="..\Source\Enemy_Hold.cpp" />
     <ClCompile Include="..\Source\Enemy_Idle.cpp" />
-    <ClCompile Include="..\Source\Enemy_Rush.cpp" />
     <ClCompile Include="..\Source\FixToTarget.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\HeeTestScene.cpp" />
     <ClCompile Include="..\Source\MainGame.cpp" />
+    <ClCompile Include="..\Source\Missile.cpp" />
     <ClCompile Include="..\Source\MouseOption.cpp" />
     <ClCompile Include="..\Source\NalmakScene.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
@@ -261,7 +260,6 @@
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
-    <ClCompile Include="..\Source\ShootingState.cpp" />
     <ClCompile Include="..\Source\SingleLine.cpp" />
     <ClCompile Include="..\Source\Stage2Scene.cpp" />
     <ClCompile Include="..\Source\StageManager.cpp" />

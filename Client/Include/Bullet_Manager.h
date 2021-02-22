@@ -25,7 +25,7 @@ public:
 
 public:
 	void Fire(Vector3 _pos, Quaternion _rot);
-
+	void Fire_Missile(Vector3 _start, Vector3 _dest);
 	
 
 };

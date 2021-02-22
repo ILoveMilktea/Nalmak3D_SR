@@ -171,8 +171,14 @@ void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 
 void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 {
-	m_currentShader = nullptr;
-	m_currentMaterial = nullptr;
+	ClearRenderTarget(L"GBuffer_Diffuse");
+	ClearRenderTarget(L"GBuffer_Normal");
+	ClearRenderTarget(L"GBuffer_Depth");
+	ClearRenderTarget(L"GBuffer_Position");
+	ClearRenderTarget(L"GBuffer_Light");
+	ClearRenderTarget(L"GBuffer_Shade");
+
+	//SkyboxPass(_cBuffer);
 
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));

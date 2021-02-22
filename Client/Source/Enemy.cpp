@@ -6,6 +6,18 @@
 
 Enemy::Enemy(Desc * _Desc)
 {
+	m_fMaxSpd = _Desc->fMaxSpd;
+	m_fLookSpd = _Desc->fLookSpd;
+	m_fFov = _Desc->fFov;
+
+	m_fFpm = _Desc->fFpm;
+	m_iFullRound = _Desc->iRound;
+	m_iCurRound = m_iFullRound;
+	
+	m_fFpm_Missile = _Desc->fFpm_Missile;
+	m_iFullRound_Missile = _Desc->iRound_Missile;
+	m_iCurRound_Missile = m_iFullRound_Missile;
+	m_fFpmDelta_Missile = 60.f / m_fFpm_Missile;
 }
 
 Enemy::~Enemy()
@@ -19,24 +31,44 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-
 	Target_Update();
+	//Look_Target();
+	////Horizontally();
+	
+	// Kiting();
+	// Chase();
+	 Drop();
+	// Hold();
+	Reloading();
 
-	Look_Target();
-	Horizontally();
-	Go_Straight();
+	Decelerate();
+	Accelerate();
+	//Go_Straight();
 	
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_SPACE))
+	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_SPACE))
+	//{
+	//	Shoot();
+	//}
+	
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_ARROW))
 	{
- 		Shoot();
+		Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), -dTime*10.f);
+		m_transform->rotation *= qTemp;
 	}
-	
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_ARROW))
+	{
+		Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), dTime*10.f);
+		m_transform->rotation *= qTemp;
+	}
 #pragma region DebugLog
 	//DEBUG_LOG(L"Target On?", bTarget);
-	//DEBUG_LOG(L"타겟 까지의 거리", m_fDist_Target);
-	//DEBUG_LOG(L"타겟과의 내적 값", m_fInner);
+	DEBUG_LOG(L"타겟 까지의 거리", m_fDist_Target);
+	DEBUG_LOG(L"타겟과의 내적 값", m_fInner);
 	//DEBUG_LOG(L"UpVector과의 내적 값", m_fUpInner);
 	//DEBUG_LOG(L"Up Angle", m_fUpAngle);
+	DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
+	DEBUG_LOG(L"Enemy Current Speed", m_fSpd);
+	DEBUG_LOG(L"Remain Round", m_iCurRound);
 #pragma endregion
 }
 
@@ -52,6 +84,7 @@ void Enemy::Target_Setting(bool _onoff)
 			/* First Inner Setting */
 			Vector3 vDir = m_pTarget->GetTransform()->position - m_transform->position;
 			D3DXVec3Normalize(&vDir, &vDir);
+			
 			m_fInner_First = D3DXVec3Dot(&vDir, &m_transform->GetForward());
 
 			bTarget = true;
@@ -92,6 +125,12 @@ void Enemy::Target_Update()
 }
 
 
+void Enemy::Go_ToPos(Vector3 _pos)
+{
+	m_transform->LookAt(_pos, m_fLookSpd, &m_QuartRot);
+	m_transform->position += m_transform->GetForward() * m_fSpd * dTime;
+}
+
 void Enemy::Go_Straight()
 {
 	m_transform->position += m_transform->GetForward() * m_fSpd * dTime;
@@ -102,6 +141,20 @@ void Enemy::Look_Target()
 	if (bTarget)
 	{
 		m_transform->LookAt(m_pTarget, m_fLookSpd, &m_QuartRot);
+	}
+}
+
+bool Enemy::Fov_Check()
+{
+	if (D3DXToRadian(m_fFov/2.f) >= acosf(m_fInner))
+	{
+		m_bFov = true;
+		return true; 
+	}
+	else 
+	{ 
+		m_bFov = false; 
+		return false;
 	}
 }
 
@@ -260,62 +313,211 @@ void Enemy::Horizontally()
 void Enemy::Turn()
 {
 
-
-
 }
 
 void Enemy::Dive()
 {
+
 }
 
 void Enemy::Soar()
 {
+
 }
 
-void Enemy::Shoot()
+bool Enemy::Shoot()
 {
+	if (m_iCurRound > 0)
+	{
+		m_fFpmDelta += dTime;
 
-	Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
+		if (m_fFpmDelta >= 60.f / m_fFpm && Fov_Check())
+		{
+			Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
 
+			--m_iCurRound;
+
+			m_fFpmDelta = 0.f;
+			return true;
+		}
+	}
+
+	return false;
 	//따발총
 }
 
-void Enemy::Misile()
+
+void Enemy::Reloading()
 {
-	//미사일 
+	if (m_iCurRound <= 0)
+	{
+		m_fRoundDelta += dTime;
+
+		if (m_fRoundDelta >= 3.f)
+		{
+			m_iCurRound = m_iFullRound;
+
+			m_fRoundDelta = 0.f;
+		}
+	}
+	
 }
 
-void Enemy::Rush()
-{//멀리서 총쏘면서 다가오는거
-	//0. 플레이어 시야각 안에서 생성
-	//1. 타겟 세팅 (완전 플레이어 pos가 아니라 그 주위에서)
-	//2. LookTarget하면서 오다가
-	//3. Distance 어느 정도 오면 발사 하고 LookTarget풀기
-	//4. 그 방향으로 이동하다가 Turn으로 방향바꾸고 다시 다른 패턴
+bool Enemy::Missile()
+{
+	//미사일 
+	if (m_iCurRound_Missile > 0)
+	{
+		m_fFpmDelta_Missile += dTime;
+
+		if (m_fFpmDelta_Missile >= 60.f / m_fFpm_Missile)
+		{
+			Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_pTarget->GetTransform()->position);
+
+			--m_iCurRound_Missile;
+
+			m_fFpmDelta_Missile = 0.f;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Enemy::Missile_Reloading()
+{
+	if (m_iCurRound_Missile <= 0)
+	{
+		m_fRoundDelta_Missile += dTime; 
+		
+		if (m_fRoundDelta_Missile >= 3.f)
+		{
+			m_iCurRound_Missile = m_iFullRound_Missile;
+
+			m_fRoundDelta_Missile = 0.f;
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+void Enemy::Decelerate()
+{	
+	if (m_fDist_Target <= 80.f && m_fSpd >= 10.f)
+	{
+		m_fSpd -= dTime * 3.f;
+	}
+}
+
+void Enemy::Accelerate()
+{
+	if (m_fDist_Target >= 100 && m_fSpd <= m_fMaxSpd)
+	{
+		m_fSpd += dTime * 5.f;
+	}
+}
+
+void Enemy::Kiting()
+{
+	//쏘면서 다가오다가 확 꺽기
 
 
-	
-	
 
 }
 
 void Enemy::Chase()
-{//뒤에서 총 쏘면서 쫓아오는거
-	//0. 타겟 세팅 완전 그 플레이어
-	//1. 뒤에서 달려오면서 총 쏨
-	//2. 만약 플레이어가 급 정거 등등 하면 관성처럼 약간은 앞으로 가서 회전하기.
+{
+	//존나 달려와서 존나 쏴 그냥
+	Target_Setting(true);
+	Target_Update();
+
+	Look_Target();
+	Go_Straight();
+
+	if (m_fDist_Target <= 80.f && m_fDist_Target >= 20.f)
+	{
+		Shoot();
+	}
+
+	//보고 거리 가까워 지면 딴 곳 타겟으로 잡고 돌기
+
 
 }
 
 void Enemy::Drop()
-{//폭탄 떨구고 급선회 하는거
-	//0. 아무래도 앞에서 달려오다가 미사일 발사하고 확 도는거
+{
+	//폭탄 떨구고 ㅌㅌㅌ 하는거
+	//0. 아무래도 앞에서 달려오다가 미사일 발사하고 확 도는게 낫겠지?
+	//1. 잠시 텀 뒀다가 발사하기
+	if (Missile_Reloading())
+	{
+		Go_ToPos(m_vRandPos);
+	}
+	else 
+	{
+		Target_Setting(true);
+		Target_Update();
+		Look_Target();
+
+		Go_Straight();
+
+		if (m_fDist_Target <= 100.f)
+		{
+			if (Missile())
+			{
+				m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
+				m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
+				m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
+			}
+		}
+	}
+
 
 }
 
 void Enemy::Hold()
 {
 	//그냥 자리에 홀드 박아놓고 두두두두두두두
+	//쏘다가 일정거리 이상 들어오면 ㅌㅌㅌㅌ 하다가 다시 자리잡기
+
+	
+	//m_fHoldDelta += dTime; _pos
+
+	if (m_fDist_Target >= 50.f && m_iCurRound != 0)
+	{
+		m_bHoldMove = false;
+		Target_Setting(true);
+		Target_Update();
+		Look_Target();
+		Shoot();
+	}
+	else { m_bHoldMove = true; }
+	
+	if(m_bHoldMove)
+	{//그냥 일정 시간동안 움직이기
+		m_bHoldMove = true;
+
+		if (m_fHoldDelta == 0.f)
+		{
+			m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
+			m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
+			m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
+		}
+
+		m_fHoldDelta += dTime;
+		
+		
+
+		Go_ToPos(m_vRandPos);
+
+		if (m_fHoldDelta >= 3.f)
+		{
+			m_bHoldMove = false;
+
+			m_fHoldDelta = 0.f;
+		}
+	}
+
 }
 
  

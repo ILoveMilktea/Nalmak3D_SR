@@ -6,8 +6,15 @@ class Enemy :
 public:
 	struct Desc 
 	{
-		float fSpd = 10.f;
-		float fLookSpd = 0.5;
+		float fMaxSpd = 20.f;
+		float fLookSpd = 1.f;
+		float fFov = 90.f;
+
+		float fFpm = 300.f;
+		int	iRound = 50;
+
+		float fFpm_Missile = 30.f;
+		int iRound_Missile = 1; 
 
 	};
 public:
@@ -24,6 +31,8 @@ public:
 	void Target_Update(); 
 	void Look_Target();
 	
+	bool Fov_Check();
+
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
 	
@@ -38,6 +47,7 @@ public: /* Set */
 
 
 public: /* Move */
+	void Go_ToPos(Vector3 _pos);
 	void Go_Straight(); 
 	void Lean();
 	void Horizontally(); 
@@ -46,11 +56,17 @@ public: /* Move */
 	void Dive(); //급 하강
 	void Soar(); //급 상승
 
-	void Shoot();
-	void Misile();
+	bool Shoot();
+	void Reloading();
+
+	bool Missile();
+	bool Missile_Reloading();
+
+	void Decelerate();
+	void Accelerate();
 
 public: /* pattern*/
-	void Rush();
+	void Kiting();
 	void Chase();
 	void Drop();
 	void Hold();
@@ -62,16 +78,30 @@ private:
 	int	m_iAtt = 0;
 	int m_iFullHp = 0;
 	int m_iCurHp = 0;
-	int m_iFpm = 0; //Fire per minute 연사력
+	
+	float m_fFpm = 0; //Fire per minute 연사력
+	float m_fFpmDelta = 0;
+	int m_iFullRound = 100;
+	int m_iCurRound = 0;
+	float m_fRoundDelta = 0.f;
 
+	float m_fFpm_Missile = 0;
+	float m_fFpmDelta_Missile = 0;
+	int m_iFullRound_Missile = 5;
+	int m_iCurRound_Missile = 0;
+	float m_fRoundDelta_Missile = 0.f;
 
-	float m_fSpd = 10.f;
+	float m_fMaxSpd = 0.f;
+	float m_fSpd = 20.f;
 	float m_fLookSpd = 0.5f;
 	//Spd : LookSpd = 20 : 1
 
 	float m_fHorizonSpd = 10.f;
 
-	float m_fDist_Target = 0.f;
+
+	float	m_fDist_Target = 0.f;
+	float	m_fFov = 90.f;
+	bool	m_bFov = false;
 
 	float m_fInner = 0.f;//CurInner 
 
@@ -83,6 +113,10 @@ private:
 	float m_fQuartRotZ = 0.f;
 	Quaternion m_QuartRot = { 0.f, 0.f, 0.f, 0.f };
 	
+	enum ePattern { RUSH, IDLE, CHASE, DROP, HOLD};
+	float m_fHoldDelta = 0.f;
+	Vector3 m_vRandPos = { 0.f,0.f,0.f };
+	bool	m_bHoldMove = false;
 
 #pragma region ForLean
 	float m_fTurnDeltaTime = 0.f;

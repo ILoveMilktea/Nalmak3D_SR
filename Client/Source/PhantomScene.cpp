@@ -23,6 +23,8 @@ PhantomScene::~PhantomScene()
 
 void PhantomScene::Initialize()
 {
+	srand(time(NULL));
+
 	GameObject* player;
 	{
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();

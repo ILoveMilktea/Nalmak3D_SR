@@ -1,15 +1,7 @@
 #pragma once
 
-/*
-몬스타 매니져
-	몬스타 보관
-	몬스타 생성
-	현재 전투 스테이트 받아오기
-*/
-#ifndef _ENEMY_MANAGER_H_
-#define _ENEMY_MANAGER_H_
-
 #include "Component.h"
+
 class EnemyManager : public Component
 {
 public:
@@ -48,5 +40,3 @@ private:
 
 
 };
-
-#endif
