@@ -118,13 +118,9 @@
     <ClInclude Include="..\Include\UILabScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="..\Include\ShootingState.h">
       <Filter>04.State</Filter>
     </ClInclude>
-=======
-    <ClInclude Include="..\Include\ShootingState.h" />
->>>>>>> 0579131a4def43ac46d68430816dfd5ba2725b8f
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -229,13 +225,9 @@
     <ClCompile Include="..\Source\UILabScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\Source\ShootingState.cpp">
       <Filter>04.State</Filter>
     </ClCompile>
-=======
-    <ClCompile Include="..\Source\ShootingState.cpp" />
->>>>>>> 0579131a4def43ac46d68430816dfd5ba2725b8f
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
