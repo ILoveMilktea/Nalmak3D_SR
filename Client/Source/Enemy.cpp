@@ -6,6 +6,9 @@
 
 Enemy::Enemy(Desc * _Desc)
 {
+	m_fSpd = _Desc->fSpd;
+	m_fLookSpd = _Desc->fLookSpd;
+	m_fFpm = _Desc->fFpm;
 }
 
 Enemy::~Enemy()
@@ -22,21 +25,33 @@ void Enemy::Update()
 
 	Target_Update();
 
-	Look_Target();
-	Horizontally();
-	Go_Straight();
+	//Look_Target();
+	//Horizontally();
+	Rush();
+	//Go_Straight();
 	
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_SPACE))
+	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_SPACE))
+	//{
+	//	Shoot();
+	//}
+	
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_ARROW))
 	{
- 		Shoot();
+		Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), -dTime*10.f);
+		m_transform->rotation *= qTemp;
 	}
-	
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_ARROW))
+	{
+		Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), dTime*10.f);
+		m_transform->rotation *= qTemp;
+	}
 #pragma region DebugLog
 	//DEBUG_LOG(L"Target On?", bTarget);
-	//DEBUG_LOG(L"타겟 까지의 거리", m_fDist_Target);
-	//DEBUG_LOG(L"타겟과의 내적 값", m_fInner);
+	DEBUG_LOG(L"타겟 까지의 거리", m_fDist_Target);
+	DEBUG_LOG(L"타겟과의 내적 값", m_fInner);
 	//DEBUG_LOG(L"UpVector과의 내적 값", m_fUpInner);
 	//DEBUG_LOG(L"Up Angle", m_fUpAngle);
+	DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
 #pragma endregion
 }
 
@@ -52,6 +67,7 @@ void Enemy::Target_Setting(bool _onoff)
 			/* First Inner Setting */
 			Vector3 vDir = m_pTarget->GetTransform()->position - m_transform->position;
 			D3DXVec3Normalize(&vDir, &vDir);
+			
 			m_fInner_First = D3DXVec3Dot(&vDir, &m_transform->GetForward());
 
 			bTarget = true;
@@ -103,6 +119,20 @@ void Enemy::Look_Target()
 	{
 		m_transform->LookAt(m_pTarget, m_fLookSpd, &m_QuartRot);
 	}
+}
+
+bool Enemy::Fov_Check()
+{
+	if (D3DXToRadian(m_fFov/2.f) >= acosf(m_fInner))
+	{
+		m_bFov = true;
+		return true; 
+	}
+	else { m_bFov = false; 
+	return false;
+	}
+
+	
 }
 
 void Enemy::Damaged(const int & _playerDmg)
@@ -260,22 +290,27 @@ void Enemy::Horizontally()
 void Enemy::Turn()
 {
 
-
-
 }
 
 void Enemy::Dive()
 {
+
 }
 
 void Enemy::Soar()
 {
+
 }
 
 void Enemy::Shoot()
 {
+	m_fFpmDelta += dTime;
 
-	Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
+	if (m_fFpmDelta >= 60.f/m_fFpm && Fov_Check())
+	{
+		Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
+		m_fFpmDelta = 0.f;
+	}
 
 	//따발총
 }
@@ -293,7 +328,11 @@ void Enemy::Rush()
 	//3. Distance 어느 정도 오면 발사 하고 LookTarget풀기
 	//4. 그 방향으로 이동하다가 Turn으로 방향바꾸고 다시 다른 패턴
 
+	if (m_fDist_Target <= 50.f)
+	{
+		Shoot();
 
+	}
 	
 	
 

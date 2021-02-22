@@ -220,7 +220,6 @@
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
-    <ClInclude Include="..\Include\ShootingState.h" />
     <ClInclude Include="..\Include\SingleLine.h" />
     <ClInclude Include="..\Include\Stage2Scene.h" />
     <ClInclude Include="..\Include\StageManager.h" />
@@ -259,7 +258,6 @@
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
-    <ClCompile Include="..\Source\ShootingState.cpp" />
     <ClCompile Include="..\Source\SingleLine.cpp" />
     <ClCompile Include="..\Source\Stage2Scene.cpp" />
     <ClCompile Include="..\Source\StageManager.cpp" />

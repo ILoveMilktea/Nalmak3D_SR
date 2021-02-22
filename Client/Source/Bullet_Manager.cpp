@@ -48,7 +48,7 @@ void Bullet_Manager::Fire(Vector3 _pos, Quaternion _rot)
 	GameObject* Bullet_obj = INSTANTIATE(OBJECT_TAG_BULLET, L"Bullet");
 	Bullet_obj->SetPosition(_pos);
 	Bullet_obj->GetTransform()->rotation = _rot;
-	Bullet_obj->SetScale(0.1f, 0.1f, 0.1f);
+	Bullet_obj->SetScale(0.5f, 0.5f, 0.5f);
 	
 	Bullet::Desc Bullet_Desc;
 	Bullet_Desc.fSpd = 50.f;
@@ -57,7 +57,7 @@ void Bullet_Manager::Fire(Vector3 _pos, Quaternion _rot)
 
 	MeshRenderer::Desc Bullet_Mesh;
 	Bullet_Mesh.mtrlName = L"default";
-	Bullet_Mesh.meshName = L"sphere";
+	Bullet_Mesh.meshName = L"box";
 	Bullet_obj->AddComponent<MeshRenderer>(&Bullet_Mesh);
 
 

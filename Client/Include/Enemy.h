@@ -7,8 +7,8 @@ public:
 	struct Desc 
 	{
 		float fSpd = 10.f;
-		float fLookSpd = 0.5;
-
+		float fLookSpd = 0.5f;
+		float fFpm = 120.f;
 	};
 public:
 	Enemy(Desc* _Desc);
@@ -24,6 +24,8 @@ public:
 	void Target_Update(); 
 	void Look_Target();
 	
+	bool Fov_Check();
+
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
 	
@@ -62,8 +64,8 @@ private:
 	int	m_iAtt = 0;
 	int m_iFullHp = 0;
 	int m_iCurHp = 0;
-	int m_iFpm = 0; //Fire per minute 연사력
-
+	float m_fFpm = 0; //Fire per minute 연사력
+	float m_fFpmDelta = 0;
 
 	float m_fSpd = 10.f;
 	float m_fLookSpd = 0.5f;
@@ -71,7 +73,9 @@ private:
 
 	float m_fHorizonSpd = 10.f;
 
-	float m_fDist_Target = 0.f;
+	float	m_fDist_Target = 0.f;
+	float	m_fFov = 90.f;
+	bool	m_bFov = false;
 
 	float m_fInner = 0.f;//CurInner 
 
@@ -83,6 +87,7 @@ private:
 	float m_fQuartRotZ = 0.f;
 	Quaternion m_QuartRot = { 0.f, 0.f, 0.f, 0.f };
 	
+	enum ePattern { RUSH, IDLE, CHASE, DROP, HOLD};
 
 #pragma region ForLean
 	float m_fTurnDeltaTime = 0.f;

@@ -18,7 +18,6 @@ public:
 	Transform(Desc* _desc);
 	~Transform();
 private:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;

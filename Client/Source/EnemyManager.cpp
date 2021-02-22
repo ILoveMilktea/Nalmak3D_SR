@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Include\EnemyManager.h"
+#include "../Include/EnemyManager.h"
 
 #include "DogFightState.h"
 #include "ShootingState.h"
@@ -11,21 +11,19 @@ EnemyManager* EnemyManager::m_Instance = nullptr;
 
 
 EnemyManager::EnemyManager(Desc * _Desc)
-{//유니티의 어웨이크
-
-	///* 현재 전투 상황 3가지를 스테이트로 관리 할 에정이다 이거야. */
+{
 	//m_gameObject->AddComponent<StateControl>(); 
 	////component의 m_gameObject => 해당 컴포넌트를 가지고 있는 게임옵h
 	//GetComponent<StateControl>()->AddState<DogFightState>(L"dogFight");
 	//GetComponent<StateControl>()->AddState<ShootingState>(L"shoot");
 	//GetComponent<StateControl>()->AddState<BossState>(L"boss");
-	//
-	//GetComponent<StateControl>()->InitState(L"dogFight");
 
+	//GetComponent<StateControl>()->InitState(L"dogFight");
 }
 
 EnemyManager::~EnemyManager()
 {
+
 }
 
 EnemyManager * EnemyManager::GetInstance()
@@ -60,7 +58,7 @@ void EnemyManager::Update()
 {
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
 	{
-		Enemy_Spawn(Vector3(0, 0, 0));
+		Enemy_Spawn(Vector3(0, 0, 150));
 	}
 }
 
@@ -90,10 +88,6 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos)
 	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 
 
-
-
-	
-
 }
 
 void EnemyManager::Spawn_Rush()
@@ -119,7 +113,7 @@ void EnemyManager::Spawn_Rush()
 void EnemyManager::Spawn_Chase()
 {
 	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
-	//Enemy_obj->SetPosition(_pos);
+	Enemy_obj->SetPosition(0,0,0);
 	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
 
 	Enemy_obj->AddComponent<StateControl>();

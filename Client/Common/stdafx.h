@@ -19,6 +19,8 @@
 #include <crtdbg.h>
 #include <assert.h>
 
+#pragma warning(disable:4819)
+
 using namespace std;
 
 

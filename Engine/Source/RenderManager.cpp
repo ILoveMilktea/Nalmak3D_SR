@@ -155,7 +155,7 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	ShadePass(_cBuffer); // GBuffer + Lightpass 합성
 
-	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
+	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Diffuse")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
 	TransparentPass(_cBuffer); // 투명객체를 그림
 }
