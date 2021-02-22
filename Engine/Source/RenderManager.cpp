@@ -175,7 +175,7 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Light");
 	ClearRenderTarget(L"GBuffer_Shade");
 
-	SkyboxPass(_cBuffer);
+	//SkyboxPass(_cBuffer);
 
 	GBufferPass(_cam, _cBuffer); // GBuffer -> Gemotry 를 그림 -> 기하도형
 

@@ -26,6 +26,6 @@ void Bullet::Update()
 	
 	if (m_fDeltaTime >= 10.f)
 	{
-		DESTROY((GameObject*)this);
+		DESTROY(m_gameObject);
 	}
 }

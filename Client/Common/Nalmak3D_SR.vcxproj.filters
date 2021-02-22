@@ -61,9 +61,6 @@
     <ClInclude Include="..\Include\Enemy.h">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Enemy_Rush.h">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Rush</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Enemy_Idle.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle</Filter>
     </ClInclude>
@@ -74,10 +71,7 @@
       <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Bullet_Manager.h">
-      <Filter>02.Component\00.Manager\Bullet\00%29Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Bullet.h">
-      <Filter>02.Component\00.Manager\Bullet</Filter>
+      <Filter>02.Component\00.Manager\BulletManager\00%29Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\SceneChanger.h">
       <Filter>02.Component\01.Utility</Filter>
@@ -90,9 +84,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\ClimbTerrain.h">
       <Filter>02.Component\01.Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ShootingState.h">
-      <Filter>02.Component\00.Manager\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PrintInfo.h">
       <Filter>02.Component\01.Utility</Filter>
@@ -120,6 +111,15 @@
     </ClInclude>
     <ClInclude Include="..\Include\ShootingState.h">
       <Filter>04.State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Bullet.h">
+      <Filter>02.Component\00.Manager\BulletManager\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Missile.h">
+      <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ShootingState.h">
+      <Filter>01.Scene\00.Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +168,6 @@
     <ClCompile Include="..\Source\Enemy.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Enemy_Rush.cpp">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Rush</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Enemy_Idle.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle</Filter>
     </ClCompile>
@@ -181,10 +178,7 @@
       <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Bullet_Manager.cpp">
-      <Filter>02.Component\00.Manager\Bullet\00%29Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Bullet.cpp">
-      <Filter>02.Component\00.Manager\Bullet</Filter>
+      <Filter>02.Component\00.Manager\BulletManager\00%29Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\SceneChanger.cpp">
       <Filter>02.Component\01.Utility</Filter>
@@ -197,9 +191,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\ClimbTerrain.cpp">
       <Filter>02.Component\01.Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ShootingState.cpp">
-      <Filter>02.Component\00.Manager\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PrintInfo.cpp">
       <Filter>02.Component\01.Utility</Filter>
@@ -227,6 +218,15 @@
     </ClCompile>
     <ClCompile Include="..\Source\ShootingState.cpp">
       <Filter>04.State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Bullet.cpp">
+      <Filter>02.Component\00.Manager\BulletManager\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Missile.cpp">
+      <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ShootingState.cpp">
+      <Filter>01.Scene\00.Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -310,15 +310,6 @@
     <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold">
       <UniqueIdentifier>{d0f1736a-3073-4268-b99a-eb82fb56c575}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\Bullet">
-      <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Bullet\00%29Manager">
-      <UniqueIdentifier>{a62225df-353e-428f-82dd-4d2fca9da824}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Bullet\Missile">
-      <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\01.Utility">
       <UniqueIdentifier>{e9b71a8c-da3c-4ad5-8464-e03f0375b2ec}</UniqueIdentifier>
     </Filter>
@@ -336,6 +327,18 @@
     </Filter>
     <Filter Include="03.Resource\02.Shader\Common">
       <UniqueIdentifier>{6b5467bb-1bd2-4774-8798-9a69fc77288c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\BulletManager">
+      <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\BulletManager\00%29Manager">
+      <UniqueIdentifier>{a62225df-353e-428f-82dd-4d2fca9da824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\BulletManager\Missile">
+      <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\BulletManager\Bullet">
+      <UniqueIdentifier>{23765436-d43d-4b2e-aa6d-67b00e77d76c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
