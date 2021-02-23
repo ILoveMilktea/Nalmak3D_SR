@@ -22,16 +22,16 @@ void DrawGizmo::SetActiveHandles(bool _value)
 
 bool DrawGizmo::CheckHandlePicked()
 {
-	if (!m_forwardHandle->GetComponent<PositionHandle>()->CheckActive())
-		return false;
+	if (m_forwardHandle->GetComponent<PositionHandle>()->CheckPicked())
+		return true;
 
-	if (!m_rightHandle->GetComponent<PositionHandle>()->CheckActive())
-		return false;
+	if (m_rightHandle->GetComponent<PositionHandle>()->CheckPicked())
+		return true;
 
-	if (!m_upHandle->GetComponent<PositionHandle>()->CheckActive())
-		return false;
+	if (m_upHandle->GetComponent<PositionHandle>()->CheckPicked())
+		return true;
 
-	return true;
+	return false;
 }
 
 

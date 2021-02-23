@@ -33,12 +33,18 @@ void MeshPicking::Update()
 			auto handle = GetComponent<PositionHandle>();
 			if (handle)
 			{
-				handle->ActHandle(true);
+				handle->PickHandle(true);
 			}
 		}
 		else
 		{
-			if (m_gizmo && m_gizmo->CheckHandlePicked())
+			auto handle = GetComponent<PositionHandle>();
+			if (handle)
+			{
+				handle->PickHandle(true);
+			}
+
+			if (m_gizmo && !m_gizmo->CheckHandlePicked())
 			{
 				m_gizmo->SetActiveHandles(false);
 			}
@@ -50,7 +56,7 @@ void MeshPicking::Update()
 		auto handle = GetComponent<PositionHandle>();
 		if (handle)
 		{
-			handle->ActHandle(false);
+			handle->PickHandle(false);
 		}
 	}
 }

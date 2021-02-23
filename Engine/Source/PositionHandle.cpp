@@ -36,7 +36,7 @@ void PositionHandle::Initialize()
 
 void PositionHandle::Update()
 {
-	if (m_act)
+	if (m_isPick)
 		MoveTarget();
 }
 
