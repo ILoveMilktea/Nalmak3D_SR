@@ -52,6 +52,7 @@ struct ConstantBuffer
 	Matrix invView;
 	Matrix invProj;
 	Vector3 worldCamPos;
+	Vector3 worldCamLook;
 };
 #pragma endregion Constant Buffer
 //

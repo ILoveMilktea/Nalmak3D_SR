@@ -11,6 +11,7 @@ struct cBuffer
 	matrix invView;
 	matrix invProj;
 	float3 worldCamPos;
+	float3 worldCamLook;
 
 };
 

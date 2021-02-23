@@ -193,6 +193,7 @@ Vector3 Camera::GetCamToMouseWorldDirection()
 	screenPos.x = (float)point.x;
 	screenPos.y = (float)point.y;
 
+
 	Vector3 camToScreenDirection_ViewSpace;
 	Vector3 camToScreenDirection_WorldSpace;
 	Matrix invView;
@@ -207,6 +208,8 @@ Vector3 Camera::GetCamToMouseWorldDirection()
 
 	
 }
+
+
 
 void Camera::SetRenderTarget(UINT _index, wstring  _rtName)
 {

@@ -37,6 +37,7 @@ public: /* For Rendering */
 	const Matrix& GetWorldMatrix();
 	const Matrix& GetUIWorldMatrix();
 	const Matrix& GetNoneScaleWorldMatrix();
+	const Matrix& GetUINoneScaleWorldMatrix();
 	Vector3 GetWorldPosition();
 	Quaternion GetWorldRotation();
 	Vector3 GetForward();

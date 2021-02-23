@@ -54,11 +54,39 @@ float4 CalcPointLight(PointLight _pointLight,float3 _camPos, float3 _worldPos, f
 	return color * attenuation;
 }
 
-//float4 CalcLightInternal(baseLightInfo _light, float3 _lightDir, float3 _normal)
-//{
-//	float4 ambientColor = float4(_light.color, 1.0) * _light.ambientIntensity;
-//	float diffuseFactor = dot(_normal, -lightDir);
-//
-//	float4 diffuseColor = 0;
-//	float4 specular
-//}
+float G1V(float _dotNV, float _k)
+{
+	return 1.0f / (_dotNV * (1.0f - _k) + _k);
+}
+
+float LightingGGX_Ref(float3 _N, float _V, float3 _L, float _F0, float _Roughness)
+{
+	float alpha = _Roughness * _Roughness;
+
+	float3 H = normalize(_V + _L);
+
+	float dotNL = saturate(dot(_N, _L));
+	float dotNV = saturate(dot(_N, _V));
+	float dotNH = saturate(dot(_N, H));
+	float dotLH = saturate(dot(_L, H));
+
+	float F; // Fresnel
+	float D; // GGX ref
+	float V; // smith's schlick
+
+	float alphaSqr = alpha * alpha;
+	const float PI = 3.141592f;
+	float denom = dotNH * dotNH * (alphaSqr - 1.0) + 1.0f;
+	D = alphaSqr / (PI * denom * denom);
+
+	float dotLH5 = pow(1.0f - dotLH, 5);
+	F = _F0 + (1.0 - _F0) * dotLH5;
+
+
+	float k = alpha / 2.0f;
+	V = G1V(dotNL, k) * G1V(dotNV, k);
+
+	float specular = dotNL * D * F * V;
+
+	return specular;
+}

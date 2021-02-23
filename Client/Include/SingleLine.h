@@ -10,8 +10,8 @@ class SingleLine :
 public:
 	struct Desc
 	{
-		Vector3 point1;
-		Vector3 point2;
+		Vector3* point1;
+		Vector3* point2;
 	};
 
 public:
@@ -23,8 +23,8 @@ public:
 	
 private:
 	Core* m_core;
-	Vector3 m_point1;
-	Vector3 m_point2;
+	Vector3* m_point1;
+	Vector3* m_point2;
 };
 
 

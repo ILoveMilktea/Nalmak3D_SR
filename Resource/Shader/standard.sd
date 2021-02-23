@@ -7,7 +7,7 @@ inputLayout "2"
 renderTarget "GBuffer_Diffuse"
 renderTarget "GBuffer_Normal"
 renderTarget "GBuffer_Depth"
-renderTarget "GBuffer_Position"
+renderTarget "GBuffer_CookTorrance"
 
 primitive "2"
 

@@ -38,6 +38,9 @@
     <Filter Include="04.Manager">
       <UniqueIdentifier>{b9c6cf20-3d5f-4972-8404-f7cc08d211bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Component">
+      <UniqueIdentifier>{84394786-98c7-475e-ad0f-d35da6039698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">

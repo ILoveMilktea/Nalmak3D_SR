@@ -53,8 +53,8 @@ public: /* Move */
 	void Horizontally(); 
 	void Turn(); //Like Screw
 	
-	void Dive(); //급 하강
-	void Soar(); //급 상승
+	bool Dive(); //급 하강
+	bool Soar(); //급 상승
 
 	bool Shoot();
 	void Reloading();
@@ -98,6 +98,11 @@ private:
 
 	float m_fHorizonSpd = 10.f;
 
+	Vector3 m_vOriginForward = { 0.f, 0.f, 0.f };
+	bool	m_bDive = false;
+	float	m_fDiveInner = 0.f;
+	bool	m_bSoar = false;
+	float	m_fSoarInner = 0.f;
 
 	float	m_fDist_Target = 0.f;
 	float	m_fFov = 90.f;
@@ -117,6 +122,8 @@ private:
 	float m_fHoldDelta = 0.f;
 	Vector3 m_vRandPos = { 0.f,0.f,0.f };
 	bool	m_bHoldMove = false;
+
+	bool	m_bDropMove = false;
 
 #pragma region ForLean
 	float m_fTurnDeltaTime = 0.f;

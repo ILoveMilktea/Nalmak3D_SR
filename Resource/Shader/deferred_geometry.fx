@@ -6,7 +6,6 @@ texture g_diffuse;
 texture g_depth;
 texture g_normal;
 texture g_light;
-texture g_skyBox;
 
 sampler DiffuseSampler = sampler_state
 {
@@ -24,10 +23,7 @@ sampler LightSampler = sampler_state
 {
 	texture = g_light;
 };
-sampler SkySampler = sampler_state
-{
-	texture = g_skyBox;
-};
+
 
 struct VS_INPUT
 {
@@ -70,16 +66,20 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	float3 diffuse = tex2D(DiffuseSampler, _input.uv).xyz;
 	float3 normal = tex2D(NormalSampler, _input.uv).xyz;
 	float3 light = tex2D(LightSampler, _input.uv).xyz;
-	float3 sky;
+
+	float3 final;
 	if (normal.x == 0 && normal.y == 0 && normal.z == 0)
 	{
-		sky = tex2D(SkySampler, _input.uv).xyz;
+		final =  diffuse;
+	}
+	else
+	{
+		final = light * diffuse;
 	}
 
-	float3 final = light * diffuse + sky;
-
+	
 	o.color = float4(final, 1);
-	//o.color = 1;
+
 	return o;
 }
 

@@ -1,3 +1,5 @@
+#include "..\..\TerrainTool\Include\Core.h"
+#include "..\..\TerrainTool\Include\Core.h"
 #include "Core.h"
 
 #include "Exception.h"
@@ -152,6 +154,11 @@ GameObject * Core::FindObjectByName(_OBJECT_TAG _tag, wstring name)
 	return m_objectManager->Find(_tag, name);
 }
 
+Camera * Core::GetMainCamera()
+{
+	return m_renderManager->GetMainCamera();
+}
+
 UINT Core::GetWindowWidth()
 {
 	return m_renderManager->GetWindowWidth();
@@ -161,6 +168,12 @@ UINT  Core::GetWindowHeight()
 {
 	return m_renderManager->GetWindowHeight();
 }
+
+void Core::SetWindowSize(UINT _wincx, UINT _wincy)
+{
+	m_renderManager->SetWindowSize(_wincx, _wincy);
+}
+
 
 HWND  Core::GetHWND()
 {

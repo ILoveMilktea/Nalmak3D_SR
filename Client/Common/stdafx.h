@@ -4,6 +4,7 @@
 //
 
 #pragma once
+#pragma warning(disable:4819)
 
 #include "targetver.h"
 
@@ -29,5 +30,7 @@ using namespace std;
 #include "Enum.h"
 
 #include "Core.h"
+#include "UIFactory.h"
+
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.

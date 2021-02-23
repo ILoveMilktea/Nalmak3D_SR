@@ -4,9 +4,11 @@
 
 
 
+#pragma warning(disable:4251)
+#pragma warning(disable:4819)
+
 #include <windows.h>
 
-// C 런타임 헤더 파일입니다.
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>

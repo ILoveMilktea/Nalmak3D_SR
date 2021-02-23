@@ -5,7 +5,8 @@
 
 Button::Button(Desc * _desc)
 {
-	m_event += _desc->eventFunc;
+	if(_desc->eventFunc != nullptr)
+		m_event += _desc->eventFunc;
 
 	m_normalColor = { 1.f,1.f,1.f,1.f };
 	m_highlightColor = { 0.8f,0.8f,0.8f,1.f };
@@ -135,6 +136,44 @@ void Button::ChangeState(BUTTON_STATE _state)
 
 	m_currentState = _state;
 }
+
+void Button::ChangeAllColor(Vector4 _color)
+{
+	ChangeNormalColor(_color);
+	ChangeHighlightColor(_color);
+	ChangePressedColor(_color);
+	ChangeDisableColor(_color);
+
+}
+
+void Button::ChangeAllTexture(wstring _name)
+{
+	ChangeNormalTexture(_name);
+	ChangeHighlightTexture(_name);
+	ChangePressedTexture(_name);
+	ChangeDisableTexture(_name);
+}
+
+void Button::ChangeNormalTexture(wstring _name)
+{
+	m_normalImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
+}
+
+void Button::ChangeHighlightTexture(wstring _name)
+{
+	m_highlightImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
+}
+
+void Button::ChangePressedTexture(wstring _name)
+{
+	m_pressedImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
+}
+
+void Button::ChangeDisableTexture(wstring _name)
+{
+	m_disableImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
+}
+
 bool Button::CheckCursorPosition()
 {
 	RECT* boundary = m_renderer->GetBoundary();
@@ -168,4 +207,19 @@ void Button::SetInteraction(bool _value)
 void Button::AddEventHandler(EventHandler _eventFunc)
 {
 	m_event += _eventFunc;
+}
+
+void Button::GetEventHandler(int _index)
+{
+	m_event.GetHandler(_index);
+}
+
+void Button::RemoveEventHandler(EventHandler _eventFunc)
+{
+	m_event -= _eventFunc;
+}
+
+void Button::RemoveEventHandler(int _index)
+{
+	m_event.RemoveHandler(_index);
 }

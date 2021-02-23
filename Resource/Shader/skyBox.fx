@@ -1,8 +1,8 @@
 #include "H_common.fx"
-
+#include "H_light.fx"
 
 texture g_skyBox;
-
+DirectionalLight g_directionalLight;
 
 samplerCUBE skyBoxSampler = sampler_state
 {
@@ -65,7 +65,9 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 PS_OUTPUT PS_Main_Default(PS_INPUT  _input) 
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
-	o.diffuse =texCUBE(skyBoxSampler, _input.uvw);
+	float diffuseFactor = max(dot(float3(0, 1, 0), -g_directionalLight.direction),0) + 0.2f;
+	o.diffuse = texCUBE(skyBoxSampler, _input.uvw) *diffuseFactor;
+
 
 	return o;
 }

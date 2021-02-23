@@ -45,9 +45,9 @@
 #include "CanvasRenderer.h"
 #include "SingleImage.h"
 #include "MeshPicking.h"
-
 #include "DeviceManager.h"
 #include "RenderManager.h"
+#include "Toggle.h"
 #pragma endregion
 
 class CollisionManager;
@@ -101,9 +101,12 @@ public:
 	// Search
 	GameObject* FindFirstObject(_OBJECT_TAG _tag);
 	GameObject* FindObjectByName(_OBJECT_TAG _tag, wstring name);
+	Camera* GetMainCamera();
 public:
 	UINT GetWindowWidth();
 	UINT GetWindowHeight();
+	void SetWindowSize(UINT _wincx, UINT _wincy);
+
 public:
 	HWND GetHWND();
 public:

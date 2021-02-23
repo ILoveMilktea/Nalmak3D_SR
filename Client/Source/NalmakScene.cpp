@@ -19,7 +19,7 @@ void NalmakScene::Initialize()
 	rot.xAxisSpeed = 1;
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 1.f;
-	light.ambientIntensity = 0.1f;
+	light.ambientIntensity = 0.2f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 30, 0)->AddComponent<AutoRotate>(&rot);
 	{
 		FreeMove::Desc free;
@@ -78,12 +78,7 @@ void NalmakScene::Initialize()
 		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Light")->GetTexture());
 		obj->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
 	}
-	{
-		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<CanvasRenderer>()->AddComponent<SingleImage>();
-		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_SkyBox")->GetTexture());
-		obj->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
-	}
+	
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 }

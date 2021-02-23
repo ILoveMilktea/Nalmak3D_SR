@@ -27,8 +27,8 @@ public:
 
 public:
 	void MoveTarget();
-	void ActHandle(bool _value) { m_act = _value; }
-	bool CheckActive() { return m_act; }
+	void PickHandle(bool _value) { m_isPick = _value; }
+	bool CheckPicked() { return m_isPick; }
 
 public:
 	Transform* m_target;
@@ -36,7 +36,7 @@ public:
 	Camera* m_camera;
 	DIR m_moveDir;
 
-	bool m_act;
+	bool m_isPick;
 };
 
 

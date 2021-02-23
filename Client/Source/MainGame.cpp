@@ -1,3 +1,5 @@
+#pragma warning(disable:4819)
+
 #include "stdafx.h"
 #include "MainGame.h"
 #include "Core.h"
@@ -13,8 +15,8 @@
 #include "NalmakScene.h"
 
 TimeManager* g_time;
-// 렌더링 파이프라인 
-// 로컬 - 월드 - 뷰 - 후면추려내기 - 조명 - 투영 - 클리핑 - 뷰포트 - 레스터라이즈
+// rendering pipeline 
+// local -> world -> view -> backface -> light -> projection -> cliping -> viewport -> rasterize
 
 
 MainGame::MainGame()
@@ -80,7 +82,7 @@ void MainGame::ApplicationSetting()
 	core.wincy = WINCY;
 	core.windowMode = true;
 
-	// 모든 리소스 기본경로 거는거 다 로드함
+	// all resource load in resource directory
 	core.resourceDirectoryPath;
 
 	m_engine->Initialize(g_hWnd, &core);
@@ -100,7 +102,9 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
-	m_engine->SetStartScene(L"phantom");
+
+	m_engine->SetStartScene(L"nalmak");
+
 }
 
 void MainGame::ReadyResource()
