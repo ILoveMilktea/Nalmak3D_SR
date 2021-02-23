@@ -25,13 +25,13 @@ void Missile::Update()
 {
 	m_fMissileDelta += dTime;
 
-	if (m_fMissileDelta < 1.f)
+	if (m_fMissileDelta < 0.5f)
 	{
 		//약간 밑으로 내려간 다음에
-		m_transform->position.y -= dTime * 10.f;
+		m_transform->position.y -= dTime * 5.f;
 	}
 
-	if (m_fMissileDelta >= 1.f)
+	if (m_fMissileDelta >= 0.5f)
 	{//발사하고 가속도
 		Accelerate(m_fMaxSpd);
 		m_transform->position += m_transform->GetForward() * m_fCurSpd * dTime;
@@ -52,6 +52,10 @@ void Missile::Accelerate(float _maxSpd)
 	{
 		//m_fCurSpd += dTime * 50.f;
 		m_fCurSpd = Nalmak_Math::Lerp(m_fCurSpd, m_fMaxSpd, dTime);
+		//Lerp : 첫번째 인자의 수를 받아와서 MaxSpd의 비율에서 DTime만큼 증가함
+		//		=> 그냥 += dTime 으로 하면 속도가 확 증가, 확 감소 하는디
+		//			Lerp로 하면 시작지점과 끝지점을 매번 받아와서 그 안에서 비율로 증감하는거라서 등속도가 됨.
+
 	}
 }
 

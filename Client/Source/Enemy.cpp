@@ -27,14 +27,22 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	Target_Setting(true);
+	Target_Update();
+
+	m_vOriginForward = m_transform->GetForward();
 }
 
 void Enemy::Update()
 {	
+
+	Target_Update();
 	// Kiting();
-	// Chase();
-	 Drop();
-	// Hold();
+	 //Chase();
+	// Drop();
+	//Hold();
+
+	Dive();
+
 	Reloading();
 
 	//Decelerate();
@@ -60,6 +68,8 @@ void Enemy::Update()
 	DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
 	DEBUG_LOG(L"Enemy Current Speed", m_fSpd);
 	DEBUG_LOG(L"Remain Round", m_iCurRound);
+
+
 #pragma endregion
 }
 
@@ -82,11 +92,12 @@ void Enemy::Target_Setting(bool _onoff)
 			return;
 		}
 
-		bTarget = false;
+		
 	}
 	else 
 	{
 		m_pTarget = nullptr;
+		bTarget = false;
 	}
 
 }
@@ -306,27 +317,52 @@ void Enemy::Turn()
 
 }
 
-void Enemy::Dive()
+bool Enemy::Dive()
 {
 	Target_Setting(false);
 	
+	Quaternion Xaxis = m_transform->RotateAxis(m_transform->GetRight(), dTime);
+	m_transform->rotation *= Xaxis;
+
+	// 다이브,소어 둘 다 시작 할때 원래 forward값 받아 놨다가 
+	// 그 값이랑 비교해서 수직이 될때까지 몸체 돌기
+	Vector3 Z = m_transform->GetForward();
+	//Vector3 WorldY = { 0.f,1.f,0.f };
+
+	m_fDiveInner = D3DXVec3Dot(&Z, &m_vOriginForward);
+
+	if (m_fDiveInner <= 0.1f && m_fDiveInner >= -0.1f) //범위 0에 가까우면
+	{
+		return true;
+	}
+
+	DEBUG_LOG(L"다이브 Inner", m_fDiveInner);
+	Go_Straight();
+	
+	return false;
+}
+
+bool Enemy::Soar()
+{
+	Target_Setting(false);
 
 	Quaternion Xaxis = m_transform->RotateAxis(m_transform->GetRight(), -dTime);
 	m_transform->rotation *= Xaxis;
 
+	Vector3 Z = m_transform->GetForward();
+	//Vector3 WorldY = { 0.f,1.f,0.f };
+
+	m_fSoarInner = D3DXVec3Dot(&Z, &m_vOriginForward);
+
+	if (m_fSoarInner <= 0.1f && m_fSoarInner >= -0.1f) //범위 0에 가까우면
+	{
+		return true;
+	}
+
+	DEBUG_LOG(L"Soar Inner", m_fSoarInner);
 	Go_Straight();
 
-}
-
-void Enemy::Soar()
-{
-	Target_Setting(false);
-
-
-	Quaternion Xaxis = m_transform->RotateAxis(m_transform->GetRight(), dTime);
-	m_transform->rotation *= Xaxis;
-
-	Go_Straight();
+	return false;
 }
 
 bool Enemy::Shoot()
@@ -432,8 +468,8 @@ void Enemy::Kiting()
 void Enemy::Chase()
 {
 	//존나 달려와서 존나 쏴 그냥
-	Target_Setting(true);
-	Target_Update();
+	//Target_Setting(true);
+	//Target_Update();
 
 	Look_Target();
 	Go_Straight();
@@ -441,6 +477,12 @@ void Enemy::Chase()
 	if (m_fDist_Target <= 80.f && m_fDist_Target >= 20.f)
 	{
 		Shoot();
+	}
+
+	//가까워지면 거리 좀 벌릴때 까지 이동.
+	if (m_fDist_Target <= 20.f)
+	{
+
 	}
 
 
@@ -451,15 +493,45 @@ void Enemy::Drop()
 	//플레이어를 따라오거나 맞은편에서 다가오다가
 	//수평에 가까우면 폭탄 쏘고 ㅌㅌㅌ
 
-	Target_Setting(true);
-	Target_Update();
-	Look_Target();
-	Go_Straight();
+	//Target_Setting(true);
+	//Target_Update();
+	
+	int i = -1;
 
-	if (m_fDist_Target <= 150.f && m_fInner >= 0.9f)
+	if (!m_bDropMove)
 	{
-		Missile();
+		Look_Target();
+		Go_Straight();
 
+		if (m_fDist_Target <= 150.f && m_fInner >= 0.9f)
+		{
+			if (Missile())
+			{
+				i = rand() % 2;
+				m_bDropMove = true;
+			}
+		}
+	}
+	else 
+	{
+		if(i ==0)
+		{
+			m_bDive = true;
+		}
+		if (i == 1)
+		{
+			m_bSoar = true;
+		}
+	}
+
+	if (m_bDive)
+	{
+		if (Dive())
+		{
+			m_bDive = false;
+			//여기서 일정시간동안 랜덤으루다가 움직이다가
+			//다시 플레이어 고정.
+		}
 	}
 
 
@@ -495,40 +567,41 @@ void Enemy::Hold()
 	//그냥 자리에 홀드 박아놓고 두두두두두두두
 	//쏘다가 일정거리 이상 들어오면 ㅌㅌㅌㅌ 하다가 다시 자리잡기
 
-	
 	//m_fHoldDelta += dTime; _pos
 
 	if (m_fDist_Target >= 50.f && m_iCurRound != 0)
 	{
 		m_bHoldMove = false;
-		Target_Setting(true);
-		Target_Update();
+		//Target_Setting(true);
+		//Target_Update();
 		Look_Target();
 		Shoot();
 	}
-	else { m_bHoldMove = true; }
+	else 
+	{ 
+		m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
+		m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
+		m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
+
+		m_bHoldMove = true; 
+	}
 	
 	if(m_bHoldMove)
 	{//그냥 일정 시간동안 움직이기
-		m_bHoldMove = true;
+		//m_bHoldMove = true;
 
 		if (m_fHoldDelta == 0.f)
-		{
-			m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
-			m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
-			m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
+		{ //이거보다 플레이어 기준에서 얼마정도 떨어진 곳?
+			//원래 랜덤위치 있었음.
 		}
 
 		m_fHoldDelta += dTime;
-		
-		
 
 		Go_ToPos(m_vRandPos);
 
 		if (m_fHoldDelta >= 3.f)
 		{
 			m_bHoldMove = false;
-
 			m_fHoldDelta = 0.f;
 		}
 	}
