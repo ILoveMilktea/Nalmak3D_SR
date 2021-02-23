@@ -1,5 +1,6 @@
 #include "..\Include\Toggle.h"
 #include "SingleImage.h"
+#include "CanvasRenderer.h"
 #include "Transform.h"
 
 Toggle::Toggle(Desc * _desc)
@@ -44,12 +45,13 @@ void Toggle::Update()
 
 void Toggle::LateUpdate()
 {
-	if (!m_interactive)
+	// click operation
+	if (m_renderer->IsPickingBlocked())
 		return;
 
-	if (m_input->GetKeyUp(KEY_STATE_LEFT_MOUSE))
+	if (m_renderer->MouseClickUp_InRect())
 	{
-		if (m_isCursorOnButton)
+		if (m_renderer->IsInteractive())
 		{
 			m_isOn = !m_isOn;
 
@@ -59,7 +61,7 @@ void Toggle::LateUpdate()
 
 			// 1. value change event
 			m_changeEvent[(int)m_isOn];
-			
+
 			// 2. button event
 			m_event.NotifyHandlers();
 		}
@@ -67,12 +69,13 @@ void Toggle::LateUpdate()
 		ChangeState(BUTTON_STATE_NORMAL);
 
 	}
-	else if (m_input->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	else if (m_renderer->MouseClickDown())
 	{
-		if (m_isCursorOnButton)
-		{
-			ChangeState(BUTTON_STATE_PRESSED);
-		}
+		ChangeState(BUTTON_STATE_PRESSED);
+	}
+	else if (m_renderer->MouseClickUp_OutRect())
+	{
+		ChangeState(BUTTON_STATE_NORMAL);
 	}
 }
 

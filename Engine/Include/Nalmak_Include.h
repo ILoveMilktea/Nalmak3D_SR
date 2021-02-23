@@ -9,7 +9,6 @@
 
 #include <windows.h>
 
-// C ·±Å¸ÀÓ Çì´õ ÆÄÀÏÀÔ´Ï´Ù.
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
@@ -37,8 +36,6 @@
 
 #include <assert.h>
 
-#pragma warning(disable:4251)
-#pragma warning(disable:4819)
 
 #include <DirectXMath.h>
 #include <d3d9.h>

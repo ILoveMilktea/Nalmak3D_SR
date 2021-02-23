@@ -28,8 +28,6 @@ public:
 
 public:
 	IDirect3DBaseTexture9* GetTexture();
-	RECT* GetBoundary();
-
 	
 private:
 	IDirect3DBaseTexture9* m_image;

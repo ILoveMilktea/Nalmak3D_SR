@@ -25,10 +25,10 @@ void UILabScene::Initialize()
 	// component add -> 생성자 -> 다음 프레임 업데이트 때 initialize
 	// 그니까 생성자나 initialize에서 뭔가 생성하면 순서 조심하세요
 
-	//CreatePauseButton();
+	CreatePauseButton();
 
 	//CreateRader();
-	CreateSplineCurve();
+	//CreateSplineCurve();
 
 	// meshName 목록
 	// box, line, quad, sphere, triangle, quadNoneNormal
@@ -61,8 +61,8 @@ void UILabScene::CreatePauseButton()
 	auto pauseButton = UIFactory::CreatePauseButton();
 	pauseButton->SetPosition(800.f, 500.f, 0.f);
 
-	auto buttontest = UIFactory::CreateButton();
-	buttontest->SetPosition(900.f, 100.f, 0.f);
+	auto toggle = UIFactory::CreateToggle();
+	toggle->SetPosition(1200.f, 500.f, 0.f);
 
 }
 

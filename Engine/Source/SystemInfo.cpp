@@ -4,6 +4,7 @@
 #include "DebugManager.h"
 #include "Transform.h"
 #include "RenderManager.h"
+#include "CanvasRenderer.h"
 SystemInfo::SystemInfo(Desc* _desc)
 {
 }
@@ -22,6 +23,7 @@ void SystemInfo::Initialize()
 	text.option = DT_LEFT | DT_NOCLIP;
 	text.color = D3DXCOLOR(1, 1, 1, 1);
 	m_gameObject->AddComponent<Text>(&text);
+	m_gameObject->AddComponent<CanvasRenderer>();
 	m_text = GetComponent<Text>();
 	assert(m_text && L"Must have text Component!");
 
