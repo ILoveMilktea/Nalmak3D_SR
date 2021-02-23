@@ -209,6 +209,7 @@
     <ClInclude Include="..\Include\FixToTarget.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
     <ClInclude Include="..\Include\HeeTestScene.h" />
+    <ClInclude Include="..\Include\Homing.h" />
     <ClInclude Include="..\Include\MainGame.h" />
     <ClInclude Include="..\Include\Missile.h" />
     <ClInclude Include="..\Include\MouseOption.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="..\Source\FixToTarget.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\HeeTestScene.cpp" />
+    <ClCompile Include="..\Source\Homing.cpp" />
     <ClCompile Include="..\Source\MainGame.cpp" />
     <ClCompile Include="..\Source\Missile.cpp" />
     <ClCompile Include="..\Source\MouseOption.cpp" />

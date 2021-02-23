@@ -8,9 +8,8 @@ class Missile :
 public:
 	struct Desc
 	{
-		float fMaxSpd = 200.f;
+		float fMaxSpd = 100.f;
 		int		iDmg = 50.f;
-		Vector3 vDest = { 0,0,0 };
 	};
 public:
 	Missile(Desc* _desc);
@@ -20,18 +19,18 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 
+	void Go_Straight();
 	void Accelerate(float _maxSpd);
-
-	void Go_Destination();
 
 	void Boom();
 private:
-	Vector3 m_vDest = { 0.f, 0.f, 0.f };
 	
 	int	m_iDmg = 0.f;
 	float m_fMaxSpd = 0.f;
 	float m_fCurSpd = 1.f;
 	
+	float m_fMissileDelta = 0.f;
+
 	int m_iA = 0;
 };
 

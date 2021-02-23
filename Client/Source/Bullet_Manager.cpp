@@ -44,10 +44,10 @@ void Bullet_Manager::Update()
 	
 }
 
-void Bullet_Manager::Fire(Vector3 _pos, Quaternion _rot)
+void Bullet_Manager::Fire(Vector3 _start, Quaternion _rot)
 {
 	GameObject* Bullet_obj = INSTANTIATE(OBJECT_TAG_BULLET, L"Bullet");
-	Bullet_obj->SetPosition(_pos);
+	Bullet_obj->SetPosition(_start);
 	Bullet_obj->GetTransform()->rotation = _rot;
 	Bullet_obj->SetScale(0.5f, 0.5f, 0.5f);
 	
@@ -64,14 +64,14 @@ void Bullet_Manager::Fire(Vector3 _pos, Quaternion _rot)
 
 }
 
-void Bullet_Manager::Fire_Missile(Vector3 _start, Vector3 _dest)
+void Bullet_Manager::Fire_Missile(Vector3 _start, Quaternion _rot)
 {
 	GameObject* Missile_obj = INSTANTIATE(OBJECT_TAG_BULLET, L"Missile");
 	Missile_obj->SetPosition(_start);
-	Missile_obj->SetScale(0.5f, 0.5f, 3.5f);
+	Missile_obj->GetTransform()->rotation = _rot;
+	Missile_obj->SetScale(0.5f, 0.5f, 2.5f);
 
 	Missile::Desc Missile_Desc;
-	Missile_Desc.vDest = _dest;
 	Missile_obj->AddComponent<Missile>(&Missile_Desc);
 
 	MeshRenderer::Desc Missile_Mesh;
