@@ -103,13 +103,7 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
-<<<<<<< HEAD
 	m_engine->SetStartScene(L"nalmak");
-=======
-
-	m_engine->SetStartScene(L"nalmak");
-
->>>>>>> ac4e9fdfcccfe66fdf14e7a4ed8a3383c521456a
 }
 
 void MainGame::ReadyResource()

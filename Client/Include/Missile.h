@@ -8,14 +8,8 @@ class Missile :
 public:
 	struct Desc
 	{
-<<<<<<< HEAD
-		float fMaxSpd = 200.f;
-		int		iDmg = 50;
-		Vector3 vDest = { 0,0,0 };
-=======
 		float fMaxSpd = 100.f;
-		int		iDmg = 50.f;
->>>>>>> ac4e9fdfcccfe66fdf14e7a4ed8a3383c521456a
+		int		iDmg = 50;
 	};
 public:
 	Missile(Desc* _desc);

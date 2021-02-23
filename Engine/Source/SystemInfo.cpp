@@ -19,8 +19,8 @@ void SystemInfo::Initialize()
 {
 
 	Text::Desc text;
-	text.width = m_fontSize.x;
-	text.height = m_fontSize.y;
+	text.width = (UINT)m_fontSize.x;
+	text.height = (UINT)m_fontSize.y;
 	text.option = DT_LEFT | DT_NOCLIP;
 	text.color = D3DXCOLOR(1, 1, 1, 1);
 	m_gameObject->AddComponent<Text>(&text);

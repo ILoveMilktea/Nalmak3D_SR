@@ -21,6 +21,7 @@
 #include "LineManager.h"
 #include "DebugManager.h"
 #include "LightManager.h"
+#include "CanvasGroup.h"
 
 
 #pragma region Component
@@ -72,6 +73,7 @@ public:
 		_OBJECT_TAG OBJECT_TAG_COUNT = 1;
 		_RENDER_LAYER RENDER_LAYER_COUNT = 1;
 		_COLLISION_LAYER COLLISION_LAYER_COUNT = 1;
+		_CANVAS_GROUP CANVAS_GROUP_COUNT = 1;
 	};
 public:
 	void Initialize(HWND handle, Desc* _desc);
@@ -129,6 +131,7 @@ private:
 	LightManager* m_lightManager;
 	TimeManager* m_timeManager;
 
+	CanvasGroup* m_canvasGroup;
 private:
 	DeviceManager* m_deviceManager;
 	RenderManager* m_renderManager;

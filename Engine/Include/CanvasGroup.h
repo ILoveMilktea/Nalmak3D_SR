@@ -3,6 +3,7 @@
 #define __CANVASGROUP_H__
 
 #include "Nalmak_Include.h"
+
 class CanvasRenderer;
 class NALMAK_DLL CanvasGroup
 {
