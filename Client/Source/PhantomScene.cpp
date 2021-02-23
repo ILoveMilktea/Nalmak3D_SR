@@ -35,7 +35,7 @@ void PhantomScene::Initialize()
 
 	{
 		MeshRenderer::Desc render;
-		render.mtrlName = L"standard";
+		render.mtrlName = L"default"; // 210223화 12:50 전근희 제대로 안나와서 설정 바꿨음
 		render.meshName = L"flight";
 
 		player = INSTANTIATE(OBJECT_TAG_PLAYER,L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<StateControl>()->AddComponent<PlayerInfoManager>()->AddComponent<DrawGizmo>()->AddComponent<MouseOption>();;

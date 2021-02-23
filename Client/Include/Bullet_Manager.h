@@ -24,9 +24,9 @@ public:
 	virtual void Update() override;
 
 public:
-	void Fire(Vector3 _pos, Quaternion _rot);
-	void Fire_Missile(Vector3 _start, Vector3 _dest);
-	
+	void Fire(Vector3 _start, Quaternion _rot);
+	void Fire_Missile(Vector3 _start, Quaternion _rot); //직선 미사일
+	void Fire_Homing(); //유도 미사일
 
 };
 

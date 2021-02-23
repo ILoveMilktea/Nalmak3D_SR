@@ -120,6 +120,10 @@
     </ClInclude>
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
+    <ClInclude Include="..\Include\ShootingState.h" />
+    <ClInclude Include="..\Include\Homing.h">
+      <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -228,6 +232,9 @@
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClCompile>
     <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="..\Source\Homing.cpp">
+      <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -339,6 +346,9 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\BulletManager\Bullet">
       <UniqueIdentifier>{23765436-d43d-4b2e-aa6d-67b00e77d76c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\BulletManager\Homing">
+      <UniqueIdentifier>{1f100bc1-d700-466c-a558-7862f16e388b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

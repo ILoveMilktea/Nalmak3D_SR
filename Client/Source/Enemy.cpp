@@ -30,36 +30,27 @@ void Enemy::Initialize()
 }
 
 void Enemy::Update()
-{
-	Target_Update();
-	//Look_Target();
-	////Horizontally();
-	
+{	
 	// Kiting();
 	// Chase();
 	 Drop();
 	// Hold();
 	Reloading();
 
-	Decelerate();
-	Accelerate();
-	//Go_Straight();
+	//Decelerate();
+	//Accelerate();
+
 	
-	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_SPACE))
+	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_ARROW))
 	//{
-	//	Shoot();
+	//	Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), -dTime*10.f);
+	//	m_transform->rotation *= qTemp;
 	//}
-	
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_ARROW))
-	{
-		Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), -dTime*10.f);
-		m_transform->rotation *= qTemp;
-	}
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_ARROW))
-	{
-		Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), dTime*10.f);
-		m_transform->rotation *= qTemp;
-	}
+	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_ARROW))
+	//{
+	//	Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), dTime*10.f);
+	//	m_transform->rotation *= qTemp;
+	//}
 #pragma region DebugLog
 	//DEBUG_LOG(L"Target On?", bTarget);
 	DEBUG_LOG(L"타겟 까지의 거리", m_fDist_Target);
@@ -317,12 +308,25 @@ void Enemy::Turn()
 
 void Enemy::Dive()
 {
+	Target_Setting(false);
+	
+
+	Quaternion Xaxis = m_transform->RotateAxis(m_transform->GetRight(), -dTime);
+	m_transform->rotation *= Xaxis;
+
+	Go_Straight();
 
 }
 
 void Enemy::Soar()
 {
+	Target_Setting(false);
 
+
+	Quaternion Xaxis = m_transform->RotateAxis(m_transform->GetRight(), dTime);
+	m_transform->rotation *= Xaxis;
+
+	Go_Straight();
 }
 
 bool Enemy::Shoot()
@@ -372,7 +376,7 @@ bool Enemy::Missile()
 
 		if (m_fFpmDelta_Missile >= 60.f / m_fFpm_Missile)
 		{
-			Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_pTarget->GetTransform()->position);
+			Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_transform->rotation);
 
 			--m_iCurRound_Missile;
 
@@ -439,39 +443,50 @@ void Enemy::Chase()
 		Shoot();
 	}
 
-	//보고 거리 가까워 지면 딴 곳 타겟으로 잡고 돌기
-
 
 }
 
 void Enemy::Drop()
 {
-	//폭탄 떨구고 ㅌㅌㅌ 하는거
-	//0. 아무래도 앞에서 달려오다가 미사일 발사하고 확 도는게 낫겠지?
-	//1. 잠시 텀 뒀다가 발사하기
-	if (Missile_Reloading())
-	{
-		Go_ToPos(m_vRandPos);
-	}
-	else 
-	{
-		Target_Setting(true);
-		Target_Update();
-		Look_Target();
+	//플레이어를 따라오거나 맞은편에서 다가오다가
+	//수평에 가까우면 폭탄 쏘고 ㅌㅌㅌ
 
-		Go_Straight();
+	Target_Setting(true);
+	Target_Update();
+	Look_Target();
+	Go_Straight();
 
-		if (m_fDist_Target <= 100.f)
-		{
-			if (Missile())
-			{
-				m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
-				m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
-				m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
-			}
-		}
+	if (m_fDist_Target <= 150.f && m_fInner >= 0.9f)
+	{
+		Missile();
+
 	}
 
+
+#pragma region Failed
+	//if (Missile_Reloading())
+	//{
+	//	Go_ToPos(m_vRandPos);
+	//}
+	//else 
+	//{
+	//	Target_Setting(true);
+	//	Target_Update();
+	//	Look_Target();
+
+	//	Go_Straight();
+
+	//	if (m_fDist_Target <= 100.f)
+	//	{
+	//		if (Missile())
+	//		{
+	//			m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
+	//			m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
+	//			m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
+	//		}
+	//	}
+	//}
+#pragma endregion
 
 }
 
