@@ -108,8 +108,11 @@
     </ClInclude>
     <ClInclude Include="..\Include\UILabScene.h">
       <Filter>01.Scene\01.Test</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\NalmakScene.h">
       <Filter>01.Scene\01.Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ShootingState.h">
       <Filter>04.State</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Bullet.h">
@@ -117,9 +120,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\Missile.h">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ShootingState.h">
-      <Filter>01.Scene\00.Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,8 +215,11 @@
     </ClCompile>
     <ClCompile Include="..\Source\UILabScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ShootingState.cpp">
       <Filter>04.State</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Bullet.cpp">
