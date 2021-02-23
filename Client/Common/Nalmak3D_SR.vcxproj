@@ -217,6 +217,7 @@
     <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
     <ClInclude Include="..\Include\PlayerMove.h" />
+    <ClInclude Include="..\Include\PlayerToTopView.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
     <ClInclude Include="..\Include\ShootingState.h" />
@@ -229,6 +230,7 @@
     <ClInclude Include="..\Include\StageScene.h" />
     <ClInclude Include="..\Include\StageSelectScene.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
+    <ClInclude Include="..\Include\TopViewCamera.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
@@ -260,6 +262,7 @@
     <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
     <ClCompile Include="..\Source\PlayerMove.cpp" />
+    <ClCompile Include="..\Source\PlayerToTopView.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
     <ClCompile Include="..\Source\ShootingState.cpp" />
@@ -272,6 +275,7 @@
     <ClCompile Include="..\Source\StageScene.cpp" />
     <ClCompile Include="..\Source\StageSelectScene.cpp" />
     <ClCompile Include="..\Source\TitleScene.cpp" />
+    <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="PauseState.cpp" />
