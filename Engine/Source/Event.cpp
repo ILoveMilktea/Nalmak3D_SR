@@ -3,9 +3,27 @@
 
 
 
+const EventHandler * Event::GetHandler(const int & _index)
+{
+	if (_index < 0 && m_handlers.size() == 0 &&
+		_index >= m_handlers.size())
+		return nullptr;
+
+	return m_handlers[_index];
+}
+
 void Event::AddHandler(const EventHandler& _handler)
 {
 	m_handlers.emplace_back(new EventHandler{ _handler });
+}
+
+void Event::AddHandler(const int & _index, const EventHandler & _handler)
+{
+	if (_index < 0 && m_handlers.size() == 0 &&
+		_index >= m_handlers.size())
+		return;
+
+	m_handlers.insert(m_handlers.begin() + _index, new EventHandler{ _handler });
 }
 
 void Event::RemoveHandler(const EventHandler& _handler)
@@ -22,12 +40,30 @@ void Event::RemoveHandler(const EventHandler& _handler)
 	}
 }
 
+void Event::RemoveHandler(const int & _index)
+{
+	if (_index < 0 && m_handlers.size() == 0 &&
+		_index >= m_handlers.size())
+		return;
+
+	m_handlers.erase(m_handlers.begin() + _index);
+}
+
 void Event::Release()
 {
 	for (auto& handler : m_handlers)
 		SAFE_DELETE(handler);
 
 	m_handlers.clear();
+}
+
+void Event::operator[](int _index)
+{
+	if (_index < 0 && m_handlers.size() == 0 &&
+		_index >= m_handlers.size())
+		return;
+
+	(*m_handlers[_index])();
 }
 
 void Event::operator()()

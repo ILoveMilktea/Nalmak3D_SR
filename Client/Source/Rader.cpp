@@ -13,6 +13,8 @@ Rader::Rader(Desc * _desc)
 	{
 		SingleImage::Desc desc;
 		desc.textureName = L"flighticon";
+		//CanvasRenderer::Desc desc_cr;
+		//desc_cr.
 
 		auto icon =
 			INSTANTIATE()->

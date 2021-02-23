@@ -81,4 +81,6 @@ void T::DestroyInstance()							\
 #define RENDER_QUEUE_TRANSPARENT 3000
 
 
+#define NULLEVENT  EventHandler([]() {})
+
 #endif

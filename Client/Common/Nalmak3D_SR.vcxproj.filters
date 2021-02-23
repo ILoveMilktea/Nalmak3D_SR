@@ -112,15 +112,14 @@
     <ClInclude Include="..\Include\NalmakScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\ShootingState.h">
-      <Filter>04.State</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Bullet.h">
       <Filter>02.Component\00.Manager\BulletManager\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Missile.h">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClInclude>
+    <ClInclude Include="PauseState.h" />
+    <ClInclude Include="..\Include\UIFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -228,9 +227,7 @@
     <ClCompile Include="..\Source\Missile.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ShootingState.cpp">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClCompile>
+    <ClCompile Include="PauseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

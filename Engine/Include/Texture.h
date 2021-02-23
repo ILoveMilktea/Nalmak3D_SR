@@ -19,6 +19,8 @@ private:
 	virtual void Release() override;
 
 public:
+	void SetTexture(IDirect3DBaseTexture9* _image);
+public:
 	IDirect3DBaseTexture9* GetTexure(size_t _index);
 	size_t GetSpriteCount()const { return m_textures.size(); }
 private:

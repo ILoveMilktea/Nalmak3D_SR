@@ -24,6 +24,8 @@ public:
 	const float GetdeltaTime() const { return m_deltaTime; }
 	float GetTotalTime();
 
+	bool IsPause() { return m_bStop; }
+
 private:
 	float m_deltaTime;
 	LARGE_INTEGER m_countPerSec;

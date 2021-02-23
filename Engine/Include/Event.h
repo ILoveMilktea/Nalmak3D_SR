@@ -9,9 +9,13 @@
 class NALMAK_DLL Event
 {
 public:
+	const EventHandler* GetHandler(const int& _index);
 	void AddHandler(const EventHandler& _handler);
+	void AddHandler(const int& _index, const EventHandler& _handler);
 	void RemoveHandler(const EventHandler& _handler);
+	void RemoveHandler(const int& _index);
 	void Release();
+	void operator[](int _index);
 	void operator()();
 	Event &operator+=(const EventHandler& _handler);
 	Event &operator-=(const EventHandler& _handler);
