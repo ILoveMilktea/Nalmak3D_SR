@@ -94,10 +94,10 @@ void PlayerToTopView::Accelerate()
 
 bool PlayerToTopView::Fade_In()
 {
-
+	return false;
 }
 
 bool PlayerToTopView::Fade_Out()
 {
-
+	return false;
 }
