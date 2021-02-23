@@ -53,16 +53,14 @@ void Terrain::Initialize()
 
 void Terrain::Update()
 {
-	DEBUG_LOG(L"[ o , p ] Brush Size", m_brushRadius);
-	DEBUG_LOG(L"[ k , l ] Brush Power", m_brushPower);
-
+	
 	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
 	{
-		DEBUG_LOG(L"Click", L"Left Mouse");
 		Matrix worldMat = m_transform->GetWorldMatrix();
 		Vector3 point = m_mainCam->GetTransform()->GetWorldPosition();
 		Vector3 dir = m_mainCam->GetCamToMouseWorldDirection();
 
+	
 		for (int i = 0; i < m_depth; ++i)
 		{
 			for (int j = 0; j < m_width; ++j)
@@ -77,8 +75,7 @@ void Terrain::Update()
 				if (Nalmak_Math::IsIntersectTriangle(point,dir,v0,v1,v2,&intersectPoint))
 				{
 					m_isChangeData = true;
-					DEBUG_LOG(L"depth",i);
-					DEBUG_LOG(L"width",j);
+				
 				}
 				else
 				{
@@ -88,8 +85,7 @@ void Terrain::Update()
 					if (Nalmak_Math::IsIntersectTriangle(point, dir, v0, v1, v2, &intersectPoint))
 					{
 						m_isChangeData = true;
-						DEBUG_LOG(L"depth", i);
-						DEBUG_LOG(L"width", j);
+					
 					}
 				}
 				if (m_isChangeData)

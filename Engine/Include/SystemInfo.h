@@ -13,7 +13,7 @@ class NALMAK_DLL SystemInfo :
 public:
 	struct Desc
 	{
-
+		Vector2 fontSize = { 6,12 };
 	};
 public:
 	SystemInfo(Desc* _desc);
@@ -28,7 +28,7 @@ private:
 	DebugManager* m_debugLog;
 	wstring m_info;
 
-	
+	Vector2 m_fontSize;
 };
 
 #endif

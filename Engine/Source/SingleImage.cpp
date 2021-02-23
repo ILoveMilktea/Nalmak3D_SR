@@ -30,7 +30,6 @@ void SingleImage::SetTexture(IDirect3DBaseTexture9 * _tex)
 }
 
 
-
 IDirect3DBaseTexture9* SingleImage::GetTexture()
 { 
 	return m_image;

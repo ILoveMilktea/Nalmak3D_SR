@@ -16,7 +16,7 @@ void BaseScene::Initialize()
 	auto cam = INSTANTIATE()->AddComponent<Camera>()->SetPosition(2, 1, -10.f)->AddComponent<FreeMove>();
 	INSTANTIATE()->AddComponent<Grid>();
 
-	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(-300, 300, 0);
+	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(350, 350, 0);
 	//ParticleRenderer::Desc particle;
 	//particle.startMinScale = 1;
 	//particle.startMaxScale = 1;

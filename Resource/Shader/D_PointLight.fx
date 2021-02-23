@@ -8,7 +8,6 @@ PointLight g_pointLight;
 texture g_diffuse;
 texture g_normal;
 texture g_depth;
-texture g_position;
 
 sampler DiffuseSampler = sampler_state
 {
@@ -25,10 +24,7 @@ sampler DepthSampler = sampler_state
 	texture = g_depth;
 };
 
-sampler PositionSampler = sampler_state
-{
-	texture = g_position;
-};
+
 
 struct VS_INPUT
 {

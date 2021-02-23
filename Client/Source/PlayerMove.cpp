@@ -78,13 +78,8 @@ void PlayerMove::UpdateState()
 	else
 		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10);
 
-
-
 	m_accel = Nalmak_Math::Clamp(m_accel, 0.f, 1.f);
-	
-
 	speed += m_accel * 5;
-
 
 	m_playerInfo->AddSpeed(speed);
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
