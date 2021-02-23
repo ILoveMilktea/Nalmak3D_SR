@@ -8,9 +8,14 @@ MeshRenderer::MeshRenderer(Desc * _desc)
 {
 	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(_desc->meshName);
 	if (!_desc->mtrl)
+	{
 		m_material = ResourceManager::GetInstance()->GetResource<Material>(_desc->mtrlName);
+	}
 	else
+	{
 		m_material = _desc->mtrl;
+
+	}
 
 	m_animator = nullptr;
 	m_layer = _desc->layer;

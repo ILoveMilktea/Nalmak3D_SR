@@ -14,9 +14,9 @@ void NalmakScene::Initialize()
 {
 	INSTANTIATE()->AddComponent<Grid>();
 
-	//Core::GetInstance()->SetSkyBox(L"skyBox_default");
+	Core::GetInstance()->SetSkyBox(L"skybox_gradation");
 	AutoRotate::Desc rot;
-	rot.xAxisSpeed = 1;
+	//rot.xAxisSpeed = 1;
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 1.f;
 	light.ambientIntensity = 0.2f;
@@ -78,7 +78,12 @@ void NalmakScene::Initialize()
 		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Light")->GetTexture());
 		obj->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
 	}
-	
+	{
+		MeshRenderer::Desc ground;
+		ground.mtrlName = L"ground";
+		ground.meshName = L"ground";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
+	}
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 }

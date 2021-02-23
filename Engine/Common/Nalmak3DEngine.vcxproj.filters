@@ -187,6 +187,9 @@
     <Filter Include="05.Component\10.Tool">
       <UniqueIdentifier>{f90212b2-41ae-4a1a-92d1-36ef9d9ea3ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Resource\01.VIBuffer\09.Ground">
+      <UniqueIdentifier>{a05edcdc-c265-49db-a50c-24e710d4d9f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -394,6 +397,7 @@
     <ClCompile Include="..\Source\SingleImage.cpp" />
     <ClCompile Include="..\Source\SplineCurve.cpp" />
     <ClCompile Include="..\Source\Toggle.cpp" />
+    <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -622,5 +626,6 @@
     <ClInclude Include="..\Include\SingleImage.h" />
     <ClInclude Include="..\Include\SplineCurve.h" />
     <ClInclude Include="..\Include\Toggle.h" />
+    <ClInclude Include="..\Include\GroundVIBuffer.h" />
   </ItemGroup>
 </Project>

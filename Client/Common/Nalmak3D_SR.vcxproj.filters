@@ -127,6 +127,7 @@
     <ClInclude Include="..\Include\RevolvesToTarget.h">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Ground.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -241,6 +242,7 @@
     <ClCompile Include="..\Source\RevolvesToTarget.cpp">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Ground.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -414,6 +416,9 @@
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\D_Debug.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ground.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>

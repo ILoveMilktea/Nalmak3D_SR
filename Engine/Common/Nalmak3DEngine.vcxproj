@@ -46,6 +46,7 @@
     <ClCompile Include="..\Source\FreeMove.cpp" />
     <ClCompile Include="..\Source\GameObject.cpp" />
     <ClCompile Include="..\Source\Grid.cpp" />
+    <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
     <ClCompile Include="..\Source\ICycle.cpp" />
     <ClCompile Include="..\Source\InputManager.cpp" />
     <ClCompile Include="..\Source\IRenderer.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="..\Include\FreeMove.h" />
     <ClInclude Include="..\Include\GameObject.h" />
     <ClInclude Include="..\Include\Grid.h" />
+    <ClInclude Include="..\Include\GroundVIBuffer.h" />
     <ClInclude Include="..\Include\ICycle.h" />
     <ClInclude Include="..\Include\InputManager.h" />
     <ClInclude Include="..\Include\IRenderer.h" />
