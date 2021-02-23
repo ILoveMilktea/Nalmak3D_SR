@@ -145,6 +145,11 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 {
+
+	DirectionalLightInfo info;
+	if (!m_lightManager->GetDirectionalLightInfo(info))
+		return;
+
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
 
@@ -159,6 +164,7 @@ void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_SKYBOX)));
 	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
 
+	m_currentShader->SetValue("g_directionalLight", &info, sizeof(DirectionalLightInfo));
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
 
@@ -178,7 +184,7 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Light");
 	ClearRenderTarget(L"GBuffer_Shade");
 
-	//SkyboxPass(_cBuffer);
+	SkyboxPass(_cBuffer);
 
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
@@ -410,6 +416,9 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 
 void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RENDERING_MODE _mode)
 {
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
 	for (auto& MeshRendererList : m_renderLists[_mode])
 	{
 		for (auto& renderer : MeshRendererList.second)
@@ -428,6 +437,11 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 				}
 			}
 		}
+	}
+
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
 	}
 }
 

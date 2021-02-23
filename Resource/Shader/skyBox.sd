@@ -4,7 +4,7 @@
 
 inputLayout "3"
 
-renderTarget "GBuffer_SkyBox"
+renderTarget "GBuffer_Diffuse"
 
 primitive "2"
 
