@@ -4,11 +4,12 @@ matrix g_world;
 
 texture g_mainTex;
 float4 g_mainTexColor;
+float  g_f0;
+float  g_roughness;
 
 sampler mainSampler = sampler_state
 {
 	texture = g_mainTex;
-
 };
 
 struct VS_INPUT
@@ -23,14 +24,14 @@ struct VS_OUTPUT
 	float4 pos : POSITION;
 	float3 normal :NORMAL;
 	float4 uvAndDepth : TEXCOORD0; // x,y = uv  z = depth
-	float4 worldPos : TEXCOORD1;
+
 };
 
 struct PS_INPUT
 {
 	float3 normal :NORMAL;
 	float4 uvAndDepth : TEXCOORD0;
-	float4 worldPos : TEXCOORD1;
+
 };
 
 struct PS_OUTPUT
@@ -38,7 +39,7 @@ struct PS_OUTPUT
 	float4 diffuse : COLOR0;
 	float4 normal : COLOR1;
 	float4 depth : COLOR2;
-	float4 worldPos : COLOR3;
+	float4 cookTorrance : COLOR3;
 
 };
 
@@ -46,8 +47,8 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _in)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; // 
 
-	o.worldPos = mul(float4(_in.pos, 1), g_world);
-	o.pos = mul(o.worldPos, g_cBuffer.viewProj);
+	matrix wvp = mul(g_world, g_cBuffer.viewProj);
+	o.pos = mul(float4(_in.pos,1), wvp);
 
 	o.normal = GetWorldNormal(_in.normal, g_world);
 
@@ -70,7 +71,9 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	
 	o.depth = GetDepth(_in.uvAndDepth.zw);
 
-	o.worldPos = _in.worldPos;
+	o.cookTorrance.x = g_f0;
+	o.cookTorrance.y = g_roughness;
+
 	return o;
 }
 

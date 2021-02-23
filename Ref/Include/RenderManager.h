@@ -45,6 +45,10 @@ BEGIN(Nalmak)
 // Texture coverage 
 
 //http://ogldev.atspace.co.uk/www/tutorial21/tutorial21.html  deferred 참고!
+
+
+// PBR 참고  ggx
+// http://filmicworlds.com/blog/optimizing-ggx-shaders-with-dotlh/ // PBR 
 class RenderManager
 {
 	DECLARE_SINGLETON(RenderManager)

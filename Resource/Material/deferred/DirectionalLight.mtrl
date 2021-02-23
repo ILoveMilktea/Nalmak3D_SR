@@ -7,7 +7,7 @@ shader "D_DirectionalLight"
 textureRT "g_diffuse" "GBuffer_Diffuse"
 textureRT "g_normal" "GBuffer_Normal"
 textureRT "g_depth" "GBuffer_Depth"
-
+textureRT "g_cookTorrance" "GBuffer_CookTorrance"
 blendingMode "1"
 
 fillMode "0"

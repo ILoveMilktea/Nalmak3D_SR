@@ -86,7 +86,7 @@ void FreeMove::WheelInput()
 	{
 		// move	
 		Vector2 dir2 = m_input->GetMouseMoveDir();
-		Vector3 dir3 = Vector3(-dir2.x, -dir2.y, 0.f);
+		Vector3 dir3 = Vector3(-dir2.x, dir2.y, 0.f);
 		Move(dir3 * m_wheelMoveSpeed);
 	}
 }

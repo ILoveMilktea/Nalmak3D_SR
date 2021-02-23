@@ -184,6 +184,9 @@
     <Filter Include="05.Component\09.Light">
       <UniqueIdentifier>{683fd8ec-cef5-4888-9abb-eac595ddf414}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Component\10.Tool">
+      <UniqueIdentifier>{f90212b2-41ae-4a1a-92d1-36ef9d9ea3ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">

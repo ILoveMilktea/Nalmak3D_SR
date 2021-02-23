@@ -1,6 +1,6 @@
 #pragma once
 #include "VIBuffer.h"
-class Plane :
+class NALMAK_DLL Plane :
 	public VIBuffer
 {
 public:
