@@ -79,13 +79,14 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	return o;
 }
 
+// implicit truncation of vector type
 
 
 technique DefaultTechnique
 {
 	Pass DefaultPass
 	{
-		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z °ª¿¡´ëÇÑ È°¿ë
+		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z Â°ÂªÂ¿Â¡Â´Ã«Ã‡Ã‘ ÃˆÂ°Â¿Ã«
 
 		ZEnable = false;
 		VertexShader = compile vs_3_0 VS_Main_Default();

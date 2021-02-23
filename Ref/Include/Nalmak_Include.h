@@ -4,9 +4,12 @@
 
 
 
+#pragma warning(disable:4251)
+#pragma warning(disable:4819)
+
 #include <windows.h>
 
-// C ·±Å¸ÀÓ Çì´õ ÆÄÀÏÀÔ´Ï´Ù.
+// C Â·Â±Ã…Â¸Ã€Ã“ Ã‡Ã¬Â´Ãµ Ã†Ã„Ã€ÃÃ€Ã”Â´ÃÂ´Ã™.
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>

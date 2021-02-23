@@ -18,7 +18,7 @@ public:
 	SingleImage(Desc* _desc);
 
 protected:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -43,5 +43,5 @@ private:
 
 
 
-//canvas -> ±×³É ÁÂÇ¥°è º¯°æ
-// ÀÌ¹ÌÁö´Â material Á¢±ÙÇØ¼­ ÀÌ¹ÌÁö¸¸ ¹Ù²ãÁØ´Ù°í?
+//canvas -> ê·¸ëƒ¥ ì¢Œí‘œê³„ ë³€ê²½
+// ì´ë¯¸ì§€ëŠ” material ì ‘ê·¼í•´ì„œ ì´ë¯¸ì§€ë§Œ ë°”ê¿”ì¤€ë‹¤ê³ ?

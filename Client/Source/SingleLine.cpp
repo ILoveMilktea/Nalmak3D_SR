@@ -15,5 +15,5 @@ void SingleLine::Initialize()
 
 void SingleLine::Update()
 {
-	m_core->DrawLine(m_point1, m_point2);
+	m_core->DrawLine(*m_point1, *m_point2);
 }
