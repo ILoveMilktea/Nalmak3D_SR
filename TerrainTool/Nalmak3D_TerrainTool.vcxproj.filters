@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00.Frame">
+      <UniqueIdentifier>{b591db32-0554-4a6a-ab5c-35e8579ce51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.View">
+      <UniqueIdentifier>{653eceee-7615-44d1-aeb9-8d3a4dd50c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Doc">
+      <UniqueIdentifier>{3463db14-87b0-4967-b7e2-afcd63c34e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Scene">
+      <UniqueIdentifier>{253e6cfe-3b58-4b35-86d5-c6e8f3baaa07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Manager">
+      <UniqueIdentifier>{093c0672-9082-4675-940c-79e280fcfe9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.default">
+      <UniqueIdentifier>{db40da44-89cf-4b18-aeb5-2fce4e88f727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile">
+      <UniqueIdentifier>{5a37c2c0-882f-49ba-b706-f787f79d0224}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.default\리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="98.PreCompile\00.Define">
+      <UniqueIdentifier>{acadf876-c4a1-42f8-80f5-0a2d67ddc66c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\01.Struct">
+      <UniqueIdentifier>{c140ba83-6d31-4039-95a5-1eb5c0a6abf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\02.Enum">
+      <UniqueIdentifier>{f8fbfd61-9c9d-45ce-b108-93a71b881291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\03.Extern">
+      <UniqueIdentifier>{c0bb3542-7046-4e1c-b2b3-645def64efc5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainFrm.h">
+      <Filter>00.Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Nalmak3D_TerrainToolView.h">
+      <Filter>01.View</Filter>
+    </ClInclude>
+    <ClInclude Include="Nalmak3D_TerrainToolDoc.h">
+      <Filter>02.Doc</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>98.PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="Nalmak3D_TerrainTool.h">
+      <Filter>99.default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99.default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.default</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>98.PreCompile\00.Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>98.PreCompile\02.Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>98.PreCompile\01.Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Nalmak3D_TerrainControlView.h">
+      <Filter>01.View</Filter>
+    </ClInclude>
+    <ClInclude Include="Extern.h">
+      <Filter>98.PreCompile\03.Extern</Filter>
+    </ClInclude>
+    <ClInclude Include="MFC_Utility.h">
+      <Filter>98.PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainToolScene.h">
+      <Filter>03.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainTool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>00.Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Nalmak3D_TerrainToolView.cpp">
+      <Filter>01.View</Filter>
+    </ClCompile>
+    <ClCompile Include="Nalmak3D_TerrainToolDoc.cpp">
+      <Filter>02.Doc</Filter>
+    </ClCompile>
+    <ClCompile Include="Nalmak3D_TerrainTool.cpp">
+      <Filter>99.default</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>98.PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="Nalmak3D_TerrainControlView.cpp">
+      <Filter>01.View</Filter>
+    </ClCompile>
+    <ClCompile Include="MFC_Utility.cpp">
+      <Filter>98.PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainToolScene.cpp">
+      <Filter>03.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainTool.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Nalmak3D_TerrainTool.rc">
+      <Filter>99.default\리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Nalmak3D_TerrainTool.rc2">
+      <Filter>99.default\리소스 파일</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Nalmak3D_TerrainToolDoc.ico">
+      <Filter>99.default\리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Nalmak3D_TerrainTool.ico">
+      <Filter>99.default\리소스 파일</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>99.default\리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>99.default</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -7,6 +7,7 @@
 #include "CanvasRenderer.h"
 SystemInfo::SystemInfo(Desc* _desc)
 {
+	m_fontSize = _desc->fontSize;
 }
 
 
@@ -18,8 +19,8 @@ void SystemInfo::Initialize()
 {
 
 	Text::Desc text;
-	text.width = 6;
-	text.height = 12;
+	text.width = m_fontSize.x;
+	text.height = m_fontSize.y;
 	text.option = DT_LEFT | DT_NOCLIP;
 	text.color = D3DXCOLOR(1, 1, 1, 1);
 	m_gameObject->AddComponent<Text>(&text);

@@ -3,6 +3,8 @@
 #include "PlayerInfoManager.h"
 #include "MouseOption.h"
 
+#include "Bullet_Manager.h"
+
 PlayerMove::PlayerMove()
 {
 }
@@ -76,17 +78,22 @@ void PlayerMove::UpdateState()
 	else
 		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10);
 
-
-
 	m_accel = Nalmak_Math::Clamp(m_accel, 0.f, 1.f);
-	
-
 	speed += m_accel * 5;
-
 
 	m_playerInfo->AddSpeed(speed);
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	{
+		Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
+	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
+	{
+		Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_transform->rotation);
+	}
 	DEBUG_LOG(L"POS" , m_transform);
 	DEBUG_LOG(L"SPEED" , m_playerInfo->GetSpeed());
 

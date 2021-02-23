@@ -58,11 +58,12 @@ void EnemyManager::Update()
 {
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
 	{
-		int x, y, z;
-		x = rand() % 300 - 150;
-		y = rand() % 300 - 150;
-		z = rand() % 300 - 150;
-		Enemy_Spawn(Vector3((float)x, (float)y, (float)z));
+		//int x, y, z;
+		//x = rand() % 300 - 150;
+		//y = rand() % 300 - 150;
+		//z = rand() % 300 - 150;
+		//Enemy_Spawn(Vector3((float)x, (float)y, (float)z));
+		Enemy_Spawn(Vector3(150.f, 150.f, 150.f));
 	}
 }
 

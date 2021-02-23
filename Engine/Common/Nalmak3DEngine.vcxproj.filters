@@ -187,6 +187,9 @@
     <Filter Include="05.Component\08.UI\02.Toggle">
       <UniqueIdentifier>{ea982a63-06d5-49c8-9144-60924f9a510c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Component\10.Tool">
+      <UniqueIdentifier>{f90212b2-41ae-4a1a-92d1-36ef9d9ea3ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">

@@ -62,6 +62,9 @@ void RenderManager::Initialize()
 
 void RenderManager::Render()
 {
+	assert(L"Please Set Camera at least one" &&m_cameraList.size());
+
+
 	ThrowIfFailed(m_device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, m_cameraList.front()->m_clearColor, 1, 0));
 
 	for (auto& cam : m_cameraList)
@@ -100,8 +103,11 @@ void RenderManager::Render(Camera * _cam)
 	D3DXMatrixInverse(&invProj, nullptr, &proj);
 	//D3DXMatrixTranspose(&invProj, &invProj);
 
+	Matrix worldCamMatrix = _cam->GetTransform()->GetWorldMatrix();
 	cBuffer.viewProj = view * proj;
-	cBuffer.worldCamPos = _cam->GetTransform()->GetWorldPosition();
+	cBuffer.worldCamPos = Vector3(worldCamMatrix._41, worldCamMatrix._42, worldCamMatrix._43);
+	cBuffer.worldCamLook = Vector3(worldCamMatrix._31, worldCamMatrix._32, worldCamMatrix._33);
+
 	cBuffer.invView = invView;
 	cBuffer.invProj = invProj;
 
@@ -118,7 +124,7 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Diffuse");
 	ClearRenderTarget(L"GBuffer_Normal");
 	ClearRenderTarget(L"GBuffer_Depth");
-	ClearRenderTarget(L"GBuffer_Position");
+	ClearRenderTarget(L"GBuffer_CookTorrance");
 	ClearRenderTarget(L"GBuffer_Light");
 	ClearRenderTarget(L"GBuffer_Shade");
 	ClearRenderTarget(L"GBuffer_Debug");
@@ -135,8 +141,6 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
-
-	
 
 	TransparentPass(_cam,_cBuffer); 
 
@@ -180,7 +184,6 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Diffuse");
 	ClearRenderTarget(L"GBuffer_Normal");
 	ClearRenderTarget(L"GBuffer_Depth");
-	ClearRenderTarget(L"GBuffer_Position");
 	ClearRenderTarget(L"GBuffer_Light");
 	ClearRenderTarget(L"GBuffer_Shade");
 

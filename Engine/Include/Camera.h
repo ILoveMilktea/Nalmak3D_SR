@@ -71,6 +71,7 @@ public:
 
 	const float GetFovY() const { return m_fovY; }
 	Vector3 GetCamToMouseWorldDirection();
+
 public:
 	void SetRenderTarget(UINT _index,wstring  _rtName);
 

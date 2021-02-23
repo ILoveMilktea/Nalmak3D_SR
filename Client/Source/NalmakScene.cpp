@@ -40,13 +40,13 @@ void NalmakScene::Initialize()
 			point.diffuseIntensity = 1.f;
 			point.ambientIntensity = 0.1f;
 
-		/*	for (int i = 0; i < 100; ++i)
+			for (int i = 0; i < 100; ++i)
 			{
 				point.color = Vector3(Nalmak_Math::Rand(0.f, 1.f), Nalmak_Math::Rand(0.f, 1.f), Nalmak_Math::Rand(0.f, 1.f));
 				point.diffuseIntensity = Nalmak_Math::Rand(1.f, 7.f);
 				point.radius = Nalmak_Math::Rand(30.f, 60.f);
 				INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(Nalmak_Math::Rand(-60.f, 60.f), Nalmak_Math::Rand(1.f, 20.f), Nalmak_Math::Rand(-60.f, 60.f));
-			}*/
+			}
 		}
 		MeshRenderer::Desc mesh;
 		mesh.mtrlName = L"transTest";

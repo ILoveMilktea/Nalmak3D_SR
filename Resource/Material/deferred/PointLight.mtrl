@@ -7,7 +7,6 @@ shader "D_PointLight"
 textureRT "g_diffuse" "GBuffer_Diffuse"
 textureRT "g_normal" "GBuffer_Normal"
 textureRT "g_depth" "GBuffer_Depth"
-textureRT "g_position" "GBuffer_Position"
 
 blendingMode "1"
 
