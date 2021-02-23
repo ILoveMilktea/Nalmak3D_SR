@@ -156,22 +156,22 @@ void Button::ChangeAllTexture(wstring _name)
 
 void Button::ChangeNormalTexture(wstring _name)
 {
-	m_normalImage = m_resource->GetResource<Texture>(_name);
+	m_normalImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
 }
 
 void Button::ChangeHighlightTexture(wstring _name)
 {
-	m_highlightImage = m_resource->GetResource<Texture>(_name);
+	m_highlightImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
 }
 
 void Button::ChangePressedTexture(wstring _name)
 {
-	m_pressedImage = m_resource->GetResource<Texture>(_name);
+	m_pressedImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
 }
 
 void Button::ChangeDisableTexture(wstring _name)
 {
-	m_disableImage = m_resource->GetResource<Texture>(_name);
+	m_disableImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
 }
 
 bool Button::CheckCursorPosition()
