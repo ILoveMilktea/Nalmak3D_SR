@@ -434,5 +434,8 @@
     <FxCompile Include="..\..\Resource\Shader\D_Debug.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\ground.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

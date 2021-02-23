@@ -208,6 +208,7 @@
     <ClInclude Include="..\Include\Extern.h" />
     <ClInclude Include="..\Include\FixToTarget.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
+    <ClInclude Include="..\Include\Ground.h" />
     <ClInclude Include="..\Include\HeeTestScene.h" />
     <ClInclude Include="..\Include\Homing.h" />
     <ClInclude Include="..\Include\MainGame.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="..\Source\Enemy_Idle.cpp" />
     <ClCompile Include="..\Source\FixToTarget.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
+    <ClCompile Include="..\Source\Ground.cpp" />
     <ClCompile Include="..\Source\HeeTestScene.cpp" />
     <ClCompile Include="..\Source\Homing.cpp" />
     <ClCompile Include="..\Source\MainGame.cpp" />
@@ -308,6 +310,7 @@
     <FxCompile Include="..\..\Resource\Shader\D_DirectionalLight.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_FullScreen.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_PointLight_Stencil.fx" />
+    <FxCompile Include="..\..\Resource\Shader\ground.fx" />
     <FxCompile Include="..\..\Resource\Shader\H_common.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

@@ -17,8 +17,6 @@ Text::Text(Desc * _desc)
 
 void Text::Initialize()
 {
-	if (!GetComponent<CanvasRenderer>())
-		m_gameObject->AddComponent<CanvasRenderer>();
 	m_renderer = GetComponent<CanvasRenderer>();
 
 	m_render = RenderManager::GetInstance();

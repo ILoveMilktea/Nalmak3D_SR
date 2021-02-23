@@ -24,7 +24,7 @@ PhantomScene::~PhantomScene()
 
 void PhantomScene::Initialize()
 {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	GameObject* player;
 	{

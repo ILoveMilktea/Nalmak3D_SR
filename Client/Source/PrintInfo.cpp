@@ -17,5 +17,8 @@ void PrintInfo::Initialize()
 
 void PrintInfo::Update()
 {
-	DEBUG_LOG(L"obj", m_transform);
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+		CanvasGroup::GetInstance()->SetObjectActive(CANVAS_GROUP_NONE, true);
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
+		CanvasGroup::GetInstance()->SetObjectActive(CANVAS_GROUP_NONE, false);
 }

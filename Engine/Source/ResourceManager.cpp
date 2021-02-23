@@ -10,6 +10,7 @@
 #include "SkyBox.h"
 #include "DepthStencil.h"
 #include "RenderManager.h"
+#include "GroundVIBuffer.h"
 USING(Nalmak)
 IMPLEMENT_SINGLETON(ResourceManager)
 ResourceManager::ResourceManager()
@@ -76,6 +77,12 @@ void ResourceManager::CreateDefaultMesh()
 		assert("Fail to Create Mesh!" && mesh);
 		mesh->OnInitialize();
 		m_resoucreContainers[typeid(VIBuffer).name()][L"quad"] = mesh;
+	}
+	{
+		VIBuffer* mesh = new GroundVIBuffer();
+		assert("Fail to Create Mesh!" && mesh);
+		mesh->OnInitialize();
+		m_resoucreContainers[typeid(VIBuffer).name()][L"ground"] = mesh;
 	}
 	{
 		VIBuffer* mesh = new Triangle();

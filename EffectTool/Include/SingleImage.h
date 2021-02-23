@@ -19,7 +19,6 @@ public:
 	SingleImage(Desc* _desc);
 
 protected:
-	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -29,8 +28,6 @@ public:
 
 public:
 	IDirect3DBaseTexture9* GetTexture();
-	RECT* GetBoundary();
-
 	
 private:
 	IDirect3DBaseTexture9* m_image;
