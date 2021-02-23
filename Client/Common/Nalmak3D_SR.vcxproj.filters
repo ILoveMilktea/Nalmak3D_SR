@@ -124,6 +124,9 @@
     <ClInclude Include="..\Include\Homing.h">
       <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\RevolvesToTarget.h">
+      <Filter>02.Component\00.Manager\FixCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -234,6 +237,9 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="..\Source\Homing.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\RevolvesToTarget.cpp">
+      <Filter>02.Component\00.Manager\FixCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

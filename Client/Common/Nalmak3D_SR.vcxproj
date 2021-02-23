@@ -217,6 +217,7 @@
     <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
     <ClInclude Include="..\Include\PlayerMove.h" />
+    <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
     <ClInclude Include="..\Include\ShootingState.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
     <ClCompile Include="..\Source\PlayerMove.cpp" />
+    <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
     <ClCompile Include="..\Source\ShootingState.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />

@@ -58,10 +58,7 @@ void TitleScene::Initialize()
 	}
 
 
-	MeshRenderer::Desc mesh;
-	mesh.meshName = L"teapot";
-	mesh.mtrlName = L"standard";
-	INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetPosition(0, 0, 2);
+	
 
 
 	{
@@ -77,7 +74,7 @@ void TitleScene::Initialize()
 
 	SceneChanger::Desc SceneChangerDescInfo;
 	SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
-	SceneChangerDescInfo.sceneName = L"phantom";
+	SceneChangerDescInfo.sceneName = L"garage";
 	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 
 
