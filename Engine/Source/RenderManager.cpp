@@ -92,7 +92,7 @@ void RenderManager::Render(Camera * _cam)
 
 
 	///////////////////////////////////////////////////////
-	// 공용 상수버퍼
+	// public const buffer
 	ConstantBuffer cBuffer;
 	Matrix view = _cam->GetViewMatrix();
 	Matrix proj = _cam->GetProjMatrix();

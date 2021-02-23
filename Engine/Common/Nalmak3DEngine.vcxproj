@@ -27,6 +27,7 @@
     <ClCompile Include="..\Source\Box.cpp" />
     <ClCompile Include="..\Source\Button.cpp" />
     <ClCompile Include="..\Source\Camera.cpp" />
+    <ClCompile Include="..\Source\CanvasGroup.cpp" />
     <ClCompile Include="..\Source\CanvasRenderer.cpp" />
     <ClCompile Include="..\Source\Collider.cpp" />
     <ClCompile Include="..\Source\Collision.cpp" />
@@ -47,6 +48,7 @@
     <ClCompile Include="..\Source\GameObject.cpp" />
     <ClCompile Include="..\Source\Grid.cpp" />
     <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
+    <ClCompile Include="..\Source\ICanvasGroup.cpp" />
     <ClCompile Include="..\Source\ICycle.cpp" />
     <ClCompile Include="..\Source\InputManager.cpp" />
     <ClCompile Include="..\Source\IRenderer.cpp" />
@@ -102,6 +104,7 @@
     <ClInclude Include="..\Include\Box.h" />
     <ClInclude Include="..\Include\Button.h" />
     <ClInclude Include="..\Include\Camera.h" />
+    <ClInclude Include="..\Include\CanvasGroup.h" />
     <ClInclude Include="..\Include\CanvasRenderer.h" />
     <ClInclude Include="..\Include\Collider.h" />
     <ClInclude Include="..\Include\Collision.h" />
@@ -122,6 +125,7 @@
     <ClInclude Include="..\Include\GameObject.h" />
     <ClInclude Include="..\Include\Grid.h" />
     <ClInclude Include="..\Include\GroundVIBuffer.h" />
+    <ClInclude Include="..\Include\ICanvasGroup.h" />
     <ClInclude Include="..\Include\ICycle.h" />
     <ClInclude Include="..\Include\InputManager.h" />
     <ClInclude Include="..\Include\IRenderer.h" />

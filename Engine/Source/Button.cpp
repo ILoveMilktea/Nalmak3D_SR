@@ -5,7 +5,7 @@
 
 Button::Button(Desc * _desc)
 {
-	if(_desc->eventFunc != nullptr)
+	if (_desc->eventFunc != nullptr)
 		m_event += _desc->eventFunc;
 
 	m_normalColor = { 1.f,1.f,1.f,1.f };
@@ -22,45 +22,63 @@ Button::Button(Desc * _desc)
 
 void Button::Initialize()
 {
-	m_input = InputManager::GetInstance();
-
 	m_currentTransition = BUTTON_TRANSITION_COLOR;
 	m_currentState = BUTTON_STATE_NORMAL;
 	m_targetImage = &m_normalImage;
 	m_targetColor = &m_normalColor;
 
-	if (!GetComponent<CanvasRenderer>())
-		m_gameObject->AddComponent<CanvasRenderer>();
 	m_renderer = GetComponent<CanvasRenderer>();
 	m_renderer->SetImage(m_normalImage);
 	//m_renderer->SetActive(false);
-
-	m_interactive = true;
 }
 
 void Button::Update()
 {
-	m_isCursorOnButton = CheckCursorPosition();
+	// interactive(highlight) operation
+	if (m_renderer->IsPickingBlocked())
+		return;
+	if (!m_renderer->IsInteractive())
+	{
+		if (BUTTON_STATE_DISABLE != m_currentState)
+			ChangeState(BUTTON_STATE_DISABLE);
+		return;
+	}
+
+	if (m_renderer->IsCursorOnRect())
+	{
+		if (BUTTON_STATE_NORMAL == m_currentState)
+			ChangeState(BUTTON_STATE_HIGHLIGHT);
+	}
+	else
+	{
+		if (BUTTON_STATE_HIGHLIGHT == m_currentState)
+			ChangeState(BUTTON_STATE_NORMAL);
+	}
 }
 
 void Button::LateUpdate()
 {
-	if (!m_interactive)
+	// click operation
+	if (m_renderer->IsPickingBlocked())
 		return;
 
-	if (m_input->GetKeyUp(KEY_STATE_LEFT_MOUSE))
+
+	if (m_renderer->MouseClickUp_InRect())
 	{
-		if (m_isCursorOnButton)
+		if (m_renderer->IsInteractive())
+		{
 			m_event.NotifyHandlers();
+		}
 
 		ChangeState(BUTTON_STATE_NORMAL);
 	}
-	else if (m_input->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	else if (m_renderer->MouseClickDown())
 	{
-		if (m_isCursorOnButton)
-		{
-			ChangeState(BUTTON_STATE_PRESSED);
-		}
+		ChangeState(BUTTON_STATE_PRESSED);
+	}
+	else if (m_renderer->MouseClickUp_OutRect())
+	{
+		ChangeState(BUTTON_STATE_NORMAL);
 	}
 }
 
@@ -172,36 +190,6 @@ void Button::ChangePressedTexture(wstring _name)
 void Button::ChangeDisableTexture(wstring _name)
 {
 	m_disableImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
-}
-
-bool Button::CheckCursorPosition()
-{
-	RECT* boundary = m_renderer->GetBoundary();
-	Vector2 mousePos = m_input->GetMouseScreenPos();
-
-	if (boundary->left < mousePos.x &&
-		boundary->right > mousePos.x &&
-		boundary->top < mousePos.y &&
-		boundary->bottom > mousePos.y)
-	{
-		if (BUTTON_STATE_NORMAL == m_currentState)
-			ChangeState(BUTTON_STATE_HIGHLIGHT);
-		return true;
-	}
-
-	if (BUTTON_STATE_HIGHLIGHT == m_currentState)
-		ChangeState(BUTTON_STATE_NORMAL);
-	return false;
-}
-
-void Button::SetInteraction(bool _value)
-{
-	m_interactive = _value;
-
-	if (m_interactive)
-		ChangeState(BUTTON_STATE_NORMAL);
-	else
-		ChangeState(BUTTON_STATE_DISABLE);
 }
 
 void Button::AddEventHandler(EventHandler _eventFunc)

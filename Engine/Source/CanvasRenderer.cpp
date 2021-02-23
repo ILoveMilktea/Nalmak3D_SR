@@ -1,27 +1,38 @@
 #include "..\Include\CanvasRenderer.h"
 
+#include "CanvasGroup.h"
 #include "ResourceManager.h"
 #include "Transform.h"
 #include "Animator.h"
 #include "SingleImage.h"
 #include "Texture.h"
+CanvasRenderer::CanvasRenderer()
+	:ICanvasGroup()
+{
+}
 CanvasRenderer::CanvasRenderer(Desc * _desc)
+	:ICanvasGroup()
 {
 	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
 	m_material = ResourceManager::GetInstance()->GetResource<Material>(L"defaultUI");
 
 	m_type = RENDERER_TYPE_CANVAS;
 	m_color = { 1.f,1.f,1.f,1.f };
+
+	m_group = _desc->group;
 }
 
 void CanvasRenderer::Initialize()
 {
+	m_input = InputManager::GetInstance();
 	m_animator = GetComponent<Animator>();
 
 	if(m_transform->scale == Vector3(1.f, 1.f, 1.f))
 		m_transform->scale = Vector3(100.f, 100.f, 0.f);
 	
 	UpdateBoundary();
+
+	CanvasGroup::GetInstance()->AddGroupMember(this, m_group);
 }
 
 void CanvasRenderer::Update()
@@ -64,22 +75,17 @@ void CanvasRenderer::Render()
 
 	currentShader->SetMatrix("g_world", GetTransform()->GetUIWorldMatrix());
 	
-	currentShader->CommitChanges();				   // BeginPass 호출시 반드시 그리기 전에 호출
-												   ////////////////////////////////////////////////////////////////////////////////////
-												   // DrawPrimitive (index 사용 x)
-												   // Type, 이번에 이용될 인데스, 최소 참조갯수, 호출될 버텍스 수, 인덱스 버퍼내에서 읽기 시작할 인덱스, 그리는 도형 수
+	currentShader->CommitChanges();
+
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(currentShader->GetPrimitiveType(), 0, 0, m_viBuffer->GetVertexCount(), 0, m_viBuffer->GetFigureCount()));
 
 }
 
 void CanvasRenderer::BindingStreamSource()
 {
-	// 통로 소켓 넘버 //  주소               // 시작점  // 사이즈
 	ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_material->GetShader()->GetInputLayoutSize()));
 	ThrowIfFailed(m_device->SetIndices(m_viBuffer->GetIndexBuffer()));
 
-	// 고정함수 파이프라인에 필요!
-	// m_device->SetFVF()
 }
 
 void CanvasRenderer::UpdateBoundary()
@@ -90,7 +96,83 @@ void CanvasRenderer::UpdateBoundary()
 	m_boundary.bottom = LONG(m_transform->position.y + m_transform->scale.y * 0.5f);
 }
 
-RECT * CanvasRenderer::GetBoundary()
+bool CanvasRenderer::IsCursorOnRect()
 {
-	return &m_boundary;
+	Vector2 mousePos = m_input->GetMouseScreenPos();
+
+	if (m_boundary.left < mousePos.x &&
+		m_boundary.right > mousePos.x &&
+		m_boundary.top < mousePos.y &&
+		m_boundary.bottom > mousePos.y)
+	{
+		return true;
+	}
+	return false;
+}
+
+
+void CanvasRenderer::SetFade(float _alpha)
+{
+	ICanvasGroup::SetFade(_alpha);
+	m_color.w = _alpha;
+}
+
+void CanvasRenderer::SetInteractive(bool _value)
+{
+	ICanvasGroup::SetInteractive(_value);
+}
+
+void CanvasRenderer::SetBlockPicking(bool _value)
+{
+	ICanvasGroup::SetBlockPicking(_value);
+}
+
+void CanvasRenderer::SetGroup(_CANVAS_GROUP _group)
+{
+	m_group = _group;
+	CanvasGroup::GetInstance()->ChangeGroup(this, _group);
+}
+
+bool CanvasRenderer::MouseClickDown()
+{
+	if (m_input->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	{
+		if (IsCursorOnRect())
+			return true;
+	}
+
+	return false;
+}
+
+bool CanvasRenderer::MouseClickPress()
+{
+	if (m_input->GetKeyPress(KEY_STATE_LEFT_MOUSE))
+	{
+		if (IsCursorOnRect())
+			return true;
+	}
+
+	return false;
+}
+
+bool CanvasRenderer::MouseClickUp_InRect()
+{
+	if (m_input->GetKeyUp(KEY_STATE_LEFT_MOUSE))
+	{
+		if (IsCursorOnRect())
+			return true;
+	}
+
+	return false;
+}
+
+bool CanvasRenderer::MouseClickUp_OutRect()
+{
+	if (m_input->GetKeyUp(KEY_STATE_LEFT_MOUSE))
+	{
+		if (!IsCursorOnRect())
+			return true;
+	}
+
+	return false;
 }

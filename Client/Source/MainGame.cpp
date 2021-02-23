@@ -84,6 +84,7 @@ void MainGame::ApplicationSetting()
 
 	// all resource load in resource directory
 	core.resourceDirectoryPath;
+	core.CANVAS_GROUP_COUNT = CANVAS_GROUP_MAX;
 
 	m_engine->Initialize(g_hWnd, &core);
 }
@@ -102,9 +103,7 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
-
 	m_engine->SetStartScene(L"nalmak");
-
 }
 
 void MainGame::ReadyResource()

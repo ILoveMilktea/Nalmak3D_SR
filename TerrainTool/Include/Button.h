@@ -27,7 +27,6 @@ public:
 	};
 	Button(Desc* _desc);
 protected:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -47,15 +46,11 @@ protected:
 	void ChangeHighlightTexture(wstring _name);
 	void ChangePressedTexture(wstring _name);
 	void ChangeDisableTexture(wstring _name);
-
-private:
-	bool CheckCursorPosition();
-
+	
 public:
 	BUTTON_TRANSITION GetTransition() { return m_currentTransition; }
 
 	void SetTransition(BUTTON_TRANSITION _tr) { m_currentTransition = _tr; }
-	void SetInteraction(bool _value);
 
 public:
 	void AddEventHandler(EventHandler _eventFunc);
@@ -67,12 +62,9 @@ public:
 protected:
 	Event m_event;
 	ResourceManager* m_resource;
-	InputManager* m_input;
 	CanvasRenderer* m_renderer;
 
 protected:
-	bool m_interactive;	// off½Ã disable»óÅÂ
-	bool m_isCursorOnButton;
 	BUTTON_TRANSITION m_currentTransition;
 	BUTTON_STATE m_currentState;
 
@@ -88,6 +80,7 @@ protected:
 	IDirect3DBaseTexture9* m_highlightImage = nullptr;
 	IDirect3DBaseTexture9* m_pressedImage = nullptr;
 	IDirect3DBaseTexture9* m_disableImage = nullptr;
+
 
 };
 

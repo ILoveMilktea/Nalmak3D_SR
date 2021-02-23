@@ -44,6 +44,7 @@ Core::Core()
 	m_deviceManager = DeviceManager::GetInstance();
 	m_renderManager = RenderManager::GetInstance();
 	//
+	m_canvasGroup = CanvasGroup::GetInstance();
 }
 
 
@@ -62,6 +63,7 @@ Core::~Core()
 	DebugManager::DestroyInstance();
 	CollisionManager::DestroyInstance();
 	LightManager::DestroyInstance();
+	CanvasGroup::DestroyInstance();
 }
 
 
@@ -82,7 +84,7 @@ void Core::Initialize(HWND handle, Desc * _desc)
 	m_inputManager->Initialize();
 	m_lineManager->Initialize();
 
-	
+	CanvasGroup::GetInstance()->Initialize(_desc->CANVAS_GROUP_COUNT);
 }
 
 void Core::Run()

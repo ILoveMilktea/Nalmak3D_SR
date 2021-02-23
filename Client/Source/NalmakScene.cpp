@@ -12,7 +12,7 @@ NalmakScene::~NalmakScene()
 
 void NalmakScene::Initialize()
 {
-	INSTANTIATE()->AddComponent<Grid>();
+	//INSTANTIATE()->AddComponent<Grid>();
 
 	Core::GetInstance()->SetSkyBox(L"skybox_gradation");
 	AutoRotate::Desc rot;
@@ -54,27 +54,39 @@ void NalmakScene::Initialize()
 		INSTANTIATE()->AddComponent<MeshRenderer>(&mesh);
 	}
 
+	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse");
+	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
+	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal");
+	window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
+	auto window3 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Depth", CANVAS_GROUP_G1);
+	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
+	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light");
+	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
+/*
 	{
 		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<CanvasRenderer>()->AddComponent<SingleImage>();
+		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
 		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Diffuse")->GetTexture());
 		obj->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
+		obj->AddComponent<CanvasRenderer>();
+		obj->GetComponent<CanvasRenderer>()->SetGroup(CANVAS_GROUP_G1);
 	}
 	{
 		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<CanvasRenderer>()->AddComponent<SingleImage>();
+		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
 		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Normal")->GetTexture());
 		obj->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
 	}
 	{
 		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<CanvasRenderer>()->AddComponent<SingleImage>();
+		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
 		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Depth")->GetTexture());
 		obj->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
+
 	}
 	{
 		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<CanvasRenderer>()->AddComponent<SingleImage>();
+		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
 		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Light")->GetTexture());
 		obj->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
 	}
@@ -84,6 +96,12 @@ void NalmakScene::Initialize()
 		ground.meshName = L"ground";
 		INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
 	}
+	}*/
+	{
+		MeshRenderer::Desc ground;
+		ground.mtrlName = L"ground";
+		ground.meshName = L"ground";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
+	}
 
-	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 }

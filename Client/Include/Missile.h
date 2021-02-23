@@ -9,7 +9,7 @@ public:
 	struct Desc
 	{
 		float fMaxSpd = 100.f;
-		int		iDmg = 50.f;
+		int		iDmg = 50;
 	};
 public:
 	Missile(Desc* _desc);
@@ -25,7 +25,7 @@ public:
 	void Boom();
 private:
 	
-	int	m_iDmg = 0.f;
+	int	m_iDmg = 0;
 	float m_fMaxSpd = 0.f;
 	float m_fCurSpd = 1.f;
 	
