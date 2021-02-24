@@ -127,12 +127,6 @@
     <ClInclude Include="..\Include\RevolvesToTarget.h">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\TopViewCamera.h">
-      <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\PlayerToTopView.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -246,12 +240,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\RevolvesToTarget.cpp">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\TopViewCamera.cpp">
-      <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PlayerToTopView.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -368,12 +356,6 @@
     <Filter Include="02.Component\00.Manager\BulletManager\Homing">
       <UniqueIdentifier>{1f100bc1-d700-466c-a558-7862f16e388b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\FixCamera\2DTopViewCamera">
-      <UniqueIdentifier>{a72f487d-d927-47dd-842a-cbe761320505}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce">
-      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
@@ -432,9 +414,6 @@
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\D_Debug.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\ground.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>

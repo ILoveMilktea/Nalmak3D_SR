@@ -37,11 +37,11 @@ void Enemy::Update()
 
 	Target_Update();
 	// Kiting();
-	 Chase();
+	 //Chase();
 	// Drop();
-	// Hold();
+	//Hold();
 
-	//Dive();
+	Dive();
 
 	Reloading();
 
@@ -236,7 +236,7 @@ void Enemy::Lean()
 	//	//}
 
 	//	/*
-	//	ㄴㄴㄴㄴ지금 0 ~ 0.5 0.5 ~ 1 처럼 주면 시작지점에서의 각도가 90도 이상이여야함.
+	//	ㄴㄴㄴㄴ지금 0~ 0.5 0.5~1 처럼 주면 시작지점에서의 각도가 90도 이상이여야함.
 	//	그렇게 말고
 	//	처음 딱 타겟 잡았을 때(SetTarget) 시작 Inner 값과
 	//	타겟에 도착했을때 Inner값을 백분률로 나눠서 조건을 걸어줘야
@@ -365,14 +365,6 @@ bool Enemy::Soar()
 	return false;
 }
 
-void Enemy::Create_RandPos()
-{
-	m_vRandPos.y = m_transform->position.y + rand() % 1001 - 500;
-	m_vRandPos.x = m_transform->position.x + rand() % 1001 - 500;
-	m_vRandPos.z = m_transform->position.z + rand() % 1001 - 500;
-
-}
-
 bool Enemy::Shoot()
 {
 	if (m_iCurRound > 0)
@@ -479,36 +471,19 @@ void Enemy::Chase()
 	//Target_Setting(true);
 	//Target_Update();
 
-	if (!m_bChaseMove)
+	Look_Target();
+	Go_Straight();
+
+	if (m_fDist_Target <= 80.f && m_fDist_Target >= 20.f)
 	{
-		Look_Target();
-		Go_Straight();
-
-		if (m_fDist_Target <= 80.f && m_fDist_Target >= 20.f)
-		{
-			Shoot();
-		}
-
-		//가까워지면 거리 좀 벌릴때 까지 이동.
-		if (m_fDist_Target <= 20.f)
-		{
-			m_bChaseMove = true;
-		}
+		Shoot();
 	}
 
-	if (m_bChaseMove)
+	//가까워지면 거리 좀 벌릴때 까지 이동.
+	if (m_fDist_Target <= 20.f)
 	{
-		m_fChaseDelta += dTime;
-		Go_Straight();
 
-		if (m_fChaseDelta >= 3.f)
-		{
-			m_bChaseMove = false;
-		}
 	}
-	
-
-	
 
 
 }
@@ -534,73 +509,30 @@ void Enemy::Drop()
 			{
 				i = rand() % 2;
 				m_bDropMove = true;
-				m_vOriginForward = m_transform->GetForward();
 			}
 		}
 	}
-	
-	
-	
-	if(i == 0)
+	else 
 	{
-		m_bDive = true;
+		if(i ==0)
+		{
+			m_bDive = true;
+		}
+		if (i == 1)
+		{
+			m_bSoar = true;
+		}
 	}
-	if (i == 1)
-	{
-		m_bSoar = true;
-	}
-	
 
 	if (m_bDive)
 	{
 		if (Dive())
 		{
-			m_bRandMove = true;
-			Create_RandPos();
-			//m_bDive = false;
-			//m_bDropMove = false;
+			m_bDive = false;
 			//여기서 일정시간동안 랜덤으루다가 움직이다가
 			//다시 플레이어 고정.
 		}
 	}
-
-	if (m_bSoar)
-	{
-		if (Soar())
-		{
-			m_bRandMove = true;
-			Create_RandPos();
-			//m_bSoar = false;
-			//m_bDropMove = false;
-		}
-	}
-	
-	if (m_bRandMove)
-	{
-		
-		Go_ToPos(m_vRandPos);
-	
-		m_fDropDelta += dTime;
-
-		if (m_fDropDelta >= 5.f)
-		{
-
-			m_fDropDelta = 0.f;
-
-			m_bRandMove = false;
-			
-			m_bDive = false;
-			m_bSoar = false;
-			
-			m_bDropMove = false;
-		
-			Target_Setting(true);
-		
-		}
-	
-
-	}
-
 
 
 #pragma region Failed
@@ -647,7 +579,9 @@ void Enemy::Hold()
 	}
 	else 
 	{ 
-		Create_RandPos();
+		m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
+		m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
+		m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
 
 		m_bHoldMove = true; 
 	}

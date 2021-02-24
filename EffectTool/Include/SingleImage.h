@@ -7,7 +7,6 @@
 
 class Texture;
 class CanvasRenderer;
-
 class NALMAK_DLL SingleImage :
 	public Component
 {

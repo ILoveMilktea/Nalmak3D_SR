@@ -51,6 +51,7 @@ public:
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
 
+
 private:
 	static PlayerInfoManager* m_instance;
 private:

@@ -12,7 +12,6 @@
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
-#include "PlayerToTopView.h"
 PhantomScene::PhantomScene()
 {
 }
@@ -40,9 +39,6 @@ void PhantomScene::Initialize()
 		render.meshName = L"flight";
 
 		player = INSTANTIATE(OBJECT_TAG_PLAYER,L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<StateControl>()->AddComponent<PlayerInfoManager>()->AddComponent<DrawGizmo>()->AddComponent<MouseOption>();;
-		/*±ÙÈñ Ãß°¡*/
-		player->AddComponent<PlayerToTopView>();
-
 		player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle")->AddState<PlayerMove>(L"playerMove");
 		player->GetComponent<StateControl>()->InitState(L"playerIdle");
 		player->SetScale(0.1f, 0.1f, 0.1f);
@@ -51,8 +47,9 @@ void PhantomScene::Initialize()
 	{
 		SmoothFollow::Desc smoothFollowDesc;
 		smoothFollowDesc.toTarget = player;
-		auto smoothFollow = INSTANTIATE(0, L"SmoothFollow")->AddComponent<SmoothFollow>(&smoothFollowDesc);
+		auto smoothFollow = INSTANTIATE()->AddComponent<SmoothFollow>(&smoothFollowDesc);
 	}
+
 
 	//GameObject* Enemy = nullptr;
 	//Enemy = INSTANTIATE(OBJECT_TAG_ENEMY, L"enemy");

@@ -7,9 +7,9 @@ DirectionalLight g_directionalLight;
 samplerCUBE skyBoxSampler = sampler_state
 {
 	texture = <g_skyBox>;
-	/*magfilter = LINEAR;
+	magfilter = LINEAR;
 	minfilter = LINEAR;
-	mipfilter = LINEAR;*/
+	mipfilter = LINEAR;
 	AddressU = Mirror;
 	AddressV = Mirror;
 
@@ -67,7 +67,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	PS_OUTPUT o = (PS_OUTPUT)0;
 	float diffuseFactor = max(dot(float3(0, 1, 0), -g_directionalLight.direction),0) + 0.2f;
 	o.diffuse = texCUBE(skyBoxSampler, _input.uvw) *diffuseFactor;
-	//o.diffuse = float4(0.8f, 0.9f, 0.95f,1.f);
+
 
 	return o;
 }
@@ -82,7 +82,7 @@ technique DefaultTechnique
 
 		//ZEnable = false;
 		//ZWriteEnable = false;
-		CullMode = CW;
+		CullMode = none;
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

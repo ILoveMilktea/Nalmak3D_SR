@@ -11,17 +11,12 @@ SingleImage::SingleImage(Desc * _desc)
 
 void SingleImage::Initialize()
 {
-	if (!GetComponent<CanvasRenderer>())
-		m_gameObject->AddComponent<CanvasRenderer>();
-
 	m_renderer = GetComponent<CanvasRenderer>();
 	m_renderer->SetImage(m_image);
-
 }
 
 void SingleImage::Update()
 {
-
 }
 
 void SingleImage::SetTexture(wstring _name)
@@ -33,13 +28,13 @@ void SingleImage::SetTexture(wstring _name)
 
 void SingleImage::SetTexture(IDirect3DBaseTexture9 * _tex)
 {
-	m_image = _tex;
+	m_image = _tex; 
 	if (m_renderer)
 		m_renderer->SetImage(m_image);
 }
 
 
 IDirect3DBaseTexture9* SingleImage::GetTexture()
-{
+{ 
 	return m_image;
 }
