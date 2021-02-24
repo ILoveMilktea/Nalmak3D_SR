@@ -12,61 +12,9 @@ class NALMAK_DLL ParticleRenderer :
 public:
 	struct Desc
 	{
-		PARTICLE_EMIT_SHAPE shape = PARTICLE_EMIT_SHAPE::PARTICLE_EMIT_SHAPE_SPHERE;
-
-		// for Circle
-		// for Sphere 
-		float minRadius = 0.2f;
-		float maxRadius = 0.3f;
-
-		// for box
-		float width = 1.f;
-		float height = 1.f;
-		float depth = 1.f;
-
-		// for cone
-		float coneAngle = 45.f;
-
-		float startMinSpeed = 0.1f;
-		float startMaxSpeed = 0.1f;
-		float endMinSpeed = 0.1f;
-		float endMaxSpeed = 0.15f;
-
-		UINT emittorCount = 30;
-		float duration = 5.f;
-		float minAwakeTime = 0.f;
-		float maxAwakeTime = 0.f;
-
-
-		Vector3 force = Vector3(0, 0, 0);
-
-		float gravity = 0.f;
-
-		float minAngle = 0.f;
-		float maxAngle = 0.f;
-
-		float startMinScale = 0.1f;
-		float startMaxScale = 0.2f;
-		float endMinScale = 0.15f;
-		float endMaxScale = 0.2f;
-
-
-		Vector4 startMinColor = Vector4(1, 1, 1, 1);
-		Vector4 startMaxColor = Vector4(1, 1, 1, 1);
-		Vector4 endMinColor = Vector4(0, 0, 0, 0);
-		Vector4 endMaxColor = Vector4(0, 0, 0, 0);
-
-		float minLifeTime = 3;
-		float maxLifeTime = 5;
-
-		int maxParticleCount = 300;
-
-		bool  isLoop = true;
-		bool  isPlay = true;
-		bool isPlayOnAwake = true;
-		bool isLocal = false;
-		bool isVelocityLocal = false;
+		wstring particleDataName;
 	};
+
 	struct Burst
 	{
 		float time;
@@ -88,7 +36,7 @@ public:
 
 	void SetGravityScale(float _scale);
 public:
-	ParticleRenderer::Desc m_info;
+	ParticleData m_info;
 private:
 	float m_awakeTime = 0;
 	float m_playTime = 0;

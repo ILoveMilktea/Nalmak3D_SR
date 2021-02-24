@@ -468,6 +468,7 @@ void RenderManager::RenderText()
 
 void RenderManager::Reset()
 {
+	
 	m_currentMaterial = nullptr;
 
 	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)

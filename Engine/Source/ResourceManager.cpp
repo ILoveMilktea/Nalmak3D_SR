@@ -11,6 +11,7 @@
 #include "DepthStencil.h"
 #include "RenderManager.h"
 #include "GroundVIBuffer.h"
+#include "ParticleInfo.h"
 USING(Nalmak)
 IMPLEMENT_SINGLETON(ResourceManager)
 ResourceManager::ResourceManager()
@@ -35,7 +36,7 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	LoadResources<DepthStencil>(L"dsd");
 	LoadResources<Shader>(L"sd");
 	LoadResources<Material>(L"mtrl");
-
+	LoadResources<ParticleInfo>(L"ptd");
 	return S_OK;
 }
 

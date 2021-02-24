@@ -193,6 +193,9 @@
     <Filter Include="06.Resource\01.VIBuffer\09.Ground">
       <UniqueIdentifier>{a05edcdc-c265-49db-a50c-24e710d4d9f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Resource\06.ParticleInfo">
+      <UniqueIdentifier>{b73bc814-bd5b-43b0-847e-8000b3415dc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -419,6 +422,7 @@
     <ClCompile Include="..\Source\SplineCurve.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\ParticleInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -666,5 +670,6 @@
     <ClInclude Include="..\Include\SplineCurve.h">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\ParticleInfo.h" />
   </ItemGroup>
 </Project>
