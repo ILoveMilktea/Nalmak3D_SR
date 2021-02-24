@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\StageManager.h"
 #include "DogFightState.h"
-#include "Evasion.h"
+#include "EvasionState.h"
 #include "BossState.h"
 
 
@@ -41,7 +41,7 @@ void StageManager::Initialize()
 	m_gameObject->AddComponent<StateControl>();
 	m_stateControl = GetComponent<StateControl>();
 	m_stateControl->AddState<DogFightState>(L"Dog_Fight");
-	m_stateControl->AddState<Evasion>(L"Evasion");
+	m_stateControl->AddState<EvasionState>(L"Evasion");
 	m_stateControl->AddState<BossState>(L"Boss");
 	m_stateControl->InitState(L"Dog_Fight");
 }
@@ -67,6 +67,7 @@ void StageManager::ToEvasion()
 
 void StageManager::ToBoss()
 {
+	m_stateControl->SetState(L"Boss");
 }
 
 void StageManager::ToScene(const wstring & _sceneName)

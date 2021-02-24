@@ -120,37 +120,25 @@
     <ClInclude Include="..\Include\TopViewCamera.h">
       <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerToTopView.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Ground.h" />
-
     <ClInclude Include="..\Include\MoveBySpline.h" />
-
-
-    <ClInclude Include="..\Include\PlayerTopViewMove.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ShootingState.h">
-      <Filter>04.State</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\DogFightState.h">
       <Filter>04.State\00%29DogFight</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BossState.h">
       <Filter>04.State\02%29Boss</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Evasion.h">
-      <Filter>04.State\01%29Evasion</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\StageManager.h">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClInclude>
-
     <ClInclude Include="PlayerKitSelector.h" />
     <ClInclude Include="..\Include\UseKit.h" />
-
-
+    <ClInclude Include="..\Include\PlayerTopViewMove.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EvasionState.h">
+      <Filter>04.State\01%29Evasion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -240,9 +228,6 @@
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ShootingState.cpp">
-      <Filter>04.State</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Bullet.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Bullet</Filter>
     </ClCompile>
@@ -259,36 +244,25 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp">
       <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PlayerToTopView.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Ground.cpp" />
-
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
-
-
-    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\DogFightState.cpp">
       <Filter>04.State\00%29DogFight</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BossState.cpp">
       <Filter>04.State\02%29Boss</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Evasion.cpp">
-      <Filter>04.State\01%29Evasion</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\StageManager.cpp">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClCompile>
-
     <ClCompile Include="PlayerKitSelector.cpp" />
-
     <ClCompile Include="..\Source\UseKit.cpp" />
-
-
-
+    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EvasionState.cpp">
+      <Filter>04.State\01%29Evasion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -407,10 +381,6 @@
     <Filter Include="02.Component\00.Manager\FixCamera\2DTopViewCamera">
       <UniqueIdentifier>{a72f487d-d927-47dd-842a-cbe761320505}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce">
-      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
-    </Filter>
-
     <Filter Include="03.Resource\02.Shader\StageSelect">
       <UniqueIdentifier>{ce9bbe7f-34cd-45c4-bd6a-0f2b24e847ea}</UniqueIdentifier>
     </Filter>
@@ -434,7 +404,6 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
-
     </Filter>
   </ItemGroup>
   <ItemGroup>

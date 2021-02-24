@@ -12,7 +12,6 @@
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
-#include "PlayerToTopView.h"
 
 #include "StageManager.h"
 PhantomScene::PhantomScene()
@@ -34,6 +33,22 @@ void PhantomScene::Initialize()
 	StageManager::GetInstance();
 
 
+
+	Core::GetInstance()->SetSkyBox(L"skybox_gradation");
+	MeshRenderer::Desc ground;
+	ground.mtrlName = L"ground";
+	ground.meshName = L"ground";
+	auto groundObj = INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
+	groundObj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
+
+	DirectionalLight::Desc light;
+	light.diffuseIntensity = 1.f;
+	light.ambientIntensity = 0.2f;
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 30, 0);
+
+	
+	
+	
 	//GameObject* player;
 	
 	

@@ -22,10 +22,11 @@ public:
 public:
 	void TopViewMoving();
 	void Shooting();
-	void Defend_Skill();
+	void Lean(int _a);
+	//void Defend_Skill();
 
 private:
-	
+	float m_fRotz = 0.f;
 
 };
 

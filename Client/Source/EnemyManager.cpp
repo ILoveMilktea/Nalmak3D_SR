@@ -2,7 +2,7 @@
 #include "../Include/EnemyManager.h"
 
 #include "DogFightState.h"
-#include "ShootingState.h"
+
 #include "BossState.h"
 
 #include "Enemy.h"
