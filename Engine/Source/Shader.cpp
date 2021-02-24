@@ -75,6 +75,7 @@ void Shader::Initialize(wstring _fp)
 			string handleName = buffer.substr(firstWordEnd, handleNameEnd - firstWordEnd);
 
 			vertexInputLayout = (VERTEX_INPUT_LAYOUT)atoi(handleName.c_str());
+			m_vertexInputLayout = vertexInputLayout;
 		}
 
 		// 2. render target
@@ -107,7 +108,6 @@ void Shader::Initialize(wstring _fp)
 			string handleName = buffer.substr(firstWordEnd, handleNameEnd - firstWordEnd);
 
 			primitiveType = (DRAW_PRIMITIVE_TYPE)atoi(handleName.c_str());
-
 			break;
 		}
 	}
@@ -122,6 +122,7 @@ void Shader::Initialize(wstring _fp)
 		break;
 	case DRAW_PRIMITIVE_TYPE_LINELIST:
 		d3dprimitiveType = D3DPRIMITIVETYPE::D3DPT_LINELIST;
+
 		break;
 	case DRAW_PRIMITIVE_TYPE_TRIANGLELIST:
 		d3dprimitiveType = D3DPRIMITIVETYPE::D3DPT_TRIANGLELIST;

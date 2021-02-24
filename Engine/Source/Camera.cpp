@@ -16,8 +16,7 @@ Camera::Camera(Desc * _desc)
 	
 	
 
-	m_clearColor = _desc->clearColor;
-
+	
 	if (_desc->width == 0)
 		m_width = (float)RenderManager::GetInstance()->GetWindowWidth();
 	else
@@ -128,16 +127,17 @@ Vector2 Camera::WorldToScreenPos(const Vector3 & _pos)
 
 bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 {
+	if (!_renderer->IsFrustumCulling())
+		return true;
+
 	RENDERER_TYPE type = _renderer->GetType();
 	switch (type)
 	{
 	case RENDERER_TYPE_MESH:
 	case RENDERER_TYPE_PARTICLE:
 	{
-		float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius();
-		if (radius == 0)
-			return true;
-		radius *= 2;
+		float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
+	
 		Transform* trs = _renderer->GetTransform();
 		Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
 		float scale = max(trs->scale.z, max(trs->scale.x, trs->scale.y));

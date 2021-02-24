@@ -18,6 +18,7 @@ private:
 public:
 	void Initialize();
 	void SetSkyBox(const wstring& _skyBoxName);
+	void ResetSkyBox();
 	void SetDirectionalLightInfo(DirectionalLight* _light);
 	void DeleteDirectionalLight();
 	void DeletePointLight(PointLight* _light);
@@ -26,6 +27,7 @@ public:
 	const vector<PointLight*>& GetPointLights() { return m_pointLights; }
 	PointLight* GetPointLight(int _index) { return m_pointLights[_index]; }
 	size_t GetPointLightCount() { return m_pointLights.size(); }
+	bool IsSkyBoxRender() { return m_isSkyBoxRender; }
 private:
 	VIBuffer* m_skyBoxVIBuffer;
 	Material* m_skyBoxMtrl;
@@ -34,6 +36,7 @@ public:
 	Material* GetSkyboxMaterial();
 private:
 	DirectionalLight* m_directionalLigth = nullptr;
+	bool m_isSkyBoxRender = false;
 	vector<PointLight*> m_pointLights;
 };
 #endif

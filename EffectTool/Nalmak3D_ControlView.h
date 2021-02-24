@@ -162,6 +162,8 @@ public:
 	CEdit m_burstCount;
 	afx_msg void OnBnClickedAddBurst();
 	afx_msg void OnBnClickedDeleteBurst();
+	afx_msg void OnBnClickedButtonSave();
+	afx_msg void OnBnClickedButtonLoad();
 };
 
 
