@@ -10,6 +10,18 @@ class UIFactory
 {
 
 public:
+	static GameObject* CreateImage(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		auto button = INSTANTIATE();
+		button->AddComponent<CanvasRenderer>(&desc_cr);
+		button->AddComponent<SingleImage>();
+
+		return button;
+	}
+
 	static GameObject* CreateButton(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		CanvasRenderer::Desc desc_cr;

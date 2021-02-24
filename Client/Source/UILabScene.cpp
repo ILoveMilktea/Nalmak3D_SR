@@ -25,7 +25,9 @@ void UILabScene::Initialize()
 	// component add -> 생성자 -> 다음 프레임 업데이트 때 initialize
 	// 그니까 생성자나 initialize에서 뭔가 생성하면 순서 조심하세요
 
-	CreatePauseButton();
+	PlayerUIPatitial();
+
+	//CreatePauseButton();
 
 	//CreateRader();
 	//CreateSplineCurve();
@@ -209,4 +211,10 @@ void UILabScene::CreateSplineCurve()
 		}
 		prevPoint = curPoint;
 	}
+}
+
+void UILabScene::PlayerUIPatitial()
+{
+	auto image = UIFactory::CreateImage();
+	image->GetTransform()->scale.x = 500.f;
 }
