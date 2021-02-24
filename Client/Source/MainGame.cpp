@@ -100,10 +100,14 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"stage2", Scene::Instantiate<Stage2Scene>());
 	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
+
+	
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
-	m_engine->SetStartScene(L"stageSelect");
+
+	m_engine->SetStartScene(L"title");
+
 }
 
 void MainGame::ReadyResource()

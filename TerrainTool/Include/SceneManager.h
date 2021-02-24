@@ -26,6 +26,7 @@ public:
 	void Load(const wstring& _name);
 	void AddScene(const wstring& _name, Scene*);
 	bool CompareCurrentScene(const wstring& _name);
+	Scene* Find_Scene_Name(const wstring& _name);
 private:
 	void LoadNextScene();
 	unordered_map<wstring, Scene*> m_sceneList;

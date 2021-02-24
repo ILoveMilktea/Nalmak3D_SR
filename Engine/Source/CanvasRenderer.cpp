@@ -27,9 +27,14 @@ void CanvasRenderer::Initialize()
 	m_input = InputManager::GetInstance();
 	m_animator = GetComponent<Animator>();
 
-	if(m_transform->scale == Vector3(1.f, 1.f, 1.f))
-		m_transform->scale = Vector3(100.f, 100.f, 0.f);
-	
+
+	if (m_transform->scale.x == 1.f)
+		m_transform->scale.x = 100.f;
+	if (m_transform->scale.y == 1.f)
+		m_transform->scale.y = 100.f;
+
+	m_transform->scale.z = 0.f;
+
 	UpdateBoundary();
 
 	CanvasGroup::GetInstance()->AddGroupMember(this, m_group);

@@ -111,3 +111,8 @@ bool SceneManager::CompareCurrentScene(const wstring&  _name)
 {
 	return m_sceneList[_name] == m_currentScene;
 }
+
+Scene * SceneManager::Find_Scene_Name(const wstring & _name)
+{
+	return nullptr;
+}

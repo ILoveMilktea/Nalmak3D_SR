@@ -17,20 +17,14 @@ void UILabScene::Initialize()
 		mainCam->SetRotation(30, 0, 0);
 	}
 
+	PlayerUIPatitial();
 
-	// 컴포넌트를 Add하면?
-	// 생성자가 호출?
-	// transform 붙음 ( 이거도 지금은 생성자만)
-
-	// component add -> 생성자 -> 다음 프레임 업데이트 때 initialize
-	// 그니까 생성자나 initialize에서 뭔가 생성하면 순서 조심하세요
-
-	CreatePauseButton();
+	//CreatePauseButton();
 
 	//CreateRader();
 	//CreateSplineCurve();
 
-	// meshName 목록
+	// meshName 
 	// box, line, quad, sphere, triangle, quadNoneNormal
 }
 
@@ -209,4 +203,10 @@ void UILabScene::CreateSplineCurve()
 		}
 		prevPoint = curPoint;
 	}
+}
+
+void UILabScene::PlayerUIPatitial()
+{
+	auto image = UIFactory::CreateImage();
+	image->GetTransform()->scale.x = 500.f;
 }

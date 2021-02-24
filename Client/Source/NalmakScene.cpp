@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\NalmakScene.h"
 #include "PrintInfo.h"
+#include "SceneChanger.h"
 
 NalmakScene::NalmakScene()
 {
@@ -72,6 +73,14 @@ void NalmakScene::Initialize()
 		ground.meshName = L"ground";
 		auto groundObj =  INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
 		groundObj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
+	}
+
+	// 격납고씬으로 가기위한 코드
+	{
+		SceneChanger::Desc SceneChangerDescInfo;
+		SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
+		SceneChangerDescInfo.sceneName = L"garage";
+		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
 
 }

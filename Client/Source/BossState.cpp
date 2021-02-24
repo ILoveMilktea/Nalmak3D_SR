@@ -22,6 +22,7 @@ void BossState::EnterState()
 
 void BossState::UpdateState()
 {
+	DEBUG_LOG(L"Current Combat State : ", L"Boss State");
 }
 
 void BossState::ExitState()

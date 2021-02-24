@@ -1,10 +1,11 @@
 #pragma once
 #include "IState.h"
-class DogFightState : public IState
+class Evasion :
+	public IState
 {
 public:
-	DogFightState();
-	~DogFightState();
+	Evasion();
+	virtual ~Evasion();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -13,17 +14,14 @@ public:
 	virtual void ExitState() override;
 
 public:
-	void SceneToEvasion();
 
-	void Player_Faraway();
-	void Accelerate();
+public:
+	void EnterProduce();
 
 private:
-	GameObject* m_Player = nullptr;
 	GameObject* m_MainCamera = nullptr;
+	GameObject* m_Player = nullptr;
 
-	Vector3 vPlayerOrigin;
-	bool m_bProduce = false;
-	float m_fSpd = 0.f;
+	bool m_bEnter = false;
 };
 

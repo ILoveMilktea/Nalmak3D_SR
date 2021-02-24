@@ -41,5 +41,4 @@ private:
 
 
 
-//canvas -> 그냥 좌표계 변경
-// 이미지는 material 접근해서 이미지만 바꿔준다고?
+//canvas -> localface

@@ -11,11 +11,9 @@ SingleImage::SingleImage(Desc * _desc)
 
 void SingleImage::Initialize()
 {
-	if (!GetComponent<CanvasRenderer>())
-		m_gameObject->AddComponent<CanvasRenderer>();
-
 	m_renderer = GetComponent<CanvasRenderer>();
-	m_renderer->SetImage(m_image);
+	if(m_renderer)
+		m_renderer->SetImage(m_image);
 
 }
 
