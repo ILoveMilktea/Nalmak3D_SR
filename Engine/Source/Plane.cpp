@@ -45,7 +45,7 @@ void Plane::CreateVertexBuffer()
 		{
 			int index = row * (m_width + 1) + col;
 			vertices[index].position = Vector3(m_interval * col,0.f, m_interval * row);
-			vertices[index].uv = Vector2(m_interval * col, m_interval * row);
+			vertices[index].uv = Vector2(col / (float)m_width, row / (float)m_depth);
 			vertices[index].normal = Vector3(0.f, 1.f, 0.f);
 		}
 	}

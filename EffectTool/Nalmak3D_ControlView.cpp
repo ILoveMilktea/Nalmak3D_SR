@@ -5,7 +5,7 @@
 #include "Nalmak3D_EffectTool.h"
 #include "Nalmak3D_ControlView.h"
 #include "ParticleObjectManager.h"
-
+#include "Nalmak3D_EffectToolView.h"
 
 // Nalmak3D_ControlView
 
@@ -151,6 +151,8 @@ BEGIN_MESSAGE_MAP(Nalmak3D_ControlView, CFormView)
 	ON_BN_CLICKED(IDC_CHECK2, &Nalmak3D_ControlView::OnBnClickedIsPlayOnAwake)
 	ON_BN_CLICKED(IDC_BUTTON8, &Nalmak3D_ControlView::OnBnClickedAddBurst)
 	ON_BN_CLICKED(IDC_BUTTON9, &Nalmak3D_ControlView::OnBnClickedDeleteBurst)
+	ON_BN_CLICKED(IDC_BUTTON11, &Nalmak3D_ControlView::OnBnClickedButtonSave)
+	ON_BN_CLICKED(IDC_BUTTON12, &Nalmak3D_ControlView::OnBnClickedButtonLoad)
 END_MESSAGE_MAP()
 
 
@@ -1075,5 +1077,144 @@ void Nalmak3D_ControlView::OnBnClickedDeleteBurst()
 	m_currentSelectObject->GetComponent<ParticleRenderer>()->DeleteBurst(index);
 	m_burstList.DeleteString(index);
 
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	
+}
+
+
+void Nalmak3D_ControlView::OnBnClickedButtonSave()
+{
+
+	CFileDialog dlg
+	(
+		FALSE,
+		L"ptd",
+		L"*.ptd",
+		OFN_OVERWRITEPROMPT,
+		L"Data File(*.ptd) | *.ptd||",
+		this);
+
+	TCHAR fp[256] = L"";
+	GetCurrentDirectory(256, fp);
+	PathRemoveFileSpec(fp);
+	lstrcat(fp, L"\\Data\Particle");
+	dlg.m_ofn.lpstrInitialDir = fp;
+
+	if (dlg.DoModal())
+	{
+		HANDLE handle = CreateFile(dlg.GetPathName(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+		if (INVALID_HANDLE_VALUE == handle)
+		{
+			AfxMessageBox(L"Save File Failed");
+			return;
+		}
+		DWORD byte;
+
+		ParticleRenderer* particle = m_currentSelectObject->GetComponent<ParticleRenderer>();
+
+		WriteFile(handle, &particle->m_info, sizeof(ParticleRenderer::Desc), &byte, nullptr);
+
+		DWORD burstCount = (DWORD)particle->GetBurstList().size();
+		
+		WriteFile(handle, &burstCount, sizeof(DWORD), &byte, nullptr);
+		for (int i = 0; i < burstCount; ++i)
+		{
+			WriteFile(handle, &particle->GetBurstList()[i], sizeof(ParticleRenderer::Burst), &byte, nullptr);
+		}
+
+		wstring mtrlName = particle->GetMaterial()->GetName();
+		DWORD materialNameLength = mtrlName.length();
+		WriteFile(handle, &materialNameLength, sizeof(DWORD), &byte,nullptr);
+		WriteFile(handle, mtrlName.c_str(), materialNameLength * sizeof(wchar_t), &byte, nullptr);
+
+
+
+
+		CloseHandle(handle);
+		
+		afx_msg(L"Save File Succeed");
+	}
+}
+
+
+void Nalmak3D_ControlView::OnBnClickedButtonLoad()
+{
+	CFileDialog dlg
+	(
+		TRUE,
+		L"ptd",
+		L"*.ptd",
+		OFN_OVERWRITEPROMPT,
+		L"Data File(*.ptd) | *.ptd||",
+		this);
+
+	TCHAR fp[256] = L"";
+	GetCurrentDirectory(256, fp);
+	PathRemoveFileSpec(fp);
+	lstrcat(fp, L"\\Data\Particle");
+	dlg.m_ofn.lpstrInitialDir = fp;
+
+	if (dlg.DoModal())
+	{
+		HANDLE handle = CreateFile(dlg.GetPathName(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (INVALID_HANDLE_VALUE == handle)
+		{
+			afx_msg(L"Load File Failed");
+			return;
+		}
+
+		DWORD byte;
+
+		ParticleRenderer::Desc info;
+		ReadFile(handle, &info, sizeof(ParticleRenderer::Desc), &byte, nullptr);
+
+		auto obj = INSTANTIATE(0, L"particle")->AddComponent<ParticleRenderer>(&info);
+
+
+		DWORD burstCount;
+		ReadFile(handle, &burstCount, sizeof(DWORD), &byte, nullptr);
+
+		for (DWORD i = 0; i < burstCount; ++i)
+		{
+			ParticleRenderer::Burst burst;
+			ReadFile(handle, &burst, sizeof(ParticleRenderer::Burst), &byte, nullptr);
+			obj->GetComponent<ParticleRenderer>()->AddBurst(burst);
+		}
+
+		DWORD mtrlNameLength;
+		ReadFile(handle, &mtrlNameLength, sizeof(DWORD), &byte, nullptr);
+		TCHAR* nameBuffer = new TCHAR[mtrlNameLength + 1];
+		for (DWORD i = 0; i < mtrlNameLength; ++i)
+			ReadFile(handle, &nameBuffer[i], sizeof(wchar_t), &byte, nullptr);
+		nameBuffer[mtrlNameLength] = '\0';
+		obj->GetComponent<ParticleRenderer>()->SetMaterial(nameBuffer);
+
+
+		ParticleObjectManager::GetInstance()->AddObject(obj);
+		m_objectListBox.AddString(L"particle");
+		m_objectListBox.SetCurSel((int)(ParticleObjectManager::GetInstance()->GetAllObjects().size() - 1));
+		m_currentSelectObject = obj;
+		Material* mtrl = obj->GetComponent<ParticleRenderer>()->GetMaterial();
+		if (mtrl)
+		{
+			CString str;
+			str = mtrl->GetName().c_str();
+			m_materialName.SetWindowTextW(str);
+		}
+		else
+		{
+			m_materialName.SetWindowTextW(nameBuffer);
+		}
+
+		SAFE_DELETE(nameBuffer);
+		MFC_Utility::SetEditBoxFloat(&m_burstTime, 0);
+		MFC_Utility::SetEditBoxInt(&m_burstCount, 0);
+
+		OnLbnSelchangeObjectList();
+
+		CloseHandle(handle);
+
+		afx_msg(L"Load File Succeed");
+
+	}
 }

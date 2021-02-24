@@ -268,16 +268,24 @@ void GameObject::Release()
 	for (auto& component : m_newComponents)
 	{
 		component.second->Release();
-		SAFE_DELETE(component.second);
 	}
-	m_newComponents.clear();
 
-	
 	for (auto& component : m_components)
 	{
 		component.second->Release();
+	}
+
+	for (auto& component : m_newComponents)
+	{
 		SAFE_DELETE(component.second);
 	}
+
+	for (auto& component : m_components)
+	{
+		SAFE_DELETE(component.second);
+	}
+
+	m_newComponents.clear();
 	m_components.clear();
 }
 

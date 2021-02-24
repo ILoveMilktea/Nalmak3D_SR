@@ -2,17 +2,15 @@
 ##  Material Data Setting
 #########################################################
 
-shader "D_DirectionalLight"
+shader "StageSelectFloor"
 
-textureRT "g_diffuse" "GBuffer_Diffuse"
-textureRT "g_normal" "GBuffer_Normal"
-textureRT "g_depth" "GBuffer_Depth"
-textureRT "g_cookTorrance" "GBuffer_CookTorrance"
+texture "g_mainTex" "heightMapTest"
 
-blendingMode "1"
+renderQueue "1000"
 
-fillMode "0"
+blendingMode "0"
 
+fillMode "1"
 #########################################################
 ##   1. Shander
 ##  ---------------------------------------------------------------------------------------
@@ -49,7 +47,5 @@ fillMode "0"
 ##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
-
-
 
 

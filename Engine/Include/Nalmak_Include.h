@@ -59,7 +59,7 @@ using namespace std;
 #include "BitFlag.h"
 #include "Exception.h"
 #include "FileIO.h"
-
+#include "SplineCurve.h"
 
 #include "InputManager.h"
 

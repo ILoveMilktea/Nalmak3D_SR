@@ -35,7 +35,7 @@ struct DirectionalLightInfo
 	}
 	BaseLightInfo base;
 
-	Vector3 direction;
+	Vector3 direction = Vector3(0,1,0);
 };
 #pragma endregion LIGHT INFO
 

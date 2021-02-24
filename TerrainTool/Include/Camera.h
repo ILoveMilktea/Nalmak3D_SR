@@ -32,7 +32,6 @@ public:
 		CAMERA_PROJECTION_MODE  mode = CAMERA_PROJECTION_MODE_PERSPECTIVE;
 		CAMERA_RENDERING_MODE renderMode = CAMERA_RENDERING_MODE_FORWARD;
 		// for clear solidColor
-		D3DXCOLOR clearColor = D3DCOLOR_RGBA(40, 40, 110, 1);
 		wstring skyBoxName = L"";
 	};
 public:
@@ -51,7 +50,6 @@ private:
 	float m_zFar;
 	float m_width;
 	float m_height;
-	D3DXCOLOR m_clearColor;
 	Matrix m_projMatrix;
 
 	CAMERA_PROJECTION_MODE m_mode;

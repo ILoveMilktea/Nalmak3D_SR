@@ -45,7 +45,7 @@ void GroundVIBuffer::CreateVertexBuffer()
 
 	m_vBuffer->Unlock();
 
-	m_boundingSphereRadius = 0;
+	D3DXComputeBoundingSphere(&vertices[0].position, 4, sizeof(INPUT_LAYOUT_POSITION_UV), &m_boundingSphereCenter, &m_boundingSphereRadius);
 }
 
 void GroundVIBuffer::CreateIndexBuffer()

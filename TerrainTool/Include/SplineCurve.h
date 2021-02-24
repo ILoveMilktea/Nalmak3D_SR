@@ -14,12 +14,15 @@ public:
 	void AddPoint(Vector3 _point);
 	void SubPoint(int _index);
 	void DrawCurve();
+	Vector3 GetPoint(float _ratio);
 	list<Vector3>* GetCurve() { return &m_line; }
-
+private:
+	void CalcDistanceRatio();
+	Vector3 GetPoint(int _index, float _ratio);
 private:
 	vector<Vector3> m_points;
 	list<Vector3> m_line;
-
+	vector<float> m_distanceRatio;
 	// 점 3개로 커브 하나
 	// 곡선 위의 점을 얻고 싶음, 기준 점들이 아니다
 	// 4개 점 던지고, 

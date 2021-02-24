@@ -34,12 +34,14 @@ protected:
 	PDIRECT3DDEVICE9 m_device;
 	RENDERER_TYPE  m_type;
 	int m_layer;
+	bool m_isFrustumCulling = true;
 public:
 	PDIRECT3DVERTEXBUFFER9 GetVertexBuffer() const;
 	PDIRECT3DINDEXBUFFER9 GetIndexBuffer() const;
 	Material* GetMaterial() const;
 	VIBuffer* GetVIBuffer() const;
 	int GetLayer() const { return m_layer; }
+	bool IsFrustumCulling() { return m_isFrustumCulling; }
 public:
 	UINT GetVertexCount();
 	UINT GetFigureCount();
@@ -50,7 +52,7 @@ public:
 	void SetMaterial(wstring _mtrlName);
 	void SetLayer(int _layer) { m_layer = _layer; }
 	void SetMesh(wstring _meshName);
-
+	void SetFrustumCulling(bool _culling) { m_isFrustumCulling = _culling; }
 
 
 

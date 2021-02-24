@@ -215,6 +215,7 @@
     <ClInclude Include="..\Include\MainGame.h" />
     <ClInclude Include="..\Include\Missile.h" />
     <ClInclude Include="..\Include\MouseOption.h" />
+    <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\NalmakScene.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
@@ -265,6 +266,7 @@
     <ClCompile Include="..\Source\MainGame.cpp" />
     <ClCompile Include="..\Source\Missile.cpp" />
     <ClCompile Include="..\Source\MouseOption.cpp" />
+    <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\NalmakScene.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
@@ -342,6 +344,7 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\D_PointLight.fx" />
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx" />
+    <FxCompile Include="..\..\Resource\Shader\StageSelectFloor.fx" />
     <FxCompile Include="..\..\Resource\Shader\standard.fx">
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

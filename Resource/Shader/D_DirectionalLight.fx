@@ -151,6 +151,7 @@ technique DefaultTechnique
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z °ª¿¡´ëÇÑ È°¿ë
 
 		ZEnable = false;
+		AlphaBlendEnable = true;
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

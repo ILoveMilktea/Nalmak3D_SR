@@ -4,9 +4,8 @@
 
 ParticleRenderer::ParticleRenderer(Desc * _desc)
 {
-	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(_desc->meshName);
+	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
 
-	SetLayer(_desc->layer);
 	m_info = *_desc;
 	m_info.coneAngle = _desc->coneAngle * Deg2Rad;
 	m_info.minAngle = _desc->minAngle * Deg2Rad;
@@ -24,12 +23,10 @@ void ParticleRenderer::Initialize()
 {
 	SetMaxParticleCount(m_info.maxParticleCount);
 
-	if (m_info.mtrl)
-		m_material = m_info.mtrl;
-	else
-		m_material = ResourceManager::GetInstance()->GetResource<Material>(m_info.mtrlName);
 
-	if (m_material->GetShader()->GetName() != L"particle")
+	m_material = ResourceManager::GetInstance()->GetResource<Material>(L"particle");
+
+	if (m_material->GetShader()->GetInputLayout()!= VERTEX_INPUT_LAYOUT_PARTICLE)
 		assert(L"Particle Renderer must have particle Shader Material!" && 0);
 
 	m_awakeTime = Nalmak_Math::Rand(m_info.minAwakeTime, m_info.maxAwakeTime);
@@ -39,7 +36,6 @@ void ParticleRenderer::Initialize()
 
 void ParticleRenderer::Update()
 {
-
 	if (m_info.isPlay)
 	{
 		if (m_awakeTime > 0)
