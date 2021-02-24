@@ -17,3 +17,7 @@ UseKit::~UseKit()
 void UseKit::Initialize()
 {
 }
+
+void UseKit::Update()
+{
+}

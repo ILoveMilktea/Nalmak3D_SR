@@ -1,26 +1,33 @@
 #pragma once
 #include "Component.h"
+class UseKit;
 class PlayerKitSelector :
 	public Component
 {
 public:
-	PlayerKitSelector();
+	struct Desc
+	{
+
+	};
+
+public:
+	PlayerKitSelector(Desc* _desc);
 	virtual ~PlayerKitSelector();
 
-
-
-
 public:
-	// Component을(를) 통해 상속됨
+	static PlayerKitSelector* GetInstance();
+	//const unordered_map<wstring, vector<Component*>>& GetPlayerSlot();
+	static void DeleteInstance();
+public:
 	virtual void Initialize() override;
 	virtual void Update() override;
-
-public:
-	const unordered_map<wstring, vector<class UseKit*>>& GetPlayerSlot();
+	virtual void Release() override;
 
 private:
-	unordered_map<wstring, vector<class UseKit*>> m_playerSlot;
+	//unordered_map<wstring, vector<UseKit::Desc*>> m_garageSlot;
 
+private:
+	static PlayerKitSelector* m_instance;
 
 };
 

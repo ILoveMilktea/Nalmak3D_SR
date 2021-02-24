@@ -11,7 +11,7 @@ public:
 		float delay = 0.f;
 		float kitAttack = 0.f;
 		float kitSpeed = 0.f;
-		WeponType wepontype = NORMAL_MISSILE;
+		WeponType wepontype = WeponType::WEPON_END;
 	};
 
 public:
@@ -20,7 +20,7 @@ public:
 
 public:
 	virtual void Initialize() override;
-
+	virtual void Update() override;
 
 private:
 	WeponType m_eWeponType = WeponType::WEPON_END;
@@ -29,6 +29,9 @@ private:
 	float m_kitSpeed = 0.f;
 
 
+
+
+	
 
 };
 
