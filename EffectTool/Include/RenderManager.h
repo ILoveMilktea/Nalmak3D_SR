@@ -49,6 +49,9 @@ BEGIN(Nalmak)
 
 // PBR Âü°í  ggx
 // http://filmicworlds.com/blog/optimizing-ggx-shaders-with-dotlh/ // PBR 
+
+// https://holdimprovae.blogspot.com/2019/01/unityshaderstudy.html dissolve 
+
 class RenderManager
 {
 	DECLARE_SINGLETON(RenderManager)

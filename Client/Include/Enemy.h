@@ -14,9 +14,11 @@ public:
 		int	iRound = 50;
 
 		float fFpm_Missile = 30.f;
-		int iRound_Missile = 1; 
+		int iRound_Missile = 5; 
 
 	};
+
+	enum ePattern { RUSH, IDLE, CHASE, DROP, HOLD };
 public:
 	Enemy(Desc* _Desc);
 	virtual ~Enemy();
@@ -55,6 +57,8 @@ public: /* Move */
 	
 	bool Dive(); //급 하강
 	bool Soar(); //급 상승
+
+	void Create_RandPos();
 
 	bool Shoot();
 	void Reloading();
@@ -98,6 +102,9 @@ private:
 
 	float m_fHorizonSpd = 10.f;
 
+	bool	m_bRandMove = false;
+	Vector3 m_vRandPos = { 0.f,0.f,0.f };
+
 	Vector3 m_vOriginForward = { 0.f, 0.f, 0.f };
 	bool	m_bDive = false;
 	float	m_fDiveInner = 0.f;
@@ -118,11 +125,16 @@ private:
 	float m_fQuartRotZ = 0.f;
 	Quaternion m_QuartRot = { 0.f, 0.f, 0.f, 0.f };
 	
-	enum ePattern { RUSH, IDLE, CHASE, DROP, HOLD};
-	float m_fHoldDelta = 0.f;
-	Vector3 m_vRandPos = { 0.f,0.f,0.f };
+	//enum ePattern { RUSH, IDLE, CHASE, DROP, HOLD };
+	
+	float	m_fChaseDelta = 0.f;
+	bool	m_bChaseMove = false;
+
+	
+	float	m_fHoldDelta = 0.f;
 	bool	m_bHoldMove = false;
 
+	float	m_fDropDelta = 0.f;
 	bool	m_bDropMove = false;
 
 #pragma region ForLean
