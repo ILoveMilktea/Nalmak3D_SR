@@ -4,7 +4,7 @@
 
 SmoothFollow::SmoothFollow(Desc * _desc)
 {
-	m_toTarget = _desc->toTarget;
+	m_toTarget = _desc->toTarget; //Player
 	
 	m_culDistance = _desc->culDistance;
 	m_minDistance = _desc->minDistance;
@@ -25,9 +25,12 @@ SmoothFollow::~SmoothFollow()
 void SmoothFollow::Initialize()
 {
 	assert(L"Please Set Target!" && m_toTarget);
-
 	m_fromObject =  Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
 	m_fromObject->SetParents(m_gameObject);
+	//SetParents : 부모를 설정해주는건데
+	//부모를 설정하면 해당 오브젝트의 위치, 로테이션은 world 기준이 아니라 거 부모상대 좌표로 바뀜.
+	//이 코드 해석 => SmoothFollow : "im ur father, mainCamera"
+
 	m_playerInfo = PlayerInfoManager::GetInstance();
 
 	m_lookDirection = m_toTarget->GetTransform()->rotation;

@@ -10,6 +10,21 @@ class UIFactory
 {
 
 public:
+	static GameObject* CreateFade(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		CanvasRenderer::Desc desc;
+		desc.group = _group;
+
+		auto image = INSTANTIATE();
+		image->AddComponent<CanvasRenderer>(&desc);
+		image->AddComponent<SingleImage>();
+
+		auto tex = ResourceManager::GetInstance()->GetResource<Texture>(L"UIBlack")->GetTexure(0);
+		image->GetComponent<SingleImage>()->SetTexture(tex);
+
+		return image;
+	}
+
 	static GameObject* CreateButton(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		CanvasRenderer::Desc desc_cr;

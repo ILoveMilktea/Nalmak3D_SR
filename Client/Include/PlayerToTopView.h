@@ -35,6 +35,7 @@ public:
 private:
 	bool		m_bProduce = false;
 	GameObject*	m_Player = nullptr;
+	GameObject* m_MainCamera = nullptr;
 	GameObject*	m_Fade = nullptr;
 	float		m_fSpd = 0.f;
 

@@ -46,6 +46,7 @@ void PhantomScene::Initialize()
 		player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle")->AddState<PlayerMove>(L"playerMove");
 		player->GetComponent<StateControl>()->InitState(L"playerIdle");
 		player->SetScale(0.1f, 0.1f, 0.1f);
+			
 	}
 
 	{
