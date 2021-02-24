@@ -35,16 +35,42 @@ void PlayerToTopView::Initialize()
 
 void PlayerToTopView::Update()
 {
+
+	////DEBUG_LOG(L"SmoothFollow Pos", Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position);
+	////DEBUG_LOG(L"SmoothFollow Rot", Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation);
+	//DEBUG_LOG(L"MainCam Pos", m_MainCamera->GetTransform()->position);
+	////DEBUG_LOG(L"MainCam Rot", m_MainCamera->GetTransform()->rotation);
+
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
 	{
 		//여기서 바로 followSmooth 삭제하지 말고 FadeOut되면 해보자.
 
-		Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->SetActive(false);
+		 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
+		 RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
 
-		Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
-		Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
+		 //PosTemp_camera = m_MainCamera->GetTransform()->position;
+		 //RotTemp_camera = m_MainCamera->GetTransform()->rotation;
 
+		 DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
+
+		//Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->SetActive(false);
 		
+		m_MainCamera->GetTransform()->position = PosTemp;
+		m_MainCamera->GetTransform()->rotation = RotTemp;
+
+		//PosTemp_camera = m_MainCamera->GetTransform()->position;
+		//RotTemp_camera = m_MainCamera->GetTransform()->rotation;
+
+
+		//Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
+		//Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
+
+		//PosTemp += m_MainCamera->GetTransform()->position;
+		//RotTemp -= m_MainCamera->GetTransform()->rotation;
+		////각도는 맞음
+
+		//m_MainCamera->GetTransform()->position = PosTemp;
+		//m_MainCamera->GetTransform()->rotation = RotTemp;
 
 
 		//DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
@@ -71,7 +97,7 @@ void PlayerToTopView::Update()
 	if (m_bProduce)
 	{	
 		Accelerate();
-		//Player_Far();
+		Player_Far();
 
 		//Fade_Out();
 		/*
@@ -83,6 +109,7 @@ void PlayerToTopView::Update()
 		*/
 	}
 
+	
 }
 
 void PlayerToTopView::Player_Far()
@@ -96,8 +123,9 @@ void PlayerToTopView::Create_Fade()
 {
 	m_Fade = INSTANTIATE();
 
+	m_Fade->AddComponent<CanvasRenderer>();
 	SingleImage::Desc Fade_Desc;
-	Fade_Desc.textureName = L"UIWhite";
+	Fade_Desc.textureName = L"UIBlack";
 
 	m_Fade->AddComponent<SingleImage>(&Fade_Desc);
 	

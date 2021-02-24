@@ -39,5 +39,11 @@ private:
 	GameObject*	m_Fade = nullptr;
 	float		m_fSpd = 0.f;
 
+
+	Vector3 PosTemp;
+	Quaternion RotTemp;
+	Vector3 PosTemp_camera;
+	Quaternion RotTemp_camera;
+
 };
 
