@@ -3,11 +3,11 @@
 
 RevolvesToTarget::RevolvesToTarget(Desc * _desc)
 {
-	m_target = _desc->target;
+	m_targetParent = _desc->targetParent;
 	m_roationSpeed = _desc->roationSpeed;
 	m_addingPos = _desc->addingPos;
 	m_distanceLenght = _desc->distanceLenght;
-
+	m_yOffSetDistance = _desc->yOffSetDistance;
 }
 
 RevolvesToTarget::~RevolvesToTarget()
@@ -16,35 +16,40 @@ RevolvesToTarget::~RevolvesToTarget()
 
 void RevolvesToTarget::Initialize()
 {
-	assert(L"Please. Instert Target"  && m_target);
+	assert(L"Please. Instert Target"  && m_targetParent);
 	
-	m_target = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
-	////  카메라 객체를 자식으로..
-	Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA)->SetParents(m_gameObject);
-
-	m_distanceLenght = 120.f;
+	{
+		m_target = INSTANTIATE(OBJECT_TAG_GARAGE_OBJECT);
+		m_target->SetParents(m_targetParent);
+		m_target->SetPosition(0, 0.f, -2.f);
+		
+		//m_target->SetRotation(-20.f, 0, 0.f);
+		Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA)->SetParents(m_gameObject);
+	}
+	
 }
 
 void RevolvesToTarget::Update()
 {
-	/*D3DXQuaternionRotationAxis();*/
-	/*Quaternion rot;
-	D3DXQuaternionRotationAxis(&rot, &_axis, _angle);
-	return rot;*/
+	// pos set
+	Matrix temproyWorldMatrix = m_target->GetTransform()->GetWorldMatrix();
+	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * m_yOffSetDistance;
+	m_targetPos = m_target->GetTransform()->position + ((-m_target->GetTransform()->GetForward()) * m_distanceLenght) + offSetY;
 
-	//  1. toTarget;
-	
-
-	Quaternion quaterRotY;
-	D3DXQuaternionRotationAxis(&quaterRotY, &m_transform->GetUp(), m_roationSpeed * dTime * 0.15f);
-	//Vector3 targetPos;
-	
-	//m_transform->position  
-	//m_transform->rotation *= quaterRotY;
-	DEBUG_LOG(L"Camera Position", (Vector3)m_transform->position);
-	DEBUG_LOG(L"Camera Rotation" , (Vector3)m_transform->rotation);
+	//rotate set
+	Quaternion rotY;
+	rotY = m_target->GetTransform()->RotateAxis(offSetY, m_roationSpeed * dTime);
+	m_lookDir = m_target->GetTransform()->rotation *= rotY;
 }
 
 void RevolvesToTarget::LateUpdate()
 {
+	// compute 
+	m_transform->position = m_targetPos;
+	m_transform->rotation = m_lookDir;
+
+	DEBUG_LOG(L"Player Child Position", m_target->GetTransform()->position);
+	DEBUG_LOG(L"Camera Position", (Vector3)m_transform->position);
+	DEBUG_LOG(L"Camera Rotation", (Vector3)m_transform->rotation);
 }
+

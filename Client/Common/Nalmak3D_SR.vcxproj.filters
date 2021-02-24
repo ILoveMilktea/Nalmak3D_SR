@@ -124,6 +124,7 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Ground.h" />
+
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
@@ -142,6 +143,10 @@
     <ClInclude Include="..\Include\StageManager.h">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClInclude>
+
+    <ClInclude Include="PlayerKitSelector.h" />
+    <ClInclude Include="..\Include\UseKit.h" />
+
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -254,6 +259,7 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Ground.cpp" />
+
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClCompile>
@@ -269,6 +275,12 @@
     <ClCompile Include="..\Source\StageManager.cpp">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClCompile>
+
+    <ClCompile Include="PlayerKitSelector.cpp" />
+
+    <ClCompile Include="..\Source\UseKit.cpp" />
+
+
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
