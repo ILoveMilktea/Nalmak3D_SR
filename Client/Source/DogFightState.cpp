@@ -4,13 +4,14 @@
 #include "PlayerInfoManager.h"
 #include "PlayerIdle.h"
 #include "PlayerMove.h"
+#include "PlayerTopViewMove.h"
 
 #include "FixToTarget.h"
 #include "MouseOption.h"
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
-#include "PlayerToTopView.h"
+
 
 #include "StageManager.h"
 
@@ -35,6 +36,7 @@ void DogFightState::Initialize()
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
+	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 	
 	MeshRenderer::Desc render;
@@ -92,6 +94,7 @@ void DogFightState::UpdateState()
 void DogFightState::ExitState()
 {
 	//DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
+	m_Player->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
 }
 
 void DogFightState::SceneToEvasion()
