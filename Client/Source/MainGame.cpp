@@ -15,7 +15,7 @@
 #include "NalmakScene.h"
 
 TimeManager* g_time;
-// rendering pipeline 
+// rendering pipeline
 // local -> world -> view -> backface -> light -> projection -> cliping -> viewport -> rasterize
 
 
@@ -127,4 +127,3 @@ void MainGame::InstantiateDefault()
 
 
 }
-

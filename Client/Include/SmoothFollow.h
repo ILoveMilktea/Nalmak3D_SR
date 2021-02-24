@@ -29,6 +29,7 @@ public:
 
 private:
 	GameObject* m_fromObject = nullptr;
+
 private:
 	GameObject* m_toTarget = nullptr;
 	float		m_culDistance = 0;

@@ -91,8 +91,6 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos)
 	Enemy_Mesh.mtrlName = L"default";
 	Enemy_Mesh.meshName = L"flight";
 	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
-
-
 }
 
 void EnemyManager::Spawn_Rush()
