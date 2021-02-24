@@ -16,6 +16,8 @@ private:
 	void CreateRader();
 
 	void CreateSplineCurve();
+
+	void PlayerUIPatitial();
 };
 
 
