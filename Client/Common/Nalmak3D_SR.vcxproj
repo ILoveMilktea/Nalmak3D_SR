@@ -205,6 +205,7 @@
     <ClInclude Include="..\Include\Enemy_Hold.h" />
     <ClInclude Include="..\Include\Enemy_Idle.h" />
     <ClInclude Include="..\Include\Enum.h" />
+    <ClInclude Include="..\Include\Evasion.h" />
     <ClInclude Include="..\Include\Extern.h" />
     <ClInclude Include="..\Include\FixToTarget.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
     <ClInclude Include="..\Include\PlayerMove.h" />
+    <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\PlayerToTopView.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
@@ -252,6 +254,7 @@
     <ClCompile Include="..\Source\Enemy_Chase.cpp" />
     <ClCompile Include="..\Source\Enemy_Hold.cpp" />
     <ClCompile Include="..\Source\Enemy_Idle.cpp" />
+    <ClCompile Include="..\Source\Evasion.cpp" />
     <ClCompile Include="..\Source\FixToTarget.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\Ground.cpp" />
@@ -264,6 +267,7 @@
     <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
     <ClCompile Include="..\Source\PlayerMove.cpp" />
+    <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\PlayerToTopView.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />

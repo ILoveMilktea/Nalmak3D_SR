@@ -2,6 +2,7 @@
 #include "Component.h"
 
 //ø¨√‚øÎ
+//π‰ π¨∞Ì ∞¢ Stateø°º≠ ª©¡÷±‚.
 
 class PlayerToTopView :
 	public Component
@@ -25,9 +26,9 @@ public:
 
 public:
 	void Player_Far();
-
-	void Create_Fade();
 	void Accelerate();
+	void Create_Fade();
+	
 
 	bool Fade_In();
 	bool Fade_Out();

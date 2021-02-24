@@ -118,7 +118,10 @@ void PlayerToTopView::Player_Far()
 
 	m_Player->GetTransform()->position += forward * m_fSpd;
 }
-
+void PlayerToTopView::Accelerate()
+{
+	m_fSpd = Nalmak_Math::Lerp(m_fSpd, 5.f, dTime);
+}
 void PlayerToTopView::Create_Fade()
 {
 	m_Fade = INSTANTIATE();
@@ -133,10 +136,7 @@ void PlayerToTopView::Create_Fade()
 	m_Fade->GetTransform()->scale.x = 500.f;
 }
 
-void PlayerToTopView::Accelerate()
-{
-	m_fSpd = Nalmak_Math::Lerp(m_fSpd, 50.f, dTime);
-}
+
 
 bool PlayerToTopView::Fade_In()
 {
