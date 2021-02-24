@@ -34,7 +34,7 @@ Terrain::Terrain(Desc * _desc)
 		{
 			int index = row * (m_depth + 1) + col;
 			m_vertexInfo[index].position = Vector3(m_interval * col, 0.f, m_interval * row);
-			m_vertexInfo[index].uv = Vector2(m_interval * col, m_interval * row);
+			m_vertexInfo[index].uv = Vector2(m_interval * col / m_width, m_interval * row / m_depth);
 			m_vertexInfo[index].normal = Vector3(0.f, 0.f, 0.f);
 		}
 	}
@@ -54,98 +54,14 @@ void Terrain::Initialize()
 void Terrain::Update()
 {
 	
-	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
-	{
-		Matrix worldMat = m_transform->GetWorldMatrix();
-		Vector3 point = m_mainCam->GetTransform()->GetWorldPosition();
-		Vector3 dir = m_mainCam->GetCamToMouseWorldDirection();
-
 	
-		for (int i = 0; i < m_depth; ++i)
-		{
-			for (int j = 0; j < m_width; ++j)
-			{
-				Vector3 v0;
-				Vector3 v1;
-				Vector3 v2;
-				D3DXVec3TransformCoord(&v0, &m_vertexInfo[(m_depth + 1) * i + j].position, &worldMat);
-				D3DXVec3TransformCoord(&v1, &m_vertexInfo[(m_depth + 1) * i + j + 1].position, &worldMat);
-				D3DXVec3TransformCoord(&v2, &m_vertexInfo[(m_depth + 1) * (i + 1) + j + 1].position, &worldMat);
-				Vector3 intersectPoint;
-				if (Nalmak_Math::IsIntersectTriangle(point,dir,v0,v1,v2,&intersectPoint))
-				{
-					m_isChangeData = true;
-				
-				}
-				else
-				{
-					D3DXVec3TransformCoord(&v0, &m_vertexInfo[(m_depth + 1) * i + j + 1].position, &worldMat);
-					D3DXVec3TransformCoord(&v1, &m_vertexInfo[(m_depth + 1) * (i + 1) + j].position, &worldMat);
-					D3DXVec3TransformCoord(&v2, &m_vertexInfo[(m_depth + 1) * (i + 1) + j + 1].position, &worldMat);
-					if (Nalmak_Math::IsIntersectTriangle(point, dir, v0, v1, v2, &intersectPoint))
-					{
-						m_isChangeData = true;
-					
-					}
-				}
-				if (m_isChangeData)
-				{
-					float yOffset = m_brushPower * TimeManager::GetInstance()->GetdeltaTime();
-
-					int radius = (int)m_brushRadius + 1;
-					for (int k = -radius; k <= radius; ++k)
-					{
-						for (int l = -radius; l <= radius; ++l)
-						{
-							int xOffset = (int)intersectPoint.x + l;
-							int zOffset = (int)intersectPoint.z + k;
-							float distance = Nalmak_Math::Distance(Vector3((float)xOffset, 0.f, (float)zOffset), Vector3(intersectPoint.x, 0, intersectPoint.z));
-
-							if (distance < m_brushRadius)
-							{
-								float ratio =  (m_brushRadius - distance) / m_brushRadius; // 0 -> 가장자리 1 -> 가운데
-								float addHeight = sin(PI_DIV2 * ratio) * yOffset;
-								m_vertexInfo[(m_depth + 1) * zOffset + xOffset].position.y += addHeight;
-							}
-						}
-					}
-					return;
-				}
-			}
-		}
-	}
-	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_O))
-	{
-		m_brushRadius -= TimeManager::GetInstance()->GetdeltaTime();
-		if (m_brushRadius < 0)
-			m_brushRadius = 0;
-	}
-	else if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_P))
-	{
-		m_brushRadius += TimeManager::GetInstance()->GetdeltaTime();
-	}
-	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_K))
-	{
-		m_brushPower -= TimeManager::GetInstance()->GetdeltaTime();
-		if (m_brushPower < 0)
-			m_brushPower = 0;
-	}
-	else if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_L))
-	{
-		m_brushPower += TimeManager::GetInstance()->GetdeltaTime();
-	
-	}
 
 
 }
 
 void Terrain::LateUpdate()
 {
-	if (m_isChangeData)
-	{
-		((Plane*)m_viBuffer)->UpdateInstanceBuffer(m_vertexInfo, (m_depth + 1) * (m_width + 1));
-		m_isChangeData = false;
-	}
+
 }
 
 void Terrain::Release()

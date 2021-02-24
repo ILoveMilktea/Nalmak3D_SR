@@ -47,5 +47,7 @@ private:
 private:
 	class PlayerInfoManager* m_playerInfo;
 	
+
+
 };
 

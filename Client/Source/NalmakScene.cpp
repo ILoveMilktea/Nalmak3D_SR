@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\NalmakScene.h"
 #include "PrintInfo.h"
+#include "SceneChanger.h"
 
 NalmakScene::NalmakScene()
 {
@@ -15,12 +16,12 @@ void NalmakScene::Initialize()
 	//INSTANTIATE()->AddComponent<Grid>();
 
 	Core::GetInstance()->SetSkyBox(L"skybox_gradation");
-	AutoRotate::Desc rot;
-	//rot.xAxisSpeed = 1;
+
+
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 1.f;
 	light.ambientIntensity = 0.2f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 30, 0)->AddComponent<AutoRotate>(&rot);
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 30, 0);
 	{
 		FreeMove::Desc free;
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>(&free)->AddComponent<PrintInfo>()->SetPosition(0, 0, -5);
@@ -54,54 +55,32 @@ void NalmakScene::Initialize()
 		INSTANTIATE()->AddComponent<MeshRenderer>(&mesh);
 	}
 
-	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse");
+	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
 	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
-	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal");
+	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal", CANVAS_GROUP_G1);
 	window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
 	auto window3 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Depth", CANVAS_GROUP_G1);
 	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
-	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light");
+	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
 	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
-/*
-	{
-		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
-		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Diffuse")->GetTexture());
-		obj->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
-		obj->AddComponent<CanvasRenderer>();
-		obj->GetComponent<CanvasRenderer>()->SetGroup(CANVAS_GROUP_G1);
-	}
-	{
-		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
-		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Normal")->GetTexture());
-		obj->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
-	}
-	{
-		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
-		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Depth")->GetTexture());
-		obj->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
 
-	}
-	{
-		SingleImage::Desc single;
-		auto obj = INSTANTIATE()->AddComponent<SingleImage>();
-		obj->GetComponent<SingleImage>()->SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(L"GBuffer_Light")->GetTexture());
-		obj->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
-	}
+	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50,0);
+
+
 	{
 		MeshRenderer::Desc ground;
 		ground.mtrlName = L"ground";
 		ground.meshName = L"ground";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
+		auto groundObj =  INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
+		groundObj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 	}
-	}*/
+
+	// 격납고씬으로 가기위한 코드
 	{
-		MeshRenderer::Desc ground;
-		ground.mtrlName = L"ground";
-		ground.meshName = L"ground";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
+		SceneChanger::Desc SceneChangerDescInfo;
+		SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
+		SceneChangerDescInfo.sceneName = L"garage";
+		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
 
 }

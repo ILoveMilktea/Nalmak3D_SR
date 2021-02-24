@@ -6,9 +6,10 @@ class RevolvesToTarget :
 public:
 	struct Desc
 	{
-		GameObject* target = nullptr;
+		GameObject* targetParent = nullptr;
 		float roationSpeed = 5.f;
 		float distanceLenght = 15.f;
+		float yOffSetDistance = 5.f;
 		Vector3 addingPos = {};
 
 	};
@@ -24,17 +25,23 @@ public:
 	virtual void LateUpdate() override;
 
 
+private:
+
 
 private:
 	float m_roationSpeed = 0.f;
 	float m_distanceLenght = 0.f;
+	float m_yOffSetDistance = 0.f;
 	Vector3 m_addingPos = {};
 
 private:
-	GameObject* m_target = nullptr;
+	GameObject* m_targetParent = nullptr;
 
 private:
-	Vector3		m_direction;
+	GameObject* m_target = nullptr;
+private:
+	Quaternion m_lookDir = {};
+	Vector3 m_targetPos = {};
 
 };
 

@@ -415,9 +415,6 @@
     <ClCompile Include="..\Source\PositionHandle.cpp">
       <Filter>05.Component\99.Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\SplineCurve.cpp">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\SingleImage.cpp">
       <Filter>05.Component\08.UI</Filter>
     </ClCompile>
@@ -430,6 +427,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\CanvasPicking.cpp">
       <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SplineCurve.cpp">
+      <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -671,9 +671,6 @@
     <ClInclude Include="..\Include\PositionHandle.h">
       <Filter>05.Component\99.Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\SplineCurve.h">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\SingleImage.h">
       <Filter>05.Component\08.UI</Filter>
     </ClInclude>
@@ -686,6 +683,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\CanvasPicking.h">
       <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SplineCurve.h">
+    <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

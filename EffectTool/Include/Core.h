@@ -23,6 +23,10 @@
 #include "LightManager.h"
 #include "CanvasGroup.h"
 
+#include "BitFlag.h"
+#include "Exception.h"
+#include "FileIO.h"
+#include "SplineCurve.h"
 
 #pragma region Component
 #include "MeshRenderer.h"

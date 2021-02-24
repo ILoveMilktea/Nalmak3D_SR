@@ -21,6 +21,12 @@ public:
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
+
+public:
+	void ToEvasion();
+	void ToBoss();
+	void ToScene(const wstring& _sceneName);
+
 private:
 	StateControl* m_stateControl;
 };

@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "RenderManager.h"
 #include "LineManager.h"
+#include "LightManager.h"
 IMPLEMENT_SINGLETON(SceneManager)
 
 // 모든 Scene의 정보를 생성,보관,삭제
@@ -15,6 +16,7 @@ void SceneManager::LoadNextScene()
 	{
 		m_isLoad = false;
 		ObjectManager::GetInstance()->ReleaseScene();
+		LightManager::GetInstance()->ResetSkyBox();
 
 		assert("Next Scene is Empty" && m_nextScene);
 		m_currentScene = m_nextScene;
@@ -108,4 +110,9 @@ void SceneManager::AddScene(const wstring&  _name, Scene* _scene)
 bool SceneManager::CompareCurrentScene(const wstring&  _name)
 {
 	return m_sceneList[_name] == m_currentScene;
+}
+
+Scene * SceneManager::Find_Scene_Name(const wstring & _name)
+{
+	return nullptr;
 }

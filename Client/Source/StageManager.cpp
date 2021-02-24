@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\StageManager.h"
 #include "DogFightState.h"
-#include "ShootingState.h"
+#include "Evasion.h"
 #include "BossState.h"
 
 
@@ -13,7 +13,7 @@ StageManager * StageManager::GetInstance()
 	{
 		auto instance = INSTANTIATE()->AddComponent<StageManager>();
 		m_instance = instance->GetComponent<StageManager>();
-		instance->SetDontDestroy(true);
+		//instance->SetDontDestroy(true);
 	}
 
 	return m_instance;
@@ -29,12 +29,7 @@ void StageManager::DeleteInstance()
 
 StageManager::StageManager(Desc * _desc)
 {
-	m_gameObject->AddComponent<StateControl>();
-	m_stateControl = GetComponent<StateControl>();
-	m_stateControl->AddState<DogFightState>(L"dogFight");
-	m_stateControl->AddState<ShootingState>(L"shooting");
-	m_stateControl->AddState<BossState>(L"boss");
-	m_stateControl->InitState(L"dogFight");
+
 }
 
 StageManager::~StageManager()
@@ -43,12 +38,38 @@ StageManager::~StageManager()
 
 void StageManager::Initialize()
 {
-	
+	m_gameObject->AddComponent<StateControl>();
+	m_stateControl = GetComponent<StateControl>();
+	m_stateControl->AddState<DogFightState>(L"Dog_Fight");
+	m_stateControl->AddState<Evasion>(L"Evasion");
+	m_stateControl->AddState<BossState>(L"Boss");
+	m_stateControl->InitState(L"Dog_Fight");
 }
 
 void StageManager::Update()
 {
 
+	if (m_stateControl->CompareState(L"Dog_Fight"))
+	{
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
+		{
+
+		}
+	}
 
 
+}
+
+void StageManager::ToEvasion()
+{
+	m_stateControl->SetState(L"Evasion");
+}
+
+void StageManager::ToBoss()
+{
+}
+
+void StageManager::ToScene(const wstring & _sceneName)
+{
+	m_stateControl->SetState(_sceneName);
 }

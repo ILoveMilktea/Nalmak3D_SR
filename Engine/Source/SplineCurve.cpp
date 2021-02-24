@@ -14,6 +14,35 @@ SplineCurve::~SplineCurve()
 void SplineCurve::AddPoint(Vector3 _point)
 {
 	m_points.emplace_back(_point);
+
+	if (m_points.size() > 3)
+		CalcDistanceRatio();
+}
+
+void SplineCurve::CalcDistanceRatio()
+{
+	float totlaDistance = 0;
+	m_distanceRatio.clear();
+	vector<float> distantList;
+	for (int i = 1; i < m_points.size() - 2; ++i)
+	{
+		totlaDistance += Nalmak_Math::Distance(m_points[i], m_points[i + 1]);
+		distantList.emplace_back(totlaDistance);
+	}
+
+	for (auto& distance : distantList)
+	{
+		m_distanceRatio.emplace_back(distance / totlaDistance);
+	}
+
+}
+
+Vector3 SplineCurve::GetPoint(int _index, float _ratio)
+{
+	Vector3 point;
+	D3DXVec3CatmullRom(&point, &m_points[_index-2], &m_points[_index-1], &m_points[_index], &m_points[_index + 1], _ratio);
+
+	return point;
 }
 
 void SplineCurve::SubPoint(int _index)
@@ -25,8 +54,13 @@ void SplineCurve::SubPoint(int _index)
 
 void SplineCurve::DrawCurve()
 {
+#ifdef _DEBUG
 	if (m_points.size() < 3)
+	{
+		assert(L"Spline Curve must have points at least 3! " && 0);
 		return;
+	}
+#endif // _DEBUG
 
 	int index = 0;
 	m_line.clear();
@@ -58,6 +92,46 @@ void SplineCurve::DrawCurve()
 		D3DXVec3CatmullRom(&out, &m_points[index], &m_points[index + 1], &m_points[index + 2], &m_points[index + 2], i * 0.1f);
 		m_line.emplace_back(out);
 	}
+}
+
+Vector3 SplineCurve::GetPoint(float _ratio)
+{
+	
+	_ratio = Nalmak_Math::Clamp(_ratio, 0.f, 1.f);
+
+	int index = 0;
+	Vector3 point;
+	for (int i = 0; i < m_distanceRatio.size(); ++i)
+	{
+		if (_ratio <= m_distanceRatio[i])
+		{
+			
+			float total;
+			float patial;
+			if (i == 0)
+			{
+				total = m_distanceRatio[i];
+				patial = _ratio;
+				
+			}
+			else
+			{
+				total = m_distanceRatio[i] - m_distanceRatio[i - 1];
+				patial = _ratio - m_distanceRatio[i - 1];
+
+			}
+
+			point = GetPoint(i + 2, patial / total);
+			break;
+			
+		}
+	}
+	return point;
+
+
+
+
+
 }
 
 /*

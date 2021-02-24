@@ -64,8 +64,7 @@ void RenderManager::Render()
 {
 	assert(L"Please Set Camera at least one" &&m_cameraList.size());
 
-
-	ThrowIfFailed(m_device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, m_cameraList.front()->m_clearColor, 1, 0));
+	ThrowIfFailed(m_device->Clear(0, NULL,  D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,0, 1, 0));
 
 	for (auto& cam : m_cameraList)
 	{
@@ -75,13 +74,10 @@ void RenderManager::Render()
 		}
 	}
 	ThrowIfFailed(m_device->Present(nullptr, nullptr, 0, nullptr));
-	for (int i = 0; i < RENDERING_MODE_MAX; ++i)
-	{
-		for (auto& renderList : m_renderLists[i])
-			renderList.second.clear();
-	}
 
-	m_renderUILists.clear();
+
+	Reset();
+
 
 }
 
@@ -130,27 +126,25 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	SkyboxPass(_cBuffer);
 
-	GBufferPass(_cam, _cBuffer); 
+	GBufferPass(_cam, _cBuffer);
 
-	LightPass(_cam,_cBuffer); 
+	LightPass(_cam,_cBuffer);
 
-	ShadePass(_cBuffer); 
+	ShadePass(_cBuffer);
 
 	DebugPass(_cBuffer);
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
 
-	TransparentPass(_cam,_cBuffer); 
+	TransparentPass(_cam,_cBuffer);
 
 	UIPass(_cam, _cBuffer);
 }
 
 void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 {
-
-	DirectionalLightInfo info;
-	if (!m_lightManager->GetDirectionalLightInfo(info))
+	if (!m_lightManager->IsSkyBoxRender())
 		return;
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
@@ -167,7 +161,16 @@ void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 	ThrowIfFailed(m_device->SetStreamSource(0, viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_SKYBOX)));
 	ThrowIfFailed(m_device->SetIndices(viBuffer->GetIndexBuffer()));
 
-	m_currentShader->SetValue("g_directionalLight", &info, sizeof(DirectionalLightInfo));
+	DirectionalLightInfo info;
+	if (m_lightManager->GetDirectionalLightInfo(info))
+	{
+		m_currentShader->SetValue("g_directionalLight", &info, sizeof(DirectionalLightInfo));
+	}
+	else
+	{
+		m_currentShader->SetValue("g_directionalLight", &DirectionalLightInfo(), sizeof(DirectionalLightInfo));
+	}
+
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
 
@@ -188,7 +191,6 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 	SkyboxPass(_cBuffer);
 
-
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 
 	RenderNoneAlpha(_cam, _cBuffer, RENDERING_MODE_BACKGROUND);
@@ -206,20 +208,16 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
 
-	
-	if (m_currentShader)
-	{
-		m_currentShader->EndPass();
-		EndRenderTarget();
-	}
+	EndRenderTarget();
 }
 
 void RenderManager::LightPass(Camera* _cam, ConstantBuffer& _cBuffer)
 {
 
-	DirectionalLightPass(_cBuffer);	
+	DirectionalLightPass(_cBuffer);
 
 	PointLightPass(_cam,_cBuffer);
+
 
 }
 
@@ -324,7 +322,7 @@ void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _ligh
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
 
-	
+
 	EndRenderTarget();
 }
 
@@ -379,7 +377,7 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 			}
 		}
 	}
-	
+
 	if (m_currentShader)
 	{
 		m_currentShader->EndPass();
@@ -395,6 +393,8 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+
 	for (auto& renderer : m_renderUILists)
 	{
 		if (_cam->CompareLayer(renderer->GetLayer()))
@@ -409,6 +409,7 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 			}
 		}
 	}
+	RenderText();
 
 	if (m_currentShader)
 	{
@@ -453,7 +454,6 @@ void RenderManager::Reset()
 {
 	m_currentMaterial = nullptr;
 
-	m_cameraList.clear();
 	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)
 	for (auto& renderList : m_renderLists[i])
 	{
@@ -481,11 +481,8 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
 
-	if (m_currentShader)
-	{
-		m_currentShader->EndPass();
-	}
 
+	m_currentShader->EndPass();
 	EndRenderTarget();
 }
 

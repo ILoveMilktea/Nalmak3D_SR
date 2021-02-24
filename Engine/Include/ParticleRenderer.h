@@ -12,11 +12,6 @@ class NALMAK_DLL ParticleRenderer :
 public:
 	struct Desc
 	{
-		_RENDER_LAYER layer = 0;
-		wstring meshName = L"quadNoneNormal";
-		const TCHAR* mtrlName = L"particleAdd";
-		const TCHAR* particleName = L"particle";
-		Material* mtrl = nullptr;
 		PARTICLE_EMIT_SHAPE shape = PARTICLE_EMIT_SHAPE::PARTICLE_EMIT_SHAPE_SPHERE;
 
 		// for Circle

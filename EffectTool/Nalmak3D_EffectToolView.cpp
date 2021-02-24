@@ -19,7 +19,6 @@
 #endif
 
 HWND g_hWnd;
-// CNalmak3D_EffectToolView
 
 IMPLEMENT_DYNCREATE(CNalmak3D_EffectToolView, CView)
 

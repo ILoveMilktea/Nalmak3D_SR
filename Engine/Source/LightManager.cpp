@@ -21,7 +21,13 @@ void LightManager::Initialize()
 
 void LightManager::SetSkyBox(const wstring & _skyBoxName)
 {
+	m_isSkyBoxRender = true;
 	m_skyBoxMtrl->SetTexture("g_skyBox", _skyBoxName);
+}
+
+void LightManager::ResetSkyBox()
+{
+	m_isSkyBoxRender = false;
 }
 
 void LightManager::SetDirectionalLightInfo(DirectionalLight * _light)
