@@ -1,23 +1,24 @@
 #pragma once
 
-#ifndef __POSITIONHANDLE_H__
-#define __POSITIONHANDLE_H__
+#ifndef __POSITIONHANDLE2D_H__
+#define __POSITIONHANDLE2D_H__
 
 #include "Component.h"
-class Camera;
 class Transform;
 class InputManager;
-class NALMAK_DLL PositionHandle :
+class PositionHandle_2D :
 	public Component
 {
 public:
-	enum DIR { RIGHT,UP,FORWARD };
+	enum DIR { RIGHT, UP };
+
 public:
 	struct Desc
 	{
 		DIR dir;
+		Transform* target = nullptr;
 	};
-	PositionHandle(Desc* _desc);
+	PositionHandle_2D(Desc* _desc);
 
 
 public:
@@ -26,13 +27,13 @@ public:
 
 public:
 	void MoveTarget();
+	void ResetingPosition();
 	void PickHandle(bool _value) { m_isPick = _value; }
-	bool CheckPicked() { return m_isPick; }
+	bool CheckPicked();
 
 public:
 	Transform* m_target;
 	InputManager* m_input;
-	Camera* m_camera;
 	DIR m_moveDir;
 
 	bool m_isPick;
@@ -40,4 +41,4 @@ public:
 
 
 
-#endif // !__POSITIONHANDLE_H__
+#endif // !__POSITIONHANDLE2D_H__

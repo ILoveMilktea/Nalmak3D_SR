@@ -43,7 +43,18 @@ void Text::LateUpdate()
 
 void Text::PreRender()
 {
-	m_render->RenderRequest(this);
+}
+
+void Text::RenderText()
+{
+	m_font->DrawTextW(
+		nullptr,
+		m_text.c_str(),
+		-1,
+		GetBoundary(),
+		m_option,
+		m_color
+	);
 }
 
 

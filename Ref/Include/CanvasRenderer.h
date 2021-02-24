@@ -14,6 +14,7 @@ class NALMAK_DLL CanvasRenderer :
 public:
 	struct Desc
 	{
+		wstring mtrlName = L"defaultUI";
 		_CANVAS_GROUP group = 0;
 	};
 	CanvasRenderer();
@@ -28,6 +29,8 @@ public:
 	virtual void Render() override;
 	virtual void BindingStreamSource() override;
 
+	void Render_Image();
+	void Render_Text();
 public:
 	void UpdateBoundary();
 	bool IsCursorOnRect();

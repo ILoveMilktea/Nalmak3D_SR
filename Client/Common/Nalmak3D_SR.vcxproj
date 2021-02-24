@@ -197,8 +197,10 @@
     <ClInclude Include="..\Include\Bullet.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
+    <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\Define.h" />
     <ClInclude Include="..\Include\DogFightState.h" />
+    <ClInclude Include="..\Include\EditController.h" />
     <ClInclude Include="..\Include\Enemy.h" />
     <ClInclude Include="..\Include\EnemyManager.h" />
     <ClInclude Include="..\Include\Enemy_Chase.h" />
@@ -246,7 +248,9 @@
     <ClCompile Include="..\Source\Bullet.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
+    <ClCompile Include="..\Source\CustomDebuger.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp" />
+    <ClCompile Include="..\Source\EditController.cpp" />
     <ClCompile Include="..\Source\Enemy.cpp" />
     <ClCompile Include="..\Source\EnemyManager.cpp" />
     <ClCompile Include="..\Source\Enemy_Chase.cpp" />

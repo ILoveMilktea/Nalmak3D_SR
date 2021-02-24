@@ -74,7 +74,6 @@ void RenderManager::Render()
 			Render(cam);
 		}
 	}
-	RenderText();
 	ThrowIfFailed(m_device->Present(nullptr, nullptr, 0, nullptr));
 	for (int i = 0; i < RENDERING_MODE_MAX; ++i)
 	{
@@ -391,7 +390,8 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 {
-
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
@@ -414,6 +414,7 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->EndPass();
 	}
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 }
 
@@ -446,23 +447,6 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 	{
 		m_currentShader->EndPass();
 	}
-}
-
-void RenderManager::RenderText()
-{
-	for (auto& text : m_textRenderList)
-	{
-		text->m_font->DrawTextW(
-			nullptr,
-			text->m_text.c_str(),
-			-1,
-			text->GetBoundary(),
-			text->m_option,
-			text->m_color
-		);
-	}
-	m_textRenderList.clear();
-	m_debugManager->EraseTheRecord();
 }
 
 void RenderManager::Reset()

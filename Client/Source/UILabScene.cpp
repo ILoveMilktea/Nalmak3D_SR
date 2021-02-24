@@ -3,12 +3,14 @@
 #include "Rader.h"
 #include "SingleLine.h"
 #include "SplineCurve.h"
-
+#include "CustomDebuger.h"
 
 void UILabScene::Initialize()
 {
 	INSTANTIATE()->AddComponent<Grid>();
-	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(100, 100, 0);
+	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->
+		AddComponent<SystemInfo>()->
+		SetPosition(50, 100, 0);
 	
 	{
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>();
@@ -207,6 +209,44 @@ void UILabScene::CreateSplineCurve()
 
 void UILabScene::PlayerUIPatitial()
 {
-	auto image = UIFactory::CreateImage();
-	image->GetTransform()->scale.x = 500.f;
+	//grid line 
+	{
+		//left
+
+		//right
+	}
+
+	SingleImage::Desc desc_si;
+	desc_si.textureName = L"garageSample";
+	auto background = INSTANTIATE();
+	background->AddComponent<CanvasRenderer>();
+	background->AddComponent<SingleImage>(&desc_si);
+	background->GetComponent<CanvasRenderer>()->SetFade(0.5f);
+	background->SetPosition(WINCX * 0.5f, WINCY * 0.5f);
+	background->SetScale(WINCX, WINCY);
+
+	auto bigtext = UIFactory::CreateText_Title_LEFT_White_Grid(L"BIG TEXT");
+	bigtext->AddComponent<DrawGizmo_2D>();
+	bigtext->AddComponent<CanvasPicking>();
+	bigtext->AddComponent<CustomDebuger>();
+	bigtext->SetPosition(200.f, 100.f);
+	bigtext->SetScale(300.f, 80.f);
+
+	auto smalltext = UIFactory::CreateText_Contents_LEFT_White_Grid(L"Small Text");
+	smalltext->AddComponent<DrawGizmo_2D>();
+	smalltext->AddComponent<CanvasPicking>();
+	smalltext->AddComponent<CustomDebuger>();
+	smalltext->SetPosition(200.f, 300.f);
+	smalltext->SetScale(400.f, 80.f);
+	//auto image1 = UIFactory::CreateImage();
+	//image1->SetPosition(100.f, 100.f, 0.f);
+	//auto image2 = UIFactory::CreateImage(CANVAS_GROUP_G1);
+	//image2->SetPosition(300.f, 100.f, 0.f);
+	//auto image3 = UIFactory::CreateImage();
+	//image3->SetPosition(500.f, 100.f, 0.f);
+	//auto image4 = UIFactory::CreateImage(CANVAS_GROUP_G2);
+	//image4->SetPosition(700.f, 100.f, 0.f);
+	//image4->GetComponent<CanvasRenderer>()->SetFade(0.f);
+
+	UIFactory::CreateEditController();
 }

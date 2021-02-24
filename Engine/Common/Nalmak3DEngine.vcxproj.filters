@@ -193,6 +193,9 @@
     <Filter Include="06.Resource\01.VIBuffer\09.Ground">
       <UniqueIdentifier>{a05edcdc-c265-49db-a50c-24e710d4d9f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Component\99.Utility\UIPicking">
+      <UniqueIdentifier>{e8333c85-56bf-47db-9fe2-207d9feef9ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -417,6 +420,16 @@
     </ClCompile>
     <ClCompile Include="..\Source\SingleImage.cpp">
       <Filter>05.Component\08.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
+    <ClCompile Include="..\Source\PositionHandle_2D.cpp">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DrawGizmo_2D.cpp">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CanvasPicking.cpp">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -663,6 +676,16 @@
     </ClInclude>
     <ClInclude Include="..\Include\SingleImage.h">
       <Filter>05.Component\08.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GroundVIBuffer.h" />
+    <ClInclude Include="..\Include\PositionHandle_2D.h">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DrawGizmo_2D.h">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CanvasPicking.h">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

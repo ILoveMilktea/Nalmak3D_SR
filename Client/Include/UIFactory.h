@@ -3,6 +3,7 @@
 #define __UIFACTORY_H__
 
 #include "Core.h"
+#include "EditController.h"
 class GameObject;
 
 // Please Add CanvasRender First
@@ -100,6 +101,56 @@ public:
 			SetTexture(ResourceManager::GetInstance()->GetResource<RenderTarget>(_name)->GetTexture());
 
 		return window;
+	}
+
+	static GameObject* CreateText_Title_LEFT_White_Grid(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		Text::Desc desc;
+		desc.width = 20;
+		desc.height = 40;
+		desc.text = _text;
+		//desc.color = D3DCOLOR_RGBA(0, 0, 0, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"Title");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+
+		SingleImage::Desc desc_si;
+		desc_si.textureName = L"textgrid";
+		text->AddComponent<SingleImage>(&desc_si);
+
+		return text;
+	}
+	static GameObject* CreateText_Contents_LEFT_White_Grid(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		Text::Desc desc;
+		desc.width = 14;
+		desc.height = 24;
+		desc.text = _text;
+		//desc.color = D3DCOLOR_RGBA(0, 0, 0, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"Contents");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+
+		SingleImage::Desc desc_si;
+		desc_si.textureName = L"textgrid";
+		text->AddComponent<SingleImage>(&desc_si);
+
+		return text;
+	}
+	/*
+	text + fill
+
+	*/
+
+public:
+	static GameObject* CreateEditController()
+	{
+		auto controller = INSTANTIATE();
+		controller->AddComponent<EditController>();
+
+		return controller;
 	}
 };
 

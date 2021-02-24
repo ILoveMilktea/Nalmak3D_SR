@@ -133,6 +133,9 @@
     <ClInclude Include="..\Include\PlayerToTopView.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Ground.h" />
+    <ClInclude Include="..\Include\EditController.h" />
+    <ClInclude Include="..\Include\CustomDebuger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -253,6 +256,9 @@
     <ClCompile Include="..\Source\PlayerToTopView.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Ground.cpp" />
+    <ClCompile Include="..\Source\EditController.cpp" />
+    <ClCompile Include="..\Source\CustomDebuger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
