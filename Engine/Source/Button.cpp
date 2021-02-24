@@ -28,7 +28,8 @@ void Button::Initialize()
 	m_targetColor = &m_normalColor;
 
 	m_renderer = GetComponent<CanvasRenderer>();
-	m_renderer->SetImage(m_normalImage);
+	if (m_renderer)
+		m_renderer->SetImage(m_normalImage);
 	//m_renderer->SetActive(false);
 }
 

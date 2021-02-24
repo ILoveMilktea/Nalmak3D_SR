@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
-class UseKit;
+#include "UseKit.h"
+
 class PlayerKitSelector :
 	public Component
 {
@@ -24,7 +25,7 @@ public:
 	virtual void Release() override;
 
 private:
-	//unordered_map<wstring, vector<UseKit::Desc*>> m_garageSlot;
+	unordered_map<wstring, vector<UseKit::Desc*>> m_garageSlot;
 
 private:
 	static PlayerKitSelector* m_instance;

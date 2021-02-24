@@ -82,6 +82,9 @@ void InputManager::ProcessKeyState()
 		case KEY_STATE_ALT:
 			res[KEY_STATE_ALT] = GetAsyncKeyState(VK_MENU);
 			break;
+		case KEY_STATE_TAB:
+			res[KEY_STATE_TAB] = GetAsyncKeyState(VK_TAB);
+			break;
 		case KEY_STATE_SPACE:
 			res[KEY_STATE_SPACE] = GetAsyncKeyState(VK_SPACE);
 			break;

@@ -73,12 +73,11 @@ void RenderManager::Render()
 			Render(cam);
 		}
 	}
-
 	ThrowIfFailed(m_device->Present(nullptr, nullptr, 0, nullptr));
 
 
 	Reset();
-	
+
 
 }
 
@@ -127,18 +126,18 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	SkyboxPass(_cBuffer);
 
-	GBufferPass(_cam, _cBuffer); 
+	GBufferPass(_cam, _cBuffer);
 
-	LightPass(_cam,_cBuffer); 
+	LightPass(_cam,_cBuffer);
 
-	ShadePass(_cBuffer); 
+	ShadePass(_cBuffer);
 
 	DebugPass(_cBuffer);
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
 
-	TransparentPass(_cam,_cBuffer); 
+	TransparentPass(_cam,_cBuffer);
 
 	UIPass(_cam, _cBuffer);
 }
@@ -171,7 +170,7 @@ void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->SetValue("g_directionalLight", &DirectionalLightInfo(), sizeof(DirectionalLightInfo));
 	}
-	
+
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
 
@@ -215,7 +214,7 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 void RenderManager::LightPass(Camera* _cam, ConstantBuffer& _cBuffer)
 {
 
-	DirectionalLightPass(_cBuffer);	
+	DirectionalLightPass(_cBuffer);
 
 	PointLightPass(_cam,_cBuffer);
 
@@ -323,7 +322,7 @@ void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _ligh
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
 
-	
+
 	EndRenderTarget();
 }
 
@@ -378,7 +377,7 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 			}
 		}
 	}
-	
+
 	if (m_currentShader)
 	{
 		m_currentShader->EndPass();
@@ -389,7 +388,8 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 {
-
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
@@ -415,6 +415,7 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->EndPass();
 	}
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 }
 
@@ -449,23 +450,6 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 	}
 }
 
-void RenderManager::RenderText()
-{
-	for (auto& text : m_textRenderList)
-	{
-		text->m_font->DrawTextW(
-			nullptr,
-			text->m_text.c_str(),
-			-1,
-			text->GetBoundary(),
-			text->m_option,
-			text->m_color
-		);
-	}
-	m_textRenderList.clear();
-	m_debugManager->EraseTheRecord();
-}
-
 void RenderManager::Reset()
 {
 	m_currentMaterial = nullptr;
@@ -497,7 +481,7 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
 
-	
+
 	m_currentShader->EndPass();
 	EndRenderTarget();
 }

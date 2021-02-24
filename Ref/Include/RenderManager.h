@@ -66,7 +66,6 @@ public:
 	void Initialize();
 	void Render();
 	void Render(Camera* _cam);
-	void RenderText();
 	void Reset();
 private:
 	void SkyboxPass(ConstantBuffer& _cBuffer);

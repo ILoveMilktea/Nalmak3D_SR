@@ -152,8 +152,10 @@ public:
 	bool IsStatic() const { return m_static; }
 	GameObject* SetPosition(const Vector3& _pos);
 	GameObject* SetPosition(float _x, float _y, float _z);
+	GameObject* SetPosition(float _x, float _y);
 	GameObject* SetScale(const Vector3& _scale);
 	GameObject* SetScale(float _x, float _y, float _z);
+	GameObject* SetScale(float _x, float _y);
 	GameObject* SetRotation(float _xAngle, float _yAngle, float _zAngle);
 
 	void ResetCollision();
