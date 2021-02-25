@@ -139,7 +139,6 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PauseState.h" />
-    </ClInclude>
     <ClInclude Include="..\Include\Define.h">
       <Filter>98.PreCompile\00.Define</Filter>
     </ClInclude>
