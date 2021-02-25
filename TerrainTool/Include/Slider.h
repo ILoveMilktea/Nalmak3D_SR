@@ -14,8 +14,8 @@ public:
 		Transform* background = nullptr;
 		Transform* fill = nullptr;
 
-		const float* curValue = nullptr;
-		const float* maxValue = nullptr;
+		const float* targetValue = nullptr;
+		float maxValue = 100.f;
 	};
 
 public:
@@ -31,7 +31,7 @@ private:
 	float m_fillWidthOrigin;
 
 	const float* m_curValue;
-	const float* m_maxValue;
+	float m_maxValue;
 
 	float m_observeValue;
 };

@@ -10,6 +10,8 @@ PlayerInfoManager::PlayerInfoManager(Desc * _Desc)
 	m_maxHp = _Desc->maxHp;
 	m_dirsensor = _Desc->dirsenser;
 	m_hp = m_maxHp;
+
+	m_maxSpeed = _Desc->maxSpeed;
 }
 
 PlayerInfoManager::~PlayerInfoManager()

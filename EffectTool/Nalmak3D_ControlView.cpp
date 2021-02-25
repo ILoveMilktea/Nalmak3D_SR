@@ -1163,7 +1163,6 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 			return;
 		}
 
-		DWORD byte;
 
 		wstring filePath = dlg.GetPathName();
 		wstring fileName = filePath.substr(filePath.find_last_of(L'\\') + 1);

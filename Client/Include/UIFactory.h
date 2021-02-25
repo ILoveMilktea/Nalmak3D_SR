@@ -28,14 +28,16 @@ public:
 		return image;
 	}
 
-	static GameObject* CreateImage(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	static GameObject* CreateImage(CANVAS_GROUP _group = CANVAS_GROUP_NONE, const wstring& _name = L"defaultUI")
 	{
 		CanvasRenderer::Desc desc_cr;
 		desc_cr.group = _group;
+		SingleImage::Desc desc_si;
+		desc_si.textureName = _name;
 
 		auto button = INSTANTIATE();
 		button->AddComponent<CanvasRenderer>(&desc_cr);
-		button->AddComponent<SingleImage>();
+		button->AddComponent<SingleImage>(&desc_si);
 
 		return button;
 	}
@@ -277,14 +279,30 @@ public:
 		
 	}
 
-	static GameObject* Prefab_ItemContents_Bar(const float* _value, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	static GameObject* Prefab_ItemContents_Bar(const float* _targetValue, float _max, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		auto bar = INSTANTIATE();
 
-		auto background = CreateImage(_group);
-		auto fill = CreateImage(_group);
+		auto background = CreateImage(_group, L"niniz");
+		background->SetPosition(0.f, 0.f, 0.f);
+		background->SetScale(160.f, 25.f);
+		auto fill = CreateImage(_group, L"UIRed");
+		fill->SetPosition(0.f, 0.f, 0.f);
+		fill->SetScale(160.f, 25.f);
 
-		//Slider::
+		Slider::Desc desc;
+		desc.background = background->GetTransform();
+		desc.fill = fill->GetTransform();
+		desc.targetValue = _targetValue;
+		desc.maxValue = _max;
+
+		bar->AddComponent<CanvasRenderer>();
+		bar->AddComponent<Slider>(&desc);
+		
+		background->SetParents(bar);
+		fill->SetParents(bar);
+
+		return bar;
 	}
 public:
 	static GameObject* CreateEditController()
