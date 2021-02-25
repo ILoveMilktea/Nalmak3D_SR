@@ -124,3 +124,4 @@ const float & PlayerInfoManager::GetDirSenser() const
 	return m_dirsensor;
 }
 
+

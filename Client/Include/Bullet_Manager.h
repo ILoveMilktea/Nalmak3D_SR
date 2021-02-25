@@ -28,5 +28,9 @@ public:
 	void Fire_Missile(Vector3 _start, Quaternion _rot); //직선 미사일
 	void Fire_Homing(); //유도 미사일
 
+	void Fire_Evasion(Vector2 _start);
+	void Missile_Evasion(Vector2 _start);
+	void Homing_Evasion(Vector2 _start, Vector2 _target);
+
 };
 

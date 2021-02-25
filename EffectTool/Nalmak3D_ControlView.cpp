@@ -1,4 +1,4 @@
-// Nalmak3D_ControlView.cpp : ±¸Çö ÆÄÀÏÀÔ´Ï´Ù.
+// Nalmak3D_ControlView.cpp : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 //
 
 #include "stdafx.h"
@@ -156,7 +156,7 @@ BEGIN_MESSAGE_MAP(Nalmak3D_ControlView, CFormView)
 END_MESSAGE_MAP()
 
 
-// Nalmak3D_ControlView Áø´ÜÀÔ´Ï´Ù.
+// Nalmak3D_ControlView ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 
 #ifdef _DEBUG
 void Nalmak3D_ControlView::AssertValid() const
@@ -173,15 +173,15 @@ void Nalmak3D_ControlView::Dump(CDumpContext& dc) const
 #endif //_DEBUG
 
 
-// Nalmak3D_ControlView ¸Þ½ÃÁö Ã³¸®±âÀÔ´Ï´Ù.
+// Nalmak3D_ControlView ï¿½Þ½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 
 void Nalmak3D_ControlView::OnLbnSelchangeObjectList()
 {
 	int  currentIndex = m_objectListBox.GetCurSel();
 	//m_objectListBox.SetCurSel(currentIndex);
 	m_currentSelectObject = ParticleObjectManager::GetInstance()->GetParticleObject(currentIndex);
-	
-	
+
+
 	PARTICLE_EMIT_SHAPE shape = m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.shape;
 
 	m_sphereShape.SetCheck(false);
@@ -240,7 +240,7 @@ void Nalmak3D_ControlView::OnLbnSelchangeObjectList()
 
 void Nalmak3D_ControlView::OnBnClickedCreateParticle()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 	auto obj = INSTANTIATE(0,L"particle")->AddComponent<ParticleRenderer>();
 	ParticleObjectManager::GetInstance()->AddObject(obj);
 	m_objectListBox.AddString(L"particle");
@@ -267,7 +267,7 @@ void Nalmak3D_ControlView::OnBnClickedCreateParticle()
 
 void Nalmak3D_ControlView::OnBnClickedDeleteParticle()
 {
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 
 	int  currentIndex = m_objectListBox.GetCurSel();
 	ParticleObjectManager::GetInstance()->DeleteObject(currentIndex);
@@ -370,7 +370,7 @@ void Nalmak3D_ControlView::UpdateData()
 	MFC_Utility::SetEditBoxFloat(&m_maxEndAlpha, particle->m_info.endMaxColor.w);
 
 	m_isPlayOnAwake.SetCheck(particle->m_info.isPlayOnAwake);
-	
+
 
 
 }
@@ -930,7 +930,7 @@ void Nalmak3D_ControlView::OnBnClickedPlay()
 {
 	ParticleObjectManager::GetInstance()->OffActiveParticles();
 	ParticleObjectManager::GetInstance()->OnActiveParticle(m_currentSelectObject);
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 }
 
 
@@ -938,14 +938,14 @@ void Nalmak3D_ControlView::OnBnClickedPlayAll()
 {
 	ParticleObjectManager::GetInstance()->OnActiveParticles();
 
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 }
 
 
 void Nalmak3D_ControlView::OnBnClickedStop()
 {
 	ParticleObjectManager::GetInstance()->OffActiveParticles();
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 }
 
 
@@ -1036,7 +1036,7 @@ void Nalmak3D_ControlView::OnBnClickedIsPlayOnAwake()
 	else
 		m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.isPlayOnAwake = true;
 
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 }
 
 
@@ -1061,7 +1061,7 @@ void Nalmak3D_ControlView::OnBnClickedAddBurst()
 	MFC_Utility::SetEditBoxFloat(&m_burstTime, 0);
 	MFC_Utility::SetEditBoxInt(&m_burstCount, 0);
 
-	// TODO: ¿©±â¿¡ ÄÁÆ®·Ñ ¾Ë¸² Ã³¸®±â ÄÚµå¸¦ Ãß°¡ÇÕ´Ï´Ù.
+	// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ë¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½Úµå¸¦ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 }
 
 
@@ -1077,7 +1077,7 @@ void Nalmak3D_ControlView::OnBnClickedDeleteBurst()
 	m_currentSelectObject->GetComponent<ParticleRenderer>()->DeleteBurst(index);
 	m_burstList.DeleteString(index);
 
-	
+
 }
 
 
@@ -1111,10 +1111,10 @@ void Nalmak3D_ControlView::OnBnClickedButtonSave()
 
 		ParticleRenderer* particle = m_currentSelectObject->GetComponent<ParticleRenderer>();
 
-		WriteFile(handle, &particle->m_info, sizeof(ParticleRenderer::Desc), &byte, nullptr);
+		WriteFile(handle, &particle->m_info, sizeof(ParticleData), &byte, nullptr);
 
 		DWORD burstCount = (DWORD)particle->GetBurstList().size();
-		
+
 		WriteFile(handle, &burstCount, sizeof(DWORD), &byte, nullptr);
 		for (DWORD i = 0; i < burstCount; ++i)
 		{
@@ -1130,7 +1130,7 @@ void Nalmak3D_ControlView::OnBnClickedButtonSave()
 
 
 		CloseHandle(handle);
-		
+
 		afx_msg(L"Save File Succeed");
 	}
 }
@@ -1150,7 +1150,7 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 	TCHAR fp[256] = L"";
 	GetCurrentDirectory(256, fp);
 	PathRemoveFileSpec(fp);
-	lstrcat(fp, L"\\Data\\Particle");
+	lstrcat(fp, L"\\Resource\\Particle");
 	dlg.m_ofn.lpstrInitialDir = fp;
 
 	if (dlg.DoModal())
@@ -1165,29 +1165,14 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 
 		DWORD byte;
 
-		ParticleRenderer::Desc info;
-		ReadFile(handle, &info, sizeof(ParticleRenderer::Desc), &byte, nullptr);
+		wstring filePath = dlg.GetPathName();
+		wstring fileName = filePath.substr(filePath.find_last_of(L'\\') + 1);
+		size_t targetNum = fileName.find_last_of(L".");
+		fileName = fileName.substr(0, targetNum);
 
-		auto obj = INSTANTIATE(0, L"particle")->AddComponent<ParticleRenderer>(&info);
-
-
-		DWORD burstCount;
-		ReadFile(handle, &burstCount, sizeof(DWORD), &byte, nullptr);
-
-		for (DWORD i = 0; i < burstCount; ++i)
-		{
-			ParticleRenderer::Burst burst;
-			ReadFile(handle, &burst, sizeof(ParticleRenderer::Burst), &byte, nullptr);
-			obj->GetComponent<ParticleRenderer>()->AddBurst(burst);
-		}
-
-		DWORD mtrlNameLength;
-		ReadFile(handle, &mtrlNameLength, sizeof(DWORD), &byte, nullptr);
-		TCHAR* nameBuffer = new TCHAR[mtrlNameLength + 1];
-		for (DWORD i = 0; i < mtrlNameLength; ++i)
-			ReadFile(handle, &nameBuffer[i], sizeof(wchar_t), &byte, nullptr);
-		nameBuffer[mtrlNameLength] = '\0';
-		obj->GetComponent<ParticleRenderer>()->SetMaterial(nameBuffer);
+		ParticleRenderer::Desc render;
+		render.particleDataName = fileName;
+		auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
 
 
 		ParticleObjectManager::GetInstance()->AddObject(obj);
@@ -1195,20 +1180,20 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 		m_objectListBox.SetCurSel((int)(ParticleObjectManager::GetInstance()->GetAllObjects().size() - 1));
 		m_currentSelectObject = obj;
 		Material* mtrl = obj->GetComponent<ParticleRenderer>()->GetMaterial();
+
+
+
 		if (mtrl)
 		{
 			CString str;
 			str = mtrl->GetName().c_str();
 			m_materialName.SetWindowTextW(str);
 		}
-		else
-		{
-			m_materialName.SetWindowTextW(nameBuffer);
-		}
 
-		SAFE_DELETE(nameBuffer);
+
 		MFC_Utility::SetEditBoxFloat(&m_burstTime, 0);
 		MFC_Utility::SetEditBoxInt(&m_burstCount, 0);
+
 
 		OnLbnSelchangeObjectList();
 

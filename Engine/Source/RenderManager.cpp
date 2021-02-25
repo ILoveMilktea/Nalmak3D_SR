@@ -446,6 +446,7 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 
 void RenderManager::Reset()
 {
+
 	m_currentMaterial = nullptr;
 
 	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)

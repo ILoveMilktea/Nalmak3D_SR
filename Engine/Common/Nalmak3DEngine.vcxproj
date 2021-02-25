@@ -67,6 +67,7 @@
     <ClCompile Include="..\Source\ObjectManager.cpp" />
     <ClCompile Include="..\Source\ObjMesh.cpp" />
     <ClCompile Include="..\Source\Particle.cpp" />
+    <ClCompile Include="..\Source\ParticleInfo.cpp" />
     <ClCompile Include="..\Source\ParticleRenderer.cpp" />
     <ClCompile Include="..\Source\Plane.cpp" />
     <ClCompile Include="..\Source\PointLight.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="..\Include\ObjectManager.h" />
     <ClInclude Include="..\Include\ObjMesh.h" />
     <ClInclude Include="..\Include\Particle.h" />
+    <ClInclude Include="..\Include\ParticleInfo.h" />
     <ClInclude Include="..\Include\ParticleRenderer.h" />
     <ClInclude Include="..\Include\Plane.h" />
     <ClInclude Include="..\Include\PointLight.h" />

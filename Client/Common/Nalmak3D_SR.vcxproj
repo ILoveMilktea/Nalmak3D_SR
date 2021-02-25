@@ -207,7 +207,7 @@
     <ClInclude Include="..\Include\Enemy_Hold.h" />
     <ClInclude Include="..\Include\Enemy_Idle.h" />
     <ClInclude Include="..\Include\Enum.h" />
-    <ClInclude Include="..\Include\Evasion.h" />
+    <ClInclude Include="..\Include\EvasionState.h" />
     <ClInclude Include="..\Include\Extern.h" />
     <ClInclude Include="..\Include\FixToTarget.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
@@ -219,14 +219,15 @@
     <ClInclude Include="..\Include\MouseOption.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\NalmakScene.h" />
+    <ClInclude Include="..\Include\PauseState.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
+    <ClInclude Include="..\Include\PlayerIdle.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
+    <ClInclude Include="..\Include\PlayerKitSelector.h" />
     <ClInclude Include="..\Include\PlayerMove.h" />
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
-    <ClInclude Include="..\Include\PlayerToTopView.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
-    <ClInclude Include="..\Include\ShootingState.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
@@ -235,15 +236,13 @@
     <ClInclude Include="..\Include\StageManager.h" />
     <ClInclude Include="..\Include\StageScene.h" />
     <ClInclude Include="..\Include\StageSelectScene.h" />
+    <ClInclude Include="..\Include\Struct.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
     <ClInclude Include="..\Include\TopViewCamera.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
-    <ClInclude Include="..\Include\UseKit.h" />
+    <ClInclude Include="..\Include\UseItem.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
-    <ClInclude Include="PauseState.h" />
-    <ClInclude Include="PlayerIdle.h" />
-    <ClInclude Include="PlayerKitSelector.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -261,7 +260,7 @@
     <ClCompile Include="..\Source\Enemy_Chase.cpp" />
     <ClCompile Include="..\Source\Enemy_Hold.cpp" />
     <ClCompile Include="..\Source\Enemy_Idle.cpp" />
-    <ClCompile Include="..\Source\Evasion.cpp" />
+    <ClCompile Include="..\Source\EvasionState.cpp" />
     <ClCompile Include="..\Source\FixToTarget.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\Ground.cpp" />
@@ -272,14 +271,15 @@
     <ClCompile Include="..\Source\MouseOption.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\NalmakScene.cpp" />
+    <ClCompile Include="..\Source\PauseState.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
+    <ClCompile Include="..\Source\PlayerIdle.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
+    <ClCompile Include="..\Source\PlayerKitSelector.cpp" />
     <ClCompile Include="..\Source\PlayerMove.cpp" />
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
-    <ClCompile Include="..\Source\PlayerToTopView.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
-    <ClCompile Include="..\Source\ShootingState.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
@@ -291,11 +291,8 @@
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
-    <ClCompile Include="..\Source\UseKit.cpp" />
+    <ClCompile Include="..\Source\UseItem.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
-    <ClCompile Include="PauseState.cpp" />
-    <ClCompile Include="PlayerIdle.cpp" />
-    <ClCompile Include="PlayerKitSelector.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

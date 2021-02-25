@@ -4,6 +4,7 @@
 #include "core.h"
 #include "SceneChanger.h"
 #include "PlayerKitSelector.h"
+#include "PlayerInfoManager.h"
 GarageScene::GarageScene()
 {
 }
@@ -27,7 +28,7 @@ void GarageScene::Initialize()
 		MeshRenderer::Desc render;
 		render.mtrlName = L"default"; 
 		render.meshName = L"flight";
-		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<MeshRenderer>(&render);
+		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<PlayerInfoManager>();
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
 	
@@ -50,6 +51,19 @@ void GarageScene::Initialize()
 		//PlayerKitSelector::GetInstance()
 
 	}
+
+
+	{
+		auto offTheFieldButton = UIFactory::CreateButton(
+			EventHandler([]() {
+			/*Core::GetInstance()->LoadScene(L"phantom");*/
+
+
+		}));
+
+		offTheFieldButton->SetPosition(1600.f, 500.f, 0.f);
+	}
+
 
 	{
 		auto offTheFieldButton = UIFactory::CreateButton(
