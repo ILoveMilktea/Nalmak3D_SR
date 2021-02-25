@@ -1,15 +1,22 @@
 #include "ParticleRenderer.h"
 #include "Transform.h"
 #include "Particle.h"
-
+#include "ParticleInfo.h"
 ParticleRenderer::ParticleRenderer(Desc * _desc)
 {
 	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
 
-	m_info = *_desc;
-	m_info.coneAngle = _desc->coneAngle * Deg2Rad;
-	m_info.minAngle = _desc->minAngle * Deg2Rad;
-	m_info.maxAngle = _desc->maxAngle * Deg2Rad;
+	ParticleInfo* info = ResourceManager::GetInstance()->GetResource<ParticleInfo>(_desc->particleDataName);
+	m_emitBursts = info->GetParticleBurst();
+	m_material = info->GetMaterial();
+
+	if (m_material->GetShader()->GetInputLayout() != VERTEX_INPUT_LAYOUT_PARTICLE)
+		assert(L"Particle Renderer must have particle Shader Material!" && 0);
+	m_info = info->GetParticleInfo();
+
+	m_info.coneAngle = info->GetParticleInfo().coneAngle;
+	m_info.minAngle = info->GetParticleInfo().minAngle;
+	m_info.maxAngle = info->GetParticleInfo().maxAngle;
 
 	m_currentCount = 0;
 	m_playTime = 0.f;
@@ -23,11 +30,6 @@ void ParticleRenderer::Initialize()
 {
 	SetMaxParticleCount(m_info.maxParticleCount);
 
-
-	m_material = ResourceManager::GetInstance()->GetResource<Material>(L"particle");
-
-	if (m_material->GetShader()->GetInputLayout()!= VERTEX_INPUT_LAYOUT_PARTICLE)
-		assert(L"Particle Renderer must have particle Shader Material!" && 0);
 
 	m_awakeTime = Nalmak_Math::Rand(m_info.minAwakeTime, m_info.maxAwakeTime);
 

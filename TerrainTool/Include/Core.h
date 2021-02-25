@@ -9,6 +9,7 @@
 #include "Nalmak_Struct.h"
 #include "Nalmak_Define.h"
 #include "Nalmak_Extern.h"
+#include "Nalmak_Struct.h"
 
 #include "SceneManager.h"
 #include "PrototypeManager.h"

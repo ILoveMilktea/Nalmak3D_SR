@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="00.Core">
@@ -192,6 +192,9 @@
     </Filter>
     <Filter Include="06.Resource\01.VIBuffer\09.Ground">
       <UniqueIdentifier>{a05edcdc-c265-49db-a50c-24e710d4d9f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Resource\06.ParticleInfo">
+      <UniqueIdentifier>{b73bc814-bd5b-43b0-847e-8000b3415dc8}</UniqueIdentifier>
     </Filter>
     <Filter Include="05.Component\99.Utility\UIPicking">
       <UniqueIdentifier>{e8333c85-56bf-47db-9fe2-207d9feef9ae}</UniqueIdentifier>
@@ -431,6 +434,7 @@
     <ClCompile Include="..\Source\SplineCurve.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\ParticleInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -687,5 +691,6 @@
     <ClInclude Include="..\Include\SplineCurve.h">
     <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\ParticleInfo.h" />
   </ItemGroup>
 </Project>

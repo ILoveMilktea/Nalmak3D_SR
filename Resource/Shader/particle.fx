@@ -50,6 +50,12 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 		worldMatrix3.x,worldMatrix3.y,worldMatrix3.z,worldMatrix3.w,
 		worldMatrix4.x,worldMatrix4.y,worldMatrix4.z,worldMatrix4.w
 	};*/
+	float4x4 invViewRot = 0;
+	invViewRot = g_cBuffer.invView;
+	/*invViewRot._41 = 0;
+	invViewRot._42 = 0;
+	invViewRot._43 = 0;*/
+	world = mul(invViewRot, world);
 	float4x4 wvp = mul(world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
 	o.uv = _input.uv;
