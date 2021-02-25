@@ -124,4 +124,10 @@ const float & PlayerInfoManager::GetDirSenser() const
 	return m_dirsensor;
 }
 
+void PlayerInfoManager::EquipWepon(ItemDesc * _desc)
+{
+	m_playerItem[0] = _desc;
+}
+
+
 

@@ -69,7 +69,7 @@ private:
 	Vector3 m_addedRot = {};
 
 private:
-	class ItemDesc* playerItem[2];
+	ItemDesc* m_playerItem[2];
 
 };
 

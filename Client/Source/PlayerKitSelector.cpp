@@ -13,7 +13,15 @@ PlayerKitSelector::PlayerKitSelector(Desc * _desc)
 
 PlayerKitSelector::~PlayerKitSelector()
 {
-	Release();
+	for (auto& first : m_garageSlot)
+	{
+		for (auto & value : first.second)
+		{
+			SAFE_DELETE(value);
+		}
+		first.second.clear();
+	}
+	m_garageSlot.clear();
 }
 
 PlayerKitSelector * PlayerKitSelector::GetInstance()
@@ -45,7 +53,7 @@ ItemDesc * PlayerKitSelector::FindSlotItme(const wstring & _name, ITEMTYPE _enum
 			}
 		}
 	}
-	assert("Nullptr, Can't Item Info Seraching..." && itemInfo);
+	//assert("Nullptr, Can't Item Info Seraching..." && itemInfo);
 	return itemInfo;
 }
 
@@ -62,8 +70,6 @@ void PlayerKitSelector::Initialize()
 {
 	vector<ItemDesc*> vecitemInfo;
 	vecitemInfo.reserve(2);
-
-
 	{
 		ItemDesc itemInfo;
 		itemInfo.delay = 0.1f;
@@ -88,7 +94,7 @@ void PlayerKitSelector::Initialize()
 	}
 
 
-	m_garageSlot[L"Wepon"] = vecitemInfo;
+	m_garageSlot[L"Weapon"] = vecitemInfo;
 
 }
 
@@ -97,27 +103,4 @@ void PlayerKitSelector::Update()
 
 
 }
-
-void PlayerKitSelector::Release()
-{
-	for (auto& first : m_garageSlot)
-	{
-		for (auto & value : first.second)
-		{
-			SAFE_DELETE(value);
-		}
-		first.second.clear();
-	}
-	m_garageSlot.clear();
-	// 	for_each(.begin(), .end(), [](auto& rPair) 
-	// 	{
-	// 		if (rPair.second)
-	// 		{
-	// 			delete rPair.second; 
-	// 			rPair.second = nullptr; 
-	// 		}
-	// 	});
-}
-
-
 
