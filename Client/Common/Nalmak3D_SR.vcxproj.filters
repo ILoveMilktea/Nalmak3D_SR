@@ -291,7 +291,6 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PauseState.cpp" />
-    </ClCompile>
     <ClCompile Include="..\Source\Enemy_Drop.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\att_Drop</Filter>
     </ClCompile>
