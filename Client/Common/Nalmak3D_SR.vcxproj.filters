@@ -118,8 +118,6 @@
     <ClInclude Include="..\Include\EditController.h" />
     <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\DogFightState.h">
       <Filter>04.Combat State\00%29DogFight</Filter>
     </ClInclude>
@@ -268,9 +266,6 @@
     <ClCompile Include="..\Source\EditController.cpp" />
     <ClCompile Include="..\Source\CustomDebuger.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
-    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\DogFightState.cpp">
       <Filter>04.Combat State\00%29DogFight</Filter>
     </ClCompile>
