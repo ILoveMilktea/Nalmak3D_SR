@@ -1,24 +1,19 @@
 #include "stdafx.h"
 #include "../Include/EnemyManager.h"
 
-#include "DogFightState.h"
-
-#include "BossState.h"
-
 #include "Enemy.h"
+
+#include "Enemy_Idle.h"
+#include "Enemy_Chase.h"
+#include "Enemy_Hold.h"
+#include "Enemy_Drop.h"
+#include "Enemy_Death.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
 
 EnemyManager::EnemyManager(Desc * _Desc)
 {
-	//m_gameObject->AddComponent<StateControl>(); 
-	////component의 m_gameObject => 해당 컴포넌트를 가지고 있는 게임옵h
-	//GetComponent<StateControl>()->AddState<DogFightState>(L"dogFight");
-	//GetComponent<StateControl>()->AddState<ShootingState>(L"shoot");
-	//GetComponent<StateControl>()->AddState<BossState>(L"boss");
-
-	//GetComponent<StateControl>()->InitState(L"dogFight");
 }
 
 EnemyManager::~EnemyManager()
@@ -63,73 +58,126 @@ void EnemyManager::Update()
 		//y = rand() % 300 - 150;
 		//z = rand() % 300 - 150;
 		//Enemy_Spawn(Vector3((float)x, (float)y, (float)z));
-		Enemy_Spawn(Vector3(150.f, 150.f, 150.f));
+		Enemy_Spawn(Vector3(0.f, 0.f, 50.f), ENEMY_STATE::CHASE);
 	}
 }
 
-//const int & EnemyManager::Get_EnemyCount() const
-//{
-//	// TODO: 여기에 반환 구문을 삽입합니다.
-//	return 0;
-//}
-
-void EnemyManager::Enemy_Spawn(Vector3 _pos)
+const int & EnemyManager::Get_EnemyCount() const
 {
-	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
+	return int(0);
+}
+
+
+void EnemyManager::Enemy_Spawn(Vector3 _pos, ENEMY_STATE _initState)
+{
+	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
 	Enemy_obj->SetPosition(_pos);
 	Enemy_obj->SetScale(0.1f,0.1f,0.1f);
 
-	//Enemy_obj->AddComponent<StateControl>();
-	
-
-	Enemy::Desc Enemy_desc;
-	/*desc 세팅*/
-	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
-	
-	
-	MeshRenderer::Desc Enemy_Mesh;
-	Enemy_Mesh.mtrlName = L"default";
-	Enemy_Mesh.meshName = L"flight";
-	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
-}
-
-void EnemyManager::Spawn_Rush()
-{
-	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
-	//Enemy_obj->SetPosition(_pos);
-	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
-
 	Enemy_obj->AddComponent<StateControl>();
-
+	m_pStateControl = Enemy_obj->GetComponent<StateControl>();
+	m_pStateControl->AddState<Enemy_Idle>(L"Idle");
+	m_pStateControl->AddState<Enemy_Chase>(L"Chase");
+	m_pStateControl->AddState<Enemy_Hold>(L"Hold");
+	m_pStateControl->AddState<Enemy_Drop>(L"Drop");
+	m_pStateControl->AddState<Enemy_Death>(L"Death");
+	switch (_initState)
+	{
+	case IDLE:
+	{
+		m_pStateControl->InitState(L"Idle");
+	}
+	break;
+	case CHASE:
+	{
+		m_pStateControl->InitState(L"Chase");
+	}
+		break;
+	case HOLD:
+	{
+		m_pStateControl->InitState(L"Hold");
+	}
+		break;
+	case DROP:
+	{
+		m_pStateControl->InitState(L"Drop");
+	}
+		break;
+	case DEATH:
+	{
+		m_pStateControl->InitState(L"Death");
+	}
+		break;
+	case ENEMY_STATE_MAX:
+		break;
+	default:
+		break;
+	}
 
 	Enemy::Desc Enemy_desc;
 	/*desc 세팅*/
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
-
-
+	
+	
 	MeshRenderer::Desc Enemy_Mesh;
 	Enemy_Mesh.mtrlName = L"default";
 	Enemy_Mesh.meshName = L"flight";
 	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
+
+	SphereCollider::Desc Enemy_col;
+	Enemy_col.radius = 1.f;
+	Enemy_col.collisionLayer = COLLISION_LAYER_ENEMY;
+	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
 }
 
-void EnemyManager::Spawn_Chase()
-{
-	GameObject* Enemy_obj = INSTANTIATE(0, L"Enemy");
-	Enemy_obj->SetPosition(0,0,0);
-	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
-
-	Enemy_obj->AddComponent<StateControl>();
-
-
-	Enemy::Desc Enemy_desc;
-	/*desc 세팅*/
-	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
-
-
-	MeshRenderer::Desc Enemy_Mesh;
-	Enemy_Mesh.mtrlName = L"default";
-	Enemy_Mesh.meshName = L"flight";
-	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
-}
-
+#pragma region nonono
+//
+//void EnemyManager::Spawn_Rush()
+//{
+//	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
+//	//Enemy_obj->SetPosition(_pos);
+//	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
+//
+//	Enemy_obj->AddComponent<StateControl>();
+//
+//
+//	Enemy::Desc Enemy_desc;
+//	/*desc 세팅*/
+//	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
+//
+//
+//	MeshRenderer::Desc Enemy_Mesh;
+//	Enemy_Mesh.mtrlName = L"default";
+//	Enemy_Mesh.meshName = L"flight";
+//	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
+//
+//	SphereCollider::Desc Enemy_col;
+//	Enemy_col.radius = 1.f;
+//	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
+//}
+//
+//void EnemyManager::Spawn_Chase()
+//{
+//	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
+//	Enemy_obj->SetPosition(0,0,0);
+//	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
+//
+//	Enemy_obj->AddComponent<StateControl>();
+//
+//
+//	Enemy::Desc Enemy_desc;
+//	/*desc 세팅*/
+//	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
+//
+//
+//	MeshRenderer::Desc Enemy_Mesh;
+//	Enemy_Mesh.mtrlName = L"default";
+//	Enemy_Mesh.meshName = L"flight";
+//	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
+//
+//	SphereCollider::Desc Enemy_col;
+//	Enemy_col.radius = 1.f;
+//	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
+//}
+//
+#pragma endregion

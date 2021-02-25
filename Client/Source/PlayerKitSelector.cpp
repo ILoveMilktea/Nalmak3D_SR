@@ -13,7 +13,15 @@ PlayerKitSelector::PlayerKitSelector(Desc * _desc)
 
 PlayerKitSelector::~PlayerKitSelector()
 {
-	Release();
+	for (auto& first : m_garageSlot)
+	{
+		for (auto & value : first.second)
+		{
+			SAFE_DELETE(value);
+		}
+		first.second.clear();
+	}
+	m_garageSlot.clear();
 }
 
 PlayerKitSelector * PlayerKitSelector::GetInstance()
@@ -45,7 +53,8 @@ ItemDesc * PlayerKitSelector::FindSlotItme(const wstring & _name, ITEMTYPE _enum
 			}
 		}
 	}
-	assert("Nullptr, Can't Item Info Seraching..." && itemInfo);
+
+	//assert("Nullptr, Can't Item Info Seraching..." && itemInfo);
 	return itemInfo;
 }
 
@@ -54,14 +63,13 @@ void PlayerKitSelector::DeleteInstance()
 
 	if (m_instance)
 		DESTROY(m_instance->GetGameObject());
-	
+
 }
 
 
 void PlayerKitSelector::Initialize()
 {
 	m_garageSlot[L"Wepon"].reserve(2);
-
 
 	{
 		ItemDesc itemInfo;
@@ -91,30 +99,7 @@ void PlayerKitSelector::Initialize()
 
 void PlayerKitSelector::Update()
 {
-
+	//DEBUG_LOG(L"POINTER", this);
+	DEBUG_LOG(L"Size", m_garageSlot[L"Weapon"].size());
 
 }
-
-void PlayerKitSelector::Release()
-{
-	for (auto& first : m_garageSlot)
-	{
-		for (auto & value : first.second)
-		{
-			SAFE_DELETE(value);
-		}
-		first.second.clear();
-	}
-	m_garageSlot.clear();
-	// 	for_each(.begin(), .end(), [](auto& rPair) 
-	// 	{
-	// 		if (rPair.second)
-	// 		{
-	// 			delete rPair.second; 
-	// 			rPair.second = nullptr; 
-	// 		}
-	// 	});
-}
-
-
-

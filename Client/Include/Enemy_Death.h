@@ -1,23 +1,16 @@
 #pragma once
 #include "IState.h"
-class Enemy_Chase :
+class Enemy_Death :
 	public IState
 {
 public:
-	Enemy_Chase();
-	virtual ~Enemy_Chase();
+	Enemy_Death();
+	virtual ~Enemy_Death();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
-
-public:
-
-public:
-
-private:
-	class Enemy* m_pEnemy;
 };
 

@@ -22,6 +22,7 @@ void PlayerInfoManager::Initialize()
 
 void PlayerInfoManager::Update()
 {
+	
 }
 
 PlayerInfoManager * PlayerInfoManager::GetInstance()
@@ -122,6 +123,12 @@ const float & PlayerInfoManager::GetSpeed() const
 const float & PlayerInfoManager::GetDirSenser() const
 {
 	return m_dirsensor;
+}
+
+
+void PlayerInfoManager::EquipWepon(PARTS_NUM _enumID, ItemDesc * _desc)
+{
+	m_playerItem[_enumID] = _desc;
 }
 
 

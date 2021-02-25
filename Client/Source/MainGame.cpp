@@ -91,7 +91,9 @@ void MainGame::ApplicationSetting()
 
 void MainGame::SystemSetting()
 {
-	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_DEFAULT, COLLISION_LAYER_DEFAULT);
+	//m_engine->ActivateCollisionByLayer(COLLISION_LAYER_DEFAULT, COLLISION_LAYER_DEFAULT);
+	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_PLAYER, COLLISION_LAYER_ENEMY);
+	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_ENEMY, COLLISION_LAYER_PLAYER);
 
 	m_engine->AddScene(L"title", Scene::Instantiate<TitleScene>());
 	m_engine->AddScene(L"garage", Scene::Instantiate<GarageScene>());

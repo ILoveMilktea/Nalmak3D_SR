@@ -20,6 +20,7 @@ void GarageScene::Initialize()
 {
 
 //	 grid setting
+	INSTANTIATE()->AddComponent<Grid>()->SetPosition(0,0,-5.f);
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	
@@ -41,30 +42,24 @@ void GarageScene::Initialize()
 		revolvesDesc.roationSpeed = 1.f;
 		auto revolvesTarget = INSTANTIATE()->AddComponent<RevolvesToTarget>(&revolvesDesc);
 	}
-
+		auto kitmgr = PlayerKitSelector::GetInstance();
 	{
 		SceneChanger::Desc SceneChangerDescInfo;
 		SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
 		SceneChangerDescInfo.sceneName = L"phantom";
 		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
-	{
-		auto kitmanager = INSTANTIATE()->AddComponent<PlayerKitSelector>();
-		//PlayerKitSelector::GetInstance()
-
-	}
-
-
-	{
-		auto offTheFieldButton = UIFactory::CreateButton(
+	
+	
+		auto mainEquipWepon = UIFactory::CreateButton(
 			EventHandler([]() {
-			/*Core::GetInstance()->LoadScene(L"phantom");*/
-
+			ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
+			PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
 
 		}));
 
-		offTheFieldButton->SetPosition(1600.f, 500.f, 0.f);
-	}
+		mainEquipWepon->SetPosition(1600.f, 500.f, 0.f);
+	
 
 
 	{

@@ -11,7 +11,12 @@
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
+<<<<<<< HEAD
+#include "PlayerKitSelector.h"
+=======
 
+#include "Bullet_Manager.h"
+>>>>>>> e07fa3b72c198cc6e5e53c6f2c90bb532f0b6491
 
 #include "StageManager.h"
 
@@ -43,10 +48,13 @@ void DogFightState::Initialize()
 	render.mtrlName = L"default"; // 210223화 12:50 전근희 제대로 안나와서 설정 바꿨음
 	render.meshName = L"flight";
 	m_Player->AddComponent<MeshRenderer>(&render);
-
-	m_Player->AddComponent<PlayerInfoManager>();
+	m_Player->AddComponent<PlayerKitSelector>();
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
+	
+	SphereCollider::Desc player_col;
+	player_col.radius = 1.f;
+	m_Player->AddComponent<SphereCollider>();
 
 	//m_Player->AddComponent<PlayerToTopView>();
 
@@ -89,6 +97,11 @@ void DogFightState::UpdateState()
 			StageManager::GetInstance()->ToScene(L"Evasion");
 		}
 	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
+	{
+		Bullet_Manager::GetInstance()->Fire_Gun(Vector3(0, 0, 0), Quaternion(0, 0, 0, 0));
+	}
 }
 
 void DogFightState::ExitState()
@@ -123,6 +136,7 @@ void DogFightState::Player_Faraway()
 
 	m_Player->GetTransform()->position += forward * m_fSpd;
 }
+
 void DogFightState::Accelerate()
 {
 	m_fSpd = Nalmak_Math::Lerp(m_fSpd, 5.f, dTime);

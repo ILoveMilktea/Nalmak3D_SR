@@ -5,6 +5,7 @@
 
 #include "Bullet_Manager.h"
 
+#include "AimMissile.h"
 PlayerMove::PlayerMove()
 {
 }
@@ -21,7 +22,7 @@ void PlayerMove::Initialize()
 	m_timeMananger = TimeManager::GetInstance();
 	m_playerInfo->SetSpeed(2);
 	m_playerInfo->SetRollAngle(15.f);
-	m_playerInfo->SetDirSeneser(1.7f);
+	m_playerInfo->SetDirSeneser(0.2f);
 
 	m_playerInfo->SetMinSpeed(0.f);
 	m_playerInfo->SetMaxSpeed(20.f);
@@ -33,6 +34,25 @@ void PlayerMove::Initialize()
 	m_playerInfo->GetAddRot().y = Deg2Rad * eulerRot.y;
 	m_playerInfo->GetAddRot().z = Deg2Rad * eulerRot.z;
 	m_mouse = GetComponent<MouseOption>();
+
+
+	// player slot check
+	
+	/*for (int i = 0; i < ITEMTYPE_MAX; ++i)
+	{
+		if (nullptr == m_playerInfo->GetItemDescInfoArray()[i])
+		{
+
+		}
+	}*/
+	/*m_gameObject->AddComponent<AimMissile>();
+	
+	
+	
+	
+	m_useItem = GetComponent<AimMissile>();*/
+
+
 }
 
 void PlayerMove::EnterState()
@@ -66,7 +86,7 @@ void PlayerMove::UpdateState()
 	
 	Quaternion quaterRotX , quaterRotY, quaterRotZ;
 	D3DXQuaternionRotationAxis(&quaterRotY, &m_transform->GetUp(), dirY * dTime * 1.5f);
-	D3DXQuaternionRotationAxis(&quaterRotX, &m_transform->GetRight(), dirX * dTime);
+	D3DXQuaternionRotationAxis(&quaterRotX, &m_transform->GetRight(), dirX * dTime* 1.5f);
 	D3DXQuaternionRotationAxis(&quaterRotZ, &m_transform->GetForward(), m_playerInfo->GetRollAngle() * dTime * 0.1f);
 	m_transform->rotation *=  (quaterRotX * quaterRotY * quaterRotZ);
 	
@@ -85,15 +105,21 @@ void PlayerMove::UpdateState()
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
 
+<<<<<<< HEAD
+	TemproryAttackFunc();
+=======
+	/* 근희 테스트용 */
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
-		Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
+		Bullet_Manager::GetInstance()->Fire_Gun(m_transform->position, m_transform->rotation);
 	}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
 	{
 		Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_transform->rotation);
 	}
+	/* ㅇㄻㅇㄹ */
+>>>>>>> e07fa3b72c198cc6e5e53c6f2c90bb532f0b6491
 	DEBUG_LOG(L"POS" , m_transform);
 	DEBUG_LOG(L"SPEED" , m_playerInfo->GetSpeed());
 
@@ -102,6 +128,18 @@ void PlayerMove::UpdateState()
 
 void PlayerMove::ExitState()
 {
+}
+
+void PlayerMove::TemproryAttackFunc()
+{
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	{
+		//m_useItem = 
+	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
+	{
+	}
 }
 
 Quaternion* PlayerMove::Rotation(const Vector3 & _dir)
