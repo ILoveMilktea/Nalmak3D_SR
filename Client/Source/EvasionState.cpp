@@ -1,22 +1,22 @@
 #include "stdafx.h"
-#include "..\Include\Evasion.h"
+#include "..\Include\EvasionState.h"
 
 
-Evasion::Evasion()
+EvasionState::EvasionState()
 {
 }
 
 
-Evasion::~Evasion()
+EvasionState::~EvasionState()
 {
 }
 
-void Evasion::Initialize()
+void EvasionState::Initialize()
 {
 
 }
 
-void Evasion::EnterState()
+void EvasionState::EnterState()
 {
 	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 
@@ -24,24 +24,23 @@ void Evasion::EnterState()
 	{
 		assert(L"아 ㅋㅋ 메인 카메라 못찾겠다고 ㅋㅋ");
 	}
+	
 	m_MainCamera->SetPosition(0.f, 100.f, 0.f);
 	m_MainCamera->SetRotation(0.f, 0.f, 0.f);
 	m_MainCamera->GetTransform()->RotateX(90.f);
-
+	
 	m_Player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
-
 	if (m_Player == nullptr)
 	{
 		assert(L"플레이어 못받은거 같은데여 ㅋㅋ;;");
 	}
-	
 	m_Player->GetTransform()->position = Vector3(0, 0, -50);
 	m_Player->GetTransform()->SetRotation(0, 0, 0);
 
 	m_bEnter = true;
 }
 
-void Evasion::UpdateState()
+void EvasionState::UpdateState()
 {
 	EnterProduce();
 		
@@ -54,13 +53,14 @@ void Evasion::UpdateState()
 	DEBUG_LOG(L"MainCam Rotx", m_MainCamera->GetTransform()->rotation.x);
 	DEBUG_LOG(L"MainCam Roty", m_MainCamera->GetTransform()->rotation.y);
 	DEBUG_LOG(L"MainCam Rotz", m_MainCamera->GetTransform()->rotation.z);
+	DEBUG_LOG(L"Player Rotz", m_Player->GetTransform()->rotation.z);
 }
 
-void Evasion::ExitState()
+void EvasionState::ExitState()
 {
 }
 
-void Evasion::EnterProduce()
+void EvasionState::EnterProduce()
 {
 	if (m_bEnter)
 	{

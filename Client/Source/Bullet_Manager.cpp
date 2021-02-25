@@ -80,3 +80,44 @@ void Bullet_Manager::Fire_Missile(Vector3 _start, Quaternion _rot)
 	Missile_obj->AddComponent<MeshRenderer>(&Missile_Mesh);
 
 }
+
+void Bullet_Manager::Fire_Evasion(Vector2 _start)
+{//_start.x => x //_start.y => z
+
+	Vector3 vStart = { _start.x, 0.f,_start.y };
+
+	GameObject* Bullet_obj = INSTANTIATE(OBJECT_TAG_BULLET, L"Bullet");
+	Bullet_obj->SetPosition(vStart);
+	Bullet_obj->SetScale(0.5f, 0.5f, 0.5f);
+
+	Bullet::Desc Bullet_Desc;
+	Bullet_Desc.fSpd = 50.f;
+	Bullet_Desc.iDmg = 10;
+	Bullet_obj->AddComponent<Bullet>(&Bullet_Desc);
+
+	MeshRenderer::Desc Bullet_Mesh;
+	Bullet_Mesh.mtrlName = L"default";
+	Bullet_Mesh.meshName = L"box";
+	Bullet_obj->AddComponent<MeshRenderer>(&Bullet_Mesh);
+}
+
+void Bullet_Manager::Missile_Evasion(Vector2 _start)
+{
+	Vector3 vStart = { _start.x, 0.f,_start.y };
+
+	GameObject* Missile_obj = INSTANTIATE(OBJECT_TAG_BULLET, L"Missile");
+	Missile_obj->SetPosition(vStart);
+	Missile_obj->SetScale(0.5f, 0.5f, 2.5f);
+
+	Missile::Desc Missile_Desc;
+	Missile_obj->AddComponent<Missile>(&Missile_Desc);
+
+	MeshRenderer::Desc Missile_Mesh;
+	Missile_Mesh.mtrlName = L"default";
+	Missile_Mesh.meshName = L"box";
+	Missile_obj->AddComponent<MeshRenderer>(&Missile_Mesh);
+}
+
+void Bullet_Manager::Homing_Evasion(Vector2 _start, Vector2 _target)
+{
+}

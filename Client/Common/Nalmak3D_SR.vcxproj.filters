@@ -120,10 +120,9 @@
     <ClInclude Include="..\Include\TopViewCamera.h">
       <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerToTopView.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Ground.h" />
+
+    <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\EditController.h" />
     <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
@@ -133,23 +132,30 @@
     <ClInclude Include="..\Include\ShootingState.h">
       <Filter>04.State</Filter>
     </ClInclude>
+
     <ClInclude Include="..\Include\DogFightState.h">
       <Filter>04.State\00%29DogFight</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BossState.h">
       <Filter>04.State\02%29Boss</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Evasion.h">
-      <Filter>04.State\01%29Evasion</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\StageManager.h">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClInclude>
+
+
+    <ClInclude Include="..\Include\PlayerTopViewMove.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EvasionState.h">
+      <Filter>04.State\01%29Evasion</Filter>
+
     <ClInclude Include="..\Include\UseKit.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerKitSelector.h">
       <Filter>02.Component\00.Manager\Player</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -240,9 +246,6 @@
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ShootingState.cpp">
-      <Filter>04.State</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Bullet.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Bullet</Filter>
     </ClCompile>
@@ -259,9 +262,6 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp">
       <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PlayerToTopView.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Ground.cpp" />
     <ClCompile Include="..\Source\EditController.cpp" />
     <ClCompile Include="..\Source\CustomDebuger.cpp" />
@@ -275,17 +275,16 @@
     <ClCompile Include="..\Source\BossState.cpp">
       <Filter>04.State\02%29Boss</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Evasion.cpp">
-      <Filter>04.State\01%29Evasion</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\StageManager.cpp">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerKitSelector.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
+    <ClCompile Include="PlayerKitSelector.cpp" />
+    <ClCompile Include="..\Source\UseKit.cpp" />
+    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\UseKit.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
+    <ClCompile Include="..\Source\EvasionState.cpp">
+      <Filter>04.State\01%29Evasion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
