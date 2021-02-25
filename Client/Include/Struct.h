@@ -1,7 +1,6 @@
 #pragma once
 
-#ifndef _STRUCT_H_
-#define _STRUCT_H_
+
 
 typedef struct tagBullet
 {
@@ -21,12 +20,12 @@ typedef struct tagEnemy
 	float	m_fMaxSpd;
 	float	m_fCurSpd;
 	float	m_fLookSpd;
-	
+
 	ENEMY_STATE	m_eCurState;
 
 	/* for machine gun*/
 	int		m_iDmg_Gun;
-	float	m_fFpm_Gun; //Fire per minute ¿¬»ç·Â
+	float	m_fFpm_Gun; //Fire per minute ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int		m_iFullRound_Gun;
 	int		m_iCurRound_Gun;
 	float	m_fReloadTime_Gun; //time to Reloaing
@@ -46,9 +45,33 @@ typedef struct tagEnemy
 	int		m_iCurRound_Homing;
 	float	m_fReloadTime_Homing;
 
-	
+
 
 
 }ENEMY_STATUS;
 
-#endif // !_STRUCT_H_
+
+typedef struct Desc
+{
+	Desc() {};
+	Desc(const Desc& other) {
+		itemtype = other.itemtype;
+		weaponSpeed = other.weaponSpeed;
+		delay = other.delay;
+		weaponAttak = other.weaponAttak;
+		weaponAmmo = other.weaponAmmo;
+	};
+
+	Desc(ITEMTYPE & _itemType, float& _weaponSpeed, float& _delay, int& _weaponAttak, int& _weaponAmmo) :
+		itemtype(_itemType), weaponSpeed(_weaponSpeed), delay(_delay) , weaponAttak(_weaponAttak), weaponAmmo(_weaponAmmo)
+	{
+
+	};
+
+	ITEMTYPE itemtype;
+	float	 weaponSpeed;
+	float	 delay;
+	int	 weaponAttak;
+	int  weaponAmmo;
+
+}ItemDesc;

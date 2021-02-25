@@ -51,6 +51,9 @@ public:
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
 
+public:
+	void EquipWepon(ItemDesc* _desc);
+
 private:
 	static PlayerInfoManager* m_instance;
 private:
@@ -64,6 +67,9 @@ private:
 	float m_minSpeed = 0;
 	float	m_maxSpeed = 0;
 	Vector3 m_addedRot = {};
+
+private:
+	ItemDesc* m_playerItem[2];
 
 };
 

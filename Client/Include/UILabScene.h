@@ -18,6 +18,8 @@ private:
 	void CreateSplineCurve();
 
 	void PlayerUIPatitial();
+
+	void GarageMainWindow();
 };
 
 

@@ -32,14 +32,19 @@ protected:
 	virtual void LateUpdate() override;
 	virtual void Release() override;
 
+public:
 	void ChangeTransition(BUTTON_TRANSITION _transition);
 	void ChangeState(BUTTON_STATE _state);
 
 	void ChangeAllColor(Vector4 _color);
 	void ChangeNormalColor(Vector4 _color) { m_normalColor = _color; }
-	void ChangeHighlightColor(Vector4 _color) { m_normalColor = _color; }
-	void ChangePressedColor(Vector4 _color) { m_normalColor = _color; }
-	void ChangeDisableColor(Vector4 _color) { m_normalColor = _color; }
+	void ChangeNormalColor(float _r, float _g, float _b, float _a) { m_normalColor = Vector4(_r,_g,_b,_a); }
+	void ChangeHighlightColor(Vector4 _color) { m_highlightColor = _color; }
+	void ChangeHighlightColor(float _r, float _g, float _b, float _a) { m_highlightColor = Vector4(_r, _g, _b, _a); }
+	void ChangePressedColor(Vector4 _color) { m_pressedColor = _color; }
+	void ChangePressedColor(float _r, float _g, float _b, float _a) { m_pressedColor = Vector4(_r, _g, _b, _a); }
+	void ChangeDisableColor(Vector4 _color) { m_disableColor = _color; }
+	void ChangeDisableColor(float _r, float _g, float _b, float _a) { m_disableColor = Vector4(_r, _g, _b, _a); }
 
 	void ChangeAllTexture(wstring _name);
 	void ChangeNormalTexture(wstring _name);

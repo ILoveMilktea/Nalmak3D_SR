@@ -21,7 +21,7 @@ void PlayerMove::Initialize()
 	m_timeMananger = TimeManager::GetInstance();
 	m_playerInfo->SetSpeed(2);
 	m_playerInfo->SetRollAngle(15.f);
-	m_playerInfo->SetDirSeneser(1.7f);
+	m_playerInfo->SetDirSeneser(0.2f);
 
 	m_playerInfo->SetMinSpeed(0.f);
 	m_playerInfo->SetMaxSpeed(20.f);
@@ -66,7 +66,7 @@ void PlayerMove::UpdateState()
 	
 	Quaternion quaterRotX , quaterRotY, quaterRotZ;
 	D3DXQuaternionRotationAxis(&quaterRotY, &m_transform->GetUp(), dirY * dTime * 1.5f);
-	D3DXQuaternionRotationAxis(&quaterRotX, &m_transform->GetRight(), dirX * dTime);
+	D3DXQuaternionRotationAxis(&quaterRotX, &m_transform->GetRight(), dirX * dTime* 1.5f);
 	D3DXQuaternionRotationAxis(&quaterRotZ, &m_transform->GetForward(), m_playerInfo->GetRollAngle() * dTime * 0.1f);
 	m_transform->rotation *=  (quaterRotX * quaterRotY * quaterRotZ);
 	

@@ -103,12 +103,12 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
 
-	
+
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
 
-	m_engine->SetStartScene(L"title");
+	m_engine->SetStartScene(L"garage");
 
 }
 

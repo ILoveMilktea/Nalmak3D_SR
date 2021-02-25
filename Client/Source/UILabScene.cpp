@@ -19,15 +19,17 @@ void UILabScene::Initialize()
 		mainCam->SetRotation(30, 0, 0);
 	}
 
-	PlayerUIPatitial();
+	//PlayerUIPatitial();
 
 	//CreatePauseButton();
 
 	//CreateRader();
 	//CreateSplineCurve();
+	GarageMainWindow();
 
 	// meshName 
 	// box, line, quad, sphere, triangle, quadNoneNormal
+	UIFactory::CreateEditController();
 }
 
 void UILabScene::CreatePauseButton()
@@ -215,6 +217,7 @@ void UILabScene::PlayerUIPatitial()
 
 		//right
 	}
+	
 
 	SingleImage::Desc desc_si;
 	desc_si.textureName = L"garageSample";
@@ -228,7 +231,7 @@ void UILabScene::PlayerUIPatitial()
 	auto bigtext = UIFactory::CreateText_Title_LEFT_White_Grid(L"BIG TEXT");
 	bigtext->AddComponent<DrawGizmo_2D>();
 	bigtext->AddComponent<CanvasPicking>();
-	bigtext->AddComponent<CustomDebuger>();
+	bigtext->AddComponent<CustomDebuger>(); // debuglog
 	bigtext->SetPosition(200.f, 100.f);
 	bigtext->SetScale(300.f, 80.f);
 
@@ -248,5 +251,59 @@ void UILabScene::PlayerUIPatitial()
 	//image4->SetPosition(700.f, 100.f, 0.f);
 	//image4->GetComponent<CanvasRenderer>()->SetFade(0.f);
 
-	UIFactory::CreateEditController();
+}
+
+void UILabScene::GarageMainWindow()
+{
+
+	SingleImage::Desc desc_si;
+	desc_si.textureName = L"garageSample";
+	auto background = INSTANTIATE();
+	background->AddComponent<CanvasRenderer>();
+	background->AddComponent<SingleImage>(&desc_si);
+	background->GetComponent<CanvasRenderer>()->SetFade(0.3f);
+	background->SetPosition(WINCX * 0.5f, WINCY * 0.5f);
+	background->SetScale(WINCX, WINCY);
+
+	// Menu
+	{
+		// Title (text)
+		{
+			auto title = UIFactory::Prefab_Title(L"MAIN MENU", CANVAS_GROUP_MAINWND);
+			title->SetPosition(576.f, 124.f);
+		}
+
+		// Menu 1 - START STAGE	(Button)
+		{
+			EventHandler eventFunc = EventHandler([=]() {});
+			auto menu = UIFactory::Prefab_Menu(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND);
+			menu->SetPosition(576.f, 230.f);
+		}
+		// Menu 2 - WEAPON (Button)
+		{
+			EventHandler eventFunc = EventHandler([=]() {});
+			auto menu = UIFactory::Prefab_Menu(eventFunc, L"SELECT WEAPON", CANVAS_GROUP_MAINWND);
+			menu->SetPosition(576.f, 270.f);
+		}
+		// Menu 3 - SKILL (Button)
+		{
+			EventHandler eventFunc = EventHandler([=]() {});
+			auto menu = UIFactory::Prefab_Menu(eventFunc, L"SELECT SKILL", CANVAS_GROUP_MAINWND);
+			menu->SetPosition(576.f, 310.f);
+		}
+		// Menu 4 - STAGE SELECT (Button)
+		{
+			EventHandler eventFunc = EventHandler([=]() {});
+			auto menu = UIFactory::Prefab_Menu(eventFunc, L"RETURN TO MAP", CANVAS_GROUP_MAINWND);
+			menu->SetPosition(576.f, 350.f);
+		}
+	}
+	// description (text)
+	{
+		auto script = UIFactory::Prefab_Script(L"이곳은 아마 선택한 기체에 대해 설명하는 곳입니다. 그런데 줄바꿈 문제없이 되나요???????", CANVAS_GROUP_MAINWND);
+		script->SetPosition(576.f, 880.f);
+	}
+	// key helper (image)
+	// key helper text (text)
+
 }

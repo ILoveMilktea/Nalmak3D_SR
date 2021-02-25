@@ -14,6 +14,11 @@ void EditController::Initialize()
 
 void EditController::Update()
 {
+	if (m_input->GetKeyDown(KEY_STATE_ESC))
+	{
+		PostQuitMessage(0);
+	}
+
 	if (m_input->GetKeyDown(KEY_STATE_TAB))
 		m_editMode = true;
 	
