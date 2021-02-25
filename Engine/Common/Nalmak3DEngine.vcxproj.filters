@@ -431,6 +431,7 @@
     <ClCompile Include="..\Source\SplineCurve.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -685,7 +686,8 @@
       <Filter>05.Component\99.Utility\UIPicking</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\SplineCurve.h">
-    <Filter>99.PreCompile\99.Utility</Filter>
+      <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\ScaleHandle_2D.h" />
   </ItemGroup>
 </Project>

@@ -79,6 +79,7 @@
     <ClCompile Include="..\Source\RenderTarget.cpp" />
     <ClCompile Include="..\Source\ResourceManager.cpp" />
     <ClCompile Include="..\Source\Rigidbody.cpp" />
+    <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
     <ClCompile Include="..\Source\Scene.cpp" />
     <ClCompile Include="..\Source\SceneManager.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="..\Include\RenderTarget.h" />
     <ClInclude Include="..\Include\ResourceManager.h" />
     <ClInclude Include="..\Include\Rigidbody.h" />
+    <ClInclude Include="..\Include\ScaleHandle_2D.h" />
     <ClInclude Include="..\Include\Scene.h" />
     <ClInclude Include="..\Include\SceneManager.h" />
     <ClInclude Include="..\Include\Shader.h" />

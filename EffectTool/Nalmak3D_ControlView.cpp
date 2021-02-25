@@ -1096,7 +1096,7 @@ void Nalmak3D_ControlView::OnBnClickedButtonSave()
 	TCHAR fp[256] = L"";
 	GetCurrentDirectory(256, fp);
 	PathRemoveFileSpec(fp);
-	lstrcat(fp, L"\\Data\Particle");
+	lstrcat(fp, L"\\Data\\Particle");
 	dlg.m_ofn.lpstrInitialDir = fp;
 
 	if (dlg.DoModal())
@@ -1116,13 +1116,13 @@ void Nalmak3D_ControlView::OnBnClickedButtonSave()
 		DWORD burstCount = (DWORD)particle->GetBurstList().size();
 		
 		WriteFile(handle, &burstCount, sizeof(DWORD), &byte, nullptr);
-		for (int i = 0; i < burstCount; ++i)
+		for (DWORD i = 0; i < burstCount; ++i)
 		{
 			WriteFile(handle, &particle->GetBurstList()[i], sizeof(ParticleRenderer::Burst), &byte, nullptr);
 		}
 
 		wstring mtrlName = particle->GetMaterial()->GetName();
-		DWORD materialNameLength = mtrlName.length();
+		DWORD materialNameLength = (DWORD)mtrlName.length();
 		WriteFile(handle, &materialNameLength, sizeof(DWORD), &byte,nullptr);
 		WriteFile(handle, mtrlName.c_str(), materialNameLength * sizeof(wchar_t), &byte, nullptr);
 
@@ -1150,7 +1150,7 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 	TCHAR fp[256] = L"";
 	GetCurrentDirectory(256, fp);
 	PathRemoveFileSpec(fp);
-	lstrcat(fp, L"\\Data\Particle");
+	lstrcat(fp, L"\\Data\\Particle");
 	dlg.m_ofn.lpstrInitialDir = fp;
 
 	if (dlg.DoModal())

@@ -77,15 +77,10 @@ void RenderManager::Render()
 
 
 	Reset();
-
-
 }
 
 void RenderManager::Render(Camera * _cam)
 {
-
-
-
 	///////////////////////////////////////////////////////
 	// public const buffer
 	ConstantBuffer cBuffer;
@@ -409,7 +404,6 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 			}
 		}
 	}
-	RenderText();
 
 	if (m_currentShader)
 	{
@@ -460,6 +454,8 @@ void RenderManager::Reset()
 		renderList.second.clear();
 	}
 	m_renderUILists.clear();
+
+	m_debugManager->EraseTheRecord();
 }
 
 void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _cBuffer)

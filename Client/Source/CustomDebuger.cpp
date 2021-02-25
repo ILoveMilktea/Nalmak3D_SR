@@ -11,5 +11,5 @@ void CustomDebuger::Initialize()
 
 void CustomDebuger::Update()
 {
-	DEBUG_LOG(m_gameObject->GetName(), GetTransform()->position);
+	DEBUG_LOG(m_gameObject->GetName(), GetTransform());
 }

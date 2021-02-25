@@ -1,4 +1,5 @@
-#include "..\Include\PositionHandle_2D.h"
+#include "..\Include\ScaleHandle_2D.h"
+
 #include "Transform.h"
 #include "InputManager.h"
 #include "TimeManager.h"
@@ -7,13 +8,13 @@
 #include "DrawGizmo_2D.h"
 
 
-PositionHandle_2D::PositionHandle_2D(Desc * _desc)
+ScaleHandle_2D::ScaleHandle_2D(Desc * _desc)
 {
 	m_moveDir = _desc->dir;
 	m_target = _desc->target;
 }
 
-void PositionHandle_2D::Initialize()
+void ScaleHandle_2D::Initialize()
 {
 	m_input = InputManager::GetInstance();
 
@@ -21,10 +22,10 @@ void PositionHandle_2D::Initialize()
 
 	switch (m_moveDir)
 	{
-	case PositionHandle_2D::RIGHT:
+	case ScaleHandle_2D::RIGHT:
 		m_transform->position = m_target->position + m_target->GetRight() * m_target->scale.x * 0.6f;
 		break;
-	case PositionHandle_2D::UP:
+	case ScaleHandle_2D::UP:
 		m_transform->position = m_target->position + m_target->GetUp() * m_target->scale.y * 0.6f;
 		break;
 	default:
@@ -34,13 +35,13 @@ void PositionHandle_2D::Initialize()
 	m_gameObject->SetActive(false);
 }
 
-void PositionHandle_2D::Update()
+void ScaleHandle_2D::Update()
 {
 	if (m_isPick)
-		MoveTarget();
+		ScalingTarget();
 }
 
-void PositionHandle_2D::MoveTarget()
+void ScaleHandle_2D::ScalingTarget()
 {
 	Vector2 dir = m_input->GetMouseMoveDir();
 	if (Vector2(0.f, 0.f) == dir)
@@ -52,11 +53,11 @@ void PositionHandle_2D::MoveTarget()
 
 	switch (m_moveDir)
 	{
-	case PositionHandle_2D::RIGHT:
+	case ScaleHandle_2D::RIGHT:
 		axis = m_target->GetRight();
 		axis *= dir.x;
 		break;
-	case PositionHandle_2D::UP:
+	case ScaleHandle_2D::UP:
 		axis = m_target->GetUp();
 		axis *= dir.y;
 		break;
@@ -64,19 +65,19 @@ void PositionHandle_2D::MoveTarget()
 		break;
 	}
 
-	m_target->position += axis * len;
-	
+	m_target->scale += axis * len;
+
 	m_target->GetComponent<DrawGizmo_2D>()->ResetingHandlePosition();
 }
 
-void PositionHandle_2D::ResetingPosition()
+void ScaleHandle_2D::ResetingPosition()
 {
 	switch (m_moveDir)
 	{
-	case PositionHandle_2D::RIGHT:
+	case ScaleHandle_2D::RIGHT:
 		m_transform->position = m_target->position + m_target->GetRight() * m_target->scale.x * 0.6f;
 		break;
-	case PositionHandle_2D::UP:
+	case ScaleHandle_2D::UP:
 		m_transform->position = m_target->position + m_target->GetUp() * m_target->scale.y * 0.6f;
 		break;
 	default:
@@ -84,7 +85,7 @@ void PositionHandle_2D::ResetingPosition()
 	}
 }
 
-bool PositionHandle_2D::CheckPicked()
+bool ScaleHandle_2D::CheckPicked()
 {
 	return GetComponent<CanvasRenderer>()->IsCursorOnRect();
 }

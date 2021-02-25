@@ -6,7 +6,9 @@
 #include "EditController.h"
 class GameObject;
 
+//===============================
 // Please Add CanvasRender First
+//===============================
 class UIFactory
 {
 
@@ -158,6 +160,104 @@ public:
 	text + fill
 
 	*/
+	public:
+
+	static GameObject* Prefab_Title(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 18;
+		desc.height = 40;
+		desc.text = _text;
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+		
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"Title");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+
+		text->SetScale(760.f, 40.f);
+		return text;
+	}
+	static GameObject* Prefab_SubTitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 24;
+		desc.text = _text;
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"Contents");
+		subtitle->AddComponent<Text>(&desc);
+		subtitle->SetScale(760.f, 25.f);
+		return subtitle;
+	}
+	static GameObject* Prefab_Menu(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// button
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+
+		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"Menu");
+		menu->AddComponent<CanvasRenderer>(&desc_cr);
+		menu->AddComponent<Button>(&desc_bt);
+
+		menu->GetComponent<Button>()->ChangeNormalColor(1.f, 1.f, 1.f, 0.f);
+		menu->GetComponent<Button>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
+		menu->GetComponent<Button>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
+		menu->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
+
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 24;
+		desc.text = _text;
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		menu->AddComponent<Text>(&desc);
+
+		menu->SetScale(760.f, 30.f);
+		return menu;
+	}
+	static GameObject* Prefab_Contents(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 24;
+		desc.text = _text;
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto contents = INSTANTIATE(OBJECT_TAG_UI, L"Contents");
+		contents->AddComponent<Text>(&desc);
+		contents->SetScale(200.f, 25.f);
+		return contents;
+	}
+
+	static GameObject* Prefab_Script(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 24;
+		desc.text = _text;
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto script = INSTANTIATE(OBJECT_TAG_UI, L"Script");
+		script->AddComponent<CanvasRenderer>();
+		script->AddComponent<Text>(&desc);
+		script->SetScale(760.f, 150.f);
+
+		return script;
+	}
+	static GameObject* Prefab_KeyHelper(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		
+	}
+
 
 public:
 	static GameObject* CreateEditController()
@@ -168,7 +268,5 @@ public:
 		return controller;
 	}
 };
-
-
 
 #endif // !__UIFACTORY_H__
