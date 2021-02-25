@@ -45,7 +45,7 @@ void QuadNoneNormal::CreateVertexBuffer()
 
 	vertices[3].position = Vector3(0.5f, 0.5f, 0.f);
 	vertices[3].uv = Vector2(1.f, 0.f);
-
+	
 	m_vBuffer->Unlock();
 
 	D3DXComputeBoundingSphere(&vertices[0].position, 4, sizeof(INPUT_LAYOUT_POSITION_UV), &m_boundingSphereCenter, &m_boundingSphereRadius);
@@ -73,6 +73,6 @@ void QuadNoneNormal::CreateIndexBuffer()
 	indices[3] = 1;
 	indices[4] = 3;
 	indices[5] = 2;
-
+	
 	m_iBuffer->Unlock();
 }

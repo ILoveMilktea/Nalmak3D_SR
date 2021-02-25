@@ -40,11 +40,14 @@ void PlayerKitSelector::DeleteInstance()
 void PlayerKitSelector::Initialize()
 {
 	UseKit::Desc kitInfo;
-	//m_playerSlot.emplace(L"Wepon", &kitInfo);
+	kitInfo.wepontype = UseKit::CANNON_30MM;
+	kitInfo.amorCount = 20;
+	UseKit::Desc kitInfo2;
+	kitInfo2.wepontype = UseKit::GUID_MISSILE;
+	kitInfo2.amorCount = 10;
 
-	//vector<class UseKit::Desc*>().push_back
 
-//	m_garageSlot[L"Wepon"] = vector<UseKit::Desc*>{ &kitInfo };
+	m_garageSlot[L"Wepon"] = vector<UseKit::Desc*>{ &kitInfo , &kitInfo2 };
 
 }
 
@@ -54,18 +57,11 @@ void PlayerKitSelector::Update()
 
 void PlayerKitSelector::Release()
 {
-	/*for (auto& name : m_playerSlot)
+	for (auto& name : m_garageSlot)
 	{
-		for (auto & value : name.second)
-		{
-			if (value)
-			{
-			
-			}
-		}
-
-	}*/
-
+		name.second.clear();
+	}
+	m_garageSlot.clear();
 	// 	for_each(.begin(), .end(), [](auto& rPair) 
 	// 	{
 	// 		if (rPair.second)

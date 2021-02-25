@@ -66,7 +66,6 @@ public:
 	void Initialize();
 	void Render();
 	void Render(Camera* _cam);
-	void RenderText();
 	void Reset();
 private:
 	void SkyboxPass(ConstantBuffer& _cBuffer);
@@ -127,6 +126,8 @@ private:
 private:
 	void RecordRenderTarget(UINT _index, const wstring& _name);
 	void EndRenderTarget(const wstring& _name);
+	void RecordDepthStencil(const wstring& _name);
+	void EndDepthStencil(const wstring& _name);
 public:
 	void SetWindowSize(UINT _x, UINT _y);
 public:
@@ -149,6 +150,7 @@ private:
 
 private:
 	void ClearRenderTarget(const wstring& _targetName);
+	void ClearDepthStencil(const wstring& _targetName);
 
 };
 

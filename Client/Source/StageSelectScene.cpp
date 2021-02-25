@@ -13,7 +13,10 @@ StageSelectScene::~StageSelectScene()
 
 void StageSelectScene::Initialize()
 {
-	INSTANTIATE()->AddComponent<DirectionalLight>();
+	DirectionalLight::Desc dir;
+	dir.diffuseIntensity = 2.f;
+	dir.color = { 0.1f,0.4f,0.8f };
+	INSTANTIATE()->AddComponent<DirectionalLight>(&dir)->SetRotation(50, 20, 0);
 	auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<FreeMove>();// ->AddComponent<MoveBySpline>()->SetPosition(0, 0, 0);
 	/*cam->GetComponent<MoveBySpline>()
 		->AddSplinePoint({ 0,0,0 })
@@ -37,11 +40,34 @@ void StageSelectScene::Initialize()
 		render.interval = 3.f;
 		INSTANTIATE()->AddComponent<Terrain>(&render);
 	}
-	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50,0);
 
+	{
+		MeshRenderer::Desc render;
+		render.meshName = L"box";
+		render.mtrlName = L"standard";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0,0,-1);
 
+	}
 
+	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
+	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
+	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal", CANVAS_GROUP_G1);
+	window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
+	auto window3 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Depth", CANVAS_GROUP_G1);
+	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
+	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
+	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
+	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Transparent", CANVAS_GROUP_G1);
+	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
 	ParticleRenderer::Desc particle;
-	particle.particleDataName = L"fire";
-	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle);
+	particle.particleDataName = L"niniz";
+	PointLight::Desc point;
+	point.color = Vector3(1.f, 0.8f, 0.f);
+	point.diffuseIntensity = 3.f;
+	
+	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
+
+
+	point.radius = 2.f;
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<PointLight>(&point);
 }

@@ -197,8 +197,10 @@
     <ClInclude Include="..\Include\Bullet.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
+    <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\Define.h" />
     <ClInclude Include="..\Include\DogFightState.h" />
+    <ClInclude Include="..\Include\EditController.h" />
     <ClInclude Include="..\Include\Enemy.h" />
     <ClInclude Include="..\Include\EnemyManager.h" />
     <ClInclude Include="..\Include\Enemy_Chase.h" />
@@ -251,7 +253,9 @@
     <ClCompile Include="..\Source\Bullet.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
+    <ClCompile Include="..\Source\CustomDebuger.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp" />
+    <ClCompile Include="..\Source\EditController.cpp" />
     <ClCompile Include="..\Source\Enemy.cpp" />
     <ClCompile Include="..\Source\EnemyManager.cpp" />
     <ClCompile Include="..\Source\Enemy_Chase.cpp" />
@@ -343,6 +347,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\D_PointLight.fx" />
+    <FxCompile Include="..\..\Resource\Shader\particle_billboard.fx" />
+    <FxCompile Include="..\..\Resource\Shader\particle_billboard_vertical.fx" />
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx" />
     <FxCompile Include="..\..\Resource\Shader\StageSelectFloor.fx" />
     <FxCompile Include="..\..\Resource\Shader\standard.fx">

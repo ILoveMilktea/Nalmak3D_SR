@@ -14,7 +14,6 @@ void SingleImage::Initialize()
 	m_renderer = GetComponent<CanvasRenderer>();
 	if(m_renderer)
 		m_renderer->SetImage(m_image);
-
 }
 
 void SingleImage::Update()

@@ -164,6 +164,10 @@ public:
 	afx_msg void OnBnClickedDeleteBurst();
 	afx_msg void OnBnClickedButtonSave();
 	afx_msg void OnBnClickedButtonLoad();
+	afx_msg void OnEnChangeMinAngularVelocity();
+	afx_msg void OnEnChangeMaxAngularVelocity();
+	CEdit m_minAngularVelocity;
+	CEdit m_maxAngularVelocity;
 };
 
 

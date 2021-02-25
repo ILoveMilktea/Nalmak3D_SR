@@ -120,7 +120,7 @@ struct NALMAK_DLL ParticleData
 	float depth = 1.f;
 
 	// for cone
-	float coneAngle = 45.f;
+	float coneAngle = 45.f * Deg2Rad;
 
 	float startMinSpeed = 0.1f;
 	float startMaxSpeed = 0.1f;
@@ -139,6 +139,9 @@ struct NALMAK_DLL ParticleData
 
 	float minAngle = 0.f;
 	float maxAngle = 0.f;
+
+	float minAngularVelocity = 0.f;
+	float maxAngularVelocity = 0.f;
 
 	float startMinScale = 0.1f;
 	float startMaxScale = 0.2f;

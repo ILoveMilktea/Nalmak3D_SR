@@ -82,7 +82,9 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 	float4 light =  CalcPointLight(g_pointLight, g_cBuffer.worldCamPos, worldPos.xyz, normal);
 
-	o.diffuse = float4(diffuse,1) *light;
+	//o.diffuse = float4(diffuse, 1);// *light;
+	
+	o.diffuse = float4(diffuse,1) * light;
 	//o.diffuse = worldPos;
 	return o;
 }

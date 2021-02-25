@@ -26,17 +26,21 @@ void Particle::Update(INPUT_LAYOUT_PARTICLE* _info)
 	finalVelocity += totalAcceleration;
 	position += finalVelocity * delta;
 
+	angle += angluarVelocity * delta;
+
+
 	_info->color = Nalmak_Math::Lerp(startColor, endColor, lifeTimeRatio);
 	float curScale = Nalmak_Math::Lerp(startScale, endScale, lifeTimeRatio);
 
 	Matrix trans, rot, scale;
 	D3DXMatrixTranslation(&trans, position.x, position.y, position.z);
+	D3DXMatrixRotationZ(&rot, angle);
 	D3DXMatrixScaling(&scale, curScale, curScale, curScale);
 
 	if (parents)
-		_info->worldMatrix = scale * trans * parents->GetWorldMatrix();
+		_info->worldMatrix = scale * rot * trans * parents->GetWorldMatrix();
 	else
-		_info->worldMatrix = scale * trans;
+		_info->worldMatrix = scale * rot * trans;
 
 	m_currentLifeTime += delta;
 

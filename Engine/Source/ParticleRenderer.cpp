@@ -9,14 +9,14 @@ ParticleRenderer::ParticleRenderer(Desc * _desc)
 	ParticleInfo* info = ResourceManager::GetInstance()->GetResource<ParticleInfo>(_desc->particleDataName);
 	m_emitBursts = info->GetParticleBurst();
 	m_material = info->GetMaterial();
+	m_info = info->GetParticleInfo();
+
+
 
 	if (m_material->GetShader()->GetInputLayout() != VERTEX_INPUT_LAYOUT_PARTICLE)
 		assert(L"Particle Renderer must have particle Shader Material!" && 0);
-	m_info = info->GetParticleInfo();
 
-	m_info.coneAngle = info->GetParticleInfo().coneAngle;
-	m_info.minAngle = info->GetParticleInfo().minAngle;
-	m_info.maxAngle = info->GetParticleInfo().maxAngle;
+
 
 	m_currentCount = 0;
 	m_playTime = 0.f;
@@ -226,6 +226,7 @@ void ParticleRenderer::SetEmitCount(int _count)
 
 void ParticleRenderer::EmitSphere(int _count)
 {
+
 	Matrix world = m_transform->GetWorldMatrix();
 	Vector3 pos;
 	memcpy(&pos, &world._41, sizeof(Vector3));
@@ -273,6 +274,7 @@ void ParticleRenderer::EmitSphere(int _count)
 		particle->startScale = Nalmak_Math::Rand(m_info.startMinScale, m_info.startMaxScale);
 		particle->endScale = Nalmak_Math::Rand(m_info.endMinScale, m_info.endMaxScale);	
 		particle->angle = Nalmak_Math::Rand(m_info.minAngle, m_info.maxAngle);
+		particle->angluarVelocity = Nalmak_Math::Rand(m_info.minAngularVelocity, m_info.maxAngularVelocity);
 		float startColor = Nalmak_Math::Rand(0.f, 1.f);
 		particle->startColor = Nalmak_Math::Lerp(m_info.startMinColor, m_info.startMaxColor,startColor);
 		float endColor = Nalmak_Math::Rand(0.f, 1.f);
@@ -327,6 +329,7 @@ void ParticleRenderer::EmitCircle(int _count)
 		particle->startSpeed = Nalmak_Math::Rand(m_info.startMinSpeed, m_info.startMaxSpeed);
 		particle->endSpeed = Nalmak_Math::Rand(m_info.endMinSpeed, m_info.endMaxSpeed);
 		particle->angle = Nalmak_Math::Rand(m_info.minAngle, m_info.maxAngle);
+		particle->angluarVelocity = Nalmak_Math::Rand(m_info.minAngularVelocity, m_info.maxAngularVelocity);
 		float startColor = Nalmak_Math::Rand(0.f, 1.f);
 		particle->startColor = Nalmak_Math::Lerp(m_info.startMinColor, m_info.startMaxColor, startColor);
 		float endColor = Nalmak_Math::Rand(0.f, 1.f);
@@ -395,6 +398,7 @@ void ParticleRenderer::EmitBox(int _count)
 		particle->startSpeed = Nalmak_Math::Rand(m_info.startMinSpeed, m_info.startMaxSpeed);
 		particle->endSpeed = Nalmak_Math::Rand(m_info.endMinSpeed, m_info.endMaxSpeed);
 		particle->angle = Nalmak_Math::Rand(m_info.minAngle, m_info.maxAngle);
+		particle->angluarVelocity = Nalmak_Math::Rand(m_info.minAngularVelocity, m_info.maxAngularVelocity);
 		float startColor = Nalmak_Math::Rand(0.f, 1.f);
 		particle->startColor = Nalmak_Math::Lerp(m_info.startMinColor, m_info.startMaxColor, startColor);
 		float endColor = Nalmak_Math::Rand(0.f, 1.f);
@@ -455,6 +459,7 @@ void ParticleRenderer::EmitCone(int _count)
 		particle->startScale = Nalmak_Math::Rand(m_info.startMinScale, m_info.startMaxScale);
 		particle->endScale = Nalmak_Math::Rand(m_info.endMinScale, m_info.endMaxScale);
 		particle->angle = Nalmak_Math::Rand(m_info.minAngle, m_info.maxAngle);
+		particle->angluarVelocity = Nalmak_Math::Rand(m_info.minAngularVelocity, m_info.maxAngularVelocity);
 		float startColor = Nalmak_Math::Rand(0.f, 1.f);
 		particle->startColor = Nalmak_Math::Lerp(m_info.startMinColor, m_info.startMaxColor, startColor);
 		float endColor = Nalmak_Math::Rand(0.f, 1.f);

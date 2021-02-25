@@ -207,7 +207,7 @@ void RenderTarget::Clear()
 		m_device->GetRenderTarget(i + 1, &surface[i]);
 		m_device->SetRenderTarget(i + 1, nullptr);
 	}
-	m_device->Clear(0, nullptr, D3DCLEAR_TARGET, m_color, 0, 1);
+	m_device->Clear(0, nullptr, D3DCLEAR_TARGET, m_color, 1, 0);
 
 	for (int i = 0; i < 3; ++i)
 	{

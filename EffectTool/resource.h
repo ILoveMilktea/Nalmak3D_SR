@@ -39,6 +39,7 @@
 #define IDC_BUTTON10                    1030
 #define IDC_RADIO5                      1031
 #define IDC_EDIT37                      1032
+#define IDC_EDIT46                      1033
 #define IDC_BUTTON5                     1034
 #define IDC_BUTTON6                     1035
 #define IDC_BUTTON7                     1036
@@ -81,6 +82,7 @@
 #define IDC_MFCCOLORBUTTON3             1072
 #define IDC_MFCCOLORBUTTON4             1073
 #define IDC_BUTTON12                    1074
+#define IDC_EDIT47                      1075
 
 // Next default values for new objects
 // 

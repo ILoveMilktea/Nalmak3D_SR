@@ -12,7 +12,7 @@ class NALMAK_DLL ParticleRenderer :
 public:
 	struct Desc
 	{
-		wstring particleDataName;
+		wstring particleDataName = L"default";
 	};
 
 	struct Burst

@@ -196,6 +196,9 @@
     <Filter Include="06.Resource\06.ParticleInfo">
       <UniqueIdentifier>{b73bc814-bd5b-43b0-847e-8000b3415dc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Component\99.Utility\UIPicking">
+      <UniqueIdentifier>{e8333c85-56bf-47db-9fe2-207d9feef9ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -419,10 +422,21 @@
       <Filter>05.Component\08.UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
+    <ClCompile Include="..\Source\PositionHandle_2D.cpp">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DrawGizmo_2D.cpp">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CanvasPicking.cpp">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\SplineCurve.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ParticleInfo.cpp" />
+    <ClCompile Include="..\Source\ParticleInfo.cpp">
+      <Filter>06.Resource\06.ParticleInfo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -667,9 +681,20 @@
       <Filter>05.Component\08.UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\GroundVIBuffer.h" />
+    <ClInclude Include="..\Include\PositionHandle_2D.h">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DrawGizmo_2D.h">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CanvasPicking.h">
+      <Filter>05.Component\99.Utility\UIPicking</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\SplineCurve.h">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\ParticleInfo.h" />
+    <ClInclude Include="..\Include\ParticleInfo.h">
+      <Filter>06.Resource\06.ParticleInfo</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

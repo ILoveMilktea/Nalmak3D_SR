@@ -11,6 +11,7 @@ public:
 		float delay = 0.f;
 		float kitAttack = 0.f;
 		float kitSpeed = 0.f;
+		int amorCount = 0;
 		WeponType wepontype = WeponType::WEPON_END;
 	};
 
@@ -27,7 +28,7 @@ private:
 	float m_delay = 0.f;
 	float m_kitAttack = 0.f;
 	float m_kitSpeed = 0.f;
-
+	int m_amorCount;
 
 
 

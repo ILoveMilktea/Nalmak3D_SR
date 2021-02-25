@@ -28,27 +28,33 @@ void NalmakScene::Initialize()
 	}
 
 	{
-		for (int i = 0; i < 200; ++i)
+		
+		for (int i = -5; i < 5; ++i)
 		{
-			MeshRenderer::Desc mesh;
-			mesh.meshName = L"sphere";
-			mesh.mtrlName = L"standard";
-			INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetScale(Vector3(1, 1, 1) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(Nalmak_Math::Rand(-60.f, 60.f), Nalmak_Math::Rand(1.f, 20.f), Nalmak_Math::Rand(-60.f, 60.f));
+			for (int j = -5; j < 5; ++j)
+			{
+				MeshRenderer::Desc mesh;
+				mesh.meshName = L"sphere";
+				mesh.mtrlName = L"standard";
+				INSTANTIATE()->AddComponent<MeshRenderer>(&mesh)->SetScale(Vector3(1, 1, 1) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(i * 3, 0, j * 3);
+			}
 		}
 
 		{
 			PointLight::Desc point;
-			point.diffuseIntensity = 1.f;
-			point.ambientIntensity = 0.1f;
+			point.diffuseIntensity = Nalmak_Math::Rand(1.f, 5.f);
+			point.ambientIntensity = 0.f;
 
 			for (int i = 0; i < 100; ++i)
 			{
 				point.color = Vector3(Nalmak_Math::Rand(0.f, 1.f), Nalmak_Math::Rand(0.f, 1.f), Nalmak_Math::Rand(0.f, 1.f));
-				point.diffuseIntensity = Nalmak_Math::Rand(1.f, 7.f);
-				point.radius = Nalmak_Math::Rand(30.f, 60.f);
-				INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(Nalmak_Math::Rand(-60.f, 60.f), Nalmak_Math::Rand(1.f, 20.f), Nalmak_Math::Rand(-60.f, 60.f));
+				point.diffuseIntensity = Nalmak_Math::Rand(1.f, 2.f);
+				point.radius = Nalmak_Math::Rand(5.f, 10.f);
+				INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(Nalmak_Math::Rand(-15.f, 15.f), Nalmak_Math::Rand(-2.f, 2.f), Nalmak_Math::Rand(-15.f, 15.f));
 			}
 		}
+	
+			
 		MeshRenderer::Desc mesh;
 		mesh.mtrlName = L"transTest";
 		mesh.meshName = L"box";

@@ -84,6 +84,8 @@ void Nalmak3D_ControlView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST1, m_burstList);
 	DDX_Control(pDX, IDC_EDIT27, m_burstTime);
 	DDX_Control(pDX, IDC_EDIT28, m_burstCount);
+	DDX_Control(pDX, IDC_EDIT46, m_minAngularVelocity);
+	DDX_Control(pDX, IDC_EDIT47, m_maxAngularVelocity);
 }
 
 BEGIN_MESSAGE_MAP(Nalmak3D_ControlView, CFormView)
@@ -153,6 +155,8 @@ BEGIN_MESSAGE_MAP(Nalmak3D_ControlView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON9, &Nalmak3D_ControlView::OnBnClickedDeleteBurst)
 	ON_BN_CLICKED(IDC_BUTTON11, &Nalmak3D_ControlView::OnBnClickedButtonSave)
 	ON_BN_CLICKED(IDC_BUTTON12, &Nalmak3D_ControlView::OnBnClickedButtonLoad)
+	ON_EN_CHANGE(IDC_EDIT46, &Nalmak3D_ControlView::OnEnChangeMinAngularVelocity)
+	ON_EN_CHANGE(IDC_EDIT47, &Nalmak3D_ControlView::OnEnChangeMaxAngularVelocity)
 END_MESSAGE_MAP()
 
 
@@ -255,7 +259,7 @@ void Nalmak3D_ControlView::OnBnClickedCreateParticle()
 	}
 	else
 	{
-		m_materialName.SetWindowTextW(L"particleAdd");
+		m_materialName.SetWindowTextW(L"particleAdd_billboard");
 	}
 
 	MFC_Utility::SetEditBoxFloat(&m_burstTime, 0);
@@ -340,6 +344,9 @@ void Nalmak3D_ControlView::UpdateData()
 
 	MFC_Utility::SetEditBoxFloat(&m_minRotation, Rad2Deg * particle->m_info.minAngle);
 	MFC_Utility::SetEditBoxFloat(&m_maxRotation, Rad2Deg * particle->m_info.maxAngle);
+
+	MFC_Utility::SetEditBoxFloat(&m_minAngularVelocity, Rad2Deg * particle->m_info.minAngularVelocity);
+	MFC_Utility::SetEditBoxFloat(&m_maxAngularVelocity, Rad2Deg * particle->m_info.maxAngularVelocity);
 
 	MFC_Utility::SetEditBoxFloat(&m_velocityX, particle->m_info.force.x);
 	MFC_Utility::SetEditBoxFloat(&m_velocityY, particle->m_info.force.y);
@@ -485,7 +492,7 @@ void Nalmak3D_ControlView::OnInitialUpdate()
 
 	for (auto& mtrl : ResourceManager::GetInstance()->GetAllResource<Material>())
 	{
-		if (((Material*)(mtrl.second))->GetShader()->GetName() == L"particle")
+		if (((Material*)(mtrl.second))->GetShader()->GetInputLayout() == VERTEX_INPUT_LAYOUT_PARTICLE)
 		{
 			CString str = mtrl.second->GetName().c_str();
 			m_materialList.AddString(str);
@@ -829,7 +836,7 @@ void Nalmak3D_ControlView::OnBnClickedUpdateMaterial()
 
 	for (auto& mtrl : ResourceManager::GetInstance()->GetAllResource<Material>())
 	{
-		if (((Material*)(mtrl.second))->GetShader()->GetName() == L"particle")
+		if (((Material*)(mtrl.second))->GetShader()->GetInputLayout() == VERTEX_INPUT_LAYOUT_PARTICLE)
 		{
 			CString str = mtrl.second->GetName().c_str();
 			m_materialList.AddString(str);
@@ -1096,7 +1103,7 @@ void Nalmak3D_ControlView::OnBnClickedButtonSave()
 	TCHAR fp[256] = L"";
 	GetCurrentDirectory(256, fp);
 	PathRemoveFileSpec(fp);
-	lstrcat(fp, L"\\Data\Particle");
+	lstrcat(fp, L"\\Data\\Particle");
 	dlg.m_ofn.lpstrInitialDir = fp;
 
 	if (dlg.DoModal())
@@ -1116,13 +1123,13 @@ void Nalmak3D_ControlView::OnBnClickedButtonSave()
 		DWORD burstCount = (DWORD)particle->GetBurstList().size();
 		
 		WriteFile(handle, &burstCount, sizeof(DWORD), &byte, nullptr);
-		for (int i = 0; i < burstCount; ++i)
+		for (DWORD i = 0; i < burstCount; ++i)
 		{
 			WriteFile(handle, &particle->GetBurstList()[i], sizeof(ParticleRenderer::Burst), &byte, nullptr);
 		}
 
 		wstring mtrlName = particle->GetMaterial()->GetName();
-		DWORD materialNameLength = mtrlName.length();
+		DWORD materialNameLength = (DWORD)mtrlName.length();
 		WriteFile(handle, &materialNameLength, sizeof(DWORD), &byte,nullptr);
 		WriteFile(handle, mtrlName.c_str(), materialNameLength * sizeof(wchar_t), &byte, nullptr);
 
@@ -1150,20 +1157,12 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 	TCHAR fp[256] = L"";
 	GetCurrentDirectory(256, fp);
 	PathRemoveFileSpec(fp);
-	lstrcat(fp, L"\\Resource\Particle");
+	lstrcat(fp, L"\\Resource\\Particle");
 	dlg.m_ofn.lpstrInitialDir = fp;
 
 	if (dlg.DoModal())
 	{
-		HANDLE handle = CreateFile(dlg.GetPathName(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
-
-		if (INVALID_HANDLE_VALUE == handle)
-		{
-			afx_msg(L"Load File Failed");
-			return;
-		}
-
-		DWORD byte;
+		
 
 		wstring filePath = dlg.GetPathName();
 		wstring fileName = filePath.substr(filePath.find_last_of(L'\\') + 1);
@@ -1197,9 +1196,28 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 
 		OnLbnSelchangeObjectList();
 
-		CloseHandle(handle);
 
 		afx_msg(L"Load File Succeed");
 
 	}
+}
+
+
+void Nalmak3D_ControlView::OnEnChangeMinAngularVelocity()
+{
+	if (!m_currentSelectObject)
+		return;
+	CString value;
+	GetDlgItem(IDC_EDIT46)->GetWindowTextW(value);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.minAngularVelocity = Deg2Rad * (float)_tstof(value);
+}
+
+
+void Nalmak3D_ControlView::OnEnChangeMaxAngularVelocity()
+{
+	if (!m_currentSelectObject)
+		return;
+	CString value;
+	GetDlgItem(IDC_EDIT47)->GetWindowTextW(value);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.maxAngularVelocity = Deg2Rad *(float)_tstof(value);
 }

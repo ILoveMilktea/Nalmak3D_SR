@@ -18,7 +18,7 @@ public:
 	float startSpeed = 0.f;
 	float endSpeed = 0.f;
 	float angle = 0.f;
-	Vector3 angularVelocity = Vector3(0, 0, 0);
+	float angluarVelocity = 0.f;
 	float startScale = 1.f;
 	float endScale = 0.f;
 	Vector4 startColor = Vector4(1, 1, 1, 1);

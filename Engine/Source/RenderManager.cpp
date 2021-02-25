@@ -16,7 +16,7 @@
 #include "LightManager.h"
 #include "PointLight.h"
 #include "Transform.h"
-
+#include "DepthStencil.h"
 USING(Nalmak)
 IMPLEMENT_SINGLETON(RenderManager)
 RenderManager::RenderManager()
@@ -73,12 +73,11 @@ void RenderManager::Render()
 			Render(cam);
 		}
 	}
-
 	ThrowIfFailed(m_device->Present(nullptr, nullptr, 0, nullptr));
 
 
 	Reset();
-	
+
 
 }
 
@@ -124,21 +123,25 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Light");
 	ClearRenderTarget(L"GBuffer_Shade");
 	ClearRenderTarget(L"GBuffer_Debug");
+	ClearRenderTarget(L"GBuffer_Transparent");
+	ClearDepthStencil(L"Stencil_Transparent");
 
 	SkyboxPass(_cBuffer);
 
-	GBufferPass(_cam, _cBuffer); 
+	GBufferPass(_cam, _cBuffer);
 
-	LightPass(_cam,_cBuffer); 
+	TransparentPass(_cam, _cBuffer);
 
-	ShadePass(_cBuffer); 
+	LightPass(_cam,_cBuffer);
+
+	ShadePass(_cBuffer);
+
+
 
 	DebugPass(_cBuffer);
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
-
-	TransparentPass(_cam,_cBuffer); 
 
 	UIPass(_cam, _cBuffer);
 }
@@ -171,7 +174,7 @@ void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->SetValue("g_directionalLight", &DirectionalLightInfo(), sizeof(DirectionalLightInfo));
 	}
-	
+
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, viBuffer->GetVertexCount(), 0, viBuffer->GetFigureCount()));
 
@@ -184,11 +187,7 @@ void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 
 void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 {
-	ClearRenderTarget(L"GBuffer_Diffuse");
-	ClearRenderTarget(L"GBuffer_Normal");
-	ClearRenderTarget(L"GBuffer_Depth");
-	ClearRenderTarget(L"GBuffer_Light");
-	ClearRenderTarget(L"GBuffer_Shade");
+
 
 	SkyboxPass(_cBuffer);
 
@@ -207,7 +206,7 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 	RenderNoneAlpha(_cam, _cBuffer, RENDERING_MODE_CUTOUT);
 
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
+
 
 	EndRenderTarget();
 }
@@ -215,7 +214,7 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 void RenderManager::LightPass(Camera* _cam, ConstantBuffer& _cBuffer)
 {
 
-	DirectionalLightPass(_cBuffer);	
+	DirectionalLightPass(_cBuffer);
 
 	PointLightPass(_cam,_cBuffer);
 
@@ -259,7 +258,7 @@ void RenderManager::PointLightPass(Camera* _cam, ConstantBuffer & _cBuffer)
 
 		Matrix world;
 		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
-		float scale = pointLight->GetRadius();
+		float scale = pointLight->GetRadius() * 2;
 		pointLight->SetLightPosition(pos);
 
 		Matrix matTrs, matScale;
@@ -315,6 +314,8 @@ void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _ligh
 	m_device->SetRenderState(D3DRS_ZWRITEENABLE, true);
 	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
 	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_NOTEQUAL);
+	m_device->SetRenderState(D3DRS_STENCILREF, 0);
+
 	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, false);
 
 	m_currentShader->SetValue("g_pointLight", &_lightInfo, sizeof(PointLightInfo));
@@ -323,14 +324,26 @@ void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _ligh
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, _viBuffer->GetVertexCount(), 0, _viBuffer->GetFigureCount()));
 
-	
+
 	EndRenderTarget();
 }
 
 void RenderManager::ShadePass(ConstantBuffer & _cBuffer)
 {
+
+	//RecordDepthStencil(L"Stencil_Transparent");
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_EQUAL));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILREF, 0)); // 1과 같을때 통과
+
 	Material* material = m_resourceManager->GetResource<Material>(L"GBuffer_Shade");
 	RenderByMaterialToScreen(material, _cBuffer);
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS));
+
+	//EndDepthStencil(L"Stencil_Transparent");
 }
 
 void RenderManager::DebugPass(ConstantBuffer & _cBuffer)
@@ -356,10 +369,11 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
+	RecordRenderTarget(0, L"GBuffer_Transparent");
+
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
 
 	for (auto& MeshRendererList : m_renderLists[RENDERING_MODE_TRANSPARENT])
 	{
@@ -378,18 +392,22 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 			}
 		}
 	}
-	
+
 	if (m_currentShader)
 	{
 		m_currentShader->EndPass();
 	}
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW));
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+
+	EndRenderTarget(L"GBuffer_Transparent");
 }
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 {
-
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
@@ -409,12 +427,12 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 			}
 		}
 	}
-	RenderText();
 
 	if (m_currentShader)
 	{
 		m_currentShader->EndPass();
 	}
+	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 }
 
@@ -449,23 +467,6 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 	}
 }
 
-void RenderManager::RenderText()
-{
-	for (auto& text : m_textRenderList)
-	{
-		text->m_font->DrawTextW(
-			nullptr,
-			text->m_text.c_str(),
-			-1,
-			text->GetBoundary(),
-			text->m_option,
-			text->m_color
-		);
-	}
-	m_textRenderList.clear();
-	m_debugManager->EraseTheRecord();
-}
-
 void RenderManager::Reset()
 {
 	
@@ -498,7 +499,7 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
 
-	
+
 	m_currentShader->EndPass();
 	EndRenderTarget();
 }
@@ -716,6 +717,16 @@ void RenderManager::EndRenderTarget(const wstring & _name)
 	m_resourceManager->GetResource<RenderTarget>(_name)->EndRecord();
 }
 
+void RenderManager::RecordDepthStencil(const wstring & _name)
+{
+	m_resourceManager->GetResource<DepthStencil>(_name)->StartRecord();
+}
+
+void RenderManager::EndDepthStencil(const wstring & _name)
+{
+	m_resourceManager->GetResource<DepthStencil>(_name)->EndRecord();
+}
+
 void RenderManager::SetWindowSize(UINT _x, UINT _y)
 {
 	m_wincx = _x;
@@ -754,4 +765,9 @@ void RenderManager::DeleteCamera(Camera * _cam)
 void RenderManager::ClearRenderTarget(const wstring & _targetName)
 {
 	m_resourceManager->GetResource<RenderTarget>(_targetName)->Clear();
+}
+
+void RenderManager::ClearDepthStencil(const wstring & _targetName)
+{
+	m_resourceManager->GetResource<DepthStencil>(_targetName)->Clear();
 }
