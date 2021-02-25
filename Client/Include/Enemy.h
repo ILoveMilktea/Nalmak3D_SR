@@ -26,7 +26,9 @@ public:
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
-
+	virtual void OnTriggerEnter(Collisions& _collision)override;
+	virtual void OnTriggerStay(Collisions& _collision)override;
+	virtual void OnTriggerExit(Collisions& _collision)override;
 
 public:
 	void Target_Setting(bool _onoff);
@@ -70,7 +72,6 @@ public: /* Move */
 	void Accelerate();
 
 public: /* pattern*/
-	void Kiting();
 	void Chase();
 	void Drop();
 	void Hold();
@@ -79,9 +80,11 @@ private:
 	GameObject* m_pTarget = nullptr;
 	bool bTarget = false;
 
+	ENEMY_STATUS m_tStatus;
+
 	int	m_iAtt = 0;
 	int m_iFullHp = 0;
-	int m_iCurHp = 0;
+	int m_iCurHp = 1240;
 	
 	float m_fFpm = 0; //Fire per minute 연사력
 	float m_fFpmDelta = 0;

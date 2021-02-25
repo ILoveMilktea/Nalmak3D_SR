@@ -435,9 +435,7 @@
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
-    </ClCompile>
     <ClCompile Include="..\Source\ParticleInfo.cpp" />
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -695,8 +693,6 @@
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ScaleHandle_2D.h" />
-    </ClInclude>
     <ClInclude Include="..\Include\ParticleInfo.h" />
-    </ClInclude>
   </ItemGroup>
 </Project>

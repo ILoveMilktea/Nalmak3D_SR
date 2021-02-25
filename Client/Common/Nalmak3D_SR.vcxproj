@@ -205,6 +205,8 @@
     <ClInclude Include="..\Include\Enemy.h" />
     <ClInclude Include="..\Include\EnemyManager.h" />
     <ClInclude Include="..\Include\Enemy_Chase.h" />
+    <ClInclude Include="..\Include\Enemy_Drop.h" />
+    <ClInclude Include="..\Include\Enemy_Death.h" />
     <ClInclude Include="..\Include\Enemy_Hold.h" />
     <ClInclude Include="..\Include\Enemy_Idle.h" />
     <ClInclude Include="..\Include\Enum.h" />
@@ -260,6 +262,8 @@
     <ClCompile Include="..\Source\Enemy.cpp" />
     <ClCompile Include="..\Source\EnemyManager.cpp" />
     <ClCompile Include="..\Source\Enemy_Chase.cpp" />
+    <ClCompile Include="..\Source\Enemy_Drop.cpp" />
+    <ClCompile Include="..\Source\Enemy_Death.cpp" />
     <ClCompile Include="..\Source\Enemy_Hold.cpp" />
     <ClCompile Include="..\Source\Enemy_Idle.cpp" />
     <ClCompile Include="..\Source\EvasionState.cpp" />

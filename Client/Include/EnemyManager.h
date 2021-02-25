@@ -26,17 +26,18 @@ public:
 	virtual void Update() override;
 
 public: /* Gettttt */
-	//const int& Get_EnemyCount() const;
+	const int& Get_EnemyCount() const;
 
 public: /* Settttt */
 
 
 public: /* Funcs */
-	void Enemy_Spawn(Vector3 _pos);
-	void Spawn_Rush();
-	void Spawn_Chase();
+	void Enemy_Spawn(Vector3 _pos = Vector3(0.f,0.f,0.f), 
+		ENEMY_STATE _initState =ENEMY_STATE::IDLE);
+	//void Spawn_Rush();
+	//void Spawn_Chase();
 
 private:
-
+	StateControl* m_pStateControl;
 
 };

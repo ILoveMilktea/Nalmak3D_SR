@@ -118,8 +118,8 @@ void CollisionManager::SphereToSphere(Collider * _colA, Collider * _colB)
 	{
 		Vector3 hitPoint;
 
-		colA->GetGameObject()->CollisionNotify(Collision(colA->m_gameObject, hitPoint));
-		colB->GetGameObject()->CollisionNotify(Collision(colB->m_gameObject, hitPoint));
+		colA->GetGameObject()->CollisionNotify(Collision(colB->m_gameObject, hitPoint));
+		colB->GetGameObject()->CollisionNotify(Collision(colA->m_gameObject, hitPoint));
 	}
 	
 }
