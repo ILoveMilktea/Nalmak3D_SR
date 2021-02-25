@@ -409,7 +409,6 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 			}
 		}
 	}
-	RenderText();
 
 	if (m_currentShader)
 	{

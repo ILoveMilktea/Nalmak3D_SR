@@ -1096,7 +1096,7 @@ void Nalmak3D_ControlView::OnBnClickedButtonSave()
 	TCHAR fp[256] = L"";
 	GetCurrentDirectory(256, fp);
 	PathRemoveFileSpec(fp);
-	lstrcat(fp, L"\\Data\Particle");
+	lstrcat(fp, L"\\Data\\Particle");
 	dlg.m_ofn.lpstrInitialDir = fp;
 
 	if (dlg.DoModal())
@@ -1150,7 +1150,7 @@ void Nalmak3D_ControlView::OnBnClickedButtonLoad()
 	TCHAR fp[256] = L"";
 	GetCurrentDirectory(256, fp);
 	PathRemoveFileSpec(fp);
-	lstrcat(fp, L"\\Resource\Particle");
+	lstrcat(fp, L"\\Resource\\Particle");
 	dlg.m_ofn.lpstrInitialDir = fp;
 
 	if (dlg.DoModal())
