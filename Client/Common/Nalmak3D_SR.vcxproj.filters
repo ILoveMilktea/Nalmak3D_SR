@@ -118,7 +118,6 @@
     <ClInclude Include="..\Include\EditController.h" />
     <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
-    <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\DogFightState.h">
@@ -140,7 +139,7 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PauseState.h" />
-
+    </ClInclude>
     <ClInclude Include="..\Include\Define.h">
       <Filter>98.PreCompile\00.Define</Filter>
     </ClInclude>
@@ -149,17 +148,13 @@
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_Death.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
-</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Include\PlayerKitSelector.h">
       <Filter>02.Component\00.Manager</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="..\Include\UseItem.h">
       <Filter>02.Component\00.Manager\Player</Filter>
-
     </ClInclude>
->>>>>>> e07fa3b72c198cc6e5e53c6f2c90bb532f0b6491
     <ClInclude Include="..\Include\Struct.h">
       <Filter>98.PreCompile\03.Struct</Filter>
     </ClInclude>
@@ -296,13 +291,13 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PauseState.cpp" />
-
+    </ClCompile>
     <ClCompile Include="..\Source\Enemy_Drop.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\att_Drop</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Death.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
-</ClCompile>
+   </ClCompile>
     <ClCompile Include="..\Source\PlayerKitSelector.cpp">
       <Filter>02.Component\00.Manager</Filter>
     </ClCompile>
@@ -310,12 +305,7 @@
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\UseItem.cpp">
-<<<<<<< HEAD
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
-=======
-      <Filter>02.Component\00.Manager\Player</Filter>
-
->>>>>>> e07fa3b72c198cc6e5e53c6f2c90bb532f0b6491
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
