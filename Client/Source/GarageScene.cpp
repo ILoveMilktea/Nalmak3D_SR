@@ -51,8 +51,8 @@ void GarageScene::Initialize()
 	
 		auto mainEquipWepon = UIFactory::CreateButton(
 			EventHandler([]() {
-			ItemDesc * Desc = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
-			PlayerInfoManager::GetInstance()->EquipWepon(Desc);
+			ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
+			PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
 
 		}));
 

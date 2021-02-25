@@ -38,7 +38,7 @@ void RevolvesToTarget::Update()
 
 	//rotate set
 	Quaternion rotY;
-	rotY = m_target->GetTransform()->RotateAxis(offSetY, m_roationSpeed * dTime);
+	rotY = m_target->GetTransform()->RotateAxis({0,1,0}, m_roationSpeed * dTime);
 	m_lookDir = m_target->GetTransform()->rotation *= rotY;
 
 	m_transform->position = m_targetPos;

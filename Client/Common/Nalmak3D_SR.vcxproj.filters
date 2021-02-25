@@ -146,11 +146,14 @@
     <ClInclude Include="..\Include\PlayerKitSelector.h">
       <Filter>02.Component\00.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UseItem.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Struct.h">
       <Filter>98.PreCompile\03.Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AimMissile.h">
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UseItem.h">
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -282,8 +285,11 @@
     <ClCompile Include="..\Source\PlayerKitSelector.cpp">
       <Filter>02.Component\00.Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\AimMissile.cpp">
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\UseItem.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -432,6 +438,9 @@
     </Filter>
     <Filter Include="98.PreCompile\03.Struct">
       <UniqueIdentifier>{40096f35-81ec-4923-bda7-8bb44ae8d51d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\PlayerKit">
+      <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

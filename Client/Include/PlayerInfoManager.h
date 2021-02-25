@@ -50,9 +50,9 @@ public:
 	const float& GetRollAngle() {return m_rollAngle;}
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
-
+	//const ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
 public:
-	void EquipWepon(ItemDesc* _desc);
+	void EquipWepon(PARTS_NUM _enumID ,ItemDesc* _desc);
 
 private:
 	static PlayerInfoManager* m_instance;
@@ -69,7 +69,7 @@ private:
 	Vector3 m_addedRot = {};
 
 private:
-	ItemDesc* m_playerItem[2];
+	ItemDesc* m_playerItem[PARTS_NUM::PARTS_MAX];
 
 };
 

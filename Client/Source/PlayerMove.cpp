@@ -5,6 +5,7 @@
 
 #include "Bullet_Manager.h"
 
+#include "AimMissile.h"
 PlayerMove::PlayerMove()
 {
 }
@@ -33,6 +34,25 @@ void PlayerMove::Initialize()
 	m_playerInfo->GetAddRot().y = Deg2Rad * eulerRot.y;
 	m_playerInfo->GetAddRot().z = Deg2Rad * eulerRot.z;
 	m_mouse = GetComponent<MouseOption>();
+
+
+	// player slot check
+	
+	/*for (int i = 0; i < ITEMTYPE_MAX; ++i)
+	{
+		if (nullptr == m_playerInfo->GetItemDescInfoArray()[i])
+		{
+
+		}
+	}*/
+	/*m_gameObject->AddComponent<AimMissile>();
+	
+	
+	
+	
+	m_useItem = GetComponent<AimMissile>();*/
+
+
 }
 
 void PlayerMove::EnterState()
@@ -85,15 +105,7 @@ void PlayerMove::UpdateState()
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
-	{
-		Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
-	}
-
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
-	{
-		Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_transform->rotation);
-	}
+	TemproryAttackFunc();
 	DEBUG_LOG(L"POS" , m_transform);
 	DEBUG_LOG(L"SPEED" , m_playerInfo->GetSpeed());
 
@@ -102,6 +114,18 @@ void PlayerMove::UpdateState()
 
 void PlayerMove::ExitState()
 {
+}
+
+void PlayerMove::TemproryAttackFunc()
+{
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	{
+		//m_useItem = 
+	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
+	{
+	}
 }
 
 Quaternion* PlayerMove::Rotation(const Vector3 & _dir)

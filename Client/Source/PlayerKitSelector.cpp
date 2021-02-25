@@ -53,6 +53,7 @@ ItemDesc * PlayerKitSelector::FindSlotItme(const wstring & _name, ITEMTYPE _enum
 			}
 		}
 	}
+	
 	//assert("Nullptr, Can't Item Info Seraching..." && itemInfo);
 	return itemInfo;
 }
@@ -100,7 +101,8 @@ void PlayerKitSelector::Initialize()
 
 void PlayerKitSelector::Update()
 {
-
+	//DEBUG_LOG(L"POINTER", this);
+	DEBUG_LOG(L"Size", m_garageSlot[L"Weapon"].size());
 
 }
 

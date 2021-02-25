@@ -49,7 +49,7 @@ void SmoothFollow::LateUpdate()
 
 
 	m_followDirection = Nalmak_Math::Lerp(m_followDirection, -m_toTarget->GetTransform()->GetForward() , dTime * 1.5f);
-	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_toTarget->GetTransform()->rotation, dTime * 4.f);
+	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_toTarget->GetTransform()->rotation, dTime * 6.f);
 
 
 	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());
