@@ -5,7 +5,7 @@
 #include "Component.h"
 
 class Transform;
-class Slider :
+class NALMAK_DLL Slider :
 	public Component
 {
 public:

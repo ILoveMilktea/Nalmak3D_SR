@@ -11,12 +11,8 @@
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
-<<<<<<< HEAD
 #include "PlayerKitSelector.h"
-=======
-
 #include "Bullet_Manager.h"
->>>>>>> e07fa3b72c198cc6e5e53c6f2c90bb532f0b6491
 
 #include "StageManager.h"
 

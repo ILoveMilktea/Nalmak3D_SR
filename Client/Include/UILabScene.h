@@ -102,9 +102,12 @@ public:
 					auto name = UIFactory::Prefab_ItemContents_Name(L"SPEED");
 					name->SetPosition(1555.f, 260.f);
 
-					wstring value = to_wstring(info->GetMaxSpeed());
-					auto bar = UIFactory::Prefab_ItemContents_Name(value);
-					bar->SetPosition(1740.f, 260.f);
+					const float* valueRef = &info->GetMaxSpeed();
+					//wstring value = to_wstring(info->GetMaxSpeed());
+
+					//auto bar = UIFactory::Prefab_ItemContents_Name(value);
+					//bar->SetPosition(1740.f, 260.f);
+					//auto bar = UIFactory::Prefab_ItemContents_Name(value);
 				}
 
 				//c3

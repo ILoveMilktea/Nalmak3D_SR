@@ -279,7 +279,12 @@ public:
 
 	static GameObject* Prefab_ItemContents_Bar(const float* _value, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
+		auto bar = INSTANTIATE();
 
+		auto background = CreateImage(_group);
+		auto fill = CreateImage(_group);
+
+		//Slider::
 	}
 public:
 	static GameObject* CreateEditController()
