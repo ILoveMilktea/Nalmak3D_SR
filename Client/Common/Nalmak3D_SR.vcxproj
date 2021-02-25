@@ -236,13 +236,13 @@
     <ClInclude Include="..\Include\StageManager.h" />
     <ClInclude Include="..\Include\StageScene.h" />
     <ClInclude Include="..\Include\StageSelectScene.h" />
+    <ClInclude Include="..\Include\Struct.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
     <ClInclude Include="..\Include\TopViewCamera.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
-    <ClInclude Include="..\Include\UseKit.h" />
+    <ClInclude Include="..\Include\UseItem.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
-    <ClInclude Include="PlayerKitSelector.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -291,7 +291,7 @@
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
-    <ClCompile Include="..\Source\UseKit.cpp" />
+    <ClCompile Include="..\Source\UseItem.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

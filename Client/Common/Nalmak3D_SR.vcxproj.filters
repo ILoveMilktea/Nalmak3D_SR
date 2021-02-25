@@ -139,15 +139,19 @@
     <ClInclude Include="..\Include\EvasionState.h">
       <Filter>04.State\01%29Evasion</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerKitSelector.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\PlayerKitSelector.h" />
-    <ClInclude Include="..\Include\UseKit.h" />
     <ClInclude Include="..\Include\PlayerIdle.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PauseState.h" />
+    <ClInclude Include="..\Include\PlayerKitSelector.h">
+      <Filter>02.Component\00.Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UseItem.h">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Struct.h">
+      <Filter>98.PreCompile\03.Struct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -265,18 +269,22 @@
     <ClCompile Include="..\Source\StageManager.cpp">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\UseKit.cpp" />
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\EvasionState.cpp">
       <Filter>04.State\01%29Evasion</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PlayerKitSelector.cpp" />
     <ClCompile Include="..\Source\PlayerIdle.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PauseState.cpp" />
+    <ClCompile Include="..\Source\PlayerKitSelector.cpp">
+      <Filter>02.Component\00.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\UseItem.cpp">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -421,6 +429,9 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\03.Struct">
+      <UniqueIdentifier>{40096f35-81ec-4923-bda7-8bb44ae8d51d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

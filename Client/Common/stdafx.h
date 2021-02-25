@@ -28,6 +28,7 @@ using namespace std;
 #include "Extern.h"
 #include "Define.h"
 #include "Enum.h"
+#include "Struct.h"
 
 #include "Core.h"
 #include "UIFactory.h"
