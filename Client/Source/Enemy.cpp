@@ -37,7 +37,7 @@ void Enemy::Update()
 
 	Target_Update();
 	// Kiting();
-	 Chase();
+	// Chase();
 	// Drop();
 	// Hold();
 
@@ -71,6 +71,19 @@ void Enemy::Update()
 
 
 #pragma endregion
+}
+
+void Enemy::OnTriggerEnter(Collisions & _collision)
+{
+	
+}
+
+void Enemy::OnTriggerStay(Collisions & _collision)
+{
+}
+
+void Enemy::OnTriggerExit(Collisions & _collision)
+{
 }
 
 
@@ -381,7 +394,7 @@ bool Enemy::Shoot()
 
 		if (m_fFpmDelta >= 60.f / m_fFpm && Fov_Check())
 		{
-			Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
+			Bullet_Manager::GetInstance()->Fire_Gun(m_transform->position, m_transform->rotation);
 
 			--m_iCurRound;
 
@@ -465,13 +478,7 @@ void Enemy::Accelerate()
 	}
 }
 
-void Enemy::Kiting()
-{
-	//쏘면서 다가오다가 확 꺽기
 
-
-
-}
 
 void Enemy::Chase()
 {

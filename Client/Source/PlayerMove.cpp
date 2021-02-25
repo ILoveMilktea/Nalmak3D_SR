@@ -85,15 +85,17 @@ void PlayerMove::UpdateState()
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
 
+	/* 근희 테스트용 */
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
-		Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
+		Bullet_Manager::GetInstance()->Fire_Gun(m_transform->position, m_transform->rotation);
 	}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
 	{
 		Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_transform->rotation);
 	}
+	/* ㅇㄻㅇㄹ */
 	DEBUG_LOG(L"POS" , m_transform);
 	DEBUG_LOG(L"SPEED" , m_playerInfo->GetSpeed());
 

@@ -29,15 +29,17 @@ void SphereCollider::Initialize()
 
 void SphereCollider::OnTriggerEnter(Collisions & _collision)
 {
+	//DEBUG_LOG(L"충돌 시작!", L"충돌 시작!");
 }
 
 void SphereCollider::OnTriggerStay(Collisions & _collision)
 {
-	DEBUG_LOG(L"충돌!", L"충돌");
+	//DEBUG_LOG(L"충돌 중!", L"충돌 중!");
 }
 
 void SphereCollider::OnTriggerExit(Collisions & _collision)
 {
+	//DEBUG_LOG(L"충돌 끝!", L"충돌 끝!");
 }
 
 

@@ -94,7 +94,7 @@ void PlayerTopViewMove::Shooting()
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
 		Vector2 vCurPos = { m_transform->position.x,m_transform->position.z };
-		Bullet_Manager::GetInstance()->Fire_Evasion(vCurPos);
+		Bullet_Manager::GetInstance()->Gun_Evasion(vCurPos);
 	}
 
 	if(InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))

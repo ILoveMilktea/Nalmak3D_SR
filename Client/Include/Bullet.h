@@ -3,6 +3,7 @@
 class Bullet :
 	public Component
 {
+	
 public:
 	struct Desc
 	{
@@ -18,6 +19,10 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 
+
+	virtual void OnTriggerEnter(Collisions& _collision)override;
+	virtual void OnTriggerStay(Collisions& _collision)override;
+	virtual void OnTriggerExit(Collisions& _collision)override;
 private:
 	
 	float m_fSpd = 0.f;

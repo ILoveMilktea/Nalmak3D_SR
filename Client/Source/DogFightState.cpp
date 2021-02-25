@@ -12,6 +12,7 @@
 
 #include "EnemyManager.h"
 
+#include "Bullet_Manager.h"
 
 #include "StageManager.h"
 
@@ -47,6 +48,10 @@ void DogFightState::Initialize()
 	m_Player->AddComponent<PlayerInfoManager>();
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
+	
+	SphereCollider::Desc player_col;
+	player_col.radius = 1.f;
+	m_Player->AddComponent<SphereCollider>();
 
 	//m_Player->AddComponent<PlayerToTopView>();
 
@@ -89,6 +94,11 @@ void DogFightState::UpdateState()
 			StageManager::GetInstance()->ToScene(L"Evasion");
 		}
 	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
+	{
+		Bullet_Manager::GetInstance()->Fire_Gun(Vector3(0, 0, 0), Quaternion(0, 0, 0, 0));
+	}
 }
 
 void DogFightState::ExitState()
@@ -123,6 +133,7 @@ void DogFightState::Player_Faraway()
 
 	m_Player->GetTransform()->position += forward * m_fSpd;
 }
+
 void DogFightState::Accelerate()
 {
 	m_fSpd = Nalmak_Math::Lerp(m_fSpd, 5.f, dTime);
