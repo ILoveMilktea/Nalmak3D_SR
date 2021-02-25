@@ -6,6 +6,7 @@
 #include "Animator.h"
 #include "SingleImage.h"
 #include "Texture.h"
+#include "Text.h"
 CanvasRenderer::CanvasRenderer()
 	:ICanvasGroup()
 {
@@ -14,7 +15,7 @@ CanvasRenderer::CanvasRenderer(Desc * _desc)
 	:ICanvasGroup()
 {
 	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
-	m_material = ResourceManager::GetInstance()->GetResource<Material>(L"defaultUI");
+	m_material = ResourceManager::GetInstance()->GetResource<Material>(_desc->mtrlName);
 
 	m_type = RENDERER_TYPE_CANVAS;
 	m_color = { 1.f,1.f,1.f,1.f };
@@ -64,7 +65,19 @@ void CanvasRenderer::Release()
 
 void CanvasRenderer::Render()
 {
+	Render_Image();
+	Render_Text();
+}
 
+void CanvasRenderer::BindingStreamSource()
+{
+	ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_material->GetShader()->GetInputLayoutSize()));
+	ThrowIfFailed(m_device->SetIndices(m_viBuffer->GetIndexBuffer()));
+
+}
+
+void CanvasRenderer::Render_Image()
+{
 	Shader*	currentShader = m_material->GetShader();
 
 	assert("Current Shader is nullptr! " && currentShader);
@@ -79,18 +92,21 @@ void CanvasRenderer::Render()
 	currentShader->SetVector("g_mainTexColor", m_color);
 
 	currentShader->SetMatrix("g_world", GetTransform()->GetUIWorldMatrix());
-	
+
 	currentShader->CommitChanges();
 
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(currentShader->GetPrimitiveType(), 0, 0, m_viBuffer->GetVertexCount(), 0, m_viBuffer->GetFigureCount()));
 
 }
 
-void CanvasRenderer::BindingStreamSource()
+void CanvasRenderer::Render_Text()
 {
-	ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_material->GetShader()->GetInputLayoutSize()));
-	ThrowIfFailed(m_device->SetIndices(m_viBuffer->GetIndexBuffer()));
+	Text* text = GetComponent<Text>();
 
+	if (text)
+	{
+		text->RenderText();
+	}
 }
 
 void CanvasRenderer::UpdateBoundary()

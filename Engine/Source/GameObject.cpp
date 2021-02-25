@@ -352,6 +352,13 @@ GameObject* GameObject::SetPosition(float _x, float _y, float _z)
 	return this;
 }
 
+GameObject * GameObject::SetPosition(float _x, float _y)
+{
+	m_transform->position = Vector3(_x, _y, m_transform->position.z);
+
+	return this;
+}
+
 GameObject* GameObject::SetScale(const Vector3 & _scale)
 {
 	m_transform->scale = _scale;
@@ -362,6 +369,13 @@ GameObject* GameObject::SetScale(const Vector3 & _scale)
 GameObject* GameObject::SetScale(float _x, float _y, float _z)
 {
 	m_transform->scale = Vector3(_x, _y, _z);
+
+	return this;
+}
+
+GameObject * GameObject::SetScale(float _x, float _y)
+{
+	m_transform->scale = Vector3(_x, _y, m_transform->scale.z);
 
 	return this;
 }

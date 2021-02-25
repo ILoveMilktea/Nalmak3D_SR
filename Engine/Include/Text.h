@@ -31,11 +31,14 @@ private:
 	virtual void PreRender() override;
 	virtual void Release() override;
 public:
+	void RenderText();
+
 	void SetText(wstring _text) { m_text = _text; }
 	void SetColor(const D3DXCOLOR& _color) { m_color = _color; }
 	void SetAlpha(float _alpha) { m_color.a = _alpha; }
 
 	RECT* GetBoundary();
+
 
 private:
 	LPD3DXFONT m_font = nullptr;

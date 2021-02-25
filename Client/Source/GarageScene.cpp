@@ -3,6 +3,7 @@
 #include "RevolvesToTarget.h"
 #include "core.h"
 #include "SceneChanger.h"
+#include "PlayerKitSelector.h"
 GarageScene::GarageScene()
 {
 }
@@ -44,7 +45,11 @@ void GarageScene::Initialize()
 		SceneChangerDescInfo.sceneName = L"phantom";
 		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
+	{
+		auto kitmanager = INSTANTIATE()->AddComponent<PlayerKitSelector>();
+		//PlayerKitSelector::GetInstance()
 
+	}
 
 	{
 		auto offTheFieldButton = UIFactory::CreateButton(
