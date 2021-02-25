@@ -162,38 +162,23 @@ public:
 	*/
 	public:
 
-	static GameObject* Prefab_Title(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	static GameObject* Prefab_MenuTitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text
 		Text::Desc desc;
-		desc.width = 18;
-		desc.height = 40;
+		desc.width = 12;
+		desc.height = 30;
 		desc.text = _text;
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 		
-		auto text = INSTANTIATE(OBJECT_TAG_UI, L"Title");
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuTitle");
 		text->AddComponent<CanvasRenderer>();
 		text->AddComponent<Text>(&desc);
 
 		text->SetScale(760.f, 40.f);
 		return text;
 	}
-	static GameObject* Prefab_SubTitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
-	{
-
-		// text
-		Text::Desc desc;
-		desc.width = 12;
-		desc.height = 24;
-		desc.text = _text;
-		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
-
-		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"Contents");
-		subtitle->AddComponent<Text>(&desc);
-		subtitle->SetScale(760.f, 25.f);
-		return subtitle;
-	}
-	static GameObject* Prefab_Menu(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	static GameObject* Prefab_MenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// button
 		CanvasRenderer::Desc desc_cr;
@@ -202,7 +187,7 @@ public:
 		Button::Desc desc_bt;
 		desc_bt.eventFunc = _eventFunc;
 
-		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"Menu");
+		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"MenuButton");
 		menu->AddComponent<CanvasRenderer>(&desc_cr);
 		menu->AddComponent<Button>(&desc_bt);
 
@@ -213,8 +198,8 @@ public:
 
 		// text
 		Text::Desc desc;
-		desc.width = 12;
-		desc.height = 24;
+		desc.width = 10;
+		desc.height = 25;
 		desc.text = _text;
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
@@ -223,22 +208,56 @@ public:
 		menu->SetScale(760.f, 30.f);
 		return menu;
 	}
-	static GameObject* Prefab_Contents(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	
+	static GameObject* Prefab_ItemTitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text
 		Text::Desc desc;
-		desc.width = 12;
-		desc.height = 24;
+		desc.width = 10;
+		desc.height = 25;
 		desc.text = _text;
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
-		auto contents = INSTANTIATE(OBJECT_TAG_UI, L"Contents");
+		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"ItemTitle");
+		subtitle->AddComponent<CanvasRenderer>();
+		subtitle->AddComponent<Text>(&desc);
+		subtitle->SetScale(380.f, 30.f);
+		return subtitle;
+	}
+	static GameObject* Prefab_ItemSubtitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 8;
+		desc.height = 20;
+		desc.text = _text;
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"ItemSubtitle");
+		subtitle->AddComponent<CanvasRenderer>();
+		subtitle->AddComponent<Text>(&desc);
+		subtitle->SetScale(380.f, 25.f);
+		return subtitle;
+	}
+	static GameObject* Prefab_ItemContents_Name(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 10;
+		desc.height = 25;
+		desc.text = _text;
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto contents = INSTANTIATE(OBJECT_TAG_UI, L"ItemContents_Name");
+		contents->AddComponent<CanvasRenderer>();
 		contents->AddComponent<Text>(&desc);
 		contents->SetScale(200.f, 25.f);
 		return contents;
 	}
 
-	static GameObject* Prefab_Script(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	// bar
+
+	static GameObject* Prefab_ItemExplane(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		Text::Desc desc;
 		desc.width = 12;
@@ -258,7 +277,10 @@ public:
 		
 	}
 
+	static GameObject* Prefab_ItemContents_Bar(const float* _value, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
 
+	}
 public:
 	static GameObject* CreateEditController()
 	{

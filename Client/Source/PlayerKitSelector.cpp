@@ -60,8 +60,7 @@ void PlayerKitSelector::DeleteInstance()
 
 void PlayerKitSelector::Initialize()
 {
-	vector<ItemDesc*> vecitemInfo;
-	vecitemInfo.reserve(2);
+	m_garageSlot[L"Wepon"].reserve(2);
 
 
 	{
@@ -73,7 +72,7 @@ void PlayerKitSelector::Initialize()
 
 
 		ItemDesc* ItemWepon = new ItemDesc(itemInfo);
-		vecitemInfo.emplace_back(ItemWepon);
+		m_garageSlot[L"Wepon"].emplace_back(ItemWepon);
 	}
 	{
 
@@ -84,11 +83,9 @@ void PlayerKitSelector::Initialize()
 		itemInfo.weaponSpeed = 5.f;
 
 		ItemDesc* ItemWepon = new ItemDesc(itemInfo);
-		vecitemInfo.emplace_back(ItemWepon);
+		m_garageSlot[L"Wepon"].emplace_back(ItemWepon);
 	}
 
-
-	m_garageSlot[L"Wepon"] = vecitemInfo;
 
 }
 

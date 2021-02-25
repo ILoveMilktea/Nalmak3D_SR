@@ -5,6 +5,8 @@
 #include "SceneChanger.h"
 #include "PlayerKitSelector.h"
 #include "PlayerInfoManager.h"
+
+#include "UILabScene.h"
 GarageScene::GarageScene()
 {
 }
@@ -73,4 +75,8 @@ void GarageScene::Initialize()
 
 		offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
 	}
+
+	UILabScene::GarageMainWindow();
 }
+
+
