@@ -42,13 +42,34 @@ public: /* Affect Status */
 	
 
 public: /* Get */
-	const int& Get_Damage();
-	const int& Get_FullHp();
-	const int& Get_CurHp();
+	const ENEMY_STATUS& Get_Status() const; 
+	const int&		Get_FullHp() const;
+	const int&		Get_CurHp() const;
+	
+	const int&		Get_GunDamage() const;
+	const int&		Get_MissileDamage() const;
+	const int&		Get_HomingDamage() const;
+
+	const int&		Get_GunCurRound() const;
+	const int&		Get_GunFullRound() const;
+
+	const int&		Get_MissileCurRound() const;
+	const int&		Get_MissileFullRound() const;
+
+	const int&		Get_HomingCurRound() const;
+	const int&		Get_HomingFullRound() const;
+
+	
+	
+	const float&	Get_Distance() const;
+	const float&	Get_Inner() const;
+	const Vector3&	Get_RandPos() const;
+
+
 
 public: /* Set */
 	void Set_Damage(const int& _dmg);
-
+	void Set_OriginForward(const Vector3& _forward);
 
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);
@@ -119,6 +140,7 @@ private:
 	bool	m_bFov = false;
 
 	float m_fInner = 0.f;//CurInner 
+	//Dot calc Enemy's forward and Distance that between Enemy and Player
 
 	float m_fUpInner = 0.f;
 	float m_fUpAngle = 0.f;
@@ -150,21 +172,5 @@ private:
 	const float m_fInner_Goal = 1.f;
 #pragma endregion
 
-#pragma region forTest
-	//float m_fRotX = 0.f;
-	//float m_fRotY = 0.f;
-	//float m_fRotZ = 0.f;
-	//
-	//float fRotZ = 0.f;
-
-	//float m_fForwardRot = 0.f;
-	//float m_fRightRot = 0.f;
-	//float m_fUpRot = 0.f;
-
-	//Quaternion qForwardRot = { 0,0,0,0 };
-	//Quaternion qUpRot = { 0,0,0,0 };
-	//Quaternion qRightRot = { 0,0,0,0 };
-	//Quaternion ResultQuater = { 0,0,0,0 };
-#pragma endregion
 };
 

@@ -430,7 +430,8 @@ void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 
 	/* 임의의 축으로 얼만큼 회전을 했을 때 나오는 쿼터니언을 받아와서 적용 시켜준다. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
-	*_qOut = QuartTemp;
+	if (_qOut != nullptr)
+	{	*_qOut = QuartTemp;	}
 
 
 	/* 테스트 */
@@ -451,8 +452,8 @@ void Transform::LookAt(Vector3 _pos, float _Spd, Quaternion * _qOut)
 
 	/* 임의의 축으로 얼만큼 회전을 했을 때 나오는 쿼터니언을 받아와서 적용 시켜준다. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
-	if (_qOut != nullptr)
-	{	*_qOut = QuartTemp;}
+
+	*_qOut = QuartTemp;	
 
 
 	/* 테스트 */
