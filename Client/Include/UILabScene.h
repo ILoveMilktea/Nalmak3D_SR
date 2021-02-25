@@ -107,7 +107,8 @@ public:
 
 					//auto bar = UIFactory::Prefab_ItemContents_Name(value);
 					//bar->SetPosition(1740.f, 260.f);
-					//auto bar = UIFactory::Prefab_ItemContents_Name(value);
+					auto bar = UIFactory::Prefab_ItemContents_Bar(valueRef, 50.f, CANVAS_GROUP_MAINWND);
+					bar->SetPosition(1740.f, 260.f);
 				}
 
 				//c3
