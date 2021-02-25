@@ -34,9 +34,6 @@
     <ClInclude Include="..\Include\PlayerInfoManager.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerIdle.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\PlayerMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
@@ -109,7 +106,6 @@
     <ClInclude Include="..\Include\Missile.h">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClInclude>
-    <ClInclude Include="PauseState.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\Homing.h">
       <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
@@ -121,7 +117,6 @@
       <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Ground.h" />
-
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\EditController.h" />
     <ClInclude Include="..\Include\CustomDebuger.h" />
@@ -129,10 +124,6 @@
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\ShootingState.h">
-      <Filter>04.State</Filter>
-    </ClInclude>
-
     <ClInclude Include="..\Include\DogFightState.h">
       <Filter>04.State\00%29DogFight</Filter>
     </ClInclude>
@@ -142,21 +133,21 @@
     <ClInclude Include="..\Include\StageManager.h">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClInclude>
-
-
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\EvasionState.h">
       <Filter>04.State\01%29Evasion</Filter>
-
-    <ClInclude Include="..\Include\UseKit.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayerKitSelector.h">
       <Filter>02.Component\00.Manager\Player</Filter>
-
     </ClInclude>
+    <ClInclude Include="..\Include\PlayerKitSelector.h" />
+    <ClInclude Include="..\Include\UseKit.h" />
+    <ClInclude Include="..\Include\PlayerIdle.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PauseState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -176,9 +167,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\PlayerInfoManager.cpp">
       <Filter>02.Component\00.Manager\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerIdle.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PlayerMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
@@ -252,7 +240,6 @@
     <ClCompile Include="..\Source\Missile.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClCompile>
-    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="..\Source\Homing.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
     </ClCompile>
@@ -278,7 +265,6 @@
     <ClCompile Include="..\Source\StageManager.cpp">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerKitSelector.cpp" />
     <ClCompile Include="..\Source\UseKit.cpp" />
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
@@ -286,6 +272,11 @@
     <ClCompile Include="..\Source\EvasionState.cpp">
       <Filter>04.State\01%29Evasion</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\PlayerKitSelector.cpp" />
+    <ClCompile Include="..\Source\PlayerIdle.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PauseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

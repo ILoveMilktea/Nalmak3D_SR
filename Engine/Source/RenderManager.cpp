@@ -78,7 +78,7 @@ void RenderManager::Render()
 
 	Reset();
 
-
+	m_debugManager->EraseTheRecord();
 }
 
 void RenderManager::Render(Camera * _cam)
@@ -409,7 +409,7 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 			}
 		}
 	}
-	RenderText();
+	//RenderText();
 
 	if (m_currentShader)
 	{
