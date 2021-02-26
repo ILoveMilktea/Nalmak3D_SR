@@ -7,6 +7,8 @@
 #include "PlayerInfoManager.h"
 
 #include "UILabScene.h"
+#include "StageManager.h"
+
 GarageScene::GarageScene()
 {
 }
@@ -18,12 +20,13 @@ GarageScene::~GarageScene()
 
 void GarageScene::Initialize()
 {
+	//StageManager::GetInstance();
 
 //	 grid setting
 	INSTANTIATE()->AddComponent<Grid>()->SetPosition(0,0,-5.f);
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
-	
+	auto kitmgr = PlayerKitSelector::GetInstance();
 	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->SetPosition(0, 0, -5);;
 
 	GameObject* player;
@@ -42,7 +45,6 @@ void GarageScene::Initialize()
 		revolvesDesc.roationSpeed = 1.f;
 		auto revolvesTarget = INSTANTIATE()->AddComponent<RevolvesToTarget>(&revolvesDesc);
 	}
-		auto kitmgr = PlayerKitSelector::GetInstance();
 	{
 		SceneChanger::Desc SceneChangerDescInfo;
 		SceneChangerDescInfo.keyState = KEY_STATE_ENTER;

@@ -231,6 +231,7 @@
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
+    <ClInclude Include="..\Include\Shooter.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
@@ -286,6 +287,7 @@
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
+    <ClCompile Include="..\Source\Shooter.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />

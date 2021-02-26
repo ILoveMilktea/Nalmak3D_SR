@@ -21,6 +21,8 @@ public:
 
 private:
 	GameObject * missile[SIDE_MAX];
+	Vector3 m_playerDir = {};
+	Quaternion m_playerRot = {};
 	bool ShotCheck = false;
 };
 

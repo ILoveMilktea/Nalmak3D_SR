@@ -15,6 +15,7 @@
 #include "Bullet_Manager.h"
 
 #include "StageManager.h"
+#include "SceneChanger.h"
 
 DogFightState::DogFightState()
 {
@@ -28,6 +29,11 @@ DogFightState::~DogFightState()
 
 void DogFightState::Initialize()
 {
+	
+}
+
+void DogFightState::EnterState()
+{
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
@@ -39,35 +45,39 @@ void DogFightState::Initialize()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
-	
+
 	MeshRenderer::Desc render;
 	render.mtrlName = L"default"; // 210223화 12:50 전근희 제대로 안나와서 설정 바꿨음
 	render.meshName = L"flight";
 	m_Player->AddComponent<MeshRenderer>(&render);
-	m_Player->AddComponent<PlayerKitSelector>();
+	//m_Player->AddComponent<PlayerKitSelector>();
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
-	
+
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();
 
 	//m_Player->AddComponent<PlayerToTopView>();
 
-	
+	/*SceneChanger::Desc SceneChangerDescInfo;
+	SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
+	SceneChangerDescInfo.sceneName = L"garage";
+	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
+	*/
+
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
 	smoothFollowDesc.toTarget = m_Player;
 	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
 
 	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
-
+	auto offTheFieldButton = UIFactory::CreateButton(
+		EventHandler([]() {
+		Core::GetInstance()->LoadScene(L"garage");
+	}));
+	offTheFieldButton->SetPosition(200.f, 800.f, 0.f);
 	EnemyManager::GetInstance();
-}
-
-void DogFightState::EnterState()
-{
-	
 }
 
 void DogFightState::UpdateState()

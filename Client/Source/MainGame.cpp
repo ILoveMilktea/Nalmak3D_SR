@@ -108,7 +108,7 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
 
-	m_engine->SetStartScene(L"UILab");
+	m_engine->SetStartScene(L"garage");
 
 }
 
