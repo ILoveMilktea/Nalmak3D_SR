@@ -146,9 +146,6 @@
     <ClInclude Include="..\Include\PlayerKitSelector.h">
       <Filter>02.Component\00.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UseItem.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Struct.h">
       <Filter>98.PreCompile\03.Struct</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UseItem.h">
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

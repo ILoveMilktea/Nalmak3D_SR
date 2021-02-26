@@ -34,7 +34,7 @@ void GarageScene::Initialize()
 		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<PlayerInfoManager>();
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
-	
+	 
 	// 플레이어 주위를 뱅뱅도는
 	{
 		RevolvesToTarget::Desc revolvesDesc;
@@ -50,12 +50,10 @@ void GarageScene::Initialize()
 		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
 	
-	
+	 // 주무장
 		auto mainEquipWepon = UIFactory::CreateButton(
 			EventHandler([]() {
-			ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
-			PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
-
+			PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_MISSILE));
 		}));
 
 		mainEquipWepon->SetPosition(1600.f, 500.f, 0.f);

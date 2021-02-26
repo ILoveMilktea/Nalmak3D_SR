@@ -3,9 +3,14 @@
 class UseItem :
 	public Component
 {
+public:
+	struct Desc
+	{
+		ItemDesc useItemInfo;
+	};
 
 public:
-	UseItem(ItemDesc* _desc);
+	UseItem(Desc* _desc);
 	virtual ~UseItem();
 
 

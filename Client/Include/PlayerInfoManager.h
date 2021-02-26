@@ -50,7 +50,7 @@ public:
 	const float& GetRollAngle() {return m_rollAngle;}
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
-	//const ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
+	ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
 public:
 	void EquipWepon(PARTS_NUM _enumID ,ItemDesc* _desc);
 
