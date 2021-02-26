@@ -64,27 +64,19 @@ void PlayerTopViewMove::TopViewMoving()
 			Lean(LEFT);
 		}
 	}
+	
 
-	//if (InputManager::GetInstance()->GetKeyUp(KEY_STATE_D))
+
+	//if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_ARROW))
 	//{
-	//	m_transform->rotation.z = 0.f;
+	//	Lean(LEFT);
 	//}
-	
-
-	
-
-
-	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_ARROW))
-	{
-		Lean(LEFT);
-	}
-	else if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_RIGHT_ARROW))
-	{
-		Lean(RIGHT);
-	}
+	//else if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_RIGHT_ARROW))
+	//{
+	//	Lean(RIGHT);
+	//}
 
 
-	//횡 이동 할 때 z축 기울기 추가해주기
 
 	
 }

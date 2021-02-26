@@ -127,9 +127,6 @@
     <ClInclude Include="..\Include\StageManager.h">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerTopViewMove.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\EvasionState.h">
       <Filter>04.Combat State\01%29Evasion</Filter>
     </ClInclude>
@@ -160,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\UseItem.h">
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerTopViewMove.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -275,9 +275,6 @@
     <ClCompile Include="..\Source\StageManager.cpp">
       <Filter>02.Component\00.Manager\StageStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\EvasionState.cpp">
       <Filter>04.Combat State\01%29Evasion</Filter>
     </ClCompile>
@@ -290,7 +287,7 @@
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Death.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
-   </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Source\PlayerKitSelector.cpp">
       <Filter>02.Component\00.Manager</Filter>
     </ClCompile>
@@ -299,6 +296,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\UseItem.cpp">
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

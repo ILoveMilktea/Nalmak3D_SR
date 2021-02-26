@@ -58,7 +58,7 @@ void EnemyManager::Update()
 		//y = rand() % 300 - 150;
 		//z = rand() % 300 - 150;
 		//Enemy_Spawn(Vector3((float)x, (float)y, (float)z));
-		Enemy_Spawn(Vector3(0.f, 0.f, 50.f), ENEMY_STATE::CHASE);
+		Enemy_Spawn(Vector3(0.f, 20.f, 150.f), ENEMY_STATE::CHASE);
 	}
 }
 
@@ -130,54 +130,3 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, ENEMY_STATE _initState)
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
 }
 
-#pragma region nonono
-//
-//void EnemyManager::Spawn_Rush()
-//{
-//	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
-//	//Enemy_obj->SetPosition(_pos);
-//	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
-//
-//	Enemy_obj->AddComponent<StateControl>();
-//
-//
-//	Enemy::Desc Enemy_desc;
-//	/*desc 세팅*/
-//	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
-//
-//
-//	MeshRenderer::Desc Enemy_Mesh;
-//	Enemy_Mesh.mtrlName = L"default";
-//	Enemy_Mesh.meshName = L"flight";
-//	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
-//
-//	SphereCollider::Desc Enemy_col;
-//	Enemy_col.radius = 1.f;
-//	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
-//}
-//
-//void EnemyManager::Spawn_Chase()
-//{
-//	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
-//	Enemy_obj->SetPosition(0,0,0);
-//	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
-//
-//	Enemy_obj->AddComponent<StateControl>();
-//
-//
-//	Enemy::Desc Enemy_desc;
-//	/*desc 세팅*/
-//	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
-//
-//
-//	MeshRenderer::Desc Enemy_Mesh;
-//	Enemy_Mesh.mtrlName = L"default";
-//	Enemy_Mesh.meshName = L"flight";
-//	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
-//
-//	SphereCollider::Desc Enemy_col;
-//	Enemy_col.radius = 1.f;
-//	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
-//}
-//
-#pragma endregion

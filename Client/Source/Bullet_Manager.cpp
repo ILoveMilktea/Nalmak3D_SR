@@ -50,6 +50,7 @@ void Bullet_Manager::Fire_Gun(Vector3 _start, Quaternion _rot, float _fpm, float
 	//m_FireDelta += dTime;
 
 	//if (m_FireDelta >= 60.f / _fpm)
+	//
 	//{
 		GameObject* Bullet_obj = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"Bullet_Enemy");
 		Bullet_obj->SetPosition(_start);

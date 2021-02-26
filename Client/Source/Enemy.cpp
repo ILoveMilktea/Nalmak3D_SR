@@ -28,6 +28,7 @@ void Enemy::Initialize()
 {
 	Target_Setting(true);
 	Target_Update();
+	Look_Target();
 
 	m_vOriginForward = m_transform->GetForward();
 }
@@ -35,30 +36,18 @@ void Enemy::Initialize()
 void Enemy::Update()
 {	
 
-	Target_Update();
-	// Kiting();
-	// Chase();
-	// Drop();
-	// Hold();
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
+	{
 
-	//Dive();
+	}
+	
 
 	Reloading();
 
 	//Decelerate();
 	//Accelerate();
 
-	
-	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_ARROW))
-	//{
-	//	Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), -dTime*10.f);
-	//	m_transform->rotation *= qTemp;
-	//}
-	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_ARROW))
-	//{
-	//	Quaternion qTemp = m_transform->RotateAxis(m_transform->GetUp(), dTime*10.f);
-	//	m_transform->rotation *= qTemp;
-	//}
+
 #pragma region DebugLog
 	//DEBUG_LOG(L"Target On?", bTarget);
 	DEBUG_LOG(L"타겟 까지의 거리", m_fDist_Target);
@@ -68,14 +57,18 @@ void Enemy::Update()
 	DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
 	DEBUG_LOG(L"Enemy Current Speed", m_fSpd);
 	DEBUG_LOG(L"Remain Round", m_iCurRound);
-
-
 #pragma endregion
 }
 
 void Enemy::OnTriggerEnter(Collisions & _collision)
 {
-	
+	for (auto& obj : _collision)
+	{
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
+		{
+			obj.GetGameObject()->GetComponent<StateControl>()->SetState(L"Death");
+		}
+	}
 }
 
 void Enemy::OnTriggerStay(Collisions & _collision)
@@ -104,8 +97,6 @@ void Enemy::Target_Setting(bool _onoff)
 			bTarget = true;
 			return;
 		}
-
-		
 	}
 	else 
 	{
@@ -177,26 +168,91 @@ void Enemy::Damaged(const int & _playerDmg)
 {
 }
 
-const int & Enemy::Get_Damage()
+const ENEMY_STATUS & Enemy::Get_Status() const
 {
-	// TODO: 여기에 반환 구문을 삽입합니다.
-	return m_iAtt;
+	return m_tStatus;
 }
 
-const int & Enemy::Get_FullHp()
+const int & Enemy::Get_FullHp() const
 {
-	// TODO: 여기에 반환 구문을 삽입합니다.
-	return m_iFullHp;
+	return m_tStatus.m_iFullHp;
 }
 
-const int & Enemy::Get_CurHp()
+const int & Enemy::Get_CurHp() const
 {
-	// TODO: 여기에 반환 구문을 삽입합니다.
-	return m_iCurHp;
+	return m_tStatus.m_iCurHp;
 }
+
+const int & Enemy::Get_GunDamage() const
+{
+	return m_tStatus.m_iDmg_Gun;
+}
+
+const int & Enemy::Get_MissileDamage() const
+{
+	//Select Randomly Among min and max Dmg
+	return int(0);
+}
+
+const int & Enemy::Get_HomingDamage() const
+{
+	return  int(0);
+}
+
+const int & Enemy::Get_GunCurRound() const
+{
+	return m_iCurRound_Missile;
+}
+
+const int & Enemy::Get_GunFullRound() const
+{
+	return int(0);
+}
+
+const int & Enemy::Get_MissileCurRound() const
+{
+	return int(0);
+}
+
+const int & Enemy::Get_MissileFullRound() const
+{
+	return int(0);
+}
+
+
+const int & Enemy::Get_HomingCurRound() const
+{
+	return int(0);
+}
+
+const int & Enemy::Get_HomingFullRound() const
+{
+	return int(0);
+}
+
+const float & Enemy::Get_Distance() const
+{
+	return m_fDist_Target;
+}
+
+const float & Enemy::Get_Inner() const
+{
+	return m_fInner;
+}
+
+const Vector3 & Enemy::Get_RandPos() const
+{
+	return m_vRandPos;
+}
+
 
 void Enemy::Set_Damage(const int & _dmg)
 {
+}
+
+void Enemy::Set_OriginForward(const Vector3 & _forward)
+{
+	m_vOriginForward = _forward;
 }
 
 //린 쓰지말고 걍 내적 0이면 수평 맞추는 것만 해보자.
@@ -482,7 +538,7 @@ void Enemy::Accelerate()
 
 void Enemy::Chase()
 {
-	//존나 달려와서 존나 쏴 그냥
+
 	//Target_Setting(true);
 	//Target_Update();
 
@@ -496,7 +552,6 @@ void Enemy::Chase()
 			Shoot();
 		}
 
-		//가까워지면 거리 좀 벌릴때 까지 이동.
 		if (m_fDist_Target <= 20.f)
 		{
 			m_bChaseMove = true;
@@ -602,38 +657,8 @@ void Enemy::Drop()
 			m_bDropMove = false;
 		
 			Target_Setting(true);
-		
 		}
-	
-
 	}
-
-
-
-#pragma region Failed
-	//if (Missile_Reloading())
-	//{
-	//	Go_ToPos(m_vRandPos);
-	//}
-	//else 
-	//{
-	//	Target_Setting(true);
-	//	Target_Update();
-	//	Look_Target();
-
-	//	Go_Straight();
-
-	//	if (m_fDist_Target <= 100.f)
-	//	{
-	//		if (Missile())
-	//		{
-	//			m_vRandPos.y = m_transform->position.y + rand() % 501 - 250;
-	//			m_vRandPos.x = m_transform->position.x + rand() % 501 - 250;
-	//			m_vRandPos.z = m_transform->position.z + rand() % 501 - 250;
-	//		}
-	//	}
-	//}
-#pragma endregion
 
 }
 
