@@ -153,6 +153,11 @@ public:
 			}
 		}
 	}
+
+	static void DogfightStage()
+	{
+
+	}
 };
 
 
