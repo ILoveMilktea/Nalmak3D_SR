@@ -19,8 +19,10 @@ protected:
 	virtual void Update() override;
 
 public:
-	virtual void Shooting() = 0;
+	virtual void Shooting(bool _check) = 0;
 
+public:
+	const float& GetDelayTime() { return m_useDelay; }
 protected:
 	ITEMTYPE m_itemtype = {};
 	float	m_useDelay = 0.f;
@@ -28,6 +30,8 @@ protected:
 	int		 m_weaponAttak = 0;
 	int		 m_weaponAmmo = 0;
 
+protected:
+	float MaxTime = 0;
 
 };
 

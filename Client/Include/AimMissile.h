@@ -15,7 +15,7 @@ public:
 
 	virtual void Initialize() override;
 	virtual void Update() override;
-	virtual void Shooting() override;
+	virtual void Shooting(bool _check) override;
 
 	void SetWeapon();
 
@@ -24,5 +24,9 @@ private:
 	Vector3 m_playerDir = {};
 	Quaternion m_playerRot = {};
 	bool ShotCheck = false;
+	
+
+private:
+	Core* m_core;
 };
 

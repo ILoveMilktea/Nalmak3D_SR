@@ -161,7 +161,12 @@
     <ClInclude Include="..\Include\UseItem.h">
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Shooter.h" />
+    <ClInclude Include="..\Include\Shooter.h">
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadTimer.h">
+      <Filter>02.Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -301,7 +306,12 @@
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Shooter.cpp" />
+    <ClCompile Include="..\Source\Shooter.cpp">
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadTimer.cpp">
+      <Filter>02.Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
