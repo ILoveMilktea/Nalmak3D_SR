@@ -32,6 +32,8 @@ void PositionHandle::Initialize()
 	default:
 		break;
 	}
+
+	m_gameObject->SetActive(false);
 }
 
 void PositionHandle::Update()
@@ -85,6 +87,6 @@ void PositionHandle::MoveTarget()
 		axis *= dir.y;
 	}
 	Vector3 look = m_target->position - m_camera->GetTransform()->position;
-	float len = D3DXVec3Length(&look) * 0.5f;
+	float len = D3DXVec3Length(&look) * 2.f;
 	m_target->position += axis * len * dTime;
 }

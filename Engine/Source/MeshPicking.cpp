@@ -13,38 +13,34 @@ MeshPicking::MeshPicking(Desc* _desc)
 
 void MeshPicking::Initialize()
 {
+	m_mainCam = RenderManager::GetInstance()->GetMainCamera();
+
 	m_renderer = GetComponent<MeshRenderer>();
 	m_gizmo = GetComponent<DrawGizmo>();
-	m_mainCam = RenderManager::GetInstance()->GetMainCamera();
+	m_handle = GetComponent<PositionHandle>();
 }
 
 void MeshPicking::Update()
 {
-	DEBUG_LOG(L"test", L"test");
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
-		if (IsMousePicking())
+		if (m_handle)
 		{
-			if (m_gizmo)
+			if (IsMousePicking())
 			{
-				m_gizmo->SetActiveHandles(true);
-			}
-
-			auto handle = GetComponent<PositionHandle>();
-			if (handle)
-			{
-				handle->PickHandle(true);
+				m_handle->PickHandle(true);
 			}
 		}
-		else
+		else if (m_gizmo)
 		{
-			auto handle = GetComponent<PositionHandle>();
-			if (handle)
+			if (!m_gizmo->CheckHandlePicked())
 			{
-				handle->PickHandle(true);
+				if (IsMousePicking())
+				{
+					m_gizmo->SetActiveHandles(true);
+				}
 			}
-
-			if (m_gizmo && !m_gizmo->CheckHandlePicked())
+			else
 			{
 				m_gizmo->SetActiveHandles(false);
 			}
@@ -53,27 +49,23 @@ void MeshPicking::Update()
 
 	if (InputManager::GetInstance()->GetKeyUp(KEY_STATE_LEFT_MOUSE))
 	{
-		auto handle = GetComponent<PositionHandle>();
-		if (handle)
+		if (m_handle)
 		{
-			handle->PickHandle(false);
+			m_handle->PickHandle(false);
 		}
 	}
 }
 
 void MeshPicking::OnTriggerEnter(Collisions & _collision)
 {
-	DEBUG_LOG(L"enter", L"collision");
 }
 
 void MeshPicking::OnTriggerStay(Collisions & _collision)
 {
-	DEBUG_LOG(L"stay", L"collision");
 }
 
 void MeshPicking::OnTriggerExit(Collisions & _collision)
 {
-	DEBUG_LOG(L"enter", L"collision");
 }
 
 bool MeshPicking::IsMousePicking()

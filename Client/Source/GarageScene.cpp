@@ -61,12 +61,14 @@ void GarageScene::Initialize()
 
 
 	{
-		auto offTheFieldButton = UIFactory::CreateButton(
-			EventHandler([]() {
-			Core::GetInstance()->LoadScene(L"phantom");
-		}));
+		// ----> UILab으로 이동
 
-		offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
+		//auto offTheFieldButton = UIFactory::CreateButton(
+		//	EventHandler([]() {
+		//	Core::GetInstance()->LoadScene(L"phantom");
+		//}));
+
+		//offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
 	}
 
 	UILabScene::GarageMainWindow();

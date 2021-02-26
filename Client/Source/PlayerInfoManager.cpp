@@ -12,6 +12,7 @@ PlayerInfoManager::PlayerInfoManager(Desc * _Desc)
 	m_hp = m_maxHp;
 
 	m_maxSpeed = _Desc->maxSpeed;
+	 
 }
 
 PlayerInfoManager::~PlayerInfoManager()

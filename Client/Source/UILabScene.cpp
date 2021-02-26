@@ -24,8 +24,8 @@ void UILabScene::Initialize()
 	//CreatePauseButton();
 
 	//CreateRader();
-	//CreateSplineCurve();
-	GarageMainWindow();
+	CreateSplineCurve();
+	//GarageMainWindow();
 
 	// meshName 
 	// box, line, quad, sphere, triangle, quadNoneNormal
