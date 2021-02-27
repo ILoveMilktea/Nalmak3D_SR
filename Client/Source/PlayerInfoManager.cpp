@@ -12,6 +12,8 @@ PlayerInfoManager::PlayerInfoManager(Desc * _Desc)
 	m_hp = m_maxHp;
 
 	m_maxSpeed = _Desc->maxSpeed;
+	 
+	m_player = nullptr;
 }
 
 PlayerInfoManager::~PlayerInfoManager()
@@ -100,6 +102,11 @@ void PlayerInfoManager::SetMaxSpeed(const float & _value)
 {
 	m_maxSpeed = _value;
 
+}
+
+void PlayerInfoManager::SetPlayer(GameObject * _player)
+{
+	m_player = _player;
 }
 
 const int & PlayerInfoManager::GetHp() const

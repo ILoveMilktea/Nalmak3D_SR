@@ -72,11 +72,6 @@ void DrawGizmo::Initialize()
 		AddComponent<PositionHandle>(&desc_ph)->
 		SetScale(0.2f, 0.2f, 0.2f);
 	m_forwardHandle->SetParents(m_gameObject);
-
-	m_rightHandle->SetActive(false);
-	m_upHandle->SetActive(false);
-	m_forwardHandle->SetActive(false);
-
 }
 
 void DrawGizmo::Update()

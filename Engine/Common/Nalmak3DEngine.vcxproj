@@ -64,6 +64,7 @@
     <ClCompile Include="..\Source\CanvasPicking.cpp" />
     <ClCompile Include="..\Source\MeshRenderer.cpp" />
     <ClCompile Include="..\Source\Nalmak_DirectXMath.cpp" />
+    <ClCompile Include="..\Source\Number.cpp" />
     <ClCompile Include="..\Source\ObjectManager.cpp" />
     <ClCompile Include="..\Source\ObjMesh.cpp" />
     <ClCompile Include="..\Source\Particle.cpp" />
@@ -100,6 +101,7 @@
     <ClCompile Include="..\Source\Toggle.cpp" />
     <ClCompile Include="..\Source\Transform.cpp" />
     <ClCompile Include="..\Source\Triangle.cpp" />
+    <ClCompile Include="..\Source\UIInteractor.cpp" />
     <ClCompile Include="..\Source\VIBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +157,7 @@
     <ClInclude Include="..\Include\Nalmak_String.h" />
     <ClInclude Include="..\Include\Nalmak_Struct.h" />
     <ClInclude Include="..\Include\Nalmak_Typedef.h" />
+    <ClInclude Include="..\Include\Number.h" />
     <ClInclude Include="..\Include\ObjectManager.h" />
     <ClInclude Include="..\Include\ObjMesh.h" />
     <ClInclude Include="..\Include\Particle.h" />
@@ -191,6 +194,7 @@
     <ClInclude Include="..\Include\Toggle.h" />
     <ClInclude Include="..\Include\Transform.h" />
     <ClInclude Include="..\Include\Triangle.h" />
+    <ClInclude Include="..\Include\UIInteractor.h" />
     <ClInclude Include="..\Include\VIBuffer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

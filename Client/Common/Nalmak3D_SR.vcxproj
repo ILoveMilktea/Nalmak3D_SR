@@ -233,6 +233,7 @@
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
+    <ClInclude Include="..\Include\Shooter.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
@@ -246,7 +247,9 @@
     <ClInclude Include="..\Include\TopViewCamera.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
+    <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="..\Include\UseItem.h" />
+    <ClInclude Include="DeadTimer.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -290,6 +293,7 @@
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
+    <ClCompile Include="..\Source\Shooter.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
@@ -302,6 +306,7 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="..\Source\UseItem.cpp" />
+    <ClCompile Include="DeadTimer.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

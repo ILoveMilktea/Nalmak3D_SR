@@ -29,6 +29,7 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	m_directoryPath = _path;
 	LoadMeshes<ObjMesh>(L"obj");
 
+	LoadTextures(L"jpg");
 	LoadTextures(L"png");
 	LoadTextures(L"dds");
 

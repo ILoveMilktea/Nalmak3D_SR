@@ -38,19 +38,15 @@ void PlayerMove::Initialize()
 
 	// player slot check
 	
-	/*for (int i = 0; i < ITEMTYPE_MAX; ++i)
-	{
-		if (nullptr == m_playerInfo->GetItemDescInfoArray()[i])
-		{
+	//if (m_playerInfo->GetItemDescInfoArray()[FIRST_PARTS]->itemtype == ITEMTYPE_MISSILE)
+	//{
+	//	AimMissile::Desc info; // 나중에 함수로빼자
+	//	info.useItem = *m_playerInfo->GetItemDescInfoArray()[FIRST_PARTS];
+	//	m_gameObject->AddComponent<AimMissile>(&info);
+	//	m_useItem = GetComponent<AimMissile>();
 
-		}
-	}*/
-	/*m_gameObject->AddComponent<AimMissile>();
-	
-	
-	
-	
-	m_useItem = GetComponent<AimMissile>();*/
+	//}
+
 
 
 }
@@ -120,9 +116,13 @@ void PlayerMove::ExitState()
 
 void PlayerMove::TemproryAttackFunc()
 {
+	if (!m_useItem)
+		return;
+
+
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
-		//m_useItem = 
+		m_useItem->Shooting(true);
 	}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))

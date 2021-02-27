@@ -436,7 +436,11 @@
     </ClCompile>
     <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
     <ClCompile Include="..\Source\ParticleInfo.cpp" />
-    <ClCompile Include="..\Source\Slider.cpp" />
+    <ClCompile Include="..\Source\Slider.cpp">
+      <Filter>05.Component\08.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Number.cpp" />
+    <ClCompile Include="..\Source\UIInteractor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -695,6 +699,10 @@
     </ClInclude>
     <ClInclude Include="..\Include\ScaleHandle_2D.h" />
     <ClInclude Include="..\Include\ParticleInfo.h" />
-    <ClInclude Include="..\Include\Slider.h" />
+    <ClInclude Include="..\Include\Slider.h">
+      <Filter>05.Component\08.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Number.h" />
+    <ClInclude Include="..\Include\UIInteractor.h" />
   </ItemGroup>
 </Project>

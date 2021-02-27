@@ -19,13 +19,13 @@ void UILabScene::Initialize()
 		mainCam->SetRotation(30, 0, 0);
 	}
 
-	//PlayerUIPatitial();
+	PlayerUIPatitial();
 
 	//CreatePauseButton();
 
 	//CreateRader();
 	//CreateSplineCurve();
-	GarageMainWindow();
+	//GarageMainWindow();
 
 	// meshName 
 	// box, line, quad, sphere, triangle, quadNoneNormal
@@ -80,7 +80,6 @@ void UILabScene::CreateRader()
 
 	// rader
 	Rader::Desc desc;
-	desc.player = player->GetTransform();
 	desc.findRange = 100.f;
 	desc.readyflight = 5;
 
@@ -220,7 +219,7 @@ void UILabScene::PlayerUIPatitial()
 	
 
 	SingleImage::Desc desc_si;
-	desc_si.textureName = L"garageSample";
+	desc_si.textureName = L"dfSample";
 	auto background = INSTANTIATE();
 	background->AddComponent<CanvasRenderer>();
 	background->AddComponent<SingleImage>(&desc_si);

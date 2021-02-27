@@ -27,20 +27,17 @@ void EditController::Update()
 
 	if (m_input->GetKeyDown(KEY_STATE_F1))
 	{
-		CanvasGroup::GetInstance()->SetGroupFade(CANVAS_GROUP_NONE, 0.5f);
+		PlayerInfoManager::GetInstance()->SetMaxSpeed(10.f);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F2))
 	{
-		CanvasGroup::GetInstance()->SetGroupFade(CANVAS_GROUP_G1, 0.5f);
+		PlayerInfoManager::GetInstance()->SetMaxSpeed(20.f);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F3))
 	{
-		CanvasGroup::GetInstance()->SetGroupFade(CANVAS_GROUP_G2, 0.5f);
+		PlayerInfoManager::GetInstance()->SetMaxSpeed(30.f);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F4))
 	{
-		CanvasGroup::GetInstance()->SetGroupFade(CANVAS_GROUP_NONE, 1.f);
-		CanvasGroup::GetInstance()->SetGroupFade(CANVAS_GROUP_G1, 1.f);
-		CanvasGroup::GetInstance()->SetGroupFade(CANVAS_GROUP_G2, 1.f);
 	}
 }

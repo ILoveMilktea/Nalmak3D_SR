@@ -6,9 +6,9 @@ class PlayerInfoManager :
 public:
 	struct Desc
 	{
-		int attack;
-		int hp;
-		int maxHp;
+		int attack = 30;
+		int hp = 100;
+		int maxHp = 100;
 		float minSpeed = 1;
 		float maxSpeed = 30;
 		float speed = 5;
@@ -20,7 +20,7 @@ public:
 
 
 public:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -38,7 +38,7 @@ public:
 	void SetRollAngle(const float& _value);
 	void SetMinSpeed(const float& _value);
 	void SetMaxSpeed(const float& _value);
-
+	void SetPlayer(GameObject* _player);
 
 public:
 	const int& GetHp() const;
@@ -50,7 +50,10 @@ public:
 	const float& GetRollAngle() {return m_rollAngle;}
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
+	ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
 	//const ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
+	GameObject* GetPlayer() { return m_player; }
+	
 public:
 	void EquipWepon(PARTS_NUM _enumID ,ItemDesc* _desc);
 
@@ -68,8 +71,10 @@ private:
 	float	m_maxSpeed = 0;
 	Vector3 m_addedRot = {};
 
+	GameObject* m_player;
+
+
 private:
 	ItemDesc* m_playerItem[PARTS_NUM::PARTS_MAX];
 
 };
-
