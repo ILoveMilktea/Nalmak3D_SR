@@ -237,7 +237,7 @@ public:
 		// reference
 		{
 			SingleImage::Desc desc_si;
-			desc_si.textureName = L"UIBlack";
+			desc_si.textureName = L"smog";
 			auto background = INSTANTIATE();
 			background->AddComponent<CanvasRenderer>();
 			background->AddComponent<SingleImage>(&desc_si);

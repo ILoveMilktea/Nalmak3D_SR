@@ -16,10 +16,11 @@
 
 #include "StageManager.h"
 #include "UIWindowFactory.h"
+#include "SceneChanger.h"
 
 DogFightState::DogFightState()
 {
-	
+
 }
 
 
@@ -28,6 +29,11 @@ DogFightState::~DogFightState()
 }
 
 void DogFightState::Initialize()
+{
+
+}
+
+void DogFightState::EnterState()
 {
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
@@ -40,21 +46,28 @@ void DogFightState::Initialize()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
-	
+
 	MeshRenderer::Desc render;
-	render.mtrlName = L"default"; // 210223È­ 12:50 Àü±ÙÈñ Á¦´ë·Î ¾È³ª¿Í¼­ ¼³Á¤ ¹Ù²åÀ½
+	render.mtrlName = L"default"; // 210223È­ 12:50 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È³ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½
 	render.meshName = L"flight";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
-	
+
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();
 
 	//m_Player->AddComponent<PlayerToTopView>();
+
+	/*SceneChanger::Desc SceneChangerDescInfo;
+	SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
+	SceneChangerDescInfo.sceneName = L"garage";
+	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
+	*/
+
 	PlayerInfoManager::GetInstance()->SetPlayer(m_Player);
-	
+
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
 	smoothFollowDesc.toTarget = m_Player;
@@ -67,9 +80,6 @@ void DogFightState::Initialize()
 	EnemyManager::GetInstance();
 }
 
-void DogFightState::EnterState()
-{
-}
 
 void DogFightState::UpdateState()
 {
@@ -92,7 +102,7 @@ void DogFightState::UpdateState()
 		Player_Faraway();
 
 		Vector3 Dir = m_Player->GetTransform()->position - vPlayerOrigin;
-		
+
 		if (D3DXVec3Length(&Dir) >= 1100.f)
 		{
 			StageManager::GetInstance()->ToScene(L"Evasion");

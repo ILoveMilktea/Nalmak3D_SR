@@ -54,7 +54,7 @@ ItemDesc * PlayerKitSelector::FindSlotItme(const wstring & _name, ITEMTYPE _enum
 		}
 	}
 
-	//assert("Nullptr, Can't Item Info Seraching..." && itemInfo);
+	assert("Nullptr, Can't Item Info Seraching..." && itemInfo);
 	return itemInfo;
 }
 
@@ -69,7 +69,7 @@ void PlayerKitSelector::DeleteInstance()
 
 void PlayerKitSelector::Initialize()
 {
-	m_garageSlot[L"Wepon"].reserve(2);
+	m_garageSlot[L"Weapon"].reserve(2);
 
 	{
 		ItemDesc itemInfo;
@@ -80,7 +80,7 @@ void PlayerKitSelector::Initialize()
 
 
 		ItemDesc* ItemWepon = new ItemDesc(itemInfo);
-		m_garageSlot[L"Wepon"].emplace_back(ItemWepon);
+		m_garageSlot[L"Weapon"].emplace_back(ItemWepon);
 	}
 	{
 
@@ -88,10 +88,10 @@ void PlayerKitSelector::Initialize()
 		itemInfo.delay = 3.f;
 		itemInfo.itemtype = ITEMTYPE::ITEMTYPE_MISSILE;
 		itemInfo.weaponAttak = 35;
-		itemInfo.weaponSpeed = 5.f;
+		itemInfo.weaponSpeed = 15.f;
 
 		ItemDesc* ItemWepon = new ItemDesc(itemInfo);
-		m_garageSlot[L"Wepon"].emplace_back(ItemWepon);
+		m_garageSlot[L"Weapon"].emplace_back(ItemWepon);
 	}
 
 

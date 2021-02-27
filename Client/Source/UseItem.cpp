@@ -2,7 +2,7 @@
 #include "..\Include\UseItem.h"
 
 
-UseItem::UseItem(ItemDesc * _desc)
+UseItem::UseItem(Desc * _desc)
 {
 	
 }

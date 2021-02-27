@@ -20,7 +20,7 @@ public:
 
 
 public:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -50,8 +50,10 @@ public:
 	const float& GetRollAngle() {return m_rollAngle;}
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
+	ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
 	//const ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
 	GameObject* GetPlayer() { return m_player; }
+	
 public:
 	void EquipWepon(PARTS_NUM _enumID ,ItemDesc* _desc);
 
@@ -76,4 +78,3 @@ private:
 	ItemDesc* m_playerItem[PARTS_NUM::PARTS_MAX];
 
 };
-
