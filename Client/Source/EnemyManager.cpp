@@ -8,6 +8,8 @@
 #include "Enemy_Hold.h"
 #include "Enemy_Drop.h"
 #include "Enemy_Death.h"
+#include "Enemy_Explosion.h"
+#include "Enemy_Falling.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -47,28 +49,40 @@ void EnemyManager::DeleteInstance()
 
 void EnemyManager::Initialize()
 {//유니티의 스따뜨
+
+
 }
 
 void EnemyManager::Update()
 {
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
 	{
-		//int x, y, z;
-		//x = rand() % 300 - 150;
-		//y = rand() % 300 - 150;
-		//z = rand() % 300 - 150;
-		//Enemy_Spawn(Vector3((float)x, (float)y, (float)z));
-		Enemy_Spawn(Vector3(0.f, 20.f, 150.f), ENEMY_STATE::CHASE);
+		ENEMY_STATUS tStatus(10, 20, 1);
+		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+		BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+
+
+		Enemy_Spawn(Vector3(100.f, 20.f, 150.f), ENEMY_STATE::HOLD,
+			tStatus,tGun,tMissile);
 	}
 }
 
 const int & EnemyManager::Get_EnemyCount() const
 {
-	return int(0);
+	return (int)(Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY).size());
+}
+
+list<GameObject*> EnemyManager::Get_EnemyList() const
+{
+	return Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY);
 }
 
 
-void EnemyManager::Enemy_Spawn(Vector3 _pos, ENEMY_STATE _initState)
+
+
+void EnemyManager::Enemy_Spawn(Vector3 _pos, 
+	ENEMY_STATE _initState, ENEMY_STATUS _status, 
+	BULLET_STATUS _gun, BULLET_STATUS _missile, BULLET_STATUS _homing)
 {
 	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
 	Enemy_obj->SetPosition(_pos);
@@ -80,6 +94,8 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, ENEMY_STATE _initState)
 	m_pStateControl->AddState<Enemy_Chase>(L"Chase");
 	m_pStateControl->AddState<Enemy_Hold>(L"Hold");
 	m_pStateControl->AddState<Enemy_Drop>(L"Drop");
+	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
+	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
 	m_pStateControl->AddState<Enemy_Death>(L"Death");
 	switch (_initState)
 	{
@@ -103,6 +119,14 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, ENEMY_STATE _initState)
 		m_pStateControl->InitState(L"Drop");
 	}
 		break;
+	case EXPLOSION:
+	{m_pStateControl->InitState(L"Explosion"); }
+	break;
+
+	case FALLING:
+	{m_pStateControl->InitState(L"Falling"); }
+	break;
+
 	case DEATH:
 	{
 		m_pStateControl->InitState(L"Death");
@@ -114,7 +138,8 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, ENEMY_STATE _initState)
 		break;
 	}
 
-	Enemy::Desc Enemy_desc;
+
+	Enemy::Desc Enemy_desc(_status, _gun, _missile);
 	/*desc 세팅*/
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 	

@@ -27,17 +27,22 @@ public:
 
 public: /* Gettttt */
 	const int& Get_EnemyCount() const;
+	list<GameObject*> Get_EnemyList() const;
 
 public: /* Settttt */
 
 
+
 public: /* Funcs */
 	void Enemy_Spawn(Vector3 _pos = Vector3(0.f,0.f,0.f), 
-		ENEMY_STATE _initState =ENEMY_STATE::IDLE);
-	//void Spawn_Rush();
-	//void Spawn_Chase();
+		ENEMY_STATE _initState =ENEMY_STATE::IDLE,
+		ENEMY_STATUS _status = ENEMY_STATUS(),
+		BULLET_STATUS _gun = BULLET_STATUS(), 
+		BULLET_STATUS _missile = BULLET_STATUS(), 
+		BULLET_STATUS _homing = BULLET_STATUS());
+
 
 private:
-	StateControl* m_pStateControl;
+	StateControl* m_pStateControl = nullptr;
 
 };

@@ -17,7 +17,7 @@ Enemy_Chase::~Enemy_Chase()
 
 void Enemy_Chase::Initialize()
 {	
-
+	
 }
 
 void Enemy_Chase::EnterState()
@@ -25,6 +25,8 @@ void Enemy_Chase::EnterState()
 	m_pEnemy = m_gameObject->GetComponent<Enemy>();
 
 	assert(L"아 ㅋㅋ 에너미 못찾겠다고 ㅋㅋㄹㅇ" && m_pEnemy);
+
+	m_pEnemy->Target_Setting(true);
 }
 
 void Enemy_Chase::UpdateState()
@@ -33,13 +35,15 @@ void Enemy_Chase::UpdateState()
 	{
 		m_pEnemy->Target_Update();
 		m_pEnemy->Look_Target();
+		m_pEnemy->Accelerate();
 		m_pEnemy->Go_Straight();
 
 		//float m_dist = m_pEnemy->Get_Distance();
 
 		if (m_pEnemy->Get_Distance() <= 80.f && m_pEnemy->Get_Distance() >= 20.f)
 		{
-			Fire_Gun();
+			m_pEnemy->Decelerate();
+			m_pEnemy->Fire_Gun();
 		}
 
 		if (m_pEnemy->Get_Distance() <= 20.f)
@@ -64,6 +68,8 @@ void Enemy_Chase::UpdateState()
 			m_bAvoid = false;
 		}
 	}
+
+	
 }
 
 void Enemy_Chase::ExitState()
@@ -71,9 +77,3 @@ void Enemy_Chase::ExitState()
 
 }
 
-void Enemy_Chase::Fire_Gun()
-{
-	//Bullet_Manager::GetInstance()->Fire_Gun(m_pEnemy->GetTransform()->position, m_pEnemy->GetTransform()->rotation);
-	m_pEnemy->Shoot();
-	
-}

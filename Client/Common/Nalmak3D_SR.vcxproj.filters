@@ -97,9 +97,6 @@
     <ClInclude Include="..\Include\NalmakScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Bullet.h">
-      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Missile.h">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClInclude>
@@ -160,6 +157,15 @@
     </ClInclude>
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Explosion.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Falling.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MachineGun.h">
+      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,9 +253,6 @@
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Bullet.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Missile.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClCompile>
@@ -299,6 +302,15 @@
     </ClCompile>
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Explosion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Falling.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MachineGun.cpp">
+      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -456,6 +468,12 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\PlayerKit">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling">
+      <UniqueIdentifier>{841dcd20-f92c-4b7d-9282-6c7b09c0a791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion">
+      <UniqueIdentifier>{33e26b4f-4494-4a5e-9415-a8bbf100a730}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

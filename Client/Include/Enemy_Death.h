@@ -1,7 +1,9 @@
 #pragma once
 #include "IState.h"
-class Enemy_Death :
-	public IState
+
+#include "Enemy.h"
+
+class Enemy_Death : public IState
 {
 public:
 	Enemy_Death();
@@ -13,9 +15,11 @@ public:
 	virtual void ExitState() override;
 
 public:
-
+	
 public:
 
 private:
-};
+	//Enemy* m_pEnemy = nullptr;
 
+	
+};

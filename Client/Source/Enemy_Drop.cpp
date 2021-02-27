@@ -33,14 +33,15 @@ void Enemy_Drop::UpdateState()
 	{
 		m_pEnemy->Target_Update();
 		m_pEnemy->Look_Target();
+		m_pEnemy->Accelerate();
 		m_pEnemy->Go_Straight();
 
 		if (m_pEnemy->Get_Distance() <= 150.f && m_pEnemy->Get_Inner() >= 0.9f)
 		{
-			if (m_pEnemy->Missile())
+			if (m_pEnemy->Fire_Missile())
 			{
 				iRandPattern = rand() % 2;
-				m_pEnemy->Set_OriginForward(m_pEnemy->GetTransform()->GetForward());
+				m_pEnemy->Set_OriginForward();
 				m_bAvoid = true;
 			}
 		}
@@ -51,10 +52,12 @@ void Enemy_Drop::UpdateState()
 		if (iRandPattern == 0)
 		{
 			m_bDive = true;
+			iRandPattern = -1;
 		}
 		if (iRandPattern == 1)
 		{
 			m_bSoar = true;
+			iRandPattern = -1;
 		}
 
 
@@ -105,4 +108,5 @@ void Enemy_Drop::UpdateState()
 
 void Enemy_Drop::ExitState()
 {
+
 }

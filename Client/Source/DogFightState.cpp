@@ -94,10 +94,6 @@ void DogFightState::UpdateState()
 		}
 	}
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
-	{
-		Bullet_Manager::GetInstance()->Fire_Gun(Vector3(0, 0, 0), Quaternion(0, 0, 0, 0));
-	}
 }
 
 void DogFightState::ExitState()

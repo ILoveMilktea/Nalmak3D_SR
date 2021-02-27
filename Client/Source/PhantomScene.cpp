@@ -34,7 +34,7 @@ void PhantomScene::Initialize()
 
 
 
-	Core::GetInstance()->SetSkyBox(L"skybox_gradation");
+	//Core::GetInstance()->SetSkyBox(L"skybox_gradation");
 	//MeshRenderer::Desc ground;
 	//ground.mtrlName = L"ground";
 	//ground.meshName = L"ground";

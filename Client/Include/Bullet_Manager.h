@@ -24,10 +24,12 @@ public:
 	virtual void Update() override;
 
 public: /* for Enemy */
+	
 	/* for DogFight */
-	void Fire_Gun(Vector3 _start, Quaternion _rot, 
-		float _fpm = 120.f, float _dmg = 10.f);
-	void Fire_Missile(Vector3 _start, Quaternion _rot); //직선 미사일
+	void Fire_Gun(Vector3 _start, Quaternion _rot, int _dmg = 10.f, float _spd = 50.f);
+	void Fire_Missile(Vector3 _start, Quaternion _rot,
+		int _minDmg = 0.f, int _maxDmg = 10.f,
+		float _maxSpd = 150.f); //직선 미사일
 	void Fire_Homing(); //유도 미사일
 
 	/* for Evasion */
@@ -37,12 +39,10 @@ public: /* for Enemy */
 
 
 public:
-
+	
 
 private:
-	float m_FireDelta = 0.f;
-	float m_MissileDelta = 0.f;
-	float m_HomingDelta = 0.f;
+
 
 
 };
