@@ -103,7 +103,6 @@
     <ClInclude Include="..\Include\Missile.h">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\Homing.h">
       <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
     </ClInclude>
@@ -158,7 +157,6 @@
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="..\Include\UseItem.h">
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClInclude>
@@ -167,6 +165,30 @@
     </ClInclude>
     <ClInclude Include="DeadTimer.h">
       <Filter>02.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIFactory.h">
+      <Filter>97.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIWindowFactory.h">
+      <Filter>97.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripter.h">
+      <Filter>02.Component\03.Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptReady.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptEnd.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPause.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPlay.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptWait.h">
+      <Filter>02.Component\03.Script\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +334,24 @@
     </ClCompile>
     <ClCompile Include="DeadTimer.cpp">
       <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripter.cpp">
+      <Filter>02.Component\03.Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptEnd.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptPause.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptPlay.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptReady.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptWait.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -469,6 +509,15 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\PlayerKit">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Factory">
+      <UniqueIdentifier>{be2dea7a-aa32-49b7-bc71-46f57bd4b57f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script">
+      <UniqueIdentifier>{09811998-c3f5-48ce-9d6a-1d5d36ab622e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State">
+      <UniqueIdentifier>{0ab8d627-438f-44e8-926f-75128c57cd86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

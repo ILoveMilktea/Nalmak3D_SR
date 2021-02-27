@@ -26,7 +26,7 @@ void PlayerInfoManager::Initialize()
 
 void PlayerInfoManager::Update()
 {
-	
+	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();
 }
 
 PlayerInfoManager * PlayerInfoManager::GetInstance()
@@ -102,6 +102,16 @@ void PlayerInfoManager::SetMaxSpeed(const float & _value)
 {
 	m_maxSpeed = _value;
 
+}
+
+void PlayerInfoManager::SetTimeLimit(const float & _value)
+{
+	m_timelimit = _value;
+}
+
+void PlayerInfoManager::SetScore(const float & _value)
+{
+	m_score = _value;
 }
 
 void PlayerInfoManager::SetPlayer(GameObject * _player)

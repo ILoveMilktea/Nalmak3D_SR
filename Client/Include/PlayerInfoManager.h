@@ -20,7 +20,6 @@ public:
 
 
 public:
-	// Component��(��) ���� ���ӵ�
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -38,6 +37,9 @@ public:
 	void SetRollAngle(const float& _value);
 	void SetMinSpeed(const float& _value);
 	void SetMaxSpeed(const float& _value);
+
+	void SetTimeLimit(const float& _value);
+	void SetScore(const float& _value);
 	void SetPlayer(GameObject* _player);
 
 public:
@@ -52,6 +54,10 @@ public:
 	const float& GetMaxSpeed() { return m_maxSpeed; }
 	ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
 	//const ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
+	
+	// temporary members
+	const float& GetTimeLimit() { return m_timelimit; }
+	const float& GetScore() { return m_score; }
 	GameObject* GetPlayer() { return m_player; }
 	
 public:
@@ -71,6 +77,9 @@ private:
 	float	m_maxSpeed = 0;
 	Vector3 m_addedRot = {};
 
+	// temporary members
+	float m_timelimit = 0.f;
+	float m_score = 0.f;
 	GameObject* m_player;
 
 

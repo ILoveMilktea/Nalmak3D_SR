@@ -231,6 +231,11 @@
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
+    <ClInclude Include="..\Include\ScriptEnd.h" />
+    <ClInclude Include="..\Include\ScriptPause.h" />
+    <ClInclude Include="..\Include\ScriptPlay.h" />
+    <ClInclude Include="..\Include\ScriptReady.h" />
+    <ClInclude Include="..\Include\ScriptWait.h" />
     <ClInclude Include="..\Include\Shooter.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
@@ -250,6 +255,7 @@
     <ClInclude Include="DeadTimer.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scripter.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -289,6 +295,11 @@
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
+    <ClCompile Include="..\Source\ScriptEnd.cpp" />
+    <ClCompile Include="..\Source\ScriptPause.cpp" />
+    <ClCompile Include="..\Source\ScriptPlay.cpp" />
+    <ClCompile Include="..\Source\ScriptReady.cpp" />
+    <ClCompile Include="..\Source\ScriptWait.cpp" />
     <ClCompile Include="..\Source\Shooter.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
@@ -304,6 +315,7 @@
     <ClCompile Include="..\Source\UseItem.cpp" />
     <ClCompile Include="DeadTimer.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
+    <ClCompile Include="Scripter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

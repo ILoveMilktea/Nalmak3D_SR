@@ -1,41 +1,80 @@
 #include "..\Include\Number.h"
 #include "Text.h"
 
-template<typename T>
-Number<T>::Number(Desc * _desc)
+Number::Number(Desc * _desc)
+	:Text(&_desc->text_desc)
 {
-	m_targetValue = _desc->targetValue;
+	m_printType = _desc->printType;
+	m_curValue = _desc->defaultValue;
 }
 
-template<typename T>
-void Number<T>::Initialize()
+
+void Number::UpdateValue(SetFloatFunc _setValueFunc, GetFloatFunc _getValueFunc)
 {
-}
-template<typename T>
-void Number<T>::Update()
-{
-	if (m_observeValue != *m_targetValue)
+	float targetValue = 0.f;
+	_setValueFunc(&targetValue, _getValueFunc);
+
+	if (m_curValue != targetValue)
 	{
+		m_curValue = targetValue;
 
-
+		switch (m_printType)
+		{
+		case Number::NUMBER:
+			PrintNumber();
+			break;
+		case Number::TIME_H_M_S:
+			PrintTime_H_M_S();
+			break;
+		case Number::TIME_M:
+			break;
+		case Number::TIME_M_S_MS:
+			PrintTime_M_S_MS();
+			break;
+		default:
+			break;
+		}
 	}
-
 }
 
-template<typename T>
-void Number<T>::SetTargetValue(T _value)
+void Number::PrintNumber()
 {
+	int ivalue = (int)m_curValue;
+	SetText(to_wstring(ivalue));
 }
 
-template<typename T>
-T Number<T>::GetTargetValue()
+void Number::PrintTime_H_M_S()
 {
-	return T();
+	int time = (int)m_curValue;
+
+	int secondValue = time % 60;
+	time /= 60;
+	int minuteValue = time % 60;
+	time /= 24;
+	int hourValue = time;
+
+	wstring hour	= to_wstring(hourValue);
+	wstring minute	= to_wstring(minuteValue);
+	wstring second	= to_wstring(secondValue);
+
+	wstring timeText = hour + L":" + minute + L":" + second;
+	SetText(timeText);
 }
 
-template<typename T>
-wstring Number<T>::PrintNumber()
+void Number::PrintTime_M_S_MS()
 {
-	(*m_targetValue)
-	return wstring();
+	int time = (int)(m_curValue * 100.f);
+
+	int millisecondValue = time % 100;
+	time /= 100;
+	int secondValue = time % 60;
+	time /= 60;
+	int minuteValue = time % 60;
+
+	wstring minute = to_wstring(minuteValue);
+	wstring second = to_wstring(secondValue);
+	wstring millisecond = to_wstring(millisecondValue);
+
+	wstring timeText = minute + L":" + second + L":" + millisecond;
+	SetText(timeText);
 }

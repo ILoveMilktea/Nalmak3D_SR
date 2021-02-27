@@ -160,9 +160,6 @@
     <Filter Include="05.Component\08.UI\00.Text">
       <UniqueIdentifier>{87b8cdd5-9a8f-4027-9ab5-22f7a8dc2fa4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Component\08.UI\01.Button">
-      <UniqueIdentifier>{49699f4f-10a1-4cc0-8e2c-ae05d544d6d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Component\05.Animator">
       <UniqueIdentifier>{313c2061-4062-4c60-b294-b3dfcf03a32d}</UniqueIdentifier>
     </Filter>
@@ -184,9 +181,6 @@
     <Filter Include="05.Component\09.Light">
       <UniqueIdentifier>{683fd8ec-cef5-4888-9abb-eac595ddf414}</UniqueIdentifier>
     </Filter>
-    <Filter Include="05.Component\08.UI\02.Toggle">
-      <UniqueIdentifier>{ea982a63-06d5-49c8-9144-60924f9a510c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="05.Component\10.Tool">
       <UniqueIdentifier>{f90212b2-41ae-4a1a-92d1-36ef9d9ea3ac}</UniqueIdentifier>
     </Filter>
@@ -198,6 +192,21 @@
     </Filter>
     <Filter Include="05.Component\99.Utility\UIPicking">
       <UniqueIdentifier>{e8333c85-56bf-47db-9fe2-207d9feef9ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\08.UI\01.SingleImage">
+      <UniqueIdentifier>{31062613-49b9-4e03-a8fd-bf2942d4559c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\08.UI\02.Button">
+      <UniqueIdentifier>{49699f4f-10a1-4cc0-8e2c-ae05d544d6d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\08.UI\03.Toggle">
+      <UniqueIdentifier>{ea982a63-06d5-49c8-9144-60924f9a510c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\08.UI\04.Number">
+      <UniqueIdentifier>{049fb086-5965-4cc2-834c-36fdc5f75d7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\08.UI\05.Slider">
+      <UniqueIdentifier>{7d0dba0a-9cac-48c2-86b6-eb769603a9c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -363,9 +372,6 @@
     <ClCompile Include="..\Source\ObjMesh.cpp">
       <Filter>06.Resource\01.VIBuffer\07.ObjMesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Button.cpp">
-      <Filter>05.Component\08.UI\01.Button</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Animator.cpp">
       <Filter>05.Component\05.Animator</Filter>
     </ClCompile>
@@ -401,7 +407,7 @@
       <Filter>05.Component\09.Light</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Toggle.cpp">
-      <Filter>05.Component\08.UI\02.Toggle</Filter>
+      <Filter>05.Component\08.UI\03.Toggle</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ICanvasGroup.cpp">
       <Filter>03.Interface</Filter>
@@ -418,9 +424,6 @@
     <ClCompile Include="..\Source\PositionHandle.cpp">
       <Filter>05.Component\99.Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\SingleImage.cpp">
-      <Filter>05.Component\08.UI</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
     <ClCompile Include="..\Source\PositionHandle_2D.cpp">
       <Filter>05.Component\99.Utility\UIPicking</Filter>
@@ -436,11 +439,21 @@
     </ClCompile>
     <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
     <ClCompile Include="..\Source\ParticleInfo.cpp" />
-    <ClCompile Include="..\Source\Slider.cpp">
+    <ClCompile Include="..\Source\SingleImage.cpp">
+      <Filter>05.Component\08.UI\01.SingleImage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\UIInteractor.cpp">
       <Filter>05.Component\08.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Number.cpp" />
-    <ClCompile Include="..\Source\UIInteractor.cpp" />
+    <ClCompile Include="..\Source\Number.cpp">
+      <Filter>05.Component\08.UI\04.Number</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Slider.cpp">
+      <Filter>05.Component\08.UI\05.Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Button.cpp">
+      <Filter>05.Component\08.UI\02.Button</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -626,9 +639,6 @@
     <ClInclude Include="..\Include\ObjMesh.h">
       <Filter>06.Resource\01.VIBuffer\07.ObjMesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Button.h">
-      <Filter>05.Component\08.UI\01.Button</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Animator.h">
       <Filter>05.Component\05.Animator</Filter>
     </ClInclude>
@@ -664,7 +674,7 @@
       <Filter>05.Component\09.Light</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Toggle.h">
-      <Filter>05.Component\08.UI\02.Toggle</Filter>
+      <Filter>05.Component\08.UI\03.Toggle</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ICanvasGroup.h">
       <Filter>03.Interface</Filter>
@@ -681,9 +691,6 @@
     <ClInclude Include="..\Include\PositionHandle.h">
       <Filter>05.Component\99.Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\SingleImage.h">
-      <Filter>05.Component\08.UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\GroundVIBuffer.h" />
     <ClInclude Include="..\Include\PositionHandle_2D.h">
       <Filter>05.Component\99.Utility\UIPicking</Filter>
@@ -699,10 +706,20 @@
     </ClInclude>
     <ClInclude Include="..\Include\ScaleHandle_2D.h" />
     <ClInclude Include="..\Include\ParticleInfo.h" />
-    <ClInclude Include="..\Include\Slider.h">
+    <ClInclude Include="..\Include\SingleImage.h">
+      <Filter>05.Component\08.UI\01.SingleImage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIInteractor.h">
       <Filter>05.Component\08.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Number.h" />
-    <ClInclude Include="..\Include\UIInteractor.h" />
+    <ClInclude Include="..\Include\Number.h">
+      <Filter>05.Component\08.UI\04.Number</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Slider.h">
+      <Filter>05.Component\08.UI\05.Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Button.h">
+      <Filter>05.Component\08.UI\02.Button</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

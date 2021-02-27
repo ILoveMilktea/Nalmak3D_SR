@@ -334,6 +334,27 @@ public:
 		text->SetScale(60.f, 30.f);
 		return text;
 	}
+	static GameObject* Prefab_StageInfo_TimeNumber(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc_text;
+		desc_text.width = 12;
+		desc_text.height = 30;
+		desc_text.text = L"0";
+		desc_text.color = D3DCOLOR_RGBA(25, 200, 25, 255);
+		desc_text.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+		
+		Number::Desc desc_num;
+		desc_num.text_desc = desc_text;
+		desc_num.printType = Number::TIME_M_S_MS;
+
+		auto number = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_TimeNumber");
+		number->AddComponent<CanvasRenderer>();
+		number->AddComponent<Number>(&desc_num);
+		number->SetScale(120.f, 30.f);
+		return number;
+	}
+	
 	static GameObject* Prefab_StageInfo_ScoreText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text
@@ -350,6 +371,26 @@ public:
 		text->SetScale(84.f, 30.f);
 		return text;
 	}
+	static GameObject* Prefab_StageInfo_ScoreNumber(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		Text::Desc desc_text;
+		desc_text.width = 12;
+		desc_text.height = 30;
+		desc_text.text = L"0";
+		desc_text.color = D3DCOLOR_RGBA(25, 200, 25, 255);
+		desc_text.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		Number::Desc desc_num;
+		desc_num.text_desc = desc_text;
+		desc_num.printType = Number::NUMBER;
+
+		auto number = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_ScoreNumber");
+		number->AddComponent<CanvasRenderer>();
+		number->AddComponent<Number>(&desc_num);
+		number->SetScale(110.f, 30.f);
+		return number;
+	}
+
 	static GameObject* Prefab_StageInfo_TargetText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text
@@ -366,7 +407,58 @@ public:
 		text->SetScale(100.f, 30.f);
 		return text;
 	}
+	static GameObject* Prefab_StageInfo_TargetName(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		//Text::Desc desc;
+		//desc.width = 12;
+		//desc.height = 30;
+		//desc.text = _text;
+		//desc.color = D3DCOLOR_RGBA(25, 200, 25, 255);
+		//desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
+		//auto text = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_TargetText");
+		//text->AddComponent<CanvasRenderer>();
+		//text->AddComponent<Text>(&desc);
+		//text->SetScale(100.f, 30.f);
+		//return text;
+	}
+
+	static GameObject* Prefab_Stage_DialogueTitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 30;
+		desc.weight = 800;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 100, 255, 255);
+		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_TargetText");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+		text->SetScale(640.f, 36.f);
+		return text;
+	}
+	static GameObject* Prefab_Stage_DialogueScript(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 30;
+		desc.weight = 700;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(225, 225, 225, 255);
+		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_TargetText");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+		text->SetPosition(960.f, 120.f);
+		text->SetScale(640.f, 72.f);
+		return text;
+	}
 	static GameObject* Prefab_Rader(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// rader

@@ -1,32 +1,37 @@
 #pragma once
-#include "Component.h"
+#ifndef __NUMBER_H__
+#define __NUMBER_H__
 
-class Text;
-template <typename T>
+#include "Text.h"
+
 class NALMAK_DLL Number :
-	public Component
+	public Text
 {
+public:
+	enum PRINTTYPE { NUMBER, TIME_H_M_S, TIME_M, TIME_M_S_MS };
+
 	struct Desc
 	{
-		T* targetValue = nullptr;
+		Text::Desc text_desc = Text::Desc();
+
+		PRINTTYPE printType = NUMBER;
+		float defaultValue = 0.f;
 	};
+
 public:
 	Number(Desc* _desc);
 
-	// Component을(를) 통해 상속됨
-	virtual void Initialize() override;
-	virtual void Update() override;
-
 public:
-	void SetTargetValue(T _value);
-	T GetTargetValue();
+	void UpdateValue(SetFloatFunc _setValueFunc, GetFloatFunc _getValueFunc);
 
-	wstring PrintNumber();
-	
+	void PrintNumber();
+	void PrintTime_H_M_S();
+	void PrintTime_M_S_MS();
+
 private:
-	Text* m_text;
-	T* m_targetValue;
+	float m_curValue;
 
-	T m_observeValue;
+	PRINTTYPE m_printType;
 };
 
+#endif // !__NUMBER_H__

@@ -7,6 +7,7 @@
 #include "SingleImage.h"
 #include "Texture.h"
 #include "Text.h"
+#include "Number.h"
 CanvasRenderer::CanvasRenderer()
 	:ICanvasGroup()
 {
@@ -67,6 +68,7 @@ void CanvasRenderer::Render()
 {
 	Render_Image();
 	Render_Text();
+	Render_Number();
 }
 
 void CanvasRenderer::BindingStreamSource()
@@ -106,6 +108,16 @@ void CanvasRenderer::Render_Text()
 	if (text)
 	{
 		text->RenderText();
+	}
+}
+
+void CanvasRenderer::Render_Number()
+{
+	Number* number = GetComponent<Number>();
+
+	if (number)
+	{
+		number->RenderText();
 	}
 }
 

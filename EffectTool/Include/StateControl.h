@@ -49,14 +49,18 @@ public:
 	void InitState(wstring _stateName);
 	void SetState(wstring _stateName);
 	bool CompareState(wstring _stateName);
+	template <typename T>
+	T* GetState(wstring _stateName);
 
 	void SetInteger(wstring _key, int _value);
 	void SetFloat(wstring _key, float _value);
 	void SetVector3(wstring _key, const Vector3& _value);
+	void SetString(wstring _key, const wstring& _value);
 
 	int GetInteger(wstring _key);
 	float GetFloat(wstring _key);
 	const Vector3& GetVector3(wstring _key);
+	const wstring& GetString(wstring _key);
 private:
 	IState* m_state;
 	map<wstring, IState*> m_stateList;

@@ -8,6 +8,7 @@
 #include "PlayerInfoManager.h"
 #include "PlayerKitSelector.h"
 #include "UIInteractor.h"
+#include "Scripter.h"
 class UIWindowFactory
 {
 public:
@@ -98,7 +99,12 @@ public:
 				// speed
 				// guitar
 				auto info = PlayerInfoManager::GetInstance();
-				
+
+				SetFloatFunc setValueFunc =
+					SetFloatFunc([=](float* _out, GetFloatFunc _func) {
+					*_out = _func();
+				});
+
 				// speed
 				{
 					auto name = UIFactory::Prefab_ItemContents_Name(L"SPEED");
@@ -107,12 +113,7 @@ public:
 
 					GetFloatFunc getValueFunc =
 						GetFloatFunc([=]() {
-						return PlayerInfoManager::GetInstance()->GetMaxSpeed();
-					});
-
-					SetFloatFunc setValueFunc =
-						SetFloatFunc([=](float* _out, GetFloatFunc _func) {
-						*_out = _func();
+						return (float)PlayerInfoManager::GetInstance()->GetMaxSpeed();
 					});
 
 					auto bar = UIFactory::Prefab_ItemContents_Bar(CANVAS_GROUP_MAINWND);
@@ -132,12 +133,7 @@ public:
 
 					GetFloatFunc getValueFunc =
 						GetFloatFunc([=]() {
-						return PlayerInfoManager::GetInstance()->GetMaxHp();
-					});
-
-					SetFloatFunc setValueFunc =
-						SetFloatFunc([=](float* _out, GetFloatFunc _func) {
-						*_out = _func();
+						return (float)PlayerInfoManager::GetInstance()->GetMaxHp();
 					});
 
 					auto bar = UIFactory::Prefab_ItemContents_Bar(CANVAS_GROUP_MAINWND);
@@ -150,19 +146,14 @@ public:
 					bar->SetPosition(1740.f, 290.f);
 				}
 
-				//c1
+				//c3
 				{
 					auto name = UIFactory::Prefab_ItemContents_Name(L"ATTACK");
 					name->SetPosition(1555.f, 320.f);
 
 					GetFloatFunc getValueFunc =
 						GetFloatFunc([=]() {
-						return PlayerInfoManager::GetInstance()->GetAttack();
-					});
-
-					SetFloatFunc setValueFunc =
-						SetFloatFunc([=](float* _out, GetFloatFunc _func) {
-						*_out = _func();
+						return (float)PlayerInfoManager::GetInstance()->GetAttack();
 					});
 
 					auto bar = UIFactory::Prefab_ItemContents_Bar(CANVAS_GROUP_MAINWND);
@@ -176,19 +167,14 @@ public:
 					bar->SetPosition(1740.f, 320.f);
 				}
 
-				//c2
+				//c4
 				{
 					auto name = UIFactory::Prefab_ItemContents_Name(L"DEFENCE");
 					name->SetPosition(1555.f, 350.f);
 
 					GetFloatFunc getValueFunc =
 						GetFloatFunc([=]() {
-						return PlayerInfoManager::GetInstance()->GetAttack();
-					});
-
-					SetFloatFunc setValueFunc =
-						SetFloatFunc([=](float* _out, GetFloatFunc _func) {
-						*_out = _func();
+						return (float)PlayerInfoManager::GetInstance()->GetAttack();
 					});
 
 					auto bar = UIFactory::Prefab_ItemContents_Bar(CANVAS_GROUP_MAINWND);
@@ -202,7 +188,7 @@ public:
 					bar->SetPosition(1740.f, 350.f);
 				}
 
-				//c3
+				//c5
 				{
 					auto name = UIFactory::Prefab_ItemContents_Name(L"ADDITIANAL");
 					name->SetPosition(1555.f, 380.f);
@@ -210,12 +196,7 @@ public:
 
 					GetFloatFunc getValueFunc =
 						GetFloatFunc([=]() {
-						return PlayerInfoManager::GetInstance()->GetAttack();
-					});
-
-					SetFloatFunc setValueFunc =
-						SetFloatFunc([=](float* _out, GetFloatFunc _func) {
-						*_out = _func();
+						return (float)PlayerInfoManager::GetInstance()->GetAttack();
 					});
 
 					auto bar = UIFactory::Prefab_ItemContents_Bar(CANVAS_GROUP_MAINWND);
@@ -232,7 +213,7 @@ public:
 		}
 	}
 
-	static void DogfightStageWindow()
+	static void DogfightStageWindow(GameObject* _player)
 	{
 		// reference
 		{
@@ -241,7 +222,7 @@ public:
 			auto background = INSTANTIATE();
 			background->AddComponent<CanvasRenderer>();
 			background->AddComponent<SingleImage>(&desc_si);
-			background->GetComponent<CanvasRenderer>()->SetFade(0.4f);
+			background->GetComponent<CanvasRenderer>()->SetFade(0.6f);
 			background->SetPosition(WINCX * 0.5f, WINCY * 0.5f);
 			background->SetScale(WINCX, WINCY);
 		}
@@ -249,25 +230,87 @@ public:
 		// stage info
 		{
 
+			SetFloatFunc setValueFunc =
+				SetFloatFunc([=](float* _out, GetFloatFunc _func) {
+				*_out = _func();
+			});
+
+
 			// time limit
 			{
-				auto title = UIFactory::Prefab_StageInfo_TimeText(L"TIME", CANVAS_GROUP_STAGEWND);
-				title->SetPosition(140.f, 70.f);
+				// text
+				auto timeText = UIFactory::Prefab_StageInfo_TimeText(L"TIME", CANVAS_GROUP_STAGEWND);
+				timeText->SetPosition(140.f, 70.f);
+
+				// value;
+
+				auto timeNumber = UIFactory::Prefab_StageInfo_TimeNumber(CANVAS_GROUP_STAGEWND);
+				timeNumber->SetPosition(230.f, 70.f);
+
+
+				GetFloatFunc getValueFunc =
+					GetFloatFunc([=]() {
+					return PlayerInfoManager::GetInstance()->GetTimeLimit();
+				});
+				EventHandler eventFunc =
+					EventHandler([=]() {
+					timeNumber->GetComponent<Number>()->UpdateValue(setValueFunc, getValueFunc);
+				});
+				
+				_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
 			}
 			// score
 			{
-				auto title = UIFactory::Prefab_StageInfo_ScoreText(L"SCORE", CANVAS_GROUP_STAGEWND);
-				title->SetPosition(150.f, 105.f);
+				// text
+				auto scoreText = UIFactory::Prefab_StageInfo_ScoreText(L"SCORE", CANVAS_GROUP_STAGEWND);
+				scoreText->SetPosition(150.f, 105.f);
+
+				// value;
+
+				auto scoreNumber = UIFactory::Prefab_StageInfo_ScoreNumber(CANVAS_GROUP_STAGEWND);
+				scoreNumber->SetPosition(250.f, 105.f);
+
+
+				GetFloatFunc getValueFunc =
+					GetFloatFunc([=]() {
+					return PlayerInfoManager::GetInstance()->GetScore();
+				});
+				
+				EventHandler eventFunc =
+					EventHandler([=]() {
+					scoreNumber->GetComponent<Number>()->UpdateValue(setValueFunc, getValueFunc);
+				});
+
+				_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
 			}
 			// target
 			{
-				auto title = UIFactory::Prefab_StageInfo_TargetText(L"TARGET", CANVAS_GROUP_STAGEWND);
-				title->SetPosition(160.f, 140.f);
+				// text
+				auto targetText = UIFactory::Prefab_StageInfo_TargetText(L"TARGET", CANVAS_GROUP_STAGEWND);
+				targetText->SetPosition(160.f, 140.f);
+
+				// name
+
+				/*auto scoreNumber = UIFactory::Prefab_StageInfo_TimeNumber(CANVAS_GROUP_STAGEWND);
+				scoreNumber->SetPosition(246.f, 105.f);
+
+
+				GetFloatFunc getValueFunc =
+					GetFloatFunc([=]() {
+					return PlayerInfoManager::GetInstance()->GetScore();
+				});
+
+				EventHandler eventFunc =
+					EventHandler([=]() {
+					scoreNumber->GetComponent<Number>()->UpdateValue(setValueFunc, getValueFunc);
+				});
+
+				_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);*/
 			}
 
 		}
-		// alarm title
-		// alarm script
+		// Scripter
+		DogfightScript();
 
 		// speed text
 		// speed box
@@ -293,6 +336,48 @@ public:
 		
 	}
 
+	static void DogfightScript()
+	{
+		// dialogue title
+		auto titleText = UIFactory::Prefab_Stage_DialogueTitle(L"");
+		titleText->SetPosition(960.f, 60.f);
+		// dialogue script
+		auto scriptText = UIFactory::Prefab_Stage_DialogueScript(L"");
+		scriptText->SetPosition(960.f, 120.f);
+		// sample script
+		vector<Dialogue> list;
+		{
+			wstring title = L"전근희";
+			wstring script = L"<< 행님들 제가 생각을 해봤는데 말이죠 >>";
+
+			Dialogue dialogue;
+			dialogue.first = title;
+			dialogue.second = script;
+
+			list.emplace_back(dialogue);
+
+			script = L"<< 이거 어떻게 동작하는 거에요? >>";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"<< 아 이라면 돼요? >>";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"<< 크... 오늘도 하나 배워 갑니다. >>";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"<< 어라..? 이렇게 쉽게 이해하는 나, 사실은 이 팀 에이스 일 지도..? >>";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+		}
+		// scripter
+		Scripter::Desc desc_scr;
+		desc_scr.title = titleText->GetComponent<Text>();
+		desc_scr.script = scriptText->GetComponent<Text>();
+		desc_scr.startDialogue = list;
+		auto scripter =
+			INSTANTIATE()->
+			AddComponent<Scripter>(&desc_scr);
+	}
 };
 
 
