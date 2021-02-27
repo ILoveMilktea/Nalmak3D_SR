@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\Enemy_Death.h"
 
+#include "EnemyManager.h"
 
 Enemy_Death::Enemy_Death()
 {
@@ -26,6 +27,7 @@ void Enemy_Death::EnterState()
 	//m_pEnemy->Target_Setting(false);
 
 	DESTROY(m_gameObject); //°ž!
+	EnemyManager::GetInstance()->Add_EnemyCount(-1);
 }
 
 void Enemy_Death::UpdateState()

@@ -13,15 +13,26 @@ public:
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 
-public:
+public: /* Get */
+	float Get_Time() const;
+	float Get_Score() const;
+
+public: /* Set */
+	void Set_Score(float _score);
+	void Add_Score(float _score);
 
 public:
 	void EnterProduce();
+
+	void SceneToBoss();
 
 private:
 	GameObject* m_MainCamera = nullptr;
 	GameObject* m_Player = nullptr;
 
 	bool m_bEnter = false;
+
+	float	m_fEvasionTime = 0.f;
+	float	m_fEvasiontScore = 0.f;
 };
 

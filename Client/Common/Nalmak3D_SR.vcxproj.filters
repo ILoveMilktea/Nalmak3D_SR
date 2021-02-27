@@ -43,9 +43,6 @@
     <ClInclude Include="..\Include\SmoothFollow.h">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Enemy.h">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Enemy_Idle.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Idle</Filter>
     </ClInclude>
@@ -174,6 +171,12 @@
     <ClInclude Include="DeadTimer.h">
       <Filter>02.Component</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Enemy.h">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Boss.h">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -205,9 +208,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\SmoothFollow.cpp">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Enemy.cpp">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Idle.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Idle</Filter>
@@ -324,6 +324,12 @@
     </ClCompile>
     <ClCompile Include="DeadTimer.cpp">
       <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy.cpp">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Boss.cpp">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -487,6 +493,12 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion">
       <UniqueIdentifier>{33e26b4f-4494-4a5e-9415-a8bbf100a730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\01%29Enemy\Normal">
+      <UniqueIdentifier>{1c9eeaa3-a37d-4e0c-8363-64310e6861d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\01%29Enemy\Boss">
+      <UniqueIdentifier>{25e8a919-3650-4188-b4bf-32b4a974466e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

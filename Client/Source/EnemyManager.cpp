@@ -62,19 +62,28 @@ void EnemyManager::Update()
 		BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 
 
-		Enemy_Spawn(Vector3(100.f, 20.f, 150.f), ENEMY_STATE::HOLD,
+		Enemy_Spawn(Vector3(0.f, 0.f, 100.f), ENEMY_STATE::HOLD,
 			tStatus,tGun,tMissile);
 	}
+
+	DEBUG_LOG(L"Remianed Enemy Count", m_iEnemyCount);
 }
 
-const int & EnemyManager::Get_EnemyCount() const
+int EnemyManager::Get_EnemyCount() const
 {
-	return (int)(Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY).size());
+	//size_t size = Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY).size();
+	//최적화를 위해서 그냥 멤버 변수루다가 넘기자
+	return  m_iEnemyCount;
 }
 
 list<GameObject*> EnemyManager::Get_EnemyList() const
 {
 	return Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY);
+}
+
+void EnemyManager::Add_EnemyCount(int _count)
+{
+	m_iEnemyCount += _count;
 }
 
 
@@ -153,5 +162,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos,
 	Enemy_col.radius = 1.f;
 	Enemy_col.collisionLayer = COLLISION_LAYER_ENEMY;
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
+	
+	++m_iEnemyCount;
 }
 

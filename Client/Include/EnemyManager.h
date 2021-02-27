@@ -26,11 +26,11 @@ public:
 	virtual void Update() override;
 
 public: /* Gettttt */
-	const int& Get_EnemyCount() const;
+	int Get_EnemyCount() const;
 	list<GameObject*> Get_EnemyList() const;
 
 public: /* Settttt */
-
+	void Add_EnemyCount(int _count);
 
 
 public: /* Funcs */
@@ -44,5 +44,5 @@ public: /* Funcs */
 
 private:
 	StateControl* m_pStateControl = nullptr;
-
+	int				m_iEnemyCount = 0;
 };

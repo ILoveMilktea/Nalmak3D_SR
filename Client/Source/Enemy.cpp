@@ -31,7 +31,7 @@ void Enemy::Update()
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
 	{
-		//State Change
+		//pattern change
 	}
 
 	Reloading_Gun();
@@ -48,6 +48,7 @@ void Enemy::Update()
 	DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
 	DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
 	DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
+	DEBUG_LOG(L"Current Pattern", m_gameObject->GetComponent<StateControl>()->GetCurStateString());
 #pragma endregion
 }
 
@@ -57,8 +58,12 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 	{
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
 		{
-			obj.GetGameObject()->GetComponent<StateControl>()
-				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
+			//m_gameObject->GetComponent<StateControl>()
+			//	->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
+			m_gameObject->GetComponent<StateControl>()
+					->SetState(L"Falling");
+		
+
 		}
 	}
 }

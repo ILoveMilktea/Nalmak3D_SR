@@ -67,14 +67,10 @@ void PlayerTopViewMove::TopViewMoving()
 	
 
 
-	//if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_ARROW))
-	//{
-	//	Lean(LEFT);
-	//}
-	//else if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_RIGHT_ARROW))
-	//{
-	//	Lean(RIGHT);
-	//}
+	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
+	{
+		Bullet_Manager::GetInstance()->Fire_Player(m_transform->position, m_transform->rotation, 150.f);
+	}
 
 
 

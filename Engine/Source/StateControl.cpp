@@ -44,6 +44,18 @@ void StateControl::Release()
 
 }
 
+const wstring & StateControl::GetCurStateString()
+{
+	for (auto& state : m_stateList)
+	{
+		if (state.second == m_state)
+		{
+			return state.first;
+		}
+	}
+	return L"";
+}
+
 void StateControl::InitState(wstring _stateName)
 {
 	if (m_stateList.end() == m_stateList.find(_stateName))
@@ -53,7 +65,7 @@ void StateControl::InitState(wstring _stateName)
 
 }
 
-void StateControl::SetState(wstring _stateName)
+void StateControl::SetState(const wstring& _stateName)
 {
 	if (m_stateList.end() == m_stateList.find(_stateName))
 		assert("Can't find state that name" && 0);

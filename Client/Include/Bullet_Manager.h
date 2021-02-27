@@ -38,7 +38,8 @@ public: /* for Enemy */
 	void Homing_Evasion(Vector2 _start, Vector2 _target);
 
 
-public:
+public: /* for Player */
+	void Fire_Player(Vector3 _start, Quaternion _rot, float _spd);
 	
 
 private:

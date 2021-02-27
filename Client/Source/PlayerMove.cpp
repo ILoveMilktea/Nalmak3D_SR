@@ -102,6 +102,12 @@ void PlayerMove::UpdateState()
 	m_playerInfo->AddSpeed(speed);
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
+	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
+	{
+		Bullet_Manager::GetInstance()->Fire_Player(m_transform->position, m_transform->rotation, 150.f);
+	}
+
+
 
 	TemproryAttackFunc();
 	DEBUG_LOG(L"POS" , m_transform);
