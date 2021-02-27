@@ -91,6 +91,8 @@ void MainGame::ApplicationSetting()
 
 void MainGame::SystemSetting()
 {
+	auto editor = INSTANTIATE()->AddComponent<EditController>();
+	editor->SetDontDestroy(true);
 	//m_engine->ActivateCollisionByLayer(COLLISION_LAYER_DEFAULT, COLLISION_LAYER_DEFAULT);
 	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_PLAYER, COLLISION_LAYER_ENEMY);
 	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_ENEMY, COLLISION_LAYER_PLAYER);
@@ -108,7 +110,7 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 
 
-	m_engine->SetStartScene(L"UILab");
+	m_engine->SetStartScene(L"garage");
 
 }
 

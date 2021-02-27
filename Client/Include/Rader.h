@@ -1,12 +1,13 @@
 #pragma once
 #include "Component.h"
+
+class PlayerInfoManager;
 class Rader :
 	public Component
 {
 public:
 	struct Desc
 	{
-		Transform* player = nullptr;
 		float findRange = 25.f;
 
 		int readyflight = 10;
@@ -16,7 +17,6 @@ public:
 	Rader(Desc* _desc);
 
 private:
-	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -33,7 +33,7 @@ private:
 	GameObject* m_playerIcon = nullptr;				// 중심 플레이어 기체
 	GameObject* m_stick = nullptr;					// 막대기
 
-	Transform* m_player = nullptr;
+	PlayerInfoManager* m_playerInfoManager = nullptr;
 
 	list<Transform*> m_enemy;
 	list<Vector2> m_iconPoint;

@@ -14,6 +14,8 @@
 #include "EnemyManager.h"
 
 #include "StageManager.h"
+
+#include "UIWindowFactory.h"
 PhantomScene::PhantomScene()
 {
 	
@@ -91,6 +93,5 @@ void PhantomScene::Initialize()
 
 	
 
-	
 	
 }

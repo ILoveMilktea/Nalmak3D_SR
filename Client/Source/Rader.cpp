@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Rader.h"
 
+#include "PlayerInfoManager.h"
 
 Rader::Rader(Desc * _desc)
 {
-	m_player = _desc->player;
 	m_findRange =_desc->findRange;
 
 	// icon ready
@@ -13,13 +13,11 @@ Rader::Rader(Desc * _desc)
 	{
 		SingleImage::Desc desc;
 		desc.textureName = L"flighticon";
-		//CanvasRenderer::Desc desc_cr;
-		//desc_cr.
 
 		auto icon =
 			INSTANTIATE()->
-			AddComponent<SingleImage>(&desc)->
 			AddComponent<CanvasRenderer>()->
+			AddComponent<SingleImage>(&desc)->
 			SetScale(8.f, 16.f, 0.f);
 
 		icon->SetActive(false);
@@ -29,27 +27,37 @@ Rader::Rader(Desc * _desc)
 
 void Rader::Initialize()
 {
+	m_playerInfoManager = PlayerInfoManager::GetInstance();
+
 	// circle ready
 	SingleImage::Desc desc;
 	desc.textureName = L"circle";
 	m_circleBackground =
 		INSTANTIATE()->
+		AddComponent<CanvasRenderer>()->
 		AddComponent<SingleImage>(&desc)->
-		SetPosition(200.f, WINCY - 200.f, 0.f)->
+		SetPosition(0.f, 0.f, 0.f)->
 		SetScale(400.f, 400.f, 0.f);
+	m_circleBackground->SetParents(m_transform);
 
 
 	SingleImage::Desc playerdesc;
 	playerdesc.textureName = L"flighticon";
 	m_playerIcon =
 		INSTANTIATE()->
+		AddComponent<CanvasRenderer>()->
 		AddComponent<SingleImage>(&playerdesc)->
-		SetPosition(200.f, WINCY - 200.f, 0.f)->
+		SetPosition(0.f, 0.f, 0.f)->
 		SetScale(8.f, 16.f, 0.f);
+
+	m_playerIcon->SetParents(m_transform);
 }
 
 void Rader::Update()
 {
+	if (!m_playerInfoManager->GetPlayer()->GetTransform())
+		return;
+
 	// 한바퀴 돌면 업뎃 하면 될듯
 	m_timer += TimeManager::GetInstance()->GetdeltaTime();
 	if (1.f <= m_timer)
@@ -71,8 +79,9 @@ void Rader::UpdateTarget()
 
 	for (auto& enemy : m_enemy)
 	{
+		Transform* tr = m_playerInfoManager->GetPlayer()->GetTransform();
 		Vector2 point = { enemy->position.x, enemy->position.z };
-		Vector2 dir = point - Vector2(m_player->position.x, m_player->position.z);
+		Vector2 dir = point - Vector2(tr->position.x, tr->position.z);
 		float length = D3DXVec2Length(&dir);
 
 		if (length < m_findRange)

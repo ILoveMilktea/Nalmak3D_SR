@@ -244,6 +244,7 @@
     <ClInclude Include="..\Include\TopViewCamera.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
+    <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="..\Include\UseItem.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />

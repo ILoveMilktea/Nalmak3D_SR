@@ -6,7 +6,7 @@
 #include "PlayerKitSelector.h"
 #include "PlayerInfoManager.h"
 
-#include "UILabScene.h"
+#include "UIWindowFactory.h"
 GarageScene::GarageScene()
 {
 }
@@ -50,20 +50,19 @@ void GarageScene::Initialize()
 		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
 	
-	
-		auto mainEquipWepon = UIFactory::CreateButton(
-			EventHandler([]() {
-			ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
-			PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
 
-		}));
-
-		mainEquipWepon->SetPosition(1600.f, 500.f, 0.f);
-	
-
-
+	// test button ----> UILab
 	{
-		// ----> UILab으로 이동
+		//auto mainEquipWepon = UIFactory::CreateButton(
+		//	EventHandler([]() {
+		//	ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
+		//	PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
+
+		//}));
+
+		//mainEquipWepon->SetPosition(1600.f, 500.f, 0.f);
+	
+
 
 		//auto offTheFieldButton = UIFactory::CreateButton(
 		//	EventHandler([]() {
@@ -73,7 +72,6 @@ void GarageScene::Initialize()
 		//offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
 	}
 
-	UILabScene::GarageMainWindow();
+	player->AddComponent<UIInteractor>();
+	UIWindowFactory::GarageMainWindow(player);
 }
-
-

@@ -15,6 +15,7 @@
 #include "Bullet_Manager.h"
 
 #include "StageManager.h"
+#include "UIWindowFactory.h"
 
 DogFightState::DogFightState()
 {
@@ -44,7 +45,6 @@ void DogFightState::Initialize()
 	render.mtrlName = L"default"; // 210223화 12:50 전근희 제대로 안나와서 설정 바꿨음
 	render.meshName = L"flight";
 	m_Player->AddComponent<MeshRenderer>(&render);
-	m_Player->AddComponent<PlayerKitSelector>();
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
 	
@@ -53,7 +53,7 @@ void DogFightState::Initialize()
 	m_Player->AddComponent<SphereCollider>();
 
 	//m_Player->AddComponent<PlayerToTopView>();
-
+	PlayerInfoManager::GetInstance()->SetPlayer(m_Player);
 	
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
@@ -62,17 +62,22 @@ void DogFightState::Initialize()
 
 	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 
+	UIWindowFactory::DogfightStageWindow();
+
 	EnemyManager::GetInstance();
 }
 
 void DogFightState::EnterState()
 {
-	
 }
 
 void DogFightState::UpdateState()
 {
 	DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+	{
+	}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
 	{

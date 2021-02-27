@@ -3,7 +3,10 @@
 #define __UIFACTORY_H__
 
 #include "Core.h"
+#include "Rader.h"
 #include "EditController.h"
+#include "PlayerInfoManager.h"
+
 class GameObject;
 
 //===============================
@@ -162,7 +165,7 @@ public:
 	text + fill
 
 	*/
-	public:
+public:
 
 	static GameObject* Prefab_MenuTitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
@@ -171,6 +174,7 @@ public:
 		desc.width = 12;
 		desc.height = 30;
 		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 		
 		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuTitle");
@@ -203,6 +207,7 @@ public:
 		desc.width = 10;
 		desc.height = 25;
 		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		menu->AddComponent<Text>(&desc);
@@ -218,6 +223,7 @@ public:
 		desc.width = 10;
 		desc.height = 25;
 		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"ItemTitle");
@@ -233,6 +239,7 @@ public:
 		desc.width = 8;
 		desc.height = 20;
 		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"ItemSubtitle");
@@ -248,6 +255,7 @@ public:
 		desc.width = 10;
 		desc.height = 25;
 		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto contents = INSTANTIATE(OBJECT_TAG_UI, L"ItemContents_Name");
@@ -265,6 +273,7 @@ public:
 		desc.width = 12;
 		desc.height = 24;
 		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto script = INSTANTIATE(OBJECT_TAG_UI, L"Script");
@@ -279,7 +288,7 @@ public:
 		
 	}
 
-	static GameObject* Prefab_ItemContents_Bar(const float* _targetValue, float _max, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	static GameObject* Prefab_ItemContents_Bar(CANVAS_GROUP _group = CANVAS_GROUP_NONE, float _maxValue = 100.f, float _minValue = 0.f)
 	{
 		auto bar = INSTANTIATE();
 
@@ -288,22 +297,92 @@ public:
 		background->SetScale(160.f, 25.f);
 		auto fill = CreateImage(_group, L"UIRed");
 		fill->SetPosition(0.f, 0.f, 0.f);
-		fill->SetScale(160.f, 25.f);
+		fill->SetScale(152.f, 21.f);
 
 		Slider::Desc desc;
 		desc.background = background->GetTransform();
 		desc.fill = fill->GetTransform();
-		desc.targetValue = _targetValue;
-		desc.maxValue = _max;
-
+		desc.maxValue = _maxValue;
+		desc.minValue = _minValue;
+		
 		bar->AddComponent<CanvasRenderer>();
 		bar->AddComponent<Slider>(&desc);
+
+		bar->GetComponent<Slider>()->SetCurrentValue(_maxValue);
 		
 		background->SetParents(bar);
 		fill->SetParents(bar);
 
 		return bar;
 	}
+
+public:
+
+	static GameObject* Prefab_StageInfo_TimeText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 30;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(25, 200, 25, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_TimeText");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+		text->SetScale(60.f, 30.f);
+		return text;
+	}
+	static GameObject* Prefab_StageInfo_ScoreText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 30;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(25, 200, 25, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_ScoreText");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+		text->SetScale(84.f, 30.f);
+		return text;
+	}
+	static GameObject* Prefab_StageInfo_TargetText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 30;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(25, 200, 25, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"StageInfo_TargetText");
+		text->AddComponent<CanvasRenderer>();
+		text->AddComponent<Text>(&desc);
+		text->SetScale(100.f, 30.f);
+		return text;
+	}
+
+	static GameObject* Prefab_Rader(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// rader
+		Rader::Desc desc;
+		desc.findRange = 100.f;
+		desc.readyflight = 5;
+
+		auto rader = INSTANTIATE()->
+			AddComponent<CanvasRenderer>()->
+			AddComponent<Rader>(&desc);
+		
+		rader->SetScale(300.f, 300.f);
+
+		return rader;
+	}
+
 public:
 	static GameObject* CreateEditController()
 	{
