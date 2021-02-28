@@ -14,6 +14,12 @@ Scripter::Scripter(Desc* _desc)
 	m_dialogueList = _desc->startDialogue;
 }
 
+Scripter::~Scripter()
+{
+	m_dialogueList.clear();
+	m_dialogueList.shrink_to_fit();
+}
+
 void Scripter::Initialize()
 {
 	m_dialogueIndex = 0;

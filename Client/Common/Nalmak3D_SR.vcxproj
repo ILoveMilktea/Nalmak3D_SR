@@ -198,6 +198,7 @@
     <ClInclude Include="..\Include\Bullet.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
+    <ClInclude Include="..\Include\Crosshair.h" />
     <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\Define.h" />
     <ClInclude Include="..\Include\DogFightState.h" />
@@ -265,6 +266,7 @@
     <ClCompile Include="..\Source\Bullet.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
+    <ClCompile Include="..\Source\Crosshair.cpp" />
     <ClCompile Include="..\Source\CustomDebuger.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp" />
     <ClCompile Include="..\Source\EditController.cpp" />

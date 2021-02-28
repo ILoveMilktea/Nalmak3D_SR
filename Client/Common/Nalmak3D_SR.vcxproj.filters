@@ -190,6 +190,7 @@
     <ClInclude Include="..\Include\ScriptWait.h">
       <Filter>02.Component\03.Script\State</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Crosshair.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -353,6 +354,7 @@
     <ClCompile Include="..\Source\ScriptWait.cpp">
       <Filter>02.Component\03.Script\State</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Crosshair.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

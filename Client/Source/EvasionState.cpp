@@ -38,6 +38,9 @@ void EvasionState::EnterState()
 	m_Player->GetTransform()->SetRotation(0, 0, 0);
 
 	m_bEnter = true;
+
+	// UI test
+	CanvasGroup::GetInstance()->SetObjectActive(CANVAS_GROUP_STAGE1, false);
 }
 
 void EvasionState::UpdateState()

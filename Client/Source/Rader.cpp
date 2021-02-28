@@ -37,7 +37,7 @@ void Rader::Initialize()
 		AddComponent<CanvasRenderer>()->
 		AddComponent<SingleImage>(&desc)->
 		SetPosition(0.f, 0.f, 0.f)->
-		SetScale(400.f, 400.f, 0.f);
+		SetScale(300.f, 300.f, 0.f);
 	m_circleBackground->SetParents(m_transform);
 
 

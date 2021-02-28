@@ -54,8 +54,14 @@ void Number::PrintTime_H_M_S()
 	int hourValue = time;
 
 	wstring hour	= to_wstring(hourValue);
+	if (hourValue < 10)
+		hour = L"0" + hour;
 	wstring minute	= to_wstring(minuteValue);
+	if (minuteValue < 10)
+		minute = L"0" + minute;
 	wstring second	= to_wstring(secondValue);
+	if (secondValue < 10)
+		second = L"0" + second;
 
 	wstring timeText = hour + L":" + minute + L":" + second;
 	SetText(timeText);
@@ -72,8 +78,14 @@ void Number::PrintTime_M_S_MS()
 	int minuteValue = time % 60;
 
 	wstring minute = to_wstring(minuteValue);
-	wstring second = to_wstring(secondValue);
+	if (minuteValue < 10)
+		minute = L"0" + minute;
+	wstring second = to_wstring(secondValue);	
+	if (secondValue < 10)
+		second = L"0" + second;
 	wstring millisecond = to_wstring(millisecondValue);
+	if (millisecondValue < 10)
+		millisecond = L"0" + millisecond;
 
 	wstring timeText = minute + L":" + second + L":" + millisecond;
 	SetText(timeText);

@@ -19,6 +19,7 @@ public:
 
 public:
 	Scripter(Desc* _desc);
+	~Scripter();
 
 	virtual void Initialize() override;
 	virtual void Update() override;
