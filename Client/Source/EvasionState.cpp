@@ -48,6 +48,9 @@ void EvasionState::EnterState()
 	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-20.f, 0.f, 30.f), ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
 
 	m_bEnter = true;
+
+	// UI test
+	CanvasGroup::GetInstance()->SetObjectActive(CANVAS_GROUP_STAGE1, false);
 }
 
 void EvasionState::UpdateState()

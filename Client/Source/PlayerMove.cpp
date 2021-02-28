@@ -5,7 +5,6 @@
 
 #include "Bullet_Manager.h"
 
-#include "AimMissile.h"
 PlayerMove::PlayerMove()
 {
 }
@@ -128,7 +127,7 @@ void PlayerMove::TemproryAttackFunc()
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
-		m_useItem->Shooting(true);
+		
 	}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))

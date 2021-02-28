@@ -11,7 +11,6 @@
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
-#include "PlayerKitSelector.h"
 #include "Bullet_Manager.h"
 
 #include "StageManager.h"
@@ -68,7 +67,10 @@ void DogFightState::EnterState()
 	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	*/
 
-	PlayerInfoManager::GetInstance()->SetPlayer(m_Player);
+	auto infoManager = PlayerInfoManager::GetInstance();
+	infoManager->SetTimeLimit(2000.f);
+	infoManager->SetScore(123456.f);
+	infoManager->SetPlayer(m_Player);
 
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
@@ -77,7 +79,8 @@ void DogFightState::EnterState()
 
 	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 
-	UIWindowFactory::DogfightStageWindow();
+	m_Player->AddComponent<UIInteractor>();
+	UIWindowFactory::DogfightStageWindow(m_Player);
 
 	EnemyManager::GetInstance();
 

@@ -7,11 +7,10 @@
 #include "Nalmak_Include.h"
 class IState;
 
-
-// ÇØ´ç ÄÄÆ÷³ÍÆ® Ãß°¡½Ã fsm ÆĞÅÏ »ç¿ë°¡´É
-// IState¸¦ »ó¼Ó¹ŞÀº »óÅÂ¸¦ ¸¸µé°í ÇØ´ç ÄÄÆ÷³ÍÆ®¿¡ AddStateÇÔ¼ö·Î µî·Ï
-// SetState·Î ´Ù¸¥ »óÅÂ·Î ÀüÈ¯ °¡´É
-// SetInteger ,SetFloat µîÀ¸·Î ´Ù¸¥ »óÅÂ·Î ÀüÈ¯ÇÏ´õ¶óµµ µ¥ÀÌÅÍ ±³È¯°¡´É
+// í•´ë‹¹ ì»´í¬ë„ŒíŠ¸ ì¶”ê°€ì‹œ fsm íŒ¨í„´ ì‚¬ìš©ê°€ëŠ¥
+// IStateë¥¼ ìƒì†ë°›ì€ ìƒíƒœë¥¼ ë§Œë“¤ê³  í•´ë‹¹ ì»´í¬ë„ŒíŠ¸ì— AddStateí•¨ìˆ˜ë¡œ ë“±ë¡
+// SetStateë¡œ ë‹¤ë¥¸ ìƒíƒœë¡œ ì „í™˜ ê°€ëŠ¥
+// SetInteger ,SetFloat ë“±ìœ¼ë¡œ ë‹¤ë¥¸ ìƒíƒœë¡œ ì „í™˜í•˜ë”ë¼ë„ ë°ì´í„° êµí™˜ê°€ëŠ¥
 class NALMAK_DLL StateControl :
 	public Component
 {
@@ -23,7 +22,6 @@ public:
 	StateControl(Desc* _desc);
 	~StateControl();
 private:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -55,7 +53,7 @@ public:
 #ifdef _DEBUG
 		if (state == m_stateList.end())
 		{
-			assert(L"¾Æ ¤»¤» ±×·± state ¾ø´Ù°í ¤»¤»");
+			assert(L"can't find state");
 		}
 #endif
 
@@ -71,11 +69,12 @@ public:
 	void SetInteger(wstring _key, int _value);
 	void SetFloat(wstring _key, float _value);
 	void SetVector3(wstring _key, const Vector3& _value);
+	void SetString(wstring _key, const wstring& _value);
 
 	int GetInteger(wstring _key);
 	float GetFloat(wstring _key);
 	const Vector3& GetVector3(wstring _key);
-
+	const wstring& GetString(wstring _key);
 private:
 	IState* m_state;
 	map<wstring, IState*> m_stateList;

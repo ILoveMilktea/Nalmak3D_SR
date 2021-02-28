@@ -66,27 +66,31 @@ typedef struct tagEnemy
 }ENEMY_STATUS;
 
 
-typedef struct Desc
+typedef struct tagItemInfo
 {
-	Desc() {};
-	Desc(const Desc& other) {
-		itemtype = other.itemtype;
+	tagItemInfo() {};
+	tagItemInfo(const tagItemInfo& other) {
+		//itemtype = other.itemtype;
+		costGold = other.costGold;
+		itemName = other.itemName;
 		weaponSpeed = other.weaponSpeed;
 		delay = other.delay;
 		weaponAttak = other.weaponAttak;
 		weaponAmmo = other.weaponAmmo;
 	};
 
-	Desc(ITEMTYPE & _itemType, float& _weaponSpeed, float& _delay, int& _weaponAttak, int& _weaponAmmo) :
-		itemtype(_itemType), weaponSpeed(_weaponSpeed), delay(_delay) , weaponAttak(_weaponAttak), weaponAmmo(_weaponAmmo)
+	tagItemInfo(const wstring& _itemName, float& _weaponSpeed, float& _delay, int& _weaponAttak, int& _weaponAmmo, int& _gold) :
+		 weaponSpeed(_weaponSpeed), delay(_delay) , weaponAttak(_weaponAttak), weaponAmmo(_weaponAmmo), costGold(_gold)
 	{
-
+		//strcpy X
+		itemName = _itemName;
 	};
 
-	ITEMTYPE itemtype;
+	wstring itemName;
 	float	 weaponSpeed;
 	float	 delay;
 	int	 weaponAttak;
 	int  weaponAmmo;
+	int  costGold;
 
-}ItemDesc;
+}ITEMINFO;

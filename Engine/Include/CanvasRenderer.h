@@ -31,6 +31,7 @@ public:
 
 	void Render_Image();
 	void Render_Text();
+	void Render_Number();
 public:
 	void UpdateBoundary();
 	bool IsCursorOnRect();

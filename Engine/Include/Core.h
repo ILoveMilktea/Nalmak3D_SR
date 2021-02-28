@@ -58,6 +58,7 @@
 #include "RenderManager.h"
 #include "Toggle.h"
 #include "Slider.h"
+#include "Number.h"
 #pragma endregion
 
 class CollisionManager;

@@ -107,13 +107,22 @@ void StateControl::SetVector3(wstring _key, const Vector3 & _value)
 	m_blackBoardVector3[_key] = _value;
 }
 
+void StateControl::SetString(wstring _key, const wstring& _value)
+{
+	m_blackBoardString[_key] = _value;
+}
+
 
 
 int StateControl::GetInteger(wstring _key)
 {
 	if (m_blackBoardInteger.find(_key) == m_blackBoardInteger.end())
 	{
-		assert(L"Can't find integer data has that key!" && 0);
+#ifdef _DEBUG
+		{
+			assert(L"Can't find integer data has that key!" && 0);
+		}
+#endif
 	}
 
 	return m_blackBoardInteger[_key];
@@ -123,7 +132,11 @@ float StateControl::GetFloat(wstring _key)
 {
 	if (m_blackBoardFloat.find(_key) == m_blackBoardFloat.end())
 	{
-		assert(L"Can't find integer data has that key!" && 0);
+#ifdef _DEBUG
+		{
+			assert(L"Can't find integer data has that key!" && 0);
+		}
+#endif
 	}
 
 	return m_blackBoardFloat[_key];
@@ -133,9 +146,27 @@ const Vector3 & StateControl::GetVector3(wstring _key)
 {
 	if (m_blackBoardVector3.find(_key) == m_blackBoardVector3.end())
 	{
-		assert(L"Can't find integer data has that key!" && 0);
+#ifdef _DEBUG
+		{
+			assert(L"Can't find integer data has that key!" && 0);
+		}
+#endif
 	}
 
 	return m_blackBoardVector3[_key];
+}
+
+const wstring& StateControl::GetString(wstring _key)
+{
+	if (m_blackBoardString.find(_key) == m_blackBoardString.end())
+	{
+#ifdef _DEBUG
+		{
+		assert(L"Can't find integer data has that key!" && 0);
+		}
+#endif
+	}
+
+	return m_blackBoardString[_key];
 }
 

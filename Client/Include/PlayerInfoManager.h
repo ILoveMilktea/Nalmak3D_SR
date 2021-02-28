@@ -9,6 +9,7 @@ public:
 		int attack = 30;
 		int hp = 100;
 		int maxHp = 100;
+		int gold = 2000;
 		float minSpeed = 1;
 		float maxSpeed = 30;
 		float speed = 5;
@@ -20,7 +21,6 @@ public:
 
 
 public:
-	// Component��(��) ���� ���ӵ�
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -38,8 +38,11 @@ public:
 	void SetRollAngle(const float& _value);
 	void SetMinSpeed(const float& _value);
 	void SetMaxSpeed(const float& _value);
-	void SetPlayer(GameObject* _player);
 
+	void SetTimeLimit(const float& _value);
+	void SetScore(const float& _value);
+	void SetPlayer(GameObject* _player);
+	void MinGold(int _value);
 public:
 	const int& GetHp() const;
 	const int& GetAttack() const;
@@ -50,12 +53,13 @@ public:
 	const float& GetRollAngle() {return m_rollAngle;}
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
-	ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
-	//const ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
+	const int& GetGold() { return m_gold; }
+
+	// temporary members
+	const float& GetTimeLimit() { return m_timelimit; }
+	const float& GetScore() { return m_score; }
 	GameObject* GetPlayer() { return m_player; }
-	
-public:
-	void EquipWepon(PARTS_NUM _enumID ,ItemDesc* _desc);
+	vector<wstring>& GetInven() { return m_haveItemList; }
 
 private:
 	static PlayerInfoManager* m_instance;
@@ -63,6 +67,7 @@ private:
 	int m_attack = 0;
 	int m_hp = 0;
 	int m_maxHp = 0;
+	int m_gold = 0;
 
 	float m_speed = 0;
 	float m_rollAngle;
@@ -71,10 +76,12 @@ private:
 	float	m_maxSpeed = 0;
 	Vector3 m_addedRot = {};
 
+	// temporary members
+	float m_timelimit = 0.f;
+	float m_score = 0.f;
 	GameObject* m_player;
 
-
+	bool EquipItem(const wstring& _equipItemName);
 private:
-	ItemDesc* m_playerItem[PARTS_NUM::PARTS_MAX];
-
+	vector<wstring> m_haveItemList;
 };

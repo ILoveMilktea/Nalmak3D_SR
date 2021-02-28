@@ -1,28 +1,24 @@
 #pragma once
-#ifndef __PAUSESTATE_H__
-#define __PAUSESTATE_H__
-
+#ifndef __SCRIPTEND_H__
+#define __SCRIPTEND_H__
 
 #include "IState.h"
-class PauseState :
+class Scripter;
+class ScriptEnd :
 	public IState
 {
 public:
-	PauseState();
-	~PauseState();
+	ScriptEnd();
+	~ScriptEnd();
 
-
-
-	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
-
 	virtual void EnterState() override;
-
 	virtual void UpdateState() override;
-
 	virtual void ExitState() override;
 
+private:
+	Scripter* m_scripter;
 };
 
 
-#endif // !__PAUSESTATE_H__
+#endif // !__SCRIPTEND_H__

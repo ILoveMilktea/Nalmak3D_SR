@@ -24,14 +24,14 @@ public:
 	};
 	Text(Desc* _desc);
 private:
-	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
 	virtual void PreRender() override;
 	virtual void Release() override;
+
 public:
-	void RenderText();
+	virtual void RenderText();
 
 	void SetText(wstring _text) { m_text = _text; }
 	void SetColor(const D3DXCOLOR& _color) { m_color = _color; }

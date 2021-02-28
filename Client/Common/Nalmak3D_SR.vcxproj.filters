@@ -97,7 +97,6 @@
     <ClInclude Include="..\Include\Missile.h">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\Homing.h">
       <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
     </ClInclude>
@@ -109,8 +108,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\Ground.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
-    <ClInclude Include="..\Include\EditController.h" />
-    <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\DogFightState.h">
       <Filter>04.Combat State\00%29DogFight</Filter>
@@ -127,7 +124,6 @@
     <ClInclude Include="..\Include\PlayerIdle.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PauseState.h" />
     <ClInclude Include="..\Include\Define.h">
       <Filter>98.PreCompile\00.Define</Filter>
     </ClInclude>
@@ -137,17 +133,8 @@
     <ClInclude Include="..\Include\Enemy_Death.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerKitSelector.h">
-      <Filter>02.Component\00.Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Struct.h">
       <Filter>98.PreCompile\03.Struct</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\AimMissile.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\UseItem.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
@@ -161,15 +148,35 @@
     <ClInclude Include="..\Include\MachineGun.h">
       <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UIWindowFactory.h" />
-    <ClInclude Include="..\Include\UseItem.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    <ClInclude Include="..\Include\UIFactory.h">
+      <Filter>97.Factory</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Shooter.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    <ClInclude Include="..\Include\UIWindowFactory.h">
+      <Filter>97.Factory</Filter>
     </ClInclude>
-    <ClInclude Include="DeadTimer.h">
-      <Filter>02.Component</Filter>
+    <ClInclude Include="..\Include\ScriptReady.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptEnd.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPause.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPlay.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptWait.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ItemManager.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerItem.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AimMissile.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy.h">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
@@ -182,6 +189,25 @@
     </ClInclude>
     <ClInclude Include="..\Include\BossStageCamera.h">
       <Filter>02.Component\00.Manager\FixCamera\BossStageCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Crosshair.h">
+      <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Scripter.h">
+      <Filter>02.Component\03.Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DeadTimer.h" />
+    <ClInclude Include="..\Include\UIWindowFactory.h">
+      <Filter>97.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CustomDebuger.h">
+      <Filter>96.Debuger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EditController.h">
+      <Filter>96.Debuger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerShooter.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -279,8 +305,6 @@
       <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Ground.cpp" />
-    <ClCompile Include="..\Source\EditController.cpp" />
-    <ClCompile Include="..\Source\CustomDebuger.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp">
       <Filter>04.Combat State\00%29DogFight</Filter>
@@ -297,21 +321,11 @@
     <ClCompile Include="..\Source\PlayerIdle.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PauseState.cpp" />
     <ClCompile Include="..\Source\Enemy_Drop.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\att_Drop</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Death.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PlayerKitSelector.cpp">
-      <Filter>02.Component\00.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\AimMissile.cpp">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\UseItem.cpp">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
@@ -325,11 +339,20 @@
     <ClCompile Include="..\Source\MachineGun.cpp">
       <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Shooter.cpp">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    <ClCompile Include="..\Source\ScriptEnd.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
     </ClCompile>
-    <ClCompile Include="DeadTimer.cpp">
-      <Filter>02.Component</Filter>
+    <ClCompile Include="..\Source\ScriptPause.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptPlay.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptReady.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptWait.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
@@ -342,6 +365,31 @@
     </ClCompile>
     <ClCompile Include="..\Source\BossStageCamera.cpp">
       <Filter>02.Component\00.Manager\FixCamera\BossStageCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ItemManager.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerItem.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AimMissile.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Crosshair.cpp">
+      <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Scripter.cpp">
+      <Filter>02.Component\03.Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DeadTimer.cpp" />
+    <ClCompile Include="..\Source\CustomDebuger.cpp">
+      <Filter>96.Debuger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EditController.cpp">
+      <Filter>96.Debuger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerShooter.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -497,7 +545,7 @@
     <Filter Include="98.PreCompile\03.Struct">
       <UniqueIdentifier>{40096f35-81ec-4923-bda7-8bb44ae8d51d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\PlayerKit">
+    <Filter Include="02.Component\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling">
@@ -523,6 +571,18 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Player\PlayerFSM\BossStageMove">
       <UniqueIdentifier>{579c4214-40c5-4439-ad3d-35a3f2a7c402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Factory">
+      <UniqueIdentifier>{be2dea7a-aa32-49b7-bc71-46f57bd4b57f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script">
+      <UniqueIdentifier>{09811998-c3f5-48ce-9d6a-1d5d36ab622e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State">
+      <UniqueIdentifier>{0ab8d627-438f-44e8-926f-75128c57cd86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Debuger">
+      <UniqueIdentifier>{e5d73c33-bd55-4534-8849-38459f478dd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
