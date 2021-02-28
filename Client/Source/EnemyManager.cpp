@@ -2,6 +2,7 @@
 #include "../Include/EnemyManager.h"
 
 #include "Enemy.h"
+#include "Boss.h"
 
 #include "Enemy_Idle.h"
 #include "Enemy_Chase.h"
@@ -50,7 +51,7 @@ void EnemyManager::DeleteInstance()
 void EnemyManager::Initialize()
 {//유니티의 스따뜨
 
-
+	
 }
 
 void EnemyManager::Update()
@@ -88,8 +89,15 @@ void EnemyManager::Add_EnemyCount(int _count)
 
 
 
+void EnemyManager::Destroy_AllEnemy()
+{
+	for (auto& enemy : Get_EnemyList())
+	{
+		DESTROY(enemy);
+	}
+}
 
-void EnemyManager::Enemy_Spawn(Vector3 _pos, 
+void EnemyManager::Enemy_Spawn(Vector3 _pos,
 	ENEMY_STATE _initState, ENEMY_STATUS _status, 
 	BULLET_STATUS _gun, BULLET_STATUS _missile, BULLET_STATUS _homing)
 {
@@ -164,5 +172,29 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos,
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
 	
 	++m_iEnemyCount;
+}
+
+void EnemyManager::Boss_Spawn()
+{
+	GameObject* Boss_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Boss");
+	Boss_obj->SetPosition(Vector3(0.f, 0.f, 200.f));
+	Boss_obj->SetScale(100.f, 200.f, 100.f);
+
+	Boss::Desc Boss_Desc;
+	/*desc 세팅*/
+	Boss_obj->AddComponent<Boss>(&Boss_Desc);
+
+	MeshRenderer::Desc Boss_Mesh;
+	Boss_Mesh.mtrlName = L"niniz";
+	Boss_Mesh.meshName = L"box";
+	Boss_obj->AddComponent<MeshRenderer>(&Boss_Mesh);
+
+	SphereCollider::Desc Boss_col;
+	Boss_col.radius = 100.f;
+	Boss_col.collisionLayer = COLLISION_LAYER_ENEMY;
+	Boss_obj->AddComponent<SphereCollider>(&Boss_col);
+
+	++m_iEnemyCount;
+
 }
 

@@ -177,6 +177,12 @@
     <ClInclude Include="..\Include\Boss.h">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\PlayerBossStageMove.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\BossStageCamera.h">
+      <Filter>02.Component\00.Manager\FixCamera\BossStageCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -330,6 +336,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\Boss.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerBossStageMove.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\BossStageCamera.cpp">
+      <Filter>02.Component\00.Manager\FixCamera\BossStageCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -499,6 +511,18 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\01%29Enemy\Boss">
       <UniqueIdentifier>{25e8a919-3650-4188-b4bf-32b4a974466e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion">
+      <UniqueIdentifier>{a62a8d0f-f021-4dc7-a7b5-cee1959531c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\04%29Boss_Pattern">
+      <UniqueIdentifier>{f839a401-4a80-421c-aa04-ee526e7ee845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\FixCamera\BossStageCamera">
+      <UniqueIdentifier>{80bf70f9-492b-41d5-9ff8-eb38719eb005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\BossStageMove">
+      <UniqueIdentifier>{579c4214-40c5-4439-ad3d-35a3f2a7c402}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
