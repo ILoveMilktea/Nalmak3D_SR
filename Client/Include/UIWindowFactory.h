@@ -6,9 +6,10 @@
 #include "UIFactory.h"
 
 #include "PlayerInfoManager.h"
-#include "PlayerKitSelector.h"
 #include "UIInteractor.h"
 #include "Scripter.h"
+#include "ItemManager.h"
+
 class UIWindowFactory
 {
 public:
@@ -45,16 +46,15 @@ public:
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND);
 				menu->SetPosition(576.f, 230.f);
 			}
-			// Menu 2 - WEAPON (Button)
+			// Menu 2 - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
 			{
-				EventHandler eventFunc = EventHandler([]() {
-					ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
-					PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS, ItemDescInfo);
+				EventHandler eventFunc = EventHandler([=]() {
+
+					ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
 
 				});
-
-				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"SELECT WEAPON", CANVAS_GROUP_MAINWND);
-				menu->SetPosition(576.f, 270.f);
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
+				menu->SetPosition(1600.f, 600.f);
 			}
 			// Menu 3 - SKILL (Button)
 			{
@@ -71,7 +71,7 @@ public:
 		}
 		// description (text)
 		{
-			auto script = UIFactory::Prefab_ItemExplane(L"ÀÌ°÷Àº ¾Æ¸¶ ¼±ÅÃÇÑ ±âÃ¼¿¡ ´ëÇØ ¼³¸íÇÏ´Â °÷ÀÔ´Ï´Ù. ±×·±µ¥ ÁÙ¹Ù²Þ ¹®Á¦¾øÀÌ µÇ³ª¿ä???????", CANVAS_GROUP_MAINWND);
+			auto script = UIFactory::Prefab_ItemExplane(L"ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½Æ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½. ï¿½×·ï¿½ï¿½ï¿½ ï¿½Ù¹Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç³ï¿½ï¿½ï¿½???????", CANVAS_GROUP_MAINWND);
 			script->SetPosition(576.f, 880.f);
 		}
 
@@ -162,8 +162,8 @@ public:
 						bar->GetComponent<Slider>()->UpdateFillAmount(setValueFunc, getValueFunc);
 					});
 
-					_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc); 
-					
+					_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
+
 					bar->SetPosition(1740.f, 320.f);
 				}
 
@@ -183,12 +183,12 @@ public:
 						bar->GetComponent<Slider>()->UpdateFillAmount(setValueFunc, getValueFunc);
 					});
 
-					_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc); 
-					
+					_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
+
 					bar->SetPosition(1740.f, 350.f);
 				}
 
-				// ³ªÁß¿¡ Ãß°¡
+				// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ß°ï¿½
 				{
 					auto name = UIFactory::Prefab_ItemContents_Name(L"ADDITIANAL");
 					name->SetPosition(1555.f, 380.f);
@@ -205,8 +205,8 @@ public:
 						bar->GetComponent<Slider>()->UpdateFillAmount(setValueFunc, getValueFunc);
 					});
 
-					_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc); 
-					
+					_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
+
 					bar->SetPosition(1740.f, 380.f);
 				}
 			}
@@ -255,7 +255,7 @@ public:
 					EventHandler([=]() {
 					timeNumber->GetComponent<Number>()->UpdateValue(setValueFunc, getValueFunc);
 				});
-				
+
 				_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
 			}
 			// score
@@ -274,7 +274,7 @@ public:
 					GetFloatFunc([=]() {
 					return PlayerInfoManager::GetInstance()->GetScore();
 				});
-				
+
 				EventHandler eventFunc =
 					EventHandler([=]() {
 					scoreNumber->GetComponent<Number>()->UpdateValue(setValueFunc, getValueFunc);
@@ -403,7 +403,7 @@ public:
 			auto rader = UIFactory::Prefab_Rader(CANVAS_GROUP_STAGE1);
 			rader->SetPosition(250.f, 875.f);
 		}
-		
+
 		// Player Info
 		{
 			float interval = 36.f;
@@ -441,7 +441,7 @@ public:
 
 				GetFloatFunc getValueFunc =
 					GetFloatFunc([=]() {
-					return 5.f/* ³ªÁß¿¡ skill ³²Àº¼ö? */;
+					return 5.f/* ï¿½ï¿½ï¿½ß¿ï¿½ skill ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? */;
 				});
 
 				EventHandler eventFunc =
@@ -517,7 +517,7 @@ public:
 				img->SetPosition(1770.f, 960.f);
 			}
 		}
-		
+
 	}
 
 	static void DogfightScript()
@@ -531,8 +531,8 @@ public:
 		// sample script
 		vector<Dialogue> list;
 		{
-			wstring title = L"Àü±ÙÈñ";
-			wstring script = L"<< Çà´Ôµé Á¦°¡ »ý°¢À» ÇØºÃ´Âµ¥ ¸»ÀÌÁÒ >>";
+			wstring title = L"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+			wstring script = L"<< ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ØºÃ´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ >>";
 
 			Dialogue dialogue;
 			dialogue.first = title;
@@ -540,16 +540,16 @@ public:
 
 			list.emplace_back(dialogue);
 
-			script = L"<< ÀÌ°Å ¾î¶»°Ô µ¿ÀÛÇÏ´Â °Å¿¡¿ä? >>";
+			script = L"<< ï¿½Ì°ï¿½ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Å¿ï¿½ï¿½ï¿½? >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< ¾Æ ÀÌ¶ó¸é µÅ¿ä? >>";
+			script = L"<< ï¿½ï¿½ ï¿½Ì¶ï¿½ï¿½ï¿½ ï¿½Å¿ï¿½? >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< Å©... ¿À´Ãµµ ÇÏ³ª ¹è¿ö °©´Ï´Ù. >>";
+			script = L"<< Å©... ï¿½ï¿½ï¿½Ãµï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½. >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< ¾î¶ó..? ÀÌ·¸°Ô ½±°Ô ÀÌÇØÇÏ´Â ³ª, »ç½ÇÀº ÀÌ ÆÀ ¿¡ÀÌ½º ÀÏ Áöµµ..? >>";
+			script = L"<< ï¿½ï¿½ï¿½ï¿½..? ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½..? >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 		}

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\PlayerInfoManager.h"
-
+#include "ItemManager.h"
 
 PlayerInfoManager*::PlayerInfoManager::m_instance = nullptr;
 
@@ -12,7 +12,8 @@ PlayerInfoManager::PlayerInfoManager(Desc * _Desc)
 	m_hp = m_maxHp;
 
 	m_maxSpeed = _Desc->maxSpeed;
-	 
+	m_gold = _Desc->gold;
+
 	m_player = nullptr;
 }
 
@@ -26,6 +27,10 @@ void PlayerInfoManager::Initialize()
 
 void PlayerInfoManager::Update()
 {
+	DEBUG_LOG(L"Gold", m_gold);
+	DEBUG_LOG(L"�κ� ���� ������", m_haveItemList.size());
+
+
 	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();
 }
 
@@ -44,7 +49,7 @@ void PlayerInfoManager::DeleteInstance()
 {
 	if (m_instance)
 		DESTROY(m_instance->GetGameObject());
-	
+
 }
 
 
@@ -119,6 +124,13 @@ void PlayerInfoManager::SetPlayer(GameObject * _player)
 	m_player = _player;
 }
 
+void PlayerInfoManager::MinGold(int _value)
+{
+	if (m_gold <= 0)
+		return;
+	m_gold -= _value;
+}
+
 const int & PlayerInfoManager::GetHp() const
 {
 	return m_hp;
@@ -144,10 +156,9 @@ const float & PlayerInfoManager::GetDirSenser() const
 	return m_dirsensor;
 }
 
-
-void PlayerInfoManager::EquipWepon(PARTS_NUM _enumID, ItemDesc * _desc)
+bool PlayerInfoManager::EquipItem(const wstring & _equipItemName)
 {
-	m_playerItem[_enumID] = _desc;
+	//
+
+	return false;
 }
-
-

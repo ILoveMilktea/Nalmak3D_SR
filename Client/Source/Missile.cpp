@@ -7,6 +7,9 @@
 
 Missile::Missile(Desc * _desc)
 {
+	m_iMinDmg = _desc->iMinDmg;
+	m_iMaxDmg = _desc->iMaxDmg;
+
 	m_fMaxSpd = _desc->fMaxSpd;
 }
 
@@ -37,13 +40,28 @@ void Missile::Update()
 		m_transform->position += m_transform->GetForward() * m_fCurSpd * dTime;
 	}
 
-	//m_transform->position = Nalmak_Math::Clamp(m_transform,)
-
-
-
 	Boom();
 	DEBUG_LOG(L"미사일 현재 위치", m_transform->position);
 	DEBUG_LOG(L"미사일 속도", m_fCurSpd);
+}
+
+void Missile::OnTriggerEnter(Collisions & _collision)
+{
+	for (auto& obj : _collision)
+	{
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_PLAYER)
+		{
+			DESTROY(m_gameObject);
+		}
+	}
+}
+
+void Missile::OnTriggerStay(Collisions & _collision)
+{
+}
+
+void Missile::OnTriggerExit(Collisions & _collision)
+{
 }
 
 void Missile::Accelerate(float _maxSpd)
@@ -59,29 +77,11 @@ void Missile::Accelerate(float _maxSpd)
 	}
 }
 
-//void Missile::Go_Destination()
-//{	
-//
-//	Vector3 vDir = m_vDest - m_transform->position;
-//	D3DXVec3Normalize(&vDir, &vDir);
-//	
-//	Vector3 vDest;
-//	D3DXVec3Normalize(&vDest, &m_vDest);
-//
-//	//Quaternion qTemp;
-//	//m_transform->LookAt(vDest, 10.f, &qTemp);
-//	//m_transform->rotation = qTemp;
-//
-//
-//	m_transform->position += vDir * m_fCurSpd * dTime;
-//	//m_transform->position += m_transform->GetForward() * m_fCurSpd * dTime;
-//}
 
 void Missile::Boom()
 {
 	if (m_fMissileDelta >= 10.f)
 	{
-		DEBUG_LOG(L"펑", m_iA);
 		DESTROY(m_gameObject);
 	}
 	

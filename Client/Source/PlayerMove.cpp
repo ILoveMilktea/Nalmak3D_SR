@@ -5,7 +5,6 @@
 
 #include "Bullet_Manager.h"
 
-#include "AimMissile.h"
 PlayerMove::PlayerMove()
 {
 }
@@ -22,10 +21,10 @@ void PlayerMove::Initialize()
 	m_timeMananger = TimeManager::GetInstance();
 	m_playerInfo->SetSpeed(2);
 	m_playerInfo->SetRollAngle(15.f);
-	m_playerInfo->SetDirSeneser(0.2f);
+	m_playerInfo->SetDirSeneser(0.5f);
 
 	m_playerInfo->SetMinSpeed(0.f);
-	m_playerInfo->SetMaxSpeed(20.f);
+	m_playerInfo->SetMaxSpeed(22.f);
 
 
 	
@@ -90,15 +89,23 @@ void PlayerMove::UpdateState()
 	 speed -= 3.f;
 
 	 if (m_inputManager->GetKeyPress(KEY_STATE_W))
-		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 20);
+		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 50);
+	 //defualt dTime * 20
 	else
 		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10);
 
 	m_accel = Nalmak_Math::Clamp(m_accel, 0.f, 1.f);
 	speed += m_accel * 5;
+	
 
 	m_playerInfo->AddSpeed(speed);
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
+
+	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
+	{
+		Bullet_Manager::GetInstance()->Fire_Player(m_transform->position, m_transform->rotation, 150.f);
+	}
+
 
 
 	TemproryAttackFunc();
@@ -120,7 +127,7 @@ void PlayerMove::TemproryAttackFunc()
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
-		m_useItem->Shooting(true);
+		
 	}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))

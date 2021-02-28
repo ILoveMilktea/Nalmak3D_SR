@@ -1,5 +1,6 @@
 #pragma once
 
+
 #ifndef __CORE_H__
 #define __CORE_H__
 
@@ -112,6 +113,7 @@ public:
 	// Search
 	GameObject* FindFirstObject(_OBJECT_TAG _tag);
 	GameObject* FindObjectByName(_OBJECT_TAG _tag, wstring name);
+	list<GameObject*> GetObjectList(_OBJECT_TAG _tag);
 	Camera* GetMainCamera();
 public:
 	UINT GetWindowWidth();
@@ -148,10 +150,9 @@ private:
 public:
 	LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+	
+
 };
-
-
-
 
 END
 

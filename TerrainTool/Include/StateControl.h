@@ -8,10 +8,10 @@
 class IState;
 
 
-// ÇØ´ç ÄÄÆ÷³ÍÆ® Ãß°¡½Ã fsm ÆÐÅÏ »ç¿ë°¡´É
-// IState¸¦ »ó¼Ó¹ÞÀº »óÅÂ¸¦ ¸¸µé°í ÇØ´ç ÄÄÆ÷³ÍÆ®¿¡ AddStateÇÔ¼ö·Î µî·Ï
-// SetState·Î ´Ù¸¥ »óÅÂ·Î ÀüÈ¯ °¡´É
-// SetInteger ,SetFloat µîÀ¸·Î ´Ù¸¥ »óÅÂ·Î ÀüÈ¯ÇÏ´õ¶óµµ µ¥ÀÌÅÍ ±³È¯°¡´É
+// ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ß°ï¿½ï¿½ï¿½ fsm ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ë°¡ï¿½ï¿½
+// IStateï¿½ï¿½ ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ AddStateï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+// SetStateï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½
+// SetInteger ,SetFloat ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½
 class NALMAK_DLL StateControl :
 	public Component
 {
@@ -23,7 +23,7 @@ public:
 	StateControl(Desc* _desc);
 	~StateControl();
 private:
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -46,8 +46,26 @@ public:
 
 		return this;
 	}
+
+	template <class T>
+	T*	GetState(const wstring& _stateName)
+	{
+		auto state = m_stateList.find(_stateName);
+
+#ifdef _DEBUG
+		if (state == m_stateList.end())
+		{
+			assert(L"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ state ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½");
+		}
+#endif
+
+		T* castState = static_cast<T*>(state->second);
+		return castState;
+	}
+
+	const wstring& GetCurStateString();
 	void InitState(wstring _stateName);
-	void SetState(wstring _stateName);
+	void SetState(const wstring& _stateName);
 	bool CompareState(wstring _stateName);
 	template <typename T>
 	T* GetState(wstring _stateName);

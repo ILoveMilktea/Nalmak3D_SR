@@ -31,14 +31,14 @@ void Enemy_Hold::UpdateState()
 {
 	if (!m_bAvoid)
 	{
-		if (m_pEnemy->Get_Distance() >= 50.f || m_pEnemy->Get_GunCurRound() != 0)
-		{
+		//if (m_pEnemy->Get_Distance() >= 50.f || m_pEnemy->Get_GunCurRound() > 0)
+		//{
 			m_pEnemy->Target_Update();
 			m_pEnemy->Look_Target();
-			m_pEnemy->Shoot();
+			m_pEnemy->Fire_Gun();
 			m_bAvoid = false;
-		}
-		else
+		//}
+		if(m_pEnemy->Get_Distance() < 50.f || m_pEnemy->Get_GunCurRound() <= 0)
 		{
 			m_pEnemy->Create_RandPos();
 			m_bAvoid = true;
@@ -55,8 +55,12 @@ void Enemy_Hold::UpdateState()
 		}
 
 		m_fAvoidDelta += dTime;
-
+		
 		m_pEnemy->Go_ToPos(m_pEnemy->Get_RandPos());
+
+		m_pEnemy->Accelerate();
+		m_pEnemy->Go_Straight();
+
 
 		if (m_fAvoidDelta >= 3.f)
 		{

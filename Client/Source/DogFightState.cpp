@@ -11,7 +11,6 @@
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
-#include "PlayerKitSelector.h"
 #include "Bullet_Manager.h"
 
 #include "StageManager.h"
@@ -48,7 +47,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
-	render.mtrlName = L"default"; // 210223ȭ 12:50 ������ ������ �ȳ��ͼ� ���� �ٲ���
+	render.mtrlName = L"default"; //210223ȭ 12:50 ������ ������ �ȳ��ͼ� ���� �ٲ���
 	render.meshName = L"flight";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
@@ -82,40 +81,50 @@ void DogFightState::EnterState()
 	UIWindowFactory::DogfightStageWindow(m_Player);
 
 	EnemyManager::GetInstance();
+
+	ENEMY_STATUS tStatus(10, 20, 1);
+	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, 0.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
+
 }
 
 
 void DogFightState::UpdateState()
 {
-	DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
+	++m_iFrame;
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+	if (m_iFrame > 0)
 	{
-	}
-
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
-	{
-		SceneToEvasion();
-	}
+		DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
 
 
-
-	if (m_bProduce)
-	{
-		Accelerate();
-		Player_Faraway();
-
-		Vector3 Dir = m_Player->GetTransform()->position - vPlayerOrigin;
-
-		if (D3DXVec3Length(&Dir) >= 1100.f)
+		int i = EnemyManager::GetInstance()->Get_EnemyCount();
+		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
 		{
-			StageManager::GetInstance()->ToScene(L"Evasion");
+			SceneToEvasion();
 		}
-	}
+		//지금 Enter에서 에너미 생성하면 newGameobjectList에 담기니까
+		//gameobjectlist에는 Enemy가 없으니 바로 ScenetoEvasion으로 넘어옴.
+		//그리고 나서 Player도 newGameObjectList에 있으니 못 찾아와서 팅김.
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
-	{
-		Bullet_Manager::GetInstance()->Fire_Gun(Vector3(0, 0, 0), Quaternion(0, 0, 0, 0));
+
+
+
+		if (m_bProduce)
+		{
+			Accelerate();
+			Player_Faraway();
+
+			Vector3 Dir = m_Player->GetTransform()->position - vPlayerOrigin;
+
+			if (D3DXVec3Length(&Dir) >= 1100.f)
+			{
+				StageManager::GetInstance()->ToScene(L"Evasion");
+			}
+		}
+
+		m_fDogFightTime += dTime;
 	}
 }
 
@@ -124,6 +133,28 @@ void DogFightState::ExitState()
 	//DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
 	m_Player->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
 }
+
+float DogFightState::Get_Time() const
+{
+	return m_fDogFightTime;
+}
+
+float DogFightState::Get_Score() const
+{
+	return m_fDogFightScore;
+}
+
+void DogFightState::Set_Score(float _score)
+{
+	m_fDogFightScore = _score;
+}
+
+void DogFightState::Add_Score(float _score)
+{
+	m_fDogFightScore += _score;
+}
+
+
 
 void DogFightState::SceneToEvasion()
 {
@@ -154,5 +185,9 @@ void DogFightState::Player_Faraway()
 
 void DogFightState::Accelerate()
 {
-	m_fSpd = Nalmak_Math::Lerp(m_fSpd, 5.f, dTime);
+	//m_fSpd = Nalmak_Math::Lerp(m_fSpd, 5.f, dTime);
+	//if u using lerp, object will be slower in lowFrame Computer.
+
+	m_fSpd = dTime * 500.f;
+	
 }
