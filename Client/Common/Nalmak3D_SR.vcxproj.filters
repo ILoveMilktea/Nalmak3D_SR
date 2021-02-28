@@ -152,9 +152,6 @@
       <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\UIWindowFactory.h" />
-    <ClInclude Include="..\Include\UseItem.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClInclude>
     <ClInclude Include="DeadTimer.h">
       <Filter>02.Component</Filter>
     </ClInclude>
@@ -334,9 +331,6 @@
     <ClCompile Include="..\Source\MachineGun.cpp">
       <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Shooter.cpp">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClCompile>
     <ClCompile Include="DeadTimer.cpp">
       <Filter>02.Component</Filter>
     </ClCompile>
@@ -364,8 +358,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Boss.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
-    <ClCompile Include="DeadTimer.cpp">
-      <Filter>02.Component</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ItemManager.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>

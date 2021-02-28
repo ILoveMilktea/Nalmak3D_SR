@@ -92,23 +92,6 @@ bool StateControl::CompareState(wstring _stateName)
 	return false;
 }
 
-template<typename T>
-T* StateControl::GetState(wstring _stateName)
-{
-	auto state = m_stateList.find(_stateName);
-	if (state == m_stateList.end())
-	{
-#ifdef _DEBUG
-		{
-			assert(L"Can't find integer data has that key!" && 0);
-		}
-#endif
-	}
-	
-	T* castState = reinterpret_cast<T*>(state->second);
-	return castState;
-}
-
 void StateControl::SetInteger(wstring _key, int _value)
 {
 	m_blackBoardInteger[_key] = _value;

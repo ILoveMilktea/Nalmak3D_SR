@@ -7,11 +7,10 @@
 #include "Nalmak_Include.h"
 class IState;
 
-
-// �ش� ������Ʈ �߰��� fsm ���� ���밡��
-// IState�� ���ӹ��� ���¸� ������ �ش� ������Ʈ�� AddState�Լ��� ����
-// SetState�� �ٸ� ���·� ��ȯ ����
-// SetInteger ,SetFloat ������ �ٸ� ���·� ��ȯ�ϴ����� ������ ��ȯ����
+// 해당 컴포넌트 추가시 fsm 패턴 사용가능
+// IState를 상속받은 상태를 만들고 해당 컴포넌트에 AddState함수로 등록
+// SetState로 다른 상태로 전환 가능
+// SetInteger ,SetFloat 등으로 다른 상태로 전환하더라도 데이터 교환가능
 class NALMAK_DLL StateControl :
 	public Component
 {
@@ -23,7 +22,6 @@ public:
 	StateControl(Desc* _desc);
 	~StateControl();
 private:
-	// Component��(��) ���� ���ӵ�
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -55,7 +53,7 @@ public:
 #ifdef _DEBUG
 		if (state == m_stateList.end())
 		{
-			assert(L"�� ���� �׷� state ���ٰ� ����");
+			assert(L"can't find state");
 		}
 #endif
 
@@ -67,8 +65,6 @@ public:
 	void InitState(wstring _stateName);
 	void SetState(const wstring& _stateName);
 	bool CompareState(wstring _stateName);
-	template <typename T>
-	T* GetState(wstring _stateName);
 
 	void SetInteger(wstring _key, int _value);
 	void SetFloat(wstring _key, float _value);

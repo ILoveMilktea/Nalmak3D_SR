@@ -54,8 +54,6 @@ public:
 	const float& GetMinSpeed() { return m_minSpeed; }
 	const float& GetMaxSpeed() { return m_maxSpeed; }
 	const int& GetGold() { return m_gold; }
-	ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
-	//const ItemDesc** GetItemDescInfoArray() {return m_playerItem;}
 
 	// temporary members
 	const float& GetTimeLimit() { return m_timelimit; }

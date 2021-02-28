@@ -241,7 +241,6 @@
     <ClInclude Include="..\Include\ScriptPlay.h" />
     <ClInclude Include="..\Include\ScriptReady.h" />
     <ClInclude Include="..\Include\ScriptWait.h" />
-    <ClInclude Include="..\Include\Shooter.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
@@ -310,7 +309,6 @@
     <ClCompile Include="..\Source\ScriptPlay.cpp" />
     <ClCompile Include="..\Source\ScriptReady.cpp" />
     <ClCompile Include="..\Source\ScriptWait.cpp" />
-    <ClCompile Include="..\Source\Shooter.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />

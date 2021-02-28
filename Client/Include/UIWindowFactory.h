@@ -71,7 +71,7 @@ public:
 		}
 		// description (text)
 		{
-			auto script = UIFactory::Prefab_ItemExplane(L"�̰��� �Ƹ� ������ ��ü�� ���� �����ϴ� ���Դϴ�. �׷��� �ٹٲ� �������� �ǳ���???????", CANVAS_GROUP_MAINWND);
+			auto script = UIFactory::Prefab_ItemExplane(L"Hi, please write down in this space what you want to explane about selected aircraft.", CANVAS_GROUP_MAINWND);
 			script->SetPosition(576.f, 880.f);
 		}
 
@@ -530,9 +530,10 @@ public:
 		scriptText->SetPosition(960.f, 120.f);
 		// sample script
 		vector<Dialogue> list;
+
 		{
-			wstring title = L"������";
-			wstring script = L"<< ���Ե� ���� ������ �غôµ� ������ >>";
+			wstring title = L"SPEAKER";
+			wstring script = L"<< SCRIPT1 >>";
 
 			Dialogue dialogue;
 			dialogue.first = title;
@@ -540,19 +541,20 @@ public:
 
 			list.emplace_back(dialogue);
 
-			script = L"<< �̰� ��� �����ϴ� �ſ���? >>";
+			script = L"<< SCRIPT2 >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< �� �̶��� �ſ�? >>";
+			script = L"<< SCRIPT3 >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< ũ... ���õ� �ϳ� ���� ���ϴ�. >>";
+			script = L"<< SCRIPT4 >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< ����..? �̷��� ���� �����ϴ� ��, ������ �� �� ���̽� �� ����..? >>";
+			script = L"<< SCRIPT5 >>";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 		}
+
 		// scripter
 		Scripter::Desc desc_scr;
 		desc_scr.title = titleText->GetComponent<Text>();
