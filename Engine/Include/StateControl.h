@@ -46,8 +46,26 @@ public:
 
 		return this;
 	}
+
+	template <class T>
+	T*	GetState(const wstring& _stateName)
+	{
+		auto state = m_stateList.find(_stateName);
+
+#ifdef _DEBUG
+		if (state == m_stateList.end())
+		{
+			assert(L"아 ㅋㅋ 그런 state 없다고 ㅋㅋ");
+		}
+#endif
+
+		T* castState = static_cast<T*>(state->second);
+		return castState;
+	}
+
+	const wstring& GetCurStateString();
 	void InitState(wstring _stateName);
-	void SetState(wstring _stateName);
+	void SetState(const wstring& _stateName);
 	bool CompareState(wstring _stateName);
 
 	void SetInteger(wstring _key, int _value);
@@ -57,6 +75,7 @@ public:
 	int GetInteger(wstring _key);
 	float GetFloat(wstring _key);
 	const Vector3& GetVector3(wstring _key);
+
 private:
 	IState* m_state;
 	map<wstring, IState*> m_stateList;

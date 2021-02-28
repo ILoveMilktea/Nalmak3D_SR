@@ -194,8 +194,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\AimMissile.h" />
+    <ClInclude Include="..\Include\Boss.h" />
     <ClInclude Include="..\Include\BossState.h" />
-    <ClInclude Include="..\Include\Bullet.h" />
+    <ClInclude Include="..\Include\MachineGun.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
     <ClInclude Include="..\Include\CustomDebuger.h" />
@@ -207,6 +208,8 @@
     <ClInclude Include="..\Include\Enemy_Chase.h" />
     <ClInclude Include="..\Include\Enemy_Drop.h" />
     <ClInclude Include="..\Include\Enemy_Death.h" />
+    <ClInclude Include="..\Include\Enemy_Explosion.h" />
+    <ClInclude Include="..\Include\Enemy_Falling.h" />
     <ClInclude Include="..\Include\Enemy_Hold.h" />
     <ClInclude Include="..\Include\Enemy_Idle.h" />
     <ClInclude Include="..\Include\Enum.h" />
@@ -255,8 +258,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\AimMissile.cpp" />
+    <ClCompile Include="..\Source\Boss.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
-    <ClCompile Include="..\Source\Bullet.cpp" />
+    <ClCompile Include="..\Source\MachineGun.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
     <ClCompile Include="..\Source\CustomDebuger.cpp" />
@@ -267,6 +271,8 @@
     <ClCompile Include="..\Source\Enemy_Chase.cpp" />
     <ClCompile Include="..\Source\Enemy_Drop.cpp" />
     <ClCompile Include="..\Source\Enemy_Death.cpp" />
+    <ClCompile Include="..\Source\Enemy_Explosion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Falling.cpp" />
     <ClCompile Include="..\Source\Enemy_Hold.cpp" />
     <ClCompile Include="..\Source\Enemy_Idle.cpp" />
     <ClCompile Include="..\Source\EvasionState.cpp" />

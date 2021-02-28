@@ -43,9 +43,6 @@
     <ClInclude Include="..\Include\SmoothFollow.h">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Enemy.h">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Enemy_Idle.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Idle</Filter>
     </ClInclude>
@@ -97,9 +94,6 @@
     <ClInclude Include="..\Include\NalmakScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Bullet.h">
-      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Missile.h">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClInclude>
@@ -149,6 +143,15 @@
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Explosion.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Falling.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MachineGun.h">
+      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="..\Include\UseItem.h">
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
@@ -156,6 +159,7 @@
     <ClInclude Include="DeadTimer.h">
       <Filter>02.Component</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Include\ItemManager.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
@@ -167,6 +171,13 @@
     </ClInclude>
     <ClInclude Include="PlayerShooter.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
+=======
+    <ClInclude Include="..\Include\Enemy.h">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Boss.h">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+>>>>>>> a5f3ccfb840b4cbce7bf626cdb7a1cce5cc5e576
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,9 +210,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\SmoothFollow.cpp">
       <Filter>02.Component\00.Manager\FixCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Enemy.cpp">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Idle.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Idle</Filter>
@@ -254,9 +262,6 @@
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Bullet.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Missile.cpp">
       <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
     </ClCompile>
@@ -298,6 +303,7 @@
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="DeadTimer.cpp">
       <Filter>02.Component</Filter>
     </ClCompile>
@@ -312,6 +318,28 @@
     </ClCompile>
     <ClCompile Include="PlayerShooter.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
+=======
+    <ClCompile Include="..\Source\Enemy_Explosion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Falling.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MachineGun.cpp">
+      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Shooter.cpp">
+      <Filter>02.Component\00.Manager\PlayerKit</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadTimer.cpp">
+      <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy.cpp">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Boss.cpp">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+>>>>>>> a5f3ccfb840b4cbce7bf626cdb7a1cce5cc5e576
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -469,6 +497,18 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling">
+      <UniqueIdentifier>{841dcd20-f92c-4b7d-9282-6c7b09c0a791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion">
+      <UniqueIdentifier>{33e26b4f-4494-4a5e-9415-a8bbf100a730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\01%29Enemy\Normal">
+      <UniqueIdentifier>{1c9eeaa3-a37d-4e0c-8363-64310e6861d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\01%29Enemy\Boss">
+      <UniqueIdentifier>{25e8a919-3650-4188-b4bf-32b4a974466e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Include\EvasionState.h"
 
+#include "EnemyManager.h"
+#include "StageManager.h"
 
 EvasionState::EvasionState()
 {
@@ -37,6 +39,11 @@ void EvasionState::EnterState()
 	m_Player->GetTransform()->position = Vector3(0, 0, -50);
 	m_Player->GetTransform()->SetRotation(0, 0, 0);
 
+	ENEMY_STATUS tStatus(10, 20, 1);
+	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, 0.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
+
 	m_bEnter = true;
 }
 
@@ -44,7 +51,17 @@ void EvasionState::UpdateState()
 {
 	EnterProduce();
 		
-	
+	if (!m_bEnter)
+	{
+		int i = EnemyManager::GetInstance()->Get_EnemyCount();
+		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+		{
+			SceneToBoss();
+		}
+
+
+
+	}
 
 
 		
@@ -54,10 +71,32 @@ void EvasionState::UpdateState()
 	DEBUG_LOG(L"MainCam Roty", m_MainCamera->GetTransform()->rotation.y);
 	DEBUG_LOG(L"MainCam Rotz", m_MainCamera->GetTransform()->rotation.z);
 	DEBUG_LOG(L"Player Rotz", m_Player->GetTransform()->rotation.z);
+
+	m_fEvasionTime += dTime;
 }
 
 void EvasionState::ExitState()
 {
+}
+
+float EvasionState::Get_Time() const
+{
+	return m_fEvasionTime;
+}
+
+float EvasionState::Get_Score() const
+{
+	return m_fEvasiontScore;
+}
+
+void EvasionState::Set_Score(float _score)
+{
+	m_fEvasiontScore = _score;
+}
+
+void EvasionState::Add_Score(float _score)
+{
+	m_fEvasiontScore += _score;
 }
 
 void EvasionState::EnterProduce()
@@ -71,4 +110,9 @@ void EvasionState::EnterProduce()
 			m_bEnter = false;
 		}
 	}
+}
+
+void EvasionState::SceneToBoss()
+{
+	StageManager::GetInstance()->ToScene(L"Boss");
 }

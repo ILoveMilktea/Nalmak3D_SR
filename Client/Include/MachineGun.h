@@ -1,30 +1,28 @@
 #pragma once
 #include "Component.h"
-class Bullet :
+class MachineGun :
 	public Component
 {
 	
 public:
 	struct Desc
 	{
-		float	fSpd = 150.f;
-		int		iDmg = 10;
+		float	fSpd;
+		int		iDmg;
 	};
 	
 public:
-	Bullet(Desc* _desc);
-	virtual ~Bullet();
+	MachineGun(Desc* _desc);
+	virtual ~MachineGun();
 
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
 
-
 	virtual void OnTriggerEnter(Collisions& _collision)override;
 	virtual void OnTriggerStay(Collisions& _collision)override;
 	virtual void OnTriggerExit(Collisions& _collision)override;
 private:
-	
 	float m_fSpd = 0.f;
 	int m_iDamage = 0;
 

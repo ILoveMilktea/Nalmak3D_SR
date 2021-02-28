@@ -422,14 +422,22 @@ void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 	Vector3 vDir = _Target->GetTransform()->position - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
+	Vector3 look = m_transform->GetForward();
+
+	if (Nalmak_Math::Dot(vDir, look) > 0.999f)
+	{
+		return;
+	}
+
 	/* 2. 회전을 위한 임의의 축을 구하기 위해서
 	객체의 look(forward)벡터와 타겟 사이와의 벡터를 외적*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
-	D3DXVec3Cross(&vAxis, &m_transform->GetForward(), &vDir);
+	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
 	/* 임의의 축으로 얼만큼 회전을 했을 때 나오는 쿼터니언을 받아와서 적용 시켜준다. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
+
 	if (_qOut != nullptr)
 	{	*_qOut = QuartTemp;	}
 
@@ -438,26 +446,31 @@ void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 	m_transform->rotation *= QuartTemp;
 }
 
-void Transform::LookAt(Vector3 _pos, float _Spd, Quaternion * _qOut)
+void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 {
 	/* 1. 객체와 타겟 사이의 사이벡터 구하기*/
 	Vector3 vDir = _pos - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
+	Vector3 look = m_transform->GetForward();
+	if (Nalmak_Math::Dot(vDir, look) > 0.999f)
+	{
+		return;
+	}
+
 	/* 2. 회전을 위한 임의의 축을 구하기 위해서
 	객체의 look(forward)벡터와 타겟 사이와의 벡터를 외적*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
-	D3DXVec3Cross(&vAxis, &m_transform->GetForward(), &vDir);
+	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
 	/* 임의의 축으로 얼만큼 회전을 했을 때 나오는 쿼터니언을 받아와서 적용 시켜준다. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
+	if (_qOut != nullptr)
+	{		*_qOut = QuartTemp;	}
 
-	*_qOut = QuartTemp;	
-
-
-	/* 테스트 */
-	//m_transform->rotation *= QuartTemp;
+	
+	m_transform->rotation *= QuartTemp;
 }
 
 
