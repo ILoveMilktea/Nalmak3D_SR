@@ -208,6 +208,15 @@
     <Filter Include="05.Component\08.UI\05.Slider">
       <UniqueIdentifier>{7d0dba0a-9cac-48c2-86b6-eb769603a9c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Component\99.Utility\UIPicking\3D">
+      <UniqueIdentifier>{33789d81-7e42-4e7a-83a7-bcad5622e7ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\99.Utility\UIPicking\2D">
+      <UniqueIdentifier>{802621b8-f660-4c64-8a0d-047ae25abf2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\99.Utility\CanvasGroup">
+      <UniqueIdentifier>{1b20bc97-9e5a-4e83-8ad2-f7755950b6ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -324,9 +333,6 @@
     <ClCompile Include="..\Source\CollisionManager.cpp">
       <Filter>02.Manager\11.CollisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\DrawGizmo.cpp">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Rigidbody.cpp">
       <Filter>05.Component\03.Rigidbody</Filter>
     </ClCompile>
@@ -412,32 +418,13 @@
     <ClCompile Include="..\Source\ICanvasGroup.cpp">
       <Filter>03.Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\CanvasGroup.cpp">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\CanvasRenderer.cpp">
       <Filter>05.Component\01.Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\MeshPicking.cpp">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PositionHandle.cpp">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
-    <ClCompile Include="..\Source\PositionHandle_2D.cpp">
-      <Filter>05.Component\99.Utility\UIPicking</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DrawGizmo_2D.cpp">
-      <Filter>05.Component\99.Utility\UIPicking</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\CanvasPicking.cpp">
-      <Filter>05.Component\99.Utility\UIPicking</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\SplineCurve.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
     <ClCompile Include="..\Source\ParticleInfo.cpp" />
     <ClCompile Include="..\Source\SingleImage.cpp">
       <Filter>05.Component\08.UI\01.SingleImage</Filter>
@@ -453,6 +440,30 @@
     </ClCompile>
     <ClCompile Include="..\Source\Button.cpp">
       <Filter>05.Component\08.UI\02.Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DrawGizmo.cpp">
+      <Filter>05.Component\99.Utility\UIPicking\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MeshPicking.cpp">
+      <Filter>05.Component\99.Utility\UIPicking\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PositionHandle.cpp">
+      <Filter>05.Component\99.Utility\UIPicking\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CanvasPicking.cpp">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DrawGizmo_2D.cpp">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PositionHandle_2D.cpp">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScaleHandle_2D.cpp">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CanvasGroup.cpp">
+      <Filter>05.Component\99.Utility\CanvasGroup</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -591,9 +602,6 @@
     <ClInclude Include="..\Include\CollisionManager.h">
       <Filter>02.Manager\11.CollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\DrawGizmo.h">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Rigidbody.h">
       <Filter>05.Component\03.Rigidbody</Filter>
     </ClInclude>
@@ -679,32 +687,13 @@
     <ClInclude Include="..\Include\ICanvasGroup.h">
       <Filter>03.Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\CanvasGroup.h">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\CanvasRenderer.h">
       <Filter>05.Component\01.Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\MeshPicking.h">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\PositionHandle.h">
-      <Filter>05.Component\99.Utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\GroundVIBuffer.h" />
-    <ClInclude Include="..\Include\PositionHandle_2D.h">
-      <Filter>05.Component\99.Utility\UIPicking</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\DrawGizmo_2D.h">
-      <Filter>05.Component\99.Utility\UIPicking</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\CanvasPicking.h">
-      <Filter>05.Component\99.Utility\UIPicking</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\SplineCurve.h">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\ScaleHandle_2D.h" />
     <ClInclude Include="..\Include\ParticleInfo.h" />
     <ClInclude Include="..\Include\SingleImage.h">
       <Filter>05.Component\08.UI\01.SingleImage</Filter>
@@ -720,6 +709,30 @@
     </ClInclude>
     <ClInclude Include="..\Include\Button.h">
       <Filter>05.Component\08.UI\02.Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DrawGizmo.h">
+      <Filter>05.Component\99.Utility\UIPicking\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MeshPicking.h">
+      <Filter>05.Component\99.Utility\UIPicking\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PositionHandle.h">
+      <Filter>05.Component\99.Utility\UIPicking\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CanvasPicking.h">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DrawGizmo_2D.h">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PositionHandle_2D.h">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScaleHandle_2D.h">
+      <Filter>05.Component\99.Utility\UIPicking\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CanvasGroup.h">
+      <Filter>05.Component\99.Utility\CanvasGroup</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
