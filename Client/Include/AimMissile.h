@@ -1,32 +1,13 @@
 #pragma once
-#include "UseItem.h"
+#include "PlayerItem.h"
 class AimMissile :
-	public UseItem
+	public PlayerItem
 {
 public:
-	enum SIDE_TYPE { LEFT_SIDE, RIGHT_SIDE , SIDE_MAX };
-	struct Desc
-	{
-		ItemDesc useItem;
-	};
-public:
-	AimMissile(Desc* _desc);
+	AimMissile(const ITEMINFO& copy);
+	virtual ~AimMissile();
 
-
-	virtual void Initialize() override;
-	virtual void Update() override;
-	virtual void Shooting(bool _check) override;
-
-	void SetWeapon();
-
-private:
-	GameObject * missile[SIDE_MAX];
-	Vector3 m_playerDir = {};
-	Quaternion m_playerRot = {};
-	bool ShotCheck = false;
-	
-
-private:
-	Core* m_core;
+	// PlayerItem을(를) 통해 상속됨
+	virtual void ItemShot() override;
 };
 

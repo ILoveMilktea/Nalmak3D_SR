@@ -3,12 +3,12 @@
 #include "RevolvesToTarget.h"
 #include "core.h"
 #include "SceneChanger.h"
-#include "PlayerKitSelector.h"
 #include "PlayerInfoManager.h"
 
 #include "UIWindowFactory.h"
 #include "UILabScene.h"
 #include "StageManager.h"
+#include "ItemManager.h"
 
 GarageScene::GarageScene()
 {
@@ -23,11 +23,16 @@ void GarageScene::Initialize()
 {
 	//StageManager::GetInstance();
 
+	ItemManager::GetInstance(); 
+
+	// singlemanger instance
+	
+
+	//
 //	 grid setting
 	INSTANTIATE()->AddComponent<Grid>()->SetPosition(0,0,-5.f);
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
-	auto kitmgr = PlayerKitSelector::GetInstance();
 	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->SetPosition(0, 0, -5);;
 
 	GameObject* player;
@@ -52,8 +57,6 @@ void GarageScene::Initialize()
 		SceneChangerDescInfo.sceneName = L"phantom";
 		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
-
-
 	// test button ----> UILab
 	{
 		//auto mainEquipWepon = UIFactory::CreateButton(
@@ -61,10 +64,7 @@ void GarageScene::Initialize()
 		//	ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
 		//	PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
 	 // �ֹ���
-		auto mainEquipWepon = UIFactory::CreateButton(
-			EventHandler([]() {
-			PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_MISSILE));
-		}));
+		
 
 		//}));
 

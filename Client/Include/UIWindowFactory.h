@@ -6,8 +6,9 @@
 #include "UIFactory.h"
 
 #include "PlayerInfoManager.h"
-#include "PlayerKitSelector.h"
 #include "UIInteractor.h"
+#include "ItemManager.h"
+
 class UIWindowFactory
 {
 public:
@@ -44,16 +45,15 @@ public:
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND);
 				menu->SetPosition(576.f, 230.f);
 			}
-			// Menu 2 - WEAPON (Button)
+			// Menu 2 - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
 			{
-				EventHandler eventFunc = EventHandler([]() {
-					ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
-					PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS, ItemDescInfo);
-
+				EventHandler eventFunc = EventHandler([=]() {
+					
+					ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
+					
 				});
-
-				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"SELECT WEAPON", CANVAS_GROUP_MAINWND);
-				menu->SetPosition(576.f, 270.f);
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
+				menu->SetPosition(1600.f, 600.f);
 			}
 			// Menu 3 - SKILL (Button)
 			{

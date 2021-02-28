@@ -143,17 +143,8 @@
     <ClInclude Include="..\Include\Enemy_Death.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerKitSelector.h">
-      <Filter>02.Component\00.Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Struct.h">
       <Filter>98.PreCompile\03.Struct</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\AimMissile.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\UseItem.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PlayerTopViewMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
@@ -162,11 +153,20 @@
     <ClInclude Include="..\Include\UseItem.h">
       <Filter>02.Component\00.Manager\PlayerKit</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Shooter.h">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClInclude>
     <ClInclude Include="DeadTimer.h">
       <Filter>02.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ItemManager.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerItem.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AimMissile.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerShooter.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,23 +295,23 @@
     <ClCompile Include="..\Source\Enemy_Death.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PlayerKitSelector.cpp">
-      <Filter>02.Component\00.Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\AimMissile.cpp">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\UseItem.cpp">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Shooter.cpp">
-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
-    </ClCompile>
     <ClCompile Include="DeadTimer.cpp">
       <Filter>02.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ItemManager.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerItem.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AimMissile.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerShooter.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -467,7 +467,7 @@
     <Filter Include="98.PreCompile\03.Struct">
       <UniqueIdentifier>{40096f35-81ec-4923-bda7-8bb44ae8d51d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\PlayerKit">
+    <Filter Include="02.Component\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
