@@ -19,7 +19,7 @@ public:
 	};
 	CanvasRenderer();
 	CanvasRenderer(Desc* _desc);
-	
+
 private:
 	virtual void Initialize() override;
 	virtual void Update() override;

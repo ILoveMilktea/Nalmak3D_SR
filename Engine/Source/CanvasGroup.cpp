@@ -79,6 +79,18 @@ void CanvasGroup::AddGroupMember(CanvasRenderer* _member, _CANVAS_GROUP _group)
 	m_groupLists[_group].emplace_back(_member);
 }
 
+void CanvasGroup::RemoveGroupMember(CanvasRenderer * _member, _CANVAS_GROUP _group)
+{
+	for (auto& member : m_groupLists[_group])
+	{
+		if (member == _member)
+		{
+			m_groupLists[_group].remove(member);
+			return;
+		}
+	}
+}
+
 void CanvasGroup::ChangeGroup(CanvasRenderer * _member, _CANVAS_GROUP _groupToChange)
 {
 	auto iter_begin = m_groupLists[_member->GetGroup()].begin();
@@ -94,6 +106,44 @@ void CanvasGroup::ChangeGroup(CanvasRenderer * _member, _CANVAS_GROUP _groupToCh
 	}
 
 	m_groupLists[_groupToChange].emplace_back(_member);
+}
+
+void CanvasGroup::AllOff()
+{
+	for (auto& group : m_groupLists)
+	{
+		for (auto& member : group)
+		{
+			member->GetGameObject()->SetActive(false);
+		}
+	}
+}
+
+void CanvasGroup::AllOn()
+{
+	for (auto& group : m_groupLists)
+	{
+		for (auto& member : group)
+		{
+			member->GetGameObject()->SetActive(true);
+		}
+	}
+}
+
+void CanvasGroup::GroupOn(_CANVAS_GROUP _group)
+{
+	for (auto& member : m_groupLists[_group])
+	{
+		member->GetGameObject()->SetActive(true);
+	}
+}
+
+void CanvasGroup::GroupOff(_CANVAS_GROUP _group)
+{
+	for (auto& member : m_groupLists[_group])
+	{
+		member->GetGameObject()->SetActive(false);
+	}
 }
 
 const list<CanvasRenderer*>& CanvasGroup::GetGroup(_CANVAS_GROUP _group)

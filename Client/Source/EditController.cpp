@@ -25,19 +25,19 @@ void EditController::Update()
 	if (!m_editMode)
 		return;
 
-	if (m_input->GetKeyDown(KEY_STATE_F1))
+	if (m_input->GetKeyDown(KEY_STATE_F9))
 	{
-		PlayerInfoManager::GetInstance()->SetMaxSpeed(10.f);
+		CanvasGroup::GetInstance()->AllOff();
 	}
-	if (m_input->GetKeyDown(KEY_STATE_F2))
+	if (m_input->GetKeyDown(KEY_STATE_F8))
 	{
-		PlayerInfoManager::GetInstance()->SetMaxSpeed(20.f);
+		CanvasGroup::GetInstance()->AllOn();
 	}
-	if (m_input->GetKeyDown(KEY_STATE_F3))
+	if (m_input->GetKeyDown(KEY_STATE_F7))
 	{
-		PlayerInfoManager::GetInstance()->SetMaxSpeed(30.f);
+
 	}
-	if (m_input->GetKeyDown(KEY_STATE_F4))
+	if (m_input->GetKeyDown(KEY_STATE_F6))
 	{
 	}
 }
