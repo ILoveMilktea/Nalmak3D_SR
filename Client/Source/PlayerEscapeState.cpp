@@ -40,7 +40,7 @@ void PlayerEscapeState::EnterState()
 	m_dealy = m_skillInfo->GetItmeInfo().delay;
 
 	{
-		MeshRenderer::Desc meshInfo;
+		VIBufferRenderer::Desc meshInfo;
 		//meshInfo.mtrlName = L"debugCollider";
 		meshInfo.mtrlName = L"debugCollider";
 		meshInfo.meshName  = L"sphere";
@@ -51,7 +51,7 @@ void PlayerEscapeState::EnterState()
 		
 		SphereCollider::Desc SphereColliderInfo;
 
-		m_temproryObj = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo)->AddComponent<ScaleDampingDeffender>(&scaleDamping);;
+		m_temproryObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&meshInfo)->AddComponent<ScaleDampingDeffender>(&scaleDamping);;
 		m_temproryObj->SetParents(m_gameObject);
 	}
 	
