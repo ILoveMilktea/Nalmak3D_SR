@@ -16,6 +16,7 @@
 #include "StageManager.h"
 #include "UIWindowFactory.h"
 #include "SceneChanger.h"
+#include "PlayerBossStageMove.h"
 
 DogFightState::DogFightState()
 {
@@ -44,6 +45,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
+	m_Player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
@@ -129,6 +131,9 @@ void DogFightState::UpdateState()
 void DogFightState::ExitState()
 {
 	//DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
+	//monster들 다 없애기
+
+
 	m_Player->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
 }
 

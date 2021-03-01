@@ -59,7 +59,8 @@ void Enemy_Falling::UpdateState()
 
 	if (m_fFallDelta >= 5.f)
 	{
-		m_gameObject->GetComponent<StateControl>()->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Death"));
+		m_gameObject->GetComponent<StateControl>()->SetState(L"Death");
+		//m_gameObject->GetComponent<StateControl>()->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Death"));
 	}
 	DEBUG_LOG(L"Enemy State", L"Falling");
 }

@@ -34,6 +34,7 @@ public: /* Settttt */
 
 
 public: /* Funcs */
+	void Destroy_AllEnemy();
 	void Enemy_Spawn(Vector3 _pos = Vector3(0.f,0.f,0.f), 
 		ENEMY_STATE _initState =ENEMY_STATE::IDLE,
 		ENEMY_STATUS _status = ENEMY_STATUS(),
@@ -41,6 +42,7 @@ public: /* Funcs */
 		BULLET_STATUS _missile = BULLET_STATUS(), 
 		BULLET_STATUS _homing = BULLET_STATUS());
 
+	void Boss_Spawn();
 
 private:
 	StateControl* m_pStateControl = nullptr;

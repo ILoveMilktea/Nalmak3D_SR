@@ -195,6 +195,7 @@
   <ItemGroup>
     <ClInclude Include="..\Include\AimMissile.h" />
     <ClInclude Include="..\Include\Boss.h" />
+    <ClInclude Include="..\Include\BossStageCamera.h" />
     <ClInclude Include="..\Include\BossState.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\EnemyDetector.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\NalmakScene.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
+    <ClInclude Include="..\Include\PlayerBossStageMove.h" />
     <ClInclude Include="..\Include\PlayerIdle.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
     <ClInclude Include="..\Include\PlayerItem.h" />
@@ -266,6 +268,7 @@
   <ItemGroup>
     <ClCompile Include="..\Source\AimMissile.cpp" />
     <ClCompile Include="..\Source\Boss.cpp" />
+    <ClCompile Include="..\Source\BossStageCamera.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\EnemyDetector.cpp" />
@@ -298,6 +301,7 @@
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\NalmakScene.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
+    <ClCompile Include="..\Source\PlayerBossStageMove.cpp" />
     <ClCompile Include="..\Source\PlayerIdle.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
     <ClCompile Include="..\Source\PlayerItem.cpp" />
