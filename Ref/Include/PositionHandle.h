@@ -11,7 +11,7 @@ class NALMAK_DLL PositionHandle :
 	public Component
 {
 public:
-	enum DIR { RIGHT,UP,FORWARD };
+	enum DIR { RIGHT, UP, FORWARD };
 public:
 	struct Desc
 	{

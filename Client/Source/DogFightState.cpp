@@ -27,11 +27,14 @@ DogFightState::~DogFightState()
 
 void DogFightState::Initialize()
 {
+
+
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
+
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
-	m_Player->SetScale(0.1f, 0.1f, 0.1f);
+	m_Player->SetScale(0.8f, 0.8f, 0.8f);
 
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
@@ -40,13 +43,17 @@ void DogFightState::Initialize()
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 	
 	MeshRenderer::Desc render;
-	render.mtrlName = L"default"; // 210223화 12:50 전근희 제대로 안나와서 설정 바꿨음
-	render.meshName = L"flight";
+	render.mtrlName = L"f15_base"; // 210223화 12:50 전근희 제대로 안나와서 설정 바꿨음
+	render.meshName = L"f15";
 	m_Player->AddComponent<MeshRenderer>(&render);
 
 	m_Player->AddComponent<PlayerInfoManager>();
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
+
+	ParticleRenderer::Desc particle;
+	particle.particleDataName = L"20mmCannon";
+	m_Player->AddComponent<ParticleRenderer>(&particle);
 
 	//m_Player->AddComponent<PlayerToTopView>();
 

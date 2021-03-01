@@ -168,6 +168,24 @@ public:
 	afx_msg void OnEnChangeMaxAngularVelocity();
 	CEdit m_minAngularVelocity;
 	CEdit m_maxAngularVelocity;
+	afx_msg void OnBnClickedStretched();
+	afx_msg void OnEnChangeStretchedScale();
+	CEdit m_stretchedScale;
+	CEdit m_animationTileX;
+	CEdit m_animationTileY;
+	afx_msg void OnEnChangeAnimationTileX();
+	afx_msg void OnEnChangeAnimationTileY();
+	CButton m_isAnimation;
+	afx_msg void OnBnClickedRadioBillboardNone();
+	afx_msg void OnBnClickedRadioBillboard();
+	afx_msg void OnBnClickedRadioBillboardHorizontal();
+	afx_msg void OnBnClickedRadioBillboardVertical();
+	afx_msg void OnBnClickedRadioBillboardStertched();
+	CButton m_billboardNone;
+	CButton m_billboardDefault;
+	CButton m_billboardHorizontal;
+	CButton m_billboardVertical;
+	CButton m_billboardStertched;
 };
 
 

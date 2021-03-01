@@ -86,7 +86,6 @@
       <Filter>04.Manager</Filter>
     </ClInclude>
     <ClInclude Include="MFC_Utility.h" />
-    <ClInclude Include="..\Client\Include\Enemy_Rush.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">

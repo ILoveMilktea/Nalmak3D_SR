@@ -3,7 +3,7 @@
 #include "MeshRenderer.h"
 #include "MeshPicking.h"
 #include "PositionHandle.h"
-
+#include "VIBufferRenderer.h"
 
 DrawGizmo::DrawGizmo(Desc * _desc)
 {
@@ -39,7 +39,7 @@ void DrawGizmo::Initialize()
 {
 	m_line = LineManager::GetInstance();
 
-	MeshRenderer::Desc desc_mr;
+	VIBufferRenderer::Desc desc_mr;
 	PositionHandle::Desc desc_ph;
 
 	desc_mr.meshName = L"box";
@@ -47,7 +47,7 @@ void DrawGizmo::Initialize()
 	desc_ph.dir = PositionHandle::RIGHT;
 	m_rightHandle =
 		INSTANTIATE()->
-		AddComponent<MeshRenderer>(&desc_mr)->
+		AddComponent<VIBufferRenderer>(&desc_mr)->
 		AddComponent<MeshPicking>()->
 		AddComponent<PositionHandle>(&desc_ph)->
 		SetScale(0.2f, 0.2f, 0.2f);
@@ -57,7 +57,7 @@ void DrawGizmo::Initialize()
 	desc_ph.dir = PositionHandle::UP;
 	m_upHandle =
 		INSTANTIATE()->
-		AddComponent<MeshRenderer>(&desc_mr)->
+		AddComponent<VIBufferRenderer>(&desc_mr)->
 		AddComponent<MeshPicking>()->
 		AddComponent<PositionHandle>(&desc_ph)->
 		SetScale(0.2f, 0.2f, 0.2f);
@@ -67,16 +67,11 @@ void DrawGizmo::Initialize()
 	desc_ph.dir = PositionHandle::FORWARD;
 	m_forwardHandle =
 		INSTANTIATE()->
-		AddComponent<MeshRenderer>(&desc_mr)->
+		AddComponent<VIBufferRenderer>(&desc_mr)->
 		AddComponent<MeshPicking>()->
 		AddComponent<PositionHandle>(&desc_ph)->
 		SetScale(0.2f, 0.2f, 0.2f);
 	m_forwardHandle->SetParents(m_gameObject);
-
-	m_rightHandle->SetActive(false);
-	m_upHandle->SetActive(false);
-	m_forwardHandle->SetActive(false);
-
 }
 
 void DrawGizmo::Update()

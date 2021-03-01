@@ -72,7 +72,6 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	
 	float4 diffuse = tex2D(DiffuseSampler, uvRT);
 	float3 normal = tex2D(NormalSampler, uvRT).xyz;
-	
 
 	float2 depth = tex2D(DepthSampler, uvRT).xy;
 	float4 worldPos = GetWorldPosFromDepth(depth, _in.uv);

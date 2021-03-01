@@ -1,6 +1,12 @@
 #include "stdafx.h"
+
 #include "..\Include\StageSelectScene.h"
 #include "MoveBySpline.h"
+#include "StageSelectCamera.h"
+#include "StageSelectCamera_Idle.h"
+#include "StageSelectCamera_Intro.h"
+#include "StageSelectCamera_Stage1.h"
+#include "StageSelectCamera_Stage2.h"
 
 StageSelectScene::StageSelectScene()
 {
@@ -13,11 +19,29 @@ StageSelectScene::~StageSelectScene()
 
 void StageSelectScene::Initialize()
 {
+
 	DirectionalLight::Desc dir;
-	dir.diffuseIntensity = 2.f;
-	dir.color = { 0.1f,0.4f,0.8f };
+	dir.diffuseIntensity = 1.f;
+	dir.ambientIntensity = 0.05f;
+	//dir.color = { 0.7f,0.8f,0.8f };
+
 	INSTANTIATE()->AddComponent<DirectionalLight>(&dir)->SetRotation(50, 20, 0);
-	auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<FreeMove>();// ->AddComponent<MoveBySpline>()->SetPosition(0, 0, 0);
+
+	{
+		//MoveBySpline::Desc	spline;
+		//spline.moveTime = 2.f;
+		//auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<MoveBySpline>(&spline)->AddComponent<StateControl>()->SetRotation(40,0,0);
+		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Idle>(L"idle");
+		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Intro>(L"intro");
+		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage1>(L"stage1");
+		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage2>(L"stage2");
+		//cam->GetComponent<StateControl>()->InitState(L"intro");
+	}
+	{
+		auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<FreeMove>();
+	}
+
+
 	/*cam->GetComponent<MoveBySpline>()
 		->AddSplinePoint({ 0,0,0 })
 		->AddSplinePoint({ 0,5,3 })
@@ -26,28 +50,36 @@ void StageSelectScene::Initialize()
 		->AddSplinePoint({ -35,-6,20 })
 		->AddSplinePoint({ 50,15,30 })
 		->AddSplinePoint({ 70,30,50 });*/
-	{
+	/*{
 		MeshRenderer::Desc render;
 		render.mtrlName = L"StageSelect_BG";
 		render.meshName = L"quadNoneNormal";
 		auto obj = INSTANTIATE(OBJECT_TAG_DEFAULT, L"background")->AddComponent<MeshRenderer>(&render)->SetScale(2, 2, 1);
 		obj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
-	}
+	}*/
 
 	{
 		Terrain::Desc render;
 		render.mtrlName = L"StageSelect_Floor";
 		render.interval = 3.f;
-		INSTANTIATE()->AddComponent<Terrain>(&render);
+		INSTANTIATE()->AddComponent<Terrain>(&render)->SetPosition(-150,0,0);
 	}
 
 	{
 		MeshRenderer::Desc render;
-		render.meshName = L"box";
-		render.mtrlName = L"standard";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0,0,-1);
+		render.meshName = L"plane";
+		render.mtrlName = L"f15_base";
+		
+		auto obj = INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0,10,-1);
+		obj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 
 	}
+	/*{
+		MeshRenderer::Desc render;
+		render.meshName = L"planeTest";
+		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 5);
+	}*/
+
 
 	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
 	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
@@ -57,17 +89,36 @@ void StageSelectScene::Initialize()
 	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
 	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
 	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
-	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Transparent", CANVAS_GROUP_G1);
+	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_CookTorrance", CANVAS_GROUP_G1);
 	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
 	ParticleRenderer::Desc particle;
-	particle.particleDataName = L"niniz";
-	PointLight::Desc point;
-	point.color = Vector3(1.f, 0.8f, 0.f);
-	point.diffuseIntensity = 3.f;
-	
+
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 
 
-	point.radius = 2.f;
-	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<PointLight>(&point);
+
+
+	//{
+	//	PointLight::Desc point;
+	//	point.color = Vector3(1.f, 1.f, 0.8f);
+	//	point.diffuseIntensity = 1.f;
+	//	point.radius = 6.f;
+
+	//	MeshRenderer::Desc render;
+	//	render.mtrlName = L"standard";
+	//	render.meshName = L"box";
+	//	INSTANTIATE()->AddComponent<MeshRenderer>(&render)->AddComponent<MeshPicking>()->AddComponent<DrawGizmo>()->AddComponent<PointLight>(&point)->SetScale(0.1f, 0.1f, 0.1f);
+	//}
+	//{
+	//	MeshRenderer::Desc render;
+	//	render.mtrlName = L"iron_normal";
+	//	render.meshName = L"Tbox";
+	//	INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(1, 0, 0)->SetScale(1,1,1);
+	//}
+	//{
+	//	MeshRenderer::Desc render;
+	//	render.mtrlName = L"iron";
+	//	render.meshName = L"box";
+	//	INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(3, 0, 0)->SetScale(1, 1, 1);
+	//}
 }

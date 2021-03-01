@@ -14,8 +14,8 @@ public:
 	virtual ~VIBuffer();
 public:
 	void OnInitialize(const TCHAR * _fp = L"");
-private:
 	virtual void Initialize(wstring _fp = L"") override = 0;
+private:
 	virtual void Release() override;
 public:
 	virtual void SetVertexCount(UINT _count) { m_vertexCount = _count; }

@@ -4,6 +4,9 @@ xcopy /y ..\Bin\*.dll ..\..\Client\Bin\Win32\Release\
 xcopy /y ..\Bin\*.dll ..\..\Client\Bin\x64\Debug\
 xcopy /y ..\Bin\*.dll ..\..\Client\Bin\x64\Release\
 xcopy /y ..\Bin\*.lib ..\..\Ref\Lib\
+xcopy /y ..\Lib\x64\release\*.lib ..\..\Ref\Lib\x64\release\
+xcopy /y ..\Lib\x64\debug\*.lib ..\..\Ref\Lib\x64\debug\
+
 
 xcopy /y ..\Bin\*.dll ..\..\EffectTool\
 xcopy /y ..\Bin\*.lib ..\..\EffectTool\

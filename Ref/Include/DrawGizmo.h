@@ -25,11 +25,6 @@ private:
 private:
 	LineManager* m_line;
 
-	VIBuffer* m_viBuffer_right;
-	VIBuffer* m_viBuffer_up;
-	VIBuffer* m_viBuffer_look;
-
-
 	GameObject* m_rightHandle;
 	GameObject* m_upHandle;
 	GameObject* m_forwardHandle;

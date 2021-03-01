@@ -24,14 +24,16 @@ void PositionHandle::Initialize()
 		m_transform->position = m_target->GetRight() * 3;
 		break;
 	case PositionHandle::UP:
-		m_transform->position = m_target->GetUp() *3;
+		m_transform->position = m_target->GetUp() * 3;
 		break;
 	case PositionHandle::FORWARD:
-		m_transform->position = m_target->GetForward() *3;
+		m_transform->position = m_target->GetForward() * 3;
 		break;
 	default:
 		break;
 	}
+
+	m_gameObject->SetActive(false);
 }
 
 void PositionHandle::Update()
@@ -62,7 +64,7 @@ void PositionHandle::MoveTarget()
 	default:
 		break;
 	}
-	
+
 	Vector2 targetWinPos = m_camera->WorldToScreenPos(m_target->position);
 	Vector2 handleWinPos = m_camera->WorldToScreenPos(m_transform->position + m_target->position);
 
@@ -85,6 +87,6 @@ void PositionHandle::MoveTarget()
 		axis *= dir.y;
 	}
 	Vector3 look = m_target->position - m_camera->GetTransform()->position;
-	float len = D3DXVec3Length(&look) * 0.5f;
+	float len = D3DXVec3Length(&look) * 2.f;
 	m_target->position += axis * len * dTime;
 }

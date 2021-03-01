@@ -6,6 +6,7 @@
 
 class Camera;
 class DrawGizmo;
+class PositionHandle;
 class MeshRenderer;
 class NALMAK_DLL MeshPicking :
 	public Component
@@ -17,7 +18,6 @@ public:
 public:
 	MeshPicking(Desc* _desc);
 
-	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
 
@@ -30,7 +30,9 @@ public:
 private:
 	Camera* m_mainCam;
 	MeshRenderer* m_renderer;
+
 	DrawGizmo* m_gizmo;
+	PositionHandle* m_handle;
 };
 
 

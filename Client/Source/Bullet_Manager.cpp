@@ -56,10 +56,10 @@ void Bullet_Manager::Fire(Vector3 _start, Quaternion _rot)
 	Bullet_Desc.iDmg = 10;
 	Bullet_obj->AddComponent<Bullet>(&Bullet_Desc);
 
-	MeshRenderer::Desc Bullet_Mesh;
+	VIBufferRenderer::Desc Bullet_Mesh;
 	Bullet_Mesh.mtrlName = L"default";
 	Bullet_Mesh.meshName = L"box";
-	Bullet_obj->AddComponent<MeshRenderer>(&Bullet_Mesh);
+	Bullet_obj->AddComponent<VIBufferRenderer>(&Bullet_Mesh);
 
 
 }
@@ -74,9 +74,9 @@ void Bullet_Manager::Fire_Missile(Vector3 _start, Quaternion _rot)
 	Missile::Desc Missile_Desc;
 	Missile_obj->AddComponent<Missile>(&Missile_Desc);
 
-	MeshRenderer::Desc Missile_Mesh;
+	VIBufferRenderer::Desc Missile_Mesh;
 	Missile_Mesh.mtrlName = L"default";
 	Missile_Mesh.meshName = L"box";
-	Missile_obj->AddComponent<MeshRenderer>(&Missile_Mesh);
+	Missile_obj->AddComponent<VIBufferRenderer>(&Missile_Mesh);
 
 }

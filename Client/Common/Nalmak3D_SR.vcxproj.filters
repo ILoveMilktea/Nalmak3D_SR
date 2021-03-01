@@ -151,6 +151,23 @@
     <ClInclude Include="PlayerKitSelector.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\StageSelectSceneManager.h">
+      <Filter>02.Component\00.Manager\StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectCamera.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Idle.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectCamera_Intro.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ObjLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -287,6 +304,23 @@
     <ClCompile Include="..\Source\UseKit.cpp">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\StageSelectSceneManager.cpp">
+      <Filter>02.Component\00.Manager\StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectCamera.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Idle.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ObjLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -432,6 +466,12 @@
     <Filter Include="02.Component\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Component\00.Manager\StageSelectScene">
+      <UniqueIdentifier>{eaa549ba-682e-4d55-9948-0886d6897327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\StageSelectScene\CameraMove">
+      <UniqueIdentifier>{77a6e37e-4059-4f3f-9a48-468430dfa279}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
@@ -498,10 +538,7 @@
     <FxCompile Include="..\..\Resource\Shader\D_PointLight.fx">
       <Filter>03.Resource\02.Shader\Light</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\particle_billboard.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\particle_billboard_vertical.fx">
+    <FxCompile Include="..\..\Resource\Shader\standard_normal.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>

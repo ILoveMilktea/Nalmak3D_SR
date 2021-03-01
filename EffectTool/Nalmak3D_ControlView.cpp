@@ -86,6 +86,14 @@ void Nalmak3D_ControlView::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT28, m_burstCount);
 	DDX_Control(pDX, IDC_EDIT46, m_minAngularVelocity);
 	DDX_Control(pDX, IDC_EDIT47, m_maxAngularVelocity);
+	DDX_Control(pDX, IDC_EDIT48, m_stretchedScale);
+	DDX_Control(pDX, IDC_EDIT49, m_animationTileX);
+	DDX_Control(pDX, IDC_EDIT50, m_animationTileY);
+	DDX_Control(pDX, IDC_RADIO9, m_billboardNone);
+	DDX_Control(pDX, IDC_RADIO10, m_billboardDefault);
+	DDX_Control(pDX, IDC_RADIO11, m_billboardHorizontal);
+	DDX_Control(pDX, IDC_RADIO12, m_billboardVertical);
+	DDX_Control(pDX, IDC_RADIO13, m_billboardStertched);
 }
 
 BEGIN_MESSAGE_MAP(Nalmak3D_ControlView, CFormView)
@@ -157,6 +165,14 @@ BEGIN_MESSAGE_MAP(Nalmak3D_ControlView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON12, &Nalmak3D_ControlView::OnBnClickedButtonLoad)
 	ON_EN_CHANGE(IDC_EDIT46, &Nalmak3D_ControlView::OnEnChangeMinAngularVelocity)
 	ON_EN_CHANGE(IDC_EDIT47, &Nalmak3D_ControlView::OnEnChangeMaxAngularVelocity)
+	ON_EN_CHANGE(IDC_EDIT48, &Nalmak3D_ControlView::OnEnChangeStretchedScale)
+	ON_EN_CHANGE(IDC_EDIT49, &Nalmak3D_ControlView::OnEnChangeAnimationTileX)
+	ON_EN_CHANGE(IDC_EDIT50, &Nalmak3D_ControlView::OnEnChangeAnimationTileY)
+	ON_BN_CLICKED(IDC_RADIO9, &Nalmak3D_ControlView::OnBnClickedRadioBillboardNone)
+	ON_BN_CLICKED(IDC_RADIO10, &Nalmak3D_ControlView::OnBnClickedRadioBillboard)
+	ON_BN_CLICKED(IDC_RADIO11, &Nalmak3D_ControlView::OnBnClickedRadioBillboardHorizontal)
+	ON_BN_CLICKED(IDC_RADIO12, &Nalmak3D_ControlView::OnBnClickedRadioBillboardVertical)
+	ON_BN_CLICKED(IDC_RADIO13, &Nalmak3D_ControlView::OnBnClickedRadioBillboardStertched)
 END_MESSAGE_MAP()
 
 
@@ -209,6 +225,36 @@ void Nalmak3D_ControlView::OnLbnSelchangeObjectList()
 	default:
 		break;
 	}
+
+	PARTICLE_BILLBOARD_TYPE billboard = m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.billboard;
+
+	m_billboardDefault.SetCheck(false);
+	m_billboardHorizontal.SetCheck(false);
+	m_billboardNone.SetCheck(false);
+	m_billboardStertched.SetCheck(false);
+	m_billboardVertical.SetCheck(false);
+
+	switch (billboard)
+	{
+	case PARTICLE_BILLBOARD_TYPE_NONE:
+		m_billboardNone.SetCheck(true);
+		break;
+	case PARTICLE_BILLBOARD_TYPE_DEFAULT:
+		m_billboardDefault.SetCheck(true);
+		break;
+	case PARTICLE_BILLBOARD_TYPE_HORIZONTAL:
+		m_billboardHorizontal.SetCheck(true);
+		break;
+	case PARTICLE_BILLBOARD_TYPE_VERTICAL:
+		m_billboardVertical.SetCheck(true);
+		break;
+	case PARTICLE_BILLBOARD_TYPE_STERTCHED:
+		m_billboardStertched.SetCheck(true);
+		break;
+	default:
+		break;
+	}
+
 
 	Material* mtrl = m_currentSelectObject->GetComponent<ParticleRenderer>()->GetMaterial();
 	if (mtrl)
@@ -352,6 +398,11 @@ void Nalmak3D_ControlView::UpdateData()
 	MFC_Utility::SetEditBoxFloat(&m_velocityY, particle->m_info.force.y);
 	MFC_Utility::SetEditBoxFloat(&m_velocityZ, particle->m_info.force.z);
 	MFC_Utility::SetEditBoxFloat(&m_gravity, particle->m_info.gravity);
+
+	MFC_Utility::SetEditBoxFloat(&m_stretchedScale, particle->m_info.stretchedScale);
+
+	MFC_Utility::SetEditBoxInt(&m_animationTileX, particle->m_info.animationTileX);
+	MFC_Utility::SetEditBoxInt(&m_animationTileY, particle->m_info.animationTileY);
 
 
 	COLORREF color = COLOR_RGB(particle->m_info.startMinColor.x, particle->m_info.startMinColor.y, particle->m_info.startMinColor.z);
@@ -701,7 +752,7 @@ void Nalmak3D_ControlView::OnEnChangeMaxCount()
 		return;
 	CString value;
 	GetDlgItem(IDC_EDIT9)->GetWindowTextW(value);
-	m_currentSelectObject->GetComponent<ParticleRenderer>()->SetMaxParticleCount(_tstoi(value));
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->UpdateParticleInfo(_tstoi(value));
 }
 
 
@@ -1220,4 +1271,100 @@ void Nalmak3D_ControlView::OnEnChangeMaxAngularVelocity()
 	CString value;
 	GetDlgItem(IDC_EDIT47)->GetWindowTextW(value);
 	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.maxAngularVelocity = Deg2Rad *(float)_tstof(value);
+
+}
+
+
+
+void Nalmak3D_ControlView::OnEnChangeStretchedScale()
+{
+	if (!m_currentSelectObject)
+		return;
+	CString value;
+	GetDlgItem(IDC_EDIT48)->GetWindowTextW(value);
+	auto particle = m_currentSelectObject->GetComponent<ParticleRenderer>();
+	particle->m_info.stretchedScale = (float)_tstof(value);
+
+	particle->UpdateParticleInfo(particle->m_info.maxParticleCount);
+}
+
+
+
+
+void Nalmak3D_ControlView::OnEnChangeAnimationTileX()
+{
+	if (!m_currentSelectObject)
+		return;
+	CString value;
+	GetDlgItem(IDC_EDIT49)->GetWindowTextW(value);
+
+	auto particle = m_currentSelectObject->GetComponent<ParticleRenderer>();
+	
+	particle->m_info.animationTileX = _tstoi(value);
+	particle->UpdateParticleInfo(particle->m_info.maxParticleCount);
+}
+
+
+void Nalmak3D_ControlView::OnEnChangeAnimationTileY()
+{
+	if (!m_currentSelectObject)
+		return;
+	CString value;
+	GetDlgItem(IDC_EDIT50)->GetWindowTextW(value);
+
+	auto particle = m_currentSelectObject->GetComponent<ParticleRenderer>();
+
+	particle->m_info.animationTileY = _tstoi(value);
+	particle->UpdateParticleInfo(particle->m_info.maxParticleCount);
+
+}
+
+
+void Nalmak3D_ControlView::OnBnClickedRadioBillboardNone()
+{
+	if (!m_currentSelectObject)
+		return;
+	m_stretchedScale.EnableWindow(false);
+
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.billboard = PARTICLE_BILLBOARD_TYPE::PARTICLE_BILLBOARD_TYPE_NONE;
+}
+
+
+void Nalmak3D_ControlView::OnBnClickedRadioBillboard()
+{
+	if (!m_currentSelectObject)
+		return;
+	m_stretchedScale.EnableWindow(false);
+
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.billboard = PARTICLE_BILLBOARD_TYPE::PARTICLE_BILLBOARD_TYPE_DEFAULT;
+}
+
+
+void Nalmak3D_ControlView::OnBnClickedRadioBillboardHorizontal()
+{
+	if (!m_currentSelectObject)
+		return;
+	m_stretchedScale.EnableWindow(false);
+
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.billboard = PARTICLE_BILLBOARD_TYPE::PARTICLE_BILLBOARD_TYPE_HORIZONTAL;
+}
+
+
+void Nalmak3D_ControlView::OnBnClickedRadioBillboardVertical()
+{
+	if (!m_currentSelectObject)
+		return;
+	m_stretchedScale.EnableWindow(false);
+
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.billboard = PARTICLE_BILLBOARD_TYPE::PARTICLE_BILLBOARD_TYPE_VERTICAL;
+}
+
+
+void Nalmak3D_ControlView::OnBnClickedRadioBillboardStertched()
+{
+	if (!m_currentSelectObject)
+		return;
+	m_stretchedScale.EnableWindow(true);
+
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.billboard = PARTICLE_BILLBOARD_TYPE::PARTICLE_BILLBOARD_TYPE_STERTCHED;
 }

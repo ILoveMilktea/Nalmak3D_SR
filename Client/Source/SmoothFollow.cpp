@@ -45,7 +45,7 @@ void SmoothFollow::Update()
 void SmoothFollow::LateUpdate()
 {
 	Matrix temproyWorldMatrix = m_toTarget->GetTransform()->GetWorldMatrix();
-	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * (m_culDistance * 2);
+	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * (m_culDistance);
 
 
 	m_followDirection = Nalmak_Math::Lerp(m_followDirection, -m_toTarget->GetTransform()->GetForward() , dTime * 1.5f);
@@ -58,7 +58,7 @@ void SmoothFollow::LateUpdate()
 	Vector3 targetPos = (m_toTarget->GetTransform()->position) + m_followDirection * (Interval + m_culDistance);
 
 	
-	m_transform->position = Nalmak_Math::Lerp(m_transform->position, targetPos + offSetY, dTime * 7.f);
+	m_transform->position = Nalmak_Math::Lerp(m_transform->position, targetPos + offSetY * 0.3f, dTime * 7.f);
 	m_transform->rotation = m_lookDirection;
 
 

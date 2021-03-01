@@ -63,8 +63,9 @@ void CanvasRenderer::Release()
 {
 }
 
-void CanvasRenderer::Render()
+void CanvasRenderer::Render(Shader * _shader, int _index)
 {
+	
 	Render_Image();
 	Render_Text();
 }
@@ -81,6 +82,7 @@ void CanvasRenderer::Render_Image()
 	Shader*	currentShader = m_material->GetShader();
 
 	assert("Current Shader is nullptr! " && currentShader);
+
 
 	if (m_animator)
 		GetMaterial()->SetTexture(0, m_animator->GetDiffuseSprite());
@@ -196,4 +198,25 @@ bool CanvasRenderer::MouseClickUp_OutRect()
 	}
 
 	return false;
+}
+
+
+int CanvasRenderer::GetMaterialCount()
+{
+	return 1;
+}
+
+Material * CanvasRenderer::GetMaterial(int _index)
+{
+	return m_material;
+}
+
+void CanvasRenderer::SetMaterial(Material * _material, int _index)
+{
+	m_material = _material;
+}
+
+void CanvasRenderer::SetMaterial(const wstring& _mtrlName, int _index)
+{
+	m_material = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
 }

@@ -194,7 +194,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Client\Include\Enemy_Rush.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enum.h" />

@@ -84,8 +84,9 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 		final = light * diffuse;
 	}
 
+
 	
-	o.color = float4(final, 1) + float4(trans,1);
+	o.color = float4(final + trans, 1);
 
 	return o;
 }

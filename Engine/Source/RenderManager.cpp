@@ -46,7 +46,6 @@ void RenderManager::Initialize()
 
 	m_currentMaterial = nullptr;
 	m_currentShader = nullptr;
-	m_currentVIBuffer = nullptr;
 
 	m_cameraList.clear();
 
@@ -83,9 +82,6 @@ void RenderManager::Render()
 
 void RenderManager::Render(Camera * _cam)
 {
-
-
-
 	///////////////////////////////////////////////////////
 	// public const buffer
 	ConstantBuffer cBuffer;
@@ -375,19 +371,22 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 
 
-	for (auto& MeshRendererList : m_renderLists[RENDERING_MODE_TRANSPARENT])
+	for (auto& renderList : m_renderLists[RENDERING_MODE_TRANSPARENT])
 	{
-		for (auto& renderer : MeshRendererList.second)
+		for (auto& renderer : renderList.second)
 		{
 			if (_cam->CompareLayer(renderer->GetLayer()))
 			{
 				if (_cam->IsInFrustumCulling(renderer))
 				{
-					Material* material = renderer->GetMaterial();
-					UpdateMaterial(material, _cBuffer);
-					UpdateVIBuffer(renderer);
+					renderer->BindingStreamSource();
+					for (int i = 0; i < renderer->GetMaterialCount(); ++i)
+					{
+						Material* material = renderer->GetMaterial(i);
+						UpdateMaterial(material, _cBuffer);
 
-					renderer->Render();
+						renderer->Render(m_currentShader, i);
+					}
 				}
 			}
 		}
@@ -413,17 +412,19 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
 
+
 	for (auto& renderer : m_renderUILists)
 	{
 		if (_cam->CompareLayer(renderer->GetLayer()))
 		{
 			if (_cam->IsInFrustumCulling(renderer))
 			{
+				renderer->BindingStreamSource();
+
 				Material* material = renderer->GetMaterial();
 				UpdateMaterial(material, _cBuffer);
-				UpdateVIBuffer(renderer);
 
-				renderer->Render();
+				renderer->Render(m_currentShader, 0);
 			}
 		}
 	}
@@ -449,13 +450,15 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 			{
 				if (_cam->IsInFrustumCulling(renderer))
 				{
-					Material* material = renderer->GetMaterial();
-					UpdateNoneAlphaMaterial(material, _cBuffer);
-					UpdateRenderTarget();
+					renderer->BindingStreamSource();
 
-					UpdateVIBuffer(renderer);
-
-					renderer->Render();
+					for (int i = 0; i < renderer->GetMaterialCount(); ++i)
+					{
+						Material* material = renderer->GetMaterial(i);
+						UpdateMaterial(material, _cBuffer);
+						UpdateRenderTarget();
+						renderer->Render(m_currentShader, i);
+					}
 				}
 			}
 		}
@@ -469,7 +472,7 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 
 void RenderManager::Reset()
 {
-	
+	m_debugManager->EraseTheRecord();
 	m_currentMaterial = nullptr;
 
 	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)
@@ -557,6 +560,7 @@ void RenderManager::AddCamera(GameObject * _cam)
 {
 	AddCamera(_cam->GetComponent<Camera>());
 }
+
 
 void RenderManager::UpdateMaterial(Material * _material, ConstantBuffer & _cBuffer)
 {
@@ -647,11 +651,7 @@ void RenderManager::UpdateFillMode(Material * _material)
 
 }
 
-void RenderManager::UpdateVIBuffer(IRenderer * _renderer)
-{
-	auto viBuffer = _renderer->GetVIBuffer();
-	_renderer->BindingStreamSource();
-}
+
 
 void RenderManager::UpdateRenderTarget()
 {

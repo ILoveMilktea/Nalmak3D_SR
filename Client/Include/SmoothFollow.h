@@ -7,13 +7,13 @@ public:
 	struct Desc
 	{
 		GameObject* toTarget = nullptr;
-		float culDistance = 20.f;
-		float minDistance = 25.f;
-		float maxDistance = 50.f;
-		float followMoveSpeed = 5.f;
+		float culDistance = 15.f;
+		float minDistance = 10.f;
+		float maxDistance = 25.f;
+		float followMoveSpeed = 10.f;
 		float followRotationSpeed = 10.f;
 		float ratioDamping = 0.3f; // 1¹Ì¸¸
-		float offSetY = 40.f;
+		float offSetY = 3.f;
 	};
 
 public:

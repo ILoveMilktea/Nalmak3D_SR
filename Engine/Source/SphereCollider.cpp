@@ -1,6 +1,6 @@
 #include "..\Include\SphereCollider.h"
 #include "MeshRenderer.h"
-
+#include "VIBufferRenderer.h"
 SphereCollider::SphereCollider(Desc * _desc)
 {
 	m_center = _desc->offset;
@@ -18,10 +18,10 @@ void SphereCollider::Initialize()
 	Collider::Initialize();
 
 
-	MeshRenderer::Desc render;
+	VIBufferRenderer::Desc render;
 	render.mtrlName = L"debugCollider";
 	render.meshName = L"sphere";
-	m_colliderDebug = INSTANTIATE()->AddComponent<MeshRenderer>(&render);
+	m_colliderDebug = INSTANTIATE()->AddComponent<VIBufferRenderer>(&render);
 	m_colliderDebug->SetParents(m_gameObject);
 	m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
 }

@@ -136,7 +136,7 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 	case RENDERER_TYPE_MESH:
 	case RENDERER_TYPE_PARTICLE:
 	{
-		float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
+		/*float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
 	
 		Transform* trs = _renderer->GetTransform();
 		Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
@@ -149,7 +149,7 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 			{
 				return false;
 			}
-		}
+		}*/
 	}
 	break;
 	case RENDERER_TYPE_CANVAS:

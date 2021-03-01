@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Particle.h"
 #include "ParticleInfo.h"
+#include "RenderManager.h"
 ParticleRenderer::ParticleRenderer(Desc * _desc)
 {
 	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
@@ -10,7 +11,6 @@ ParticleRenderer::ParticleRenderer(Desc * _desc)
 	m_emitBursts = info->GetParticleBurst();
 	m_material = info->GetMaterial();
 	m_info = info->GetParticleInfo();
-
 
 
 	if (m_material->GetShader()->GetInputLayout() != VERTEX_INPUT_LAYOUT_PARTICLE)
@@ -28,12 +28,15 @@ ParticleRenderer::ParticleRenderer(Desc * _desc)
 
 void ParticleRenderer::Initialize()
 {
-	SetMaxParticleCount(m_info.maxParticleCount);
+	UpdateParticleInfo(m_info.maxParticleCount);
 
+	m_spriteIndexRatio = 1.f / (m_info.animationTileX * m_info.animationTileY);
 
 	m_awakeTime = Nalmak_Math::Rand(m_info.minAwakeTime, m_info.maxAwakeTime);
 
 	m_secPerEmit = 1 / (float)m_info.emittorCount;
+
+	m_camera = RenderManager::GetInstance()->GetMainCamera();
 }
 
 void ParticleRenderer::Update()
@@ -92,11 +95,11 @@ void ParticleRenderer::Update()
 
 	}
 
-	ParticleUpdate();
 }
 
 void ParticleRenderer::LateUpdate()
 {
+	ParticleUpdate();
 }
 
 void ParticleRenderer::Release()
@@ -114,16 +117,15 @@ void ParticleRenderer::Release()
 	SAFE_DELETE(m_instanceBuffer);
 }
 
-void ParticleRenderer::Render()
+void ParticleRenderer::Render(Shader * _shader, int _index)
 {
-
 	if (m_currentCount == 0)
 		return;
-	Shader* currentShader = m_material->GetShader();
-	assert("Current Shader is nullptr! " && currentShader);
 
-	currentShader->CommitChanges();
-	ThrowIfFailed(m_device->DrawIndexedPrimitive(currentShader->GetPrimitiveType(), 0, 0, 4 * m_currentCount, 0, m_viBuffer->GetFigureCount()));
+	assert("Current Shader is nullptr! " && _shader);
+
+	_shader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(_shader->GetPrimitiveType(), 0, 0, 4 * m_currentCount, 0, m_viBuffer->GetFigureCount()));
 
 	ThrowIfFailed(m_device->SetStreamSourceFreq(0, 1));
 	ThrowIfFailed(m_device->SetStreamSourceFreq(1, 1));
@@ -144,7 +146,7 @@ void ParticleRenderer::BindingStreamSource()
 
 }
 
-void ParticleRenderer::SetMaxParticleCount(int _maxCount)
+void ParticleRenderer::UpdateParticleInfo(int _maxCount)
 {
 	if (_maxCount <= 0)
 		return;
@@ -169,20 +171,35 @@ void ParticleRenderer::SetMaxParticleCount(int _maxCount)
 
 	m_instanceBuffer = new DynamicInstanceBuffer(m_info.maxParticleCount);
 	m_particlesInfo = new INPUT_LAYOUT_PARTICLE[m_info.maxParticleCount];
+	
+	SetAnimationCount(m_info.animationTileX *  m_info.animationTileY);
+	for (int i = 0; i < m_info.maxParticleCount; ++i)
+	{
+		m_particlesInfo[i].spriteX_spriteY_index.x = (float)m_info.animationTileX;
+		m_particlesInfo[i].spriteX_spriteY_index.y = (float)m_info.animationTileY;
+	}
 	for (int i = 0; i < m_info.maxParticleCount; ++i)
 	{
 		auto particle = new Particle;
 		particle->gravityScale = m_info.gravity;
+		particle->StretchedScale = m_info.stretchedScale;
 		m_particlePool.push(particle);
 	}
-
+	
 	
 }
+
+void ParticleRenderer::SetAnimationCount(int _count)
+{
+	m_spriteIndexRatio = 1.f / _count;
+}
+
+
 
 void ParticleRenderer::SetGravityScale(float _scale)
 {
 	m_info.gravity = _scale;
-	SetMaxParticleCount(m_info.maxParticleCount);
+	UpdateParticleInfo(m_info.maxParticleCount);
 }
 
 void ParticleRenderer::Emit(int _count)
@@ -280,6 +297,7 @@ void ParticleRenderer::EmitSphere(int _count)
 		float endColor = Nalmak_Math::Rand(0.f, 1.f);
 		particle->endColor = Nalmak_Math::Lerp(m_info.endMinColor, m_info.endMaxColor,endColor);
 		particle->lifeTime = Nalmak_Math::Rand(m_info.minLifeTime, m_info.maxLifeTime);
+
 		m_activedParticles.emplace_back(particle);
 	}
 }
@@ -472,8 +490,68 @@ void ParticleRenderer::EmitCone(int _count)
 
 void ParticleRenderer::ParticleUpdate()
 {
+
+
 	if (m_activedParticles.size() == 0)
 		return;
+
+
+	Matrix view = m_camera->GetViewMatrix();
+	Matrix billboard;
+	D3DXMatrixIdentity(&billboard);
+
+	switch (m_info.billboard)
+	{
+	case PARTICLE_BILLBOARD_TYPE_NONE:
+	
+		break;
+	case PARTICLE_BILLBOARD_TYPE_DEFAULT:
+	{
+
+		memcpy(&billboard.m[0][0], &view.m[0][0], sizeof(Vector3));
+		memcpy(&billboard.m[1][0], &view.m[1][0], sizeof(Vector3));
+		memcpy(&billboard.m[2][0], &view.m[2][0], sizeof(Vector3));
+
+		D3DXMatrixInverse(&billboard, 0, &billboard);
+		break;
+	}
+	case PARTICLE_BILLBOARD_TYPE_HORIZONTAL:
+	{
+
+		billboard._11 = view._11;
+		billboard._21 = view._21;
+		billboard._22 = view._22;
+		billboard._12 = view._12;
+
+		D3DXMatrixInverse(&billboard, 0, &billboard);
+
+		break;
+	}
+	case PARTICLE_BILLBOARD_TYPE_VERTICAL:
+	{
+
+		billboard._11 = view._11;
+		billboard._13 = view._13;
+		billboard._31 = view._31;
+		billboard._33 = view._33;
+
+		D3DXMatrixInverse(&billboard, 0, &billboard);
+		break;
+	}
+	case PARTICLE_BILLBOARD_TYPE_STERTCHED:
+	{
+		memcpy(&billboard.m[0][0], &view.m[0][0], sizeof(Vector3));
+		memcpy(&billboard.m[1][0], &view.m[1][0], sizeof(Vector3));
+		memcpy(&billboard.m[2][0], &view.m[2][0], sizeof(Vector3));
+
+		D3DXMatrixInverse(&billboard, 0, &billboard);
+		break;
+	}
+	case PARTICLE_BILLBOARD_TYPE_MAX:
+		break;
+	default:
+		break;
+	}
 
 	int i = 0;
 	for (auto iter = m_activedParticles.begin(); iter != m_activedParticles.end();)
@@ -485,7 +563,7 @@ void ParticleRenderer::ParticleUpdate()
 		}
 		else
 		{
-			(*iter)->Update(&m_particlesInfo[i]);
+			(*iter)->Update(&m_particlesInfo[i], billboard, m_spriteIndexRatio, m_info.billboard);
 			++iter;
 			++i;
 			
@@ -493,6 +571,26 @@ void ParticleRenderer::ParticleUpdate()
 	}
 	m_instanceBuffer->UpdateInstanceBuffer(m_particlesInfo, i);
 	m_currentCount = i;
+}
+
+int ParticleRenderer::GetMaterialCount()
+{
+	return 1;
+}
+
+Material * ParticleRenderer::GetMaterial(int _index)
+{
+	return m_material;
+}
+
+void ParticleRenderer::SetMaterial(Material * _material, int _index)
+{
+	m_material = _material;
+}
+
+void ParticleRenderer::SetMaterial(const wstring& _mtrlName, int _index)
+{
+	m_material = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
 }
 
 void ParticleRenderer::Stop()

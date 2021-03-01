@@ -16,6 +16,8 @@ void TimeManager::Reset()
 	QueryPerformanceCounter(&m_previousTime);
 	QueryPerformanceFrequency(&m_countPerSec);
 
+	m_deltaTime = 0;
+
 }
 
 void TimeManager::Start()

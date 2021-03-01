@@ -73,6 +73,8 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 	o.cookTorrance.x = g_f0;
 	o.cookTorrance.y = g_roughness;
+	o.cookTorrance.z = 0;
+	o.cookTorrance.w = 1;
 
 	return o;
 }

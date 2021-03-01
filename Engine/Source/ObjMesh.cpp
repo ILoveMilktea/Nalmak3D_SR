@@ -1,6 +1,5 @@
 #include "..\Include\ObjMesh.h"
 #include <fstream>
-
 ObjMesh::ObjMesh()
 {
 }
