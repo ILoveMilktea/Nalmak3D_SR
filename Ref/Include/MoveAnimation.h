@@ -28,7 +28,7 @@ public:
 public:
 	void SetActor(GameObject* _actor);
 	void SetDestination(Vector3 _dest) { m_destination = _dest; }
-	void SetPlaytime(float _time) { m_playTimer = _time; }
+	void SetPlaytime(float _time) { m_playDuration = _time; }
 
 private:
 	ANIMATION m_currentAnimation;

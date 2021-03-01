@@ -2,6 +2,8 @@
 #ifndef __UIFACTORY_H__
 #define __UIFACTORY_H__
 
+#include "stdafx.h"
+
 #include "Core.h"
 #include "Rader.h"
 #include "Crosshair.h"

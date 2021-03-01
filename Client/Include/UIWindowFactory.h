@@ -2,6 +2,7 @@
 #ifndef __UIWINDOWNFACTORY_H__
 #define __UIWINDOWNFACTORY_H__
 
+#include "stdafx.h"
 #include "Core.h"
 #include "UIFactory.h"
 
