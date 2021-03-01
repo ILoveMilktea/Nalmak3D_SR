@@ -2,10 +2,10 @@
 ##  Material Data Setting
 #########################################################
 
-shader "particle"
+shader "20mmCannon"
 
 texture "g_mainTex" "fx20mmCannon"
-
+vector4   "g_mainTexColor" "1,1,0.5f,1"
 renderQueue "3000"
 
 blendingMode "1"

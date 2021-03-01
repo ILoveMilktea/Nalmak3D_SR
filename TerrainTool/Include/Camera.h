@@ -52,6 +52,7 @@ private:
 	float m_height;
 	Matrix m_projMatrix;
 
+
 	CAMERA_PROJECTION_MODE m_mode;
 	CAMERA_RENDERING_MODE m_renderingMode;
 	BitFlag<_RENDER_LAYER> m_layer;

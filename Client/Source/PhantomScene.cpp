@@ -50,6 +50,14 @@ void PhantomScene::Initialize()
 	StageManager::GetInstance();
 
 
+	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
+	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
+	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal", CANVAS_GROUP_G1);
+	window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
+	auto window3 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Depth", CANVAS_GROUP_G1);
+	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
+	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Transparent", CANVAS_GROUP_G1);
+	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
 
 	//Core::GetInstance()->SetSkyBox(L"skybox_gradation");
 	//MeshRenderer::Desc ground;

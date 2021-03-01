@@ -39,7 +39,7 @@ void PlayerShooter::Update()
 	if (m_shootTime > 0)
 	{
 		m_shootTime -= dTime;
-		if(m_shootTime <= 0)
+		if (m_shootTime <= 0)
 			m_useEquipment->CreateBullet();
 	}
 	//if (m_useEquipment->GetShotCheck()) // ½úÀ¸¸é

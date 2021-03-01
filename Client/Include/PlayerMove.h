@@ -14,7 +14,6 @@ public:
 	virtual void ExitState() override;
 
 
-	void TemproryAttackFunc(); 
 	Quaternion* Rotation(const Vector3& _dir);
 	//Vector3 Move(const int& _dirPara = 0);
 private:

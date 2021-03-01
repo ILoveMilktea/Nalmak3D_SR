@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Nalmak3D_SR.h">
@@ -205,9 +205,6 @@
     <ClInclude Include="..\Include\EditController.h">
       <Filter>96.Debuger</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerShooter.h">
-      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\EnemyDetector.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
@@ -219,9 +216,6 @@
     <ClInclude Include="PlayerEscapeState.h" />
     <ClInclude Include="..\Include\BossUIAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\StageSelectSceneManager.h">
-      <Filter>02.Component\00.Manager\StageSelectScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\StageSelectCamera.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Idle.h">
@@ -237,6 +231,11 @@
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ObjLoader.h" />
+    <ClInclude Include="..\Include\StageSelectSceneManager.h" />
+    <ClInclude Include="..\Include\PlayerShooter.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -415,9 +414,6 @@
     <ClCompile Include="..\Source\EditController.cpp">
       <Filter>96.Debuger</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PlayerShooter.cpp">
-      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\EnemyDetector.cpp">
       <Filter>02.Component\02.UI</Filter>
     </ClCompile>
@@ -429,9 +425,6 @@
     <ClCompile Include="PlayerEscapeState.cpp" />
     <ClCompile Include="..\Source\BossUIAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\StageSelectSceneManager.cpp">
-      <Filter>02.Component\00.Manager\StageSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\StageSelectCamera.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Idle.cpp">
@@ -447,6 +440,11 @@
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ObjLoader.cpp" />
+    <ClCompile Include="..\Source\StageSelectSceneManager.cpp" />
+    <ClCompile Include="..\Source\PlayerShooter.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -637,9 +635,6 @@
     <Filter Include="02.Component\01.Utility\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\StageSelectScene">
-      <UniqueIdentifier>{eaa549ba-682e-4d55-9948-0886d6897327}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\00.Manager\StageSelectScene\CameraMove">
       <UniqueIdentifier>{77a6e37e-4059-4f3f-9a48-468430dfa279}</UniqueIdentifier>
     </Filter>
@@ -717,6 +712,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\standard_normal.fx">
       <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\20mmCannon.fx">
+      <Filter>03.Resource\02.Shader\Stage</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

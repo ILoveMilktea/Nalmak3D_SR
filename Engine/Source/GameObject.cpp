@@ -115,7 +115,8 @@ GameObject * GameObject::Instantiate(int _tag, wstring _name)
 
 void GameObject::Destroy(GameObject * _obj)
 {
-	_obj->m_dead = true;
+	if(_obj)
+		_obj->m_dead = true;
 }
 
 void GameObject::AddComponent(const pair<string, Component*>& _component)

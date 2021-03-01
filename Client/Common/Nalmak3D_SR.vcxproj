@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -198,6 +198,7 @@
     <ClInclude Include="..\Include\BossStageCamera.h" />
     <ClInclude Include="..\Include\BossState.h" />
     <ClInclude Include="..\Include\BulletDirMove.h" />
+    <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
     <ClInclude Include="..\Include\EnemyDetector.h" />
     <ClInclude Include="..\Include\EscapeSkill.h" />
     <ClInclude Include="..\Include\MachineGun.h" />
@@ -284,6 +285,7 @@
     <ClCompile Include="..\Source\BossStageCamera.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
     <ClCompile Include="..\Source\BulletDirMove.cpp" />
+    <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
     <ClCompile Include="..\Source\EnemyDetector.cpp" />
     <ClCompile Include="..\Source\EscapeSkill.cpp" />
     <ClCompile Include="..\Source\MachineGun.cpp" />
@@ -369,6 +371,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\20mmCannon.fx" />
     <FxCompile Include="..\..\Resource\Shader\default.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
