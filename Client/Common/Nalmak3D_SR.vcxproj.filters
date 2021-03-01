@@ -208,12 +208,6 @@
     <ClInclude Include="..\Include\EnemyDetector.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\BulletDirMove.h" />
-    <ClInclude Include="..\Include\EscapeSkill.h" />
-    <ClInclude Include="..\Include\PlayerAttak.h" />
-    <ClInclude Include="..\Include\PlayerSkillActor.h" />
-    <ClInclude Include="..\Include\SmallCannon.h" />
-    <ClInclude Include="PlayerEscapeState.h" />
     <ClInclude Include="..\Include\BossUIAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
@@ -221,14 +215,29 @@
     <ClInclude Include="..\Include\StageSelectCamera_Idle.h">
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\StageSelectCamera_Intro.h">
-      <Filter>02.Component\04.StageSelectScene</Filter>
+    <ClInclude Include="..\Include\BulletDirMove.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h">
-      <Filter>02.Component\04.StageSelectScene</Filter>
+    <ClInclude Include="..\Include\EscapeSkill.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h">
-      <Filter>02.Component\04.StageSelectScene</Filter>
+    <ClInclude Include="..\Include\PlayerAttak.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SmallCannon.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerShooter.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerSkillActor.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScaleDampingDeffender.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerEscapeState.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ObjLoader.h" />
     <ClInclude Include="..\Include\StageSelectSceneManager.h" />
@@ -417,12 +426,6 @@
     <ClCompile Include="..\Source\EnemyDetector.cpp">
       <Filter>02.Component\02.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\BulletDirMove.cpp" />
-    <ClCompile Include="..\Source\EscapeSkill.cpp" />
-    <ClCompile Include="..\Source\PlayerAttak.cpp" />
-    <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
-    <ClCompile Include="..\Source\SmallCannon.cpp" />
-    <ClCompile Include="PlayerEscapeState.cpp" />
     <ClCompile Include="..\Source\BossUIAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
@@ -430,14 +433,29 @@
     <ClCompile Include="..\Source\StageSelectCamera_Idle.cpp">
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp">
-      <Filter>02.Component\04.StageSelectScene</Filter>
+    <ClCompile Include="..\Source\BulletDirMove.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp">
-      <Filter>02.Component\04.StageSelectScene</Filter>
+    <ClCompile Include="..\Source\EscapeSkill.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp">
-      <Filter>02.Component\04.StageSelectScene</Filter>
+    <ClCompile Include="..\Source\PlayerAttak.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SmallCannon.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerShooter.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerSkillActor.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScaleDampingDeffender.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerEscapeState.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ObjLoader.cpp" />
     <ClCompile Include="..\Source\StageSelectSceneManager.cpp" />
