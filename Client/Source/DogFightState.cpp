@@ -45,7 +45,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
-	m_Player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerbossMove");
+	m_Player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;

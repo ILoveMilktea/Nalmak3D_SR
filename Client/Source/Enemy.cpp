@@ -63,7 +63,6 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 			m_gameObject->GetComponent<StateControl>()
 					->SetState(L"Falling");
 		
-
 		}
 	}
 }

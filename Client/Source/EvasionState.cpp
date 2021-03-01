@@ -80,7 +80,7 @@ void EvasionState::UpdateState()
 
 void EvasionState::ExitState()
 {
-	m_Player->GetComponent<StateControl>()->SetState(L"playerbossMove");
+	m_Player->GetComponent<StateControl>()->SetState(L"playerBossMove");
 
 	EnemyManager::GetInstance()->Destroy_AllEnemy();
 }

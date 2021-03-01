@@ -12,5 +12,16 @@ public:
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
+
+public: /* Get */
+
+public: /* Set */
+
+public: /* function */
+	void Accelerate();
+private:
+	float m_fSpd = 0.f;
+
+
 };
 

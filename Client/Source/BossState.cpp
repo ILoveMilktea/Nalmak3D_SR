@@ -3,6 +3,7 @@
 
 #include "EnemyManager.h"
 #include "PlayerTopViewMove.h"
+#include "PlayerBossStageMove.h"
 
 
 BossState::BossState()
@@ -38,7 +39,7 @@ void BossState::EnterState()
 	{
 		assert(L"플레이어 못받은거 같은데여 ㅋㅋ;;");
 	}
-	m_pPlayer->DeleteComponent<PlayerTopViewMove>();
+
 
 	//m_pPlayer->GetTransform()->position = Vector3(0, 0, -50);
 	//m_pPlayer->GetTransform()->SetRotation(0, 0, 0);
@@ -140,11 +141,7 @@ void BossState::EnterProduce()
 
 
 	//2. Camera shaking
-	//if (fShakingTime <= 0)
-	//{
-	//	m_pMainCamera->GetTransform()->position = vCameraOrigin;
-	//	m_bCameraShaking = false;
-	//}
+
 
 	if (m_bCameraShaking)
 	{
