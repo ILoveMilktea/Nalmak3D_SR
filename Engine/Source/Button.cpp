@@ -215,3 +215,14 @@ void Button::RemoveEventHandler(int _index)
 {
 	m_event.RemoveHandler(_index);
 }
+
+void Button::ResetEvent()
+{
+	m_event.Release();
+}
+
+void Button::ResetEvent(EventHandler _eventFunc)
+{
+	m_event.Release();
+	m_event += _eventFunc;
+}

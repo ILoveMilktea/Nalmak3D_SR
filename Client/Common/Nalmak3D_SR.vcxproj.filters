@@ -218,7 +218,13 @@
     <ClInclude Include="..\Include\SmallCannon.h" />
     <ClInclude Include="PlayerEscapeState.h" />
     <ClInclude Include="..\Include\BossUIAnimator.h">
-      <Filter>02.Component\05.Animator</Filter>
+      <Filter>02.Component\05.Animator\BossUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuAnimator.h">
+      <Filter>02.Component\05.Animator\Garage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ItemButton.h">
+      <Filter>02.Component\02.UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -411,7 +417,13 @@
     <ClCompile Include="..\Source\SmallCannon.cpp" />
     <ClCompile Include="PlayerEscapeState.cpp" />
     <ClCompile Include="..\Source\BossUIAnimator.cpp">
-      <Filter>02.Component\05.Animator</Filter>
+      <Filter>02.Component\05.Animator\BossUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuAnimator.cpp">
+      <Filter>02.Component\05.Animator\Garage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ItemButton.cpp">
+      <Filter>02.Component\02.UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -608,6 +620,12 @@
     </Filter>
     <Filter Include="02.Component\03.Script\99.Default">
       <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\05.Animator\BossUI">
+      <UniqueIdentifier>{f37d885e-ae9d-4468-aac6-a7994ca547b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\05.Animator\Garage">
+      <UniqueIdentifier>{7e643725-d4a0-49ba-b883-885e93ffcd22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -50,7 +50,8 @@ void MoveAnimation::End_Animation()
 void MoveAnimation::Play_MoveLerp()
 {
 	Vector3 curPos;
-	D3DXVec3Lerp(&curPos, &m_start, &m_destination, m_playTimer);
+	float curTime = (m_playTimer - m_startDelay) / m_playDuration;
+	D3DXVec3Lerp(&curPos, &m_start, &m_destination, curTime);
 
 	m_actor->SetPosition(curPos);
 }
