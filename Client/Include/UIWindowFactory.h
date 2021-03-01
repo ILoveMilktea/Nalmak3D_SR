@@ -56,6 +56,39 @@ public:
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
 				menu->SetPosition(1600.f, 600.f);
 			}
+			{
+				EventHandler eventFunc = EventHandler([=]() {
+
+					PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"AimMissile"); // 주무장으로 에임미사일을
+
+				});
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
+				menu->SetPosition(1600.f, 650.f);
+			}
+			//
+
+			// Menu 2 - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+			{
+				EventHandler eventFunc = EventHandler([=]() {
+
+					ItemManager::GetInstance()->BuyItem(L"Weapon", L"Cannon");
+
+				});
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
+				menu->SetPosition(1600.f, 700.f);
+			}
+			{
+				EventHandler eventFunc = EventHandler([=]() {
+
+					PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Cannon"); // 보조무장으로 캐논을
+
+				});
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon -Cannon ] ", CANVAS_GROUP_MAINWND);
+				menu->SetPosition(1600.f, 750.f);
+			}
+			//
+
+
 			// Menu 3 - SKILL (Button)
 			{
 				EventHandler eventFunc = EventHandler([=]() {});

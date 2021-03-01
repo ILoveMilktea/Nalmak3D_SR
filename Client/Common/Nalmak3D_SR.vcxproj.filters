@@ -2,13 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Nalmak3D_SR.h">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Extern.h">
       <Filter>98.PreCompile\02.Extern</Filter>
@@ -196,7 +196,6 @@
     <ClInclude Include="..\Include\Scripter.h">
       <Filter>02.Component\03.Script</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h">
       <Filter>97.Factory</Filter>
     </ClInclude>
@@ -212,10 +211,16 @@
     <ClInclude Include="..\Include\EnemyDetector.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\SmallCannon.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\BulletDirMove.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MainGame.cpp">
       <Filter>00.Main</Filter>
@@ -384,7 +389,6 @@
     <ClCompile Include="..\Source\Scripter.cpp">
       <Filter>02.Component\03.Script</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\CustomDebuger.cpp">
       <Filter>96.Debuger</Filter>
     </ClCompile>
@@ -397,19 +401,22 @@
     <ClCompile Include="..\Source\EnemyDetector.cpp">
       <Filter>02.Component\02.UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\SmallCannon.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\BulletDirMove.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </Image>
     <Image Include="small.ico">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="99.Default">
-      <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="98.PreCompile">
       <UniqueIdentifier>{2e85a4a7-f68d-4f19-a778-f1c020085930}</UniqueIdentifier>
     </Filter>
@@ -590,15 +597,18 @@
     <Filter Include="96.Debuger">
       <UniqueIdentifier>{e5d73c33-bd55-4534-8849-38459f478dd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Component\03.Script\99.Default">
+      <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

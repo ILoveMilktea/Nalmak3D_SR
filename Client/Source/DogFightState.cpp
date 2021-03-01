@@ -17,6 +17,7 @@
 #include "UIWindowFactory.h"
 #include "SceneChanger.h"
 #include "PlayerBossStageMove.h"
+#include "PlayerShooter.h"
 
 DogFightState::DogFightState()
 {
@@ -54,7 +55,7 @@ void DogFightState::EnterState()
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
-
+	m_Player->AddComponent<PlayerShooter>();
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();

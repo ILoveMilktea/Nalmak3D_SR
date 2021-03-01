@@ -2,7 +2,7 @@
 #include "..\Include\ItemManager.h"
 #include "PlayerItem.h"
 #include "AimMissile.h"
-
+#include "SmallCannon.h"
 #include "PlayerInfoManager.h"
 
 ItemManager* ItemManager::m_instance = nullptr;
@@ -28,13 +28,25 @@ void ItemManager::Initialize()
 {
 	// 겟인스턴스 이후 컴퍼넌트가 추가된 이후 이니셜라이즈
 	// unordered_map<wstring, vector<class PlayerItem*>> m_mapShopItem;
-
+	ITEMINFO info;
 	m_mapShopItem[L"Weapon"].reserve(5);
 	{
-		ITEMINFO info;
+		
 		info.itemName = L"AimMissile";
 		info.costGold = 200;
+		info.delay = 2.5f;
+		info.weaponSpeed = 35.f;
 		m_mapShopItem[L"Weapon"].emplace_back(new AimMissile(info));
+	}
+
+	{
+		ITEMINFO info;
+		info.itemName = L"Cannon";
+		info.costGold = 100;
+		info.delay = 0.25f;
+		info.weaponSpeed = 45.f;
+
+		m_mapShopItem[L"Weapon"].emplace_back(new SmallCannon(info));
 	}
 
 

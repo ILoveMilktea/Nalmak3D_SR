@@ -42,7 +42,6 @@ public:
 	void SetTimeLimit(const float& _value);
 	void SetScore(const float& _value);
 	void SetPlayer(GameObject* _player);
-	void MinGold(int _value);
 public:
 	const int& GetHp() const;
 	const int& GetAttack() const;
@@ -60,6 +59,15 @@ public:
 	const float& GetScore() { return m_score; }
 	GameObject* GetPlayer() { return m_player; }
 	vector<wstring>& GetInven() { return m_haveItemList; }
+	const wstring* GetWeaponArray() { return m_Culweapon; }
+
+	const wstring& GetWeapon(PARTS_NUM _weaponName) { return m_Culweapon[_weaponName]; }
+
+public: //using
+	bool EquipItem(PARTS_NUM eID , const wstring& _equipItemName);
+	void MinGold(int _value);
+
+
 
 private:
 	static PlayerInfoManager* m_instance;
@@ -81,7 +89,9 @@ private:
 	float m_score = 0.f;
 	GameObject* m_player;
 
-	bool EquipItem(const wstring& _equipItemName);
 private:
 	vector<wstring> m_haveItemList;
+	wstring  m_Culweapon[PARTS_NUM::PARTS_MAX] = {};
+
+
 };

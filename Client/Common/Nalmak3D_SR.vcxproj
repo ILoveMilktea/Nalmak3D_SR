@@ -197,7 +197,7 @@
     <ClInclude Include="..\Include\Boss.h" />
     <ClInclude Include="..\Include\BossStageCamera.h" />
     <ClInclude Include="..\Include\BossState.h" />
-    <ClInclude Include="..\Include\DeadTimer.h" />
+    <ClInclude Include="..\Include\BulletDirMove.h" />
     <ClInclude Include="..\Include\EnemyDetector.h" />
     <ClInclude Include="..\Include\MachineGun.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
@@ -246,6 +246,7 @@
     <ClInclude Include="..\Include\ScriptPlay.h" />
     <ClInclude Include="..\Include\ScriptReady.h" />
     <ClInclude Include="..\Include\ScriptWait.h" />
+    <ClInclude Include="..\Include\SmallCannon.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
@@ -270,7 +271,7 @@
     <ClCompile Include="..\Source\Boss.cpp" />
     <ClCompile Include="..\Source\BossStageCamera.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
-    <ClCompile Include="..\Source\DeadTimer.cpp" />
+    <ClCompile Include="..\Source\BulletDirMove.cpp" />
     <ClCompile Include="..\Source\EnemyDetector.cpp" />
     <ClCompile Include="..\Source\MachineGun.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
@@ -316,6 +317,7 @@
     <ClCompile Include="..\Source\ScriptPlay.cpp" />
     <ClCompile Include="..\Source\ScriptReady.cpp" />
     <ClCompile Include="..\Source\ScriptWait.cpp" />
+    <ClCompile Include="..\Source\SmallCannon.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
