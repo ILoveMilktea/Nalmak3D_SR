@@ -17,7 +17,7 @@ public:
 	static void GarageMainWindow(GameObject* _player)
 	{
 		auto interactiveController = INSTANTIATE();
-
+		
 		// reference
 		{
 			SingleImage::Desc desc_si;
@@ -46,7 +46,7 @@ public:
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND);
 				menu->SetPosition(576.f, 230.f);
 			}
-			// Menu 2 - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+			// Menu (2 - 0) - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
 			{
 				EventHandler eventFunc = EventHandler([=]() {
 
@@ -59,7 +59,7 @@ public:
 			{
 				EventHandler eventFunc = EventHandler([=]() {
 
-					PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"AimMissile"); // 주무장으로 에임미사일을
+					PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 주무장으로 에임미사일을
 
 				});
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
@@ -67,26 +67,38 @@ public:
 			}
 			//
 
-			// Menu 2 - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+			// Menu (2 - 1) - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
 			{
 				EventHandler eventFunc = EventHandler([=]() {
 
 					ItemManager::GetInstance()->BuyItem(L"Weapon", L"Cannon");
 
 				});
-				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - Cannon ] ", CANVAS_GROUP_MAINWND);
 				menu->SetPosition(1600.f, 700.f);
 			}
 			{
 				EventHandler eventFunc = EventHandler([=]() {
 
-					PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Cannon"); // 보조무장으로 캐논을
+					PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Cannon"); // 보조무장으로 캐논을
 
 				});
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon -Cannon ] ", CANVAS_GROUP_MAINWND);
 				menu->SetPosition(1600.f, 750.f);
 			}
 			//
+
+			// Menu (2 - 2) - EQuipSkill (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+			{
+				EventHandler eventFunc = EventHandler([=]() {
+
+					PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Skill", L"EscapeMove"); //스킬슬롯 첫번째 파츠에 스킬을 셋하겠다.
+
+				});
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc,  L"Test) SkillSlot - First Parts : EscapeMove", CANVAS_GROUP_MAINWND);
+				menu->SetPosition(1600.f, 800.f);
+			}
+
 
 
 			// Menu 3 - SKILL (Button)

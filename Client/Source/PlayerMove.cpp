@@ -35,18 +35,6 @@ void PlayerMove::Initialize()
 	m_mouse = GetComponent<MouseOption>();
 
 
-	// player slot check
-	
-	//if (m_playerInfo->GetItemDescInfoArray()[FIRST_PARTS]->itemtype == ITEMTYPE_MISSILE)
-	//{
-	//	AimMissile::Desc info; // 나중에 함수로빼자
-	//	info.useItem = *m_playerInfo->GetItemDescInfoArray()[FIRST_PARTS];
-	//	m_gameObject->AddComponent<AimMissile>(&info);
-	//	m_useItem = GetComponent<AimMissile>();
-
-	//}
-
-
 
 }
 
@@ -90,7 +78,6 @@ void PlayerMove::UpdateState()
 
 	 if (m_inputManager->GetKeyPress(KEY_STATE_W))
 		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 50);
-	 //defualt dTime * 20
 	else
 		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10);
 
@@ -100,11 +87,6 @@ void PlayerMove::UpdateState()
 
 	m_playerInfo->AddSpeed(speed);
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
-
-	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
-	{
-		Bullet_Manager::GetInstance()->Fire_Player(m_transform->position, m_transform->rotation, 150.f);
-	}
 
 
 
@@ -121,18 +103,12 @@ void PlayerMove::ExitState()
 
 void PlayerMove::TemproryAttackFunc()
 {
-	if (!m_useItem)
-		return;
 
-
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
 	{
-		
+		Bullet_Manager::GetInstance()->Fire_Player(m_transform->position, m_transform->rotation, 150.f);
 	}
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
-	{
-	}
 }
 
 Quaternion* PlayerMove::Rotation(const Vector3 & _dir)

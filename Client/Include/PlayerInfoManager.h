@@ -58,13 +58,14 @@ public:
 	const float& GetTimeLimit() { return m_timelimit; }
 	const float& GetScore() { return m_score; }
 	GameObject* GetPlayer() { return m_player; }
-	vector<wstring>& GetInven() { return m_haveItemList; }
-	const wstring* GetWeaponArray() { return m_Culweapon; }
+	map<wstring, vector<wstring>>& GetInven() { return m_haveItemList; }
+	const wstring* GetWeaponArray() { return m_currentlyWeapon; }
 
-	const wstring& GetWeapon(PARTS_NUM _weaponName) { return m_Culweapon[_weaponName]; }
+	const wstring& GetWeapon(PARTS_NUM _partsNumn) { return m_currentlyWeapon[_partsNumn]; }
+	const wstring& GetSkill(PARTS_NUM _partsNumn) { return m_currentlySkill[_partsNumn]; }
 
 public: //using
-	bool EquipItem(PARTS_NUM eID , const wstring& _equipItemName);
+	bool EquipItem(PARTS_NUM eID , const wstring& _itemtype  ,const wstring& _equipItemName);
 	void MinGold(int _value);
 
 
@@ -89,9 +90,11 @@ private:
 	float m_score = 0.f;
 	GameObject* m_player;
 
+private: // 이중stl쓰기 
+	map<wstring, vector<wstring>> m_haveItemList;
 private:
-	vector<wstring> m_haveItemList;
-	wstring  m_Culweapon[PARTS_NUM::PARTS_MAX] = {};
+	wstring m_currentlySkill[PARTS_NUM::PARTS_MAX] = {};
+	wstring  m_currentlyWeapon[PARTS_NUM::PARTS_MAX] = {};
 
 
 };

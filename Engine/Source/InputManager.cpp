@@ -148,6 +148,15 @@ void InputManager::ProcessKeyState()
 		case KEY_STATE_F4:
 			res[KEY_STATE_F4] = GetAsyncKeyState(VK_F4);
 			break;
+		case KEY_STATE_1:
+			res[KEY_STATE_1] = GetAsyncKeyState('1');
+			break;
+		case KEY_STATE_2:
+			res[KEY_STATE_2] = GetAsyncKeyState('2');
+			break;
+		case KEY_STATE_3:
+			res[KEY_STATE_3] = GetAsyncKeyState('3');
+			break;
 
 
 		default:

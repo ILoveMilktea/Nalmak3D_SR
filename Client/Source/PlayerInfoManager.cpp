@@ -30,10 +30,8 @@ void PlayerInfoManager::Initialize()
 void PlayerInfoManager::Update()
 {
 	DEBUG_LOG(L"Gold", m_gold);
-	DEBUG_LOG(L"인벤사이즈", m_haveItemList.size());
-
-	DEBUG_LOG(L"현재 장착중인 주무기 ", m_Culweapon[FIRST_PARTS]);
-	DEBUG_LOG(L"현재 장착중인 부 무장무기 ", m_Culweapon[SECOND_PARTS]);
+	DEBUG_LOG(L"현재 장착중인 주무기 ", m_currentlyWeapon[FIRST_PARTS]);
+	DEBUG_LOG(L"현재 장착중인 부 무장무기 ", m_currentlyWeapon[SECOND_PARTS]);
 
 
 	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();
@@ -161,42 +159,67 @@ const float & PlayerInfoManager::GetDirSenser() const
 	return m_dirsensor;
 }
 
-bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring & _equipItemName)
+bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const wstring & _equipItemName)
 {
 	// 1. 인벤에 있는 스트링이랑 상점에 있는 데이터  스트링이랑 맞으면
 
 	//L"Weapon" == 임시
-	wstring findString = L"";
+	wstring findItemType = L"";
+	wstring findItemName = L"";
 
-	for (auto& value : m_haveItemList)
+	for (auto& slotName : m_haveItemList)
 	{
-		if (value == _equipItemName)
+		if (_itemtype == slotName.first)
 		{
-			findString = value;
-			break;
+			findItemType = slotName.first;
+			for (auto & ItemName : slotName.second)
+			{
+				if (ItemName == _equipItemName)
+				{
+					findItemName = ItemName;
+					break;
+				}
+			}
 		}
 	}
 
-	PlayerItem* equipItem = ItemManager::GetInstance()->FindItemObject(L"Weapon", findString);
+	PlayerItem* equipItem = ItemManager::GetInstance()->FindItemObject(findItemType, findItemName);
 	if (!equipItem)
 		return false;
 
-	switch (eID)
+	// 여기서 거르자
+	if (findItemType == L"Weapon")
 	{
-	case FIRST_PARTS:
-		m_Culweapon[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
-	
-		break;
-	case SECOND_PARTS:
-		m_Culweapon[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
-		
-		break;
-	case THIRD_PARTS:
-		break;
-	case PARTS_MAX:
-		break;
-	default:
-		break;
+		switch (eID)
+		{
+		case FIRST_PARTS:
+			m_currentlyWeapon[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case SECOND_PARTS:
+			m_currentlyWeapon[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case THIRD_PARTS:
+			break;
+		}
+
+	}
+	else if (findItemType == L"Skill")
+	{
+		switch (eID)
+		{
+		case FIRST_PARTS:
+			m_currentlySkill[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case SECOND_PARTS:
+			m_currentlySkill[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case THIRD_PARTS:
+			break;
+		}
 	}
 
 	return true;

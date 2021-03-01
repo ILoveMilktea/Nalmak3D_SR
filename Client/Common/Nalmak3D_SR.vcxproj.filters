@@ -217,6 +217,18 @@
     <ClInclude Include="..\Include\BulletDirMove.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\PlayerAttak.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerEscapeState.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EscapeSkill.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerSkillActor.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -405,6 +417,18 @@
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BulletDirMove.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerAttak.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerEscapeState.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EscapeSkill.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerSkillActor.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClCompile>
   </ItemGroup>
