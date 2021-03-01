@@ -31,6 +31,7 @@ private:
 	Camera* m_mainCam;
 	MeshRenderer* m_renderer;
 
+	
 	DrawGizmo* m_gizmo;
 	PositionHandle* m_handle;
 };

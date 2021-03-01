@@ -6,6 +6,7 @@
 
 class DrawGizmo_2D;
 class PositionHandle_2D;
+class ScaleHandle_2D;
 class CanvasRenderer;
 class NALMAK_DLL CanvasPicking :
 	public Component
@@ -23,7 +24,8 @@ public:
 private:
 	CanvasRenderer* m_renderer;
 	DrawGizmo_2D* m_gizmo;
-	PositionHandle_2D* m_handle;
+	PositionHandle_2D* m_positionHandle;
+	ScaleHandle_2D* m_scaleHandle;
 };
 
 

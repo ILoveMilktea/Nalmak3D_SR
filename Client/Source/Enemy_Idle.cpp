@@ -4,11 +4,13 @@
 
 Enemy_Idle::Enemy_Idle()
 {
+
 }
 
 
 Enemy_Idle::~Enemy_Idle()
 {
+
 }
 
 void Enemy_Idle::Initialize()

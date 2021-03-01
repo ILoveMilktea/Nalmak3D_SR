@@ -7,6 +7,7 @@
 #include "SingleImage.h"
 #include "Texture.h"
 #include "Text.h"
+#include "Number.h"
 CanvasRenderer::CanvasRenderer()
 	:ICanvasGroup()
 {
@@ -61,6 +62,7 @@ void CanvasRenderer::LateUpdate()
 
 void CanvasRenderer::Release()
 {
+	CanvasGroup::GetInstance()->RemoveGroupMember(this, m_group);
 }
 
 void CanvasRenderer::Render(Shader * _shader, int _index)
@@ -68,6 +70,7 @@ void CanvasRenderer::Render(Shader * _shader, int _index)
 	
 	Render_Image();
 	Render_Text();
+	Render_Number();
 }
 
 void CanvasRenderer::BindingStreamSource()
@@ -111,12 +114,36 @@ void CanvasRenderer::Render_Text()
 	}
 }
 
+void CanvasRenderer::Render_Number()
+{
+	Number* number = GetComponent<Number>();
+
+	if (number)
+	{
+		number->RenderText();
+	}
+}
+
 void CanvasRenderer::UpdateBoundary()
 {
-	m_boundary.left = LONG(m_transform->position.x - m_transform->scale.x * 0.5f);
-	m_boundary.top = LONG(m_transform->position.y - m_transform->scale.y * 0.5f);
-	m_boundary.right = LONG(m_transform->position.x + m_transform->scale.x * 0.5f);
-	m_boundary.bottom = LONG(m_transform->position.y + m_transform->scale.y * 0.5f);
+	if (m_transform->GetParents())
+	{
+		auto worldMatrix = m_transform->GetUIWorldMatrix();
+		Vector3 position = { worldMatrix.m[3][0], worldMatrix.m[3][1], worldMatrix.m[3][2] };
+
+		m_boundary.left = LONG(position.x - m_transform->scale.x * 0.5f);
+		m_boundary.top = LONG(position.y - m_transform->scale.y * 0.5f);
+		m_boundary.right = LONG(position.x + m_transform->scale.x * 0.5f);
+		m_boundary.bottom = LONG(position.y + m_transform->scale.y * 0.5f);
+	}
+	else
+	{
+		m_boundary.left = LONG(m_transform->position.x - m_transform->scale.x * 0.5f);
+		m_boundary.top = LONG(m_transform->position.y - m_transform->scale.y * 0.5f);
+		m_boundary.right = LONG(m_transform->position.x + m_transform->scale.x * 0.5f);
+		m_boundary.bottom = LONG(m_transform->position.y + m_transform->scale.y * 0.5f);
+	}
+
 }
 
 bool CanvasRenderer::IsCursorOnRect()

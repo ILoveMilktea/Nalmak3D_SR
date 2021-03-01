@@ -28,7 +28,13 @@ public:
 public:
 	void SetNonGroup(CanvasRenderer* _member);
 	void AddGroupMember(CanvasRenderer* _member, _CANVAS_GROUP _group = 0);
+	void RemoveGroupMember(CanvasRenderer* _member, _CANVAS_GROUP _group = 0);
 	void ChangeGroup(CanvasRenderer* _member, _CANVAS_GROUP _groupToChange = 0);
+
+	void AllOn();
+	void AllOff();
+	void GroupOn(_CANVAS_GROUP _group = 0);
+	void GroupOff(_CANVAS_GROUP _group = 0);
 
 public:
 	const list<CanvasRenderer*>& GetGroup(_CANVAS_GROUP _group);

@@ -16,4 +16,14 @@ typedef int _COLLISION_LAYER;
 
 typedef int _CANVAS_GROUP;
 
+
+typedef function<int(void)> GetIntFunc;
+typedef function<void(int*, function<int(void)>)>  SetIntFunc;
+typedef function<float(void)> GetFloatFunc;
+typedef function<void(float*, function<float(void)>)>  SetFloatFunc;
+typedef function<Vector2(void)> GetVector2Func;
+typedef function<void(Vector2*, function<Vector2(void)>)>  SetVector2Func;
+typedef function<Vector3(void)> GetVector3Func;
+typedef function<void(Vector3*, function<Vector3(void)>)>  SetVector3Func;
+
 #endif

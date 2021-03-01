@@ -1,31 +1,35 @@
 #pragma once
+#ifndef __RADER_H__
+#define __RADER_H__
+
 #include "Component.h"
+
+class EnemyManager;
+class PlayerInfoManager;
 class Rader :
 	public Component
 {
 public:
 	struct Desc
 	{
-		Transform* player = nullptr;
-		float findRange = 25.f;
+		float findRange = 100.f;
 
-		int readyflight = 10;
+		int readyIcon = 10;
 	};
 
 public:
 	Rader(Desc* _desc);
+	~Rader();
 
 private:
-	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
 
-	void RotateStick();
+	//void RotateStick();
 	void UpdateTarget();
 	void SetFlightPoint();
-public:
-	void Temp_AddEnemy(Transform* _tr) { m_enemy.emplace_back(_tr); }
-	//void CheckEnemyInRange(GameO)
+
+	void CreateMoreIcon(size_t _count);
 
 private:
 	GameObject* m_circleBackground = nullptr;		// 레이더 배경
@@ -33,9 +37,9 @@ private:
 	GameObject* m_playerIcon = nullptr;				// 중심 플레이어 기체
 	GameObject* m_stick = nullptr;					// 막대기
 
-	Transform* m_player = nullptr;
+	PlayerInfoManager* m_playerInfoManager = nullptr;
+	EnemyManager* m_enemyManager = nullptr;
 
-	list<Transform*> m_enemy;
 	list<Vector2> m_iconPoint;
 	list<GameObject*> m_stickTrail;
 	vector<GameObject*> m_IconContainer;
@@ -45,3 +49,5 @@ private:
 	float m_timer;
 };
 
+
+#endif // !__RADER_H__

@@ -29,7 +29,10 @@ void Button::Initialize()
 
 	m_renderer = GetComponent<CanvasRenderer>();
 	if (m_renderer)
+	{
 		m_renderer->SetImage(m_normalImage);
+		m_renderer->SetColor(*m_targetColor);
+	}
 	//m_renderer->SetActive(false);
 }
 

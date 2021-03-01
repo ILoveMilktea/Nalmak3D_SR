@@ -158,6 +158,11 @@ GameObject * Core::FindObjectByName(_OBJECT_TAG _tag, wstring name)
 	return m_objectManager->Find(_tag, name);
 }
 
+list<GameObject*> Core::GetObjectList(_OBJECT_TAG _tag)
+{
+	return m_objectManager->GetObjectList(_tag);
+}
+
 Camera * Core::GetMainCamera()
 {
 	return m_renderManager->GetMainCamera();

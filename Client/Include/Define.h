@@ -11,4 +11,11 @@
 #define HALF_WINCX 960
 #define HALF_WINCY 540
 
+/* for TopView Moving's lean */
+#define LEFT	1
+#define RIGHT	-1
+
+
+typedef pair<wstring, wstring> Dialogue;
+
 #endif // !__DEFINE_H__

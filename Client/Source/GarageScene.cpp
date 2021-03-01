@@ -3,7 +3,13 @@
 #include "RevolvesToTarget.h"
 #include "core.h"
 #include "SceneChanger.h"
-#include "PlayerKitSelector.h"
+#include "PlayerInfoManager.h"
+
+#include "UIWindowFactory.h"
+#include "UILabScene.h"
+#include "StageManager.h"
+#include "ItemManager.h"
+
 GarageScene::GarageScene()
 {
 }
@@ -15,11 +21,18 @@ GarageScene::~GarageScene()
 
 void GarageScene::Initialize()
 {
+	//StageManager::GetInstance();
 
+	ItemManager::GetInstance(); 
+
+	// singlemanger instance
+	
+
+	//
 //	 grid setting
+	INSTANTIATE()->AddComponent<Grid>()->SetPosition(0,0,-5.f);
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
-	
 	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->SetPosition(0, 0, -5);;
 
 	GameObject* player;
@@ -30,33 +43,43 @@ void GarageScene::Initialize()
 		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<VIBufferRenderer>(&render);
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
-	
-	// ÇÃ·¹ÀÌ¾î ÁÖÀ§¸¦ ¹ð¹ðµµ´Â
+
+	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ðµµ´ï¿½
 	{
 		RevolvesToTarget::Desc revolvesDesc;
 		revolvesDesc.targetParent = player;
 		revolvesDesc.roationSpeed = 1.f;
 		auto revolvesTarget = INSTANTIATE()->AddComponent<RevolvesToTarget>(&revolvesDesc);
 	}
-
 	{
 		SceneChanger::Desc SceneChangerDescInfo;
 		SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
 		SceneChangerDescInfo.sceneName = L"phantom";
 		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	}
+	// test button ----> UILab
 	{
-		auto kitmanager = INSTANTIATE()->AddComponent<PlayerKitSelector>();
-		//PlayerKitSelector::GetInstance()
+		//auto mainEquipWepon = UIFactory::CreateButton(
+		//	EventHandler([]() {
+		//	ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
+		//	PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
+	 // ï¿½Ö¹ï¿½ï¿½ï¿½
+		
 
+		//}));
+
+		//mainEquipWepon->SetPosition(1600.f, 500.f, 0.f);
+
+
+
+		//auto offTheFieldButton = UIFactory::CreateButton(
+		//	EventHandler([]() {
+		//	Core::GetInstance()->LoadScene(L"phantom");
+		//}));
+
+		//offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
 	}
 
-	{
-		auto offTheFieldButton = UIFactory::CreateButton(
-			EventHandler([]() {
-			Core::GetInstance()->LoadScene(L"phantom");
-		}));
-
-		offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
-	}
+	player->AddComponent<UIInteractor>();
+	UIWindowFactory::GarageMainWindow(player);
 }

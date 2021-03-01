@@ -91,7 +91,11 @@ void MainGame::ApplicationSetting()
 
 void MainGame::SystemSetting()
 {
-	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_DEFAULT, COLLISION_LAYER_DEFAULT);
+	auto editor = INSTANTIATE()->AddComponent<EditController>();
+	editor->SetDontDestroy(true);
+	//m_engine->ActivateCollisionByLayer(COLLISION_LAYER_DEFAULT, COLLISION_LAYER_DEFAULT);
+	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_PLAYER, COLLISION_LAYER_ENEMY);
+	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_ENEMY, COLLISION_LAYER_PLAYER);
 
 	m_engine->AddScene(L"title", Scene::Instantiate<TitleScene>());
 	m_engine->AddScene(L"garage", Scene::Instantiate<GarageScene>());
@@ -101,7 +105,7 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
 
-	
+
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 

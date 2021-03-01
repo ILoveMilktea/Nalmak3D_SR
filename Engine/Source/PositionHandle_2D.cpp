@@ -47,33 +47,23 @@ void PositionHandle_2D::MoveTarget()
 		return;
 
 	Vector3 axis;
+	float len = D3DXVec2Length(&dir);
+	D3DXVec2Normalize(&dir, &dir);
 
 	switch (m_moveDir)
 	{
 	case PositionHandle_2D::RIGHT:
 		axis = m_target->GetRight();
+		axis *= dir.x;
 		break;
 	case PositionHandle_2D::UP:
 		axis = m_target->GetUp();
+		axis *= dir.y;
 		break;
 	default:
 		break;
 	}
 
-	Vector2 targetWinPos = m_target->position;
-	Vector2 handleWinPos = m_transform->position + m_target->position;
-
-	float len = D3DXVec2Length(&dir);
-	D3DXVec2Normalize(&dir, &dir);
-
-	if (fabsf(dir.x) > fabsf(dir.y))
-	{
-		axis *= dir.x;
-	}
-	else
-	{
-		axis *= dir.y;
-	}
 	m_target->position += axis * len;
 	
 	m_target->GetComponent<DrawGizmo_2D>()->ResetingHandlePosition();

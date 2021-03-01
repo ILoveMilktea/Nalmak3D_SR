@@ -1,14 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Nalmak3D_SR.h">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Extern.h">
       <Filter>98.PreCompile\02.Extern</Filter>
@@ -22,47 +22,38 @@
     <ClInclude Include="stdafx.h">
       <Filter>98.PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Define.h">
-      <Filter>98.PreCompile\01.Enum</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\HeeTestScene.h">
       <Filter>01.Scene\01.Test\99%29GeunHeeTestScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\EnemyManager.h">
-      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\00%29EnemyManager</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PlayerInfoManager.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerIdle.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PlayerMove.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\FixToTarget.h">
-      <Filter>02.Component\00.Manager\FixCamera</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MouseOption.h">
-      <Filter>02.Component\00.Manager\Mouse</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\SmoothFollow.h">
-      <Filter>02.Component\00.Manager\FixCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Enemy.h">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_Idle.h">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Idle</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_Chase.h">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Chase</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Chase</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_Hold.h">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Hold</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Bullet_Manager.h">
-      <Filter>02.Component\00.Manager\BulletManager\00%29Manager</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\00%29Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\SceneChanger.h">
       <Filter>02.Component\01.Utility</Filter>
@@ -103,53 +94,131 @@
     <ClInclude Include="..\Include\NalmakScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Bullet.h">
-      <Filter>02.Component\00.Manager\BulletManager\Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Missile.h">
-      <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\Missile</Filter>
     </ClInclude>
-    <ClInclude Include="PauseState.h" />
-    <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\Homing.h">
-      <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\Homing</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\RevolvesToTarget.h">
-      <Filter>02.Component\00.Manager\FixCamera</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\TopViewCamera.h">
-      <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\PlayerToTopView.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera\2DTopViewCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Ground.h" />
-    <ClInclude Include="..\Include\EditController.h" />
-    <ClInclude Include="..\Include\CustomDebuger.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
-    <ClInclude Include="..\Include\PlayerTopViewMove.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ShootingState.h">
-      <Filter>04.State</Filter>
-    </ClInclude>
+    <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\DogFightState.h">
-      <Filter>04.State\00%29DogFight</Filter>
+      <Filter>04.Combat State\00%29DogFight</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BossState.h">
-      <Filter>04.State\02%29Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Evasion.h">
-      <Filter>04.State\01%29Evasion</Filter>
+      <Filter>04.Combat State\02%29Boss</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\StageManager.h">
-      <Filter>02.Component\00.Manager\StageStateManager</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\StageStateManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UseKit.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
+    <ClInclude Include="..\Include\EvasionState.h">
+      <Filter>04.Combat State\01%29Evasion</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerKitSelector.h">
-      <Filter>02.Component\00.Manager\Player</Filter>
+    <ClInclude Include="..\Include\PlayerIdle.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Define.h">
+      <Filter>98.PreCompile\00.Define</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Drop.h">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Drop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Death.h">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Struct.h">
+      <Filter>98.PreCompile\03.Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerTopViewMove.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Explosion.h">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Falling.h">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MachineGun.h">
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\MachineGun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIFactory.h">
+      <Filter>97.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIWindowFactory.h">
+      <Filter>97.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptReady.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptEnd.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPause.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPlay.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptWait.h">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ItemManager.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerItem.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AimMissile.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy.h">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\01%29Enemy\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Boss.h">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerBossStageMove.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\BossStageCamera.h">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera\BossStageCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Crosshair.h">
+      <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Scripter.h">
+      <Filter>02.Component\03.Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIWindowFactory.h">
+      <Filter>97.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CustomDebuger.h">
+      <Filter>96.Debuger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EditController.h">
+      <Filter>96.Debuger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerShooter.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EnemyDetector.h">
+      <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\BulletDirMove.h" />
+    <ClInclude Include="..\Include\EscapeSkill.h" />
+    <ClInclude Include="..\Include\PlayerAttak.h" />
+    <ClInclude Include="..\Include\PlayerSkillActor.h" />
+    <ClInclude Include="..\Include\SmallCannon.h" />
+    <ClInclude Include="PlayerEscapeState.h" />
+    <ClInclude Include="..\Include\BossUIAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\StageSelectSceneManager.h">
       <Filter>02.Component\00.Manager\StageSelectScene</Filter>
@@ -171,7 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MainGame.cpp">
       <Filter>00.Main</Filter>
@@ -183,40 +252,34 @@
       <Filter>01.Scene\01.Test\99%29GeunHeeTestScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\EnemyManager.cpp">
-      <Filter>02.Component\00.Manager\Enemy\00%29EnemyManager</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\00%29EnemyManager</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PlayerInfoManager.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerIdle.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PlayerMove.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\FixToTarget.cpp">
-      <Filter>02.Component\00.Manager\FixCamera</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MouseOption.cpp">
-      <Filter>02.Component\00.Manager\Mouse</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\SmoothFollow.cpp">
-      <Filter>02.Component\00.Manager\FixCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Enemy.cpp">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Idle.cpp">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Idle</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Chase.cpp">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Chase</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Chase</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Hold.cpp">
-      <Filter>02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Hold</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Bullet_Manager.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\00%29Manager</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\00%29Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\SceneChanger.cpp">
       <Filter>02.Component\01.Utility</Filter>
@@ -257,52 +320,115 @@
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ShootingState.cpp">
-      <Filter>04.State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Bullet.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Missile.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\Missile</Filter>
     </ClCompile>
-    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="..\Source\Homing.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\Homing</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\RevolvesToTarget.cpp">
-      <Filter>02.Component\00.Manager\FixCamera</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\TopViewCamera.cpp">
-      <Filter>02.Component\00.Manager\FixCamera\2DTopViewCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PlayerToTopView.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera\2DTopViewCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Ground.cpp" />
-    <ClCompile Include="..\Source\EditController.cpp" />
-    <ClCompile Include="..\Source\CustomDebuger.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
-    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\DogFightState.cpp">
-      <Filter>04.State\00%29DogFight</Filter>
+      <Filter>04.Combat State\00%29DogFight</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BossState.cpp">
-      <Filter>04.State\02%29Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Evasion.cpp">
-      <Filter>04.State\01%29Evasion</Filter>
+      <Filter>04.Combat State\02%29Boss</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\StageManager.cpp">
-      <Filter>02.Component\00.Manager\StageStateManager</Filter>
+      <Filter>02.Component\01.Utility\00.Manager\StageStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerKitSelector.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
+    <ClCompile Include="..\Source\EvasionState.cpp">
+      <Filter>04.Combat State\01%29Evasion</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\UseKit.cpp">
-      <Filter>02.Component\00.Manager\Player</Filter>
+    <ClCompile Include="..\Source\PlayerIdle.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Drop.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Drop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Death.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM\ToTopView Produce</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Explosion.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Falling.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MachineGun.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\BulletManager\MachineGun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptEnd.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptPause.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptPlay.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptReady.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptWait.cpp">
+      <Filter>02.Component\03.Script\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\01%29Enemy\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Boss.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerBossStageMove.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\BossStageCamera.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Enemy\FixCamera\BossStageCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ItemManager.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerItem.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AimMissile.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Crosshair.cpp">
+      <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Scripter.cpp">
+      <Filter>02.Component\03.Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CustomDebuger.cpp">
+      <Filter>96.Debuger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EditController.cpp">
+      <Filter>96.Debuger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerShooter.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EnemyDetector.cpp">
+      <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\BulletDirMove.cpp" />
+    <ClCompile Include="..\Source\EscapeSkill.cpp" />
+    <ClCompile Include="..\Source\PlayerAttak.cpp" />
+    <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
+    <ClCompile Include="..\Source\SmallCannon.cpp" />
+    <ClCompile Include="PlayerEscapeState.cpp" />
+    <ClCompile Include="..\Source\BossUIAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\StageSelectSceneManager.cpp">
       <Filter>02.Component\00.Manager\StageSelectScene</Filter>
@@ -324,16 +450,13 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </Image>
     <Image Include="small.ico">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="99.Default">
-      <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="98.PreCompile">
       <UniqueIdentifier>{2e85a4a7-f68d-4f19-a778-f1c020085930}</UniqueIdentifier>
     </Filter>
@@ -361,48 +484,6 @@
     <Filter Include="03.Resource\02.Shader">
       <UniqueIdentifier>{7ae42d59-6412-4a79-acc3-19e26215e710}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager">
-      <UniqueIdentifier>{620004b3-601d-458e-9e74-70f98e3743b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.State">
-      <UniqueIdentifier>{dea952e2-3812-4031-99e4-5366973e199d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy">
-      <UniqueIdentifier>{88c15850-b344-4d77-b46d-6ed376456930}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\00%29EnemyManager">
-      <UniqueIdentifier>{74a4154a-e67a-4131-afa2-e0fd522637e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\01%29Enemy">
-      <UniqueIdentifier>{471371f4-d5fc-408a-9393-b9a42789b616}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern">
-      <UniqueIdentifier>{68e9b2a4-58d6-4e4c-a3a1-54069dc961b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player">
-      <UniqueIdentifier>{5098e947-8ec3-495e-8bb1-bb2273f1e12f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM">
-      <UniqueIdentifier>{a323ffc7-d61c-4058-b946-29056b0ca33e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\FixCamera">
-      <UniqueIdentifier>{55e4567d-ddb8-4fa2-b78d-65321c051a15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Mouse">
-      <UniqueIdentifier>{ff632f15-61fa-4d29-95de-f7e2b4aac73b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Rush">
-      <UniqueIdentifier>{08bc2334-fb03-47f3-8c43-d8b8e74f8631}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Idle">
-      <UniqueIdentifier>{057f3a40-069b-41bf-83d1-769f80e85d03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Chase">
-      <UniqueIdentifier>{2ff71113-836e-4780-bc55-a381acfc1710}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Move_Pattern\Hold">
-      <UniqueIdentifier>{d0f1736a-3073-4268-b99a-eb82fb56c575}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\01.Utility">
       <UniqueIdentifier>{e9b71a8c-da3c-4ad5-8464-e03f0375b2ec}</UniqueIdentifier>
     </Filter>
@@ -421,27 +502,6 @@
     <Filter Include="03.Resource\02.Shader\Common">
       <UniqueIdentifier>{6b5467bb-1bd2-4774-8798-9a69fc77288c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager">
-      <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\00%29Manager">
-      <UniqueIdentifier>{a62225df-353e-428f-82dd-4d2fca9da824}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\Missile">
-      <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\Bullet">
-      <UniqueIdentifier>{23765436-d43d-4b2e-aa6d-67b00e77d76c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\Homing">
-      <UniqueIdentifier>{1f100bc1-d700-466c-a558-7862f16e388b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\FixCamera\2DTopViewCamera">
-      <UniqueIdentifier>{a72f487d-d927-47dd-842a-cbe761320505}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce">
-      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03.Resource\02.Shader\StageSelect">
       <UniqueIdentifier>{ce9bbe7f-34cd-45c4-bd6a-0f2b24e847ea}</UniqueIdentifier>
     </Filter>
@@ -454,16 +514,127 @@
     <Filter Include="02.Component\04.StageSelectScene">
       <UniqueIdentifier>{1ea3685e-e51f-4601-b41b-86822fef3d55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.State\00%29DogFight">
+    <Filter Include="04.Combat State">
+      <UniqueIdentifier>{dea952e2-3812-4031-99e4-5366973e199d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight">
       <UniqueIdentifier>{4aa02e57-21f5-4eb5-80f6-83bb52a1c427}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.State\01%29Evasion">
+    <Filter Include="04.Combat State\01%29Evasion">
       <UniqueIdentifier>{1a189a41-bbb6-4ae4-a62b-63c2d3be9e7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.State\02%29Boss">
+    <Filter Include="04.Combat State\02%29Boss">
       <UniqueIdentifier>{583558e6-abcc-426b-88ad-24cacee3edcb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\StageStateManager">
+    <Filter Include="98.PreCompile\03.Struct">
+      <UniqueIdentifier>{c24f9b1b-464a-4c16-ae34-cb42bf5c172e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.PreCompile\03.Struct">
+      <UniqueIdentifier>{40096f35-81ec-4923-bda7-8bb44ae8d51d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Factory">
+      <UniqueIdentifier>{be2dea7a-aa32-49b7-bc71-46f57bd4b57f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script">
+      <UniqueIdentifier>{09811998-c3f5-48ce-9d6a-1d5d36ab622e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State">
+      <UniqueIdentifier>{0ab8d627-438f-44e8-926f-75128c57cd86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Debuger">
+      <UniqueIdentifier>{e5d73c33-bd55-4534-8849-38459f478dd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\05.Animator">
+      <UniqueIdentifier>{ef1fce22-5667-4862-b153-c0b81e108948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager">
+      <UniqueIdentifier>{620004b3-601d-458e-9e74-70f98e3743b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy">
+      <UniqueIdentifier>{88c15850-b344-4d77-b46d-6ed376456930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\00%29EnemyManager">
+      <UniqueIdentifier>{74a4154a-e67a-4131-afa2-e0fd522637e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\01%29Enemy">
+      <UniqueIdentifier>{471371f4-d5fc-408a-9393-b9a42789b616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\01%29Enemy\Normal">
+      <UniqueIdentifier>{1c9eeaa3-a37d-4e0c-8363-64310e6861d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\01%29Enemy\Boss">
+      <UniqueIdentifier>{25e8a919-3650-4188-b4bf-32b4a974466e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns">
+      <UniqueIdentifier>{68e9b2a4-58d6-4e4c-a3a1-54069dc961b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Idle">
+      <UniqueIdentifier>{057f3a40-069b-41bf-83d1-769f80e85d03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Death">
+      <UniqueIdentifier>{d5f13b66-30ff-4c40-ba3c-319d661789ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Chase">
+      <UniqueIdentifier>{2ff71113-836e-4780-bc55-a381acfc1710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Hold">
+      <UniqueIdentifier>{d0f1736a-3073-4268-b99a-eb82fb56c575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\att_Drop">
+      <UniqueIdentifier>{08bc2334-fb03-47f3-8c43-d8b8e74f8631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Falling">
+      <UniqueIdentifier>{841dcd20-f92c-4b7d-9282-6c7b09c0a791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\02%29Enemy_Patterns\Explosion">
+      <UniqueIdentifier>{33e26b4f-4494-4a5e-9415-a8bbf100a730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\03%29Enemy_Evasion">
+      <UniqueIdentifier>{a62a8d0f-f021-4dc7-a7b5-cee1959531c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\04%29Boss_Pattern">
+      <UniqueIdentifier>{f839a401-4a80-421c-aa04-ee526e7ee845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\FixCamera">
+      <UniqueIdentifier>{55e4567d-ddb8-4fa2-b78d-65321c051a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\FixCamera\2DTopViewCamera">
+      <UniqueIdentifier>{a72f487d-d927-47dd-842a-cbe761320505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Enemy\FixCamera\BossStageCamera">
+      <UniqueIdentifier>{80bf70f9-492b-41d5-9ff8-eb38719eb005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Player">
+      <UniqueIdentifier>{5098e947-8ec3-495e-8bb1-bb2273f1e12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Player\PlayerFSM">
+      <UniqueIdentifier>{a323ffc7-d61c-4058-b946-29056b0ca33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Player\PlayerFSM\ToTopView Produce">
+      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Player\PlayerFSM\BossStageMove">
+      <UniqueIdentifier>{579c4214-40c5-4439-ad3d-35a3f2a7c402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\Mouse">
+      <UniqueIdentifier>{ff632f15-61fa-4d29-95de-f7e2b4aac73b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\BulletManager">
+      <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\BulletManager\00%29Manager">
+      <UniqueIdentifier>{a62225df-353e-428f-82dd-4d2fca9da824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\BulletManager\Missile">
+      <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\BulletManager\Homing">
+      <UniqueIdentifier>{1f100bc1-d700-466c-a558-7862f16e388b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\BulletManager\MachineGun">
+      <UniqueIdentifier>{23765436-d43d-4b2e-aa6d-67b00e77d76c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\01.Utility\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\00.Manager\StageSelectScene">
@@ -471,16 +642,21 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\StageSelectScene\CameraMove">
       <UniqueIdentifier>{77a6e37e-4059-4f3f-9a48-468430dfa279}</UniqueIdentifier>
+    <Filter Include="02.Component\01.Utility\00.Manager\ItemManger">
+      <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\99.Default">
+      <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt">
-      <Filter>99.Default</Filter>
+      <Filter>02.Component\03.Script\99.Default</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

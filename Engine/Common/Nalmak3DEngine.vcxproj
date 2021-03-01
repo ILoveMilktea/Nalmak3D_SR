@@ -49,11 +49,16 @@
     <ClCompile Include="..\Source\GameObject.cpp" />
     <ClCompile Include="..\Source\Grid.cpp" />
     <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
+    <ClCompile Include="..\Source\IAnimation.cpp" />
     <ClCompile Include="..\Source\ICanvasGroup.cpp" />
+    <ClCompile Include="..\Source\ColorAnimation.cpp" />
     <ClCompile Include="..\Source\ICycle.cpp" />
+    <ClCompile Include="..\Source\MoveAnimation.cpp" />
     <ClCompile Include="..\Source\InputManager.cpp" />
     <ClCompile Include="..\Source\IRenderer.cpp" />
     <ClCompile Include="..\Source\IResource.cpp" />
+    <ClCompile Include="..\Source\RotateAnimation.cpp" />
+    <ClCompile Include="..\Source\ScaleAnimation.cpp" />
     <ClCompile Include="..\Source\IState.cpp" />
     <ClCompile Include="..\Source\Light.cpp" />
     <ClCompile Include="..\Source\LightManager.cpp" />
@@ -65,6 +70,7 @@
     <ClCompile Include="..\Source\CanvasPicking.cpp" />
     <ClCompile Include="..\Source\MeshRenderer.cpp" />
     <ClCompile Include="..\Source\Nalmak_DirectXMath.cpp" />
+    <ClCompile Include="..\Source\Number.cpp" />
     <ClCompile Include="..\Source\ObjectManager.cpp" />
     <ClCompile Include="..\Source\ObjMesh.cpp" />
     <ClCompile Include="..\Source\Particle.cpp" />
@@ -81,11 +87,13 @@
     <ClCompile Include="..\Source\RenderTarget.cpp" />
     <ClCompile Include="..\Source\ResourceManager.cpp" />
     <ClCompile Include="..\Source\Rigidbody.cpp" />
+    <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
     <ClCompile Include="..\Source\Scene.cpp" />
     <ClCompile Include="..\Source\SceneManager.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
     <ClCompile Include="..\Source\SingleImage.cpp" />
     <ClCompile Include="..\Source\SkyBox.cpp" />
+    <ClCompile Include="..\Source\Slider.cpp" />
     <ClCompile Include="..\Source\Sphere.cpp" />
     <ClCompile Include="..\Source\SphereCollider.cpp" />
     <ClCompile Include="..\Source\SplineCurve.cpp" />
@@ -101,6 +109,7 @@
     <ClCompile Include="..\Source\Toggle.cpp" />
     <ClCompile Include="..\Source\Transform.cpp" />
     <ClCompile Include="..\Source\Triangle.cpp" />
+    <ClCompile Include="..\Source\UIInteractor.cpp" />
     <ClCompile Include="..\Source\VIBuffer.cpp" />
     <ClCompile Include="..\Source\VIBufferRenderer.cpp" />
   </ItemGroup>
@@ -134,11 +143,16 @@
     <ClInclude Include="..\Include\GameObject.h" />
     <ClInclude Include="..\Include\Grid.h" />
     <ClInclude Include="..\Include\GroundVIBuffer.h" />
+    <ClInclude Include="..\Include\IAnimation.h" />
     <ClInclude Include="..\Include\ICanvasGroup.h" />
+    <ClInclude Include="..\Include\ColorAnimation.h" />
     <ClInclude Include="..\Include\ICycle.h" />
+    <ClInclude Include="..\Include\MoveAnimation.h" />
     <ClInclude Include="..\Include\InputManager.h" />
     <ClInclude Include="..\Include\IRenderer.h" />
     <ClInclude Include="..\Include\IResource.h" />
+    <ClInclude Include="..\Include\RotateAnimation.h" />
+    <ClInclude Include="..\Include\ScaleAnimation.h" />
     <ClInclude Include="..\Include\IState.h" />
     <ClInclude Include="..\Include\Light.h" />
     <ClInclude Include="..\Include\LightManager.h" />
@@ -158,6 +172,7 @@
     <ClInclude Include="..\Include\Nalmak_String.h" />
     <ClInclude Include="..\Include\Nalmak_Struct.h" />
     <ClInclude Include="..\Include\Nalmak_Typedef.h" />
+    <ClInclude Include="..\Include\Number.h" />
     <ClInclude Include="..\Include\ObjectManager.h" />
     <ClInclude Include="..\Include\ObjMesh.h" />
     <ClInclude Include="..\Include\Particle.h" />
@@ -174,11 +189,13 @@
     <ClInclude Include="..\Include\RenderTarget.h" />
     <ClInclude Include="..\Include\ResourceManager.h" />
     <ClInclude Include="..\Include\Rigidbody.h" />
+    <ClInclude Include="..\Include\ScaleHandle_2D.h" />
     <ClInclude Include="..\Include\Scene.h" />
     <ClInclude Include="..\Include\SceneManager.h" />
     <ClInclude Include="..\Include\Shader.h" />
     <ClInclude Include="..\Include\SingleImage.h" />
     <ClInclude Include="..\Include\SkyBox.h" />
+    <ClInclude Include="..\Include\Slider.h" />
     <ClInclude Include="..\Include\Sphere.h" />
     <ClInclude Include="..\Include\SphereCollider.h" />
     <ClInclude Include="..\Include\SplineCurve.h" />
@@ -194,6 +211,7 @@
     <ClInclude Include="..\Include\Toggle.h" />
     <ClInclude Include="..\Include\Transform.h" />
     <ClInclude Include="..\Include\Triangle.h" />
+    <ClInclude Include="..\Include\UIInteractor.h" />
     <ClInclude Include="..\Include\VIBuffer.h" />
     <ClInclude Include="..\Include\VIBufferRenderer.h" />
   </ItemGroup>

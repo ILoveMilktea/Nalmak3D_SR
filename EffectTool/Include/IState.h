@@ -25,10 +25,12 @@ protected:
 	void SetInteger(wstring _key, int _value);
 	void SetFloat(wstring _key, float _value);
 	void SetVector3(wstring _key, const Vector3& _value);
+	void SetString(wstring _key, wstring _value);
 
 	int GetInteger(wstring _key);
 	float GetFloat(wstring _key);
 	const Vector3& GetVector3(wstring _key);
+	wstring GetString(wstring _key);
 
 	template <typename T>
 	T* GetComponent()

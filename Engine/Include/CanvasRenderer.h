@@ -19,7 +19,7 @@ public:
 	};
 	CanvasRenderer();
 	CanvasRenderer(Desc* _desc);
-	
+
 private:
 	virtual void Initialize() override;
 	virtual void Update() override;
@@ -40,6 +40,7 @@ public:	// IRenderer을(를) 통해 상속됨
 public:
 	void Render_Image();
 	void Render_Text();
+	void Render_Number();
 public:
 	void UpdateBoundary();
 	bool IsCursorOnRect();

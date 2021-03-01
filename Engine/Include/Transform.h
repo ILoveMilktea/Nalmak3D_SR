@@ -68,10 +68,8 @@ public:
 
 
 	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut = nullptr); // transform 
-	void LookAt(Vector3 _pos, float _Spd, Quaternion* _qOut = nullptr);
+	void LookAt(const Vector3& _pos, float _Spd, Quaternion* _qOut = nullptr);
 	void LookAt(const Vector3& _pos);
-
-
 
 private:
 	list<Transform*>   m_childs;

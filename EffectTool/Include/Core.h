@@ -1,5 +1,6 @@
 #pragma once
 
+
 #ifndef __CORE_H__
 #define __CORE_H__
 
@@ -29,6 +30,11 @@
 #include "FileIO.h"
 #include "SplineCurve.h"
 
+#include "MoveAnimation.h"
+#include "RotateAnimation.h"
+#include "ScaleAnimation.h"
+#include "ColorAnimation.h"
+
 #pragma region Component
 #include "MeshRenderer.h"
 #include "VIBufferRenderer.h"
@@ -57,6 +63,8 @@
 #include "DeviceManager.h"
 #include "RenderManager.h"
 #include "Toggle.h"
+#include "Slider.h"
+#include "Number.h"
 #pragma endregion
 
 class CollisionManager;
@@ -111,6 +119,7 @@ public:
 	// Search
 	GameObject* FindFirstObject(_OBJECT_TAG _tag);
 	GameObject* FindObjectByName(_OBJECT_TAG _tag, wstring name);
+	list<GameObject*> GetObjectList(_OBJECT_TAG _tag);
 	Camera* GetMainCamera();
 public:
 	UINT GetWindowWidth();
@@ -147,10 +156,9 @@ private:
 public:
 	LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
+	
+
 };
-
-
-
 
 END
 

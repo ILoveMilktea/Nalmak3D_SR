@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Include\PlayerInfoManager.h"
-
+#include "ItemManager.h"
+#include "PlayerShooter.h"
+#include "PlayerItem.h"
 
 PlayerInfoManager*::PlayerInfoManager::m_instance = nullptr;
 
@@ -10,6 +12,11 @@ PlayerInfoManager::PlayerInfoManager(Desc * _Desc)
 	m_maxHp = _Desc->maxHp;
 	m_dirsensor = _Desc->dirsenser;
 	m_hp = m_maxHp;
+
+	m_maxSpeed = _Desc->maxSpeed;
+	m_gold = _Desc->gold;
+
+	m_player = nullptr;
 }
 
 PlayerInfoManager::~PlayerInfoManager()
@@ -22,6 +29,12 @@ void PlayerInfoManager::Initialize()
 
 void PlayerInfoManager::Update()
 {
+	DEBUG_LOG(L"Gold", m_gold);
+	DEBUG_LOG(L"현재 장착중인 주무기 ", m_currentlyWeapon[FIRST_PARTS]);
+	DEBUG_LOG(L"현재 장착중인 부 무장무기 ", m_currentlyWeapon[SECOND_PARTS]);
+
+
+	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();
 }
 
 PlayerInfoManager * PlayerInfoManager::GetInstance()
@@ -39,7 +52,7 @@ void PlayerInfoManager::DeleteInstance()
 {
 	if (m_instance)
 		DESTROY(m_instance->GetGameObject());
-	
+
 }
 
 
@@ -99,6 +112,28 @@ void PlayerInfoManager::SetMaxSpeed(const float & _value)
 
 }
 
+void PlayerInfoManager::SetTimeLimit(const float & _value)
+{
+	m_timelimit = _value;
+}
+
+void PlayerInfoManager::SetScore(const float & _value)
+{
+	m_score = _value;
+}
+
+void PlayerInfoManager::SetPlayer(GameObject * _player)
+{
+	m_player = _player;
+}
+
+void PlayerInfoManager::MinGold(int _value)
+{
+	if (m_gold <= 0)
+		return;
+	m_gold -= _value;
+}
+
 const int & PlayerInfoManager::GetHp() const
 {
 	return m_hp;
@@ -124,3 +159,68 @@ const float & PlayerInfoManager::GetDirSenser() const
 	return m_dirsensor;
 }
 
+bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const wstring & _equipItemName)
+{
+	// 1. 인벤에 있는 스트링이랑 상점에 있는 데이터  스트링이랑 맞으면
+
+	//L"Weapon" == 임시
+	wstring findItemType = L"";
+	wstring findItemName = L"";
+
+	for (auto& slotName : m_haveItemList)
+	{
+		if (_itemtype == slotName.first)
+		{
+			findItemType = slotName.first;
+			for (auto & ItemName : slotName.second)
+			{
+				if (ItemName == _equipItemName)
+				{
+					findItemName = ItemName;
+					break;
+				}
+			}
+		}
+	}
+
+	PlayerItem* equipItem = ItemManager::GetInstance()->FindItemObject(findItemType, findItemName);
+	if (!equipItem)
+		return false;
+
+	// 여기서 거르자
+	if (findItemType == L"Weapon")
+	{
+		switch (eID)
+		{
+		case FIRST_PARTS:
+			m_currentlyWeapon[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case SECOND_PARTS:
+			m_currentlyWeapon[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case THIRD_PARTS:
+			break;
+		}
+
+	}
+	else if (findItemType == L"Skill")
+	{
+		switch (eID)
+		{
+		case FIRST_PARTS:
+			m_currentlySkill[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case SECOND_PARTS:
+			m_currentlySkill[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case THIRD_PARTS:
+			break;
+		}
+	}
+
+	return true;
+}

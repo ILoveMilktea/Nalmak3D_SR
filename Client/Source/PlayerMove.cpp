@@ -21,10 +21,10 @@ void PlayerMove::Initialize()
 	m_timeMananger = TimeManager::GetInstance();
 	m_playerInfo->SetSpeed(2);
 	m_playerInfo->SetRollAngle(15.f);
-	m_playerInfo->SetDirSeneser(1.7f);
+	m_playerInfo->SetDirSeneser(0.5f);
 
 	m_playerInfo->SetMinSpeed(0.f);
-	m_playerInfo->SetMaxSpeed(20.f);
+	m_playerInfo->SetMaxSpeed(22.f);
 
 
 	
@@ -33,6 +33,9 @@ void PlayerMove::Initialize()
 	m_playerInfo->GetAddRot().y = Deg2Rad * eulerRot.y;
 	m_playerInfo->GetAddRot().z = Deg2Rad * eulerRot.z;
 	m_mouse = GetComponent<MouseOption>();
+
+
+
 }
 
 void PlayerMove::EnterState()
@@ -53,20 +56,15 @@ void PlayerMove::UpdateState()
 
 	float dirY = m_mouse->GetMouseMoveDir().x;
 	float dirX = m_mouse->GetMouseMoveDir().y;
-	DEBUG_LOG(L"mouse X", dirX);
-	DEBUG_LOG(L"mouse Y", dirY);
 
 	float sensitive = m_playerInfo->GetDirSenser();
 	dirX = Nalmak_Math::Clamp(dirX, -sensitive, +sensitive);
 	dirY = Nalmak_Math::Clamp(dirY, -sensitive, +sensitive);
-	DEBUG_LOG(L"sensitive", sensitive);
 
-	DEBUG_LOG(L"mouse X", dirX);
-	DEBUG_LOG(L"mouse Y", dirY);
 	
 	Quaternion quaterRotX , quaterRotY, quaterRotZ;
 	D3DXQuaternionRotationAxis(&quaterRotY, &m_transform->GetUp(), dirY * dTime * 1.5f);
-	D3DXQuaternionRotationAxis(&quaterRotX, &m_transform->GetRight(), dirX * dTime);
+	D3DXQuaternionRotationAxis(&quaterRotX, &m_transform->GetRight(), dirX * dTime* 1.5f);
 	D3DXQuaternionRotationAxis(&quaterRotZ, &m_transform->GetForward(), m_playerInfo->GetRollAngle() * dTime * 0.1f);
 	m_transform->rotation *=  (quaterRotX * quaterRotY * quaterRotZ);
 	
@@ -74,34 +72,34 @@ void PlayerMove::UpdateState()
 	 speed -= 3.f;
 
 	 if (m_inputManager->GetKeyPress(KEY_STATE_W))
-		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 20);
+		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 50);
 	else
 		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10);
 
 	m_accel = Nalmak_Math::Clamp(m_accel, 0.f, 1.f);
 	speed += m_accel * 5;
+	
 
 	m_playerInfo->AddSpeed(speed);
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
-	{
-		Bullet_Manager::GetInstance()->Fire(m_transform->position, m_transform->rotation);
-	}
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
-	{
-		Bullet_Manager::GetInstance()->Fire_Missile(m_transform->position, m_transform->rotation);
-	}
-	DEBUG_LOG(L"POS" , m_transform);
-	DEBUG_LOG(L"SPEED" , m_playerInfo->GetSpeed());
-
-
+	TemproryAttackFunc();
 }
 
 void PlayerMove::ExitState()
 {
+}
+
+void PlayerMove::TemproryAttackFunc()
+{
+
+	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
+	{
+		Bullet_Manager::GetInstance()->Fire_Player(m_transform->position, m_transform->rotation, 150.f);
+	}
+
 }
 
 Quaternion* PlayerMove::Rotation(const Vector3 & _dir)

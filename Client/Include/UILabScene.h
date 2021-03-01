@@ -10,7 +10,7 @@ class UILabScene :
 	// Scene을(를) 통해 상속됨
 	virtual void Initialize() override;
 
-private:
+public:
 	void CreatePauseButton();
 
 	void CreateRader();
@@ -18,6 +18,7 @@ private:
 	void CreateSplineCurve();
 
 	void PlayerUIPatitial();
+
 };
 
 

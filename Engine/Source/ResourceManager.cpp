@@ -37,6 +37,7 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	LoadResources<VIBuffer,ObjMesh>(L"obj");
 	LoadResources<Mesh, StaticMesh>(L"X");
 
+	LoadTextures(L"jpg");
 	LoadTextures(L"png");
 	LoadTextures(L"jpg");
 	LoadTextures(L"dds");

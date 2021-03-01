@@ -76,8 +76,6 @@ void RenderManager::Render()
 
 
 	Reset();
-
-
 }
 
 void RenderManager::Render(Camera * _cam)
@@ -472,7 +470,6 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 
 void RenderManager::Reset()
 {
-	m_debugManager->EraseTheRecord();
 	m_currentMaterial = nullptr;
 
 	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)
@@ -481,6 +478,8 @@ void RenderManager::Reset()
 		renderList.second.clear();
 	}
 	m_renderUILists.clear();
+
+	m_debugManager->EraseTheRecord();
 }
 
 void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _cBuffer)

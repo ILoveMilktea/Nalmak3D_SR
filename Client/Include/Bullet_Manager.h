@@ -23,10 +23,28 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 
-public:
-	void Fire(Vector3 _start, Quaternion _rot);
-	void Fire_Missile(Vector3 _start, Quaternion _rot); //직선 미사일
+public: /* for Enemy */
+	
+	/* for DogFight */
+	void Fire_Gun(Vector3 _start, Quaternion _rot, int _dmg = 10.f, float _spd = 50.f);
+	void Fire_Missile(Vector3 _start, Quaternion _rot,
+		int _minDmg = 0.f, int _maxDmg = 10.f,
+		float _maxSpd = 150.f); //직선 미사일
 	void Fire_Homing(); //유도 미사일
+
+	/* for Evasion */
+	void Gun_Evasion(Vector2 _start);
+	void Missile_Evasion(Vector2 _start);
+	void Homing_Evasion(Vector2 _start, Vector2 _target);
+
+
+public: /* for Player */
+	void Fire_Player(Vector3 _start, Quaternion _rot, float _spd);
+	
+
+private:
+
+
 
 };
 

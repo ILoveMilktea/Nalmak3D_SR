@@ -31,6 +31,13 @@ void DebugManager::DebugLog(const wstring&  _name, GameObject * _obj)
 	m_debugLog += L"\n   scale       " + Nalmak_String::GetVectorToWstring(_obj->GetTransform()->scale);
 }
 
+void DebugManager::DebugLog(const wstring & _name, const wstring& _string)
+{
+	m_debugLog += L"\n-----------------------------------";
+	m_debugLog += L"\n   " + _name;
+	m_debugLog += L"\n   " + _string;
+}
+
 void DebugManager::EraseTheRecord()
 {
 	m_debugLog = L"";

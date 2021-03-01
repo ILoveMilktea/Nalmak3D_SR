@@ -5,6 +5,7 @@
 #include "DrawGizmo_2D.h"
 #include "RenderManager.h"
 #include "PositionHandle_2D.h"
+#include "ScaleHandle_2D.h"
 
 CanvasPicking::CanvasPicking(Desc * _desc)
 {
@@ -14,41 +15,71 @@ void CanvasPicking::Initialize()
 {
 	m_renderer = GetComponent<CanvasRenderer>();
 	m_gizmo = GetComponent<DrawGizmo_2D>();
-	m_handle = GetComponent<PositionHandle_2D>();
+	m_positionHandle = GetComponent<PositionHandle_2D>();
+	m_scaleHandle = GetComponent<ScaleHandle_2D>();
 }
 
 void CanvasPicking::Update()
 {
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
-		if (m_gizmo)
+		if (m_scaleHandle)
 		{
 			if (m_renderer->IsCursorOnRect())
 			{
-				m_gizmo->SetActiveHandles(true);
+				m_scaleHandle->PickHandle(true);
 			}
-			else
+		}
+		else if (m_positionHandle)
+		{
+			if (m_renderer->IsCursorOnRect())
 			{
-				if (!m_gizmo->CheckHandlePicked())
+				m_positionHandle->PickHandle(true);
+			}
+		}
+		else if (m_gizmo)
+		{
+			if (!m_gizmo->CheckHandlePicked())
+			{
+				if (m_renderer->IsCursorOnRect())
 				{
-					m_gizmo->SetActiveHandles(false);
+					switch (m_gizmo->GetCurrentMode())
+					{
+					case DrawGizmo_2D::NONE:
+						m_gizmo->SetActivePositionHandles(true);
+						m_gizmo->SetCurrentMode(DrawGizmo_2D::POS);
+						break;
+					case DrawGizmo_2D::POS:
+						m_gizmo->SetActivePositionHandles(false);
+						m_gizmo->SetActiveScaleHandles(true);
+						m_gizmo->SetCurrentMode(DrawGizmo_2D::SCALE);
+						break;
+					case DrawGizmo_2D::SCALE:
+						m_gizmo->SetActiveScaleHandles(false);
+						m_gizmo->SetCurrentMode(DrawGizmo_2D::NONE);
+						break;
+					}
+				}
+				else
+				{
+					m_gizmo->SetActivePositionHandles(false);
+					m_gizmo->SetActiveScaleHandles(false);
+					m_gizmo->SetCurrentMode(DrawGizmo_2D::NONE);
 				}
 			}
 		}
-		else if (m_handle)
-		{
-			if (m_renderer->IsCursorOnRect())
-			{
-				m_handle->PickHandle(true);
-			}
-		}
+		
 	}
 
 	if (InputManager::GetInstance()->GetKeyUp(KEY_STATE_LEFT_MOUSE))
 	{
-		if (m_handle)
+		if (m_positionHandle)
 		{
-			m_handle->PickHandle(false);
+			m_positionHandle->PickHandle(false);
+		}
+		else if (m_scaleHandle)
+		{
+			m_scaleHandle->PickHandle(false);
 		}
 	}
 }
