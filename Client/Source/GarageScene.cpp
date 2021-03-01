@@ -40,7 +40,7 @@ void GarageScene::Initialize()
 		MeshRenderer::Desc render;
 		render.mtrlName = L"default";
 		render.meshName = L"flight";
-		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<PlayerInfoManager>();
+		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<MeshRenderer>(&render);
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
 

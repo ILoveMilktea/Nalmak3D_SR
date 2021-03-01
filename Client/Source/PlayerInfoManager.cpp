@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Include\PlayerInfoManager.h"
 #include "ItemManager.h"
+#include "PlayerShooter.h"
+#include "PlayerItem.h"
 
 PlayerInfoManager*::PlayerInfoManager::m_instance = nullptr;
 
@@ -28,7 +30,8 @@ void PlayerInfoManager::Initialize()
 void PlayerInfoManager::Update()
 {
 	DEBUG_LOG(L"Gold", m_gold);
-	DEBUG_LOG(L"ï¿½Îºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", m_haveItemList.size());
+	DEBUG_LOG(L"ÇöÀç ÀåÂøÁßÀÎ ÁÖ¹«±â ", m_currentlyWeapon[FIRST_PARTS]);
+	DEBUG_LOG(L"ÇöÀç ÀåÂøÁßÀÎ ºÎ ¹«Àå¹«±â ", m_currentlyWeapon[SECOND_PARTS]);
 
 
 	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();
@@ -156,9 +159,68 @@ const float & PlayerInfoManager::GetDirSenser() const
 	return m_dirsensor;
 }
 
-bool PlayerInfoManager::EquipItem(const wstring & _equipItemName)
+bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const wstring & _equipItemName)
 {
-	//
+	// 1. ÀÎº¥¿¡ ÀÖ´Â ½ºÆ®¸µÀÌ¶û »óÁ¡¿¡ ÀÖ´Â µ¥ÀÌÅÍ  ½ºÆ®¸µÀÌ¶û ¸ÂÀ¸¸é
 
-	return false;
+	//L"Weapon" == ÀÓ½Ã
+	wstring findItemType = L"";
+	wstring findItemName = L"";
+
+	for (auto& slotName : m_haveItemList)
+	{
+		if (_itemtype == slotName.first)
+		{
+			findItemType = slotName.first;
+			for (auto & ItemName : slotName.second)
+			{
+				if (ItemName == _equipItemName)
+				{
+					findItemName = ItemName;
+					break;
+				}
+			}
+		}
+	}
+
+	PlayerItem* equipItem = ItemManager::GetInstance()->FindItemObject(findItemType, findItemName);
+	if (!equipItem)
+		return false;
+
+	// ¿©±â¼­ °Å¸£ÀÚ
+	if (findItemType == L"Weapon")
+	{
+		switch (eID)
+		{
+		case FIRST_PARTS:
+			m_currentlyWeapon[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case SECOND_PARTS:
+			m_currentlyWeapon[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case THIRD_PARTS:
+			break;
+		}
+
+	}
+	else if (findItemType == L"Skill")
+	{
+		switch (eID)
+		{
+		case FIRST_PARTS:
+			m_currentlySkill[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case SECOND_PARTS:
+			m_currentlySkill[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
+
+			break;
+		case THIRD_PARTS:
+			break;
+		}
+	}
+
+	return true;
 }

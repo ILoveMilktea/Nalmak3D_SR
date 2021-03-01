@@ -12,3 +12,4 @@ PlayerItem::PlayerItem(const ITEMINFO & _info)
 PlayerItem::~PlayerItem()
 {
 }
+

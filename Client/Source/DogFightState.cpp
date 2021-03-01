@@ -17,6 +17,13 @@
 #include "UIWindowFactory.h"
 #include "SceneChanger.h"
 #include "PlayerBossStageMove.h"
+#include "PlayerShooter.h"
+
+// playerskill 시전자
+#include "PlayerSkillActor.h"
+
+//스킬 상태별 상태
+#include "PlayerEscapeState.h"
 
 DogFightState::DogFightState()
 {
@@ -46,6 +53,10 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
+
+	// 스킬관려된 스테이트 
+	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
+
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
@@ -54,7 +65,8 @@ void DogFightState::EnterState()
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
-
+	m_Player->AddComponent<PlayerShooter>();
+	m_Player->AddComponent<PlayerSkillActor>();
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();
