@@ -60,7 +60,7 @@ void Bullet_Manager::Fire_Gun(Vector3 _start, Quaternion _rot, int _dmg, float _
 	VIBufferRenderer::Desc Bullet_Mesh;
 	Bullet_Mesh.mtrlName = L"default";
 	Bullet_Mesh.meshName = L"box";
-	Bullet_obj->AddComponent<VIBufferRenderer>(&Bullet_Mesh);
+	Gun_obj->AddComponent<VIBufferRenderer>(&Bullet_Mesh);
 
 	SphereCollider::Desc Gun_col;
 	Gun_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
@@ -150,10 +150,10 @@ void Bullet_Manager::Fire_Player(Vector3 _start, Quaternion _rot, float _spd)
 	Gun_Desc.fSpd = _spd;
 	Gun_obj->AddComponent<MachineGun>(&Gun_Desc);
 
-	MeshRenderer::Desc Gun_Mesh;
+	VIBufferRenderer::Desc Gun_Mesh;
 	Gun_Mesh.mtrlName = L"default";
 	Gun_Mesh.meshName = L"box";
-	Gun_obj->AddComponent<MeshRenderer>(&Gun_Mesh);
+	Gun_obj->AddComponent<VIBufferRenderer>(&Gun_Mesh);
 
 	SphereCollider::Desc Gun_col;
 	Gun_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;

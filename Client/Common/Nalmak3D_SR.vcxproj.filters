@@ -642,6 +642,7 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\StageSelectScene\CameraMove">
       <UniqueIdentifier>{77a6e37e-4059-4f3f-9a48-468430dfa279}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Component\01.Utility\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
     </Filter>

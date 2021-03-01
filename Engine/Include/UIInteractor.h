@@ -21,7 +21,7 @@ public:
 
 	virtual void Initialize() override;
 	virtual void Update() override;
-
+	virtual void Release() override;
 
 public:
 	void AddEventHandler(EventHandler _eventFunc);

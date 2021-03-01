@@ -198,6 +198,7 @@
     </Filter>
     <Filter Include="06.Resource\07.Mesh">
       <UniqueIdentifier>{0b42f21e-0fa3-4c30-bfe9-97a7b6c3b208}</UniqueIdentifier>
+    </Filter>
     <Filter Include="05.Component\08.UI\01.SingleImage">
       <UniqueIdentifier>{31062613-49b9-4e03-a8fd-bf2942d4559c}</UniqueIdentifier>
     </Filter>
@@ -791,6 +792,7 @@
     <ClInclude Include="..\Include\StaticMesh.h" />
     <ClInclude Include="..\Include\VIBufferRenderer.h">
       <Filter>05.Component\01.Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\IAnimation.h">
       <Filter>03.Interface</Filter>
     </ClInclude>

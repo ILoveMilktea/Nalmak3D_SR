@@ -102,6 +102,9 @@ void EnemyDetector::UpdateTarget()
 	m_lockonTarget = nullptr;
 	m_targetIndex = 0;
 
+	if (!PlayerInfoManager::GetInstance()->GetPlayer())
+		return;
+
 	Transform* playerTr = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform();
 	for (auto& enemy : enemyList)
 	{

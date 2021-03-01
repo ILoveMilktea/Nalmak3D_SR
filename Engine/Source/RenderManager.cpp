@@ -200,6 +200,7 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 
 	RenderNoneAlpha(_cam, _cBuffer, RENDERING_MODE_CUTOUT);
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
 
 
 	EndRenderTarget();
@@ -403,12 +404,12 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 {
-	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
-	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
 
 
 	for (auto& renderer : m_renderUILists)
@@ -431,7 +432,8 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->EndPass();
 	}
-	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 }
 

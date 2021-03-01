@@ -23,7 +23,7 @@ public:
 
 	virtual void Initialize() override;
 	virtual void Update() override;
-	
+	virtual void Release() override;
 	void ScriptOn();
 	void ScriptOff();
 

@@ -16,7 +16,6 @@ Scripter::Scripter(Desc* _desc)
 
 Scripter::~Scripter()
 {
-	m_dialogueList.shrink_to_fit();
 }
 
 void Scripter::Initialize()
@@ -45,6 +44,11 @@ void Scripter::Initialize()
 
 void Scripter::Update()
 {
+}
+
+void Scripter::Release()
+{
+	m_dialogueList.shrink_to_fit();
 }
 
 void Scripter::ScriptOn()

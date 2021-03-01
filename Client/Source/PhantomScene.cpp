@@ -58,10 +58,7 @@ void PhantomScene::Initialize()
 	//auto groundObj = INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
 	//groundObj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 
-	DirectionalLight::Desc light;
-	light.diffuseIntensity = 1.f;
-	light.ambientIntensity = 0.2f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 30, 0);
+
 
 	
 	

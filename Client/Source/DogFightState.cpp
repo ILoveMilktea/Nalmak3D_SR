@@ -72,9 +72,9 @@ void DogFightState::EnterState()
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();
 
-	ParticleRenderer::Desc particle;
-	particle.particleDataName = L"20mmCannon";
-	m_Player->AddComponent<ParticleRenderer>(&particle);
+	//ParticleRenderer::Desc particle;
+	//particle.particleDataName = L"20mmCannon";
+	//m_Player->AddComponent<ParticleRenderer>(&particle);
 
 	//m_Player->AddComponent<PlayerToTopView>();
 
@@ -84,10 +84,10 @@ void DogFightState::EnterState()
 	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	*/
 
-	auto infoManager = PlayerInfoManager::GetInstance();
-	infoManager->SetTimeLimit(2000.f);
-	infoManager->SetScore(123456.f);
-	infoManager->SetPlayer(m_Player);
+	//auto infoManager = PlayerInfoManager::GetInstance();
+	//infoManager->SetTimeLimit(2000.f);
+	//infoManager->SetScore(123456.f);
+	//infoManager->SetPlayer(m_Player);
 
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
@@ -180,15 +180,17 @@ void DogFightState::SceneToEvasion()
 {
 	if (!m_bProduce)
 	{
-		Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
-		Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
+		if (Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"))
+		{
+			Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
+			Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
 
+			DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
 
-		DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
-
-
-		m_MainCamera->GetTransform()->position = PosTemp;
-		m_MainCamera->GetTransform()->rotation = RotTemp;
+			m_MainCamera->GetTransform()->position = PosTemp;
+			m_MainCamera->GetTransform()->rotation = RotTemp;
+		}
+	
 
 		vPlayerOrigin = m_Player->GetTransform()->position;
 

@@ -39,7 +39,6 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 
 	LoadTextures(L"jpg");
 	LoadTextures(L"png");
-	LoadTextures(L"jpg");
 	LoadTextures(L"dds");
 
 	LoadResources<RenderTarget, RenderTarget>(L"rtd");

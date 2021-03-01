@@ -63,6 +63,8 @@ void CanvasRenderer::LateUpdate()
 void CanvasRenderer::Release()
 {
 	CanvasGroup::GetInstance()->RemoveGroupMember(this, m_group);
+
+	
 }
 
 void CanvasRenderer::Render(Shader * _shader, int _index)

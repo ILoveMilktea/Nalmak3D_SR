@@ -46,7 +46,7 @@ void NalmakScene::Initialize()
 				VIBufferRenderer::Desc mesh;
 				mesh.meshName = L"sphere";
 				mesh.mtrlName = L"standard";
-				INSTANTIATE()->AddComponent<VIBufferRenderer>(&mesh)->SetScale(Vector3(1.f, 1.f, 1.f) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(i * 3, 0, j * 3);
+				INSTANTIATE()->AddComponent<VIBufferRenderer>(&mesh)->SetScale(Vector3(1.f, 1.f, 1.f) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(i * 3.f, 0, j * 3.f);
 			}
 		}
 

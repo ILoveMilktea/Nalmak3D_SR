@@ -78,6 +78,7 @@ private:
 			if (m_resoucreContainers[typeid(TYPE).name()][fileName])
 			{
 				MessageBox(NULL, (L"Resource is already exist! " + filePath).c_str(), NULL, MB_OK);
+				assert(0);
 			}
 
 			TYPE* resource = new T();
