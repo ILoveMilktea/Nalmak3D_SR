@@ -203,6 +203,9 @@
     <ClInclude Include="..\Include\PlayerShooter.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\EnemyDetector.h">
+      <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -378,6 +381,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\PlayerShooter.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EnemyDetector.cpp">
+      <Filter>02.Component\02.UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

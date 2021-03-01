@@ -16,6 +16,7 @@ Scripter::Scripter(Desc* _desc)
 
 Scripter::~Scripter()
 {
+	m_dialogueList.clear();
 	m_dialogueList.shrink_to_fit();
 }
 

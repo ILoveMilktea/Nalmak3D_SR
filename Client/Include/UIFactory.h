@@ -7,6 +7,7 @@
 #include "Crosshair.h"
 #include "EditController.h"
 #include "PlayerInfoManager.h"
+#include "EnemyDetector.h"
 
 class GameObject;
 
@@ -690,14 +691,34 @@ public:
 		desc_cr.group = _group;
 
 		Rader::Desc desc;
-		desc.findRange = 100.f;
-		desc.readyflight = 5;
+		desc.findRange = 200.f;
+		desc.readyIcon = 10;
 
 		auto rader = INSTANTIATE()->
 			AddComponent<CanvasRenderer>(&desc_cr)->
 			AddComponent<Rader>(&desc);
 		
 		return rader;
+	}
+
+	static GameObject* Prefab_EnemyDetector(GameObject* _crosshair, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		auto boundary = CreateImage(_group,L"detectorBoundary");
+		boundary->SetPosition(WINCX * 0.5f, WINCY *0.5f);
+		boundary->SetScale(480.f, 480.f);
+		boundary->GetComponent<CanvasRenderer>()->SetFade(0.3f);
+
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		EnemyDetector::Desc desc_ed;
+		desc_ed.crosshair = _crosshair;
+
+		auto enemyDetector = INSTANTIATE()->
+			AddComponent<CanvasRenderer>(&desc_cr)->
+			AddComponent<EnemyDetector>(&desc_ed);
+
+		return enemyDetector;
 	}
 
 public:

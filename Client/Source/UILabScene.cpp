@@ -81,7 +81,7 @@ void UILabScene::CreateRader()
 	// rader
 	Rader::Desc desc;
 	desc.findRange = 100.f;
-	desc.readyflight = 5;
+	desc.readyIcon = 5;
 
 	auto rader = INSTANTIATE()->
 		AddComponent<Rader>(&desc);
@@ -105,9 +105,9 @@ void UILabScene::CreateRader()
 		AddComponent<MeshRenderer>(&circledesc)->
 		SetPosition(25.f, -15.f, 3.f);
 
-	rader->GetComponent<Rader>()->Temp_AddEnemy(enemy1->GetTransform());
-	rader->GetComponent<Rader>()->Temp_AddEnemy(enemy2->GetTransform());
-	rader->GetComponent<Rader>()->Temp_AddEnemy(enemy3->GetTransform());
+	//rader->GetComponent<Rader>()->Temp_AddEnemy(enemy1->GetTransform());
+	//rader->GetComponent<Rader>()->Temp_AddEnemy(enemy2->GetTransform());
+	//rader->GetComponent<Rader>()->Temp_AddEnemy(enemy3->GetTransform());
 
 	{
 		MeshRenderer::Desc boxdesc;

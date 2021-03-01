@@ -197,6 +197,7 @@
     <ClInclude Include="..\Include\Boss.h" />
     <ClInclude Include="..\Include\BossState.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
+    <ClInclude Include="..\Include\EnemyDetector.h" />
     <ClInclude Include="..\Include\MachineGun.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
@@ -267,6 +268,7 @@
     <ClCompile Include="..\Source\Boss.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
+    <ClCompile Include="..\Source\EnemyDetector.cpp" />
     <ClCompile Include="..\Source\MachineGun.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />

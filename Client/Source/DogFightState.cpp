@@ -109,8 +109,6 @@ void DogFightState::UpdateState()
 		//그리고 나서 Player도 newGameObjectList에 있으니 못 찾아와서 팅김.
 
 
-
-
 		if (m_bProduce)
 		{
 			Accelerate();

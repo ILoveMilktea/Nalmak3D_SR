@@ -365,6 +365,13 @@ public:
 
 
 			_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
+
+			// enemy detector
+			{
+				auto enemyDetector = UIFactory::Prefab_EnemyDetector(crosshair, CANVAS_GROUP_STAGE1);
+				enemyDetector->SetPosition(WINCX*0.5f, WINCY*0.5f);
+			}
+
 		}
 
 		// altitude
@@ -403,7 +410,6 @@ public:
 			auto rader = UIFactory::Prefab_Rader(CANVAS_GROUP_STAGE1);
 			rader->SetPosition(250.f, 875.f);
 		}
-
 		// Player Info
 		{
 			float interval = 36.f;
