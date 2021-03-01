@@ -8,6 +8,7 @@ PointLight g_pointLight;
 texture g_diffuse;
 texture g_normal;
 texture g_depth;
+texture g_cookTorrance;
 
 sampler DiffuseSampler = sampler_state
 {
@@ -24,7 +25,10 @@ sampler DepthSampler = sampler_state
 	texture = g_depth;
 };
 
-
+sampler CookTorranceSampler = sampler_state
+{
+	texture = g_cookTorrance;
+};
 
 struct VS_INPUT
 {
@@ -78,11 +82,48 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	float2 depth = tex2D(DepthSampler, uvRT).xy;
 	float4 worldPos = GetWorldPosFromDepth(depth, uv);
 
-	//float3 test = worldPos.xyz - g_pointLight.position;
+	float2 cookTorrance = tex2D(CookTorranceSampler, uvRT).xy;
+	float f0 = cookTorrance.x;
+	float roughness = cookTorrance.y;
+
 
 	float4 light =  CalcPointLight(g_pointLight, g_cBuffer.worldCamPos, worldPos.xyz, normal);
 
-	o.diffuse = float4(diffuse,1) *light;
+	float specular;
+	
+	float3 _N = normal;
+	float3 _V = normalize(g_cBuffer.worldCamPos - worldPos.xyz);
+	//float3 _L = -g_directionalLight.direction;
+	float3 _L = -normalize(worldPos.xyz - g_pointLight.position);
+	float3 _F0 = cookTorrance.x;
+	float _Roughness = cookTorrance.y;
+	float alpha = _Roughness * _Roughness;
+
+	float3 H = normalize(_V + _L);
+
+	float dotNL = saturate(dot(_N, _L));
+	float dotNV = saturate(dot(_N, _V));
+	float dotNH = saturate(dot(_N, H));
+	float dotLH = saturate(dot(_L, H));
+
+	float F; // Fresnel
+	float D; // GGX ref
+	float V; // smith's schlick
+
+	float alphaSqr = alpha * alpha;
+	const float PI = 3.141592f;
+	float denom = dotNH * dotNH * (alphaSqr - 1.0) + 1.0f;
+	D = alphaSqr / (PI * denom * denom);
+
+	float dotLH5 = pow(1.0f - dotLH, 5);
+	F = _F0 + (1.0 - _F0) * dotLH5;
+
+	float k = alpha / 2.0f;
+	V = G1V(dotNL, k) * G1V(dotNV, k);
+
+	specular = dotNL * D * F * V;
+	
+	o.diffuse = float4(diffuse, 1) * light + specular;
 	//o.diffuse = worldPos;
 	return o;
 }

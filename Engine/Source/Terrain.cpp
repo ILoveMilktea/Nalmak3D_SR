@@ -69,18 +69,17 @@ void Terrain::Release()
 	SAFE_DELETE_ARR(m_vertexInfo);
 }
 
-void Terrain::Render()
+void Terrain::Render(Shader * _shader, int _index)
 {
-	Shader* currentShader = m_material->GetShader();
-	assert("Current Shader is nullptr! " && currentShader);
+	assert("Current Shader is nullptr! " && _shader);
 
-	currentShader->SetMatrix("g_world", GetTransform()->GetWorldMatrix());
+	_shader->SetMatrix("g_world", GetTransform()->GetWorldMatrix());
 
-	currentShader->CommitChanges();				   // BeginPass 호출시 반드시 그리기 전에 호출
+	_shader->CommitChanges();				   // BeginPass 호출시 반드시 그리기 전에 호출
 												   ////////////////////////////////////////////////////////////////////////////////////
 												   // DrawPrimitive (index 사용 x)
 												   // Type, 이번에 이용될 인데스, 최소 참조갯수, 호출될 버텍스 수, 인덱스 버퍼내에서 읽기 시작할 인덱스, 그리는 도형 수
-	ThrowIfFailed(m_device->DrawIndexedPrimitive(currentShader->GetPrimitiveType(), 0, 0, m_viBuffer->GetVertexCount(), 0, m_viBuffer->GetFigureCount()));
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(_shader->GetPrimitiveType(), 0, 0, m_viBuffer->GetVertexCount(), 0, m_viBuffer->GetFigureCount()));
 }
 
 void Terrain::BindingStreamSource()
@@ -135,4 +134,26 @@ float Terrain::GetHeight(const Vector3 & _pos)
 	}
 	float height = (-plane.a * _pos.x - plane.c * _pos.z - plane.d) / plane.b;
 	return height;
+}
+
+
+
+int Terrain::GetMaterialCount()
+{
+	return 1;
+}
+
+Material * Terrain::GetMaterial(int _index)
+{
+	return m_material;
+}
+
+void Terrain::SetMaterial(Material * _material, int _index)
+{
+	m_material = _material;
+}
+
+void Terrain::SetMaterial(const wstring & _mtrlName, int _index)
+{
+	m_material = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
 }

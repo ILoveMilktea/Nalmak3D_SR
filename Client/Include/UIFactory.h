@@ -11,6 +11,7 @@
 #include "PlayerInfoManager.h"
 #include "EnemyDetector.h"
 #include "BossUIAnimator.h"
+#include "ItemButton.h"
 
 class GameObject;
 
@@ -210,6 +211,40 @@ public:
 		menu->GetComponent<Button>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
 		menu->GetComponent<Button>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
 		menu->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
+
+		// text
+		Text::Desc desc;
+		desc.width = 10;
+		desc.height = 25;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		menu->AddComponent<Text>(&desc);
+
+		menu->SetScale(760.f, 30.f);
+		return menu;
+	}
+	static GameObject* Prefab_ItemMenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// button
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+
+		ItemButton::Desc desc_ib;
+		desc_ib.desc_button = desc_bt;
+
+		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"ItemMenuButton");
+		menu->AddComponent<CanvasRenderer>(&desc_cr);
+		menu->AddComponent<ItemButton>(&desc_ib);
+
+		menu->GetComponent<ItemButton>()->ChangeNormalColor(1.f, 1.f, 1.f, 0.f);
+		menu->GetComponent<ItemButton>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
+		menu->GetComponent<ItemButton>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
+		menu->GetComponent<ItemButton>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
 
 		// text
 		Text::Desc desc;

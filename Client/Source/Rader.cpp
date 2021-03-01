@@ -71,7 +71,7 @@ void Rader::Initialize()
 
 void Rader::Update()
 {
-	if (!m_playerInfoManager->GetPlayer()->GetTransform())
+	if (!m_playerInfoManager->GetPlayer())
 		return;
 
 	m_timer += TimeManager::GetInstance()->GetdeltaTime();

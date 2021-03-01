@@ -35,6 +35,7 @@ void Event::RemoveHandler(const EventHandler& _handler)
 		if (*(*to_remove) == _handler)
 		{
 			m_handlers.erase(to_remove);
+			SAFE_DELETE(*to_remove);
 			break;
 		}
 	}
@@ -47,6 +48,7 @@ void Event::RemoveHandler(const int & _index)
 		return;
 
 	m_handlers.erase(m_handlers.begin() + _index);
+	SAFE_DELETE(*(m_handlers.begin() + _index));
 }
 
 void Event::Release()

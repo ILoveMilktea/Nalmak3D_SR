@@ -62,7 +62,10 @@ void Text::RenderText()
 void Text::Release()
 {
 	if (m_font)
+	{
 		m_font->Release();
+		m_font = nullptr;
+	}
 }
 
 RECT* Text::GetBoundary()

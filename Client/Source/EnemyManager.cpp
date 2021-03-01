@@ -161,10 +161,10 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos,
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 	
 	
-	MeshRenderer::Desc Enemy_Mesh;
+	VIBufferRenderer::Desc Enemy_Mesh;
 	Enemy_Mesh.mtrlName = L"default";
 	Enemy_Mesh.meshName = L"flight";
-	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
+	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
 	Enemy_col.radius = 1.f;
@@ -184,10 +184,10 @@ void EnemyManager::Boss_Spawn()
 	/*desc 세팅*/
 	Boss_obj->AddComponent<Boss>(&Boss_Desc);
 
-	MeshRenderer::Desc Boss_Mesh;
+	VIBufferRenderer::Desc Boss_Mesh;
 	Boss_Mesh.mtrlName = L"niniz";
 	Boss_Mesh.meshName = L"box";
-	Boss_obj->AddComponent<MeshRenderer>(&Boss_Mesh);
+	Boss_obj->AddComponent<VIBufferRenderer>(&Boss_Mesh);
 
 	SphereCollider::Desc Boss_col;
 	Boss_col.radius = 100.f;

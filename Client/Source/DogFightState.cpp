@@ -45,8 +45,9 @@ void DogFightState::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
+
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
-	m_Player->SetScale(0.1f, 0.1f, 0.1f);
+	m_Player->SetScale(0.8f, 0.8f, 0.8f);
 
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
@@ -60,8 +61,8 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
-	render.mtrlName = L"default"; //210223ȭ 12:50 ������ ������ �ȳ��ͼ� ���� �ٲ���
-	render.meshName = L"flight";
+	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.meshName = L"f15";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
@@ -71,6 +72,10 @@ void DogFightState::EnterState()
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();
 
+	//ParticleRenderer::Desc particle;
+	//particle.particleDataName = L"20mmCannon";
+	//m_Player->AddComponent<ParticleRenderer>(&particle);
+
 	//m_Player->AddComponent<PlayerToTopView>();
 
 	/*SceneChanger::Desc SceneChangerDescInfo;
@@ -79,10 +84,10 @@ void DogFightState::EnterState()
 	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	*/
 
-	auto infoManager = PlayerInfoManager::GetInstance();
-	infoManager->SetTimeLimit(2000.f);
-	infoManager->SetScore(123456.f);
-	infoManager->SetPlayer(m_Player);
+	//auto infoManager = PlayerInfoManager::GetInstance();
+	//infoManager->SetTimeLimit(2000.f);
+	//infoManager->SetScore(123456.f);
+	//infoManager->SetPlayer(m_Player);
 
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
@@ -175,15 +180,17 @@ void DogFightState::SceneToEvasion()
 {
 	if (!m_bProduce)
 	{
-		Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
-		Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
+		if (Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"))
+		{
+			Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
+			Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
 
+			DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
 
-		DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
-
-
-		m_MainCamera->GetTransform()->position = PosTemp;
-		m_MainCamera->GetTransform()->rotation = RotTemp;
+			m_MainCamera->GetTransform()->position = PosTemp;
+			m_MainCamera->GetTransform()->rotation = RotTemp;
+		}
+	
 
 		vPlayerOrigin = m_Player->GetTransform()->position;
 

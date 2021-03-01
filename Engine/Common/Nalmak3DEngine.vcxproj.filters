@@ -13,9 +13,6 @@
     <Filter Include="99.PreCompile">
       <UniqueIdentifier>{0ac1b07e-9988-4b38-a930-917ff73f26ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99.PreCompile\00.Define">
-      <UniqueIdentifier>{4f39c9fa-f442-40b1-b43a-c4d9bcdb8575}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Manager\00.DeviceManager">
       <UniqueIdentifier>{774ea9cf-df59-43ff-8c17-37936557b3cd}</UniqueIdentifier>
     </Filter>
@@ -192,6 +189,15 @@
     </Filter>
     <Filter Include="05.Component\99.Utility\UIPicking">
       <UniqueIdentifier>{e8333c85-56bf-47db-9fe2-207d9feef9ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.PreCompile\08.ExLibrary">
+      <UniqueIdentifier>{0832be45-c0da-4203-a1b1-fd23f24f590c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10.Event\00.Define">
+      <UniqueIdentifier>{4f39c9fa-f442-40b1-b43a-c4d9bcdb8575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Resource\07.Mesh">
+      <UniqueIdentifier>{0b42f21e-0fa3-4c30-bfe9-97a7b6c3b208}</UniqueIdentifier>
     </Filter>
     <Filter Include="05.Component\08.UI\01.SingleImage">
       <UniqueIdentifier>{31062613-49b9-4e03-a8fd-bf2942d4559c}</UniqueIdentifier>
@@ -489,13 +495,26 @@
     <ClCompile Include="..\Source\ScaleAnimation.cpp">
       <Filter>11.Animation</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\ParticleInfo.cpp">
+      <Filter>06.Resource\06.ParticleInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TBox.cpp">
+      <Filter>06.Resource\01.VIBuffer\00.Box</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Mesh.cpp">
+      <Filter>06.Resource\07.Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StaticMesh.cpp" />
+    <ClCompile Include="..\Source\VIBufferRenderer.cpp">
+      <Filter>05.Component\01.Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
       <Filter>00.Core</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Nalmak_Define.h">
-      <Filter>99.PreCompile\00.Define</Filter>
+      <Filter>10.Event\00.Define</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Exception.h">
       <Filter>01.Debug</Filter>
@@ -757,6 +776,22 @@
     </ClInclude>
     <ClInclude Include="..\Include\CanvasGroup.h">
       <Filter>05.Component\99.Utility\CanvasGroup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SplineCurve.h">
+      <Filter>99.PreCompile\99.Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ParticleInfo.h">
+      <Filter>06.Resource\06.ParticleInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TBox.h">
+      <Filter>06.Resource\01.VIBuffer\00.Box</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Mesh.h">
+      <Filter>06.Resource\07.Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StaticMesh.h" />
+    <ClInclude Include="..\Include\VIBufferRenderer.h">
+      <Filter>05.Component\01.Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\IAnimation.h">
       <Filter>03.Interface</Filter>

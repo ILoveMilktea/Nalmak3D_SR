@@ -1,5 +1,3 @@
-#include "..\..\TerrainTool\Include\Core.h"
-#include "..\..\TerrainTool\Include\Core.h"
 #include "Core.h"
 
 #include "Exception.h"
@@ -14,6 +12,8 @@
 #include "Quad.h"
 #include "LineVI.h"
 #include "Triangle.h"
+#include "Core.h"
+
 USING(Nalmak)
 
 
@@ -29,6 +29,7 @@ IMPLEMENT_SINGLETON(Core)
 
 Core::Core()
 {
+	
 	m_sceneManager = SceneManager::GetInstance();
 	m_prototypeManager = PrototypeManager::GetInstance();
 	m_objectManager = ObjectManager::GetInstance();
@@ -83,6 +84,7 @@ void Core::Initialize(HWND handle, Desc * _desc)
 
 	m_inputManager->Initialize();
 	m_lineManager->Initialize();
+	m_timeManager->Initialize();
 
 	CanvasGroup::GetInstance()->Initialize(_desc->CANVAS_GROUP_COUNT);
 }

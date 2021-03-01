@@ -73,8 +73,8 @@ bool MeshPicking::IsMousePicking()
 	Matrix worldMat = m_transform->GetWorldMatrix();
 	Vector3 rayPoint = m_mainCam->GetTransform()->GetWorldPosition();
 	Vector3 rayDir = m_mainCam->GetCamToMouseWorldDirection();	// look
-	
-	VIBuffer* vibuffer = m_renderer->GetVIBuffer();
+
+	VIBuffer* vibuffer =  ResourceManager::GetInstance()->GetResource<VIBuffer>(L"box");// = m_renderer->GetVIBuffer();
 	int figureCount = vibuffer->GetFigureCount();
 	INPUT_LAYOUT_POSITION_NORMAL_UV* vertices = vibuffer->GetVertices();
 	short* indices = vibuffer->GetIndices();
@@ -91,9 +91,9 @@ bool MeshPicking::IsMousePicking()
 		if (Nalmak_Math::IsIntersectTriangle(
 			rayPoint,
 			rayDir,
-			v0, 
-			v1, 
-			v2, 
+			v0,
+			v1,
+			v2,
 			&intersectPoint))
 		{
 			return true;

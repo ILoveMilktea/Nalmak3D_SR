@@ -19,21 +19,20 @@ public:
 
 public:
 	Scripter(Desc* _desc);
-	~Scripter();
 
 	virtual void Initialize() override;
 	virtual void Update() override;
-	
+	virtual void Release() override;
 	void ScriptOn();
 	void ScriptOff();
 
 
 public:
 	void SetDialogue(vector<Dialogue> _titleList);
-	
+
 	bool LoadNextScript();
 	void LoadScriptByIndex(int _index);
-	
+
 private:
 	Text* m_title;
 	Text* m_script;
@@ -53,4 +52,3 @@ private:	/* for typing section */
 
 
 #endif // !__SCRIPTER_H__
-

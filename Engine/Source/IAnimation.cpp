@@ -19,7 +19,10 @@ bool IAnimation::Play_CurrentAnimation()
 
 	m_playTimer += m_timeManager->GetdeltaTime();
 
-	if (m_playTimer > m_playDuration)
+	if (m_playTimer < m_startDelay)
+		return false;
+
+	if (m_playTimer - m_startDelay >  m_playDuration)
 	{
 		End_Animation();
 		return false;

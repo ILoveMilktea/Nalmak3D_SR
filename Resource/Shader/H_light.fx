@@ -39,19 +39,17 @@ float4 CalcLightInternal(BaseLight _light, float3 _camPos, float3 _direction, fl
 
 float4 CalcPointLight(PointLight _pointLight,float3 _camPos, float3 _worldPos, float3 _normal)
 {
-	//_lightPos = 0;
 	float3 lightDirection = _worldPos - _pointLight.position;
 	float distance = length(lightDirection);
+
 	lightDirection = normalize(lightDirection);
 
 	float4 color = CalcLightInternal(_pointLight.base, _camPos, lightDirection, _worldPos, _normal);
+	float attention = pow((_pointLight.radius - distance) / _pointLight.radius, 2);
+	color = color * attention;
+	color.w = 1;
 
-	//float attenuation = (_pointLight.constant) + (_pointLight.linearRatio * distance) + (_pointLight.exp * distance * distance);
-	float attenuation = pow(saturate(1.f - (distance * 1.1f)/ _pointLight.radius),5.f);
-	//float attenuation = 0+ (0 * distance) + (0.3 * distance * distance);
-
-
-	return color * attenuation;
+	return  color;//*(distance - _pointLight.radius) /*/ _pointLight.radius;
 }
 
 float G1V(float _dotNV, float _k)

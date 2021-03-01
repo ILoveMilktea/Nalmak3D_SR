@@ -23,35 +23,37 @@ private:
 	virtual void PreRender() override;
 	virtual void Release() override = 0;
 public:
-	virtual void Render() = 0;
+	virtual void Render(Shader* _shader,int _index) = 0;
 	virtual void BindingStreamSource() = 0;
-
 public:
 	void RenderRequest();
+public:
+	// Only _index parameter is Valid in MeshRenderer 
+	virtual int GetMaterialCount()  = 0;
+	virtual Material* GetMaterial(int _index = 0) = 0;
+	virtual void SetMaterial(Material* _material, int _index = 0) = 0;
+	virtual void SetMaterial(const wstring& _mtrlName, int _index = 0) = 0;
+	
 protected:
-	VIBuffer* m_viBuffer;
-	Material* m_material;
 	PDIRECT3DDEVICE9 m_device;
 	RENDERER_TYPE  m_type;
 	int m_layer;
 	bool m_isFrustumCulling = true;
 public:
-	PDIRECT3DVERTEXBUFFER9 GetVertexBuffer() const;
-	PDIRECT3DINDEXBUFFER9 GetIndexBuffer() const;
-	Material* GetMaterial() const;
-	VIBuffer* GetVIBuffer() const;
+	//PDIRECT3DVERTEXBUFFER9 GetVertexBuffer() const;
+	//PDIRECT3DINDEXBUFFER9 GetIndexBuffer() const;
+
 	int GetLayer() const { return m_layer; }
 	bool IsFrustumCulling() { return m_isFrustumCulling; }
 public:
-	UINT GetVertexCount();
-	UINT GetFigureCount();
+	//UINT GetVertexCount();
+	//UINT GetFigureCount();
 
 	const RENDERER_TYPE& GetType() { return m_type; }
 public:
-	void SetMaterial(Material* _material);
-	void SetMaterial(wstring _mtrlName);
+
 	void SetLayer(int _layer) { m_layer = _layer; }
-	void SetMesh(wstring _meshName);
+	//void SetMesh(wstring _meshName);
 	void SetFrustumCulling(bool _culling) { m_isFrustumCulling = _culling; }
 
 
