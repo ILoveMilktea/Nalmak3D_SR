@@ -176,7 +176,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos,
 
 void EnemyManager::Boss_Spawn()
 {
-	GameObject* Boss_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Boss");
+	GameObject* Boss_obj = INSTANTIATE(OBJECT_TAG_BOSS, L"Boss");
 	Boss_obj->SetPosition(Vector3(0.f, 0.f, 200.f));
 	Boss_obj->SetScale(100.f, 200.f, 100.f);
 
