@@ -54,7 +54,7 @@ private:
 
 	GameObject* m_crosshair = nullptr;
 	GameObject* m_lockonTarget = nullptr;
-	float m_targetIndex;
+	int m_targetIndex;
 
 	float m_detectRange;
 	RECT m_detectRect;

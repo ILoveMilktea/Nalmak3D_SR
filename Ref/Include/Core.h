@@ -30,6 +30,11 @@
 #include "FileIO.h"
 #include "SplineCurve.h"
 
+#include "MoveAnimation.h"
+#include "RotateAnimation.h"
+#include "ScaleAnimation.h"
+#include "ColorAnimation.h"
+
 #pragma region Component
 #include "MeshRenderer.h"
 #include "Camera.h"

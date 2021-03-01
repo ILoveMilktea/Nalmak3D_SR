@@ -80,7 +80,7 @@ void DogFightState::EnterState()
 	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 
 	m_Player->AddComponent<UIInteractor>();
-	UIWindowFactory::DogfightStageWindow(m_Player);
+	UIWindowFactory::StageWindow(m_Player);
 
 	EnemyManager::GetInstance();
 

@@ -56,5 +56,11 @@ private:
 	//4. Camera Produce
 	bool	m_bCameraProduce = false;
 
+
+
+
+	// UI test
+	bool	m_bossui = false;
+
 };
 

@@ -217,6 +217,15 @@
     <Filter Include="05.Component\99.Utility\CanvasGroup">
       <UniqueIdentifier>{1b20bc97-9e5a-4e83-8ad2-f7755950b6ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05.Component\08.UI\99.Animation">
+      <UniqueIdentifier>{2ba0dfcb-286d-4541-93e0-039547cc099a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\11.Animation">
+      <UniqueIdentifier>{4d649c6c-7515-4706-9736-6badb821312e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="11.Animation">
+      <UniqueIdentifier>{e112055a-4177-46e8-be8e-654b03cba67c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -464,6 +473,21 @@
     </ClCompile>
     <ClCompile Include="..\Source\CanvasGroup.cpp">
       <Filter>05.Component\99.Utility\CanvasGroup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\IAnimation.cpp">
+      <Filter>03.Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ColorAnimation.cpp">
+      <Filter>11.Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MoveAnimation.cpp">
+      <Filter>11.Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\RotateAnimation.cpp">
+      <Filter>11.Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScaleAnimation.cpp">
+      <Filter>11.Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -733,6 +757,21 @@
     </ClInclude>
     <ClInclude Include="..\Include\CanvasGroup.h">
       <Filter>05.Component\99.Utility\CanvasGroup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\IAnimation.h">
+      <Filter>03.Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ColorAnimation.h">
+      <Filter>11.Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MoveAnimation.h">
+      <Filter>11.Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\RotateAnimation.h">
+      <Filter>11.Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScaleAnimation.h">
+      <Filter>11.Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

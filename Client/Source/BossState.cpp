@@ -4,7 +4,7 @@
 #include "EnemyManager.h"
 #include "PlayerTopViewMove.h"
 #include "PlayerBossStageMove.h"
-
+#include "UIWindowFactory.h"
 
 BossState::BossState()
 {
@@ -54,6 +54,10 @@ void BossState::EnterState()
 	//	assert(L"보스 못받은거 같은데여 ㅋㅋ;;");
 	//}
 
+	// ==== UI ====
+	UIWindowFactory::BossUI();
+	m_bossui = false;
+	// ==== UI ====
 
 	m_bEnter = true;
 }
@@ -156,6 +160,23 @@ void BossState::EnterProduce()
 		}
 
 		fShakingTime -= dTime;
+
+
+		if (!m_bossui)
+		{
+			m_bossui = true;
+			list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_BOSSHP);
+
+			for (auto ui : group)
+			{
+				BossUIAnimator* animator = ui->GetComponent<BossUIAnimator>();
+
+				if (animator)
+				{
+					animator->StartMoveDown(160.f);
+				}
+			}
+		}
 	}
 	
 	//3. Boss Appear 
@@ -193,6 +214,7 @@ void BossState::EnterProduce()
 				0.f, dTime);
 
 		m_pMainCamera->GetTransform()->SetRotationX(0);
+
 	}
 
 	

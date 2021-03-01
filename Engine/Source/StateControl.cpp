@@ -44,7 +44,7 @@ void StateControl::Release()
 
 }
 
-const wstring & StateControl::GetCurStateString()
+wstring StateControl::GetCurStateString()
 {
 	for (auto& state : m_stateList)
 	{

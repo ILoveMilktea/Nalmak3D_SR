@@ -213,7 +213,7 @@ public:
 		}
 	}
 
-	static void DogfightStageWindow(GameObject* _player)
+	static void StageWindow(GameObject* _player)
 	{
 		// reference
 		{
@@ -569,6 +569,16 @@ public:
 		auto scripter =
 			INSTANTIATE()->
 			AddComponent<Scripter>(&desc_scr);
+	}
+
+	static void BossUI()
+	{
+		//name
+		auto name = UIFactory::Prefab_Stage_BossName(L"JUN JOHN SON");
+		name->SetPosition(WINCX * 0.5f, -80.f);
+		//hp slider
+		auto slider = UIFactory::Prefab_Stage_BossHpSlider();
+		slider->SetPosition(WINCX * 0.5f, -40.f);
 	}
 };
 

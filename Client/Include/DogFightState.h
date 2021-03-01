@@ -36,6 +36,6 @@ private:
 	float	m_fDogFightTime = 0.f;
 	float	m_fDogFightScore = 0.f;
 
-	int		m_iFrame = 0.f;
+	int		m_iFrame = 0;
 };
 
