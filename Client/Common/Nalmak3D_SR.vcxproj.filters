@@ -205,20 +205,35 @@
     <ClInclude Include="..\Include\EditController.h">
       <Filter>96.Debuger</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerShooter.h">
-      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\EnemyDetector.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\BulletDirMove.h" />
-    <ClInclude Include="..\Include\EscapeSkill.h" />
-    <ClInclude Include="..\Include\PlayerAttak.h" />
-    <ClInclude Include="..\Include\PlayerSkillActor.h" />
-    <ClInclude Include="..\Include\SmallCannon.h" />
-    <ClInclude Include="PlayerEscapeState.h" />
     <ClInclude Include="..\Include\BossUIAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\BulletDirMove.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EscapeSkill.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerAttak.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SmallCannon.h">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerShooter.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerSkillActor.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScaleDampingDeffender.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\PlayerEscapeState.h">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -398,20 +413,35 @@
     <ClCompile Include="..\Source\EditController.cpp">
       <Filter>96.Debuger</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\PlayerShooter.cpp">
-      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\EnemyDetector.cpp">
       <Filter>02.Component\02.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\BulletDirMove.cpp" />
-    <ClCompile Include="..\Source\EscapeSkill.cpp" />
-    <ClCompile Include="..\Source\PlayerAttak.cpp" />
-    <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
-    <ClCompile Include="..\Source\SmallCannon.cpp" />
-    <ClCompile Include="PlayerEscapeState.cpp" />
     <ClCompile Include="..\Source\BossUIAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\BulletDirMove.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EscapeSkill.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerAttak.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SmallCannon.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerShooter.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerSkillActor.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScaleDampingDeffender.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerEscapeState.cpp">
+      <Filter>02.Component\01.Utility\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
