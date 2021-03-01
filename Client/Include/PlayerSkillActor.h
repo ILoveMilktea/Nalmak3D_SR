@@ -19,11 +19,17 @@ public:
 
 
 	bool EquipSkill(PARTS_NUM _partsType);
-
+	class PlayerItem*& GetSkillInfo() {return m_skillInfo;}
 private:
-	class PlayerItem* m_playerSkill;
+	//class PlayerItem* m_playerSkill;
 private:
 	PlayerInfoManager* m_playerMgr;
 	InputManager* m_inputMgr;
+
+private:
+	StateControl* m_stateControl;
+
+private:
+	class PlayerItem* m_skillInfo;
 };
 

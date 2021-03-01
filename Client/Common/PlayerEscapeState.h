@@ -12,5 +12,12 @@ public:
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
+
+private:
+	InputManager m_inputManager;
+	class PlayerSkillActor* m_skillActor;
+private:
+	class PlayerItem* m_skillInfo;
+	float m_dealy;
 };
 

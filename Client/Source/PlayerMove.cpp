@@ -56,16 +56,11 @@ void PlayerMove::UpdateState()
 
 	float dirY = m_mouse->GetMouseMoveDir().x;
 	float dirX = m_mouse->GetMouseMoveDir().y;
-	DEBUG_LOG(L"mouse X", dirX);
-	DEBUG_LOG(L"mouse Y", dirY);
 
 	float sensitive = m_playerInfo->GetDirSenser();
 	dirX = Nalmak_Math::Clamp(dirX, -sensitive, +sensitive);
 	dirY = Nalmak_Math::Clamp(dirY, -sensitive, +sensitive);
-	DEBUG_LOG(L"sensitive", sensitive);
 
-	DEBUG_LOG(L"mouse X", dirX);
-	DEBUG_LOG(L"mouse Y", dirY);
 	
 	Quaternion quaterRotX , quaterRotY, quaterRotZ;
 	D3DXQuaternionRotationAxis(&quaterRotY, &m_transform->GetUp(), dirY * dTime * 1.5f);
@@ -91,10 +86,6 @@ void PlayerMove::UpdateState()
 
 
 	TemproryAttackFunc();
-	DEBUG_LOG(L"POS" , m_transform);
-	DEBUG_LOG(L"SPEED" , m_playerInfo->GetSpeed());
-
-
 }
 
 void PlayerMove::ExitState()
