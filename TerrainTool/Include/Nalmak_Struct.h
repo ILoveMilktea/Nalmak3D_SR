@@ -75,12 +75,39 @@ struct INPUT_LAYOUT_POSITION_UV
 	Vector2 uv;
 };
 
+
 struct INPUT_LAYOUT_POSITION_NORMAL_UV
 {
 	Vector3 position;
 	Vector3 normal;
 	Vector2 uv;
 };
+
+struct INPUT_LAYOUT_POSITION_NORMAL_BINORMAL_TANGENT_UV
+{
+	Vector3 position;
+	Vector3 normal;
+	Vector3 binormal;
+	Vector3 tangent;
+	Vector2 uv;
+
+	bool operator == (const INPUT_LAYOUT_POSITION_NORMAL_BINORMAL_TANGENT_UV& other) const
+	{
+		
+		return position == other.position &&
+			normal == other.normal &&
+			binormal == other.binormal &&
+			tangent == other.tangent &&
+			uv == other.uv;
+	}
+	bool operator > (const INPUT_LAYOUT_POSITION_NORMAL_BINORMAL_TANGENT_UV& other) const
+	{
+		return position + normal + binormal + tangent + Vector3(uv.x, uv.y, 0) >
+			other.position + other.normal + other.binormal + other.tangent + Vector3(other.uv.x, other.uv.y, 0);
+	}
+};
+
+
 
 struct INPUT_LAYOUT_SKYBOX
 {
@@ -92,6 +119,7 @@ struct INPUT_LAYOUT_PARTICLE
 {
 	Matrix worldMatrix;
 	Vector4 color;
+	Vector3 spriteX_spriteY_index;
 };
 
 
@@ -108,7 +136,7 @@ struct INPUT_LAYOUT_PARTICLE
 struct NALMAK_DLL ParticleData
 {
 	PARTICLE_EMIT_SHAPE shape = PARTICLE_EMIT_SHAPE::PARTICLE_EMIT_SHAPE_SPHERE;
-
+	PARTICLE_BILLBOARD_TYPE billboard = PARTICLE_BILLBOARD_TYPE::PARTICLE_BILLBOARD_TYPE_DEFAULT;
 	// for Circle
 	// for Sphere 
 	float minRadius = 0.2f;
@@ -120,7 +148,7 @@ struct NALMAK_DLL ParticleData
 	float depth = 1.f;
 
 	// for cone
-	float coneAngle = 45.f;
+	float coneAngle = 45.f * Deg2Rad;
 
 	float startMinSpeed = 0.1f;
 	float startMaxSpeed = 0.1f;
@@ -140,6 +168,9 @@ struct NALMAK_DLL ParticleData
 	float minAngle = 0.f;
 	float maxAngle = 0.f;
 
+	float minAngularVelocity = 0.f;
+	float maxAngularVelocity = 0.f;
+
 	float startMinScale = 0.1f;
 	float startMaxScale = 0.2f;
 	float endMinScale = 0.15f;
@@ -153,6 +184,10 @@ struct NALMAK_DLL ParticleData
 
 	float minLifeTime = 3;
 	float maxLifeTime = 5;
+
+	float stretchedScale = 2.f;
+	int animationTileX = 1;
+	int animationTileY = 1;
 
 	int maxParticleCount = 300;
 

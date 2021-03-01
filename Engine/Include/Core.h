@@ -37,6 +37,7 @@
 
 #pragma region Component
 #include "MeshRenderer.h"
+#include "VIBufferRenderer.h"
 #include "Camera.h"
 #include "Transform.h"
 #include "FreeMove.h"
@@ -146,11 +147,11 @@ private:
 	CollisionManager* m_collisionManager;
 	LightManager* m_lightManager;
 	TimeManager* m_timeManager;
-
 	CanvasGroup* m_canvasGroup;
 private:
 	DeviceManager* m_deviceManager;
 	RenderManager* m_renderManager;
+
 
 public:
 	LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);

@@ -44,8 +44,12 @@
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
 
+
+
+
 using namespace DirectX;
 using namespace std;
+
 
 #include "Nalmak_Define.h"
 #include "Nalmak_Enum.h"
@@ -60,6 +64,7 @@ using namespace std;
 #include "Exception.h"
 #include "FileIO.h"
 #include "SplineCurve.h"
+
 
 #include "InputManager.h"
 

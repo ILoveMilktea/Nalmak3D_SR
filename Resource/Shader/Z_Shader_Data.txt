@@ -15,6 +15,7 @@
 ##   INPUT_LAYOUT_POSITION_NORMAL_UV : 2
 ##   INPUT_LAYOUT_SKYBOX                      : 3
 ##   INPUT_LAYOUT_PARTICLE                    : 4
+##   INPUT_LAYOUT_POSITION_NORMAL_BINORMAL_TANGENT_UV : 5
 ##  ---------------------------------------------------------------------------------------
 ##   2. Output Render Target   ( 0~ 4 )
 ##  ---------------------------------------------------------------------------------------

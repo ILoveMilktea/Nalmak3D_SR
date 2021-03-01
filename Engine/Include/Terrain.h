@@ -26,8 +26,18 @@ private:
 	virtual void Update() override;
 	virtual void LateUpdate() override;
 	virtual void Release() override;
-	virtual void Render() override;
+	virtual void Render(Shader * _shader, int _index) override;
+private:
 	virtual void BindingStreamSource() override;
+private:
+	VIBuffer* m_viBuffer;
+	Material* m_material;
+	// IRenderer을(를) 통해 상속됨
+public:
+	virtual int GetMaterialCount() override;
+	virtual Material * GetMaterial(int _index = 0) override;
+	virtual void SetMaterial(Material * _material, int _index = 0) override;
+	virtual void SetMaterial(const wstring & _mtrlName, int _index = 0) override;
 public:
 	float GetHeight(const Vector3& _pos);
 private:
@@ -39,5 +49,7 @@ private:
 	float m_brushRadius;
 	bool m_isChangeData;
 	class Camera* m_mainCam;
+
+
 };
 

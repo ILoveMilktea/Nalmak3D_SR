@@ -143,3 +143,12 @@ void DepthStencil::EndRecord()
 {
 	ThrowIfFailed(m_device->SetDepthStencilSurface(m_originSurface));
 }
+
+void DepthStencil::Clear()
+{
+	StartRecord();
+	
+	m_device->Clear(0, nullptr, D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, 0, 1, 0);
+
+	EndRecord();
+}

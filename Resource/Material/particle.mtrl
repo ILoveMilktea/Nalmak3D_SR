@@ -4,7 +4,7 @@
 
 shader "particle"
 
-texture "g_mainTex" "particleDefault"
+texture "g_mainTex" "niniz"
 
 renderQueue "3000"
 

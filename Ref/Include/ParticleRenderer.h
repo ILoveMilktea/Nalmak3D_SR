@@ -12,7 +12,7 @@ class NALMAK_DLL ParticleRenderer :
 public:
 	struct Desc
 	{
-		wstring particleDataName;
+		wstring particleDataName = L"default";
 	};
 
 	struct Burst
@@ -28,11 +28,21 @@ private:
 	virtual void LateUpdate() override;
 	virtual void Release() override;
 public:
-	virtual void Render() override;
-	virtual void BindingStreamSource() override;
+	virtual void Render(Shader* _shader, int _index) override;
+private:
+	virtual void BindingStreamSource();
+public:
+	// IRenderer을(를) 통해 상속됨
+	virtual int GetMaterialCount() override;
+	virtual Material * GetMaterial(int _index = 0) override;
+	virtual void SetMaterial(Material * _material, int _index = 0) override;
+	virtual void SetMaterial(const wstring& _mtrlName, int _index = 0) override;
+private:
+	VIBuffer* m_viBuffer;
+	Material* m_material;
 public:
 	// 런타임중엔 왠만해선 바꾸지말자! 상당히 무거운 작업
-	void SetMaxParticleCount(int _maxCount);
+	void UpdateParticleInfo(int _maxCount);
 
 	void SetGravityScale(float _scale);
 public:
@@ -58,6 +68,8 @@ public:
 	const vector<Burst>& GetBurstList() { return m_emitBursts; }
 	void AddBurst(Burst _burst);
 	void DeleteBurst(size_t _index);
+	void SetAnimationCount(int _count);
+
 private:
 	list<Particle*> m_activedParticles;
 	queue<Particle*> m_particlePool;
@@ -67,11 +79,15 @@ private:
 	size_t m_currentBurstTime;
 
 	Burst* m_currentBurst;
-	
-
+	float m_spriteIndexRatio;
+	class Camera* m_camera;
 private:
 	DynamicInstanceBuffer* m_instanceBuffer;
 	void ParticleUpdate();
+
+
+
+
 };
 
 #endif

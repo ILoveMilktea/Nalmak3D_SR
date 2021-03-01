@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "MeshRenderer.h"
 #include "Transform.h"
-
+#include "VIBufferRenderer.h"
 IMPLEMENT_SINGLETON(LineManager)
 
 LineManager::LineManager()
@@ -20,7 +20,7 @@ void LineManager::Initialize()
 {
 	m_lineCount = 0;
 
-	MeshRenderer::Desc desc;
+	VIBufferRenderer::Desc desc;
 	desc.meshName = L"line";
 	desc.mtrlName = L"greenLine";
 	desc.layer = 0;
@@ -28,7 +28,7 @@ void LineManager::Initialize()
 
 	for (UINT i = 0; i < m_maxLineCount; ++i)
 	{
-		auto line = GameObject::Instantiate(0, L"line")->AddComponent<MeshRenderer>(&desc);
+		auto line = GameObject::Instantiate(0, L"line")->AddComponent<VIBufferRenderer>(&desc);
 		line->SetDontDestroy(true);
 		line->SetActive(false);
 		line->InitializeComponents();
@@ -50,7 +50,7 @@ void LineManager::DrawLine(const Vector3 & _vec1, const Vector3 & _vec2, DEBUG_C
 		return;
 
 	auto line = m_dynamicLine[m_lineCount];
-	line->GetComponent<MeshRenderer>()->SetMaterial(m_debugMaterial[_color]);
+	line->GetComponent<VIBufferRenderer>()->SetMaterial(m_debugMaterial[_color]);
 	line->SetActive(true);
 	line->GetTransform()->scale = Vector3(Vector::Distance(_vec1, _vec2), Vector::Distance(_vec1, _vec2), Vector::Distance(_vec1, _vec2));
 	Vector3 norLine = Vector::Normalize(_vec2 - _vec1);

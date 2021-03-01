@@ -48,7 +48,7 @@ private:
 
 private:
 	wstring m_directoryPath;
-private:
+
 
 public:
 	void CreateDefaultResource();
@@ -60,7 +60,9 @@ public:
 	void UpdateMaterial(); // Material 데이터 다시 쓰기
 	void LoadTextures(const TCHAR* _extention);
 private:
-	template <typename T>
+
+private:
+	template <typename TYPE, typename T>
 	void LoadResources(const TCHAR* _extention)
 	{
 		list<wstring> filePaths;
@@ -73,46 +75,22 @@ private:
 			size_t targetNum = fileName.find_last_of(L".");
 			fileName = fileName.substr(0, targetNum);
 
-			if (m_resoucreContainers[typeid(T).name()][fileName])
+			if (m_resoucreContainers[typeid(TYPE).name()][fileName])
 			{
 				MessageBox(NULL, (L"Resource is already exist! " + filePath).c_str(), NULL, MB_OK);
+				assert(0);
 			}
 
-			T* resource = new T();
+			TYPE* resource = new T();
 
 			assert("Fail to Create Resource!" && resource);
 			resource->Initialize(filePath);
-			m_resoucreContainers[typeid(T).name()][fileName] = resource;
+			m_resoucreContainers[typeid(TYPE).name()][fileName] = resource;
 			((IResource*)resource)->m_name = fileName;
 
 		}
 	}
-	template <typename T>
-	void LoadMeshes(const TCHAR* _extention)
-	{
-		list<wstring> filePaths;
-		FileIO::SearchingDir(&filePaths, m_directoryPath.c_str(), _extention);
-
-		for (auto& file : filePaths)
-		{
-			wstring filePath = file;
-			wstring fileName = filePath.substr(filePath.find_last_of(L"/") + 1);
-			size_t targetNum = fileName.find_last_of(L".");
-			fileName = fileName.substr(0, targetNum);
-
-			if (m_resoucreContainers[typeid(T).name()][fileName])
-			{
-				MessageBox(NULL, (L"Resource is already exist! " + filePath).c_str(), NULL, MB_OK);
-			}
-
-			T* resource = new T();
-
-			assert("Fail to Create Resource!" && resource);
-			resource->Initialize(filePath);
-			m_resoucreContainers[typeid(VIBuffer).name()][fileName] = resource;
-			((IResource*)resource)->m_name = fileName;
-		}
-	}
+	
 public:
 	template<typename T>
 	void AddResource(const wstring& _name, const T& _resource)

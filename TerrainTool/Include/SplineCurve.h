@@ -13,6 +13,7 @@ public:
 public:
 	void AddPoint(Vector3 _point);
 	void SubPoint(int _index);
+	void DeletePoints();
 	void DrawCurve();
 	Vector3 GetPoint(float _ratio);
 	list<Vector3>* GetCurve() { return &m_line; }

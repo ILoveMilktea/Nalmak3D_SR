@@ -23,6 +23,7 @@ void TerrainToolScene::Initialize()
 
 	TerrainTool::Desc terrain;
 	terrain.interval = 1.f;
+	terrain.mtrlName = L"debugCollider";
 	INSTANTIATE()->AddComponent<TerrainTool>(&terrain);
 
 	INSTANTIATE()->AddComponent<TerrainTool>(&terrain)->SetPosition(100,0,0);

@@ -24,10 +24,10 @@ void PositionHandle::Initialize()
 		m_transform->position = m_target->GetRight() * 3;
 		break;
 	case PositionHandle::UP:
-		m_transform->position = m_target->GetUp() *3;
+		m_transform->position = m_target->GetUp() * 3;
 		break;
 	case PositionHandle::FORWARD:
-		m_transform->position = m_target->GetForward() *3;
+		m_transform->position = m_target->GetForward() * 3;
 		break;
 	default:
 		break;
@@ -64,7 +64,7 @@ void PositionHandle::MoveTarget()
 	default:
 		break;
 	}
-	
+
 	Vector2 targetWinPos = m_camera->WorldToScreenPos(m_target->position);
 	Vector2 handleWinPos = m_camera->WorldToScreenPos(m_transform->position + m_target->position);
 

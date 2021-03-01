@@ -2,29 +2,27 @@
 #include "ResourceManager.h"
 #include "Transform.h"
 #include "Animator.h"
+#include "Mesh.h"
 
 
 MeshRenderer::MeshRenderer(Desc * _desc)
 {
-	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(_desc->meshName);
 	if (!_desc->mtrl)
 	{
-		m_material = ResourceManager::GetInstance()->GetResource<Material>(_desc->mtrlName);
+		m_materials.emplace_back(ResourceManager::GetInstance()->GetResource<Material>(_desc->mtrlName));
 	}
 	else
 	{
-		m_material = _desc->mtrl;
-
+		m_materials.emplace_back(_desc->mtrl);
 	}
+	m_mesh = ResourceManager::GetInstance()->GetResource<Mesh>(_desc->meshName);
 
-	m_animator = nullptr;
 	m_layer = _desc->layer;
 	m_type = RENDERER_TYPE_MESH;
 }
 
 void MeshRenderer::Initialize()
 {
-	m_animator = GetComponent<Animator>();
 }
 
 void MeshRenderer::Update()
@@ -39,36 +37,75 @@ void MeshRenderer::Release()
 {
 }
 
-void MeshRenderer::Render()
+void MeshRenderer::Render(Shader* _shader, int _index)
 {
+	assert("Current Shader is nullptr! " && _shader);
 
-	Shader* currentShader = m_material->GetShader();
-	assert("Current Shader is nullptr! " && currentShader);
-
-	currentShader->SetMatrix("g_world", m_transform->GetWorldMatrix());
+	_shader->SetMatrix("g_world", m_transform->GetWorldMatrix());
 
 
-	if (m_animator)
-		GetMaterial()->SetTexture(0, m_animator->GetDiffuseSprite());
-
-
-
-	currentShader->CommitChanges();				   // BeginPass 호출시 반드시 그리기 전에 호출
+	_shader->CommitChanges();				   // BeginPass 호출시 반드시 그리기 전에 호출
 												   ////////////////////////////////////////////////////////////////////////////////////
 												   // DrawPrimitive (index 사용 x)
 												   // Type, 이번에 이용될 인데스, 최소 참조갯수, 호출될 버텍스 수, 인덱스 버퍼내에서 읽기 시작할 인덱스, 그리는 도형 수
-	ThrowIfFailed(m_device->DrawIndexedPrimitive(currentShader->GetPrimitiveType(), 0, 0, m_viBuffer->GetVertexCount(), 0, m_viBuffer->GetFigureCount()));
-
-
+	m_mesh->Draw(_index);
 }
 
 void MeshRenderer::BindingStreamSource()
 {
-									 // 통로 소켓 넘버 //  주소               // 시작점  // 사이즈
-	ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_material->GetShader()->GetInputLayoutSize()));
-	ThrowIfFailed(m_device->SetIndices(m_viBuffer->GetIndexBuffer()));
+}
 
-	// 고정함수 파이프라인에 필요!
-	// m_device->SetFVF()
-	
+//void MeshRenderer::BindingStreamSource()
+//{
+//	//								 // 통로 소켓 넘버 //  주소               // 시작점  // 사이즈
+//	//ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_material->GetShader()->GetInputLayoutSize()));
+//	//ThrowIfFailed(m_device->SetIndices(m_viBuffer->GetIndexBuffer()));
+//
+//	//// 고정함수 파이프라인에 필요!
+//	//// m_device->SetFVF()
+//	
+//}
+
+void MeshRenderer::AddMaterial(const wstring & _mtrl)
+{
+	m_materials.emplace_back(ResourceManager::GetInstance()->GetResource<Material>(_mtrl));
+}
+
+Material * MeshRenderer::GetMaterial(int _index)
+{
+#ifdef _DEBUG
+	if (_index >= m_materials.size())
+	{
+		assert(L"Index out of range! " && 0);
+	}
+#endif // _DEBUG
+
+	return m_materials[_index];
+}
+
+void MeshRenderer::SetMaterial(Material * _material, int _index)
+{
+#ifdef _DEBUG
+	if (_index >= m_materials.size())
+	{
+		assert(L"Index out of range! " && 0);
+	}
+#endif // _DEBUG
+	m_materials[_index] = _material;
+}
+
+void MeshRenderer::SetMaterial(const wstring& _mtrlName, int _index)
+{
+#ifdef _DEBUG
+	if (_index >= m_materials.size())
+	{
+		assert(L"Index out of range! " && 0);
+	}
+#endif // _DEBUG
+	m_materials[_index] = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
+}
+
+int MeshRenderer::GetMaterialCount()
+{
+	return (int)m_materials.size();
 }

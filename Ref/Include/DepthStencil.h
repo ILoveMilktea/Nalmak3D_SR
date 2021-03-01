@@ -15,6 +15,7 @@ public:
 	PDIRECT3DTEXTURE9 GetTexture() const { assert("Render Texture is nullptr!" && m_texture); return m_texture; }
 	void StartRecord();
 	void EndRecord();
+	void Clear();
 private:
 	PDIRECT3DTEXTURE9 m_texture = nullptr;
 	LPDIRECT3DSURFACE9 m_captureSurface = nullptr; // 밉맵 하나당 하나의 서피스
