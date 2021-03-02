@@ -19,14 +19,21 @@ public:
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
+	virtual void LateUpdate()override;
 
+	virtual void OnTriggerEnter(Collisions& _collision)override;
+	virtual void OnTriggerStay(Collisions& _collision)override;
+	virtual void OnTriggerExit(Collisions& _collision)override;
 	
-	void AxisRotate();
+	void AxisRotate(Vector3 _axis);
 private:
 	float	m_dampingSpeed = 0.f;
 	float	m_maximumScale = 0.f;
 	float	m_retainTime = 0.f;
 
 	Vector3	 m_axis;
+private:
+	SphereCollider* m_spherCollider;
+
 };
 

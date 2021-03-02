@@ -29,9 +29,10 @@ void PlayerInfoManager::Initialize()
 
 void PlayerInfoManager::Update()
 {
-	DEBUG_LOG(L"Gold", m_gold);
-	DEBUG_LOG(L"현재 장착중인 주무기 ", m_currentlyWeapon[FIRST_PARTS]);
-	DEBUG_LOG(L"현재 장착중인 부 무장무기 ", m_currentlyWeapon[SECOND_PARTS]);
+	
+	//DEBUG_LOG(L"Gold", m_gold);
+	//DEBUG_LOG(L"현재 장착중인 주무기 ", m_currentlyWeapon[FIRST_PARTS]);
+	//DEBUG_LOG(L"현재 장착중인 부 무장무기 ", m_currentlyWeapon[SECOND_PARTS]);
 
 
 	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();

@@ -48,7 +48,7 @@ void DogFightState::EnterState()
 
 
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
-	m_Player->SetScale(0.8f, 0.8f, 0.8f);
+	m_Player->SetScale(0.1f, 0.1f, 0.1f);
 
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
@@ -61,11 +61,13 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
 
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
-
-	MeshRenderer::Desc render;
-	render.mtrlName = L"f15_base"; 
-	render.meshName = L"f15";
-	m_Player->AddComponent<MeshRenderer>(&render);
+	VIBufferRenderer::Desc renderinfo;
+	renderinfo.mtrlName = L"default";
+	renderinfo.meshName = L"flight";
+	//MeshRenderer::Desc render;
+	//render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	//render.meshName = L"f15";
+	m_Player->AddComponent<VIBufferRenderer>(&renderinfo);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
 	m_Player->AddComponent<PlayerShooter>();
