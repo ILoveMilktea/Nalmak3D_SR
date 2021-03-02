@@ -858,7 +858,7 @@ public:
 	static void BossUI()
 	{
 		//name
-		auto name = UIFactory::Prefab_Stage_BossName(L"JUN JOHN SON");
+		auto name = UIFactory::Prefab_Stage_BossName(L"Jeon Johnson(24/Guro)");
 		name->SetPosition(WINCX * 0.5f, -80.f);
 		//hp slider
 		auto slider = UIFactory::Prefab_Stage_BossHpSlider();

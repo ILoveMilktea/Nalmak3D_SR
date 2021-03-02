@@ -28,7 +28,9 @@ public:
 public: /* Gettttt */
 	int Get_EnemyCount() const;
 	list<GameObject*> Get_EnemyList() const;
+	int Get_BossHp() const;
 
+	
 public: /* Settttt */
 	void Add_EnemyCount(int _count);
 
@@ -41,6 +43,8 @@ public: /* Funcs */
 		BULLET_STATUS _gun = BULLET_STATUS(), 
 		BULLET_STATUS _missile = BULLET_STATUS(), 
 		BULLET_STATUS _homing = BULLET_STATUS());
+	
+	void Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
 
 	void Boss_Spawn();
 

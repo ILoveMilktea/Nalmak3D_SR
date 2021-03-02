@@ -27,7 +27,7 @@ void BossState::EnterState()
 
 	if (m_pMainCamera == nullptr)
 	{
-		assert(L"아 ㅋㅋ 카메라 못 찾앗다고 ㅋㅋ" && 0);
+		assert(L"�� ���� ���� ī�޶� ��ã�ڴٰ� ����");
 	}
 
 	//m_pMainCamera->SetPosition(0.f, 100.f, 0.f);
@@ -37,10 +37,23 @@ void BossState::EnterState()
 	m_pPlayer = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 	if (m_pPlayer == nullptr)
 	{
-		assert(L"dk zz vmffpdldj aht qkedkTEkrh zz " && 0);
+		assert(L"�÷��̾� �������� �������� ����;;");
 	}
 
+
+
+	//m_pPlayer->GetTransform()->position = Vector3(0, 0, -50);
+	//m_pPlayer->GetTransform()->SetRotation(0, 0, 0);
+
+
 	EnemyManager::GetInstance()->Boss_Spawn();
+
+
+
+	//if (m_pPlayer == nullptr)
+	//{
+	//	assert(L"���� �������� �������� ����;;");
+	//}
 
 	// ==== UI ====
 	UIWindowFactory::BossUI();
@@ -65,8 +78,8 @@ void BossState::UpdateState()
 
 	DEBUG_LOG(L"Player Pos", m_pPlayer->GetTransform()->position);
 	DEBUG_LOG(L"Camera Pos", m_pMainCamera->GetTransform()->position);
+	//DEBUG_LOG(L"Camera Rot", m_pMainCamera->GetTransform()->rotation);
 	DEBUG_LOG(L"Current Combat State : ", L"Boss State");
-
 	m_fBossTime += dTime;
 }
 
@@ -119,9 +132,11 @@ bool BossState::EnterProduce()
 			if (!m_bCameraShaking)
 			{
 				m_bCameraShaking = true;
+				//m_bPlayerSetting = false;
 				m_bBossMove = true;
 				vCameraOrigin = m_pMainCamera->GetTransform()->position;
-				m_pBoss = Core::GetInstance()->FindObjectByName(OBJECT_TAG_BOSS, L"Boss");
+				//vCameraRand = vCameraOrigin;
+				m_pBoss = Core::GetInstance()->FindObjectByName(OBJECT_TAG_ENEMY, L"Boss");
 			}
 		}
 	}
@@ -133,6 +148,21 @@ bool BossState::EnterProduce()
 		fShakingTime -= dTime;
 
 
+		if (!m_bossui)
+		{
+			m_bossui = true;
+			list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_BOSSHP);
+
+			for (auto ui : group)
+			{
+				BossUIAnimator* animator = ui->GetComponent<BossUIAnimator>();
+
+				if (animator)
+				{
+					animator->StartMoveDown(160.f);
+				}
+			}
+		}
 	}
 
 	//3. Boss Appear
@@ -155,22 +185,6 @@ bool BossState::EnterProduce()
 				m_bPlayerMove = false;
 				m_bCameraShaking = false;
 				m_bCameraProduce = true;
-
-				if (!m_bossui)
-				{
-					m_bossui = true;
-					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_BOSSHP);
-
-					for (auto ui : group)
-					{
-						BossUIAnimator* animator = ui->GetComponent<BossUIAnimator>();
-
-						if (animator)
-						{
-							animator->StartMoveDown(160.f);
-						}
-					}
-				}
 			}
 		}
 	}

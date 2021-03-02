@@ -193,10 +193,18 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\AimMissile.h" />
+    <ClInclude Include="..\Include\AirFire_Evasion.h" />
     <ClInclude Include="..\Include\Boss.h" />
     <ClInclude Include="..\Include\BossStageCamera.h" />
     <ClInclude Include="..\Include\BossState.h" />
+    <ClInclude Include="..\Include\Circle_Evasion.h" />
+    <ClInclude Include="..\Include\CrossFire_Evasion.h" />
+    <ClInclude Include="..\Include\DeadTimer.h" />
+    <ClInclude Include="..\Include\Diagonal_Evasion.h" />
+    <ClInclude Include="..\Include\Slide_Evasion.h" />
+    <ClInclude Include="..\Include\Look_Evasion.h" />
     <ClInclude Include="..\Include\BulletDirMove.h" />
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
     <ClInclude Include="..\Include\EnemyDetector.h" />
@@ -242,9 +250,11 @@
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
     <ClInclude Include="..\Include\PlayerItem.h" />
     <ClInclude Include="..\Include\PlayerMove.h" />
+    <ClInclude Include="..\Include\PlayerNone.h" />
     <ClInclude Include="..\Include\PlayerShooter.h" />
     <ClInclude Include="..\Include\PlayerSkillActor.h" />
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
+    <ClInclude Include="..\Include\Prymide_Evasion.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\ScaleDampingDeffender.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
@@ -276,17 +286,24 @@
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
-    <ClInclude Include="MenuAnimator.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\AimMissile.cpp" />
+    <ClCompile Include="..\Source\AirFire_Evasion.cpp" />
     <ClCompile Include="..\Source\Boss.cpp" />
     <ClCompile Include="..\Source\BossStageCamera.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
+    <ClCompile Include="..\Source\Circle_Evasion.cpp" />
+    <ClCompile Include="..\Source\CrossFire_Evasion.cpp" />
+    <ClCompile Include="..\Source\DeadTimer.cpp" />
+    <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
+    <ClCompile Include="..\Source\Slide_Evasion.cpp" />
+    <ClCompile Include="..\Source\Look_Evasion.cpp" />
     <ClCompile Include="..\Source\BulletDirMove.cpp" />
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
     <ClCompile Include="..\Source\EnemyDetector.cpp" />
@@ -329,9 +346,11 @@
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
     <ClCompile Include="..\Source\PlayerItem.cpp" />
     <ClCompile Include="..\Source\PlayerMove.cpp" />
+    <ClCompile Include="..\Source\PlayerNone.cpp" />
     <ClCompile Include="..\Source\PlayerShooter.cpp" />
     <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
+    <ClCompile Include="..\Source\Prymide_Evasion.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\ScaleDampingDeffender.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
@@ -360,7 +379,6 @@
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
-    <ClCompile Include="MenuAnimator.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
