@@ -15,8 +15,6 @@ AimMissile::~AimMissile()
 
 void AimMissile::ItemShot()
 {
-
-
 	m_bullet[0]->GetTransform()->position = m_bullet[0]->GetTransform()->GetWorldPosition();
 	m_bullet[0]->GetTransform()->DeleteParent();
 
@@ -46,8 +44,8 @@ void AimMissile::CreateBullet()
 	meshInfo.meshName = L"sphere";
 	meshInfo.mtrlName = L"default";
 	// 2. BULLET INFO
-	// ¿¡ÀÓ¹Ì»çÀÏÀº ´Üµ¶ Å¬·¡½º ÀÝ¾Æ ½¸ÇÏ°í Å©·¹ÀÌÆ®¸¸ ÇØÁÖ´Â 
-
+  
+	// ì—ìž„ë¯¸ì‚¬ì¼ì€ ë‹¨ë… í´ëž˜ìŠ¤ ìž–ì•„ ìŠ›í•˜ê³  í¬ë ˆì´íŠ¸ë§Œ í•´ì£¼ëŠ” 
 	m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 
 

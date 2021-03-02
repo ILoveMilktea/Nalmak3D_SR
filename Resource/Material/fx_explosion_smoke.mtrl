@@ -2,22 +2,22 @@
 ##  Material Data Setting
 #########################################################
 
-shader "default"
+shader "particle"
 
-texture "g_mainTex" "default"
-vector4 "g_mainTexColor" "0.8,0.8,0.8,1"
+texture "g_mainTex" "smoke_test"
 
-renderQueue "1000"
+renderQueue "3000"
 
-blendingMode "0"
+blendingMode "2"
 
 fillMode "0"
+
 #########################################################
 ##   1. Shander
 ##  ---------------------------------------------------------------------------------------
 ##    shader  "name" 
 ##  ---------------------------------------------------------------------------------------
-##   2. Constant Buffer // ¥Ÿ¡ﬂ º±≈√ ∞°¥…
+##   2. Constant Buffer // Îã§Ï§ë ÏÑ†ÌÉù Í∞ÄÎä•
 ##  ---------------------------------------------------------------------------------------
 ##    bool      "handle"   "x"
 ##    int         "handle"   "x"
@@ -48,5 +48,4 @@ fillMode "0"
 ##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
-
 

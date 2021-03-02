@@ -744,7 +744,7 @@ public:
 
 	static GameObject* Prefab_EnemyDetector(GameObject* _crosshair, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
-		auto boundary = CreateImage(_group,L"detectorBoundary");
+		auto boundary = CreateImage(_group, L"detectorBoundary");
 		boundary->SetPosition(WINCX * 0.5f, WINCY *0.5f);
 		boundary->SetScale(480.f, 480.f);
 		boundary->GetComponent<CanvasRenderer>()->SetFade(0.3f);
@@ -755,7 +755,7 @@ public:
 		EnemyDetector::Desc desc_ed;
 		desc_ed.crosshair = _crosshair;
 
-		auto enemyDetector = INSTANTIATE()->
+		auto enemyDetector = INSTANTIATE(OBJECT_TAG_UI, L"detector")->
 			AddComponent<CanvasRenderer>(&desc_cr)->
 			AddComponent<EnemyDetector>(&desc_ed);
 

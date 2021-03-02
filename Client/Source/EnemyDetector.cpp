@@ -89,6 +89,7 @@ void EnemyDetector::Update()
 
 void EnemyDetector::UpdateTarget()
 {
+	m_detectedTarget.clear();
 	m_enemyPoint.clear();
 
 	list<GameObject*> enemyList = m_enemyManager->Get_EnemyList();
@@ -141,12 +142,15 @@ void EnemyDetector::UpdateTarget()
 		m_nametagContainer[index].text->GetComponent<Text>()->SetText(enemy->GetName());
 		screenPos = Vector2(screenPos.x + WINCENTER.x, WINCENTER.y - screenPos.y);
 		m_enemyPoint.emplace_back(screenPos);
+		// target regist
+		m_detectedTarget.emplace_back(enemy);
 
 		Vector2 crosshairPos = Vector2(m_crosshair->GetTransform()->position.x, m_crosshair->GetTransform()->position.y);
 		Vector2 enemyToCrosshair = screenPos - crosshairPos;
 		float len = D3DXVec2Length(&enemyToCrosshair);
 		if (len < minDistance)
 		{
+			// closest target
 			m_lockonTarget = enemy;
 			m_targetIndex = index;
 		}

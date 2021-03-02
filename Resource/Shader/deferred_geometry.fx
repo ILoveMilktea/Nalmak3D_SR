@@ -68,10 +68,12 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
 
-	float3 diffuse = tex2D(DiffuseSampler, _input.uv).xyz;
-	float3 normal = tex2D(NormalSampler, _input.uv).xyz;
-	float3 light = tex2D(LightSampler, _input.uv).xyz;
-	float3 trans = tex2D(TransSampler, _input.uv).xyz;
+	float2 uv = float2(_input.uv) + float2(perPixelX, perPixelY);
+
+	float3 diffuse = tex2D(DiffuseSampler, uv).xyz;
+	float3 normal = tex2D(NormalSampler, uv).xyz;
+	float3 light = tex2D(LightSampler, uv).xyz;
+	float3 trans = tex2D(TransSampler, uv).xyz;
 
 
 	float3 final;

@@ -68,8 +68,8 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
 
-	float2 uvRT = _in.uv + float2(0.5f / WINCX, 0.5f / WINCY);
-	
+	float2 uvRT = _in.uv + float2(perPixelX, perPixelY);
+
 	float4 diffuse = tex2D(DiffuseSampler, uvRT);
 	float3 normal = tex2D(NormalSampler, uvRT).xyz;
 

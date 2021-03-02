@@ -42,7 +42,7 @@ void Transform::Release()
 
 	for (auto& child : m_childs)
 	{
-		child->DeleteParent();
+		child->m_parents = nullptr;
 	}
 }
 
@@ -415,10 +415,6 @@ void Transform::ResetRelative()
 
 void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 {
-	/* ���ϴ� �� �ɢh�� ������ �������� �ٶ󺾴ϴ� */
-	/* */
-
-	/* 1. ��ü�� Ÿ�� ������ ���̺��� ���ϱ�*/
 	Vector3 vDir = _Target->GetTransform()->position - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
@@ -429,26 +425,20 @@ void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 		return;
 	}
 
-	/* 2. ȸ���� ���� ������ ���� ���ϱ� ���ؼ�
-	��ü�� look(forward)���Ϳ� Ÿ�� ���̿��� ���͸� ����*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
-	/* ������ ������ ��ŭ ȸ���� ���� �� ������ ���ʹϾ��� �޾ƿͼ� ���� �����ش�. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
 
 	if (_qOut != nullptr)
 	{	*_qOut = QuartTemp;	}
 
-
-	/* �׽�Ʈ */
 	m_transform->rotation *= QuartTemp;
 }
 
 void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 {
-	/* 1. ��ü�� Ÿ�� ������ ���̺��� ���ϱ�*/
 	Vector3 vDir = _pos - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
@@ -458,13 +448,10 @@ void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 		return;
 	}
 
-	/* 2. ȸ���� ���� ������ ���� ���ϱ� ���ؼ�
-	��ü�� look(forward)���Ϳ� Ÿ�� ���̿��� ���͸� ����*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
-	/* ������ ������ ��ŭ ȸ���� ���� �� ������ ���ʹϾ��� �޾ƿͼ� ���� �����ش�. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
 	if (_qOut != nullptr)
 	{		*_qOut = QuartTemp;	}
@@ -511,6 +498,13 @@ void Transform::SetParents(GameObject * _parents)
 	assert("parent is nullptr" && parents);
 	assert("parents are themselves" && !(parents == this));
 
+	Matrix childMat;
+	D3DXMatrixInverse(&childMat, nullptr, &parents->GetWorldMatrix());
+	childMat = GetWorldMatrix() * childMat;
+
+	m_transform->position = Vector3(childMat._41, childMat._42, childMat._43);
+	D3DXQuaternionRotationMatrix(&m_transform->rotation, &childMat);
+
 	m_parents = _parents->GetTransform();
 	_parents->GetTransform()->AddChild(this);
 }
@@ -526,6 +520,9 @@ void Transform::DeleteChild(Transform * _child)
 	{
 		if ((*iter) == _child)
 		{
+
+			_child->position = _child->GetWorldPosition();
+			_child->rotation = _child->GetWorldRotation();
 			m_childs.erase(iter);
 			return;
 		}
@@ -534,6 +531,10 @@ void Transform::DeleteChild(Transform * _child)
 
 void Transform::DeleteParent()
 {
+	if (!m_parents)
+		return;
+	DeleteChild(this);
+
 	m_parents = nullptr;
 }
 

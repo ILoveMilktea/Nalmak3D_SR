@@ -203,7 +203,9 @@
     <ClInclude Include="..\Include\CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
+    <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
+    <ClInclude Include="..\Include\Player_Weapon_Homing.h" />
     <ClInclude Include="..\Include\Player_ClusterMissile.h" />
     <ClInclude Include="..\Include\Player_EmpMissile.h" />
     <ClInclude Include="..\Include\Player_EmpMove.h" />
@@ -214,6 +216,10 @@
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
     <ClInclude Include="..\Include\EnemyDetector.h" />
     <ClInclude Include="..\Include\EscapeSkill.h" />
+    <ClInclude Include="..\Include\ExplosionButton.h" />
+    <ClInclude Include="..\Include\GarageSceneCameraInfo.h" />
+    <ClInclude Include="..\Include\GarageSceneCameraIntro.h" />
+    <ClInclude Include="..\Include\GarageSceneCameraMouseInput.h" />
     <ClInclude Include="..\Include\ItemButton.h" />
     <ClInclude Include="..\Include\MachineGun.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
@@ -291,6 +297,8 @@
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
+    <ClInclude Include="GarageSceneCameraAutoRotate.h" />
+    <ClInclude Include="GarageSceneCameraZoomIn.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -307,7 +315,9 @@
     <ClCompile Include="..\Source\CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
+    <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
+    <ClCompile Include="..\Source\Player_Weapon_Homing.cpp" />
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp" />
     <ClCompile Include="..\Source\Player_EmpMissile.cpp" />
     <ClCompile Include="..\Source\Player_EmpMove.cpp" />
@@ -318,6 +328,10 @@
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
     <ClCompile Include="..\Source\EnemyDetector.cpp" />
     <ClCompile Include="..\Source\EscapeSkill.cpp" />
+    <ClCompile Include="..\Source\ExplosionButton.cpp" />
+    <ClCompile Include="..\Source\GarageSceneCameraInfo.cpp" />
+    <ClCompile Include="..\Source\GarageSceneCameraIntro.cpp" />
+    <ClCompile Include="..\Source\GarageSceneCameraMouseInput.cpp" />
     <ClCompile Include="..\Source\ItemButton.cpp" />
     <ClCompile Include="..\Source\MachineGun.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
@@ -389,6 +403,8 @@
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
+    <ClCompile Include="GarageSceneCameraAutoRotate.cpp" />
+    <ClCompile Include="GarageSceneCameraZoomIn.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

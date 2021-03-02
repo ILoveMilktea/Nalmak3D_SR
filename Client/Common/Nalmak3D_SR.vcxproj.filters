@@ -245,9 +245,23 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
-    <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
-    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
-    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h" />
+    <ClInclude Include="..\Include\ItemButton.h" />
+    <ClInclude Include="..\Include\ExplosionButton.h" />
+    <ClInclude Include="..\Include\GarageSceneCameraIntro.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GarageSceneCameraAutoRotate.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GarageSceneCameraZoomIn.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GarageSceneCameraInfo.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GarageSceneCameraMouseInput.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
@@ -282,9 +296,10 @@
     <ClInclude Include="..\Include\ItemButton.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\MenuAnimator.h">
-      <Filter>02.Component\05.Animator</Filter>
+    <ClInclude Include="..\Include\Player_Weapon_Homing.h">
+      <Filter>02.Component\00.Manager\ItemManger\Homing</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\ClusterBulletMove.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
@@ -299,6 +314,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\Player_EmpPulse.h">
       <Filter>02.Component\00.Manager\ItemManger\EmpMissile\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MenuAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -518,13 +536,27 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
+    <ClCompile Include="..\Source\ItemButton.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
+    <ClCompile Include="..\Source\ExplosionButton.cpp" />
+    <ClCompile Include="..\Source\GarageSceneCameraIntro.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GarageSceneCameraAutoRotate.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GarageSceneCameraZoomIn.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GarageSceneCameraInfo.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GarageSceneCameraMouseInput.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\DeadTimer.cpp" />
-    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
-    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
-    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
     <ClCompile Include="..\Source\AirFire_Evasion.cpp">
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClCompile>
@@ -555,9 +587,10 @@
     <ClCompile Include="..\Source\ItemButton.cpp">
       <Filter>02.Component\02.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\MenuAnimator.cpp">
-      <Filter>02.Component\05.Animator</Filter>
+    <ClCompile Include="..\Source\Player_Weapon_Homing.cpp">
+      <Filter>02.Component\00.Manager\ItemManger\Homing</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\ClusterBulletMove.cpp">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClCompile>
@@ -572,6 +605,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Player_EmpPulse.cpp">
       <Filter>02.Component\00.Manager\ItemManger\EmpMissile\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MenuAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -774,6 +810,12 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\ItemManger\EmpMissile\Component">
       <UniqueIdentifier>{2abd139f-76d0-4223-b04b-6c9dcc1b532b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\ItemManger\Homing">
+      <UniqueIdentifier>{f7a4c7d9-06d8-469a-b2d0-feec97d62537}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\06.GarageScene">
+      <UniqueIdentifier>{92693aba-9f7a-4342-ad51-d5a5bdfa1b27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

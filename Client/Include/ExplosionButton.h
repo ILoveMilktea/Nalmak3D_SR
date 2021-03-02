@@ -1,21 +1,22 @@
 #pragma once
 #include "Component.h"
-class BulletDirMove :
+class ExplosionButton :
 	public Component
 {
 public:
 	struct Desc
 	{
-		float speed = 0.f;
+
 	};
 public:
-	BulletDirMove(Desc* _desc);
-	virtual ~BulletDirMove();
+	ExplosionButton(Desc* _desc);
+	~ExplosionButton();
 
+	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
+
 private:
-	Vector3 m_dir;
-	float m_speed;
+	ParticleRenderer* m_particles[4];
 };
 

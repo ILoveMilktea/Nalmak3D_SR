@@ -51,8 +51,6 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 	matWorld._42 = g_cBuffer.worldCamPos.y;
 	matWorld._43 = g_cBuffer.worldCamPos.z;
 
-
-
 	matrix wvp = mul(matWorld, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position ,1), wvp).xyww;
 	o.uvw = _input.uvw;
@@ -66,7 +64,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
 	float diffuseFactor = max(dot(float3(0, 1, 0), -g_directionalLight.direction),0) + 0.2f;
-	o.diffuse = texCUBE(skyBoxSampler, _input.uvw) *diffuseFactor;
+	o.diffuse = texCUBE(skyBoxSampler, _input.uvw);// *diffuseFactor;
 	//o.diffuse = float4(0.8f, 0.9f, 0.95f,1.f);
 
 	return o;
