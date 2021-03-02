@@ -61,7 +61,6 @@ void ItemManager::Initialize()
 	}
 
 	{
-		ITEMINFO info;
 		info.itemName = L"Player_Weapon_Homing";
 		info.costGold = 100;
 		info.delay = 0.25f;
@@ -71,7 +70,6 @@ void ItemManager::Initialize()
 	}
 
 	{
-		ITEMINFO info;
 		info.itemName = L"EscapeMove";
 		info.costGold = 0;
 		info.delay = 5.f;
@@ -80,11 +78,6 @@ void ItemManager::Initialize()
 	}
 
 	{
-		BuyItem(L"Skill", L"EscapeMove");
-		BuyItem(L"Weapon", L"Player_Weapon_Homing");
-
-		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
-    
 		info.itemName = L"ClusterMissile";
 		info.costGold = 50;
 		info.delay = 1.f;
@@ -96,10 +89,14 @@ void ItemManager::Initialize()
 	//스킬 사서쓸지 그냥 갖고있을지 몰라서 일단 사놓음.
 	{
 		BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
+		
+		/*BuyItem(L"Weapon", L"Player_Weapon_Homing");
+		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
+
+		BuyItem(L"Weapon", L"ClusterMissile");
+		m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");*/
 	}
 
-	BuyItem(L"Weapon", L"ClusterMissile");
-	m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
 
 }
 

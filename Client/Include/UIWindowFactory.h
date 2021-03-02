@@ -50,7 +50,7 @@ public:
 
 				//MenuAnimator::Desc desc_ma;
 				//desc_ma.amount = 680.f;
-				//desc_ma.duration = 0.8f;
+				//desc_ma.duration = 0.5f;
 				//menu->AddComponent<MenuAnimator>(&desc_ma);
 				menu->AddComponent<MenuAnimator>();
 				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
@@ -79,7 +79,7 @@ public:
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"WEAPON SHOP", CANVAS_GROUP_MAINWND_MAIN);
 				menu->AddComponent<MenuAnimator>();
 				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.1f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 270.f);
@@ -107,7 +107,7 @@ public:
 
 						menu->AddComponent<MenuAnimator>();
 						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 
 						menu->SetPosition(576.f - 1200.f, 230.f);
 					}
@@ -122,7 +122,7 @@ public:
 
 						menu->AddComponent<MenuAnimator>();
 						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.3f);
 						menu->SetPosition(576.f - 1200.f, 310.f);
 					}
@@ -137,7 +137,7 @@ public:
 						
 						menu->AddComponent<MenuAnimator>();
 						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
 						menu->SetPosition(576.f - 1200.f, 350.f);
 					}
@@ -176,8 +176,10 @@ public:
 									ItemButton* button = member->GetComponent<ItemButton>();
 									PARTS_NUM num = button->GetPartsNumber();
 
+									wstring type = item->first;
+									wstring itemName = item->second[itemIndex];
 									EventHandler eventFunc = EventHandler([=]() {
-										PlayerInfoManager::GetInstance()->EquipItem(num, item->first, item->second[itemIndex]);
+										PlayerInfoManager::GetInstance()->EquipItem(num, type, itemName);
 									});
 									button->ResetEvent(eventFunc);
 									
@@ -199,7 +201,7 @@ public:
 
 				menu->AddComponent<MenuAnimator>();
 				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.2f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 310.f);
@@ -228,7 +230,7 @@ public:
 
 						menu->AddComponent<MenuAnimator>();
 						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 
 						menu->SetPosition(576.f - 1200.f, 230.f);
 					}
@@ -239,7 +241,7 @@ public:
 
 						menu->AddComponent<MenuAnimator>();
 						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.3f);
 
 						menu->GetComponent<ItemButton>()->SetPartsNumber(FIRST_PARTS);
@@ -255,7 +257,7 @@ public:
 
 						menu->AddComponent<MenuAnimator>();
 						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
 
 						menu->GetComponent<ItemButton>()->SetPartsNumber(SECOND_PARTS);
@@ -273,7 +275,7 @@ public:
 
 				menu->AddComponent<MenuAnimator>();
 				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.4f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				
@@ -287,8 +289,8 @@ public:
 
 				menu->AddComponent<MenuAnimator>();
 				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.8f);
-				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.8f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 390.f);
 			}
