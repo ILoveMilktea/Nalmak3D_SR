@@ -6,8 +6,9 @@ class Enemy :
 public:
 	struct Desc 
 	{
-		Desc(ENEMY_STATUS _status ,
-			BULLET_STATUS _gun , BULLET_STATUS _missile, 
+		Desc(ENEMY_STATUS _status  = ENEMY_STATUS(),
+			BULLET_STATUS _gun = BULLET_STATUS(), 
+			BULLET_STATUS _missile = BULLET_STATUS(),
 			BULLET_STATUS _homing = BULLET_STATUS())
 		{
 			tStatus = _status;

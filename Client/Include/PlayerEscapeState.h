@@ -21,9 +21,6 @@ private:
 	float m_dealy;
 
 private:
-	GameObject* m_temproryObj;
-
-private:
 	PlayerInfoManager* m_playerInfo;
 	class MouseOption* m_mouse;
 	float m_accel = 0.f;

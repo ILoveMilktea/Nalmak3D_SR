@@ -15,8 +15,6 @@ AimMissile::~AimMissile()
 
 void AimMissile::ItemShot()
 {
-
-
 	m_bullet[0]->GetTransform()->position = m_bullet[0]->GetTransform()->GetWorldPosition();
 	m_bullet[0]->GetTransform()->DeleteParent();
 
@@ -46,23 +44,18 @@ void AimMissile::CreateBullet()
 	meshInfo.meshName = L"sphere";
 	meshInfo.mtrlName = L"default";
 	// 2. BULLET INFO
-	BulletDirMove::Desc bulletinfo;
-
-	bulletinfo.speed = m_itemInfo.weaponSpeed;
-	// ¿¡ÀÓ¹Ì»çÀÏÀº ´Üµ¶ Å¬·¡½º ÀÝ¾Æ ½¸ÇÏ°í Å©·¹ÀÌÆ®¸¸ ÇØÁÖ´Â 
-
+  
+	// ì—ìž„ë¯¸ì‚¬ì¼ì€ ë‹¨ë… í´ëž˜ìŠ¤ ìž–ì•„ ìŠ›í•˜ê³  í¬ë ˆì´íŠ¸ë§Œ í•´ì£¼ëŠ” 
 	m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 
 
 	m_bullet[0] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Left");
 	m_bullet[0]->AddComponent<VIBufferRenderer>(&meshInfo);
-	//m_bullet[0]->AddComponent<BulletDirMove>(&bulletinfo);
 	m_bullet[0]->SetParents(m_parents);
 	m_bullet[0]->SetPosition(-3.f, 0.f, 0.f);
 
 	m_bullet[1] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Right");
 	m_bullet[1]->AddComponent<VIBufferRenderer>(&meshInfo);
-	//m_bullet[1]->AddComponent<BulletDirMove>(&bulletinfo);
 	m_bullet[1]->SetParents(m_parents);
 	m_bullet[1]->SetPosition(3.f, 0.f, 0.f);
 

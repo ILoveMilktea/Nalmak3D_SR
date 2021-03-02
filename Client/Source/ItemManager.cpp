@@ -4,10 +4,12 @@
 
 #include "PlayerInfoManager.h"
 
-//ÇÃ·¹ÀÌ¾î ¾ÆÀÌÅÛ
+//í”Œë ˆì´ì–´ ì•„ì´í…œ
 #include "AimMissile.h"
 #include "SmallCannon.h"
-// ÇÃ·¹ÀÌ¾î ½ºÅ³
+#include "Player_Weapon_Homing.h"
+#include "Player_ClusterMissile.h"
+// í”Œë ˆì´ì–´ ìŠ¤í‚¬
 
 #include "EscapeSkill.h"
 
@@ -32,7 +34,7 @@ ItemManager::~ItemManager()
 
 void ItemManager::Initialize()
 {
-	// °ÙÀÎ½ºÅÏ½º ÀÌÈÄ ÄÄÆÛ³ÍÆ®°¡ Ãß°¡µÈ ÀÌÈÄ ÀÌ´Ï¼È¶óÀÌÁî
+	// ê²Ÿì¸ìŠ¤í„´ìŠ¤ ì´í›„ ì»´í¼ë„ŒíŠ¸ê°€ ì¶”ê°€ëœ ì´í›„ ì´ë‹ˆì…œë¼ì´ì¦ˆ
 	// unordered_map<wstring, vector<class PlayerItem*>> m_mapShopItem;
 	ITEMINFO info;
 	m_mapShopItem[L"Weapon"].reserve(5);
@@ -50,7 +52,6 @@ void ItemManager::Initialize()
 	}
 
 	{
-		ITEMINFO info;
 		info.itemName = L"Cannon";
 		info.costGold = 100;
 		info.delay = 0.25f;
@@ -60,19 +61,41 @@ void ItemManager::Initialize()
 	}
 
 	{
-		ITEMINFO info;
+		info.itemName = L"Player_Weapon_Homing";
+		info.costGold = 100;
+		info.delay = 0.25f;
+		info.weaponSpeed = 45.f;
+
+		m_mapShopItem[L"Weapon"].emplace_back(new Player_Weapon_Homing(info));
+	}
+
+	{
 		info.itemName = L"EscapeMove";
-		info.costGold = 0.f;
+		info.costGold = 0;
 		info.delay = 5.f;
 		m_mapShopItem[L"Skill"].emplace_back(new EscapeSkill(info));
 
 	}
 
-	//½ºÅ³ »ç¼­¾µÁö ±×³É °®°íÀÖÀ»Áö ¸ô¶ó¼­ ÀÏ´Ü »ç³õÀ½.
 	{
-		BuyItem(L"Skill", L"EscapeMove");
+		info.itemName = L"ClusterMissile";
+		info.costGold = 50;
+		info.delay = 1.f;
+		info.weaponSpeed = 45.f;
+
+		m_mapShopItem[L"Weapon"].emplace_back(new Player_ClusterMissile(info));
 	}
 
+	//ìŠ¤í‚¬ ì‚¬ì„œì“¸ì§€ ê·¸ëƒ¥ ê°–ê³ ìˆì„ì§€ ëª°ë¼ì„œ ì¼ë‹¨ ì‚¬ë†“ìŒ.
+	{
+		BuyItem(L"Skill", L"EscapeMove");// ë§ë§Œ ì´ìŠ¤ì¼€ì´í”„ ë¬´ë¸Œì§€ , ì´ë™ì— ì‹œê°„ë²„ë¦¬ê¸° ì‹«ì–´ì„œ ì¼ë‹¨ ë°©ì–´ë§‰ ìŠ¤í‚¬ë¡œ ë„£ì–´ë†“ìŒ.
+		
+		/*BuyItem(L"Weapon", L"Player_Weapon_Homing");
+		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
+
+		BuyItem(L"Weapon", L"ClusterMissile");
+		m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");*/
+	}
 
 
 }
@@ -127,14 +150,14 @@ bool ItemManager::BuyItem(const wstring & _itemName, const wstring & _typeValueN
 {
 	PlayerItem* findItem = FindItemObject(_itemName, _typeValueName);
 	
-	for (auto & inven : m_playerMgr->GetInven()) // ÀÎº¥¿¡ °°ÀºÀÌ¸§ÀÌÀÖÀ¸¸é »çÁö¾Ê´Â´Ù.
+	for (auto & inven : m_playerMgr->GetInven()) 
 	{
 		if (_itemName == inven.first)
 		{
 			for(auto & ItemName : inven.second)
 			{
 				if(_typeValueName == ItemName)
-					return false;
+					return false;// ì¸ë²¤ì— ê°™ì€ì´ë¦„ì´ìˆìœ¼ë©´ ì‚¬ì§€ì•ŠëŠ”ë‹¤.
 			}
 		}
 		

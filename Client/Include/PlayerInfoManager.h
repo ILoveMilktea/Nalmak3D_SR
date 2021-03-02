@@ -91,6 +91,7 @@ private:
 	GameObject* m_player;
 
 private: // 이중stl쓰기 
+	// type, vector<itemname>
 	map<wstring, vector<wstring>> m_haveItemList;
 private:
 	wstring m_currentlySkill[PARTS_NUM::PARTS_MAX] = {};

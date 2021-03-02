@@ -26,6 +26,11 @@ void SphereCollider::Initialize()
 	m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
 }
 
+void SphereCollider::Update()
+{
+	m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
+}
+
 
 void SphereCollider::OnTriggerEnter(Collisions & _collision)
 {

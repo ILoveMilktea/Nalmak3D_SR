@@ -24,6 +24,8 @@ public:
 private:
 	class Enemy* m_pEnemy = nullptr;
 	
+	//bool		m_bToGournd = true;
+	//bool		m_bFalling = false;
 	float		m_fFallDelta = 0.f;
 	float		m_fFallingSpd = 0.f;
 	float		m_fTurnSpd = 0.f;

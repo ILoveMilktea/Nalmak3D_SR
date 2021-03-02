@@ -20,6 +20,7 @@ MoveAnimation::~MoveAnimation()
 void MoveAnimation::Start_Animation()
 {
 	IAnimation::Start_Animation();
+	SetStart();
 }
 
 bool MoveAnimation::Play_CurrentAnimation()
@@ -70,4 +71,9 @@ void MoveAnimation::SetAnimation(ANIMATION _animation)
 void MoveAnimation::SetActor(GameObject * _actor)
 {
 	m_actor = _actor;
+}
+
+void MoveAnimation::SetStart()
+{
+	m_start = m_actor->GetTransform()->position;
 }

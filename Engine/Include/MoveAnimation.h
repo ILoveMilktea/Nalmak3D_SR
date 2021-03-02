@@ -27,6 +27,7 @@ public:
 
 public:
 	void SetActor(GameObject* _actor);
+	void SetStart();
 	void SetDestination(Vector3 _dest) { m_destination = _dest; }
 
 private:

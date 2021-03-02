@@ -64,9 +64,7 @@ public:
 	void RotateRollPitchYaw(float _x, float _y, float _z);
 	Quaternion RotateAxis(const Vector3& _axis, float _angle);
 	void ResetRelative();
-
-
-
+	
 	void LookAt(GameObject* _Target, float _Spd, Quaternion* _qOut = nullptr); // transform 
 	void LookAt(const Vector3& _pos, float _Spd, Quaternion* _qOut = nullptr);
 	void LookAt(const Vector3& _pos);

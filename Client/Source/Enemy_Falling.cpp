@@ -34,6 +34,7 @@ void Enemy_Falling::UpdateState()
 	Accelerate();
 	//1. flight ahead ground
 	//Dot forward and (0,-1,0);
+
 	Vector3 vYaxis = { 0.f, -1.f, 0.f };
 	float fInner = D3DXVec3Dot(&m_transform->GetForward(), &vYaxis);
 
@@ -41,27 +42,33 @@ void Enemy_Falling::UpdateState()
 	{
 		Quaternion qToGround = m_transform->RotateAxis(m_transform->GetRight(), dTime*2.f);
 		m_transform->rotation *= qToGround;
-		m_transform->RotateX(dTime * 5.f);
-
-		m_pEnemy->Go_Straight();
-	}
-	else {
-		//2. turn slowly to ZAxis for turn
-		//Quaternion qTemp = m_transform->RotateAxis(m_transform->GetForward(), dTime * 2.f);
-		Quaternion qTemp = m_transform->RotateAxis(Vector3(0, 1, 0), m_fTurnSpd * dTime);
-		m_transform->rotation *= qTemp;
 		
-
-		//3. faliing
-		m_transform->position.y -= dTime * m_fFallingSpd;
+		//if (fInner <= 0.98f)
+		//{
+			//m_bToGournd = false;
+		//}
 	}
 
+	
+	//if(m_bFalling)
+	//{
+		//2. turn slowly to ZAxis for turn
+		//Quaternion qTemp = m_transform->RotateAxis(Vector3(0, 1, 0), m_fTurnSpd * dTime);
+	Quaternion qTemp = m_transform->RotateAxis(m_transform->GetForward(), m_fTurnSpd * dTime);
+		m_transform->rotation *= qTemp;		
+	//}
 
-	if (m_fFallDelta >= 5.f)
+	//3. faliing
+	m_transform->position.y -= dTime * m_fFallingSpd;
+
+
+	if (m_fFallDelta >= 10.f)
 	{
 		m_gameObject->GetComponent<StateControl>()->SetState(L"Death");
 		//m_gameObject->GetComponent<StateControl>()->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Death"));
 	}
+
+	DEBUG_LOG(L"Falling Inner", fInner);
 	DEBUG_LOG(L"Enemy State", L"Falling");
 }
 

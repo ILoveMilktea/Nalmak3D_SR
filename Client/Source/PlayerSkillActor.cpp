@@ -26,6 +26,10 @@ void PlayerSkillActor::Update()
 	if (m_inputMgr->GetKeyDown(KEY_STATE_1) && EquipSkill(FIRST_PARTS))
 	{
 		/*int a = 10;*/
+		if (L"playerEscape" == m_stateControl->GetCurStateString())
+			return;
+
+
 		m_stateControl->SetState(L"playerEscape");
 
 	}
