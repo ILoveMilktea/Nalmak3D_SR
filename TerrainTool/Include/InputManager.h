@@ -41,6 +41,7 @@ public:
 	const int& GetWheelScroll() { return m_wheelScroll; } /* 추가 */
 private:
 	int m_wheelScroll = 0; /* 추가 */
+	int m_wheelDT = 0;
 
 private:
 	void ProcessMouseScreenPosition();

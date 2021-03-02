@@ -31,7 +31,7 @@ void GarageSceneCameraMouseInput::EnterState()
 	//m_garageCam->SetLookSpeed(1);
 	//m_garageCam->SetAxisTargetPos(Vector3(0, 1, 0));
 
-	m_timer = 2;
+	m_timer = 1;
 }
 
 void GarageSceneCameraMouseInput::UpdateState()
@@ -42,6 +42,17 @@ void GarageSceneCameraMouseInput::UpdateState()
 		return;
 	}
 
+	
+	int wheel = InputManager::GetInstance()->GetWheelScroll();
+	if (wheel != 0)
+	{
+		m_garageCam->AddDistance(-wheel * dTime * 50);
+		InputManager::GetInstance()->SetWheelScroll(0);
+
+		m_timer = 1.f;
+	}
+	
+
 	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_RIGHT_MOUSE))
 	{
 		Vector2 dir = InputManager::GetInstance()->GetMouseMoveDir();
@@ -49,7 +60,7 @@ void GarageSceneCameraMouseInput::UpdateState()
 		m_garageCam->AddXAxisAngle(dir.y * dTime * 100);
 		m_garageCam->AddYAxisAngle(dir.x* dTime * 100);
 
-		m_timer = 2.f;
+		m_timer = 1.f;
 	}
 	else
 	{

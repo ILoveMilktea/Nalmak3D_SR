@@ -246,8 +246,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
     <ClInclude Include="..\Include\ItemButton.h" />
-
-    <ClInclude Include="MenuAnimator.h" />
     <ClInclude Include="..\Include\ExplosionButton.h" />
     <ClInclude Include="..\Include\GarageSceneCameraIntro.h">
       <Filter>02.Component\06.GarageScene</Filter>
@@ -263,8 +261,7 @@
     </ClInclude>
     <ClInclude Include="..\Include\GarageSceneCameraMouseInput.h">
       <Filter>02.Component\06.GarageScene</Filter>
-       </ClInclude>
-
+    </ClInclude>
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
@@ -299,9 +296,6 @@
     <ClInclude Include="..\Include\ItemButton.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\MenuAnimator.h">
-      <Filter>02.Component\05.Animator</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Player_Weapon_Homing.h">
       <Filter>02.Component\00.Manager\ItemManger\Homing</Filter>
     </ClInclude>
@@ -311,6 +305,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\Player_ClusterMissile.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MenuAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -534,7 +531,6 @@
     <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
-    <ClCompile Include="MenuAnimator.cpp" />
     <ClCompile Include="..\Source\ExplosionButton.cpp" />
     <ClCompile Include="..\Source\GarageSceneCameraIntro.cpp">
       <Filter>02.Component\06.GarageScene</Filter>
@@ -550,10 +546,8 @@
     </ClCompile>
     <ClCompile Include="..\Source\GarageSceneCameraMouseInput.cpp">
       <Filter>02.Component\06.GarageScene</Filter>
-       </ClCompile>
-
+    </ClCompile>
     <ClCompile Include="..\Source\DeadTimer.cpp" />
-
     <ClCompile Include="..\Source\AirFire_Evasion.cpp">
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClCompile>
@@ -584,9 +578,6 @@
     <ClCompile Include="..\Source\ItemButton.cpp">
       <Filter>02.Component\02.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\MenuAnimator.cpp">
-      <Filter>02.Component\05.Animator</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Player_Weapon_Homing.cpp">
       <Filter>02.Component\00.Manager\ItemManger\Homing</Filter>
     </ClCompile>
@@ -596,6 +587,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MenuAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -26,7 +26,6 @@ void GarageSceneCameraAutoRotate::EnterState()
 	m_garageCam->SetFollowSpeed(3);
 	m_garageCam->SetRotateSpeed(3);
 	m_garageCam->SetLookSpeed(3);
-	m_garageCam->SetXAxisAngle(20);
 	m_garageCam->RotateYAxisAngle(5);
 	m_garageCam->SetAxisTargetPos(Vector3(0, 5, 0));
 
@@ -35,12 +34,12 @@ void GarageSceneCameraAutoRotate::EnterState()
 
 void GarageSceneCameraAutoRotate::UpdateState()
 {
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_A))
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
 	{
-		SetState(L"zoomIn");
+		SetState(L"mouseInput");
 		return;
 	}
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
+	if (InputManager::GetInstance()->GetWheelScroll() != 0)
 	{
 		SetState(L"mouseInput");
 		return;

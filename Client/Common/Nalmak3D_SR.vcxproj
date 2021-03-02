@@ -296,7 +296,6 @@
     <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="GarageSceneCameraAutoRotate.h" />
     <ClInclude Include="GarageSceneCameraZoomIn.h" />
-    <ClInclude Include="MenuAnimator.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -400,7 +399,6 @@
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="GarageSceneCameraAutoRotate.cpp" />
     <ClCompile Include="GarageSceneCameraZoomIn.cpp" />
-    <ClCompile Include="MenuAnimator.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

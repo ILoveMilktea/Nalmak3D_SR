@@ -47,7 +47,7 @@ public:
 	void SetAxisTargetPos(const Vector3& _pos);
 	void AddXAxisAngle(float _angle);
 	void AddYAxisAngle(float _angle);
-
+	void AddDistance(float _distance);
 public:
 	float GetXAxisAngle();
 	float GetYAxisAngle();
