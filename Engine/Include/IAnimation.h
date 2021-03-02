@@ -25,6 +25,7 @@ protected:
 	float m_playTimer;
 	float m_playDuration;
 	float m_startDelay;
+
 };
 #endif // !__IANIMATION_H__
 

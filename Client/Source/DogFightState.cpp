@@ -88,10 +88,10 @@ void DogFightState::EnterState()
 	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	*/
 
-	//auto infoManager = PlayerInfoManager::GetInstance();
-	//infoManager->SetTimeLimit(2000.f);
-	//infoManager->SetScore(123456.f);
-	//infoManager->SetPlayer(m_Player);
+	auto infoManager = PlayerInfoManager::GetInstance();
+	infoManager->SetTimeLimit(2000.f);
+	infoManager->SetScore(123456.f);
+	infoManager->SetPlayer(m_Player);
 
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;

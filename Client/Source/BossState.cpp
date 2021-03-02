@@ -133,21 +133,6 @@ bool BossState::EnterProduce()
 		fShakingTime -= dTime;
 
 
-		if (!m_bossui)
-		{
-			m_bossui = true;
-			list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_BOSSHP);
-
-			for (auto ui : group)
-			{
-				BossUIAnimator* animator = ui->GetComponent<BossUIAnimator>();
-
-				if (animator)
-				{
-					animator->StartMoveDown(160.f);
-				}
-			}
-		}
 	}
 
 	//3. Boss Appear
@@ -170,6 +155,22 @@ bool BossState::EnterProduce()
 				m_bPlayerMove = false;
 				m_bCameraShaking = false;
 				m_bCameraProduce = true;
+
+				if (!m_bossui)
+				{
+					m_bossui = true;
+					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_BOSSHP);
+
+					for (auto ui : group)
+					{
+						BossUIAnimator* animator = ui->GetComponent<BossUIAnimator>();
+
+						if (animator)
+						{
+							animator->StartMoveDown(160.f);
+						}
+					}
+				}
 			}
 		}
 	}

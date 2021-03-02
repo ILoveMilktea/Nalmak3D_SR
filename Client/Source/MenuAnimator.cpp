@@ -28,6 +28,7 @@ void MenuAnimator::InAnim()
 
 void MenuAnimator::OutAnim()
 {
+	//m_moveAnim.set
 	m_moveAnim.SetDestination(Vector3(m_transform->position.x - m_amount, m_transform->position.y, 0.f));
 	m_moveAnim.SetPlayDuration(m_duration);
 	m_moveAnim.SetStartDelay(m_delay);

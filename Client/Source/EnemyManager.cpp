@@ -111,7 +111,6 @@ void EnemyManager::Destroy_AllEnemy()
 	{
 		DESTROY(enemy);
 	}
-
 	m_iEnemyCount = 0;
 }
 

@@ -245,6 +245,13 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
+    <ClInclude Include="..\Include\ItemButton.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h" />
+    <ClInclude Include="MenuAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
@@ -497,6 +504,13 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
+    <ClCompile Include="..\Source\ItemButton.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
+    <ClCompile Include="MenuAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
