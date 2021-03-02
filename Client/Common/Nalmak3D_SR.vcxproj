@@ -203,7 +203,9 @@
     <ClInclude Include="..\Include\CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
+    <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
+    <ClInclude Include="..\Include\Player_Weapon_Homing.h" />
     <ClInclude Include="..\Include\Player_ClusterMissile.h" />
     <ClInclude Include="..\Include\Slide_Evasion.h" />
     <ClInclude Include="..\Include\Look_Evasion.h" />
@@ -304,7 +306,9 @@
     <ClCompile Include="..\Source\CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
+    <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
+    <ClCompile Include="..\Source\Player_Weapon_Homing.cpp" />
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp" />
     <ClCompile Include="..\Source\Slide_Evasion.cpp" />
     <ClCompile Include="..\Source\Look_Evasion.cpp" />

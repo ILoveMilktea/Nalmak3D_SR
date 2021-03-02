@@ -415,10 +415,6 @@ void Transform::ResetRelative()
 
 void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 {
-	/* ���ϴ� �� �ɢh�� ������ �������� �ٶ󺾴ϴ� */
-	/* */
-
-	/* 1. ��ü�� Ÿ�� ������ ���̺��� ���ϱ�*/
 	Vector3 vDir = _Target->GetTransform()->position - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
@@ -429,26 +425,20 @@ void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 		return;
 	}
 
-	/* 2. ȸ���� ���� ������ ���� ���ϱ� ���ؼ�
-	��ü�� look(forward)���Ϳ� Ÿ�� ���̿��� ���͸� ����*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
-	/* ������ ������ ��ŭ ȸ���� ���� �� ������ ���ʹϾ��� �޾ƿͼ� ���� �����ش�. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
 
 	if (_qOut != nullptr)
 	{	*_qOut = QuartTemp;	}
 
-
-	/* �׽�Ʈ */
 	m_transform->rotation *= QuartTemp;
 }
 
 void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 {
-	/* 1. ��ü�� Ÿ�� ������ ���̺��� ���ϱ�*/
 	Vector3 vDir = _pos - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
@@ -458,13 +448,10 @@ void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 		return;
 	}
 
-	/* 2. ȸ���� ���� ������ ���� ���ϱ� ���ؼ�
-	��ü�� look(forward)���Ϳ� Ÿ�� ���̿��� ���͸� ����*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
-	/* ������ ������ ��ŭ ȸ���� ���� �� ������ ���ʹϾ��� �޾ƿͼ� ���� �����ش�. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
 	if (_qOut != nullptr)
 	{		*_qOut = QuartTemp;	}

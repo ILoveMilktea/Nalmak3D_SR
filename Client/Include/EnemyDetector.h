@@ -33,6 +33,10 @@ public:
 	EnemyDetector(Desc* _desc);
 	~EnemyDetector();
 
+public:
+	GameObject* GetLockOnTarget() { return m_lockonTarget; }
+	list<GameObject*>& GetDetectedTargetList() { return m_detectedTarget; }
+
 private:
 	virtual void Initialize() override;
 	virtual void Update() override;
@@ -54,11 +58,11 @@ private:
 
 	GameObject* m_crosshair = nullptr;
 	GameObject* m_lockonTarget = nullptr;
+	list<GameObject*> m_detectedTarget;
 	int m_targetIndex;
 
 	float m_detectRange;
 	RECT m_detectRect;
-
 
 	list<Vector2> m_enemyPoint;
 	vector<NameTag> m_nametagContainer;

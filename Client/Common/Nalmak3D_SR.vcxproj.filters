@@ -285,6 +285,10 @@
     <ClInclude Include="..\Include\MenuAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Player_Weapon_Homing.h">
+      <Filter>02.Component\00.Manager\ItemManger\Homing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\ClusterBulletMove.h">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClInclude>
@@ -549,6 +553,10 @@
     <ClCompile Include="..\Source\MenuAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Player_Weapon_Homing.cpp">
+      <Filter>02.Component\00.Manager\ItemManger\Homing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\ClusterBulletMove.cpp">
       <Filter>02.Component\00.Manager\Player</Filter>
     </ClCompile>
@@ -750,6 +758,9 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\ItemManger\Homing">
+      <UniqueIdentifier>{f7a4c7d9-06d8-469a-b2d0-feec97d62537}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
