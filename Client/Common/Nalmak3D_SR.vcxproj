@@ -193,6 +193,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\AimMissile.h" />
     <ClInclude Include="..\Include\AirFire_Evasion.h" />
     <ClInclude Include="..\Include\Boss.h" />
@@ -285,13 +286,13 @@
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
-    <ClInclude Include="MenuAnimator.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\AimMissile.cpp" />
     <ClCompile Include="..\Source\AirFire_Evasion.cpp" />
     <ClCompile Include="..\Source\Boss.cpp" />
@@ -378,7 +379,6 @@
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
-    <ClCompile Include="MenuAnimator.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

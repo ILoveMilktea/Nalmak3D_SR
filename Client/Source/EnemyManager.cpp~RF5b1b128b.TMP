@@ -73,11 +73,6 @@ void EnemyManager::Update()
 	//		tStatus,tGun,tMissile);
 	//}
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
-	{
-		Destroy_AllEnemy();
-	}
-
 	DEBUG_LOG(L"Remianed Enemy Count", m_iEnemyCount);
 }
 
@@ -111,8 +106,6 @@ void EnemyManager::Destroy_AllEnemy()
 	{
 		DESTROY(enemy);
 	}
-
-	m_iEnemyCount = 0;
 }
 
 void EnemyManager::Enemy_Spawn(Vector3 _pos,
@@ -246,10 +239,10 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
-	VIBufferRenderer::Desc Enemy_Mesh;
+	MeshRenderer::Desc Enemy_Mesh;
 	Enemy_Mesh.mtrlName = L"default";
 	Enemy_Mesh.meshName = L"flight";
-	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
+	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
 	Enemy_col.radius = 1.f;
@@ -272,7 +265,7 @@ void EnemyManager::Boss_Spawn()
 	/*desc 세팅*/
 	Boss_obj->AddComponent<Boss>(&Boss_Desc);
 
-	VIBufferRenderer::Desc Boss_Mesh;
+	MeshRenderer::Desc Boss_Mesh;
 	Boss_Mesh.mtrlName = L"boss";
 	Boss_Mesh.meshName = L"box";
 	Boss_obj->AddComponent<VIBufferRenderer>(&Boss_Mesh);
@@ -283,4 +276,5 @@ void EnemyManager::Boss_Spawn()
 	Boss_obj->AddComponent<SphereCollider>(&Boss_col);
 
 	++m_iEnemyCount;
+
 }

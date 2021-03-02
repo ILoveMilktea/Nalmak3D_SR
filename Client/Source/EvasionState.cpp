@@ -74,10 +74,7 @@ void EvasionState::UpdateState()
 			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(LOOK);
 		}
 
-		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
-		//{
-		//	EnemyManager::GetInstance()->Enemy_Spwan_Evasion(LOOK);
-		//}
+
 
 		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0
 			/*InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2)*/)

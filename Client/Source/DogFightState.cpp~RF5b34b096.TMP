@@ -149,10 +149,10 @@ void DogFightState::UpdateState()
 				tStatus, tGun, tMissile);
 		}
 
-		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
-		//{
-		//	EnemyManager::GetInstance()->Destroy_AllEnemy();
-		//}
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
+		{
+			EnemyManager::GetInstance()->Destroy_AllEnemy();
+		}
 
 
 

@@ -8,7 +8,7 @@ texture "g_mainTex" "boss"
 vector4 "g_mainTexColor" "1,1,1,1"
 
 
-renderQueue "1000"
+renderQueue "3000"
 
 blendingMode "0"
 

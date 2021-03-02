@@ -111,10 +111,10 @@ void Bullet_Manager::Gun_Evasion(Vector3 _start, Quaternion _rot)
 	Gun_Desc.fSpd = 100.f;
 	Gun_obj->AddComponent<MachineGun>(&Gun_Desc);
 
-	MeshRenderer::Desc Gun_Mesh;
+	VIBufferRenderer::Desc Gun_Mesh;
 	Gun_Mesh.mtrlName = L"default";
 	Gun_Mesh.meshName = L"box";
-	Gun_obj->AddComponent<MeshRenderer>(&Gun_Mesh);
+	Gun_obj->AddComponent<VIBufferRenderer>(&Gun_Mesh);
 
 	SphereCollider::Desc Gun_col;
 	Gun_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
