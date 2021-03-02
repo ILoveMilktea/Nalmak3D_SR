@@ -90,11 +90,11 @@ void ItemManager::Initialize()
 	{
 		BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
 		
-		/*BuyItem(L"Weapon", L"Player_Weapon_Homing");
+		BuyItem(L"Weapon", L"Player_Weapon_Homing");
 		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
-		BuyItem(L"Weapon", L"ClusterMissile");
-		m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");*/
+		//BuyItem(L"Weapon", L"ClusterMissile");
+		//m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
 	}
 
 

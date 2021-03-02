@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\HomingBulletMove.h"
 
+#include "Player_Weapon_Homing.h"
 
 HomingBulletMove::HomingBulletMove(Desc* _desc)
 {
@@ -26,14 +27,23 @@ void HomingBulletMove::Initialize()
 	
 	m_rigidbody = GetComponent<Rigidbody>();
 	m_rigidbody->SetVelocity(m_moveDir * m_speed);
+
+	// temp destroy
+	m_tempTimer = 0.f;
 }
 
 void HomingBulletMove::Update()
 {
-	m_transform->LookAt(m_target->position, 10.f);
-	//m_rigidbody->AddTorque(toTargetDir * m_torque);
-	//m_rigidbody->AddForce(m_moveDir * m_force);
 
-	m_rigidbody->AddForceForward(m_force);
 
+	Vector3 dir = m_target->position - m_transform->position;
+	D3DXVec3Normalize(&dir, &dir);
+
+	m_transform->LookAt(dir + m_transform->position, 1.5f);
+	m_rigidbody->AddForce(dir * m_force);
+
+	// temp destroy
+	m_tempTimer += TimeManager::GetInstance()->GetdeltaTime();
+	if (3.f < m_tempTimer)
+		DESTROY(m_gameObject);
 }

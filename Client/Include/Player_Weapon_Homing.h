@@ -18,10 +18,13 @@ public:
 	virtual void CreateBullet() override;
 	virtual void DeleteBullet() override;
 
+	void SetMode(MODE _mode) { m_mode = _mode; }
+
 private:
 	list<GameObject*> m_bullet;
 	float m_reloadTerm;
 	float m_reloadTimer;
+	MODE m_mode;
 
 	GameObject* m_parents = nullptr;
 	TimeManager* m_time = nullptr;
