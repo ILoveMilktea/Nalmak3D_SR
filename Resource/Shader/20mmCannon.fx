@@ -5,6 +5,7 @@ matrix g_world;
 
 texture g_mainTex;
 float4 g_mainTexColor;
+float4x4 g_invViewForBillboard;
 
 sampler mainSampler = sampler_state
 {
@@ -36,15 +37,10 @@ struct PS_OUTPUT
 
 VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
-	VS_OUTPUT o = (VS_OUTPUT)0; // 초기???�수!
+	VS_OUTPUT o = (VS_OUTPUT)0; 
 
-	float4x4 invView = g_cBuffer.invView;
-	invView._41 = 0;
-	invView._42 = 0;
-	invView._43 = 0;
-	invView._44 = 1;
 
-	invView = mul(invView, g_world);
+	float4x4 invView= mul(g_invViewForBillboard, g_world);
 	float4x4 wvp = mul(invView, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
 	o.uv = _input.uv;

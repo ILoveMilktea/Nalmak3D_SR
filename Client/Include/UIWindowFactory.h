@@ -148,6 +148,10 @@ public:
 			{
 				
 				EventHandler eventFunc = EventHandler([=]() {
+
+					Core::GetInstance()->GetMainCamera()->GetComponent<StateControl>()->SetState(L"zoomIn");
+
+
 					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
 					for (auto member : group)
 					{
@@ -212,6 +216,8 @@ public:
 					// Menu 0 - RETURN
 					{
 						EventHandler returnFunc = EventHandler([=]() {
+							Core::GetInstance()->GetMainCamera()->GetComponent<StateControl>()->SetState(L"autoRotate");
+
 							list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_EQUIP);
 							for (auto member : group)
 							{

@@ -52,17 +52,19 @@ void ParticleRenderer::Update()
 		m_playTime += dTime;
 		if (m_playTime > m_info.duration)
 		{
+			if (m_emitBursts.size() > 0)
+			{
+				m_currentBurstIndex = 0;
+				m_currentBurst = &m_emitBursts[0];
+			}
+
 			if (!m_info.isLoop)
 			{
 				m_info.isPlay = false;
 				return;
 			}
 			m_playTime -= m_info.duration;
-			if (m_emitBursts.size() > 0)
-			{
-				m_currentBurstIndex = 0;
-				m_currentBurst = &m_emitBursts[0];
-			}
+			
 		}
 
 		if (m_currentBurst)

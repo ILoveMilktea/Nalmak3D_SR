@@ -10,6 +10,13 @@
 #include "StageManager.h"
 #include "ItemManager.h"
 
+
+#include "GarageSceneCameraAutoRotate.h"
+#include "GarageSceneCameraIntro.h"
+#include "GarageSceneCameraZoomIn.h"
+#include "GarageSceneCameraMouseInput.h"
+#include "GarageSceneCameraInfo.h"
+#include "CustomDebuger.h"
 GarageScene::GarageScene()
 {
 }
@@ -29,11 +36,23 @@ void GarageScene::Initialize()
 	
 
 	//
-//	 grid setting
+	//grid setting
 	INSTANTIATE()->AddComponent<Grid>()->SetPosition(0,0,-5.f);
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
-	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->SetPosition(0, 0, -5);;
+
+
+	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()
+		->AddComponent<StateControl>()->AddComponent<GarageSceneCameraInfo>()->AddComponent<CustomDebuger>();
+	mainCam->GetComponent<StateControl>()->AddState<GarageSceneCameraAutoRotate>(L"autoRotate");
+	mainCam->GetComponent<StateControl>()->AddState<GarageSceneCameraIntro>(L"intro");
+	mainCam->GetComponent<StateControl>()->AddState<GarageSceneCameraZoomIn>(L"zoomIn");
+	mainCam->GetComponent<StateControl>()->AddState<GarageSceneCameraMouseInput>(L"mouseInput");
+	mainCam->GetComponent<StateControl>()->InitState(L"intro");
+
+
+
+
 
 	GameObject* player;
 	{
@@ -44,19 +63,14 @@ void GarageScene::Initialize()
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
 
-	// �÷��̾� ������ ���𵵴�
-	{
+	
+	/*{
 		RevolvesToTarget::Desc revolvesDesc;
 		revolvesDesc.targetParent = player;
 		revolvesDesc.roationSpeed = 1.f;
 		auto revolvesTarget = INSTANTIATE()->AddComponent<RevolvesToTarget>(&revolvesDesc);
-	}
-	{
-		SceneChanger::Desc SceneChangerDescInfo;
-		SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
-		SceneChangerDescInfo.sceneName = L"phantom";
-		auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
-	}
+	}*/
+	
 	// test button ----> UILab
 	{
 		//auto mainEquipWepon = UIFactory::CreateButton(

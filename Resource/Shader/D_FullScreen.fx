@@ -48,7 +48,9 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 PS_OUTPUT PS_Main_Default(PS_INPUT  _input) 
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
-	float4 diffuse = tex2D(mainSampler, _input.uv);
+	float2 uv = float2(_input.uv) + float2(perPixelX, perPixelY);
+		
+	float4 diffuse = tex2D(mainSampler, uv);
 	o.diffuse = diffuse;
 
 	return o;

@@ -24,6 +24,8 @@ void BulletEffect_StretchBillboard::Initialize()
 
 	m_transform->SetScale(Vector3(1, m_stretchRatio, 1));
 
+	m_material = GetComponent<VIBufferRenderer>()->GetMaterial();
+
 }
 
 void BulletEffect_StretchBillboard::Update()
@@ -45,7 +47,16 @@ void BulletEffect_StretchBillboard::Update()
 
 	m_transform->position += m_dir * m_speed * dTime;
 
-	
+	Matrix view =  m_camera->GetViewMatrix();
+	Matrix billboard;
+	D3DXMatrixIdentity(&billboard);
+	memcpy(&billboard.m[0][0], &view.m[0][0], sizeof(Vector3));
+	memcpy(&billboard.m[1][0], &view.m[1][0], sizeof(Vector3));
+	memcpy(&billboard.m[2][0], &view.m[2][0], sizeof(Vector3));
+
+	D3DXMatrixInverse(&billboard, 0, &billboard);
+
+	m_material->SetMatrix("g_invViewForBillboard", billboard);
 
 }
 
