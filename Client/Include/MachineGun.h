@@ -22,6 +22,9 @@ public:
 	virtual void OnTriggerEnter(Collisions& _collision)override;
 	virtual void OnTriggerStay(Collisions& _collision)override;
 	virtual void OnTriggerExit(Collisions& _collision)override;
+
+public:
+	
 private:
 	float m_fSpd = 0.f;
 	int m_iDamage = 0;

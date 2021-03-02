@@ -1,33 +1,31 @@
 #pragma once
 #include "IState.h"
-class Enemy_Falling :
+class Look_Evasion :
 	public IState
 {
 public:
-	Enemy_Falling();
-	virtual ~Enemy_Falling();
+	Look_Evasion();
+	virtual ~Look_Evasion();
 
 	// IState을(를) 통해 상속됨
-
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 
-	
-
 public:
 
 public:
-	void Accelerate();
+
+public:
 
 private:
-	class Enemy* m_pEnemy = nullptr;
-	
-	//bool		m_bToGournd = true;
-	//bool		m_bFalling = false;
-	float		m_fFallDelta = 0.f;
-	float		m_fFallingSpd = 0.f;
-	float		m_fTurnSpd = 0.f;
+	GameObject* m_pPlayer = nullptr;
+		
+	Vector3		m_vDir;
+
+	float		m_fLookDelta = 0.f;
+	float		m_fFpmDelta = 0.f;
+	float		m_fFpm = 120.f;
 };
 

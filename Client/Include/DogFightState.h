@@ -6,7 +6,7 @@ public:
 	DogFightState();
 	~DogFightState();
 
-	// IStateÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// IStateï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
@@ -38,4 +38,3 @@ private:
 
 	int		m_iFrame = 0;
 };
-
