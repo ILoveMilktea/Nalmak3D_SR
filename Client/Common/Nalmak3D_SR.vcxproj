@@ -205,6 +205,9 @@
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\Player_ClusterMissile.h" />
+    <ClInclude Include="..\Include\Player_EmpMissile.h" />
+    <ClInclude Include="..\Include\Player_EmpMove.h" />
+    <ClInclude Include="..\Include\Player_EmpPulse.h" />
     <ClInclude Include="..\Include\Slide_Evasion.h" />
     <ClInclude Include="..\Include\Look_Evasion.h" />
     <ClInclude Include="..\Include\BulletDirMove.h" />
@@ -306,6 +309,9 @@
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp" />
+    <ClCompile Include="..\Source\Player_EmpMissile.cpp" />
+    <ClCompile Include="..\Source\Player_EmpMove.cpp" />
+    <ClCompile Include="..\Source\Player_EmpPulse.cpp" />
     <ClCompile Include="..\Source\Slide_Evasion.cpp" />
     <ClCompile Include="..\Source\Look_Evasion.cpp" />
     <ClCompile Include="..\Source\BulletDirMove.cpp" />

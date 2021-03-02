@@ -8,9 +8,11 @@
 #include "AimMissile.h"
 #include "SmallCannon.h"
 #include "Player_ClusterMissile.h"
-// 플레이어 스킬
+#include "Player_EmpMissile.h"
 
+// 플레이어 스킬
 #include "EscapeSkill.h"
+
 
 ItemManager* ItemManager::m_instance = nullptr;
 
@@ -76,6 +78,15 @@ void ItemManager::Initialize()
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_ClusterMissile(info));
 	}
 
+	{
+		info.itemName = L"Emp";
+		info.costGold = 0;
+		info.delay = 1.f;
+		info.weaponSpeed = 100.f;
+
+		m_mapShopItem[L"Weapon"].emplace_back(new Player_EmpMissile(info));
+	}
+
 	//스킬 사서쓸지 그냥 갖고있을지 몰라서 일단 사놓음.
 	{
 		BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
@@ -83,6 +94,11 @@ void ItemManager::Initialize()
 
 	BuyItem(L"Weapon", L"ClusterMissile");
 	m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
+
+	BuyItem(L"Weapon", L"Emp");
+
+
+
 
 }
 

@@ -87,10 +87,10 @@ typedef struct tagItemInfo
 	};
 
 	wstring itemName;
-	float	 weaponSpeed;
-	float	 delay;
+	float	 weaponSpeed; //Bullet Move Spd
+	float	 delay; //¿¬»ç·Â
 	int	 weaponAttak;
-	int  weaponAmmo;
+	int  weaponAmmo; //Round
 	int  costGold;
 
 }ITEMINFO;

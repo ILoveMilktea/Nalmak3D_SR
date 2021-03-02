@@ -2,13 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Nalmak3D_SR.h">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Extern.h">
       <Filter>98.PreCompile\02.Extern</Filter>
@@ -291,10 +291,19 @@
     <ClInclude Include="..\Include\Player_ClusterMissile.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Player_EmpMissile.h">
+      <Filter>02.Component\00.Manager\ItemManger\EmpMissile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_EmpMove.h">
+      <Filter>02.Component\00.Manager\ItemManger\EmpMissile\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_EmpPulse.h">
+      <Filter>02.Component\00.Manager\ItemManger\EmpMissile\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MainGame.cpp">
       <Filter>00.Main</Filter>
@@ -555,13 +564,22 @@
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Player_EmpMissile.cpp">
+      <Filter>02.Component\00.Manager\ItemManger\EmpMissile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_EmpMove.cpp">
+      <Filter>02.Component\00.Manager\ItemManger\EmpMissile\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_EmpPulse.cpp">
+      <Filter>02.Component\00.Manager\ItemManger\EmpMissile\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </Image>
     <Image Include="small.ico">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -654,9 +672,6 @@
     </Filter>
     <Filter Include="02.Component\05.Animator">
       <UniqueIdentifier>{ef1fce22-5667-4862-b153-c0b81e108948}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\03.Script\99.Default">
-      <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\00.Manager">
       <UniqueIdentifier>{620004b3-601d-458e-9e74-70f98e3743b1}</UniqueIdentifier>
@@ -751,15 +766,24 @@
     <Filter Include="02.Component\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\ItemManger\EmpMissile">
+      <UniqueIdentifier>{ed7d2cbd-7951-443b-9a6e-4017dcb04e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\ItemManger\EmpMissile\Component">
+      <UniqueIdentifier>{2abd139f-76d0-4223-b04b-6c9dcc1b532b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt">
-      <Filter>02.Component\03.Script\99.Default</Filter>
+      <Filter>99.Default</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

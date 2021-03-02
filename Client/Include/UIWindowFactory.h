@@ -141,6 +141,8 @@ public:
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
 						menu->SetPosition(576.f - 1200.f, 350.f);
 					}
+					
+					
 				}
 			}
 
@@ -347,6 +349,16 @@ public:
 					});
 					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) SkillSlot - First Parts : EscapeMove", CANVAS_GROUP_MAINWND);
 					menu->SetPosition(1600.f, 800.f);
+				}
+
+				//For EmpMissile tes.t
+				{
+					//EventHandler evetFunc = EventHandler([=]() {ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp"); });
+					EventHandler eventFunc 
+						= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp"); });
+					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) Weapon - First Parts : Emp", CANVAS_GROUP_MAINWND);
+					menu->SetPosition(1600.f, 850.f);
+				
 				}
 			}
 
