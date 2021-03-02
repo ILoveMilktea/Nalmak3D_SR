@@ -114,6 +114,7 @@
     <ClCompile Include="..\Source\VIBufferRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Client\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\Animator.h" />
     <ClInclude Include="..\Include\AutoRotate.h" />
     <ClInclude Include="..\Include\Bezier.h" />

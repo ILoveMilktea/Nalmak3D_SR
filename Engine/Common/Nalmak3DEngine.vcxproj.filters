@@ -808,5 +808,6 @@
     <ClInclude Include="..\Include\ScaleAnimation.h">
       <Filter>11.Animation</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Client\Include\MenuAnimator.h" />
   </ItemGroup>
 </Project>
