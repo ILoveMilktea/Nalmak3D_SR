@@ -285,6 +285,12 @@
     <ClInclude Include="..\Include\MenuAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\ClusterBulletMove.h">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_ClusterMissile.h">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -542,6 +548,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\MenuAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ClusterBulletMove.cpp">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_ClusterMissile.cpp">
+      <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

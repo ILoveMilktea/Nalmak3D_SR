@@ -7,6 +7,7 @@
 //플레이어 아이템
 #include "AimMissile.h"
 #include "SmallCannon.h"
+#include "Player_ClusterMissile.h"
 // 플레이어 스킬
 
 #include "EscapeSkill.h"
@@ -50,7 +51,6 @@ void ItemManager::Initialize()
 	}
 
 	{
-		ITEMINFO info;
 		info.itemName = L"Cannon";
 		info.costGold = 100;
 		info.delay = 0.25f;
@@ -60,7 +60,6 @@ void ItemManager::Initialize()
 	}
 
 	{
-		ITEMINFO info;
 		info.itemName = L"EscapeMove";
 		info.costGold = 0.f;
 		info.delay = 5.f;
@@ -68,12 +67,22 @@ void ItemManager::Initialize()
 
 	}
 
-	//스킬 사서쓸지 그냥 갖고있을지 몰라서 일단 사놓음.
 	{
-		BuyItem(L"Skill", L"EscapeMove");
+		info.itemName = L"ClusterMissile";
+		info.costGold = 50;
+		info.delay = 1.f;
+		info.weaponSpeed = 45.f;
+
+		m_mapShopItem[L"Weapon"].emplace_back(new Player_ClusterMissile(info));
 	}
 
+	//스킬 사서쓸지 그냥 갖고있을지 몰라서 일단 사놓음.
+	{
+		BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
+	}
 
+	BuyItem(L"Weapon", L"ClusterMissile");
+	m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
 
 }
 
@@ -127,14 +136,14 @@ bool ItemManager::BuyItem(const wstring & _itemName, const wstring & _typeValueN
 {
 	PlayerItem* findItem = FindItemObject(_itemName, _typeValueName);
 	
-	for (auto & inven : m_playerMgr->GetInven()) // 인벤에 같은이름이있으면 사지않는다.
+	for (auto & inven : m_playerMgr->GetInven()) 
 	{
 		if (_itemName == inven.first)
 		{
 			for(auto & ItemName : inven.second)
 			{
 				if(_typeValueName == ItemName)
-					return false;
+					return false;// 인벤에 같은이름이있으면 사지않는다.
 			}
 		}
 		

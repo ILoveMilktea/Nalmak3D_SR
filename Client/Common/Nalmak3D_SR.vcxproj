@@ -199,10 +199,12 @@
     <ClInclude Include="..\Include\BossStageCamera.h" />
     <ClInclude Include="..\Include\BossState.h" />
     <ClInclude Include="..\Include\Circle_Evasion.h" />
+    <ClInclude Include="..\Include\ClusterBulletMove.h" />
     <ClInclude Include="..\Include\CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
+    <ClInclude Include="..\Include\Player_ClusterMissile.h" />
     <ClInclude Include="..\Include\Slide_Evasion.h" />
     <ClInclude Include="..\Include\Look_Evasion.h" />
     <ClInclude Include="..\Include\BulletDirMove.h" />
@@ -298,10 +300,12 @@
     <ClCompile Include="..\Source\BossStageCamera.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
     <ClCompile Include="..\Source\Circle_Evasion.cpp" />
+    <ClCompile Include="..\Source\ClusterBulletMove.cpp" />
     <ClCompile Include="..\Source\CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
+    <ClCompile Include="..\Source\Player_ClusterMissile.cpp" />
     <ClCompile Include="..\Source\Slide_Evasion.cpp" />
     <ClCompile Include="..\Source\Look_Evasion.cpp" />
     <ClCompile Include="..\Source\BulletDirMove.cpp" />

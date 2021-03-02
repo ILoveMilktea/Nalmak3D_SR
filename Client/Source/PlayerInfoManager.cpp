@@ -191,36 +191,11 @@ bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const
 	// 여기서 거르자
 	if (findItemType == L"Weapon")
 	{
-		switch (eID)
-		{
-		case FIRST_PARTS:
-			m_currentlyWeapon[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
-
-			break;
-		case SECOND_PARTS:
-			m_currentlyWeapon[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
-
-			break;
-		case THIRD_PARTS:
-			break;
-		}
-
+		m_currentlyWeapon[eID] = equipItem->GetItmeInfo().itemName;
 	}
 	else if (findItemType == L"Skill")
 	{
-		switch (eID)
-		{
-		case FIRST_PARTS:
-			m_currentlySkill[FIRST_PARTS] = equipItem->GetItmeInfo().itemName;
-
-			break;
-		case SECOND_PARTS:
-			m_currentlySkill[SECOND_PARTS] = equipItem->GetItmeInfo().itemName;
-
-			break;
-		case THIRD_PARTS:
-			break;
-		}
+		m_currentlySkill[eID] = equipItem->GetItmeInfo().itemName;
 	}
 
 	return true;

@@ -17,26 +17,24 @@ void PlayerShooter::Initialize()
 	m_playerMgr = PlayerInfoManager::GetInstance();
 	m_ItemManager = ItemManager::GetInstance();
 
-	SetEquipment(FIRST_PARTS);
+	//SetEquipment(FIRST_PARTS);
 	m_shootTime = 0.5f;
 }
 
 void PlayerShooter::Update()
 {
 	// 키값받아서 호출
-	if (!m_useEquipment)
-		return;
+	
 
 	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
 	{
-		if (m_shootTime < 0)
+		if (m_useEquipment && m_shootTime < 0)
 		{
 			m_useEquipment->ItemShot();
 			m_shootTime = m_useEquipment->GetItmeInfo().delay;
 		}
 	}
-	
-	if (m_shootTime > 0)
+	if (m_useEquipment && m_shootTime > 0)
 	{
 		m_shootTime -= dTime;
 		if (m_shootTime <= 0)
@@ -61,10 +59,13 @@ void PlayerShooter::Update()
 	}
 	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_L))
 	{
-		SetEquipment(SECOND_PARTS);
+		SetEquipment(THIRD_PARTS);
 	}
 
-	DEBUG_LOG(L"현재 장착한 무기" , m_useEquipment->GetItmeInfo().itemName);
+	if (m_useEquipment)
+	{
+		DEBUG_LOG(L"현재 장착한 무기", m_useEquipment->GetItmeInfo().itemName);
+	}
 }
 
 void PlayerShooter::SetEquipment(PARTS_NUM _weaponName)
