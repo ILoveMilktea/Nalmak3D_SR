@@ -193,7 +193,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\AimMissile.h" />
     <ClInclude Include="..\Include\AirFire_Evasion.h" />
     <ClInclude Include="..\Include\Boss.h" />
@@ -203,6 +202,7 @@
     <ClInclude Include="..\Include\CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
+    <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\Slide_Evasion.h" />
     <ClInclude Include="..\Include\Look_Evasion.h" />
     <ClInclude Include="..\Include\BulletDirMove.h" />
@@ -292,7 +292,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\AimMissile.cpp" />
     <ClCompile Include="..\Source\AirFire_Evasion.cpp" />
     <ClCompile Include="..\Source\Boss.cpp" />
@@ -302,6 +301,7 @@
     <ClCompile Include="..\Source\CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
+    <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\Slide_Evasion.cpp" />
     <ClCompile Include="..\Source\Look_Evasion.cpp" />
     <ClCompile Include="..\Source\BulletDirMove.cpp" />

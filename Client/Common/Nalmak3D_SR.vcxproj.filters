@@ -245,13 +245,9 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
-    <ClInclude Include="..\Include\ItemButton.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Stage2.h" />
-    <ClInclude Include="MenuAnimator.h">
-      <Filter>02.Component\05.Animator</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
@@ -280,11 +276,14 @@
     <ClInclude Include="..\Include\PlayerNone.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Include\MenuAnimator.h">
-      <Filter>02.Component\05.Animator</Filter>
+    <ClInclude Include="..\Include\ItemButton.h">
+      <Filter>02.Component\02.UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ItemButton.h">
       <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MenuAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -504,13 +503,9 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
-    <ClCompile Include="..\Source\ItemButton.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
-    <ClCompile Include="MenuAnimator.cpp">
-      <Filter>02.Component\05.Animator</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
@@ -539,11 +534,14 @@
     <ClCompile Include="..\Source\PlayerNone.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\BackUp\Nalmak3D_SR_210302 0200 화\Client\Source\MenuAnimator.cpp">
-      <Filter>02.Component\05.Animator</Filter>
+    <ClCompile Include="..\Source\ItemButton.cpp">
+      <Filter>02.Component\02.UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ItemButton.cpp">
       <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MenuAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
