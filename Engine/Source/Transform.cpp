@@ -42,7 +42,7 @@ void Transform::Release()
 
 	for (auto& child : m_childs)
 	{
-		child->DeleteParent();
+		child->m_parents = nullptr;
 	}
 }
 
@@ -511,6 +511,13 @@ void Transform::SetParents(GameObject * _parents)
 	assert("parent is nullptr" && parents);
 	assert("parents are themselves" && !(parents == this));
 
+	Matrix childMat;
+	D3DXMatrixInverse(&childMat, nullptr, &parents->GetWorldMatrix());
+	childMat = GetWorldMatrix() * childMat;
+
+	m_transform->position = Vector3(childMat._41, childMat._42, childMat._43);
+	D3DXQuaternionRotationMatrix(&m_transform->rotation, &childMat);
+
 	m_parents = _parents->GetTransform();
 	_parents->GetTransform()->AddChild(this);
 }
@@ -526,6 +533,9 @@ void Transform::DeleteChild(Transform * _child)
 	{
 		if ((*iter) == _child)
 		{
+
+			_child->position = _child->GetWorldPosition();
+			_child->rotation = _child->GetWorldRotation();
 			m_childs.erase(iter);
 			return;
 		}
@@ -534,6 +544,10 @@ void Transform::DeleteChild(Transform * _child)
 
 void Transform::DeleteParent()
 {
+	if (!m_parents)
+		return;
+	DeleteChild(this);
+
 	m_parents = nullptr;
 }
 

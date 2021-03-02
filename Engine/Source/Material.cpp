@@ -589,7 +589,7 @@ void Material::SetFloat(const string& _parameter, float _value)
 	m_floatValues.emplace_back(pair<string, float>(_parameter, _value));
 }
 
-void Material::SetMatrix(const string& _parameter, const Matrix & _value)
+void Material::SetMatrix(const string& _parameter,const Matrix& _value)
 {
 	for (auto& value : m_matrixValues)
 	{

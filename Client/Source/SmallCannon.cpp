@@ -21,8 +21,8 @@ void SmallCannon::ItemShot()
 
 	BulletEffect_StretchBillboard::Desc bulletinfo;
 	bulletinfo.lifeTime = 5.f;
-	bulletinfo.speed = 150.f;
-	bulletinfo.stretchRatio = 12.f;
+	bulletinfo.speed = 150.f;	
+	bulletinfo.stretchRatio = 18.f;
 	m_bullet->AddComponent<BulletEffect_StretchBillboard>(&bulletinfo);
 	m_bullet = nullptr;
 }

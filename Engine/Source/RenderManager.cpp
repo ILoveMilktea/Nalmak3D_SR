@@ -124,7 +124,6 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	GBufferPass(_cam, _cBuffer);
 
-	TransparentPass(_cam, _cBuffer);
 
 	LightPass(_cam,_cBuffer);
 
@@ -136,6 +135,7 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
+	TransparentPass(_cam, _cBuffer);
 
 	UIPass(_cam, _cBuffer);
 }
@@ -356,6 +356,7 @@ void RenderManager::DirectionalLightPass(ConstantBuffer& _cBuffer)
 	Material* material = m_resourceManager->GetResource<Material>(L"DirectionalLight");
 	material->SetValue("g_directionalLight", &info, sizeof(DirectionalLightInfo));
 
+
 	RenderByMaterialToScreen(material, _cBuffer);
 }
 
@@ -364,10 +365,11 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
-	RecordRenderTarget(0, L"GBuffer_Transparent");
+	//RecordRenderTarget(0, L"GBuffer_Transparent");
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 
 
 	for (auto& renderList : m_renderLists[RENDERING_MODE_TRANSPARENT])
@@ -399,7 +401,7 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 
-	EndRenderTarget(L"GBuffer_Transparent");
+	//EndRenderTarget(L"GBuffer_Transparent");
 }
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
@@ -496,6 +498,7 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	D3DXMatrixScaling(&mat, 2, 2, 2);
 	m_currentShader->SetMatrix("g_world", mat);
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 
 	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0,  sizeof(INPUT_LAYOUT_POSITION_UV)));
 	ThrowIfFailed(m_device->SetIndices(m_imageVIBuffer->GetIndexBuffer()));
@@ -503,9 +506,11 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	m_currentShader->CommitChanges();
 	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
 
-
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 	m_currentShader->EndPass();
 	EndRenderTarget();
+
+
 }
 
 
@@ -520,6 +525,8 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 	D3DXMatrixScaling(&mat, 2, 2, 2);
 	m_currentShader->SetMatrix("g_world", mat);
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
 	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_UV)));
 	ThrowIfFailed(m_device->SetIndices(m_imageVIBuffer->GetIndexBuffer()));
 
@@ -530,6 +537,7 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 	{
 		m_currentShader->EndPass();
 	}
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 
 }
 

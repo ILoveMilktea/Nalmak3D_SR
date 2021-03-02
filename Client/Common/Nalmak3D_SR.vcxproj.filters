@@ -245,6 +245,27 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
+    <ClInclude Include="..\Include\ItemButton.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h" />
+    <ClInclude Include="MenuAnimator.h" />
+    <ClInclude Include="..\Include\ExplosionButton.h" />
+    <ClInclude Include="..\Include\GarageSceneCameraIntro.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GarageSceneCameraAutoRotate.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GarageSceneCameraZoomIn.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GarageSceneCameraInfo.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GarageSceneCameraMouseInput.h">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -463,6 +484,27 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
+    <ClCompile Include="..\Source\ItemButton.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
+    <ClCompile Include="MenuAnimator.cpp" />
+    <ClCompile Include="..\Source\ExplosionButton.cpp" />
+    <ClCompile Include="..\Source\GarageSceneCameraIntro.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GarageSceneCameraAutoRotate.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GarageSceneCameraZoomIn.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GarageSceneCameraInfo.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GarageSceneCameraMouseInput.cpp">
+      <Filter>02.Component\06.GarageScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -653,14 +695,14 @@
     <Filter Include="02.Component\01.Utility\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\StageSelectScene\CameraMove">
-      <UniqueIdentifier>{77a6e37e-4059-4f3f-9a48-468430dfa279}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\01.Utility\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\03.Script\99.Default">
       <UniqueIdentifier>{a6660160-cd4a-4c06-a1c6-60284f34124d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\06.GarageScene">
+      <UniqueIdentifier>{92693aba-9f7a-4342-ad51-d5a5bdfa1b27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
