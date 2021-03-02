@@ -21,9 +21,8 @@ public: /* Set */
 	void Add_Score(float _score);
 
 public: /* Functions */
-	void EnterProduce();
+	bool EnterProduce();
 	
-	void PlayerRotReset();
 	const Vector3& RandForShaking();
 	void CameraShaking();
 	void BossAppear();
@@ -38,10 +37,9 @@ private:
 	GameObject*	m_pMainCamera = nullptr;
 	GameObject* m_pBoss = nullptr;
 
-	Vector3		m_vPlayerInitPos = { 0, 0, 0 };
-
 	//1. player move to certain pos + rotate reset
 	bool	m_bPlayerSetting = true;
+	Vector3		m_vPlayerInitPos = { 0, 0, 0 };
 
 	//2. camera shaking
 	bool	m_bCameraShaking = false;
@@ -53,6 +51,7 @@ private:
 	//3. Boss Move + Player Move
 	bool	m_bBossMove = false;
 	bool	m_bPlayerMove = false;
+	
 	//4. Camera Produce
 	bool	m_bCameraProduce = false;
 

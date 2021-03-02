@@ -17,6 +17,7 @@
 #include "UIWindowFactory.h"
 #include "SceneChanger.h"
 #include "PlayerBossStageMove.h"
+#include "PlayerNone.h"
 
 DogFightState::DogFightState()
 {
@@ -42,6 +43,7 @@ void DogFightState::EnterState()
 	m_Player->SetScale(0.1f, 0.1f, 0.1f);
 
 	m_Player->AddComponent<StateControl>();
+	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
@@ -87,6 +89,7 @@ void DogFightState::EnterState()
 	ENEMY_STATUS tStatus(10, 20, 1);
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+
 	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, 0.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
 
 }
@@ -95,13 +98,49 @@ void DogFightState::EnterState()
 void DogFightState::UpdateState()
 {
 	++m_iFrame;
-
 	if (m_iFrame > 0)
 	{
-		DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1) )
+		//{
+		//	ENEMY_STATUS tStatus(10, 20, 1);
+		//	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+		//	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 
 
-		int i = EnemyManager::GetInstance()->Get_EnemyCount();
+		//	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-100.f, 50.f, 100.f), ENEMY_STATE::HOLD,
+		//		tStatus, tGun, tMissile);
+		//}
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+		{
+			ENEMY_STATUS tStatus(10, 20, 1);
+			BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+			BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+
+
+			EnemyManager::GetInstance()->Enemy_Spawn(Vector3(100.f, 100.f, 100.f), ENEMY_STATE::CHASE,
+				tStatus, tGun, tMissile);
+		}
+
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
+		{
+			ENEMY_STATUS tStatus(10, 20, 1);
+			BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+			BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+
+
+			EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-50.f, -20.f, 150.f), ENEMY_STATE::DROP,
+				tStatus, tGun, tMissile);
+		}
+		
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
+		{
+			EnemyManager::GetInstance()->Destroy_AllEnemy();
+		}
+		
+
+
+		//int i = EnemyManager::GetInstance()->Get_EnemyCount();
+
 		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
 		{
 			SceneToEvasion();
@@ -128,6 +167,7 @@ void DogFightState::UpdateState()
 
 		m_fDogFightTime += dTime;
 	}
+	DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
 }
 
 void DogFightState::ExitState()
@@ -136,7 +176,7 @@ void DogFightState::ExitState()
 	//monster들 다 없애기
 
 
-	m_Player->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
+	
 }
 
 float DogFightState::Get_Time() const
@@ -165,9 +205,10 @@ void DogFightState::SceneToEvasion()
 {
 	if (!m_bProduce)
 	{
+		m_Player->GetComponent<StateControl>()->SetState(L"playerNone");
+
 		Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
 		Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
-
 
 		DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
 

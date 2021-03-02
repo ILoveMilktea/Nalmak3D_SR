@@ -59,28 +59,53 @@ void EvasionState::UpdateState()
 		
 	if (!m_bEnter)
 	{
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+		{
+			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(SLIDE);
+		}
+
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
+		{
+			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(DIAGONAL);
+		}
+
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
+		{
+			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(LOOK);
+		}
+
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
+		//{
+		//	EnemyManager::GetInstance()->Enemy_Spwan_Evasion(LOOK);
+		//}
+
 		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0
 			/*InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2)*/)
 		{
 			SceneToBoss();
 		}
+
+
+
+
+
 	}
 
 
 		
-	DEBUG_LOG(L"Current Combat State : ", L"Evasion State");
-	DEBUG_LOG(L"MainCam POS", m_MainCamera->GetTransform()->position);
-	DEBUG_LOG(L"MainCam Rotx", m_MainCamera->GetTransform()->rotation.x);
-	DEBUG_LOG(L"MainCam Roty", m_MainCamera->GetTransform()->rotation.y);
-	DEBUG_LOG(L"MainCam Rotz", m_MainCamera->GetTransform()->rotation.z);
-	DEBUG_LOG(L"Player Rotz", m_Player->GetTransform()->rotation.z);
+	//DEBUG_LOG(L"Current Combat State : ", L"Evasion State");
+	//DEBUG_LOG(L"MainCam POS", m_MainCamera->GetTransform()->position);
+	//DEBUG_LOG(L"MainCam Rotx", m_MainCamera->GetTransform()->rotation.x);
+	//DEBUG_LOG(L"MainCam Roty", m_MainCamera->GetTransform()->rotation.y);
+	//DEBUG_LOG(L"MainCam Rotz", m_MainCamera->GetTransform()->rotation.z);
+	//DEBUG_LOG(L"Player Rotz", m_Player->GetTransform()->rotation.z);
 
 	m_fEvasionTime += dTime;
 }
 
 void EvasionState::ExitState()
 {
-	m_Player->GetComponent<StateControl>()->SetState(L"playerBossMove");
+	m_Player->GetComponent<StateControl>()->SetState(L"playerNone");
 
 	EnemyManager::GetInstance()->Destroy_AllEnemy();
 }
@@ -113,6 +138,7 @@ void EvasionState::EnterProduce()
 
 		if (m_Player->GetTransform()->position.z >= 0.f)
 		{
+			m_Player->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
 			m_bEnter = false;
 		}
 	}

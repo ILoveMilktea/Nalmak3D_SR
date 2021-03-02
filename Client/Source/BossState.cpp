@@ -41,6 +41,7 @@ void BossState::EnterState()
 	}
 
 
+
 	//m_pPlayer->GetTransform()->position = Vector3(0, 0, -50);
 	//m_pPlayer->GetTransform()->SetRotation(0, 0, 0);
 
@@ -62,9 +63,12 @@ void BossState::UpdateState()
 {
 	if (m_bEnter)
 	{
-		EnterProduce();
+		if (EnterProduce())
+		{
+			m_pPlayer->GetComponent<StateControl>()->SetState(L"playerBossMove");
+			m_bEnter = false;
+		}
 	}
-
 
 
 
@@ -99,7 +103,7 @@ void BossState::Add_Score(float _score)
 	m_fBossScore += _score;
 }
 
-void BossState::EnterProduce()
+bool BossState::EnterProduce()
 {
 	//1. player move to certain pos
 	
@@ -121,11 +125,6 @@ void BossState::EnterProduce()
 			&& m_pPlayer->GetTransform()->position.y >= m_vPlayerInitPos.y - 5.f
 			&& m_pPlayer->GetTransform()->position.y <= m_vPlayerInitPos.y + 5.f)
 		{
-			if (m_pPlayer->GetTransform()->position == m_vPlayerInitPos)
-			{
-		
-			}
-
 			if (!m_bCameraShaking)
 			{
 				m_bCameraShaking = true;
@@ -138,23 +137,10 @@ void BossState::EnterProduce()
 		}
 	}
 	
-
-
 	//2. Camera shaking
-
-
 	if (m_bCameraShaking)
 	{
 		m_pMainCamera->GetTransform()->position = RandForShaking() * fShakingForce + vCameraOrigin;
-
-		if (m_pBoss != nullptr)
-		{
-			//m_pPlayer->GetTransform()->position.z -= dTime * 10.f;
-			//m_pMainCamera->GetTransform()->position.y = Nalmak_Math::Lerp(m_pMainCamera->GetTransform()->position.y, 0.f, dTime * 2);
-			//m_pMainCamera->GetTransform()->position.z = Nalmak_Math::Lerp(m_pMainCamera->GetTransform()->position.z, -40.f, dTime * 2);
-			//m_pMainCamera->GetTransform()->rotation.x *= dTime;
-		}
-
 		fShakingTime -= dTime;
 	}
 	
@@ -184,6 +170,8 @@ void BossState::EnterProduce()
 
 	if (m_bCameraProduce)
 	{
+		m_pPlayer->GetTransform()->rotation.z = 0.f;
+
 		m_pMainCamera->GetTransform()->position.z 
 			= Nalmak_Math::Lerp(m_pMainCamera->GetTransform()->position.z, 
 				m_pPlayer->GetTransform()->position.z - 50.f, dTime);
@@ -193,10 +181,21 @@ void BossState::EnterProduce()
 				0.f, dTime);
 
 		m_pMainCamera->GetTransform()->SetRotationX(0);
+		
+		if (m_pMainCamera->GetTransform()->position.y <= 0.02f)
+		{
+ 			m_bCameraProduce = false;
+
+			m_pMainCamera->GetTransform()->position = Vector3( 0.f,0.f,-100.f);
+			m_pPlayer->GetTransform()->position = Vector3(0.f, 0.f, -50.f);
+			
+
+			return true;
+		}
 	}
-
+	return false;
 	
-
+	
 	//4. Camera Moving
 }
 

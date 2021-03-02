@@ -209,6 +209,30 @@
     <ClInclude Include="..\Include\PlayerShooter.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\PlayerNone.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\NoneState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Diagonal_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\01.Diagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AirFire_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\06.AirFire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Prymide_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\05.Pyramid</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Circle_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\04.Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Look_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\03.Look</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Slide_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\00.Slide</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\CrossFire_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\02.CrossFire</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -390,6 +414,30 @@
     </ClCompile>
     <ClCompile Include="..\Source\PlayerShooter.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\PlayerNone.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\NoneState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Diagonal_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\01.Diagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AirFire_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\06.AirFire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Prymide_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\05.Pyramid</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Circle_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\04.Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Look_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\03.Look</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Slide_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\00.Slide</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\CrossFire_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\02.CrossFire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,6 +631,30 @@
     </Filter>
     <Filter Include="96.Debuger">
       <UniqueIdentifier>{e5d73c33-bd55-4534-8849-38459f478dd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\NoneState">
+      <UniqueIdentifier>{a3efdf6d-2e4d-4904-856a-cab581276d57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\02.CrossFire">
+      <UniqueIdentifier>{e96c084d-2b20-46e1-9410-ed6e9c8df199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\01.Diagonal">
+      <UniqueIdentifier>{8523b914-fd83-4475-85f0-141616cc1268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\00.Slide">
+      <UniqueIdentifier>{5656fb85-f0ad-461b-9d40-24f913efffa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\04.Circle">
+      <UniqueIdentifier>{0be7f0eb-ab3e-4e34-8fda-a65092cc86a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\03.Look">
+      <UniqueIdentifier>{c9be02c0-c5da-4ebe-a220-2f115076ff6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\05.Pyramid">
+      <UniqueIdentifier>{a9ed6231-314b-4edc-baa4-ba494ab755cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\06.AirFire">
+      <UniqueIdentifier>{510ad90c-26d8-4e5a-bb6c-6d5e149ce9ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
