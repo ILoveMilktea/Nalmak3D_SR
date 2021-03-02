@@ -36,11 +36,11 @@ EnemyManager * EnemyManager::GetInstance()
 {
 	if (!m_Instance)
 	{//업데이트를 쓰기 위해서 야를 Component를 상속받은 컴포넌트 객체루다가 만듦.
-		
+
 		auto Instance = INSTANTIATE();
 		Instance->AddComponent<EnemyManager>();
 		m_Instance = Instance->GetComponent<EnemyManager>();
-		
+
 		Instance->SetDontDestroy(true);//씬 넘어가도 지우지마라 이거야.
 	}
 
@@ -59,7 +59,7 @@ void EnemyManager::DeleteInstance()
 void EnemyManager::Initialize()
 {//유니티의 스따뜨
 
-	
+
 }
 
 void EnemyManager::Update()
@@ -109,7 +109,7 @@ void EnemyManager::Destroy_AllEnemy()
 }
 
 void EnemyManager::Enemy_Spawn(Vector3 _pos,
-	ENEMY_STATE _initState, ENEMY_STATUS _status, 
+	ENEMY_STATE _initState, ENEMY_STATUS _status,
 	BULLET_STATUS _gun, BULLET_STATUS _missile, BULLET_STATUS _homing)
 {
 	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
@@ -170,18 +170,18 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos,
 	Enemy::Desc Enemy_desc(_status, _gun, _missile);
 	/*desc 세팅*/
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
-	
-	
-	MeshRenderer::Desc Enemy_Mesh;
+
+
+	VIBufferRenderer::Desc Enemy_Mesh;
 	Enemy_Mesh.mtrlName = L"default";
 	Enemy_Mesh.meshName = L"flight";
-	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
+	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
 	Enemy_col.radius = 1.f;
 	Enemy_col.collisionLayer = COLLISION_LAYER_ENEMY;
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
-	
+
 	++m_iEnemyCount;
 }
 
@@ -255,7 +255,7 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 
 void EnemyManager::Boss_Spawn()
 {
-	GameObject* Boss_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Boss");
+	GameObject* Boss_obj = INSTANTIATE(OBJECT_TAG_BOSS, L"Boss");
 	Boss_obj->SetPosition(Vector3(0.f, 0.f, 200.f));
 	Boss_obj->SetScale(100.f, 100.f, 100.f);
 
@@ -268,7 +268,7 @@ void EnemyManager::Boss_Spawn()
 	MeshRenderer::Desc Boss_Mesh;
 	Boss_Mesh.mtrlName = L"boss";
 	Boss_Mesh.meshName = L"box";
-	Boss_obj->AddComponent<MeshRenderer>(&Boss_Mesh);
+	Boss_obj->AddComponent<VIBufferRenderer>(&Boss_Mesh);
 
 	SphereCollider::Desc Boss_col;
 	Boss_col.radius = 100.f;
@@ -278,4 +278,3 @@ void EnemyManager::Boss_Spawn()
 	++m_iEnemyCount;
 
 }
-

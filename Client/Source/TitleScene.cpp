@@ -62,10 +62,10 @@ void TitleScene::Initialize()
 
 
 	{
-		MeshRenderer::Desc render;
+		VIBufferRenderer::Desc render;
 		render.mtrlName = L"standard";
 		render.meshName = L"plane";
-		INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, -1)->SetScale(100, 100, 100);
+		INSTANTIATE()->AddComponent<VIBufferRenderer>(&render)->SetPosition(0, 0, -1)->SetScale(100, 100, 100);
 	}
 
 

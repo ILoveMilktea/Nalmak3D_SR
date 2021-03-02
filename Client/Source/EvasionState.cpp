@@ -25,7 +25,7 @@ void EvasionState::EnterState()
 
 	if (m_MainCamera == nullptr)
 	{
-		assert(L"아 ㅋㅋ 메인 카메라 못찾겠다고 ㅋㅋ");
+		assert(L"아 ㅋㅋ 메인 카메라 못찾겠다고 ㅋㅋ" && 0);
 	}
 	
 	m_MainCamera->SetPosition(0.f, 100.f, 0.f);
@@ -36,7 +36,7 @@ void EvasionState::EnterState()
 	m_Player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 	if (m_Player == nullptr)
 	{
-		assert(L"플레이어 못받은거 같은데여 ㅋㅋ;;");
+		assert(L"플레이어 못받은거 같은데여 ㅋㅋ;;" && 0);
 	}
 	m_Player->GetTransform()->position = Vector3(0, 0, -50);
 	m_Player->GetTransform()->SetRotation(0, 0, 0);

@@ -28,6 +28,21 @@ PhantomScene::~PhantomScene()
 
 void PhantomScene::Initialize()
 {
+
+	Core::GetInstance()->SetSkyBox(L"SkyBox1");
+
+	DirectionalLight::Desc light;
+	light.diffuseIntensity = 0.9f;
+	light.ambientIntensity = 0.02f;
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
+
+	VIBufferRenderer::Desc ground;
+	ground.mtrlName = L"ground";
+	ground.meshName = L"ground";
+	auto groundObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
+	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
+
+
 	srand((unsigned int)time(NULL));
 
 	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
@@ -35,6 +50,14 @@ void PhantomScene::Initialize()
 	StageManager::GetInstance();
 
 
+	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
+	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
+	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal", CANVAS_GROUP_G1);
+	window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
+	auto window3 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Depth", CANVAS_GROUP_G1);
+	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
+	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Transparent", CANVAS_GROUP_G1);
+	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
 
 	//Core::GetInstance()->SetSkyBox(L"skybox_gradation");
 	//MeshRenderer::Desc ground;
@@ -43,10 +66,7 @@ void PhantomScene::Initialize()
 	//auto groundObj = INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
 	//groundObj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 
-	DirectionalLight::Desc light;
-	light.diffuseIntensity = 1.f;
-	light.ambientIntensity = 0.2f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 30, 0);
+
 
 	
 	

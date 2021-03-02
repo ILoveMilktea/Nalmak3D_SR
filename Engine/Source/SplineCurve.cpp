@@ -128,12 +128,12 @@ Vector3 SplineCurve::GetPoint(float _ratio)
 	}
 	return point;
 
-
-
-
-
 }
 
+void SplineCurve::DeletePoints()
+{
+	m_points.clear();
+}
 /*
 void CSpline::DrawCardinalSpline(bool _bIs4Point)
 {

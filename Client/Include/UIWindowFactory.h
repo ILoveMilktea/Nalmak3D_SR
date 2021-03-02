@@ -2,6 +2,7 @@
 #ifndef __UIWINDOWNFACTORY_H__
 #define __UIWINDOWNFACTORY_H__
 
+#include "stdafx.h"
 #include "Core.h"
 #include "UIFactory.h"
 
@@ -9,6 +10,8 @@
 #include "UIInteractor.h"
 #include "Scripter.h"
 #include "ItemManager.h"
+#include "MenuAnimator.h"
+#include "ItemButton.h"
 
 class UIWindowFactory
 {
@@ -17,7 +20,7 @@ public:
 	static void GarageMainWindow(GameObject* _player)
 	{
 		auto interactiveController = INSTANTIATE();
-
+		
 		// reference
 		{
 			SingleImage::Desc desc_si;
@@ -43,31 +46,306 @@ public:
 				EventHandler eventFunc = EventHandler([=]() {
 					Core::GetInstance()->LoadScene(L"phantom");
 				});
-				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND);
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND_MAIN);
+
+				//MenuAnimator::Desc desc_ma;
+				//desc_ma.amount = 680.f;
+				//desc_ma.duration = 0.8f;
+				//menu->AddComponent<MenuAnimator>(&desc_ma);
+				menu->AddComponent<MenuAnimator>();
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 230.f);
 			}
-			// Menu 2 - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+
+			// Menu 2 - WEAPON SHOP
 			{
 				EventHandler eventFunc = EventHandler([=]() {
+					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
+					for (auto member : group)
+					{
+						member->GetComponent<MenuAnimator>()->AddStartDelay(-1.5f);
+						member->GetComponent<MenuAnimator>()->OutAnim();
+					}
 
-					ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
-
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP);
+					for (auto member : group)
+					{
+						member->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+						member->GetComponent<MenuAnimator>()->InAnim();
+					}
 				});
-				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
-				menu->SetPosition(1600.f, 600.f);
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"WEAPON SHOP", CANVAS_GROUP_MAINWND_MAIN);
+				menu->AddComponent<MenuAnimator>();
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.1f);
+				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+				menu->SetPosition(576.f, 270.f);
+
+				// Shop
+				{
+					// Menu 0 - RETURN
+					{
+						EventHandler returnFunc = EventHandler([=]() {
+							list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP);
+							for (auto member : group)
+							{
+								member->GetComponent<MenuAnimator>()->AddStartDelay(-1.5f);
+								member->GetComponent<MenuAnimator>()->OutAnim();
+							}
+
+							group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
+							for (auto member : group)
+							{
+								member->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+								member->GetComponent<MenuAnimator>()->InAnim();
+							}
+						});
+						auto menu = UIFactory::Prefab_MenuButton(returnFunc, L"RETURN", CANVAS_GROUP_MAINWND_SHOP);
+
+						menu->AddComponent<MenuAnimator>();
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+
+						menu->SetPosition(576.f - 1200.f, 230.f);
+					}
+					// Menu 1 - [ Weapon - AimMissile ] 
+					{
+						EventHandler eventFunc = EventHandler([=]() {
+
+							ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
+
+						});
+						auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"[ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND_SHOP);
+
+						menu->AddComponent<MenuAnimator>();
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.3f);
+						menu->SetPosition(576.f - 1200.f, 310.f);
+					}
+					// Menu 2 - [ Weapon - Cannon ] 
+					{
+						EventHandler eventFunc = EventHandler([=]() {
+
+							ItemManager::GetInstance()->BuyItem(L"Weapon", L"Cannon");
+
+						});
+						auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"[ Weapon - Cannon ] ", CANVAS_GROUP_MAINWND_SHOP);
+						
+						menu->AddComponent<MenuAnimator>();
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
+						menu->SetPosition(576.f - 1200.f, 350.f);
+					}
+				}
 			}
-			// Menu 3 - SKILL (Button)
+
+			// Menu 3 - EQUIP WEAPON
 			{
-				EventHandler eventFunc = EventHandler([=]() {});
-				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"SELECT SKILL", CANVAS_GROUP_MAINWND);
+				
+				EventHandler eventFunc = EventHandler([=]() {
+					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
+					for (auto member : group)
+					{
+						member->GetComponent<MenuAnimator>()->AddStartDelay(-1.5f);
+						member->GetComponent<MenuAnimator>()->OutAnim();
+					}
+
+					// 여기서 이제 item manager에서 item 목록 받아와서 넣어주어야함
+					auto inven = PlayerInfoManager::GetInstance()->GetInven();
+					auto item = inven.begin();
+					size_t itemIndex = 0;
+
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_EQUIP);
+					for (auto member : group)
+					{
+						if (item != inven.end())
+						{
+							if (item->first == L"Weapon")
+							{
+								if (member->GetGameObject()->GetName() == L"ItemMenuButton")
+								{
+									// text
+									member->GetComponent<Text>()->SetText(item->second[itemIndex]);
+
+									// button
+									//ItemButton* button = member->GetComponent<ItemButton>();
+									ItemButton* button = member->GetComponent<ItemButton>();
+									//PARTS_NUM num = button->GetPartsNumber();
+									//wstring weaponName = PlayerInfoManager::GetInstance()->GetWeapon(num);
+
+									EventHandler eventFunc = EventHandler([=]() {
+										PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 주무장으로 에임미사일을
+									});
+									button->ResetEvent(eventFunc);
+									
+									++itemIndex;
+									if (itemIndex == item->second.size())
+										++item;
+								}
+							}
+							else
+							{
+								++item;
+							}
+						}
+						member->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+						member->GetComponent<MenuAnimator>()->InAnim();
+					}
+				});
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"EQUIP", CANVAS_GROUP_MAINWND_MAIN);
+
+				menu->AddComponent<MenuAnimator>();
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.2f);
+				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 310.f);
+
+
+				// EQUIP
+				{
+					// Menu 0 - RETURN
+					{
+						EventHandler returnFunc = EventHandler([=]() {
+							list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_EQUIP);
+							for (auto member : group)
+							{
+								member->GetComponent<MenuAnimator>()->AddStartDelay(-1.5f);
+								member->GetComponent<MenuAnimator>()->OutAnim();
+							}
+
+							group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
+							for (auto member : group)
+							{
+								member->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+								member->GetComponent<MenuAnimator>()->InAnim();
+							}
+						});
+						auto menu = UIFactory::Prefab_MenuButton(returnFunc, L"RETURN", CANVAS_GROUP_MAINWND_EQUIP);
+
+						menu->AddComponent<MenuAnimator>();
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+
+						menu->SetPosition(576.f - 1200.f, 230.f);
+					}
+					// Slot 1
+					{
+						EventHandler eventFunc = EventHandler([=]() {});
+						auto menu = UIFactory::Prefab_ItemMenuButton(eventFunc, L"SLOT", CANVAS_GROUP_MAINWND_EQUIP);
+
+						menu->AddComponent<MenuAnimator>();
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.3f);
+						menu->SetPosition(576.f - 1200.f, 310.f);
+					}
+					// Slot 2
+					{
+						EventHandler eventFunc = EventHandler([=]() {});
+						auto menu = UIFactory::Prefab_ItemMenuButton(eventFunc, L"SLOT", CANVAS_GROUP_MAINWND_EQUIP);
+
+						menu->AddComponent<MenuAnimator>();
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
+						menu->SetPosition(576.f - 1200.f, 350.f);
+					}
+				}
 			}
-			// Menu 4 - STAGE SELECT (Button)
+
+			// Menu 4 - SKILL (Button)
 			{
 				EventHandler eventFunc = EventHandler([=]() {});
-				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"RETURN TO MAP", CANVAS_GROUP_MAINWND);
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"SELECT SKILL", CANVAS_GROUP_MAINWND_MAIN);
+				menu->GetComponent<CanvasRenderer>()->SetInteractive(false);
+
+				menu->AddComponent<MenuAnimator>();
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.4f);
+				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+				
 				menu->SetPosition(576.f, 350.f);
 			}
+			// Menu 5 - STAGE SELECT (Button)
+			{
+				EventHandler eventFunc = EventHandler([=]() {});
+				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"RETURN TO MAP", CANVAS_GROUP_MAINWND_MAIN);
+				menu->GetComponent<CanvasRenderer>()->SetInteractive(false);\
+
+				menu->AddComponent<MenuAnimator>();
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.8f);
+				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+				menu->SetPosition(576.f, 390.f);
+			}
+
+			// ==== Test Menu ========
+			{
+
+				// Menu (2 - 0) - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+				{
+					EventHandler eventFunc = EventHandler([=]() {
+
+						ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
+
+					});
+					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
+					menu->SetPosition(1600.f, 600.f);
+				}
+				{
+					EventHandler eventFunc = EventHandler([=]() {
+
+						PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 주무장으로 에임미사일을
+
+					});
+					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
+					menu->SetPosition(1600.f, 650.f);
+				}
+				//
+
+				// Menu (2 - 1) - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+				{
+					EventHandler eventFunc = EventHandler([=]() {
+
+						ItemManager::GetInstance()->BuyItem(L"Weapon", L"Cannon");
+
+					});
+					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - Cannon ] ", CANVAS_GROUP_MAINWND);
+					menu->SetPosition(1600.f, 700.f);
+				}
+				{
+					EventHandler eventFunc = EventHandler([=]() {
+
+						PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Cannon"); // 보조무장으로 캐논을
+
+					});
+					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon -Cannon ] ", CANVAS_GROUP_MAINWND);
+					menu->SetPosition(1600.f, 750.f);
+				}
+				//
+
+				// Menu (2 - 2) - EQuipSkill (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
+				{
+					EventHandler eventFunc = EventHandler([=]() {
+
+						PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Skill", L"EscapeMove"); //스킬슬롯 첫번째 파츠에 스킬을 셋하겠다.
+
+					});
+					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) SkillSlot - First Parts : EscapeMove", CANVAS_GROUP_MAINWND);
+					menu->SetPosition(1600.f, 800.f);
+				}
+			}
+
+
+
 		}
 		// description (text)
 		{
@@ -213,7 +491,7 @@ public:
 		}
 	}
 
-	static void DogfightStageWindow(GameObject* _player)
+	static void StageWindow(GameObject* _player)
 	{
 		// reference
 		{
@@ -365,6 +643,13 @@ public:
 
 
 			_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
+
+			// enemy detector
+			{
+				auto enemyDetector = UIFactory::Prefab_EnemyDetector(crosshair, CANVAS_GROUP_STAGE1);
+				enemyDetector->SetPosition(WINCX*0.5f, WINCY*0.5f);
+			}
+
 		}
 
 		// altitude
@@ -403,7 +688,6 @@ public:
 			auto rader = UIFactory::Prefab_Rader(CANVAS_GROUP_STAGE1);
 			rader->SetPosition(250.f, 875.f);
 		}
-
 		// Player Info
 		{
 			float interval = 36.f;
@@ -563,6 +847,16 @@ public:
 		auto scripter =
 			INSTANTIATE()->
 			AddComponent<Scripter>(&desc_scr);
+	}
+
+	static void BossUI()
+	{
+		//name
+		auto name = UIFactory::Prefab_Stage_BossName(L"JUN JOHN SON");
+		name->SetPosition(WINCX * 0.5f, -80.f);
+		//hp slider
+		auto slider = UIFactory::Prefab_Stage_BossHpSlider();
+		slider->SetPosition(WINCX * 0.5f, -40.f);
 	}
 };
 

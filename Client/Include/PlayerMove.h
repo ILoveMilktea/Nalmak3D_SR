@@ -14,7 +14,6 @@ public:
 	virtual void ExitState() override;
 
 
-	void TemproryAttackFunc(); 
 	Quaternion* Rotation(const Vector3& _dir);
 	//Vector3 Move(const int& _dirPara = 0);
 private:
@@ -23,7 +22,6 @@ private:
 	class PlayerInfoManager* m_playerInfo;
 	class MouseOption* m_mouse;
 	float m_accel = 0;
-	class UseItem* m_useItem;
 
 
 };

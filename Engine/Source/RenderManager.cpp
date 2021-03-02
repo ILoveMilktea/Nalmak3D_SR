@@ -16,7 +16,7 @@
 #include "LightManager.h"
 #include "PointLight.h"
 #include "Transform.h"
-
+#include "DepthStencil.h"
 USING(Nalmak)
 IMPLEMENT_SINGLETON(RenderManager)
 RenderManager::RenderManager()
@@ -46,7 +46,6 @@ void RenderManager::Initialize()
 
 	m_currentMaterial = nullptr;
 	m_currentShader = nullptr;
-	m_currentVIBuffer = nullptr;
 
 	m_cameraList.clear();
 
@@ -118,21 +117,25 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	ClearRenderTarget(L"GBuffer_Light");
 	ClearRenderTarget(L"GBuffer_Shade");
 	ClearRenderTarget(L"GBuffer_Debug");
+	ClearRenderTarget(L"GBuffer_Transparent");
+	ClearDepthStencil(L"Stencil_Transparent");
 
 	SkyboxPass(_cBuffer);
 
 	GBufferPass(_cam, _cBuffer);
 
+	TransparentPass(_cam, _cBuffer);
+
 	LightPass(_cam,_cBuffer);
 
 	ShadePass(_cBuffer);
+
+
 
 	DebugPass(_cBuffer);
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
-
-	TransparentPass(_cam,_cBuffer);
 
 	UIPass(_cam, _cBuffer);
 }
@@ -178,11 +181,7 @@ void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
 
 void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 {
-	ClearRenderTarget(L"GBuffer_Diffuse");
-	ClearRenderTarget(L"GBuffer_Normal");
-	ClearRenderTarget(L"GBuffer_Depth");
-	ClearRenderTarget(L"GBuffer_Light");
-	ClearRenderTarget(L"GBuffer_Shade");
+
 
 	SkyboxPass(_cBuffer);
 
@@ -202,6 +201,7 @@ void RenderManager::GBufferPass(Camera * _cam, ConstantBuffer& _cBuffer)
 	RenderNoneAlpha(_cam, _cBuffer, RENDERING_MODE_CUTOUT);
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
+
 
 	EndRenderTarget();
 }
@@ -253,7 +253,7 @@ void RenderManager::PointLightPass(Camera* _cam, ConstantBuffer & _cBuffer)
 
 		Matrix world;
 		Vector3 pos = pointLight->GetTransform()->GetWorldPosition();
-		float scale = pointLight->GetRadius();
+		float scale = pointLight->GetRadius() * 2;
 		pointLight->SetLightPosition(pos);
 
 		Matrix matTrs, matScale;
@@ -309,6 +309,8 @@ void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _ligh
 	m_device->SetRenderState(D3DRS_ZWRITEENABLE, true);
 	m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
 	m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_NOTEQUAL);
+	m_device->SetRenderState(D3DRS_STENCILREF, 0);
+
 	m_device->SetRenderState(D3DRS_TWOSIDEDSTENCILMODE, false);
 
 	m_currentShader->SetValue("g_pointLight", &_lightInfo, sizeof(PointLightInfo));
@@ -323,8 +325,20 @@ void RenderManager::PointLightPass(const Matrix& _matWorld, PointLightInfo _ligh
 
 void RenderManager::ShadePass(ConstantBuffer & _cBuffer)
 {
+
+	//RecordDepthStencil(L"Stencil_Transparent");
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_EQUAL));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILREF, 0)); // 1과 같을때 통과
+
 	Material* material = m_resourceManager->GetResource<Material>(L"GBuffer_Shade");
 	RenderByMaterialToScreen(material, _cBuffer);
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_ALWAYS));
+
+	//EndDepthStencil(L"Stencil_Transparent");
 }
 
 void RenderManager::DebugPass(ConstantBuffer & _cBuffer)
@@ -350,24 +364,28 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHATESTENABLE, false));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
+	RecordRenderTarget(0, L"GBuffer_Transparent");
 
-	for (auto& MeshRendererList : m_renderLists[RENDERING_MODE_TRANSPARENT])
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
+
+	for (auto& renderList : m_renderLists[RENDERING_MODE_TRANSPARENT])
 	{
-		for (auto& renderer : MeshRendererList.second)
+		for (auto& renderer : renderList.second)
 		{
 			if (_cam->CompareLayer(renderer->GetLayer()))
 			{
 				if (_cam->IsInFrustumCulling(renderer))
 				{
-					Material* material = renderer->GetMaterial();
-					UpdateMaterial(material, _cBuffer);
-					UpdateVIBuffer(renderer);
+					renderer->BindingStreamSource();
+					for (int i = 0; i < renderer->GetMaterialCount(); ++i)
+					{
+						Material* material = renderer->GetMaterial(i);
+						UpdateMaterial(material, _cBuffer);
 
-					renderer->Render();
+						renderer->Render(m_currentShader, i);
+					}
 				}
 			}
 		}
@@ -377,18 +395,22 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	{
 		m_currentShader->EndPass();
 	}
-	ThrowIfFailed(m_device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW));
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+
+	EndRenderTarget(L"GBuffer_Transparent");
 }
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 {
-	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
-	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
+
 
 	for (auto& renderer : m_renderUILists)
 	{
@@ -396,11 +418,12 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 		{
 			if (_cam->IsInFrustumCulling(renderer))
 			{
+				renderer->BindingStreamSource();
+
 				Material* material = renderer->GetMaterial();
 				UpdateMaterial(material, _cBuffer);
-				UpdateVIBuffer(renderer);
 
-				renderer->Render();
+				renderer->Render(m_currentShader, 0);
 			}
 		}
 	}
@@ -409,7 +432,8 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->EndPass();
 	}
-	//ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 }
 
@@ -426,13 +450,15 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 			{
 				if (_cam->IsInFrustumCulling(renderer))
 				{
-					Material* material = renderer->GetMaterial();
-					UpdateNoneAlphaMaterial(material, _cBuffer);
-					UpdateRenderTarget();
+					renderer->BindingStreamSource();
 
-					UpdateVIBuffer(renderer);
-
-					renderer->Render();
+					for (int i = 0; i < renderer->GetMaterialCount(); ++i)
+					{
+						Material* material = renderer->GetMaterial(i);
+						UpdateMaterial(material, _cBuffer);
+						UpdateRenderTarget();
+						renderer->Render(m_currentShader, i);
+					}
 				}
 			}
 		}
@@ -446,7 +472,6 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 
 void RenderManager::Reset()
 {
-
 	m_currentMaterial = nullptr;
 
 	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)
@@ -537,6 +562,7 @@ void RenderManager::AddCamera(GameObject * _cam)
 	AddCamera(_cam->GetComponent<Camera>());
 }
 
+
 void RenderManager::UpdateMaterial(Material * _material, ConstantBuffer & _cBuffer)
 {
 	if (m_currentMaterial != _material)
@@ -626,11 +652,7 @@ void RenderManager::UpdateFillMode(Material * _material)
 
 }
 
-void RenderManager::UpdateVIBuffer(IRenderer * _renderer)
-{
-	auto viBuffer = _renderer->GetVIBuffer();
-	_renderer->BindingStreamSource();
-}
+
 
 void RenderManager::UpdateRenderTarget()
 {
@@ -696,6 +718,16 @@ void RenderManager::EndRenderTarget(const wstring & _name)
 	m_resourceManager->GetResource<RenderTarget>(_name)->EndRecord();
 }
 
+void RenderManager::RecordDepthStencil(const wstring & _name)
+{
+	m_resourceManager->GetResource<DepthStencil>(_name)->StartRecord();
+}
+
+void RenderManager::EndDepthStencil(const wstring & _name)
+{
+	m_resourceManager->GetResource<DepthStencil>(_name)->EndRecord();
+}
+
 void RenderManager::SetWindowSize(UINT _x, UINT _y)
 {
 	m_wincx = _x;
@@ -734,4 +766,9 @@ void RenderManager::DeleteCamera(Camera * _cam)
 void RenderManager::ClearRenderTarget(const wstring & _targetName)
 {
 	m_resourceManager->GetResource<RenderTarget>(_targetName)->Clear();
+}
+
+void RenderManager::ClearDepthStencil(const wstring & _targetName)
+{
+	m_resourceManager->GetResource<DepthStencil>(_targetName)->Clear();
 }

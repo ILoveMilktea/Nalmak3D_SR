@@ -105,7 +105,6 @@ private:
 
 private:
 	Material* m_currentMaterial; // 최적화.. Material별로 그리기 설정을 최소화
-	VIBuffer* m_currentVIBuffer; // Mesh별 그리기 최소화
 	Shader* m_currentShader; // Shader별로 그리기 설정 최소화
 	RenderTarget* m_currentRenderTarget[4]; // RenderTarget 별로 그리기 설정 최소화
 
@@ -119,13 +118,14 @@ private:
 	void UpdateNoneAlphaMaterial(Material* _material, ConstantBuffer& _cBuffer);
 	void UpdateBlendingMode(Material * _material);
 	void UpdateFillMode(Material* _material);
-	void UpdateVIBuffer(IRenderer* _renderer);
 	void UpdateRenderTarget();
 	void EndRenderTarget();
 	void UpdateShader(Shader* _shader, ConstantBuffer& _cBuffer);
 private:
 	void RecordRenderTarget(UINT _index, const wstring& _name);
 	void EndRenderTarget(const wstring& _name);
+	void RecordDepthStencil(const wstring& _name);
+	void EndDepthStencil(const wstring& _name);
 public:
 	void SetWindowSize(UINT _x, UINT _y);
 public:
@@ -148,6 +148,7 @@ private:
 
 private:
 	void ClearRenderTarget(const wstring& _targetName);
+	void ClearDepthStencil(const wstring& _targetName);
 
 };
 

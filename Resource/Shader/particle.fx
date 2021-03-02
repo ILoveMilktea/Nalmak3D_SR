@@ -20,6 +20,7 @@ struct VS_INPUT
 	float4 worldMatrix3 : TEXCOORD3;
 	float4 worldMatrix4 : TEXCOORD4;
 	float4 color : TEXCOORD5;
+	float4 xCount_yCount_index: TEXCOORD6;
 };
 
 struct VS_OUTPUT
@@ -44,21 +45,21 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; // 초기화 필수!
 	float4x4 world = { _input.worldMatrix1 , _input.worldMatrix2 , _input.worldMatrix3 , _input.worldMatrix4 };
-	/*{ 
-		worldMatrix1.x,worldMatrix1.y,worldMatrix1.z,worldMatrix1.w,
-		worldMatrix2.x,worldMatrix2.y,worldMatrix2.z,worldMatrix2.w,
-		worldMatrix3.x,worldMatrix3.y,worldMatrix3.z,worldMatrix3.w,
-		worldMatrix4.x,worldMatrix4.y,worldMatrix4.z,worldMatrix4.w
-	};*/
-	float4x4 invViewRot = 0;
-	invViewRot = g_cBuffer.invView;
-	/*invViewRot._41 = 0;
-	invViewRot._42 = 0;
-	invViewRot._43 = 0;*/
-	world = mul(invViewRot, world);
+
+
+	float invWidth = 1 / _input.xCount_yCount_index.x;
+	float invHeight= 1 / _input.xCount_yCount_index.y; 
+	int index = _input.xCount_yCount_index.z;
+
+
+	int height = index * invWidth;
+	int width = index - (_input.xCount_yCount_index.x * height);
+	float2 uv = _input.uv * float2(invWidth, invHeight);
+	uv += float2(invWidth * width, invHeight * height);
+	o.uv = uv;
+
 	float4x4 wvp = mul(world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
-	o.uv = _input.uv;
 	o.color = _input.color;
 	
 	return o;
@@ -81,7 +82,7 @@ technique DefaultTechnique
 	{
 		/*ZEnable = false;
 		ZWriteEnable = false;*/
-		//CullMode = CCW;
+		CullMode = CCW;
 
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();

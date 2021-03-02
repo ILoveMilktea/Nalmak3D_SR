@@ -61,7 +61,7 @@ public:
 		return castState;
 	}
 
-	const wstring& GetCurStateString();
+	wstring GetCurStateString();
 	void InitState(wstring _stateName);
 	void SetState(const wstring& _stateName);
 	bool CompareState(wstring _stateName);

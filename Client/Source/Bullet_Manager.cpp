@@ -57,10 +57,10 @@ void Bullet_Manager::Fire_Gun(Vector3 _start, Quaternion _rot, int _dmg, float _
 	Gun_Desc.iDmg = _dmg;
 	Gun_obj->AddComponent<MachineGun>(&Gun_Desc);
 
-	MeshRenderer::Desc Gun_Mesh;
-	Gun_Mesh.mtrlName = L"default";
-	Gun_Mesh.meshName = L"box";
-	Gun_obj->AddComponent<MeshRenderer>(&Gun_Mesh);
+	VIBufferRenderer::Desc Bullet_Mesh;
+	Bullet_Mesh.mtrlName = L"default";
+	Bullet_Mesh.meshName = L"box";
+	Gun_obj->AddComponent<VIBufferRenderer>(&Bullet_Mesh);
 
 	SphereCollider::Desc Gun_col;
 	Gun_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
@@ -83,10 +83,10 @@ void Bullet_Manager::Fire_Missile(Vector3 _start, Quaternion _rot,
 	Missile_Desc.fMaxSpd = _maxSpd;
 	Missile_obj->AddComponent<Missile>(&Missile_Desc);
 
-	MeshRenderer::Desc Missile_Mesh;	
+	VIBufferRenderer::Desc Missile_Mesh;
 	Missile_Mesh.mtrlName = L"default";
 	Missile_Mesh.meshName = L"box";
-	Missile_obj->AddComponent<MeshRenderer>(&Missile_Mesh);
+	Missile_obj->AddComponent<VIBufferRenderer>(&Missile_Mesh);
 
 	SphereCollider::Desc Missile_col;
 	Missile_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
@@ -155,10 +155,10 @@ void Bullet_Manager::Fire_Player(Vector3 _start, Quaternion _rot, float _spd)
 	Gun_Desc.fSpd = _spd;
 	Gun_obj->AddComponent<MachineGun>(&Gun_Desc);
 
-	MeshRenderer::Desc Gun_Mesh;
+	VIBufferRenderer::Desc Gun_Mesh;
 	Gun_Mesh.mtrlName = L"default";
 	Gun_Mesh.meshName = L"box";
-	Gun_obj->AddComponent<MeshRenderer>(&Gun_Mesh);
+	Gun_obj->AddComponent<VIBufferRenderer>(&Gun_Mesh);
 
 	SphereCollider::Desc Gun_col;
 	Gun_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;

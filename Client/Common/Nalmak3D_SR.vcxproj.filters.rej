@@ -1,0 +1,102 @@
+diff a/Client/Common/Nalmak3D_SR.vcxproj.filters b/Client/Common/Nalmak3D_SR.vcxproj.filters	(rejected hunks)
+@@ -161,15 +148,35 @@
+     <ClInclude Include="..\Include\MachineGun.h">
+       <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
+     </ClInclude>
+-    <ClInclude Include="..\Include\UIWindowFactory.h" />
+-    <ClInclude Include="..\Include\UseItem.h">
+-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
++    <ClInclude Include="..\Include\UIFactory.h">
++      <Filter>97.Factory</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\UIWindowFactory.h">
++      <Filter>97.Factory</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\ScriptReady.h">
++      <Filter>02.Component\03.Script\State</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\ScriptEnd.h">
++      <Filter>02.Component\03.Script\State</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\ScriptPause.h">
++      <Filter>02.Component\03.Script\State</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\ScriptPlay.h">
++      <Filter>02.Component\03.Script\State</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\ScriptWait.h">
++      <Filter>02.Component\03.Script\State</Filter>
+     </ClInclude>
+-    <ClInclude Include="..\Include\Shooter.h">
+-      <Filter>02.Component\00.Manager\PlayerKit</Filter>
++    <ClInclude Include="..\Include\ItemManager.h">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
+     </ClInclude>
+-    <ClInclude Include="DeadTimer.h">
+-      <Filter>02.Component</Filter>
++    <ClInclude Include="..\Include\PlayerItem.h">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\AimMissile.h">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
+     </ClInclude>
+     <ClInclude Include="..\Include\Enemy.h">
+       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
+@@ -183,6 +190,25 @@
+     <ClInclude Include="..\Include\BossStageCamera.h">
+       <Filter>02.Component\00.Manager\FixCamera\BossStageCamera</Filter>
+     </ClInclude>
++    <ClInclude Include="..\Include\Crosshair.h">
++      <Filter>02.Component\02.UI</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\Scripter.h">
++      <Filter>02.Component\03.Script</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\DeadTimer.h" />
++    <ClInclude Include="..\Include\UIWindowFactory.h">
++      <Filter>97.Factory</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\CustomDebuger.h">
++      <Filter>96.Debuger</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\EditController.h">
++      <Filter>96.Debuger</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Include\PlayerShooter.h">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
++    </ClInclude>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="Nalmak3D_SR.cpp">
+@@ -343,6 +366,31 @@
+     <ClCompile Include="..\Source\BossStageCamera.cpp">
+       <Filter>02.Component\00.Manager\FixCamera\BossStageCamera</Filter>
+     </ClCompile>
++    <ClCompile Include="..\Source\ItemManager.cpp">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Source\PlayerItem.cpp">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Source\AimMissile.cpp">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Source\Crosshair.cpp">
++      <Filter>02.Component\02.UI</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Source\Scripter.cpp">
++      <Filter>02.Component\03.Script</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Source\DeadTimer.cpp" />
++    <ClCompile Include="..\Source\CustomDebuger.cpp">
++      <Filter>96.Debuger</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Source\EditController.cpp">
++      <Filter>96.Debuger</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Source\PlayerShooter.cpp">
++      <Filter>02.Component\00.Manager\ItemManger</Filter>
++    </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <Image Include="Nalmak3D_SR.ico">

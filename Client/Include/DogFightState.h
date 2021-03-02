@@ -6,7 +6,7 @@ public:
 	DogFightState();
 	~DogFightState();
 
-	// IStateÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// IStateï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
@@ -37,7 +37,4 @@ private:
 	float	m_fDogFightScore = 0.f;
 
 	int		m_iFrame = 0;
-
-	int		m_iPattern = 3;
 };
-

@@ -152,6 +152,21 @@ public:
 		return _v1.x * _v2.x + _v1.y * _v2.y;
 	}
 
+	static Quaternion Normalize(const Quaternion& _v)
+	{
+		float vl = Length(_v);
+		if (vl == 0)
+			return Quaternion(0, 0, 0, 1);
+
+		Quaternion vec;
+		vec.x = _v.x / vl;
+		vec.y = _v.y / vl;
+		vec.z = _v.z / vl;
+		vec.w = _v.w / vl;
+
+		return vec;
+	}
+
 	static Vector3 Normalize(const Vector3& _v)
 	{
 		float vl = Length(_v);
@@ -227,7 +242,10 @@ public:
 	{
 		return (_v.x * _v.x + _v.y * _v.y + _v.z * _v.z);
 	}
-
+	static float Length(const Quaternion& _v)
+	{
+		return sqrt(_v.x * _v.x + _v.y * _v.y + _v.z * _v.z + _v.w * + _v.w);
+	}
 
 	static const Vector3 Cross(const Vector3& _v1, const Vector3& _v2)
 	{
@@ -249,6 +267,43 @@ public:
 	static const float Cross(const Vector2& _v1, const Vector2& _v2)
 	{
 		return _v1.x * _v2.y - _v1.y * _v2.x;
+	}
+	
+	static const void GetMatrixRotateAtoB(Matrix* _out, const Vector3& _v1, const Vector3& _v2)
+	{
+		Vector3 d1 = Nalmak_Math::Normalize(_v1);
+		Vector3 d2 = Nalmak_Math::Normalize(_v2);
+
+		float angle = Nalmak_Math::Dot(d1, d2);
+
+		Vector3 axis;
+		D3DXVec3Cross(&axis, &d1, &d2);
+		D3DXMatrixRotationAxis(_out, &axis, acos(angle));
+
+	}
+
+	static const void GetMatrixRotateACoordtoBCoord(Matrix* _out,
+		const Vector3& _rightA, const Vector3& _upA, const Vector3& _lookA,
+		const Vector3& _rightB, const Vector3& _upB, const Vector3& _lookB)
+	{
+		Matrix A, B;
+		ZeroMemory(_out, sizeof(Matrix));
+		ZeroMemory(&A, sizeof(Matrix));
+		ZeroMemory(&B, sizeof(Matrix));
+
+		memcpy(&A._11, &_rightA, sizeof(Vector3));
+		memcpy(&A._21, &_upA, sizeof(Vector3));
+		memcpy(&A._31, &_lookA, sizeof(Vector3));
+
+		memcpy(&B._11, &_rightB, sizeof(Vector3));
+		memcpy(&B._21, &_upB, sizeof(Vector3));
+		memcpy(&B._31, &_lookB, sizeof(Vector3));
+
+		D3DXMatrixTranspose(&A, &A);
+
+		_out->_44 = 1;
+
+		*_out = A * B;
 	}
 
 	static const Vector3 QuaternionToEuler(Quaternion _q)

@@ -15,7 +15,7 @@ void Sphere::Initialize(wstring _fp)
 {
 	m_heightSliceCount = 50;
 	m_widthSliceCount = 50;
-	m_radius = 1.f;
+	m_radius = 0.5f;
 
 	CreateVertexBuffer();
 	CreateIndexBuffer();
@@ -42,7 +42,7 @@ void Sphere::CreateVertexBuffer()
 	m_vBuffer->Lock(0, 0, (void**)&vertices, 0);
 
 	int vertexCount = 0;
-	float radius = m_radius * 0.5f;
+	float radius = m_radius;
 	vertices[vertexCount].position = Vector3(0, radius, 0);
 	vertices[vertexCount].normal = Vector3(0, 1, 0);
 	vertices[vertexCount].uv = Vector2(1, 0);

@@ -27,9 +27,9 @@ void SmoothFollow::Initialize()
 	assert(L"Please Set Target!" && m_toTarget);
 	m_fromObject =  Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
 	m_fromObject->SetParents(m_gameObject);
-	//SetParents : ºÎ¸ð¸¦ ¼³Á¤ÇØÁÖ´Â°Çµ¥
-	//ºÎ¸ð¸¦ ¼³Á¤ÇÏ¸é ÇØ´ç ¿ÀºêÁ§Æ®ÀÇ À§Ä¡, ·ÎÅ×ÀÌ¼ÇÀº world ±âÁØÀÌ ¾Æ´Ï¶ó °Å ºÎ¸ð»ó´ë ÁÂÇ¥·Î ¹Ù²ñ.
-	//ÀÌ ÄÚµå ÇØ¼® => SmoothFollow : "im ur father, mainCamera"
+	//SetParents : ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°Çµï¿½
+	//ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ä¡, ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ world ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Ù²ï¿½.
+	//ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ø¼ï¿½ => SmoothFollow : "im ur father, mainCamera"
 
 	m_playerInfo = PlayerInfoManager::GetInstance();
 
@@ -45,7 +45,7 @@ void SmoothFollow::Update()
 void SmoothFollow::LateUpdate()
 {
 	Matrix temproyWorldMatrix = m_toTarget->GetTransform()->GetWorldMatrix();
-	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * (m_culDistance * 2);
+	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * (m_culDistance);
 
 
 	m_followDirection = Nalmak_Math::Lerp(m_followDirection, -m_toTarget->GetTransform()->GetForward() , dTime * 1.5f);

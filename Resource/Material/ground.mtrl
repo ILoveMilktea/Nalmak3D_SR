@@ -5,7 +5,7 @@
 shader "ground"
 
 texture "g_mainTex" "ground1"
-vector4 "g_fadeColor" "0.54f,0.85f,0.97f, 0.f"
+vector4 "g_fadeColor" "0.572f,0.66f,0.819f, 0.f"
 float "g_moveSpeed" "0.001f"
 renderQueue "0"
 

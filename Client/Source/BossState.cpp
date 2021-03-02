@@ -4,7 +4,7 @@
 #include "EnemyManager.h"
 #include "PlayerTopViewMove.h"
 #include "PlayerBossStageMove.h"
-
+#include "UIWindowFactory.h"
 
 BossState::BossState()
 {
@@ -27,7 +27,7 @@ void BossState::EnterState()
 
 	if (m_pMainCamera == nullptr)
 	{
-		assert(L"¾Æ ¤»¤» ¸ÞÀÎ Ä«¸Þ¶ó ¸øÃ£°Ú´Ù°í ¤»¤»");
+		assert(L"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ã£ï¿½Ú´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½");
 	}
 
 	//m_pMainCamera->SetPosition(0.f, 100.f, 0.f);
@@ -37,7 +37,7 @@ void BossState::EnterState()
 	m_pPlayer = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 	if (m_pPlayer == nullptr)
 	{
-		assert(L"ÇÃ·¹ÀÌ¾î ¸ø¹ÞÀº°Å °°Àºµ¥¿© ¤»¤»;;");
+		assert(L"ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½;;");
 	}
 
 
@@ -52,9 +52,13 @@ void BossState::EnterState()
 
 	//if (m_pPlayer == nullptr)
 	//{
-	//	assert(L"º¸½º ¸ø¹ÞÀº°Å °°Àºµ¥¿© ¤»¤»;;");
+	//	assert(L"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½;;");
 	//}
 
+	// ==== UI ====
+	UIWindowFactory::BossUI();
+	m_bossui = false;
+	// ==== UI ====
 
 	m_bEnter = true;
 }
@@ -106,7 +110,7 @@ void BossState::Add_Score(float _score)
 bool BossState::EnterProduce()
 {
 	//1. player move to certain pos
-	
+
 	if (m_bPlayerSetting)
 	{
 		m_pPlayer->GetTransform()->position = Nalmak_Math::Lerp(m_pPlayer->GetTransform()->position, m_vPlayerInitPos, dTime * 2);
@@ -136,15 +140,32 @@ bool BossState::EnterProduce()
 			}
 		}
 	}
-	
+
 	//2. Camera shaking
 	if (m_bCameraShaking)
 	{
 		m_pMainCamera->GetTransform()->position = RandForShaking() * fShakingForce + vCameraOrigin;
 		fShakingTime -= dTime;
+
+
+		if (!m_bossui)
+		{
+			m_bossui = true;
+			list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_BOSSHP);
+
+			for (auto ui : group)
+			{
+				BossUIAnimator* animator = ui->GetComponent<BossUIAnimator>();
+
+				if (animator)
+				{
+					animator->StartMoveDown(160.f);
+				}
+			}
+		}
 	}
-	
-	//3. Boss Appear 
+
+	//3. Boss Appear
 	if (m_pBoss && m_bBossMove)
 	{
 		m_pBoss->GetTransform()->position.z -= dTime * 10.f;
@@ -153,7 +174,7 @@ bool BossState::EnterProduce()
 		{
 			m_bPlayerMove = true;
 		}
-		
+
 		if (m_bPlayerMove)
 		{
 			m_pPlayer->GetTransform()->position.z -= dTime *10.f;
@@ -172,8 +193,8 @@ bool BossState::EnterProduce()
 	{
 		m_pPlayer->GetTransform()->rotation.z = 0.f;
 
-		m_pMainCamera->GetTransform()->position.z 
-			= Nalmak_Math::Lerp(m_pMainCamera->GetTransform()->position.z, 
+		m_pMainCamera->GetTransform()->position.z
+			= Nalmak_Math::Lerp(m_pMainCamera->GetTransform()->position.z,
 				m_pPlayer->GetTransform()->position.z - 50.f, dTime);
 
 		m_pMainCamera->GetTransform()->position.y
@@ -181,21 +202,21 @@ bool BossState::EnterProduce()
 				0.f, dTime);
 
 		m_pMainCamera->GetTransform()->SetRotationX(0);
-		
+
 		if (m_pMainCamera->GetTransform()->position.y <= 0.02f)
 		{
  			m_bCameraProduce = false;
 
 			m_pMainCamera->GetTransform()->position = Vector3( 0.f,0.f,-100.f);
 			m_pPlayer->GetTransform()->position = Vector3(0.f, 0.f, -50.f);
-			
+
 
 			return true;
 		}
 	}
 	return false;
-	
-	
+
+
 	//4. Camera Moving
 }
 
@@ -211,4 +232,3 @@ void BossState::CameraShaking()
 void BossState::BossAppear()
 {
 }
-

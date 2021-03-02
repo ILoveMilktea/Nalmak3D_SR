@@ -415,10 +415,10 @@ void Transform::ResetRelative()
 
 void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 {
-	/* ¿øÇÏ´Â °× ¿É¢hÀ» ³ÖÀ¸¸é ±×ÂÊÀ¸·Î ¹Ù¶óº¾´Ï´Ù */
+	/* ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½É¢hï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶óº¾´Ï´ï¿½ */
 	/* */
 
-	/* 1. °´Ã¼¿Í Å¸°Ù »çÀÌÀÇ »çÀÌº¤ÅÍ ±¸ÇÏ±â*/
+	/* 1. ï¿½ï¿½Ã¼ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½*/
 	Vector3 vDir = _Target->GetTransform()->position - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
@@ -429,26 +429,26 @@ void Transform::LookAt(GameObject * _Target, float _Spd, Quaternion * _qOut)
 		return;
 	}
 
-	/* 2. È¸ÀüÀ» À§ÇÑ ÀÓÀÇÀÇ ÃàÀ» ±¸ÇÏ±â À§ÇØ¼­
-	°´Ã¼ÀÇ look(forward)º¤ÅÍ¿Í Å¸°Ù »çÀÌ¿ÍÀÇ º¤ÅÍ¸¦ ¿ÜÀû*/
+	/* 2. È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
+	ï¿½ï¿½Ã¼ï¿½ï¿½ look(forward)ï¿½ï¿½ï¿½Í¿ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
-	/* ÀÓÀÇÀÇ ÃàÀ¸·Î ¾ó¸¸Å­ È¸ÀüÀ» ÇßÀ» ¶§ ³ª¿À´Â ÄõÅÍ´Ï¾ðÀ» ¹Þ¾Æ¿Í¼­ Àû¿ë ½ÃÄÑÁØ´Ù. */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í´Ï¾ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
 
 	if (_qOut != nullptr)
 	{	*_qOut = QuartTemp;	}
 
 
-	/* Å×½ºÆ® */
+	/* ï¿½×½ï¿½Æ® */
 	m_transform->rotation *= QuartTemp;
 }
 
 void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 {
-	/* 1. °´Ã¼¿Í Å¸°Ù »çÀÌÀÇ »çÀÌº¤ÅÍ ±¸ÇÏ±â*/
+	/* 1. ï¿½ï¿½Ã¼ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½*/
 	Vector3 vDir = _pos - m_transform->position;
 	D3DXVec3Normalize(&vDir, &vDir);
 
@@ -458,13 +458,13 @@ void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 		return;
 	}
 
-	/* 2. È¸ÀüÀ» À§ÇÑ ÀÓÀÇÀÇ ÃàÀ» ±¸ÇÏ±â À§ÇØ¼­
-	°´Ã¼ÀÇ look(forward)º¤ÅÍ¿Í Å¸°Ù »çÀÌ¿ÍÀÇ º¤ÅÍ¸¦ ¿ÜÀû*/
+	/* 2. È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
+	ï¿½ï¿½Ã¼ï¿½ï¿½ look(forward)ï¿½ï¿½ï¿½Í¿ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	Vector3 vAxis = { 0.f, 0.f, 0.f };
 	D3DXVec3Cross(&vAxis, &look, &vDir);
 	D3DXVec3Normalize(&vAxis, &vAxis);
 
-	/* ÀÓÀÇÀÇ ÃàÀ¸·Î ¾ó¸¸Å­ È¸ÀüÀ» ÇßÀ» ¶§ ³ª¿À´Â ÄõÅÍ´Ï¾ðÀ» ¹Þ¾Æ¿Í¼­ Àû¿ë ½ÃÄÑÁØ´Ù. */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í´Ï¾ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½. */
 	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, dTime*_Spd);
 	if (_qOut != nullptr)
 	{		*_qOut = QuartTemp;	}

@@ -18,6 +18,13 @@
 #include "SceneChanger.h"
 #include "PlayerBossStageMove.h"
 #include "PlayerNone.h"
+#include "PlayerShooter.h"
+
+// playerskill 시전자
+#include "PlayerSkillActor.h"
+
+//스킬 상태별 상태
+#include "PlayerEscapeState.h"
 
 DogFightState::DogFightState()
 {
@@ -39,8 +46,9 @@ void DogFightState::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
+
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
-	m_Player->SetScale(0.1f, 0.1f, 0.1f);
+	m_Player->SetScale(0.8f, 0.8f, 0.8f);
 
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
@@ -48,18 +56,27 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
+
+	// 스킬관려된 스테이트
+	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
+
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
-	render.mtrlName = L"default"; //210223ȭ 12:50 ������ ������ �ȳ��ͼ� ���� �ٲ���
-	render.meshName = L"flight";
+	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.meshName = L"f15";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
-
+	m_Player->AddComponent<PlayerShooter>();
+	m_Player->AddComponent<PlayerSkillActor>();
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();
+
+	//ParticleRenderer::Desc particle;
+	//particle.particleDataName = L"20mmCannon";
+	//m_Player->AddComponent<ParticleRenderer>(&particle);
 
 	//m_Player->AddComponent<PlayerToTopView>();
 
@@ -69,10 +86,10 @@ void DogFightState::EnterState()
 	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	*/
 
-	auto infoManager = PlayerInfoManager::GetInstance();
-	infoManager->SetTimeLimit(2000.f);
-	infoManager->SetScore(123456.f);
-	infoManager->SetPlayer(m_Player);
+	//auto infoManager = PlayerInfoManager::GetInstance();
+	//infoManager->SetTimeLimit(2000.f);
+	//infoManager->SetScore(123456.f);
+	//infoManager->SetPlayer(m_Player);
 
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
@@ -82,7 +99,7 @@ void DogFightState::EnterState()
 	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 
 	m_Player->AddComponent<UIInteractor>();
-	UIWindowFactory::DogfightStageWindow(m_Player);
+	UIWindowFactory::StageWindow(m_Player);
 
 	EnemyManager::GetInstance();
 
@@ -131,12 +148,12 @@ void DogFightState::UpdateState()
 			EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-50.f, -20.f, 150.f), ENEMY_STATE::DROP,
 				tStatus, tGun, tMissile);
 		}
-		
+
 		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
 		{
 			EnemyManager::GetInstance()->Destroy_AllEnemy();
 		}
-		
+
 
 
 		//int i = EnemyManager::GetInstance()->Get_EnemyCount();
@@ -148,8 +165,6 @@ void DogFightState::UpdateState()
 		//지금 Enter에서 에너미 생성하면 newGameobjectList에 담기니까
 		//gameobjectlist에는 Enemy가 없으니 바로 ScenetoEvasion으로 넘어옴.
 		//그리고 나서 Player도 newGameObjectList에 있으니 못 찾아와서 팅김.
-
-
 
 
 		if (m_bProduce)
@@ -176,7 +191,7 @@ void DogFightState::ExitState()
 	//monster들 다 없애기
 
 
-	
+
 }
 
 float DogFightState::Get_Time() const
@@ -207,14 +222,18 @@ void DogFightState::SceneToEvasion()
 	{
 		m_Player->GetComponent<StateControl>()->SetState(L"playerNone");
 
-		Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
-		Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
 
-		DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
+		if (Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"))
+		{
+			Vector3 PosTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->position;
+			Quaternion RotTemp = Core::GetInstance()->FindObjectByName(0, L"SmoothFollow")->GetTransform()->rotation;
 
+			DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
 
-		m_MainCamera->GetTransform()->position = PosTemp;
-		m_MainCamera->GetTransform()->rotation = RotTemp;
+			m_MainCamera->GetTransform()->position = PosTemp;
+			m_MainCamera->GetTransform()->rotation = RotTemp;
+		}
+
 
 		vPlayerOrigin = m_Player->GetTransform()->position;
 
@@ -235,5 +254,5 @@ void DogFightState::Accelerate()
 	//if u using lerp, object will be slower in lowFrame Computer.
 
 	m_fSpd = dTime * 500.f;
-	
+
 }

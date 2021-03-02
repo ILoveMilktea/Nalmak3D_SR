@@ -18,7 +18,7 @@ public:
 	float startSpeed = 0.f;
 	float endSpeed = 0.f;
 	float angle = 0.f;
-	Vector3 angularVelocity = Vector3(0, 0, 0);
+	float angluarVelocity = 0.f;
 	float startScale = 1.f;
 	float endScale = 0.f;
 	Vector4 startColor = Vector4(1, 1, 1, 1);
@@ -26,13 +26,14 @@ public:
 	float lifeTime = 3.f;
 	float gravityScale = 0.f;
 	Transform* parents = nullptr;
+	float StretchedScale = 2.f;
 private:
 	float m_currentLifeTime = 0.f;
 	bool m_isAlive;
 public:
 	void Reset();
 	bool IsAlive() { return m_isAlive; }
-	void Update(INPUT_LAYOUT_PARTICLE* _info);
+	void Update(INPUT_LAYOUT_PARTICLE* _info, const Matrix& _billboard,float _spriteCountRatio, PARTICLE_BILLBOARD_TYPE _type);
 };
 
 #endif

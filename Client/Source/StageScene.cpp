@@ -9,12 +9,12 @@ void StageScene::Initialize()
 {
 	auto cam = INSTANTIATE()->AddComponent<Camera>();
 	cam->GetTransform()->position = Vector3(0, 0, -1.f);
-	MeshRenderer::Desc render;
+	VIBufferRenderer::Desc render;
 
 
 
 
-	auto obj1 = INSTANTIATE()->AddComponent<MeshRenderer>(&render);
+	auto obj1 = INSTANTIATE()->AddComponent<VIBufferRenderer>(&render);
 	obj1->SetScale(Vector3(1, 1, 3));
 
 

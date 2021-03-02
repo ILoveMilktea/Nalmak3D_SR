@@ -127,7 +127,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Ref/Lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Ref/Lib/;../../Ref/Lib/x64/debug/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Nalmak3D_Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
@@ -179,7 +179,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Ref/Lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Ref/Lib/;../../Ref/Lib/x64/release/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Nalmak3D_Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
@@ -204,6 +204,11 @@
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\Slide_Evasion.h" />
     <ClInclude Include="..\Include\Look_Evasion.h" />
+    <ClInclude Include="..\Include\BulletDirMove.h" />
+    <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
+    <ClInclude Include="..\Include\EnemyDetector.h" />
+    <ClInclude Include="..\Include\EscapeSkill.h" />
+    <ClInclude Include="..\Include\ItemButton.h" />
     <ClInclude Include="..\Include\MachineGun.h" />
     <ClInclude Include="..\Include\Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
@@ -235,17 +240,22 @@
     <ClInclude Include="..\Include\MouseOption.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\NalmakScene.h" />
+    <ClInclude Include="..\Include\ObjLoader.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
+    <ClInclude Include="..\Include\PlayerAttak.h" />
     <ClInclude Include="..\Include\PlayerBossStageMove.h" />
+    <ClInclude Include="..\Include\PlayerEscapeState.h" />
     <ClInclude Include="..\Include\PlayerIdle.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
     <ClInclude Include="..\Include\PlayerItem.h" />
     <ClInclude Include="..\Include\PlayerMove.h" />
     <ClInclude Include="..\Include\PlayerNone.h" />
     <ClInclude Include="..\Include\PlayerShooter.h" />
+    <ClInclude Include="..\Include\PlayerSkillActor.h" />
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\Prymide_Evasion.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
+    <ClInclude Include="..\Include\ScaleDampingDeffender.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
     <ClInclude Include="..\Include\ScriptEnd.h" />
     <ClInclude Include="..\Include\Scripter.h" />
@@ -253,6 +263,8 @@
     <ClInclude Include="..\Include\ScriptPlay.h" />
     <ClInclude Include="..\Include\ScriptReady.h" />
     <ClInclude Include="..\Include\ScriptWait.h" />
+    <ClInclude Include="..\Include\BossUIAnimator.h" />
+    <ClInclude Include="..\Include\SmallCannon.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
@@ -260,13 +272,20 @@
     <ClInclude Include="..\Include\Stage2Scene.h" />
     <ClInclude Include="..\Include\StageManager.h" />
     <ClInclude Include="..\Include\StageScene.h" />
+    <ClInclude Include="..\Include\StageSelectCamera.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Idle.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h" />
     <ClInclude Include="..\Include\StageSelectScene.h" />
+    <ClInclude Include="..\Include\StageSelectSceneManager.h" />
     <ClInclude Include="..\Include\Struct.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
     <ClInclude Include="..\Include\TopViewCamera.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
+    <ClInclude Include="MenuAnimator.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -284,6 +303,11 @@
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\Slide_Evasion.cpp" />
     <ClCompile Include="..\Source\Look_Evasion.cpp" />
+    <ClCompile Include="..\Source\BulletDirMove.cpp" />
+    <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
+    <ClCompile Include="..\Source\EnemyDetector.cpp" />
+    <ClCompile Include="..\Source\EscapeSkill.cpp" />
+    <ClCompile Include="..\Source\ItemButton.cpp" />
     <ClCompile Include="..\Source\MachineGun.cpp" />
     <ClCompile Include="..\Source\Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
@@ -312,17 +336,22 @@
     <ClCompile Include="..\Source\MouseOption.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\NalmakScene.cpp" />
+    <ClCompile Include="..\Source\ObjLoader.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
+    <ClCompile Include="..\Source\PlayerAttak.cpp" />
     <ClCompile Include="..\Source\PlayerBossStageMove.cpp" />
+    <ClCompile Include="..\Source\PlayerEscapeState.cpp" />
     <ClCompile Include="..\Source\PlayerIdle.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />
     <ClCompile Include="..\Source\PlayerItem.cpp" />
     <ClCompile Include="..\Source\PlayerMove.cpp" />
     <ClCompile Include="..\Source\PlayerNone.cpp" />
     <ClCompile Include="..\Source\PlayerShooter.cpp" />
+    <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\Prymide_Evasion.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
+    <ClCompile Include="..\Source\ScaleDampingDeffender.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
     <ClCompile Include="..\Source\ScriptEnd.cpp" />
     <ClCompile Include="..\Source\Scripter.cpp" />
@@ -330,6 +359,8 @@
     <ClCompile Include="..\Source\ScriptPlay.cpp" />
     <ClCompile Include="..\Source\ScriptReady.cpp" />
     <ClCompile Include="..\Source\ScriptWait.cpp" />
+    <ClCompile Include="..\Source\BossUIAnimator.cpp" />
+    <ClCompile Include="..\Source\SmallCannon.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
@@ -337,10 +368,17 @@
     <ClCompile Include="..\Source\Stage2Scene.cpp" />
     <ClCompile Include="..\Source\StageManager.cpp" />
     <ClCompile Include="..\Source\StageScene.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Idle.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
     <ClCompile Include="..\Source\StageSelectScene.cpp" />
+    <ClCompile Include="..\Source\StageSelectSceneManager.cpp" />
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
+    <ClCompile Include="MenuAnimator.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -357,6 +395,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\..\Resource\Shader\20mmCannon.fx" />
     <FxCompile Include="..\..\Resource\Shader\default.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -400,6 +439,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\standard_normal.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

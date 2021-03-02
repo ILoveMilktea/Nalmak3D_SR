@@ -7,9 +7,9 @@ class MoveBySpline :
 public:
 	struct Desc
 	{
-		float moveTime = 3.f;
-		bool isLoop = true;
-		bool isPlay = true;
+		float moveTime = 5.f;
+		bool isLoop = false;
+		bool isPlay = false;
 	};
 public:
 	MoveBySpline(Desc* _desc);
@@ -20,10 +20,12 @@ public:
 	virtual void Update() override;
 
 public:
+	void ClearPoints();
+	void Play();
 	MoveBySpline* AddSplinePoint(const Vector3& _point);
+	bool IsPlaying() { return m_isPlay; }
 private:
 	SplineCurve m_spline;
-
 private:
 	float m_timer;
 	float m_moveTimePerSec;

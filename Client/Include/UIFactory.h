@@ -2,11 +2,16 @@
 #ifndef __UIFACTORY_H__
 #define __UIFACTORY_H__
 
+#include "stdafx.h"
+
 #include "Core.h"
 #include "Rader.h"
 #include "Crosshair.h"
 #include "EditController.h"
 #include "PlayerInfoManager.h"
+#include "EnemyDetector.h"
+#include "BossUIAnimator.h"
+#include "ItemButton.h"
 
 class GameObject;
 
@@ -168,6 +173,7 @@ public:
 	*/
 public:
 
+#pragma region MainMenu
 	static GameObject* Prefab_MenuTitle(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text
@@ -205,6 +211,40 @@ public:
 		menu->GetComponent<Button>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
 		menu->GetComponent<Button>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
 		menu->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
+
+		// text
+		Text::Desc desc;
+		desc.width = 10;
+		desc.height = 25;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		menu->AddComponent<Text>(&desc);
+
+		menu->SetScale(760.f, 30.f);
+		return menu;
+	}
+	static GameObject* Prefab_ItemMenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// button
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+
+		ItemButton::Desc desc_ib;
+		desc_ib.desc_button = desc_bt;
+
+		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"ItemMenuButton");
+		menu->AddComponent<CanvasRenderer>(&desc_cr);
+		menu->AddComponent<ItemButton>(&desc_ib);
+
+		menu->GetComponent<ItemButton>()->ChangeNormalColor(1.f, 1.f, 1.f, 0.f);
+		menu->GetComponent<ItemButton>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
+		menu->GetComponent<ItemButton>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
+		menu->GetComponent<ItemButton>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
 
 		// text
 		Text::Desc desc;
@@ -334,9 +374,11 @@ public:
 
 		return bar;
 	}
+#pragma endregion
 
 public:
 
+#pragma region StageUI
 	static GameObject* Prefab_Stage_TimeText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text
@@ -690,14 +732,90 @@ public:
 		desc_cr.group = _group;
 
 		Rader::Desc desc;
-		desc.findRange = 100.f;
-		desc.readyflight = 5;
+		desc.findRange = 200.f;
+		desc.readyIcon = 10;
 
 		auto rader = INSTANTIATE()->
 			AddComponent<CanvasRenderer>(&desc_cr)->
 			AddComponent<Rader>(&desc);
 		
 		return rader;
+	}
+
+	static GameObject* Prefab_EnemyDetector(GameObject* _crosshair, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		auto boundary = CreateImage(_group,L"detectorBoundary");
+		boundary->SetPosition(WINCX * 0.5f, WINCY *0.5f);
+		boundary->SetScale(480.f, 480.f);
+		boundary->GetComponent<CanvasRenderer>()->SetFade(0.3f);
+
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		EnemyDetector::Desc desc_ed;
+		desc_ed.crosshair = _crosshair;
+
+		auto enemyDetector = INSTANTIATE()->
+			AddComponent<CanvasRenderer>(&desc_cr)->
+			AddComponent<EnemyDetector>(&desc_ed);
+
+		return enemyDetector;
+	}
+#pragma endregion
+
+public:
+	static GameObject* Prefab_Stage_BossName(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_BOSSHP)
+	{
+		// text
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Text::Desc desc;
+		desc.width = 20;
+		desc.height = 40;
+		desc.text = _text;		
+		desc.color = D3DCOLOR_RGBA(255, 255, 255, 255);
+		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"Stage_BossName");
+		text->AddComponent<CanvasRenderer>(&desc_cr);
+		text->AddComponent<Text>(&desc);
+		text->SetScale(480.f, 50.f);
+
+		text->AddComponent<BossUIAnimator>();
+		return text;
+	}
+
+	static GameObject* Prefab_Stage_BossHpSlider(CANVAS_GROUP _group = CANVAS_GROUP_BOSSHP, float _maxValue = 100.f, float _minValue = 0.f)
+	{
+		auto slider = INSTANTIATE();
+
+		auto background = CreateImage(_group, L"UIWhite");
+		background->SetPosition(0.f, 0.f);
+		background->SetScale(960.f, 40.f);
+		auto fill = CreateImage(_group, L"UIGreen");
+		fill->SetPosition(0.f, 0.f);
+		fill->SetScale(940.f, 32.f);
+
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Slider::Desc desc;
+		desc.background = background->GetTransform();
+		desc.fill = fill->GetTransform();
+		desc.maxValue = _maxValue;
+		desc.minValue = _minValue;
+
+		slider->AddComponent<CanvasRenderer>(&desc_cr);
+		slider->AddComponent<Slider>(&desc);
+		slider->AddComponent<BossUIAnimator>();
+
+		slider->GetComponent<Slider>()->SetCurrentValue(_maxValue);
+
+		background->SetParents(slider);
+		fill->SetParents(slider);
+
+		return slider;
 	}
 
 public:

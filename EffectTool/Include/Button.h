@@ -64,6 +64,9 @@ public:
 	void RemoveEventHandler(EventHandler _eventFunc);
 	void RemoveEventHandler(int _index);
 
+	void ResetEvent();
+	void ResetEvent(EventHandler _eventFunc);
+
 protected:
 	Event m_event;
 	ResourceManager* m_resource;
