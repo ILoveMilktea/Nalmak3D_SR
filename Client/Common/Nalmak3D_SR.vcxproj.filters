@@ -245,6 +245,13 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
+    <ClInclude Include="..\Include\ItemButton.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
+    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h" />
+    <ClInclude Include="MenuAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -463,6 +470,13 @@
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
+    <ClCompile Include="..\Source\ItemButton.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
+    <ClCompile Include="MenuAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -652,9 +666,6 @@
     </Filter>
     <Filter Include="02.Component\01.Utility\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\StageSelectScene\CameraMove">
-      <UniqueIdentifier>{77a6e37e-4059-4f3f-9a48-468430dfa279}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\01.Utility\00.Manager\ItemManger">
       <UniqueIdentifier>{497b0547-52eb-4157-8921-2f9456aab45d}</UniqueIdentifier>

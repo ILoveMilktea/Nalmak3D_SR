@@ -33,9 +33,11 @@ public:
 
 	bool BuyItem(const wstring& _itemName , const wstring& _typeValueName);
 private:
+	// <itemtype, vector<item>
+	// ÀÌ¸§ : playeritem -> get info -> name
 	unordered_map<wstring, vector<class PlayerItem*>> m_mapShopItem;
 
-
+	
 private:
 	PlayerInfoManager* m_playerMgr;
 };

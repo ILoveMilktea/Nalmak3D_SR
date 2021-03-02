@@ -95,6 +95,7 @@ void EnemyManager::Destroy_AllEnemy()
 	{
 		DESTROY(enemy);
 	}
+	m_iEnemyCount = 0;
 }
 
 void EnemyManager::Enemy_Spawn(Vector3 _pos,

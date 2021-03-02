@@ -61,7 +61,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
-	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.mtrlName = L"f15_base"; 
 	render.meshName = L"f15";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
@@ -84,10 +84,10 @@ void DogFightState::EnterState()
 	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
 	*/
 
-	//auto infoManager = PlayerInfoManager::GetInstance();
-	//infoManager->SetTimeLimit(2000.f);
-	//infoManager->SetScore(123456.f);
-	//infoManager->SetPlayer(m_Player);
+	auto infoManager = PlayerInfoManager::GetInstance();
+	infoManager->SetTimeLimit(2000.f);
+	infoManager->SetScore(123456.f);
+	infoManager->SetPlayer(m_Player);
 
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
