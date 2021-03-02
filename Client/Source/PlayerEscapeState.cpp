@@ -24,8 +24,6 @@ void PlayerEscapeState::Initialize()
 		m_inputManager = InputManager::GetInstance();
 	}
 
-
-
 }
 
 void PlayerEscapeState::EnterState()
@@ -42,17 +40,23 @@ void PlayerEscapeState::EnterState()
 	{
 		VIBufferRenderer::Desc meshInfo;
 		//meshInfo.mtrlName = L"debugCollider";
-		meshInfo.mtrlName = L"debugCollider";
+		meshInfo.mtrlName = L"default_red";
 		meshInfo.meshName  = L"sphere";
 
 		ScaleDampingDeffender::Desc scaleDamping;
-		scaleDamping.dampingSpeed = 2.f;
-		scaleDamping.maximumScale = 12.0f;
+		scaleDamping.dampingSpeed = 3.f;
+		scaleDamping.maximumScale = 15.0f;
+		scaleDamping.axisDir = Vector3(0.f, 1.f, 0.f);
 		
-		SphereCollider::Desc SphereColliderInfo;
+		SphereCollider::Desc sphereColliderInfo;
+		sphereColliderInfo.collisionLayer = COLLISION_LAYER_SHIELD;
+		sphereColliderInfo.radius = 1.f;
 
-		m_temproryObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&meshInfo)->AddComponent<ScaleDampingDeffender>(&scaleDamping);;
-		m_temproryObj->SetParents(m_gameObject);
+		auto shield = INSTANTIATE( OBJECT_TAG_PLAYER_SHIELD , L"playerNormalShield")->
+			AddComponent<VIBufferRenderer>(&meshInfo)->
+			AddComponent<ScaleDampingDeffender>(&scaleDamping)->
+			AddComponent<SphereCollider>(&sphereColliderInfo);
+		shield->SetParents(m_gameObject);
 	}
 	
 }
@@ -97,7 +101,8 @@ void PlayerEscapeState::UpdateState()
 	m_playerInfo->AddSpeed(speed);
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
-
+	if (nullptr == Core::GetInstance()->FindObjectByName(OBJECT_TAG_PLAYER_SHIELD, L"playerNormalShield"))
+		m_stateControl->SetState(L"playerMove");
 }
 
 void PlayerEscapeState::ExitState()

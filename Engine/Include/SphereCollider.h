@@ -20,6 +20,7 @@ public:
 	virtual void OnTriggerExit(Collisions& _collision)override;
 public:
 	virtual void Initialize() override;
+	virtual void Update() override;
 	virtual void Release() override;
 	void SetRadius(float _radius) { m_radius = _radius; }
 	float GetRadius() { return m_radius; }

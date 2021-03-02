@@ -55,7 +55,7 @@ void Enemy::Update()
 void Enemy::OnTriggerEnter(Collisions & _collision)
 {
 	for (auto& obj : _collision)
-	{
+	{ 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
 		{
 			//m_gameObject->GetComponent<StateControl>()
