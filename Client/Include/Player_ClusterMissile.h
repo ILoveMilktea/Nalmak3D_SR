@@ -15,5 +15,7 @@ private:
 	GameObject* m_bullet = nullptr;
 	GameObject* m_parents = nullptr;
 
+	EnemyDetector* m_detector = nullptr;
+
 };
 
