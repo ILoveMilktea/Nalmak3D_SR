@@ -18,6 +18,10 @@ void PlayerShooter::Initialize()
 	m_ItemManager = ItemManager::GetInstance();
 
 	//SetEquipment(FIRST_PARTS);
+	SetEquipment(PARTS_NUM::FIRST_PARTS);
+	SetEquipment(PARTS_NUM::SECOND_PARTS);
+	SetEquipment(PARTS_NUM::THIRD_PARTS);
+
 	m_shootTime = 0.5f;
 }
 

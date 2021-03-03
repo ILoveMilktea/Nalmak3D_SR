@@ -338,6 +338,7 @@
     <ClInclude Include="..\Include\Ground.h">
       <Filter>02.Component\07.StageScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Player_Missile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -649,6 +650,7 @@
     <ClCompile Include="..\Source\Ground.cpp">
       <Filter>02.Component\07.StageScene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Player_Missile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

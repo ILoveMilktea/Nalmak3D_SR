@@ -19,6 +19,9 @@ ItemManager* ItemManager::m_instance = nullptr;
 
 ItemManager::ItemManager(Desc * _Desc)
 {
+	m_playerMgr = PlayerInfoManager::GetInstance();
+
+	CreateItem();
 }
 
 ItemManager::~ItemManager()
@@ -36,13 +39,37 @@ ItemManager::~ItemManager()
 
 void ItemManager::Initialize()
 {
-	// 겟인스턴스 이후 컴퍼넌트가 추가된 이후 이니셜라이즈
-	// unordered_map<wstring, vector<class PlayerItem*>> m_mapShopItem;
+	//// 겟인스턴스 이후 컴퍼넌트가 추가된 이후 이니셜라이즈
+	//// unordered_map<wstring, vector<class PlayerItem*>> m_mapShopItem;
+	//
+	////��ų �缭���� �׳� ���������� ������ �ϴ� ������.
+	//{
+	//	BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
+
+	//	BuyItem(L"Weapon", L"Player_Weapon_Homing");
+	//	PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
+
+	//	//BuyItem(L"Weapon", L"ClusterMissile");
+	//	//m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
+	//}
+
+
+	//BuyItem(L"Weapon", L"Emp");
+
+
+
+
+}
+
+void ItemManager::Update()
+{
+}
+
+void ItemManager::CreateItem()
+{
 	ITEMINFO info;
 	m_mapShopItem[L"Weapon"].reserve(5);
 	m_mapShopItem[L"Skill"].reserve(5);
-
-	m_playerMgr = PlayerInfoManager::GetInstance();
 
 	{
 
@@ -97,27 +124,6 @@ void ItemManager::Initialize()
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_EmpMissile(info));
 	}
 
-	//��ų �缭���� �׳� ���������� ������ �ϴ� ������.
-	{
-		BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
-
-		BuyItem(L"Weapon", L"Player_Weapon_Homing");
-		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
-
-		//BuyItem(L"Weapon", L"ClusterMissile");
-		//m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
-	}
-
-
-	BuyItem(L"Weapon", L"Emp");
-
-
-
-
-}
-
-void ItemManager::Update()
-{
 }
 
 ItemManager * ItemManager::GetInstance()
@@ -178,6 +184,10 @@ bool ItemManager::BuyItem(const wstring & _itemName, const wstring & _typeValueN
 		}
 
 	}
+	// 찾는 아이템이 없는 경우! 여기 수정함 - 준엽
+	if (!findItem)
+		return false;
+
 	int cost = findItem->GetItmeInfo().costGold;
 	//
 	if (m_playerMgr->GetGold() >= cost &&

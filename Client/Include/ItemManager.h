@@ -17,7 +17,7 @@ public:
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
-
+	void CreateItem(); // 생성하는 거 함수로 빼둠 - 준엽
 
 private:
 	static ItemManager*  m_instance;

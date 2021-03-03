@@ -2,7 +2,10 @@
 #include "..\Include\NalmakScene.h"
 #include "PrintInfo.h"
 #include "SceneChanger.h"
-
+#include "PlayerShooter.h"
+#include "PlayerSkillActor.h"
+#include "ItemManager.h"
+#include"PlayerInfoManager.h"
 NalmakScene::NalmakScene()
 {
 }
@@ -18,23 +21,36 @@ void NalmakScene::Initialize()
 
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
+	ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
+	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"AimMissile");
+
+
 	{
 		MeshRenderer::Desc render;
 		render.meshName = L"f15";
 		render.mtrlName = L"f15_base";
 
-		plane = INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->AddComponent<FreeMove>();
+		plane = INSTANTIATE(OBJECT_TAG_PLAYER)->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0);
 		plane->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_glass");
 		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_base");
+		plane->AddComponent<PlayerShooter>();
+		plane->AddComponent<PlayerSkillActor>();
+
+		
+
 	}
+
+
+
+
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.9f;
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 	{
 		FreeMove::Desc free;
-		INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<PrintInfo>()->SetPosition(0, 10, 15)->SetRotation(30,180,0)->SetParents(plane);
+		INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<PrintInfo>()->AddComponent<FreeMove>()->SetPosition(0, 10, 15)->SetRotation(30, 180, 0);
 	}
 
 	{
@@ -103,12 +119,6 @@ void NalmakScene::Initialize()
 		groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 	}
 
-	//// 격납고씬으로 가기위한 코드
-	//{
-	//	SceneChanger::Desc SceneChangerDescInfo;
-	//	SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
-	//	SceneChangerDescInfo.sceneName = L"garage";
-	//	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
-	//}
+	
 
 }

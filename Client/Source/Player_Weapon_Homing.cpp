@@ -19,6 +19,10 @@ Player_Weapon_Homing::~Player_Weapon_Homing()
 
 void Player_Weapon_Homing::ItemShot()
 {
+	// object check 
+	if (!Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector"))
+		return;
+
 	// detector check
 	m_detector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 	if (m_detector == nullptr)
@@ -126,7 +130,6 @@ void Player_Weapon_Homing::CreateBullet()
 		bullet->SetParents(m_parents);
 		bullet->SetPosition(0.f, -1.f, 0.f);
 		bullet->SetScale(0.5f, 0.5f, 3.f);
-		Vector3 eulerRotate = m_parents->GetTransform()->GetEulerRotation();
 		//bullet->GetTransform()->SetRotation(eulerRotate.x, eulerRotate.y, eulerRotate.z);
 
 		m_bullet.emplace_back(bullet);
