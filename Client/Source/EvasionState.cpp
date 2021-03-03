@@ -74,6 +74,26 @@ void EvasionState::UpdateState()
 			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(LOOK);
 		}
 
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F5))
+		{
+			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(CROSSFIRE);
+		}
+
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F6))
+		{
+			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(AIRFIRE);
+		}
+
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F7))
+		{
+			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(CIRCLE);
+		}
+		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F8))
+		{
+			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(PRYMIDE);
+		}
+
+
 
 
 		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0

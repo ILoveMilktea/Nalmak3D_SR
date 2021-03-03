@@ -460,6 +460,28 @@ void Transform::LookAt(const Vector3& _pos, float _Spd, Quaternion * _qOut)
 	m_transform->rotation *= QuartTemp;
 }
 
+void Transform::LookAt(const Vector3 & _dest, Quaternion * _qOut)
+{
+	Vector3 vDir = _dest - m_transform->position;
+	D3DXVec3Normalize(&vDir, &vDir);
+
+	Vector3 look = m_transform->GetForward();
+	float fDot = Nalmak_Math::Dot(vDir, look);
+	if (fDot > 0.999f)
+	{
+		return;
+	}
+
+	Vector3 vAxis = { 0.f, 0.f, 0.f };
+	D3DXVec3Cross(&vAxis, &look, &vDir);
+	D3DXVec3Normalize(&vAxis, &vAxis);
+
+	Quaternion QuartTemp = m_transform->RotateAxis(vAxis, acosf(fDot));
+
+	*_qOut = QuartTemp;
+}
+
+
 
 
 

@@ -25,7 +25,11 @@ private:
 	Vector3		m_vDir;
 
 	float		m_fLookDelta = 0.f;
+	
+	float		m_fFpm = 60.f;
 	float		m_fFpmDelta = 0.f;
-	float		m_fFpm = 120.f;
+	float		m_fBrustDelta = 0.f;
+	
+	int			m_iCount = 0;
 };
 

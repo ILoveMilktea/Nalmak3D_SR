@@ -231,7 +231,7 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	{m_pStateControl->InitState(L"Prymide"); }
 		break;
 	case AIRFIRE:
-	{m_pStateControl->InitState(L"AireFire"); }
+	{m_pStateControl->InitState(L"AirFire"); }
 		break;
 	case EVASION_STATE_MAX:
 		break;

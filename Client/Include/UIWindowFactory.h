@@ -875,6 +875,11 @@ public:
 			AddComponent<Scripter>(&desc_scr);
 	}
 
+	static void EvasionAirFireScript()
+	{
+		
+	}
+
 	static void BossUI()
 	{
 		//name

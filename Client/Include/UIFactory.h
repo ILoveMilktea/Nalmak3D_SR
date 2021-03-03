@@ -607,6 +607,7 @@ public:
 
 	}
 
+
 	static GameObject* Prefab_Stage_AltitudeText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text

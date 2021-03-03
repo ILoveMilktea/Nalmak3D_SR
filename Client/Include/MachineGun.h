@@ -9,6 +9,9 @@ public:
 	{
 		float	fSpd;
 		int		iDmg;
+		
+		bool	bStraight = true;
+		Vector3	vDest = { 0.f,0.f,0.f };
 	};
 	
 public:
@@ -24,8 +27,23 @@ public:
 	virtual void OnTriggerExit(Collisions& _collision)override;
 
 public:
+	void Go_Straight();
+
+	
+	void Straight_Shoot();
+
+	void CalcDir();
+	void Dest_Shoot();
 	
 private:
+	bool	m_bStraight = true;
+	
+	bool	m_bFirst = true;
+	Vector3 m_vDest;
+	Vector3	m_vDir;
+
+	
+
 	float m_fSpd = 0.f;
 	int m_iDamage = 0;
 

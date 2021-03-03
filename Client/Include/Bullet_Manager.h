@@ -36,7 +36,8 @@ public: /* for Enemy */
 	void Gun_Evasion(Vector3 _start, Quaternion _rot);
 	void Missile_Evasion(Vector2 _start);
 	void Homing_Evasion(Vector2 _start, Vector2 _target);
-
+	
+	void Fire_Dest(Vector3 _start, Vector3 _dest, float _spd = 150.f);
 
 public: /* for Player */
 	void Fire_Player(Vector3 _start, Quaternion _rot, float _spd);

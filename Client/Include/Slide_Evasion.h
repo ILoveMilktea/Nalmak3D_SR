@@ -26,7 +26,7 @@ private:
 	int		m_iDirection = 0;
 
 	float	m_fSpd = 15.f;
-	float	m_fFpm = 30.f;
+	float	m_fFpm = 120.f;
 	float	m_fFpmDelta = 0.f;
 
 };

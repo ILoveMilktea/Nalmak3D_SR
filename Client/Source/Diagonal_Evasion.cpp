@@ -25,7 +25,7 @@ void Diagonal_Evasion::EnterState()
 	{
 		m_iDirection = -1;
 
-		int z = rand() % 45;
+		int z = rand() % 45 + 20;
 		m_transform->SetPosition(Vector3(90.f, 0.f, (float)z));
 		m_transform->SetRotationY(45.f);
 	}
@@ -35,7 +35,7 @@ void Diagonal_Evasion::EnterState()
 	{
 		m_iDirection = 1;
 
-		int z = rand() % 45;
+		int z = rand() % 45 + 20;
 		m_transform->SetPosition(Vector3(-90.f, 0.f, (float)z));
 		m_transform->SetRotationY(-45.f);
 	}
