@@ -12,5 +12,14 @@ public:
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
+
+public:
+
+public:
+
+private:
+	float		m_fShootDelta = 0.f;
+	int			m_iCount = 0;
+	Quaternion	m_qOrigin;
 };
 

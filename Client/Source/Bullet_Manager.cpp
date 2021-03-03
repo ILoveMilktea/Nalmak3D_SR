@@ -99,7 +99,7 @@ void Bullet_Manager::Fire_Homing()
 
 }
 
-void Bullet_Manager::Gun_Evasion(Vector3 _start, Quaternion _rot)
+void Bullet_Manager::Gun_Evasion(Vector3 _start, Quaternion _rot, float _spd)
 {//_start.x => x //_start.y => z
 
 	GameObject* Gun_obj = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"Bullet_Enemy");
@@ -108,7 +108,7 @@ void Bullet_Manager::Gun_Evasion(Vector3 _start, Quaternion _rot)
 	Gun_obj->SetScale(0.5f, 0.5f, 0.5f);
 
 	MachineGun::Desc Gun_Desc;
-	Gun_Desc.fSpd = 100.f;
+	Gun_Desc.fSpd = _spd;
 	Gun_obj->AddComponent<MachineGun>(&Gun_Desc);
 
 	VIBufferRenderer::Desc Gun_Mesh;

@@ -33,7 +33,7 @@ public: /* for Enemy */
 	void Fire_Homing(); //유도 미사일
 
 	/* for Evasion */
-	void Gun_Evasion(Vector3 _start, Quaternion _rot);
+	void Gun_Evasion(Vector3 _start, Quaternion _rot, float _spd = 100.f);
 	void Missile_Evasion(Vector2 _start);
 	void Homing_Evasion(Vector2 _start, Vector2 _target);
 	

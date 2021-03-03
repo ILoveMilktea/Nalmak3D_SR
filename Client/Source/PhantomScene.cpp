@@ -28,7 +28,7 @@ PhantomScene::~PhantomScene()
 
 void PhantomScene::Initialize()
 {
-	Core::GetInstance()->SetSkyBox(L"skybox_gradation");
+	//Core::GetInstance()->SetSkyBox(L"skybox_gradation");
 	/*Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
 	DirectionalLight::Desc light;

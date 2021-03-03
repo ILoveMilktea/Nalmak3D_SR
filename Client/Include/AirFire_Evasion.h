@@ -14,7 +14,7 @@ public:
 	virtual void ExitState() override;
 
 public:
-
+	void Show_TargetPos();
 public:
 
 private:
@@ -29,6 +29,6 @@ private:
 
 	int				m_iCount = 0;
 	
-	vector<GameObject*> Target_Plane;
+	vector<GameObject*> m_vTarget_Plane;
 };
 

@@ -338,6 +338,9 @@
     <ClInclude Include="..\Include\Ground.h">
       <Filter>02.Component\07.StageScene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Enemy_AirFire_TargetPlane.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -648,6 +651,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Ground.cpp">
       <Filter>02.Component\07.StageScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_AirFire_TargetPlane.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
