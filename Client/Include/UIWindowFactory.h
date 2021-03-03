@@ -291,9 +291,11 @@ public:
 			}
 			// Menu 5 - STAGE SELECT (Button)
 			{
-				EventHandler eventFunc = EventHandler([=]() {});
+				EventHandler eventFunc = EventHandler([=]() {
+					Core::GetInstance()->LoadScene(L"stageSelect");
+				});
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"RETURN TO MAP", CANVAS_GROUP_MAINWND_MAIN);
-				menu->GetComponent<CanvasRenderer>()->SetInteractive(false);\
+				//menu->GetComponent<CanvasRenderer>()->SetInteractive(true);
 
 				menu->AddComponent<MenuAnimator>();
 				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);

@@ -7,7 +7,7 @@
 class Camera;
 class DrawGizmo;
 class PositionHandle;
-class MeshRenderer;
+class VIBufferRenderer;
 class NALMAK_DLL MeshPicking :
 	public Component
 {
@@ -29,7 +29,7 @@ public:
 
 private:
 	Camera* m_mainCam;
-	MeshRenderer* m_renderer;
+	VIBufferRenderer* m_renderer;
 
 	
 	DrawGizmo* m_gizmo;

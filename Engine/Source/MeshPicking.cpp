@@ -1,5 +1,5 @@
 #include "MeshPicking.h"
-#include "MeshRenderer.h"
+#include "VIBufferRenderer.h"
 #include "Transform.h"
 #include "Camera.h"
 #include "DrawGizmo.h"
@@ -15,7 +15,7 @@ void MeshPicking::Initialize()
 {
 	m_mainCam = RenderManager::GetInstance()->GetMainCamera();
 
-	m_renderer = GetComponent<MeshRenderer>();
+	m_renderer = GetComponent<VIBufferRenderer>();
 	m_gizmo = GetComponent<DrawGizmo>();
 	m_handle = GetComponent<PositionHandle>();
 }

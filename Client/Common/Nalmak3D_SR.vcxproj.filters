@@ -318,6 +318,8 @@
     <ClInclude Include="..\Include\MenuAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\verticalBillboard.h" />
+    <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -609,6 +611,8 @@
     <ClCompile Include="..\Source\MenuAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\verticalBillboard.cpp" />
+    <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -888,6 +892,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\20mmCannon.fx">
       <Filter>03.Resource\02.Shader\Stage</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\billboard3DUI.fx">
+      <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

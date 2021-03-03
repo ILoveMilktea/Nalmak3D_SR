@@ -12,5 +12,9 @@ public:
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
+
+private:
+	class StageSelectCamera* m_stageCam;
+	Vector3 m_stage1_position;
 };
 

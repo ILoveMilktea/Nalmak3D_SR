@@ -8,6 +8,8 @@
 #include "StageSelectCamera_Stage1.h"
 #include "StageSelectCamera_Stage2.h"
 #include "ExplosionButton.h"
+#include "verticalBillboard.h"
+#include "MoveStageByMeshPicking.h"
 StageSelectScene::StageSelectScene()
 {
 }
@@ -28,17 +30,16 @@ void StageSelectScene::Initialize()
 	INSTANTIATE()->AddComponent<DirectionalLight>(&dir)->SetRotation(50, 20, 0);
 
 	{
-		//MoveBySpline::Desc	spline;
-		//spline.moveTime = 2.f;
-		//auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<MoveBySpline>(&spline)->AddComponent<StateControl>()->SetRotation(40,0,0);
-		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Idle>(L"idle");
-		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Intro>(L"intro");
-		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage1>(L"stage1");
-		//cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage2>(L"stage2");
-		//cam->GetComponent<StateControl>()->InitState(L"intro");
+		
+		auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<StageSelectCamera>()->AddComponent<StateControl>();
+		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Idle>(L"idle");
+		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Intro>(L"intro");
+		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage1>(L"stage1");
+		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage2>(L"stage2");
+		cam->GetComponent<StateControl>()->InitState(L"intro");
 	}
 	{
-		auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<FreeMove>();
+		//auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<FreeMove>();
 	}
 
 
@@ -64,21 +65,24 @@ void StageSelectScene::Initialize()
 		auto obj = INSTANTIATE(OBJECT_TAG_DEFAULT, L"background")->AddComponent<VIBufferRenderer>(&render)->SetScale(2, 2, 1);
 		obj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 	}
+
 	{
 		Terrain::Desc render;
-		render.mtrlName = L"default";
+		render.mtrlName = L"StageSelect_Floor";
 		render.interval = 3.f;
 		INSTANTIATE()->AddComponent<Terrain>(&render)->SetPosition(-150,0,0);
 	}
 
-	{
+	/*{
 		VIBufferRenderer::Desc render;
 		render.meshName = L"box";
 		render.mtrlName = L"standard";
-		auto obj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&render)->AddComponent<ExplosionButton>()->SetPosition(0,0.5f,15);
+		auto obj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&render)->AddComponent<ExplosionButton>()->SetPosition(15,0.5f,15);
 		obj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 
-	}
+	}*/
+
+
 	/*{
 		MeshRenderer::Desc render;
 		render.meshName = L"planeTest";
