@@ -104,8 +104,8 @@ void ItemManager::Initialize()
 		BuyItem(L"Weapon", L"Player_Weapon_Homing");
 		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
-		//BuyItem(L"Weapon", L"ClusterMissile");
-		//m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
+		BuyItem(L"Weapon", L"ClusterMissile");
+		m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
 	}
 
 

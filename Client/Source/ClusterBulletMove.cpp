@@ -23,17 +23,13 @@ void ClusterBulletMove::Initialize()
 void ClusterBulletMove::Update()
 {
 
-	if (FindEnemy(OBJECT_TAG_ENEMY, 80))
-	{
-		
-		int ia = 10;
+	GameObject* target = FindEnemy(OBJECT_TAG::OBJECT_TAG_ENEMY);
+	Vector3 dir = target->GetTransform()->position - m_transform->position;
+	D3DXVec3Normalize(&dir, &dir);
 
+	m_transform->LookAt(dir + m_transform->position, 1.5f);
+	m_transform->position += dir * 25 * dTime;
 
-	}
-
-	m_transform->position += m_firstDir * dTime * 5;
-
-	DEBUG_LOG(L"Near Enemy ", FindEnemy(OBJECT_TAG_ENEMY , 80));
 }
 
 GameObject* ClusterBulletMove::FindEnemy(OBJECT_TAG _enum, float _mimDis)
