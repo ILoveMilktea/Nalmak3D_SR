@@ -28,8 +28,8 @@ PhantomScene::~PhantomScene()
 
 void PhantomScene::Initialize()
 {
-	Core::GetInstance()->SetSkyBox(L"skybox_gradation");
-	/*Core::GetInstance()->SetSkyBox(L"SkyBox1");
+	//Core::GetInstance()->SetSkyBox(L"skybox_gradation");
+	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.9f;
@@ -41,7 +41,7 @@ void PhantomScene::Initialize()
 	ground.meshName = L"ground";
 	auto groundObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
 	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
-*/
+
 
 	srand((unsigned int)time(NULL));
 

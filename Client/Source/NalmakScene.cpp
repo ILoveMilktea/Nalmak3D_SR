@@ -30,7 +30,7 @@ void NalmakScene::Initialize()
 		render.meshName = L"f15";
 		render.mtrlName = L"f15_base";
 
-		plane = INSTANTIATE(OBJECT_TAG_PLAYER)->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0);
+		plane = INSTANTIATE(OBJECT_TAG_PLAYER)->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->SetScale(0.2f, 0.2f, 0.2f);
 		plane->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_glass");
 		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_base");
@@ -50,21 +50,25 @@ void NalmakScene::Initialize()
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 	{
 		FreeMove::Desc free;
-		INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<PrintInfo>()->AddComponent<FreeMove>()->SetPosition(0, 10, 15)->SetRotation(30, 180, 0);
+		INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()
+			->AddComponent<PrintInfo>()
+			->AddComponent<FreeMove>()
+			->SetPosition(0, 10, 15)
+			->SetRotation(30, 50, 0);
 	}
 
 	{
-		
-		for (int i = -5; i < 5; ++i)
-		{
-			for (int j = -5; j < 5; ++j)
-			{
-				VIBufferRenderer::Desc mesh;
-				mesh.meshName = L"sphere";
-				mesh.mtrlName = L"standard";
-				INSTANTIATE()->AddComponent<VIBufferRenderer>(&mesh)->SetScale(Vector3(1.f, 1.f, 1.f) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(i * 3.f, 0, j * 3.f);
-			}
-		}
+		//
+		//for (int i = -5; i < 5; ++i)
+		//{
+		//	for (int j = -5; j < 5; ++j)
+		//	{
+		//		VIBufferRenderer::Desc mesh;
+		//		mesh.meshName = L"sphere";
+		//		mesh.mtrlName = L"standard";
+		//		INSTANTIATE()->AddComponent<VIBufferRenderer>(&mesh)->SetScale(Vector3(1.f, 1.f, 1.f) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(i * 3.f, 0, j * 3.f);
+		//	}
+		//}
 
 		{
 		/*	PointLight::Desc point;

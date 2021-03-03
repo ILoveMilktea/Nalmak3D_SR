@@ -17,7 +17,7 @@ void GarageSceneCameraIntro::Initialize()
 
 	m_garageCam = GetComponent<GarageSceneCameraInfo>();
 	
-
+	
 
 }
 

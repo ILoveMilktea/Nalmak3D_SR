@@ -20,7 +20,7 @@ void BaseScene::Initialize()
 		render.meshName = L"f15";
 		render.mtrlName = L"f15_base";
 
-		auto plane = INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->SetScale(0.4f, 0.4f, 0.4f);
+		auto plane = INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->SetScale(0.2f, 0.2f, 0.2f);
 		plane->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_glass");
 		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_base");

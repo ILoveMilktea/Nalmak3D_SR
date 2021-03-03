@@ -17,6 +17,7 @@ private:
 	vector<ParticleRenderer::Burst> m_bursts;
 	Material* m_material;
 public:
+
 	const ParticleData& GetParticleInfo() { return m_info; }
 	vector<ParticleRenderer::Burst> GetParticleBurst() { return m_bursts; }
 	Material* GetMaterial() { return m_material; }

@@ -2,7 +2,7 @@
 #include "..\Include\AimMissile.h"
 
 #include "BulletDirMove.h"
-
+#include "Player_AimMissile.h"
 
 AimMissile::AimMissile(const ITEMINFO & _copy) 
 	: PlayerItem(_copy)
@@ -15,20 +15,14 @@ AimMissile::~AimMissile()
 
 void AimMissile::ItemShot()
 {
-	m_bullet[0]->GetTransform()->position = m_bullet[0]->GetTransform()->GetWorldPosition();
 	m_bullet[0]->GetTransform()->DeleteParent();
-
-
-	m_bullet[1]->GetTransform()->position = m_bullet[1]->GetTransform()->GetWorldPosition();
 	m_bullet[1]->GetTransform()->DeleteParent();
 
-	BulletDirMove::Desc bulletinfo;
+	Player_AimMissile::Desc bulletinfo;
 	bulletinfo.speed = m_itemInfo.weaponSpeed;
 
-
-
-	m_bullet[0]->AddComponent<BulletDirMove>(&bulletinfo);
-	m_bullet[1]->AddComponent<BulletDirMove>(&bulletinfo);
+	m_bullet[0]->AddComponent<Player_AimMissile>(&bulletinfo);
+	m_bullet[1]->AddComponent<Player_AimMissile>(&bulletinfo);
 	m_bullet[0] = nullptr;
 	m_bullet[1] = nullptr;
 }

@@ -79,7 +79,7 @@ void Particle::Update(INPUT_LAYOUT_PARTICLE * _info, const Matrix & _billboard, 
 	}
 	else
 	{
-		D3DXMatrixRotationZ(&rot, angle);
+		D3DXMatrixRotationAxis(&rot, &Vector3(_billboard._31, _billboard._32, _billboard._33), Deg2Rad * angle);
 		D3DXMatrixScaling(&scale, curScale, curScale, curScale);
 
 	}

@@ -343,13 +343,15 @@ void Nalmak3D_ControlView::UpdateData()
 
 	ParticleRenderer* particle = m_currentSelectObject->GetComponent<ParticleRenderer>();
 
-	MFC_Utility::SetEditBoxFloat(&m_posX, m_currentSelectObject->GetTransform()->position.x);
-	MFC_Utility::SetEditBoxFloat(&m_posY, m_currentSelectObject->GetTransform()->position.y);
-	MFC_Utility::SetEditBoxFloat(&m_posZ, m_currentSelectObject->GetTransform()->position.z);
+	MFC_Utility::SetEditBoxFloat(&m_posX, particle->m_info.posOffset.x);
+	MFC_Utility::SetEditBoxFloat(&m_posY, particle->m_info.posOffset.y);
+	MFC_Utility::SetEditBoxFloat(&m_posZ, particle->m_info.posOffset.z);
 
-	MFC_Utility::SetEditBoxFloat(&m_rotX, m_currentSelectObject->GetTransform()->GetEulerRotation().x);
-	MFC_Utility::SetEditBoxFloat(&m_rotY, m_currentSelectObject->GetTransform()->GetEulerRotation().y);
-	MFC_Utility::SetEditBoxFloat(&m_rotZ, m_currentSelectObject->GetTransform()->GetEulerRotation().z);
+	Quaternion quaternion = particle->m_info.rotOffset;
+	Vector3 rot = Nalmak_Math::QuaternionToEuler(quaternion);
+	MFC_Utility::SetEditBoxFloat(&m_rotX, rot.x);
+	MFC_Utility::SetEditBoxFloat(&m_rotY, rot.y);
+	MFC_Utility::SetEditBoxFloat(&m_rotZ, rot.z);
 
 	MFC_Utility::SetEditBoxFloat(&m_minRadius, particle->m_info.minRadius);
 	MFC_Utility::SetEditBoxFloat(&m_maxRadius, particle->m_info.maxRadius);
@@ -442,7 +444,7 @@ void Nalmak3D_ControlView::OnEnChangePositionX()
 
 	CString value;
 	GetDlgItem(IDC_EDIT1)->GetWindowTextW(value);
-	m_currentSelectObject->GetTransform()->position.x = (float)_tstof(value);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.posOffset.x = (float)_tstof(value);
 
 
 }
@@ -456,7 +458,7 @@ void Nalmak3D_ControlView::OnEnChangePositionY()
 
 	CString value;
 	GetDlgItem(IDC_EDIT2)->GetWindowTextW(value);
-	m_currentSelectObject->GetTransform()->position.y = (float)_tstof(value);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.posOffset.y = (float)_tstof(value);
 
 }
 
@@ -469,7 +471,7 @@ void Nalmak3D_ControlView::OnEnChangePositionZ()
 
 	CString value;
 	GetDlgItem(IDC_EDIT3)->GetWindowTextW(value);
-	m_currentSelectObject->GetTransform()->position.z = (float)_tstof(value);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.posOffset.z = (float)_tstof(value);
 
 }
 
@@ -479,10 +481,15 @@ void Nalmak3D_ControlView::OnEnChangeRotationX()
 	if (!m_currentSelectObject)
 		return;
 
-	CString value;
-	GetDlgItem(IDC_EDIT4)->GetWindowTextW(value);
-	m_currentSelectObject->GetTransform()->SetRotationX((float)_tstof(value));
-
+	CString valueX;
+	GetDlgItem(IDC_EDIT4)->GetWindowTextW(valueX);
+	CString valueY;
+	GetDlgItem(IDC_EDIT5)->GetWindowTextW(valueY);
+	CString valueZ;
+	GetDlgItem(IDC_EDIT6)->GetWindowTextW(valueZ);
+	Quaternion rot;
+	D3DXQuaternionRotationYawPitchRoll(&rot,(float)_tstof(valueY) * Deg2Rad, (float)_tstof(valueX) * Deg2Rad, (float)_tstof(valueZ) * Deg2Rad);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.rotOffset = rot;
 }
 
 
@@ -494,9 +501,15 @@ void Nalmak3D_ControlView::OnEnChangeRotationY()
 		return;
 
 
-	CString value;
-	GetDlgItem(IDC_EDIT5)->GetWindowTextW(value);
-	m_currentSelectObject->GetTransform()->SetRotationY((float)_tstof(value));
+	CString valueX;
+	GetDlgItem(IDC_EDIT4)->GetWindowTextW(valueX);
+	CString valueY;
+	GetDlgItem(IDC_EDIT5)->GetWindowTextW(valueY);
+	CString valueZ;
+	GetDlgItem(IDC_EDIT6)->GetWindowTextW(valueZ);
+	Quaternion rot;
+	D3DXQuaternionRotationYawPitchRoll(&rot, (float)_tstof(valueY) * Deg2Rad, (float)_tstof(valueX) * Deg2Rad, (float)_tstof(valueZ) * Deg2Rad);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.rotOffset = rot;
 
 }
 
@@ -507,9 +520,15 @@ void Nalmak3D_ControlView::OnEnChangeRotationZ()
 		return;
 
 
-	CString value;
-	GetDlgItem(IDC_EDIT6)->GetWindowTextW(value);
-	m_currentSelectObject->GetTransform()->SetRotationZ((float)_tstof(value));
+	CString valueX;
+	GetDlgItem(IDC_EDIT4)->GetWindowTextW(valueX);
+	CString valueY;
+	GetDlgItem(IDC_EDIT5)->GetWindowTextW(valueY);
+	CString valueZ;
+	GetDlgItem(IDC_EDIT6)->GetWindowTextW(valueZ);
+	Quaternion rot;
+	D3DXQuaternionRotationYawPitchRoll(&rot, (float)_tstof(valueY) * Deg2Rad, (float)_tstof(valueX) * Deg2Rad, (float)_tstof(valueZ) * Deg2Rad);
+	m_currentSelectObject->GetComponent<ParticleRenderer>()->m_info.rotOffset = rot;
 
 }
 

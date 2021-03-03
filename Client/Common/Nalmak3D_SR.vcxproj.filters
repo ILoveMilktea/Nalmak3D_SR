@@ -339,6 +339,7 @@
       <Filter>02.Component\07.StageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Player_Missile.h" />
+    <ClInclude Include="..\Include\Player_AimMissile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -651,6 +652,7 @@
       <Filter>02.Component\07.StageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Player_Missile.cpp" />
+    <ClCompile Include="..\Source\Player_AimMissile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -799,27 +801,6 @@
     <Filter Include="02.Component\00.Manager\Enemy\04%29Boss_Pattern">
       <UniqueIdentifier>{f839a401-4a80-421c-aa04-ee526e7ee845}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\Player">
-      <UniqueIdentifier>{5098e947-8ec3-495e-8bb1-bb2273f1e12f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM">
-      <UniqueIdentifier>{a323ffc7-d61c-4058-b946-29056b0ca33e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce">
-      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\BossStageMove">
-      <UniqueIdentifier>{579c4214-40c5-4439-ad3d-35a3f2a7c402}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\FixCamera">
-      <UniqueIdentifier>{55e4567d-ddb8-4fa2-b78d-65321c051a15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\FixCamera\2DTopViewCamera">
-      <UniqueIdentifier>{a72f487d-d927-47dd-842a-cbe761320505}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Player\FixCamera\BossStageCamera">
-      <UniqueIdentifier>{80bf70f9-492b-41d5-9ff8-eb38719eb005}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\00.Manager\Mouse">
       <UniqueIdentifier>{ff632f15-61fa-4d29-95de-f7e2b4aac73b}</UniqueIdentifier>
     </Filter>
@@ -861,6 +842,27 @@
     </Filter>
     <Filter Include="02.Component\07.StageScene">
       <UniqueIdentifier>{7bf2b31f-80f5-4054-b8ce-d2c5c9ad31db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player">
+      <UniqueIdentifier>{5098e947-8ec3-495e-8bb1-bb2273f1e12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM">
+      <UniqueIdentifier>{a323ffc7-d61c-4058-b946-29056b0ca33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\ToTopView Produce">
+      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\BossStageMove">
+      <UniqueIdentifier>{579c4214-40c5-4439-ad3d-35a3f2a7c402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\FixCamera">
+      <UniqueIdentifier>{55e4567d-ddb8-4fa2-b78d-65321c051a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\FixCamera\2DTopViewCamera">
+      <UniqueIdentifier>{a72f487d-d927-47dd-842a-cbe761320505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\FixCamera\BossStageCamera">
+      <UniqueIdentifier>{80bf70f9-492b-41d5-9ff8-eb38719eb005}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

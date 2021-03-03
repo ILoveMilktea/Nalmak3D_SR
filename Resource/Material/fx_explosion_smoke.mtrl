@@ -4,11 +4,11 @@
 
 shader "particle"
 
-texture "g_mainTex" "smoke_test"
+texture "g_mainTex" "fx_smokePuff"
 
 renderQueue "3000"
 
-blendingMode "2"
+blendingMode "0"
 
 fillMode "0"
 

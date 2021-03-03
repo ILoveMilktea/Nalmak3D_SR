@@ -12,7 +12,6 @@ ParticleRenderer::ParticleRenderer(Desc * _desc)
 	m_material = info->GetMaterial();
 	m_info = info->GetParticleInfo();
 
-
 	if (m_material->GetShader()->GetInputLayout() != VERTEX_INPUT_LAYOUT_PARTICLE)
 		assert(L"Particle Renderer must have particle Shader Material!" && 0);
 
@@ -57,21 +56,29 @@ void ParticleRenderer::Update()
 				m_currentBurstIndex = 0;
 				m_currentBurst = &m_emitBursts[0];
 			}
-
-			if (!m_info.isLoop)
-			{
-				m_info.isPlay = false;
-				return;
-			}
-			m_playTime -= m_info.duration;
-			
 		}
 
+		Vector3 pos = m_transform->position + m_info.posOffset;
+		Matrix trans, rotation;
+		D3DXMatrixTranslation(&trans, pos.x, pos.y, pos.z);
+		D3DXMatrixRotationQuaternion(&rotation, &(m_transform->rotation * m_info.rotOffset));
+		
+		Transform* parents = m_transform->GetParents();
+		Matrix worldMat;
+		if (parents)
+		{
+			worldMat = rotation * trans * parents->GetNoneScaleWorldMatrix();
+		}
+		else
+		{
+			worldMat = rotation * trans;
+		}
+		// Burst Emit
 		if (m_currentBurst)
 		{
 			if (m_currentBurst->time < m_playTime)
 			{
-				Emit(m_currentBurst->count);
+				Emit(m_currentBurst->count, worldMat);
 
 				if (m_currentBurstIndex >= m_emitBursts.size() - 1)
 				{
@@ -85,13 +92,24 @@ void ParticleRenderer::Update()
 			}
 		}
 
-
+		// Default Emit
 		if (m_currentEmitTime > m_secPerEmit)
 		{
 			int count = (int)(m_currentEmitTime / m_secPerEmit);
 			m_currentEmitTime -= m_secPerEmit * count;
-			Emit(count);
+			Emit(count, worldMat);
 		}
+
+		if (m_playTime > m_info.duration)
+		{
+			if (!m_info.isLoop)
+			{
+				m_info.isPlay = false;
+				return;
+			}
+			m_playTime -= m_info.duration;
+		}
+
 
 		m_currentEmitTime += dTime;
 
@@ -204,29 +222,29 @@ void ParticleRenderer::SetGravityScale(float _scale)
 	UpdateParticleInfo(m_info.maxParticleCount);
 }
 
-void ParticleRenderer::Emit(int _count)
+void ParticleRenderer::Emit(int _count, const Matrix& _world)
 {
 	
 	switch (m_info.shape)
 	{
 	case PARTICLE_EMIT_SHAPE_SPHERE:
 	{
-		EmitSphere(_count);
+		EmitSphere(_count, _world);
 		break;
 	}
 	case PARTICLE_EMIT_SHAPE_CIRCLE:
 	{
-		EmitCircle(_count);
+		EmitCircle(_count, _world);
 		break;
 	}
 	case PARTICLE_EMIT_SHAPE_BOX:
 	{
-		EmitBox(_count);
+		EmitBox(_count, _world);
 		break;
 	}
 	case PARTICLE_EMIT_SHAPE_CONE:
 	{
-		EmitCone(_count);
+		EmitCone(_count, _world);
 		break;
 	}
 	default:
@@ -243,7 +261,7 @@ void ParticleRenderer::SetEmitCount(int _count)
 	m_secPerEmit = 1 / (float)_count;
 }
 
-void ParticleRenderer::EmitSphere(int _count)
+void ParticleRenderer::EmitSphere(int _count, const Matrix& _world)
 {
 
 	Matrix world = m_transform->GetWorldMatrix();
@@ -304,15 +322,10 @@ void ParticleRenderer::EmitSphere(int _count)
 	}
 }
 
-void ParticleRenderer::EmitCircle(int _count)
+void ParticleRenderer::EmitCircle(int _count, const Matrix& _world)
 {
-	Matrix world = m_transform->GetWorldMatrix();
 	Vector3 pos;
-	memcpy(&pos, &world._41, sizeof(Vector3));
-	Matrix rotMat;
-	memcpy(&rotMat._11, &world._11, sizeof(Vector3));
-	memcpy(&rotMat._21, &world._21, sizeof(Vector3));
-	memcpy(&rotMat._31, &world._31, sizeof(Vector3));
+	memcpy(&pos, &_world._41, sizeof(Vector3));
 
 	Transform* parents = nullptr;
 	if (m_info.isLocal)
@@ -336,11 +349,11 @@ void ParticleRenderer::EmitCircle(int _count)
 		}
 		else
 		{
-			D3DXVec3TransformNormal(&direction, &direction, &rotMat);
+			D3DXVec3TransformNormal(&direction, &direction, &_world);
 			particle->position = pos + Nalmak_Math::Rand(m_info.minRadius, m_info.maxRadius) * direction;
 		}
 		if (m_info.isVelocityLocal)
-			D3DXVec3TransformNormal(&particle->acceleration, &m_info.force, &rotMat);
+			D3DXVec3TransformNormal(&particle->acceleration, &m_info.force, &_world);
 		else
 			particle->acceleration = m_info.force;
 		particle->startScale = Nalmak_Math::Rand(m_info.startMinScale, m_info.startMaxScale);
@@ -360,15 +373,11 @@ void ParticleRenderer::EmitCircle(int _count)
 	}
 }
 
-void ParticleRenderer::EmitBox(int _count)
+void ParticleRenderer::EmitBox(int _count, const Matrix& _world)
 {
-	Matrix world = m_transform->GetWorldMatrix();
 	Vector3 pos;
-	memcpy(&pos, &world._41, sizeof(Vector3));
-	Matrix rotMat;
-	memcpy(&rotMat._11, &world._11, sizeof(Vector3));
-	memcpy(&rotMat._21, &world._21, sizeof(Vector3));
-	memcpy(&rotMat._31, &world._31, sizeof(Vector3));
+	memcpy(&pos, &_world._41, sizeof(Vector3));
+
 
 
 	Vector3 direction = Vector3(0, 1, 0);
@@ -402,14 +411,14 @@ void ParticleRenderer::EmitBox(int _count)
 		}
 		else
 		{
-			D3DXVec3TransformNormal(&posOffset, &posOffset, &rotMat);
+			D3DXVec3TransformNormal(&posOffset, &posOffset, &_world);
 			particle->position = pos + posOffset;
-			D3DXVec3TransformNormal(&direction, &direction, &rotMat);
+			D3DXVec3TransformNormal(&direction, &direction, &_world);
 
 			//D3DXVec3TransformNormal(&direction, &direction, &rotMat);
 		}
 		if (m_info.isVelocityLocal)
-			D3DXVec3TransformNormal(&particle->acceleration, &m_info.force, &rotMat);
+			D3DXVec3TransformNormal(&particle->acceleration, &m_info.force, &_world);
 		else
 			particle->acceleration = m_info.force;
 		particle->startScale = Nalmak_Math::Rand(m_info.startMinScale, m_info.startMaxScale);
@@ -429,15 +438,11 @@ void ParticleRenderer::EmitBox(int _count)
 	}
 }
 
-void ParticleRenderer::EmitCone(int _count)
+void ParticleRenderer::EmitCone(int _count, const Matrix& _world)
 {
-	Matrix world = m_transform->GetWorldMatrix();
 	Vector3 pos;
-	memcpy(&pos, &world._41, sizeof(Vector3));
-	Matrix rotMat;
-	memcpy(&rotMat._11, &world._11, sizeof(Vector3));
-	memcpy(&rotMat._21, &world._21, sizeof(Vector3));
-	memcpy(&rotMat._31, &world._31, sizeof(Vector3));
+	memcpy(&pos, &_world._41, sizeof(Vector3));
+
 
 	Transform* parents = nullptr;
 	if (m_info.isLocal)
@@ -466,11 +471,11 @@ void ParticleRenderer::EmitCone(int _count)
 		}
 		else
 		{
-			D3DXVec3TransformNormal(&direction, &direction, &rotMat);
+			D3DXVec3TransformNormal(&direction, &direction, &_world);
 			particle->position = pos;
 		}
 		if (m_info.isVelocityLocal)
-			D3DXVec3TransformNormal(&particle->acceleration, &m_info.force, &rotMat);
+			D3DXVec3TransformNormal(&particle->acceleration, &m_info.force, &_world);
 		else
 			particle->acceleration = m_info.force;
 		particle->direction = direction;

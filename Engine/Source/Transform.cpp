@@ -35,7 +35,6 @@ void Transform::Release()
 {
 	if (m_parents)
 	{
-		m_parents->DeleteChild(this);
 		m_parents = nullptr;
 	}
 
@@ -542,7 +541,6 @@ void Transform::DeleteChild(Transform * _child)
 	{
 		if ((*iter) == _child)
 		{
-
 			_child->position = _child->GetWorldPosition();
 			_child->rotation = _child->GetWorldRotation();
 			m_childs.erase(iter);
@@ -555,7 +553,7 @@ void Transform::DeleteParent()
 {
 	if (!m_parents)
 		return;
-	DeleteChild(this);
+	m_parents->DeleteChild(this);
 
 	m_parents = nullptr;
 }

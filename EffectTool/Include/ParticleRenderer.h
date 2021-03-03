@@ -54,13 +54,13 @@ private:
 	int m_currentCount;
 	float m_secPerEmit;
 public:
-	void Emit(int _count);
+	void Emit(int _count, const Matrix& _world);
 	void SetEmitCount(int _count);
 private:
-	void EmitSphere(int _count);
-	void EmitCircle(int _count);
-	void EmitBox(int _count);
-	void EmitCone(int _count);
+	void EmitSphere(int _count, const Matrix& _world);
+	void EmitCircle(int _count, const Matrix& _world);
+	void EmitBox(int _count, const Matrix& _world);
+	void EmitCone(int _count, const Matrix& _world);
 public:
 	void Stop();
 	void Play();
@@ -69,6 +69,7 @@ public:
 	void AddBurst(Burst _burst);
 	void DeleteBurst(size_t _index);
 	void SetAnimationCount(int _count);
+
 
 private:
 	list<Particle*> m_activedParticles;

@@ -46,9 +46,12 @@ void DogFightState::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
+	ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
+	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"AimMissile");
+
 
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
-	m_Player->SetScale(0.1f, 0.1f, 0.1f);
+	m_Player->SetScale(0.2f, 0.2f, 0.2f);
 
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
@@ -61,17 +64,16 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
 
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
-	VIBufferRenderer::Desc renderinfo;
-	renderinfo.mtrlName = L"default";
-	renderinfo.meshName = L"flight";
-	//MeshRenderer::Desc render;
-	//render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
-	//render.meshName = L"f15";
-	m_Player->AddComponent<VIBufferRenderer>(&renderinfo);
+	
+	MeshRenderer::Desc render;
+	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.meshName = L"f15";
+	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
 	m_Player->AddComponent<PlayerShooter>();
 	m_Player->AddComponent<PlayerSkillActor>();
+
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	m_Player->AddComponent<SphereCollider>();

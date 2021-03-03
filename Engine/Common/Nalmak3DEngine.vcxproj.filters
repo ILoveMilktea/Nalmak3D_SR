@@ -440,7 +440,6 @@
     <ClCompile Include="..\Source\SplineCurve.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\ParticleInfo.cpp" />
     <ClCompile Include="..\Source\SingleImage.cpp">
       <Filter>05.Component\08.UI\01.SingleImage</Filter>
     </ClCompile>
@@ -507,6 +506,9 @@
     <ClCompile Include="..\Source\StaticMesh.cpp" />
     <ClCompile Include="..\Source\VIBufferRenderer.cpp">
       <Filter>05.Component\01.Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ParticleInfo.cpp">
+      <Filter>06.Resource\06.ParticleInfo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -737,7 +739,6 @@
     <ClInclude Include="..\Include\SplineCurve.h">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\ParticleInfo.h" />
     <ClInclude Include="..\Include\SingleImage.h">
       <Filter>05.Component\08.UI\01.SingleImage</Filter>
     </ClInclude>
@@ -809,5 +810,8 @@
       <Filter>11.Animation</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Client\Include\MenuAnimator.h" />
+    <ClInclude Include="..\Include\ParticleInfo.h">
+      <Filter>06.Resource\06.ParticleInfo</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
