@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "..\Include\CrossFire_Evasion.h"
-#include "Bullet_Manager.h"
+#include "..\Include\Enemy_CrossFire_Evasion.h"
+#include "Enemy_Bullet_Manager.h"
 
 
 CrossFire_Evasion::CrossFire_Evasion()
@@ -73,6 +73,8 @@ void CrossFire_Evasion::UpdateState()
 
 	//DEBUG_LOG(L"Shoot Angle", m_fShootAngle);
 	//DEBUG_LOG(L"Angle Bool", m_bAngleAdd);
+
+	Exit();
 }
 
 void CrossFire_Evasion::ExitState()

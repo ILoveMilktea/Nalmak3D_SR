@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Include\Missile.h"
+#include "..\Include\Enemy_Missile.h"
 
 
 
@@ -32,10 +32,19 @@ void Missile::Update()
 	{
 		//약간 밑으로 내려간 다음에
 		m_transform->position.y -= dTime * 5.f;
+		if (m_bEffect == false)
+		{
+			m_bEffect = true;
+		}
 	}
 
 	if (m_fMissileDelta >= 0.5f)
 	{//발사하고 가속도
+		if (m_bEffect)
+		{/*Effect Setting Here*/
+			
+			m_bEffect = false;
+		}
 		Accelerate(m_fMaxSpd);
 		m_transform->position += m_transform->GetForward() * m_fCurSpd * dTime;
 	}

@@ -2,7 +2,7 @@
 #include "../Include/EnemyManager.h"
 
 #include "Enemy.h"
-#include "Boss.h"
+#include "Enemy_Boss.h"
 
 #include "Enemy_Idle.h"
 #include "Enemy_Chase.h"
@@ -12,13 +12,14 @@
 #include "Enemy_Explosion.h"
 #include "Enemy_Falling.h"
 
-#include "Slide_Evasion.h"
-#include "Diagonal_Evasion.h"
-#include "CrossFire_Evasion.h"
-#include "Circle_Evasion.h"
-#include "Prymide_Evasion.h"
-#include "AirFire_Evasion.h"
-#include "Look_Evasion.h"
+#include "Enemy_Slide_Evasion.h"
+#include "Enemy_Diagonal_Evasion.h"
+#include "Enemy_CrossFire_Evasion.h"
+#include "Enemy_Circle_Evasion.h"
+#include "Enemy_Prymide_Evasion.h"
+#include "Enemy_AirFire_Evasion.h"
+#include "Enemy_Look_Evasion.h"
+#include "Enemy_Exit_Evasion.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -206,9 +207,10 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	m_pStateControl->AddState<Circle_Evasion>(L"Circle");
 	m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
 	m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
-	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
-	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
-	m_pStateControl->AddState<Enemy_Death>(L"Death");
+	m_pStateControl->AddState<Exit_Evasion>(L"Exit");
+	//m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
+	//m_pStateControl->AddState<Enemy_Falling>(L"Falling");
+	//m_pStateControl->AddState<Enemy_Death>(L"Death");
 
 	switch (_initState)
 	{

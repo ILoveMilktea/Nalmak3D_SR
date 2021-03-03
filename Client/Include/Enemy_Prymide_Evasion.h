@@ -1,11 +1,12 @@
 #pragma once
 #include "IState.h"
-class CrossFire_Evasion :
-	public IState
+#include "Enemy_Evasion.h"
+class Prymide_Evasion :
+	public Enemy_Evasion
 {
 public:
-	CrossFire_Evasion();
-	virtual ~CrossFire_Evasion();
+	Prymide_Evasion();
+	virtual ~Prymide_Evasion();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -17,20 +18,13 @@ public:
 
 public:
 
-public:
-
 private:
-	//float	m_fDir = 0.f;
-	float	m_fSpd = 15.f;
-
-	float	m_fFpm = 180.f;
-	float	m_fFpmDelta = 0.f;
+	float	m_fShootDelta = 0.f;
+	float	m_fBurstDelta = 0.f;
 	int		m_iCount = 0;
 
-
-	float	m_fShootAngle = 225.f;
-	bool	m_bAngleAdd = false;
-
+	float		m_fAngle[5] = {30.f, 15.f, 0.f, -15.f, -30.f};
+	Quaternion	m_qOrigin;
 
 };
 

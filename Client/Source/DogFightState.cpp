@@ -11,7 +11,7 @@
 #include "SmoothFollow.h"
 
 #include "EnemyManager.h"
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 #include "StageManager.h"
 #include "UIWindowFactory.h"

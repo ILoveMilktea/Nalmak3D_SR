@@ -3,7 +3,7 @@
 #include "PlayerInfoManager.h"
 #include "MouseOption.h"
 
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 PlayerMove::PlayerMove()
 {

@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "..\Include\Bullet_Manager.h"
+#include "..\Include\Enemy_Bullet_Manager.h"
 
-#include "MachineGun.h"
-#include "Missile.h"
+#include "Enemy_MachineGun.h"
+#include "Enemy_Missile.h"
 
 Bullet_Manager* Bullet_Manager::m_Instance = nullptr;
 

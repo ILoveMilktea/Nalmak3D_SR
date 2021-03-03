@@ -194,16 +194,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\AimMissile.h" />
-    <ClInclude Include="..\Include\AirFire_Evasion.h" />
-    <ClInclude Include="..\Include\Boss.h" />
+    <ClInclude Include="..\Include\Enemy_AirFire_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_Boss.h" />
     <ClInclude Include="..\Include\BossStageCamera.h" />
     <ClInclude Include="..\Include\BossState.h" />
-    <ClInclude Include="..\Include\Circle_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_Circle_Evasion.h" />
     <ClInclude Include="..\Include\ClusterBulletMove.h" />
-    <ClInclude Include="..\Include\CrossFire_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
-    <ClInclude Include="..\Include\Diagonal_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_TargetPlane.h" />
+    <ClInclude Include="..\Include\Enemy_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_Exit_Evasion.h" />
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
@@ -212,8 +214,8 @@
     <ClInclude Include="..\Include\Player_EmpMissile.h" />
     <ClInclude Include="..\Include\Player_EmpMove.h" />
     <ClInclude Include="..\Include\Player_EmpPulse.h" />
-    <ClInclude Include="..\Include\Slide_Evasion.h" />
-    <ClInclude Include="..\Include\Look_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_Slide_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_Look_Evasion.h" />
     <ClInclude Include="..\Include\BulletDirMove.h" />
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
     <ClInclude Include="..\Include\EnemyDetector.h" />
@@ -223,8 +225,8 @@
     <ClInclude Include="..\Include\GarageSceneCameraIntro.h" />
     <ClInclude Include="..\Include\GarageSceneCameraMouseInput.h" />
     <ClInclude Include="..\Include\ItemButton.h" />
-    <ClInclude Include="..\Include\MachineGun.h" />
-    <ClInclude Include="..\Include\Bullet_Manager.h" />
+    <ClInclude Include="..\Include\Enemy_MachineGun.h" />
+    <ClInclude Include="..\Include\Enemy_Bullet_Manager.h" />
     <ClInclude Include="..\Include\ClimbTerrain.h" />
     <ClInclude Include="..\Include\Crosshair.h" />
     <ClInclude Include="..\Include\CustomDebuger.h" />
@@ -247,10 +249,10 @@
     <ClInclude Include="..\Include\GarageScene.h" />
     <ClInclude Include="..\Include\Ground.h" />
     <ClInclude Include="..\Include\HeeTestScene.h" />
-    <ClInclude Include="..\Include\Homing.h" />
+    <ClInclude Include="..\Include\Enemy_Homing.h" />
     <ClInclude Include="..\Include\ItemManager.h" />
     <ClInclude Include="..\Include\MainGame.h" />
-    <ClInclude Include="..\Include\Missile.h" />
+    <ClInclude Include="..\Include\Enemy_Missile.h" />
     <ClInclude Include="..\Include\MouseOption.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\NalmakScene.h" />
@@ -267,7 +269,7 @@
     <ClInclude Include="..\Include\PlayerShooter.h" />
     <ClInclude Include="..\Include\PlayerSkillActor.h" />
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
-    <ClInclude Include="..\Include\Prymide_Evasion.h" />
+    <ClInclude Include="..\Include\Enemy_Prymide_Evasion.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\ScaleDampingDeffender.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
@@ -309,16 +311,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\AimMissile.cpp" />
-    <ClCompile Include="..\Source\AirFire_Evasion.cpp" />
-    <ClCompile Include="..\Source\Boss.cpp" />
+    <ClCompile Include="..\Source\Enemy_AirFire_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Boss.cpp" />
     <ClCompile Include="..\Source\BossStageCamera.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
-    <ClCompile Include="..\Source\Circle_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Circle_Evasion.cpp" />
     <ClCompile Include="..\Source\ClusterBulletMove.cpp" />
-    <ClCompile Include="..\Source\CrossFire_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
-    <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_TargetPlane.cpp" />
+    <ClCompile Include="..\Source\Enemy_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Exit_Evasion.cpp" />
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
@@ -327,8 +331,8 @@
     <ClCompile Include="..\Source\Player_EmpMissile.cpp" />
     <ClCompile Include="..\Source\Player_EmpMove.cpp" />
     <ClCompile Include="..\Source\Player_EmpPulse.cpp" />
-    <ClCompile Include="..\Source\Slide_Evasion.cpp" />
-    <ClCompile Include="..\Source\Look_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Slide_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Look_Evasion.cpp" />
     <ClCompile Include="..\Source\BulletDirMove.cpp" />
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
     <ClCompile Include="..\Source\EnemyDetector.cpp" />
@@ -338,8 +342,8 @@
     <ClCompile Include="..\Source\GarageSceneCameraIntro.cpp" />
     <ClCompile Include="..\Source\GarageSceneCameraMouseInput.cpp" />
     <ClCompile Include="..\Source\ItemButton.cpp" />
-    <ClCompile Include="..\Source\MachineGun.cpp" />
-    <ClCompile Include="..\Source\Bullet_Manager.cpp" />
+    <ClCompile Include="..\Source\Enemy_MachineGun.cpp" />
+    <ClCompile Include="..\Source\Enemy_Bullet_Manager.cpp" />
     <ClCompile Include="..\Source\ClimbTerrain.cpp" />
     <ClCompile Include="..\Source\Crosshair.cpp" />
     <ClCompile Include="..\Source\CustomDebuger.cpp" />
@@ -359,10 +363,10 @@
     <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\Ground.cpp" />
     <ClCompile Include="..\Source\HeeTestScene.cpp" />
-    <ClCompile Include="..\Source\Homing.cpp" />
+    <ClCompile Include="..\Source\Enemy_Homing.cpp" />
     <ClCompile Include="..\Source\ItemManager.cpp" />
     <ClCompile Include="..\Source\MainGame.cpp" />
-    <ClCompile Include="..\Source\Missile.cpp" />
+    <ClCompile Include="..\Source\Enemy_Missile.cpp" />
     <ClCompile Include="..\Source\MouseOption.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\NalmakScene.cpp" />
@@ -379,7 +383,7 @@
     <ClCompile Include="..\Source\PlayerShooter.cpp" />
     <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
-    <ClCompile Include="..\Source\Prymide_Evasion.cpp" />
+    <ClCompile Include="..\Source\Enemy_Prymide_Evasion.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\ScaleDampingDeffender.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />

@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "..\Include\Look_Evasion.h"
-#include "Bullet_Manager.h"
+#include "..\Include\Enemy_Look_Evasion.h"
+#include "Enemy_Bullet_Manager.h"
 #include "EnemyManager.h"
 
 
@@ -41,13 +41,13 @@ void Look_Evasion::UpdateState()
 	
 	if (m_fFpmDelta >= 60.f / m_fFpm)
 	{
-		m_fBrustDelta += dTime;
+		m_fBurstDelta += dTime;
 
-		if (m_fBrustDelta >= 0.1f)
+		if (m_fBurstDelta >= 0.1f)
 		{
 			Bullet_Manager::GetInstance()->Gun_Evasion(m_transform->position, m_transform->rotation);
 			++m_iCount;
-			m_fBrustDelta = 0.f;
+			m_fBurstDelta = 0.f;
 		}
 
 		if (m_iCount >= 3)
@@ -57,6 +57,7 @@ void Look_Evasion::UpdateState()
 		}
 	}
 
+	Exit();
 
 }
 
@@ -64,3 +65,4 @@ void Look_Evasion::ExitState()
 {
 	
 }
+

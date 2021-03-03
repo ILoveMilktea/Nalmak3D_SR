@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "..\Include\Slide_Evasion.h"
+#include "..\Include\Enemy_Slide_Evasion.h"
 
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 Slide_Evasion::Slide_Evasion()
 {

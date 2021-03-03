@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "..\Include\AirFire_Evasion.h"
-#include "Bullet_Manager.h"
+#include "..\Include\Enemy_AirFire_Evasion.h"
+#include "Enemy_Bullet_Manager.h"
 #include "Enemy_AirFire_TargetPlane.h"
 
 
@@ -33,9 +33,9 @@ void AirFire_Evasion::UpdateState()
 
 	if (m_fShootDelta >= 3.f)
 	{
-		m_fBrustDelta += dTime;
+		m_fBurstDelta += dTime;
 
-		if (m_fBrustDelta >= 0.1f)
+		if (m_fBurstDelta >= 0.1f)
 		{
 			m_vDestPos.x = m_pPlayer->GetTransform()->position.x + (float)(rand() % 11 - 5);
 			m_vDestPos.y = m_pPlayer->GetTransform()->position.y;
@@ -44,7 +44,7 @@ void AirFire_Evasion::UpdateState()
 			Bullet_Manager::GetInstance()->Fire_Dest(m_transform->position, m_vDestPos, 150.f);
 
 			++m_iCount;
-			m_fBrustDelta = 0.f;
+			m_fBurstDelta = 0.f;
 
 			Show_TargetPos();
 		}
@@ -58,7 +58,7 @@ void AirFire_Evasion::UpdateState()
 
 	}
 
-
+	Exit();
 	
 }
 

@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "..\Include\Diagonal_Evasion.h"
-#include "Bullet_Manager.h"
+#include "..\Include\Enemy_Diagonal_Evasion.h"
+#include "Enemy_Bullet_Manager.h"
 
 
 Diagonal_Evasion::Diagonal_Evasion()

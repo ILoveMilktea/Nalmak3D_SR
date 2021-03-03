@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\Enemy.h"
 
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 
 Enemy::Enemy(Desc * _Desc)
