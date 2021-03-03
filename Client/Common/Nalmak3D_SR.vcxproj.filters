@@ -106,7 +106,6 @@
     <ClInclude Include="..\Include\TopViewCamera.h">
       <Filter>02.Component\00.Manager\Player\FixCamera\2DTopViewCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Ground.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\DogFightState.h">
@@ -211,7 +210,6 @@
     <ClInclude Include="..\Include\BossUIAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\StageSelectCamera.h" />
     <ClInclude Include="..\Include\StageSelectCamera_Idle.h">
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClInclude>
@@ -240,13 +238,11 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ObjLoader.h" />
-    <ClInclude Include="..\Include\StageSelectSceneManager.h" />
     <ClInclude Include="..\Include\PlayerShooter.h">
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\BulletEffect_StretchBillboard.h" />
     <ClInclude Include="..\Include\ItemButton.h" />
-    <ClInclude Include="..\Include\ExplosionButton.h" />
     <ClInclude Include="..\Include\GarageSceneCameraIntro.h">
       <Filter>02.Component\06.GarageScene</Filter>
     </ClInclude>
@@ -263,9 +259,6 @@
       <Filter>02.Component\06.GarageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\DeadTimer.h" />
-    <ClInclude Include="..\Include\StageSelectCamera_Intro.h" />
-    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h" />
-    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h" />
     <ClInclude Include="..\Include\AirFire_Evasion.h">
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClInclude>
@@ -318,8 +311,33 @@
     <ClInclude Include="..\Include\MenuAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\verticalBillboard.h" />
-    <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
+    <ClInclude Include="..\Include\StageSelectCamera.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectCamera_Intro.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectCamera_Stage1.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectCamera_Stage2.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectSceneManager.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\verticalBillboard.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MoveStageByMeshPicking.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ExplosionButton.h">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Ground.h">
+      <Filter>02.Component\07.StageScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -415,7 +433,6 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp">
       <Filter>02.Component\00.Manager\Player\FixCamera\2DTopViewCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Ground.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp">
       <Filter>04.Combat State\00%29DogFight</Filter>
@@ -504,7 +521,6 @@
     <ClCompile Include="..\Source\BossUIAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\StageSelectCamera.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera_Idle.cpp">
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClCompile>
@@ -533,16 +549,11 @@
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ObjLoader.cpp" />
-    <ClCompile Include="..\Source\StageSelectSceneManager.cpp" />
     <ClCompile Include="..\Source\PlayerShooter.cpp">
       <Filter>02.Component\01.Utility\00.Manager\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\BulletEffect_StretchBillboard.cpp" />
     <ClCompile Include="..\Source\ItemButton.cpp" />
-    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp" />
-    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp" />
-    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp" />
-    <ClCompile Include="..\Source\ExplosionButton.cpp" />
     <ClCompile Include="..\Source\GarageSceneCameraIntro.cpp">
       <Filter>02.Component\06.GarageScene</Filter>
     </ClCompile>
@@ -611,8 +622,33 @@
     <ClCompile Include="..\Source\MenuAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\verticalBillboard.cpp" />
-    <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
+    <ClCompile Include="..\Source\StageSelectCamera.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectCamera_Intro.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectCamera_Stage1.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectCamera_Stage2.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectSceneManager.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\verticalBillboard.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ExplosionButton.cpp">
+      <Filter>02.Component\04.StageSelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Ground.cpp">
+      <Filter>02.Component\07.StageScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -820,6 +856,9 @@
     </Filter>
     <Filter Include="02.Component\06.GarageScene">
       <UniqueIdentifier>{92693aba-9f7a-4342-ad51-d5a5bdfa1b27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\07.StageScene">
+      <UniqueIdentifier>{7bf2b31f-80f5-4054-b8ce-d2c5c9ad31db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
