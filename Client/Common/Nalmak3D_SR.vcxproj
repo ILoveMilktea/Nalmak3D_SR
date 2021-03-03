@@ -205,6 +205,7 @@
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
+    <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
     <ClInclude Include="..\Include\Player_Weapon_Homing.h" />
     <ClInclude Include="..\Include\Player_ClusterMissile.h" />
     <ClInclude Include="..\Include\Player_EmpMissile.h" />
@@ -297,6 +298,7 @@
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
+    <ClInclude Include="..\Include\verticalBillboard.h" />
     <ClInclude Include="GarageSceneCameraAutoRotate.h" />
     <ClInclude Include="GarageSceneCameraZoomIn.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
@@ -317,6 +319,7 @@
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
+    <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
     <ClCompile Include="..\Source\Player_Weapon_Homing.cpp" />
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp" />
     <ClCompile Include="..\Source\Player_EmpMissile.cpp" />
@@ -403,6 +406,7 @@
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
+    <ClCompile Include="..\Source\verticalBillboard.cpp" />
     <ClCompile Include="GarageSceneCameraAutoRotate.cpp" />
     <ClCompile Include="GarageSceneCameraZoomIn.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />
@@ -422,6 +426,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\20mmCannon.fx" />
+    <FxCompile Include="..\..\Resource\Shader\billboard3DUI.fx" />
     <FxCompile Include="..\..\Resource\Shader\default.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>

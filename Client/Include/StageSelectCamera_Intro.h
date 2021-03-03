@@ -13,6 +13,7 @@ public:
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 
-
+private:
+	class StageSelectCamera* m_stageCam;
 };
 
