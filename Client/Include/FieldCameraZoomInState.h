@@ -1,5 +1,5 @@
 #pragma once
-#include "C:\Users\Administrator.JUSIN-20210118P\Desktop\Nalmak3D_SR\Ref\Include\IState.h"
+#include "IState.h"
 class FieldCameraZoomInState :
 	public IState
 {
