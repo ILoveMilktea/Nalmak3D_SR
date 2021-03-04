@@ -47,6 +47,11 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	LoadResources<Material, Material>(L"mtrl");
 	LoadResources<ParticleInfo, ParticleInfo>(L"ptd");
 
+	// Font
+	AddFontResource(L"../../Resource/Font/Selected/Astrolab.ttf");
+	//AddFontResource(L"../../Resource/Font/Selected/bladesingercond.ttf");
+	//AddFontResource(L"../../Resource/Font/Selected/DS-DIGI.otf");
+	//AddFontResource(L"../../Resource/Font/Selected/PCap Terminal Condensed.TTF");
 	return S_OK;
 }
 
@@ -64,6 +69,11 @@ HRESULT ResourceManager::Release()
 	m_resoucreContainers.clear();
 
 
+	// Font
+	RemoveFontResource(L"../../Resource/Font/Selected/Astrolab.ttf");
+	//RemoveFontResource(L"../../Resource/Font/Selected/bladesingercond.ttf");
+	//RemoveFontResource(L"../../Resource/Font/Selected/DS-DIGI.otf");
+	//RemoveFontResource(L"../../Resource/Font/Selected/PCap Terminal Condensed.TTF");
 	return S_OK;
 }
 

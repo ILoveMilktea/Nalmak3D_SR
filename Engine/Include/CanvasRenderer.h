@@ -46,7 +46,7 @@ public:
 	bool IsCursorOnRect();
 
 	void SetImage(IDirect3DBaseTexture9* _Image) { m_targetImage = _Image; }
-	void SetColor(Vector4 _color) { m_color = _color; }
+	void SetColor(Vector4 _color);
 
 	const Vector4& GetColor() { return m_color; }
 	RECT* GetBoundary() { return &m_boundary; }

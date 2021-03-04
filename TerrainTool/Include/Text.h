@@ -16,9 +16,9 @@ public:
 	{
 		UINT width = 12;
 		UINT height = 21;
-		UINT weight = 500; // 0 ~ 1000
+		UINT weight = 300; // 0 ~ 1000
 		DWORD option = DT_CENTER | DT_WORDBREAK;
-		const TCHAR* fontName = L"Consolas";
+		const TCHAR* fontName = L"Astrolab";
 		wstring text = L"default";
 		D3DCOLOR color = D3DCOLOR_RGBA(255, 255, 255, 255);
 	};

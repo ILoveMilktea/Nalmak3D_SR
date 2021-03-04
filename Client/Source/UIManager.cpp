@@ -37,7 +37,6 @@ void UIManager::Update()
 	if (1.5f < m_alarmTimer)
 	{
 		UpdateAlarm();
-		RemoveAlarm();
 		m_alarmTimer = 0.f;
 	}
 }
@@ -151,25 +150,17 @@ void UIManager::AddAlarm(UI_Alarm* _alarm)
 
 void UIManager::UpdateAlarm()
 {
-	if (m_messenger.front())
-	{
-		m_messenger.front()->AlarmOffAnim();
-		m_trashbag.push(m_messenger.front());
-	}
-	m_messenger.pop_front();
+	//up anim
+	RemoveAlarm();
 
-	if (m_alarmQueue.empty())
-		m_messenger.push_back(nullptr);
-	else
+	if (!m_alarmQueue.empty())
 	{
-		m_messenger.push_back(m_alarmQueue.front());
-		m_alarmQueue.pop();
-	}
-
-	for (auto message : m_messenger)
-	{
-		if (message)
-			message->AlarmUpAnim();
+		if (!m_alarmQueue.front()->IsPlay())
+		{
+			m_alarmQueue.front()->AlarmOffAnim();
+			m_trashbag.push(m_alarmQueue.front());
+			m_alarmQueue.pop();
+		}
 	}
 }
 
@@ -178,6 +169,8 @@ void UIManager::RemoveAlarm()
 	while (!m_trashbag.empty())
 	{
 		GameObject* trash = m_trashbag.front()->GetGameObject();
+
+		m_trashbag.front()->Remove();
 		DESTROY(trash);
 		trash = nullptr;
 		m_trashbag.pop();

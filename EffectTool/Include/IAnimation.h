@@ -25,6 +25,7 @@ public:
 	void SetPlayDuration(float _duration) { m_playDuration = _duration; }
 	void SetStartDelay(float _delay) { m_startDelay = _delay; }
 
+	const bool& IsPlay() { return m_isPlay; }
 public:
 	virtual void Play_Lerp() = 0;
 	virtual void Play_Custom() = 0;

@@ -162,6 +162,18 @@ bool CanvasRenderer::IsCursorOnRect()
 	return false;
 }
 
+void CanvasRenderer::SetColor(Vector4 _color)
+{
+	if (GetComponent<Text>())
+		GetComponent<Text>()->SetColor(
+			D3DCOLOR_RGBA(
+				int(_color.x * 255),
+				int(_color.y * 255),
+				int(_color.z * 255),
+				int(_color.w * 255)));
+	else
+		m_color = _color;
+}
 
 void CanvasRenderer::SetFade(float _alpha)
 {

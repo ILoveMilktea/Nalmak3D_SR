@@ -18,11 +18,11 @@ public:
 		float on_moveAmount = 400.f;
 		float on_duration = 1.f;
 
-		float m_up_moveAmount = 40.f;
-		float m_up_duration = 1.f;
+		float up_moveAmount = 40.f;
+		float up_duration = 1.f;
 
-		float m_off_moveAmount = 20.f;
-		float m_off_duration = 1.f;
+		float off_moveAmount = 20.f;
+		float off_duration = 1.f;
 	};
 
 public:
@@ -35,6 +35,10 @@ public:
 	void AlarmOnAnim();	// moveIn + img bright
 	void AlarmUpAnim(); // move up
 	void AlarmOffAnim(); // fade out
+
+	void Remove();
+
+	bool IsPlay();
 
 private:
 	GameObject* m_text;

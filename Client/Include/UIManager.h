@@ -40,7 +40,7 @@ public:
 	void RemoveAlarm();
 
 private:
-	list<UI_Alarm*> m_messenger;
+	vector<UI_Alarm*> m_messenger;
 	queue<UI_Alarm*> m_alarmQueue;
 	queue<UI_Alarm*> m_trashbag;
 

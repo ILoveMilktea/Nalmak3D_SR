@@ -1,7 +1,6 @@
 #include "..\Include\ColorAnimation.h"
 #include "CanvasRenderer.h"
 
-
 ColorAnimation::ColorAnimation()
 {
 }

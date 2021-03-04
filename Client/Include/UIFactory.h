@@ -780,11 +780,9 @@ public:
 		auto text = INSTANTIATE(OBJECT_TAG_UI, L"Stage_AlarmText");
 		text->AddComponent<CanvasRenderer>(&desc_cr);
 		text->AddComponent<Text>(&desc);
-		text->SetScale(400.f, 40.f);
 
 		// light img
 		auto lightImage = CreateImage(_group, L"UIWhite");
-		lightImage->SetScale(400.f, 40.f);
 
 		UI_Alarm::Desc desc_alarm;
 		desc_alarm.type = UI_Alarm::ALARMTYPE(_type);
@@ -792,10 +790,13 @@ public:
 		desc_alarm.light = lightImage;
 
 		auto alarm = INSTANTIATE()->AddComponent<UI_Alarm>(&desc_alarm);
-		text->SetParents(alarm);
-		lightImage->SetParents(alarm);
+		//text->SetParents(alarm);
+		//lightImage->SetParents(alarm);
 
-		alarm->SetPosition(1800.f, 400.f);
+		text->SetScale(400.f, 40.f);
+		text->SetPosition(2200.f, 400.f);
+		lightImage->SetScale(400.f, 40.f);
+		lightImage->SetPosition(1800.f, 400.f);
 
 		return alarm;
 	}

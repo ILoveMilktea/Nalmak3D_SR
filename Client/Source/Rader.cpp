@@ -43,7 +43,7 @@ void Rader::Initialize()
 	// circle
 	{
 		SingleImage::Desc desc;
-		desc.textureName = L"circle";
+		desc.textureName = L"raderBox";
 		m_circleBackground =
 			INSTANTIATE()->
 			AddComponent<CanvasRenderer>()->
@@ -65,6 +65,16 @@ void Rader::Initialize()
 			SetScale(8.f, 16.f, 0.f);
 
 		m_playerIcon->SetParents(m_transform);
+
+		m_pivot = INSTANTIATE()->
+			AddComponent<CanvasRenderer>()->
+			SetPosition(0.f, 0.f, 0.f);
+
+		m_pivot->GetTransform()->SetParents(m_transform);
+		for (size_t i = 0; i < m_IconContainer.capacity(); ++i)
+		{
+			m_IconContainer[i]->SetParents(m_pivot);
+		}
 	}
 
 }
@@ -75,7 +85,7 @@ void Rader::Update()
 		return;
 
 	m_timer += TimeManager::GetInstance()->GetdeltaTime();
-	if (1.f <= m_timer)
+	if (0.1f <= m_timer)
 	{
 		UpdateTarget();
 		SetFlightPoint();
@@ -119,7 +129,7 @@ void Rader::SetFlightPoint()
 	int index = 0;
 	for (auto& point : m_iconPoint)
 	{		
-		m_IconContainer[index]->GetTransform()->position = m_transform->position + Vector3(point.x, point.y, 0.f);
+		m_IconContainer[index]->GetTransform()->position = Vector3(point.x, point.y, 0.f);
 		m_IconContainer[index]->SetActive(true);
 		++index;
 	}
@@ -132,6 +142,15 @@ void Rader::SetFlightPoint()
 			break;
 	}
 
+
+	Transform* playerTr = m_playerInfoManager->GetPlayer()->GetTransform();
+	Vector3 forward = playerTr->GetForward();
+	Vector2 rotateDir = Vector2(forward.x, forward.z);
+	Vector2 up = Vector2(0.f, 1.f);
+	float cosValue = D3DXVec2Dot(&rotateDir, &up);
+	//m_pivot->GetTransform()->SetRotation(0.f, 0.f, 0.f);
+	m_pivot->GetTransform()->SetRotationZ(Rad2Deg * -acosf(cosValue));
+	//m_pivot->GetTransform()->RotateAxis(Vector3(0.f, 0.f, 1.f), Rad2Deg * cosf(cosValue));
 }
 
 void Rader::CreateMoreIcon(size_t _count)
