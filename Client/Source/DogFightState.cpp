@@ -25,6 +25,9 @@
 
 //스킬 상태별 상태
 #include "PlayerEscapeState.h"
+// camera state 정렬
+#include "FieldCameraZoomInState.h"
+#include "FieldCameraFollowPlayerState.h"
 
 DogFightState::DogFightState()
 {
@@ -48,7 +51,7 @@ void DogFightState::EnterState()
 
 
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
-	m_Player->SetScale(0.1f, 0.1f, 0.1f);
+	m_Player->SetScale(0.25f, 0.25f, 0.25f);
 
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
@@ -61,13 +64,15 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
 
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
-	VIBufferRenderer::Desc renderinfo;
+	/*VIBufferRenderer::Desc renderinfo;
 	renderinfo.mtrlName = L"default";
-	renderinfo.meshName = L"flight";
-	//MeshRenderer::Desc render;
-	//render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
-	//render.meshName = L"f15";
-	m_Player->AddComponent<VIBufferRenderer>(&renderinfo);
+	renderinfo.meshName = L"flight";*/
+	MeshRenderer::Desc render;
+	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.meshName = L"f15";
+
+
+	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<MouseOption>();
 	m_Player->AddComponent<PlayerShooter>();
@@ -93,23 +98,43 @@ void DogFightState::EnterState()
 	infoManager->SetScore(123456.f);
 	infoManager->SetPlayer(m_Player);
 
-	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
+
+	// 카메라 스테이트에서 관리해줌.
+	/*auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
 	smoothFollowDesc.toTarget = m_Player;
-	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
+	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);*/
 
-	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
+	{
+		m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
+		if (m_MainCamera)
+		{
+			//auto cameraStateControl = INSTANTIATE(OBJECT_TAG_CAMERA)
+			m_MainCamera->AddComponent<StateControl>();
+			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraZoomInState>(L"cameraZoomIn");
+			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraFollowPlayerState>(L"CameraFollow");
+			m_MainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
+		}
+	}
 
-	m_Player->AddComponent<UIInteractor>();
-	UIWindowFactory::StageWindow(m_Player);
+	{
+		m_Player->AddComponent<UIInteractor>();
+		UIWindowFactory::StageWindow(m_Player);
+	}
+	
 
-	EnemyManager::GetInstance();
 
-	ENEMY_STATUS tStatus(10, 20, 1);
-	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
-	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+	{
+		EnemyManager::GetInstance();
 
-	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, -30.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
+		ENEMY_STATUS tStatus(10, 20, 1);
+		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+		BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+
+		EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, -30.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
+
+	}
+	
 
 }
 

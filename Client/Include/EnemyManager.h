@@ -33,7 +33,7 @@ public: /* Gettttt */
 	
 public: /* Settttt */
 	void Add_EnemyCount(int _count);
-
+	GameObject* NearFindEenemy( GameObject* _finderObj, float _minDis =0 );
 
 public: /* Funcs */
 	void Destroy_AllEnemy();

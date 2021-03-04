@@ -25,14 +25,12 @@ SmoothFollow::~SmoothFollow()
 void SmoothFollow::Initialize()
 {
 	assert(L"Please Set Target!" && m_toTarget);
-	m_fromObject =  Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
-	m_fromObject->SetParents(m_gameObject);
-	//SetParents : ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°Çµï¿½
-	//ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ä¡, ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ world ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Ù²ï¿½.
-	//ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ø¼ï¿½ => SmoothFollow : "im ur father, mainCamera"
-
 	m_playerInfo = PlayerInfoManager::GetInstance();
 
+	m_fromObject =  Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
+	
+	// ´©±º°¡¸¦ ºÎ¸ð·Î »ç¿ëÇÏ°í½ÍÀ»¶§
+	//	m_fromObject->SetParents(m_gameObject);
 	m_lookDirection = m_toTarget->GetTransform()->rotation;
 }
 
@@ -54,6 +52,7 @@ void SmoothFollow::LateUpdate()
 
 	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());
 	float Interval = Nalmak_Math::Lerp(m_playerInfo->GetMinSpeed(), m_playerInfo->GetMaxSpeed(), Ratio);
+
 	m_followDirection = Nalmak_Math::Normalize(m_followDirection);
 	Vector3 targetPos = (m_toTarget->GetTransform()->position) + m_followDirection * (Interval + m_culDistance);
 

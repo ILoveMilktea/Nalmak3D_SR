@@ -301,6 +301,7 @@
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="..\Include\verticalBillboard.h" />
+    <ClInclude Include="FieldCameraFollowPlayerState.h" />
     <ClInclude Include="GarageSceneCameraAutoRotate.h" />
     <ClInclude Include="GarageSceneCameraZoomIn.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
@@ -411,6 +412,7 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="..\Source\verticalBillboard.cpp" />
+    <ClCompile Include="FieldCameraFollowPlayerState.cpp" />
     <ClCompile Include="GarageSceneCameraAutoRotate.cpp" />
     <ClCompile Include="GarageSceneCameraZoomIn.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />

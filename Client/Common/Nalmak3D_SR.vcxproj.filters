@@ -324,6 +324,9 @@
     <ClInclude Include="..\Include\FieldCameraZoomInState.h">
       <Filter>05. FieldCameraState</Filter>
     </ClInclude>
+    <ClInclude Include="FieldCameraFollowPlayerState.h">
+      <Filter>05. FieldCameraState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -619,6 +622,9 @@
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
     <ClCompile Include="..\Source\Player_NearGuideBullet.cpp" />
     <ClCompile Include="..\Source\FieldCameraZoomInState.cpp">
+      <Filter>05. FieldCameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldCameraFollowPlayerState.cpp">
       <Filter>05. FieldCameraState</Filter>
     </ClCompile>
   </ItemGroup>

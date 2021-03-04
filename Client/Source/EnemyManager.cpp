@@ -103,6 +103,26 @@ void EnemyManager::Add_EnemyCount(int _count)
 	m_iEnemyCount += _count;
 }
 
+GameObject * EnemyManager::NearFindEenemy( GameObject * _finderObj, float _minDis)
+{
+	GameObject* target = nullptr;
+	float mindis = _minDis;
+	for (auto& value : Get_EnemyList())
+	{
+		float lenght = Nalmak_Math::Distance(value->GetTransform()->position, _finderObj->GetTransform()->position);
+		//value->
+
+		if (mindis > lenght || !target)
+		{
+			mindis = lenght;
+			target = value;
+			break;
+		}
+	}
+
+	return target;
+}
+
 
 
 void EnemyManager::Destroy_AllEnemy()

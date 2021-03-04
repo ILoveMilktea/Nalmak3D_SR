@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\Player_NearGuideBullet.h"
-
+#include "EnemyManager.h"
 
 Player_NearGuideBullet::Player_NearGuideBullet(Desc * _desc)
 {
@@ -36,7 +36,7 @@ void Player_NearGuideBullet::Update()
 	if (!m_bFinish)
 		return;
 
-	GameObject * target = FindEnemy(OBJECT_TAG_ENEMY);
+	GameObject * target = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject);
 	if (target)
 	{
 		Vector3 toDistance = target->GetTransform()->position - m_transform->position;
@@ -49,23 +49,3 @@ void Player_NearGuideBullet::Update()
 }
 
 
-GameObject* Player_NearGuideBullet::FindEnemy(OBJECT_TAG _enum, float _mimDis)
-{
-	GameObject* target = nullptr;
-	float mindis = _mimDis;
-	for (auto& value : Core::GetInstance()->GetObjectList(_enum))
-	{
-		float lenght = Nalmak_Math::Distance(value->GetTransform()->position, m_transform->position);
-		//value->
-
-		if (mindis > lenght || !target)
-		{
-			mindis = lenght;
-			target = value;
-			break;
-		}
-	}
-
-	return target;
-
-}
