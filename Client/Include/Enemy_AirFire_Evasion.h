@@ -1,7 +1,8 @@
 #pragma once
 #include "IState.h"
+#include "Enemy_Evasion.h"
 class AirFire_Evasion :
-	public IState
+	public Enemy_Evasion
 {
 public:
 	AirFire_Evasion();
@@ -14,7 +15,7 @@ public:
 	virtual void ExitState() override;
 
 public:
-
+	void Show_TargetPos();
 public:
 
 private:
@@ -25,10 +26,10 @@ private:
 	
 
 	float			m_fShootDelta = 0.f;
-	float			m_fBrustDelta = 0.f;
+	float			m_fBurstDelta = 0.f;
 
 	int				m_iCount = 0;
 	
-	vector<GameObject*> Target_Plane;
+	vector<GameObject*> m_vTarget_Plane;
 };
 

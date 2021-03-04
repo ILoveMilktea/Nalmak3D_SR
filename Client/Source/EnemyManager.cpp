@@ -2,7 +2,7 @@
 #include "../Include/EnemyManager.h"
 
 #include "Enemy.h"
-#include "Boss.h"
+#include "Enemy_Boss.h"
 
 #include "Enemy_Idle.h"
 #include "Enemy_Chase.h"
@@ -12,13 +12,14 @@
 #include "Enemy_Explosion.h"
 #include "Enemy_Falling.h"
 
-#include "Slide_Evasion.h"
-#include "Diagonal_Evasion.h"
-#include "CrossFire_Evasion.h"
-#include "Circle_Evasion.h"
-#include "Prymide_Evasion.h"
-#include "AirFire_Evasion.h"
-#include "Look_Evasion.h"
+#include "Enemy_Slide_Evasion.h"
+#include "Enemy_Diagonal_Evasion.h"
+#include "Enemy_CrossFire_Evasion.h"
+#include "Enemy_Circle_Evasion.h"
+#include "Enemy_Prymide_Evasion.h"
+#include "Enemy_AirFire_Evasion.h"
+#include "Enemy_Look_Evasion.h"
+#include "Enemy_Exit_Evasion.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -64,19 +65,19 @@ void EnemyManager::Initialize()
 
 void EnemyManager::Update()
 {
+
 	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
 	//{
-	//	ENEMY_STATUS tStatus(10, 20, 1);
-	//	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
-	//	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
-	//	Enemy_Spawn(Vector3(0.f, 0.f, 100.f), ENEMY_STATE::HOLD,
-	//		tStatus,tGun,tMissile);
+	//	Player_FovSpawnTest(true, 100.f);
+	//	//Spawn_S1P1();
 	//}
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
 	{
 		Destroy_AllEnemy();
 	}
+
+	
 
 	DEBUG_LOG(L"Remianed Enemy Count", m_iEnemyCount);
 }
@@ -114,13 +115,13 @@ void EnemyManager::Destroy_AllEnemy()
 	m_iEnemyCount = 0;
 }
 
-void EnemyManager::Enemy_Spawn(Vector3 _pos,
+void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	ENEMY_STATE _initState, ENEMY_STATUS _status,
 	BULLET_STATUS _gun, BULLET_STATUS _missile, BULLET_STATUS _homing)
 {
 	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
 	Enemy_obj->SetPosition(_pos);
-	Enemy_obj->SetScale(0.1f,0.1f,0.1f);
+	Enemy_obj->GetTransform()->scale = _scale;
 
 	Enemy_obj->AddComponent<StateControl>();
 	m_pStateControl = Enemy_obj->GetComponent<StateControl>();
@@ -206,9 +207,10 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	m_pStateControl->AddState<Circle_Evasion>(L"Circle");
 	m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
 	m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
-	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
-	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
-	m_pStateControl->AddState<Enemy_Death>(L"Death");
+	m_pStateControl->AddState<Exit_Evasion>(L"Exit");
+	//m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
+	//m_pStateControl->AddState<Enemy_Falling>(L"Falling");
+	//m_pStateControl->AddState<Enemy_Death>(L"Death");
 
 	switch (_initState)
 	{
@@ -282,4 +284,184 @@ void EnemyManager::Boss_Spawn()
 	Boss_obj->AddComponent<SphereCollider>(&Boss_col);
 
 	++m_iEnemyCount;
+}
+
+void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
+{
+	if (_front) //앞에서 생성.
+	{
+		//킹론 : 플레이어 앞에서 생성되어야한다 -> 카메라랑 같은 방향
+				//플레이어 시야각 안에 생성되어야 한다 -> 카메라 안에 있어야 함.
+				// 즉 걍 카메라에 보이는 곳에 생성 되면 된다. 이말이야.
+				// 그래서 카메라 화면 즉 뷰포트의 랜덤 좌표를 넘겨줘서 
+				// 월드 좌표로 옮긴 뒤 해당 위치에 에ㅡ너미를 생성 되게 하는 것.
+
+		//Vector3 vPlayerPos = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->position;
+		
+		Vector3 vResult;
+
+		Vector2 vScreenSpace = { WINCX/2.f, WINCY/2.f };
+		Vector3 vProjSpace;
+
+		/* 뷰 포트(스크린 좌표) -> 투영 스페이스 좌표 */
+		vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
+		vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
+		vProjSpace.z = 1.f;
+		//->스크린 좌표를 반반 줬기때문에 원래 계획대로라면 투영 스페이스 좌표는 0,0,1 이 나와야함.
+
+		/* 투영 스페이스 -> 뷰 스페이스 (투영 매트릭스 역행렬 곱해주기.) */
+		Matrix matProj_Inverse;
+		D3DXMatrixInverse(&matProj_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetProjMatrix());
+		Vector3 vViewSpace;
+		D3DXVec3TransformCoord(&vViewSpace, &vProjSpace, &matProj_Inverse);
+
+		/* 뷰 스페이스 -> 월드 스페이스 (뷰 매트릭스 역행렬 곱해주기.) */
+		Matrix matView_Inverse;
+		D3DXMatrixInverse(&matView_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetViewMatrix());
+		D3DXVec3TransformCoord(&vResult, &vViewSpace, &matView_Inverse);
+		
+		//근데 너무 멂.
+		//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
+		//거리를 더 해주자.
+		D3DXVec3Normalize(&vResult, &vResult);
+		Vector3 temp = Core::GetInstance()->GetMainCamera()->GetTransform()->position + vResult * 100.f;
+		//기준 위치 + (거리{생성된 방향벡터 * 거리});
+
+		Enemy_Spawn(temp);
+
+		//근데 Camera 기준으로 할꺼면 Camera-> GetCamToMouseWorldDirection 함수 있음 ㅎㅎ;
+	}
+
+	if (!_front) //뒤에서 생성.
+	{
+		Vector3 vPlayerPos = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->position;
+
+		Vector3 vResult;
+
+		Vector2 vScreenSpace = { WINCX / 2.f, WINCY / 2.f };
+		Vector3 vProjSpace;
+
+		/* 뷰 포트(스크린 좌표) -> 투영 스페이스 좌표 */
+		vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
+		vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
+		vProjSpace.z = 1.f;
+		//->스크린 좌표를 반반 줬기때문에 원래 계획대로라면 투영 스페이스 좌표는 0,0,1 이 나와야함.
+
+		/* 투영 스페이스 -> 뷰 스페이스 (투영 매트릭스 역행렬 곱해주기.) */
+		Matrix matProj_Inverse;
+		D3DXMatrixInverse(&matProj_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetProjMatrix());
+		Vector3 vViewSpace;
+		D3DXVec3TransformCoord(&vViewSpace, &vProjSpace, &matProj_Inverse);
+
+		/* 뷰 스페이스 -> 월드 스페이스 (뷰 매트릭스 역행렬 곱해주기.) */
+		Matrix matView_Inverse;
+		D3DXMatrixInverse(&matView_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetViewMatrix());
+		D3DXVec3TransformCoord(&vResult, &vViewSpace, &matView_Inverse);
+
+		//근데 너무 멂.
+		//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
+		//거리를 더 해주자.
+		D3DXVec3Normalize(&vResult, &(vResult));
+		Vector3 temp = Core::GetInstance()->GetMainCamera()->GetTransform()->position + vResult * _distance * -1.f;
+		//기준 위치 + (거리{생성된 방향벡터 * 거리});
+
+		Enemy_Spawn(temp);
+	}
+}
+
+Vector3 EnemyManager::Pos_ScreenToWorld(float _x, float _y, float _distance)
+{
+	Vector3 vResult;
+
+	Vector2 vScreenSpace = { _x, _y };
+	Vector3 vProjSpace;
+
+	/* 뷰 포트(스크린 좌표) -> 투영 스페이스 좌표 */
+	vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
+	vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
+	vProjSpace.z = 1.f;
+	//->스크린 좌표를 반반 줬기때문에 원래 계획대로라면 투영 스페이스 좌표는 0,0,1 이 나와야함.
+
+	/* 투영 스페이스 -> 뷰 스페이스 (투영 매트릭스 역행렬 곱해주기.) */
+	Matrix matProj_Inverse;
+	D3DXMatrixInverse(&matProj_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetProjMatrix());
+	Vector3 vViewSpace;
+	D3DXVec3TransformCoord(&vViewSpace, &vProjSpace, &matProj_Inverse);
+
+	/* 뷰 스페이스 -> 월드 스페이스 (뷰 매트릭스 역행렬 곱해주기.) */
+	Matrix matView_Inverse;
+	D3DXMatrixInverse(&matView_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetViewMatrix());
+	D3DXVec3TransformCoord(&vResult, &vViewSpace, &matView_Inverse);
+
+	//근데 너무 멂.
+	//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
+	//거리를 더 해주자.
+	D3DXVec3Normalize(&vResult, &vResult);
+	Vector3 temp = Core::GetInstance()->GetMainCamera()->GetTransform()->position + vResult * _distance;
+	//기준 위치 + (거리{생성된 방향벡터 * 거리});
+
+	return temp;
+}
+
+//Vector3 EnemyManager::Pos_ViewToWorld(float _x, float _y, float _Distance)
+//{
+//	/* x,y : 0 ~ 1.0 */
+//	/* z : 100 ~ 1000 */
+//	GameObject* mainCam = Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
+//
+//	Vector3 vResult;
+//
+//	/* 뷰 포트(스크린좌표) -> 투영 스페이스*/
+//	Vector3 vScreenPos = { _x, _y, 0.f };
+//	Vector3 vProjSpace; 
+//	vProjSpace.x = vScreenPos.x / (WINCX * 0.5f) - 1.f;
+//	vProjSpace.y = 1.f - vScreenPos.y / (WINCY * 0.5f);
+//	vProjSpace.z = 1.f; //asdf
+//
+//
+//	/* 투영스페이스 -> 뷰 스페이스*/
+//	Matrix InverseProj;
+//	D3DXMatrixInverse(&InverseProj, 0, &mainCam->GetComponent<Camera>()->GetProjMatrix());
+//	D3DXVec3TransformCoord(&vResult, &vScreenPos, &InverseProj);
+//	//두번째 인자를 계산 끝난 투영 스페이스를 줘야지 시! 팔새기야 ! 씨팔 이거때문에 두시간동안 지1랄 햇네
+//
+//	//카메라 기준으로 멀어지는걸 원한다면 여기서 쁘라스 해줘야함.
+//	//vResult.z += _Distance;
+//
+//	/* 뷰스페이스 -> 월드 스페이스*/
+//	Matrix InverseView;
+//	D3DXMatrixInverse(&InverseView, 0, &mainCam->GetComponent<Camera>()->GetViewMatrix());
+//	D3DXVec3TransformCoord(&vResult, &vResult, &InverseView);
+//
+//	//나온 결과 
+//	//vResult.z += _Distance; //
+//
+//	//D3DXVec3Normalize(&vResult, &vResult);
+//
+//	return vResult;
+//}
+
+
+void EnemyManager::Spawn_S1P1()
+{
+	//Stage1 Phase1 -> Stage1 DogFight's 1Pattern => like tutorial.
+	//The big one & four Wls
+
+	/* Four Wls */
+	for (int i = 0; i < 4; ++i)
+	{
+		ENEMY_STATUS tStatus(10, 20, 1);
+		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+
+		Vector2 vRand = Nalmak_Math::Rand(Vector2(0.f, 0.f), Vector2(1920.f, 1080.f));
+		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, 100.f);
+
+		Enemy_Spawn(vPos, Vector3(0.2f, 0.2f, 0.2f), ENEMY_STATE::HOLD, tStatus, tGun);
+	}
+	//ENEMY_STATUS tStatus(100, 20, 1);
+	//BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+	//Vector2 vRand = Nalmak_Math::Rand(Vector2(0, 0), Vector2(1920.f, 1080.f));
+	//Enemy_Spawn(Vector3(vRand.x, vRand.y, 100.f), Vector3(0.3f, 0.3f, 0.3f), ENEMY_STATE::IDLE, tStatus, tGun);
+
+
 }

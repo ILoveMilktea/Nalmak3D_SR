@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Include\Boss.h"
+#include "..\Include\Enemy_Boss.h"
 
 Boss::Boss(Desc * _desc)
 {

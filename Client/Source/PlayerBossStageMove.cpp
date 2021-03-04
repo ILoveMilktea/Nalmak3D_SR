@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\PlayerBossStageMove.h"
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 
 PlayerBossStageMove::PlayerBossStageMove()

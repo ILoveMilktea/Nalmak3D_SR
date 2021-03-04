@@ -52,9 +52,6 @@
     <ClInclude Include="..\Include\Enemy_Hold.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\att_Hold</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Bullet_Manager.h">
-      <Filter>02.Component\00.Manager\BulletManager\00%29Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\SceneChanger.h">
       <Filter>02.Component\01.Utility</Filter>
     </ClInclude>
@@ -93,12 +90,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\NalmakScene.h">
       <Filter>01.Scene\01.Test</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Missile.h">
-      <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Homing.h">
-      <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\RevolvesToTarget.h">
       <Filter>02.Component\00.Manager\Player\FixCamera</Filter>
@@ -144,9 +135,6 @@
     <ClInclude Include="..\Include\Enemy_Falling.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\MachineGun.h">
-      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\UIFactory.h">
       <Filter>97.Factory</Filter>
     </ClInclude>
@@ -179,9 +167,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\Enemy.h">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Boss.h">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\PlayerBossStageMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
@@ -259,27 +244,6 @@
       <Filter>02.Component\06.GarageScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\DeadTimer.h" />
-    <ClInclude Include="..\Include\AirFire_Evasion.h">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Circle_Evasion.h">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\CrossFire_Evasion.h">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Diagonal_Evasion.h">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Look_Evasion.h">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Prymide_Evasion.h">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Slide_Evasion.h">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\PlayerNone.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
@@ -341,6 +305,51 @@
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
+    <ClInclude Include="..\Include\Enemy_Bullet_Manager.h">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Homing.h">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\Homing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_MachineGun.h">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\MachineGun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Missile.h">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Boss.h">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_AirFire_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\AirFire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Circle_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_CrossFire_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\CrossFire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Diagonal_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Diagonal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Look_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Look</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Prymide_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Prymide</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Slide_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Slide</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_AirFire_TargetPlane.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\AirFire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Exit_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Evasion.h">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -382,9 +391,6 @@
     <ClCompile Include="..\Source\Enemy_Hold.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\att_Hold</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Bullet_Manager.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\00%29Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\SceneChanger.cpp">
       <Filter>02.Component\01.Utility</Filter>
     </ClCompile>
@@ -424,12 +430,6 @@
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Missile.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\Missile</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Homing.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\Homing</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\RevolvesToTarget.cpp">
       <Filter>02.Component\00.Manager\Player\FixCamera</Filter>
     </ClCompile>
@@ -467,9 +467,6 @@
     <ClCompile Include="..\Source\Enemy_Falling.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\MachineGun.cpp">
-      <Filter>02.Component\00.Manager\BulletManager\MachineGun</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\ScriptEnd.cpp">
       <Filter>02.Component\03.Script\State</Filter>
     </ClCompile>
@@ -487,9 +484,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Enemy.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Boss.cpp">
-      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\PlayerBossStageMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
@@ -573,27 +567,6 @@
       <Filter>02.Component\06.GarageScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\DeadTimer.cpp" />
-    <ClCompile Include="..\Source\AirFire_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Circle_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\CrossFire_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Diagonal_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Look_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Prymide_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Slide_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\PlayerNone.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
@@ -655,6 +628,51 @@
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
+    <ClCompile Include="..\Source\Enemy_Bullet_Manager.cpp">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Homing.cpp">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\Homing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_MachineGun.cpp">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\MachineGun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Missile.cpp">
+      <Filter>02.Component\00.Manager\Enemy_BulletManager\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Boss.cpp">
+      <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_AirFire_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\AirFire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Circle_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_CrossFire_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\CrossFire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Diagonal_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Diagonal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Look_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Look</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Prymide_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Prymide</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Slide_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Slide</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_AirFire_TargetPlane.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\AirFire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Exit_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Evasion.cpp">
+      <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -806,21 +824,6 @@
     <Filter Include="02.Component\00.Manager\Mouse">
       <UniqueIdentifier>{ff632f15-61fa-4d29-95de-f7e2b4aac73b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager">
-      <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\00%29Manager">
-      <UniqueIdentifier>{a62225df-353e-428f-82dd-4d2fca9da824}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\Missile">
-      <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\Homing">
-      <UniqueIdentifier>{1f100bc1-d700-466c-a558-7862f16e388b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\BulletManager\MachineGun">
-      <UniqueIdentifier>{23765436-d43d-4b2e-aa6d-67b00e77d76c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\00.Manager\StageStateManager">
       <UniqueIdentifier>{493b7d00-e614-4513-b431-d1c40cd424a7}</UniqueIdentifier>
     </Filter>
@@ -865,6 +868,45 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Player\FixCamera\BossStageCamera">
       <UniqueIdentifier>{80bf70f9-492b-41d5-9ff8-eb38719eb005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy_BulletManager">
+      <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy_BulletManager\Missile">
+      <UniqueIdentifier>{273aaf80-a566-43b8-bf1d-81139c9ecb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy_BulletManager\Homing">
+      <UniqueIdentifier>{1f100bc1-d700-466c-a558-7862f16e388b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy_BulletManager\MachineGun">
+      <UniqueIdentifier>{23765436-d43d-4b2e-aa6d-67b00e77d76c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy_BulletManager\Manager">
+      <UniqueIdentifier>{a62225df-353e-428f-82dd-4d2fca9da824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\AirFire">
+      <UniqueIdentifier>{f15aea69-33d0-416d-bf21-399652f47e4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Circle">
+      <UniqueIdentifier>{5084e5d0-9eac-4b2f-b6cb-90f7ac912181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\CrossFire">
+      <UniqueIdentifier>{a09c9b44-e2b6-44a6-ba47-fd4cc9a165f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Diagonal">
+      <UniqueIdentifier>{c4242036-bdfe-401d-b937-ca12b2c1b6d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Look">
+      <UniqueIdentifier>{26a71353-f14b-40d6-87a9-0acd32d94a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Prymide">
+      <UniqueIdentifier>{6c54009c-04ed-459f-9afe-cef09177af93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Slide">
+      <UniqueIdentifier>{0cd93de4-fbe7-4ae8-b31d-cab828d952a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Exit">
+      <UniqueIdentifier>{49878f57-b735-4e94-b68d-7fa050af020b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

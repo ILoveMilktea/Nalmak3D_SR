@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\Enemy.h"
 
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 
 Enemy::Enemy(Desc * _Desc)
@@ -28,12 +28,6 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {	
-
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
-	{
-		//pattern change
-	}
-
 	Reloading_Gun();
 	Reloading_Missile();
 
@@ -42,12 +36,13 @@ void Enemy::Update()
 
 
 #pragma region DebugLog
-	DEBUG_LOG(L"타겟 까지의 거리",		m_fDist_Target);
+	DEBUG_LOG(L"CurPos", m_transform->position);
+	//DEBUG_LOG(L"타겟 까지의 거리",		m_fDist_Target);
 	//DEBUG_LOG(L"forward벡터와 사이벡터의 내적",		m_fInner);
 	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
 	//DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
-	DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
-	DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
+	//DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
+	//DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
 	DEBUG_LOG(L"Current Pattern", m_gameObject->GetComponent<StateControl>()->GetCurStateString());
 #pragma endregion
 }

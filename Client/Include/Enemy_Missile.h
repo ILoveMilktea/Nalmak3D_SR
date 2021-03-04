@@ -26,12 +26,11 @@ public:
 	virtual void OnTriggerExit(Collisions& _collision)override;
 
 public:
-	void Go_Straight();
 	void Accelerate(float _maxSpd);
 
 	void Boom();
+
 private:
-	
 	int	m_iMinDmg = 0;
 	int m_iMaxDmg = 0;
 
@@ -39,5 +38,7 @@ private:
 	float m_fMaxSpd = 0.f;
 
 	float m_fMissileDelta = 0.f;
+
+	bool	m_bEffect = false;
 };
 

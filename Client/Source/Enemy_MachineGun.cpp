@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Include\MachineGun.h"
+#include "..\Include\Enemy_MachineGun.h"
 
 
 

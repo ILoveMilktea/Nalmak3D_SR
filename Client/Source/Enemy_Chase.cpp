@@ -2,7 +2,7 @@
 #include "..\Include\Enemy_Chase.h"
 
 #include "Enemy.h"
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 
 Enemy_Chase::Enemy_Chase()

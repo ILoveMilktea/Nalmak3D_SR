@@ -36,6 +36,8 @@ Camera::Camera(Desc * _desc)
 	UpdateProjMatrix();
 
 	RenderManager::GetInstance()->AddCamera(this);
+	
+	UpdateProjMatrix();
 }
 
 void Camera::Initialize()
