@@ -21,7 +21,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void Release() override;
-	GameObject* FindEnemy(OBJECT_TAG _enum , float _mimDis = 0);
+//	GameObject* FindEnemy(OBJECT_TAG _enum , float _mimDis = 0);
 private:
 	GameObject* m_player = nullptr;
 	GameObject* m_target = nullptr;

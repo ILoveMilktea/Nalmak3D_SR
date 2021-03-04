@@ -19,9 +19,12 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 
+
+private:
+	GameObject * FindEnemy(OBJECT_TAG _enum, float _mimDis = 0);
 private:
 	Vector3 m_firstTarget;
-
+	bool	m_bFinish;
 private:
 	Vector3 m_firstDir;
 	float m_speed;

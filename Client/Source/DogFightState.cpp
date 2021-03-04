@@ -109,7 +109,7 @@ void DogFightState::EnterState()
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 
-	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, 0.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
+	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, -30.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
 
 }
 
