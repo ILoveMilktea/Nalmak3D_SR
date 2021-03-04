@@ -853,7 +853,7 @@ public:
 
 			list.emplace_back(dialogue);
 
-			script = L"<< SCRIPT2 >>";
+			script = L"MooGi Test gogo!";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 			script = L"<< SCRIPT3 >>";

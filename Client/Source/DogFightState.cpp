@@ -111,6 +111,7 @@ void DogFightState::EnterState()
 
 	//EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, 0.f, 100.f), Vector3(0.1f, 0.1f, 0.1f), ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
 
+	//EnemyManager::GetInstance()->Player_FovSpawnTest(true, 100.f);
 	EnemyManager::GetInstance()->Spawn_S1P1();
 }
 
@@ -127,24 +128,15 @@ void DogFightState::UpdateState()
 			//BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 			//BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 
-
 			//EnemyManager::GetInstance()->Enemy_Spawn(Vector3(100.f, 100.f, 100.f), ENEMY_STATE::CHASE,
 			//	tStatus, tGun, tMissile);
-
-			EnemyManager::GetInstance()->Player_FovSpawnTest(true, 100.f);
-
+			
+			//EnemyManager::GetInstance()->Player_FovSpawnTest(true, 100.f);
 		}
 
 		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
 		{
-			ENEMY_STATUS tStatus(10, 20, 1);
-			BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
-			BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
-
-
-			EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-50.f, -20.f, 150.f), Vector3(0.1f, 0.1f, 0.1f), 
-				ENEMY_STATE::DROP,
-				tStatus, tGun, tMissile);
+			EnemyManager::GetInstance()->Spawn_S1P1();
 		}
 
 

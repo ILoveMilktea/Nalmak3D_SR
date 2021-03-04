@@ -66,4 +66,6 @@ private:
 	StateControl* m_pStateControl = nullptr;
 	int				m_iEnemyCount = 0;
 
+
+
 };

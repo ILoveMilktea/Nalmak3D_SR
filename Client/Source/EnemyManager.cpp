@@ -66,6 +66,12 @@ void EnemyManager::Initialize()
 void EnemyManager::Update()
 {
 
+	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+	//{
+	//	Player_FovSpawnTest(true, 100.f);
+	//	//Spawn_S1P1();
+	//}
+
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
 	{
 		Destroy_AllEnemy();
@@ -290,7 +296,7 @@ void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 				// 그래서 카메라 화면 즉 뷰포트의 랜덤 좌표를 넘겨줘서 
 				// 월드 좌표로 옮긴 뒤 해당 위치에 에ㅡ너미를 생성 되게 하는 것.
 
-		Vector3 vPlayerPos = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->position;
+		//Vector3 vPlayerPos = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->position;
 		
 		Vector3 vResult;
 
@@ -317,7 +323,7 @@ void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 		//근데 너무 멂.
 		//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
 		//거리를 더 해주자.
-		D3DXVec3Normalize(&vResult, &(vResult));
+		D3DXVec3Normalize(&vResult, &vResult);
 		Vector3 temp = Core::GetInstance()->GetMainCamera()->GetTransform()->position + vResult * 100.f;
 		//기준 위치 + (거리{생성된 방향벡터 * 거리});
 
@@ -441,31 +447,21 @@ void EnemyManager::Spawn_S1P1()
 	//Stage1 Phase1 -> Stage1 DogFight's 1Pattern => like tutorial.
 	//The big one & four Wls
 
-	
-
-
-
 	/* Four Wls */
 	for (int i = 0; i < 4; ++i)
 	{
 		ENEMY_STATUS tStatus(10, 20, 1);
 		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 
-		Vector2 vRand = Nalmak_Math::Rand(Vector2(0, 0), Vector2(1920.f, 1080.f));
+		Vector2 vRand = Nalmak_Math::Rand(Vector2(0.f, 0.f), Vector2(1920.f, 1080.f));
 		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, 100.f);
 
 		Enemy_Spawn(vPos, Vector3(0.2f, 0.2f, 0.2f), ENEMY_STATE::HOLD, tStatus, tGun);
 	}
-
 	//ENEMY_STATUS tStatus(100, 20, 1);
 	//BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
-
 	//Vector2 vRand = Nalmak_Math::Rand(Vector2(0, 0), Vector2(1920.f, 1080.f));
-
 	//Enemy_Spawn(Vector3(vRand.x, vRand.y, 100.f), Vector3(0.3f, 0.3f, 0.3f), ENEMY_STATE::IDLE, tStatus, tGun);
 
-
-	
-	
 
 }
