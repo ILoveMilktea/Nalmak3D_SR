@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Include\UIManager.h"
 
+#include "UI_Alarm.h"
+
 UIManager* UIManager::m_Instance = nullptr;
 
 UIManager::UIManager(Desc * _desc)
@@ -15,6 +17,13 @@ void UIManager::Initialize()
 {
 	m_isSkillRotate = false;
 	m_curSkillIndex = 0;
+
+	// ----- alarm ----
+	m_messenger.push_back(nullptr);
+	m_messenger.push_back(nullptr);
+	m_messenger.push_back(nullptr);
+	m_messenger.push_back(nullptr);
+	m_alarmTimer = 0.f;
 }
 
 void UIManager::Update()
@@ -22,6 +31,14 @@ void UIManager::Update()
 	if (m_isSkillRotate)
 	{
 		SkillRotate();
+	}
+
+	m_alarmTimer += dTime;
+	if (1.5f < m_alarmTimer)
+	{
+		UpdateAlarm();
+		RemoveAlarm();
+		m_alarmTimer = 0.f;
 	}
 }
 
@@ -38,7 +55,7 @@ void UIManager::SkillRotateOn(int _weaponIndex)
 
 	if (_weaponIndex < m_curSkillIndex)
 	{
-		if (abs(_weaponIndex + weaponCount - m_curSkillIndex) < abs(_weaponIndex - m_curSkillIndex))
+		if (abs(_weaponIndex + weaponCount - m_curSkillIndex) < abs(m_curSkillIndex - _weaponIndex))
 		{
 			// normal
 			m_targetSkillIndex = _weaponIndex + weaponCount;
@@ -53,7 +70,7 @@ void UIManager::SkillRotateOn(int _weaponIndex)
 	}
 	else
 	{
-		if (abs((_weaponIndex - weaponCount) - m_curSkillIndex) < abs(_weaponIndex - m_curSkillIndex))
+		if (abs(m_curSkillIndex - (_weaponIndex - weaponCount)) < abs(_weaponIndex - m_curSkillIndex))
 		{
 			// inverse
 			m_targetSkillIndex = _weaponIndex - weaponCount;
@@ -125,6 +142,46 @@ bool UIManager::SkillSingleRotate(bool _inverse, int _speed)
 	}
 
 	return true;
+}
+
+void UIManager::AddAlarm(UI_Alarm* _alarm)
+{
+	m_alarmQueue.push(_alarm);
+}
+
+void UIManager::UpdateAlarm()
+{
+	if (m_messenger.front())
+	{
+		m_messenger.front()->AlarmOffAnim();
+		m_trashbag.push(m_messenger.front());
+	}
+	m_messenger.pop_front();
+
+	if (m_alarmQueue.empty())
+		m_messenger.push_back(nullptr);
+	else
+	{
+		m_messenger.push_back(m_alarmQueue.front());
+		m_alarmQueue.pop();
+	}
+
+	for (auto message : m_messenger)
+	{
+		if (message)
+			message->AlarmUpAnim();
+	}
+}
+
+void UIManager::RemoveAlarm()
+{
+	while (!m_trashbag.empty())
+	{
+		GameObject* trash = m_trashbag.front()->GetGameObject();
+		DESTROY(trash);
+		trash = nullptr;
+		m_trashbag.pop();
+	}
 }
 
 UIManager * UIManager::GetInstance()

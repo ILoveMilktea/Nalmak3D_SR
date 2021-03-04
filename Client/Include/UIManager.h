@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+class UI_Alarm;
 class UIManager :
 	public Component
 {
@@ -30,6 +31,20 @@ private:
 	int m_targetSkillIndex	= 0;
 	float m_rotateTimer		= 0.f;
 	float m_nextAngle		= 0.f;
+
+	//=====================
+	// alarm
+public:
+	void AddAlarm(UI_Alarm* _alarm);
+	void UpdateAlarm();
+	void RemoveAlarm();
+
+private:
+	list<UI_Alarm*> m_messenger;
+	queue<UI_Alarm*> m_alarmQueue;
+	queue<UI_Alarm*> m_trashbag;
+
+	float m_alarmTimer;
 
 public:
 	static UIManager* GetInstance();

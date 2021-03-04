@@ -9,9 +9,6 @@ class NALMAK_DLL MoveAnimation :
 	public IAnimation
 {
 public:
-	enum ANIMATION { LERP, CUSTOM };
-
-public:
 	MoveAnimation();
 	~MoveAnimation();
 
@@ -20,22 +17,18 @@ public:
 	virtual bool Play_CurrentAnimation() override;
 	virtual void End_Animation() override;
 
-	void Play_MoveLerp();
-	void Play_MoveCustom();
+	virtual void Play_Lerp() override;
+	virtual void Play_Custom() override;
 
-	void SetAnimation(ANIMATION _animation);
 
 public:
-	void SetActor(GameObject* _actor);
-	void SetStart();
-	void SetDestination(Vector3 _dest) { m_destination = _dest; }
+	void SetStartPosition();
+	void SetStartPosition(Vector3 _start);
+	void SetDestPosition(Vector3 _dest) { m_destPos = _dest; }
 
 private:
-	ANIMATION m_currentAnimation;
-	GameObject* m_actor;
-
-	Vector3 m_start;
-	Vector3 m_destination;
+	Vector3 m_startPos;
+	Vector3 m_destPos;
 };
 
 

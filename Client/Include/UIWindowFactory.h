@@ -828,7 +828,7 @@ public:
 				auto img = UIFactory::CreateImage(CANVAS_GROUP_STAGEWND, L"boundary");
 				img->SetScale(100.f, 100.f);
 				img->SetParents(pivot);
-				img->SetPosition(-cosf(Deg2Rad * 30) * 240.f, 120.f);
+				img->SetPosition(-cosf(Deg2Rad * 30) * 240.f, -120.f);
 				// 150, 130
 			}
 			// skill img 2
@@ -836,14 +836,14 @@ public:
 				auto img = UIFactory::CreateImage(CANVAS_GROUP_STAGEWND, L"boundary");
 				img->SetScale(100.f, 100.f);
 				img->SetParents(pivot);
-				img->SetPosition(cosf(Deg2Rad * 30) * 240.f, 120.f);
+				img->SetPosition(cosf(Deg2Rad * 30) * 240.f, -120.f);
 			}
 			// skill img wait
 			{
 				auto img = UIFactory::CreateImage(CANVAS_GROUP_STAGEWND, L"boundary");
 				img->SetScale(100.f, 100.f);
 				img->SetParents(pivot);
-				img->SetPosition(0.f, -240.f);
+				img->SetPosition(0.f, 240.f);
 			}
 		}
 

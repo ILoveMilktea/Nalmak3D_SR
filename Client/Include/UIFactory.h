@@ -12,6 +12,7 @@
 #include "EnemyDetector.h"
 #include "BossUIAnimator.h"
 #include "ItemButton.h"
+#include "UI_Alarm.h"
 
 class GameObject;
 
@@ -761,6 +762,42 @@ public:
 			AddComponent<EnemyDetector>(&desc_ed);
 
 		return enemyDetector;
+	}
+
+	static GameObject* Prefab_Stage_Alarm(int _type, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Text::Desc desc;
+		desc.width = 12;
+		desc.height = 30;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(25, 255, 25, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"Stage_AlarmText");
+		text->AddComponent<CanvasRenderer>(&desc_cr);
+		text->AddComponent<Text>(&desc);
+		text->SetScale(400.f, 40.f);
+
+		// light img
+		auto lightImage = CreateImage(_group, L"UIWhite");
+		lightImage->SetScale(400.f, 40.f);
+
+		UI_Alarm::Desc desc_alarm;
+		desc_alarm.type = UI_Alarm::ALARMTYPE(_type);
+		desc_alarm.text = text;
+		desc_alarm.light = lightImage;
+
+		auto alarm = INSTANTIATE()->AddComponent<UI_Alarm>(&desc_alarm);
+		text->SetParents(alarm);
+		lightImage->SetParents(alarm);
+
+		alarm->SetPosition(1800.f, 400.f);
+
+		return alarm;
 	}
 #pragma endregion
 

@@ -301,6 +301,7 @@
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIManager.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
+    <ClInclude Include="..\Include\UI_Alarm.h" />
     <ClInclude Include="..\Include\verticalBillboard.h" />
     <ClInclude Include="GarageSceneCameraAutoRotate.h" />
     <ClInclude Include="GarageSceneCameraZoomIn.h" />
@@ -412,6 +413,7 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="..\Source\UIManager.cpp" />
+    <ClCompile Include="..\Source\UI_Alarm.cpp" />
     <ClCompile Include="..\Source\verticalBillboard.cpp" />
     <ClCompile Include="GarageSceneCameraAutoRotate.cpp" />
     <ClCompile Include="GarageSceneCameraZoomIn.cpp" />

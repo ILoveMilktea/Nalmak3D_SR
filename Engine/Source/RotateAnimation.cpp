@@ -18,7 +18,8 @@ void RotateAnimation::Start_Animation()
 
 bool RotateAnimation::Play_CurrentAnimation()
 {
-	IAnimation::Play_CurrentAnimation();
+	if (!IAnimation::Play_CurrentAnimation())
+		return false;
 
 	return true;
 }
@@ -28,22 +29,10 @@ void RotateAnimation::End_Animation()
 	IAnimation::End_Animation();
 }
 
-bool RotateAnimation::Play_RotateX()
+void RotateAnimation::Play_Lerp()
 {
-	return false;
 }
 
-bool RotateAnimation::Play_RotateY()
+void RotateAnimation::Play_Custom()
 {
-	return false;
-}
-
-bool RotateAnimation::Play_RotateZ()
-{
-	return false;
-}
-
-bool RotateAnimation::Play_RotateCustom()
-{
-	return false;
 }

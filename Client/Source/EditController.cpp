@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\EditController.h"
 #include "EnemyManager.h"
+#include "UIManager.h"
 
 EditController::EditController(Desc * _desc)
 {
@@ -41,20 +42,32 @@ void EditController::Update()
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F5))
 	{
+		auto alarm = UIFactory::Prefab_Stage_Alarm(UI_Alarm::WARNING, L"warning message", CANVAS_GROUP_STAGEWND);
+		alarm->GetComponent<UI_Alarm>()->AlarmOnAnim();
+		UIManager::GetInstance()->AddAlarm(alarm->GetComponent<UI_Alarm>());
+		//UIManager::GetInstance()->SkillRotateOn(0);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F6))
 	{
+		auto alarm = UIFactory::Prefab_Stage_Alarm(UI_Alarm::NOTICE, L"notice message", CANVAS_GROUP_STAGEWND);
+		alarm->GetComponent<UI_Alarm>()->AlarmOnAnim();
+		UIManager::GetInstance()->AddAlarm(alarm->GetComponent<UI_Alarm>());
+		//UIManager::GetInstance()->SkillRotateOn(1);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F7))
 	{
+		auto alarm = UIFactory::Prefab_Stage_Alarm(UI_Alarm::KILL, L"kill message", CANVAS_GROUP_STAGEWND);
+		alarm->GetComponent<UI_Alarm>()->AlarmOnAnim();
+		UIManager::GetInstance()->AddAlarm(alarm->GetComponent<UI_Alarm>());
+		//UIManager::GetInstance()->SkillRotateOn(2);
 
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F8))
 	{
-		CanvasGroup::GetInstance()->AllOn();
+		//UIManager::GetInstance()->SkillRotateOn(3);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F9))
 	{
-		CanvasGroup::GetInstance()->AllOff();
+		UIManager::GetInstance()->SkillRotateOn(4);
 	}
 }

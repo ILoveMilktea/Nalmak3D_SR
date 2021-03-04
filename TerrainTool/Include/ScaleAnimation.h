@@ -16,10 +16,18 @@ public:
 	virtual bool Play_CurrentAnimation() override;
 	virtual void End_Animation() override;
 
-	virtual void Play_ChangeScaleX();
-	virtual void Play_ChangeScaleY();
-	virtual void Play_ChangeScaleZ();
-	virtual void Play_ScaleCustom();
+	virtual void Play_Lerp() override;
+	virtual void Play_Custom() override;
+
+
+public:
+	void SetStart();
+	void SetStartScale(Vector3 _start);
+	void SetDestScale(Vector3 _dest) { m_destScale = _dest; }
+
+private:
+	Vector3 m_startScale;
+	Vector3 m_destScale;
 };
 
 
