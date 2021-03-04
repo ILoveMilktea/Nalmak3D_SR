@@ -29,6 +29,6 @@ private:
 
 public:
 	virtual void Draw(unsigned int _subsetIndex) override;
-
+	unsigned long GetSubsetCount() { return m_subsetCount; }
 };
 

@@ -38,9 +38,9 @@ public:
 	virtual void SetMaterial(const wstring& _mtrlName, int _index = 0) override;
 private:
 	vector<Material*> m_materials;
-	class Mesh* m_mesh;
+	class StaticMesh* m_mesh;
 
-
+	unsigned long GetSubsetCount();
 
 
 };

@@ -2,7 +2,7 @@
 #include "ResourceManager.h"
 #include "Transform.h"
 #include "Animator.h"
-#include "Mesh.h"
+#include "StaticMesh.h"
 
 
 MeshRenderer::MeshRenderer(Desc * _desc)
@@ -15,7 +15,7 @@ MeshRenderer::MeshRenderer(Desc * _desc)
 	{
 		m_materials.emplace_back(_desc->mtrl);
 	}
-	m_mesh = ResourceManager::GetInstance()->GetResource<Mesh>(_desc->meshName);
+	m_mesh = ResourceManager::GetInstance()->GetResource<StaticMesh>(_desc->meshName);
 
 	m_layer = _desc->layer;
 	m_type = RENDERER_TYPE_MESH;
@@ -103,6 +103,11 @@ void MeshRenderer::SetMaterial(const wstring& _mtrlName, int _index)
 	}
 #endif // _DEBUG
 	m_materials[_index] = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
+}
+
+unsigned long MeshRenderer::GetSubsetCount()
+{
+	return m_mesh->GetSubsetCount();
 }
 
 int MeshRenderer::GetMaterialCount()

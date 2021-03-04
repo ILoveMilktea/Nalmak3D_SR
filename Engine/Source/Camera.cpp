@@ -33,12 +33,14 @@ Camera::Camera(Desc * _desc)
 	{
 			
 	}
+	UpdateProjMatrix();
+
 	RenderManager::GetInstance()->AddCamera(this);
 }
 
 void Camera::Initialize()
 {
-	UpdateProjMatrix();
+
 	
 	m_handle = DeviceManager::GetInstance()->GetHWND();
 }

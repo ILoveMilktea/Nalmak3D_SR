@@ -35,7 +35,7 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	//LoadMeshes<FBXLoader>(L"fbx");
 
 	LoadResources<VIBuffer,ObjMesh>(L"obj");
-	LoadResources<Mesh, StaticMesh>(L"X");
+	LoadResources<StaticMesh, StaticMesh>(L"X");
 
 	LoadTextures(L"jpg");
 	LoadTextures(L"png");
