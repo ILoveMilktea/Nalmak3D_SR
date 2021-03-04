@@ -41,8 +41,7 @@ void Missile::Update()
 	}
 
 	Boom();
-	DEBUG_LOG(L"미사일 현재 위치", m_transform->position);
-	DEBUG_LOG(L"미사일 속도", m_fCurSpd);
+
 }
 
 void Missile::OnTriggerEnter(Collisions & _collision)

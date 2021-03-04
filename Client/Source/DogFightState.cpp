@@ -52,7 +52,26 @@ void DogFightState::EnterState()
 
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
 	m_Player->SetScale(0.2f, 0.2f, 0.2f);
+#pragma region Player Particle
 
+	{
+		ParticleRenderer::Desc render;
+		render.particleDataName = L"player_zet_muzzle_left";
+		m_Player->AddComponent<ParticleRenderer>(&render);
+		render.particleDataName = L"player_zet_muzzle_right";
+		m_Player->AddComponent<ParticleRenderer>(&render);
+	}
+#pragma endregion
+
+	{
+		PointLight::Desc lightDesc;
+		lightDesc.color = Vector3(1, 0.3f, 0);
+		lightDesc.radius = 2.f;
+		lightDesc.diffuseIntensity = 5.f;
+		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0,0,-1.5f);
+		light->SetParents(m_Player);
+
+	}
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
@@ -70,13 +89,12 @@ void DogFightState::EnterState()
 	render.meshName = L"f15";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();
-	m_Player->AddComponent<MouseOption>();
 	m_Player->AddComponent<PlayerShooter>();
 	m_Player->AddComponent<PlayerSkillActor>();
 
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
-	m_Player->AddComponent<SphereCollider>();
+	//m_Player->AddComponent<SphereCollider>();
 
 	//ParticleRenderer::Desc particle;
 	//particle.particleDataName = L"20mmCannon";
@@ -98,6 +116,10 @@ void DogFightState::EnterState()
 	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
 	smoothFollowDesc.toTarget = m_Player;
+	smoothFollowDesc.minDistance = 5.f;
+	smoothFollowDesc.maxDistance = 10.f;
+	smoothFollowDesc.followRotationSpeed = 15.f;
+
 	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
 
 	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);

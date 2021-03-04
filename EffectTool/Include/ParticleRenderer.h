@@ -12,6 +12,7 @@ class NALMAK_DLL ParticleRenderer :
 public:
 	struct Desc
 	{
+		bool PlayOnAwake = true;
 		wstring particleDataName = L"default";
 	};
 
@@ -63,13 +64,16 @@ private:
 	void EmitCone(int _count, const Matrix& _world);
 public:
 	void Stop();
+	void StopEmit();
 	void Play();
+	bool IsPlaying();
+
 public:
 	const vector<Burst>& GetBurstList() { return m_emitBursts; }
 	void AddBurst(Burst _burst);
 	void DeleteBurst(size_t _index);
 	void SetAnimationCount(int _count);
-
+	size_t GetActivedParticleCount();
 
 private:
 	list<Particle*> m_activedParticles;

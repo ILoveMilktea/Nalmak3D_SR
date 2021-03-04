@@ -4,7 +4,7 @@
 
 shader "particle"
 
-texture "g_mainTex" "fx_exploision_flame"
+texture "g_mainTex" "fx20mmCannon"
 
 renderQueue "3001"
 

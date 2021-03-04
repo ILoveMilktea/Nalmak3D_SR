@@ -1,11 +1,13 @@
 #include "stdafx.h"
 #include "..\Include\SmoothFollow.h"
 #include "PlayerInfoManager.h"
+#include "PlayerMove.h"
 
 SmoothFollow::SmoothFollow(Desc * _desc)
 {
-	m_toTarget = _desc->toTarget; //Player
-	
+	m_playerMoveInfo = _desc->toTarget->GetComponent<StateControl>()->GetState<PlayerMove>(L"playerMove"); //Player
+	m_player = _desc->toTarget->GetTransform();
+
 	m_culDistance = _desc->culDistance;
 	m_minDistance = _desc->minDistance;
 	m_maxDistance = _desc->maxDistance;
@@ -24,7 +26,7 @@ SmoothFollow::~SmoothFollow()
 
 void SmoothFollow::Initialize()
 {
-	assert(L"Please Set Target!" && m_toTarget);
+	assert(L"Please Set Target!" && m_playerMoveInfo);
 	m_fromObject =  Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
 	m_fromObject->SetParents(m_gameObject);
 	//SetParents : �θ� �������ִ°ǵ�
@@ -33,7 +35,7 @@ void SmoothFollow::Initialize()
 
 	m_playerInfo = PlayerInfoManager::GetInstance();
 
-	m_lookDirection = m_toTarget->GetTransform()->rotation;
+	m_lookDirection = m_player->rotation;
 }
 
 void SmoothFollow::Update()
@@ -44,27 +46,31 @@ void SmoothFollow::Update()
 
 void SmoothFollow::LateUpdate()
 {
-	Matrix temproyWorldMatrix = m_toTarget->GetTransform()->GetWorldMatrix();
-	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * (m_culDistance);
+	Matrix temproyWorldMatrix = m_player->GetWorldMatrix();
 
+	// 기체로부터의 상대적 높이
+	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23);
 
-	m_followDirection = Nalmak_Math::Lerp(m_followDirection, -m_toTarget->GetTransform()->GetForward() , dTime * 1.5f);
-	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_toTarget->GetTransform()->rotation, dTime * 6.f);
-
-
-	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());
-	float Interval = Nalmak_Math::Lerp(m_playerInfo->GetMinSpeed(), m_playerInfo->GetMaxSpeed(), Ratio);
+	// 카메라의 위치를 정해주는 플레이어로부터의  방향
+	m_followDirection = Nalmak_Math::Lerp(m_followDirection, -m_player->GetForward() , dTime * 1.5f);
 	m_followDirection = Nalmak_Math::Normalize(m_followDirection);
-	Vector3 targetPos = (m_toTarget->GetTransform()->position) + m_followDirection * (Interval + m_culDistance);
+
+	// 카메라가 바라보는 방향을 정해주는 값 // 플레이어가 바라보는 방향으로 가려함
+	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_player->rotation, dTime * 2.f);
 
 	
-	m_transform->position = Nalmak_Math::Lerp(m_transform->position, targetPos + offSetY, dTime * 3.f);
-	m_transform->rotation = m_lookDirection;
+	
+	// 플레이어의 현재 속도 비율 0~1
+	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());
+
+	Vector3 targetPos = (m_player->position) + m_followDirection * (Ratio * 2 + 8) + Vector3(0, 1.7f, 0);
+
+	
+	m_transform->position = Nalmak_Math::Lerp(m_transform->position, targetPos, dTime * 4.f);
+	m_transform->SetRotation(m_playerMoveInfo->GetRotXAngle(), m_playerMoveInfo->GetRotYAngle(),0);
 
 
 
-	DEBUG_LOG(L"Ratio", Ratio);
-	DEBUG_LOG(L"Damping", m_playerInfo->GetSpeed());
 
 
 }

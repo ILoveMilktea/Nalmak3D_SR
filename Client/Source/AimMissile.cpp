@@ -3,7 +3,7 @@
 
 #include "BulletDirMove.h"
 #include "Player_AimMissile.h"
-
+#include "DeadTimer.h"
 AimMissile::AimMissile(const ITEMINFO & _copy) 
 	: PlayerItem(_copy)
 {
@@ -20,9 +20,12 @@ void AimMissile::ItemShot()
 
 	Player_AimMissile::Desc bulletinfo;
 	bulletinfo.speed = m_itemInfo.weaponSpeed;
-
+	bulletinfo.deadTimer = 5.f;
 	m_bullet[0]->AddComponent<Player_AimMissile>(&bulletinfo);
 	m_bullet[1]->AddComponent<Player_AimMissile>(&bulletinfo);
+
+	
+
 	m_bullet[0] = nullptr;
 	m_bullet[1] = nullptr;
 }
@@ -46,13 +49,14 @@ void AimMissile::CreateBullet()
 	m_bullet[0] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Left");
 	m_bullet[0]->AddComponent<VIBufferRenderer>(&meshInfo);
 	m_bullet[0]->SetParents(m_parents);
-	m_bullet[0]->SetPosition(-3.f, 0.f, 0.f);
+	m_bullet[0]->SetPosition(-1.f, -0.5f, 0.f);
+	m_bullet[0]->SetScale(0.3f, 0.3f, 1.5f);
 
 	m_bullet[1] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Right");
 	m_bullet[1]->AddComponent<VIBufferRenderer>(&meshInfo);
 	m_bullet[1]->SetParents(m_parents);
-	m_bullet[1]->SetPosition(3.f, 0.f, 0.f);
-
+	m_bullet[1]->SetPosition(1.f, -0.5f, 0.f);
+	m_bullet[1]->SetScale(0.3f, 0.3f, 1.5f);
 
 
 }

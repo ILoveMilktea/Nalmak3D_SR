@@ -340,6 +340,7 @@
     </ClInclude>
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
+    <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -653,6 +654,7 @@
     </ClCompile>
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
+    <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

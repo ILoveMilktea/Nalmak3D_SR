@@ -32,7 +32,7 @@ void PhantomScene::Initialize()
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
 	DirectionalLight::Desc light;
-	light.diffuseIntensity = 0.9f;
+	light.diffuseIntensity = 0.6f;
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 

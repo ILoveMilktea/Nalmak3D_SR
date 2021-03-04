@@ -206,6 +206,7 @@
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
+    <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_Weapon_Homing.h" />
@@ -322,6 +323,7 @@
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
+    <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_Weapon_Homing.cpp" />
