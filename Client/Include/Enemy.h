@@ -40,6 +40,9 @@ public:
 	
 	bool Fov_Check();
 
+	void Death();
+	void Emp();
+
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
 	
@@ -147,6 +150,6 @@ private:
 	Quaternion m_QuartRot = { 0.f, 0.f, 0.f, 0.f }; // for
 	
 
-
+	GameObject* m_pSmokeParticle = nullptr;
 };
 

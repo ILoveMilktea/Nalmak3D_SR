@@ -206,6 +206,7 @@
     <ClInclude Include="..\Include\Enemy_AirFire_TargetPlane.h" />
     <ClInclude Include="..\Include\Enemy_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_Exit_Evasion.h" />
+    <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
@@ -326,6 +327,7 @@
     <ClCompile Include="..\Source\Enemy_AirFire_TargetPlane.cpp" />
     <ClCompile Include="..\Source\Enemy_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_Exit_Evasion.cpp" />
+    <ClCompile Include="..\Source\GeunHee_Fps_Shoot.cpp" />
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />

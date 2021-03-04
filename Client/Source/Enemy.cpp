@@ -53,11 +53,28 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 	{ 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
 		{
-			//m_gameObject->GetComponent<StateControl>()
-			//	->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
-			m_gameObject->GetComponent<StateControl>()
-					->SetState(L"Falling");
-		
+			//데미지 입는건 거 Player bullet에서 해줌.
+
+			
+
+
+			//if (m_pSmokeParticle == nullptr)
+			//{
+			//	m_pSmokeParticle = INSTANTIATE();
+			//	
+			//	ParticleRenderer::Desc smoke_desc;
+			//	smoke_desc.particleDataName = L"enemy_smoke_0";
+			//	smoke_desc.PlayOnAwake = true; //기냥 객체 생성과 동시에 파티클 on
+			//	//파티클 삭제는 EnemyDeath에 자세히 적어놨음.
+
+			//	if (m_pSmokeParticle != nullptr)
+			//	{
+			//		m_pSmokeParticle->AddComponent<ParticleRenderer>(&smoke_desc);
+			//	}
+			//}
+
+			
+
 		}
 	}
 }
@@ -154,8 +171,25 @@ bool Enemy::Fov_Check()
 	}
 }
 
+void Enemy::Death()
+{
+	if (m_tStatus.m_iCurHp <= 0)
+	{
+		
+	}
+}
+
 void Enemy::Damaged(const int & _playerDmg)
 {
+
+	m_tStatus.m_iCurHp -= _playerDmg;
+
+	if (m_tStatus.m_iCurHp <= 0.f)
+	{
+		m_tStatus.m_iCurHp = 0;
+	}
+
+	
 }
 
 const ENEMY_STATUS & Enemy::Get_Status() const
