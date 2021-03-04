@@ -45,7 +45,8 @@ void EvasionState::EnterState()
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 	
-	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-20.f, 0.f, 30.f), ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
+	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-20.f, 0.f, 30.f), Vector3(0.1f, 0.1f, 0.1f),
+		ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
 
 	m_bEnter = true;
 
