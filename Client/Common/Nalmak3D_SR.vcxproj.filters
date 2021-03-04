@@ -350,6 +350,7 @@
     <ClInclude Include="..\Include\Enemy_Evasion.h">
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -673,6 +674,7 @@
     <ClCompile Include="..\Source\Enemy_Evasion.cpp">
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Player_AirTrailEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

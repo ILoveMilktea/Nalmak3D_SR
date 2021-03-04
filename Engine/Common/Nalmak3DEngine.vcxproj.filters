@@ -510,6 +510,7 @@
     <ClCompile Include="..\Source\ParticleInfo.cpp">
       <Filter>06.Resource\06.ParticleInfo</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\TrailRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -813,5 +814,6 @@
     <ClInclude Include="..\Include\ParticleInfo.h">
       <Filter>06.Resource\06.ParticleInfo</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\TrailRenderer.h" />
   </ItemGroup>
 </Project>

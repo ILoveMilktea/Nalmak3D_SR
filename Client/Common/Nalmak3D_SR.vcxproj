@@ -211,6 +211,7 @@
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
+    <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_Weapon_Homing.h" />
     <ClInclude Include="..\Include\Player_ClusterMissile.h" />
@@ -331,6 +332,7 @@
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
+    <ClCompile Include="..\Source\Player_AirTrailEffect.cpp" />
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_Weapon_Homing.cpp" />
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp" />
