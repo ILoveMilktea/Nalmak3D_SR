@@ -321,6 +321,7 @@
     <ClInclude Include="..\Include\verticalBillboard.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
     <ClInclude Include="..\Include\Player_NearGuideBullet.h" />
+    <ClInclude Include="Camera_ActionManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -615,6 +616,7 @@
     <ClCompile Include="..\Source\verticalBillboard.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
     <ClCompile Include="..\Source\Player_NearGuideBullet.cpp" />
+    <ClCompile Include="Camera_ActionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

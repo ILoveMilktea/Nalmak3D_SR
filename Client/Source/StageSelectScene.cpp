@@ -10,6 +10,10 @@
 #include "ExplosionButton.h"
 #include "verticalBillboard.h"
 #include "MoveStageByMeshPicking.h"
+
+//test
+#include "Camera_ActionManager.h"
+
 StageSelectScene::StageSelectScene()
 {
 }
@@ -21,7 +25,7 @@ StageSelectScene::~StageSelectScene()
 
 void StageSelectScene::Initialize()
 {
-
+	Camera_ActionManager::GetInstance();
 	DirectionalLight::Desc dir;
 	dir.diffuseIntensity = 2.f;
 	dir.ambientIntensity = 0.05f;

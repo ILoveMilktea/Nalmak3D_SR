@@ -30,6 +30,7 @@ StageSelectSceneManager::StageSelectSceneManager(Desc * _desc)
 
 StageSelectSceneManager::~StageSelectSceneManager()
 {
+	
 }
 
 void StageSelectSceneManager::Initialize()
