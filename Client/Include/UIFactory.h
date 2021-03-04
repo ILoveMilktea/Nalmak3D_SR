@@ -602,7 +602,7 @@ public:
 			AddComponent<Crosshair>(&desc_ch);
 
 		crosshair->SetScale(64.f, 64.f);
-		
+
 		return crosshair;
 
 	}
@@ -651,7 +651,7 @@ public:
 
 		return number;
 	}
-	
+
 	static GameObject* Prefab_Stage_PlayerInfoText(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// text
@@ -739,7 +739,7 @@ public:
 		auto rader = INSTANTIATE()->
 			AddComponent<CanvasRenderer>(&desc_cr)->
 			AddComponent<Rader>(&desc);
-		
+
 		return rader;
 	}
 
@@ -774,7 +774,7 @@ public:
 		Text::Desc desc;
 		desc.width = 20;
 		desc.height = 40;
-		desc.text = _text;		
+		desc.text = _text;
 		desc.color = D3DCOLOR_RGBA(255, 255, 255, 255);
 		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
 

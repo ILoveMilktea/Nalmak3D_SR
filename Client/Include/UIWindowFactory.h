@@ -12,6 +12,7 @@
 #include "ItemManager.h"
 #include "MenuAnimator.h"
 #include "ItemButton.h"
+#include "UIManager.h"
 
 class UIWindowFactory
 {
@@ -20,7 +21,7 @@ public:
 	static void GarageMainWindow(GameObject* _player)
 	{
 		auto interactiveController = INSTANTIATE();
-		
+
 		// reference
 		{
 			SingleImage::Desc desc_si;
@@ -134,21 +135,21 @@ public:
 
 						});
 						auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"[ Weapon - Cannon ] ", CANVAS_GROUP_MAINWND_SHOP);
-						
+
 						menu->AddComponent<MenuAnimator>();
 						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
 						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
 						menu->SetPosition(576.f - 1200.f, 350.f);
 					}
-					
-					
+
+
 				}
 			}
 
 			// Menu 3 - EQUIP WEAPON
 			{
-				
+
 				EventHandler eventFunc = EventHandler([=]() {
 
 					Core::GetInstance()->GetMainCamera()->GetComponent<StateControl>()->SetState(L"zoomIn");
@@ -188,7 +189,7 @@ public:
 										PlayerInfoManager::GetInstance()->EquipItem(num, type, itemName);
 									});
 									button->ResetEvent(eventFunc);
-									
+
 									++itemIndex;
 									if (itemIndex == item->second.size())
 										++item;
@@ -286,7 +287,7 @@ public:
 				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.4f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
-				
+
 				menu->SetPosition(576.f, 350.f);
 			}
 			// Menu 5 - STAGE SELECT (Button)
@@ -364,11 +365,11 @@ public:
 				//For EmpMissile tes.t
 				{
 					//EventHandler evetFunc = EventHandler([=]() {ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp"); });
-					EventHandler eventFunc 
+					EventHandler eventFunc
 						= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp"); });
 					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) Weapon - First Parts : Emp", CANVAS_GROUP_MAINWND);
 					menu->SetPosition(1600.f, 850.f);
-				
+
 				}
 			}
 
@@ -601,13 +602,13 @@ public:
 
 
 				GetFloatFunc getValueFunc =
-					GetFloatFunc([=]() {
-					return PlayerInfoManager::GetInstance()->GetScore();
+				GetFloatFunc([=]() {
+				return PlayerInfoManager::GetInstance()->GetScore();
 				});
 
 				EventHandler eventFunc =
-					EventHandler([=]() {
-					scoreNumber->GetComponent<Number>()->UpdateValue(setValueFunc, getValueFunc);
+				EventHandler([=]() {
+				scoreNumber->GetComponent<Number>()->UpdateValue(setValueFunc, getValueFunc);
 				});
 
 				_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);*/
@@ -625,9 +626,9 @@ public:
 			text->SetPosition(650.f, 510.f);
 
 			// box
-			auto numberTag = UIFactory::CreateImage(CANVAS_GROUP_STAGE1, L"leftNumberTag");
-			numberTag->SetScale(110.f, 40.f);
-			numberTag->SetPosition(650.f, 540.f);
+			auto numberTag = UIFactory::CreateImage(CANVAS_GROUP_STAGE1, L"numberTag");
+			numberTag->SetScale(110.f, 60.f);
+			numberTag->SetPosition(640.f, 540.f);
 			// speed number
 			{
 				auto number = UIFactory::Prefab_Stage_SpeedNumber(CANVAS_GROUP_STAGE1);
@@ -688,9 +689,10 @@ public:
 			text->SetPosition(1270.f, 510.f);
 
 			// box
-			auto numberTag = UIFactory::CreateImage(CANVAS_GROUP_STAGE1, L"rightNumberTag");
-			numberTag->SetScale(110.f, 40.f);
-			numberTag->SetPosition(1270.f, 540.f);
+			auto numberTag = UIFactory::CreateImage(CANVAS_GROUP_STAGE1, L"numberTag");
+			numberTag->SetScale(110.f, 60.f);
+			numberTag->SetPosition(1280.f, 540.f);
+			numberTag->GetTransform()->RotateZ(180.f);
 			// altitude number
 			{
 				auto number = UIFactory::Prefab_Stage_AltitudeNumber(CANVAS_GROUP_STAGE1);
@@ -816,17 +818,32 @@ public:
 			}
 
 
+			// skill rolling center
+			auto pivot = INSTANTIATE(OBJECT_TAG_UI, L"SkiilRollPivot");
+			pivot->AddComponent<CanvasRenderer>();
+			pivot->SetPosition(1920, 1080);
+			UIManager::GetInstance()->SetSkillRotatePivot(pivot);
 			// skill img 1
 			{
 				auto img = UIFactory::CreateImage(CANVAS_GROUP_STAGEWND, L"boundary");
-				img->SetScale(80.f, 80.f);
-				img->SetPosition(1670.f, 960.f);
+				img->SetScale(100.f, 100.f);
+				img->SetParents(pivot);
+				img->SetPosition(-cosf(Deg2Rad * 30) * 240.f, 120.f);
+				// 150, 130
 			}
 			// skill img 2
 			{
 				auto img = UIFactory::CreateImage(CANVAS_GROUP_STAGEWND, L"boundary");
-				img->SetScale(80.f, 80.f);
-				img->SetPosition(1770.f, 960.f);
+				img->SetScale(100.f, 100.f);
+				img->SetParents(pivot);
+				img->SetPosition(cosf(Deg2Rad * 30) * 240.f, 120.f);
+			}
+			// skill img wait
+			{
+				auto img = UIFactory::CreateImage(CANVAS_GROUP_STAGEWND, L"boundary");
+				img->SetScale(100.f, 100.f);
+				img->SetParents(pivot);
+				img->SetPosition(0.f, -240.f);
 			}
 		}
 
@@ -879,7 +896,7 @@ public:
 
 	static void EvasionAirFireScript()
 	{
-		
+
 	}
 
 	static void BossUI()
