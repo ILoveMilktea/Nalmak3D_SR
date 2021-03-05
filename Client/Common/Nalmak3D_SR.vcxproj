@@ -205,6 +205,7 @@
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\FieldCameraInfo.h" />
     <ClInclude Include="..\Include\FieldCameraSmoothFollowState.h" />
+    <ClInclude Include="..\Include\FieldCameraStartState.h" />
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
@@ -322,6 +323,7 @@
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\FieldCameraInfo.cpp" />
     <ClCompile Include="..\Source\FieldCameraSmoothFollowState.cpp" />
+    <ClCompile Include="..\Source\FieldCameraStartState.cpp" />
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />

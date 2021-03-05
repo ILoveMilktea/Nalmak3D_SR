@@ -40,6 +40,10 @@ public:
 
 	
 	void AddDistance(float _distance);
+
+	//
+
+	void SetTarget(Transform * _targetTransform);
 public: // Getter
 	float GetXAxisAngle();
 	float GetYAxisAngle();
@@ -91,5 +95,7 @@ private:
 private:
 	Transform * m_targetTransform;
 	GameObject * m_targetAxis;
+
+
 };
 

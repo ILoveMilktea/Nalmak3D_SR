@@ -11,16 +11,24 @@ Player_NearGuideBullet::Player_NearGuideBullet(Desc * _desc)
 
 Player_NearGuideBullet::~Player_NearGuideBullet()
 {
+	m_gameObject = nullptr;
+
 }
 
 void Player_NearGuideBullet::Initialize()
 {
 	m_firstDir = m_firstTarget - m_transform->position;
 	D3DXVec3Normalize(&m_firstDir, &m_firstDir);
+	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
 }
 
 void Player_NearGuideBullet::Update()
 {
+	// 데드 조건
+	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 150.f)
+	{
+		DESTROY(m_gameObject);
+	}
 
 	if (!m_bFinish && Nalmak_Math::Distance(m_firstTarget, m_transform->position) > 5.f)
 	{
@@ -45,7 +53,16 @@ void Player_NearGuideBullet::Update()
 		m_transform->position += toDistance * (m_speed)* dTime;
 		m_transform->LookAt(toDistance + m_transform->position, 5.5f);
 	}
+	else
+	{
+		DESTROY(m_gameObject);
+		m_gameObject = nullptr;
+	}
 
+}
+
+void Player_NearGuideBullet::Release()
+{
 }
 
 

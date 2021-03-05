@@ -25,8 +25,10 @@
 
 //스킬 상태별 상태
 #include "PlayerEscapeState.h"
+#include "FieldCameraInfo.h"
 // camera state 정렬
 #include "FieldCameraSmoothFollowState.h"
+#include "FieldCameraStartState.h"
 
 DogFightState::DogFightState()
 {
@@ -109,8 +111,11 @@ void DogFightState::EnterState()
 		if (m_MainCamera)
 		{
 			//auto cameraStateControl = INSTANTIATE(OBJECT_TAG_CAMERA)
+			m_MainCamera->AddComponent<FieldCameraInfo>();
+
 			m_MainCamera->AddComponent<StateControl>();
 			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraSmoothFollowState>(L"CameraFollow");
+			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");
 			m_MainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
 		}
 	}

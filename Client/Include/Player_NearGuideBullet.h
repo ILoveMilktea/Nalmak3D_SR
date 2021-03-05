@@ -18,6 +18,8 @@ public:
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
+	virtual void Release()override;
+
 
 
 private:
@@ -26,6 +28,7 @@ private:
 	Vector3 m_firstTarget;
 	bool	m_bFinish;
 private:
+	GameObject* m_player;
 	Vector3 m_firstDir;
 	float m_speed;
 };

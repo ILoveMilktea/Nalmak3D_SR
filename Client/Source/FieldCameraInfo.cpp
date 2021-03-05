@@ -15,17 +15,16 @@ FieldCameraInfo::~FieldCameraInfo()
 void FieldCameraInfo::Initialize()
 {
 	 // 처음은 플레이어로
-	m_targetTransform = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER)->GetTransform();
-	m_transform->position = Vector3(0, 0, -100);
+	m_targetTransform = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform();
+	m_transform->position = Vector3(0, 0, -50);
 	m_transform->SetRotation(0, 0, 0);
 
-	m_targetAxis = INSTANTIATE()->SetPosition(m_targetTransform->position + m_axisTargetPos);
+	m_targetAxis = INSTANTIATE()->SetPosition(m_targetTransform->position );
 	m_transform->SetParents(m_targetAxis);
 }
 
 void FieldCameraInfo::Update()
 {
-	m_transform->position = Nalmak_Math::Lerp(m_transform->position, Vector3(0, 0, m_targetDistance), dTime * m_followSpeed);
 
 	m_targetAxisAngle.x += m_xAxisRot * dTime;
 	m_targetAxisAngle.y += m_yAxisRot * dTime;
@@ -36,8 +35,12 @@ void FieldCameraInfo::Update()
 	m_targetAxis->SetRotation(m_currentAxisAngle.x, m_currentAxisAngle.y , m_currentAxisAngle.z);
 
 
+	// 자식
 	m_observerCurrentAngle.x = Nalmak_Math::Lerp(m_observerCurrentAngle.x, m_observerAngle.x, dTime * m_lookSpeed);
 	m_observerCurrentAngle.y = Nalmak_Math::Lerp(m_observerCurrentAngle.y, m_observerAngle.y, dTime * m_lookSpeed);
+	m_observerCurrentAngle.z = Nalmak_Math::Lerp(m_observerCurrentAngle.z, m_observerAngle.y, dTime * m_lookSpeed);
+	
+	m_transform->position = Nalmak_Math::Lerp(m_transform->position, Vector3(0, 0, m_targetDistance), dTime * m_followSpeed);
 	m_transform->SetRotation(m_observerCurrentAngle.x, m_observerCurrentAngle.y, 0.f);
 
 
@@ -129,6 +132,13 @@ void FieldCameraInfo::AddDistance(float _distance)
 {
 	m_targetDistance += _distance;
 }
+
+void FieldCameraInfo::SetTarget(Transform * _targetTransform)
+{
+	m_targetTransform = _targetTransform;
+}
+////////////////////////////////////////////////////////////////////////
+
 
 float FieldCameraInfo::GetXAxisAngle()
 {

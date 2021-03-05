@@ -72,13 +72,15 @@ void ClusterBulletMove::Release()
 		Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * length;
 		Vector3 offSetZ = Vector3(temproyWorldMatrix._31, temproyWorldMatrix._32, temproyWorldMatrix._33) * length;
 
-
+		
 		Player_NearGuideBullet::Desc guidebulletInfo;
+		SphereCollider::Desc sphereColInfo;
+		sphereColInfo.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
 		guidebulletInfo.speed = m_speed;
 		for (int i = 0; i < m_bulletCount; ++i)
 		{
 			auto child = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER)->AddComponent<VIBufferRenderer>(&render);
-			
+			child->AddComponent<SphereCollider>(&sphereColInfo);
 
 			float x = m_transform->position.x + cosf(D3DXToRadian(i * angleInterval)) * length;
 			float y = m_transform->position.y - sinf(D3DXToRadian(i * angleInterval)) * length;
