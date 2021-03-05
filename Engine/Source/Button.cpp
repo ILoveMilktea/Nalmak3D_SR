@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "CanvasRenderer.h"
 #include "ResourceManager.h"
+#include "Text.h"
 
 Button::Button(Desc * _desc)
 {
@@ -198,6 +199,11 @@ void Button::ChangePressedTexture(wstring _name)
 void Button::ChangeDisableTexture(wstring _name)
 {
 	m_disableImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
+}
+
+void Button::SetText(const wstring & _text)
+{
+	m_text->GetComponent<Text>()->SetText(_text);
 }
 
 void Button::AddEventHandler(EventHandler _eventFunc)

@@ -4,6 +4,9 @@
 #include "IRenderer.h"
 #include "DepthStencil.h"
 #include "CanvasRenderer.h"
+
+
+#include "VIBufferRenderer.h"
 USING(Nalmak)
 
 Camera::Camera(Desc * _desc)
@@ -135,10 +138,11 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 	{
 	case RENDERER_TYPE_MESH:
 	{
-		//float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
+		//VIBufferRenderer* viR = _renderer->GetComponent<VIBufferRenderer>();
+		//float radius = viR->GetVIBuffer()->GetBoundingSphereRadius() * 2;
 
 		//Transform* trs = _renderer->GetTransform();
-		//Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
+		//Vector3 Center = trs->GetWorldPosition() + viR->GetVIBuffer()->GetBoundingSphereCenter();
 		//float scale = max(trs->scale.z, max(trs->scale.x, trs->scale.y));
 		//radius *= scale;
 		//for (int i = 0; i < 6; ++i)

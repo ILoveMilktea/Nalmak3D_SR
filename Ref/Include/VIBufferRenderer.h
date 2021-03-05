@@ -31,6 +31,8 @@ public:
 	virtual Material * GetMaterial(int _index = 0) override;
 	virtual void SetMaterial(Material * _material, int _index = 0) override;
 	virtual void SetMaterial(const wstring & _mtrlName, int _index = 0) override;
+
+	VIBuffer* GetVIBuffer() { return m_viBuffer; }
 private:
 	virtual void BindingStreamSource() override;
 private:

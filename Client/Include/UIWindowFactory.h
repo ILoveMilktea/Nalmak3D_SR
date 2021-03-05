@@ -165,7 +165,6 @@ public:
 						member->GetComponent<MenuAnimator>()->OutAnim();
 					}
 
-					// 여기서 이제 item manager에서 item 목록 받아와서 넣어주어야함
 					auto inven = PlayerInfoManager::GetInstance()->GetInven();
 					auto item = inven.begin();
 					size_t itemIndex = 0;
@@ -180,7 +179,7 @@ public:
 								if (member->GetGameObject()->GetName() == L"ItemMenuButton")
 								{
 									// text
-									member->GetComponent<Text>()->SetText(item->second[itemIndex]);
+									member->GetComponent<ItemButton>()->SetText(item->second[itemIndex]);
 
 									// button
 									ItemButton* button = member->GetComponent<ItemButton>();

@@ -58,7 +58,7 @@ public:
 	BUTTON_TRANSITION GetTransition() { return m_currentTransition; }
 
 	void SetTransition(BUTTON_TRANSITION _tr) { m_currentTransition = _tr; }
-
+	void SetText(const wstring& _text);
 public:
 	void AddEventHandler(EventHandler _eventFunc);
 

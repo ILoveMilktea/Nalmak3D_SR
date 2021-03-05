@@ -31,10 +31,17 @@ void EditController::Update()
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F2))
 	{
+		m_popup = UIFactory::CreateImage(CANVAS_GROUP_MAINWND, L"UIBlue");
+		m_popup->SetPosition(WINCX * 0.5f, WINCY * 0.5f);
+		m_popup->SetScale(600.f, 400.f);
 
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F3))
 	{
+		if (m_popup->IsActive())
+			m_popup->SetActive(false);
+		else
+			m_popup->SetActive(true);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F4))
 	{

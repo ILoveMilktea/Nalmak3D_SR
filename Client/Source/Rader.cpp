@@ -10,24 +10,7 @@ Rader::Rader(Desc * _desc)
 
 	// icon ready
 	m_IconContainer.reserve(_desc->readyIcon);
-	for (size_t i = 0; i < m_IconContainer.capacity(); ++i)
-	{
-		CanvasRenderer::Desc desc_cr;
-		desc_cr.group = CANVAS_GROUP_STAGE1;
-			
-		SingleImage::Desc desc;
-		desc.textureName = L"enemyicon";
 
-		auto icon =
-			INSTANTIATE()->
-			AddComponent<CanvasRenderer>(&desc_cr)->
-			AddComponent<SingleImage>(&desc)->
-			SetScale(8.f, 8.f, 0.f);
-
-		//icon->GetComponent<CanvasRenderer>()->SetColor(Vector4(1.f, 1.f, 1.f, 1.f));
-		icon->SetActive(false);
-		m_IconContainer.emplace_back(icon);
-	}
 }
 
 Rader::~Rader()
@@ -51,6 +34,25 @@ void Rader::Initialize()
 			SetPosition(0.f, 0.f, 0.f)->
 			SetScale(300.f, 300.f, 0.f);
 		m_circleBackground->SetParents(m_transform);
+	}
+
+	for (size_t i = 0; i < m_IconContainer.capacity(); ++i)
+	{
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = CANVAS_GROUP_STAGE1;
+
+		SingleImage::Desc desc;
+		desc.textureName = L"enemyicon";
+
+		auto icon =
+			INSTANTIATE()->
+			AddComponent<CanvasRenderer>(&desc_cr)->
+			AddComponent<SingleImage>(&desc)->
+			SetScale(8.f, 8.f, 0.f);
+
+		//icon->GetComponent<CanvasRenderer>()->SetColor(Vector4(1.f, 1.f, 1.f, 1.f));
+		icon->SetActive(false);
+		m_IconContainer.emplace_back(icon);
 	}
 
 	// player icon
