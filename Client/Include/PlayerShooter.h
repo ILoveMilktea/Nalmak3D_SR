@@ -17,6 +17,9 @@ public:
 	virtual void Update() override;
 
 	void SetEquipment(PARTS_NUM _weaponName);
+
+public: /* Get */
+	
 private:
 	class PlayerItem* m_useEquipment = nullptr; //  shot »£√‚
 	bool	m_shooterFire;

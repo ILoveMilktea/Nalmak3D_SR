@@ -1,24 +1,21 @@
 #pragma once
 #include "Component.h"
-class BulletDirMove :
+class GeunHee_Fps_Shoot :
 	public Component
 {
 public:
-	struct Desc
-	{
-		float speed = 0.f;
-	};
-public:
-	BulletDirMove(Desc* _desc);
-	virtual ~BulletDirMove();
+	GeunHee_Fps_Shoot();
+	virtual ~GeunHee_Fps_Shoot();
 
+	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
+
 	virtual void OnTriggerEnter(Collisions& _collision)override;
 	virtual void OnTriggerStay(Collisions& _collision)override;
 	virtual void OnTriggerExit(Collisions& _collision)override;
-private:
-	Vector3 m_dir;
-	float m_speed;
+public:
+
+
 };
 

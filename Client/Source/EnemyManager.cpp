@@ -185,7 +185,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
-	Enemy_col.radius = 1.f;
+	Enemy_col.radius = 5.f;
 	Enemy_col.collisionLayer = COLLISION_LAYER_ENEMY;
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
 
@@ -442,7 +442,7 @@ Vector3 EnemyManager::Pos_ScreenToWorld(float _x, float _y, float _distance)
 //}
 
 
-void EnemyManager::Spawn_S1P1()
+void EnemyManager::Spawn_S1P1_Normal()
 {
 	//Stage1 Phase1 -> Stage1 DogFight's 1Pattern => like tutorial.
 	//The big one & four Wls
@@ -453,15 +453,38 @@ void EnemyManager::Spawn_S1P1()
 		ENEMY_STATUS tStatus(10, 20, 1);
 		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 
-		Vector2 vRand = Nalmak_Math::Rand(Vector2(0.f, 0.f), Vector2(1920.f, 1080.f));
-		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, 100.f);
+		Vector2 vRand = Nalmak_Math::Rand(Vector2(0.f, 0.f), Vector2((float)WINCX, (float)WINCY));
+		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, 400.f);
+
+
+		Enemy_Spawn(vPos, Vector3(0.2f, 0.2f, 0.2f), ENEMY_STATE::IDLE, tStatus, tGun);
+	}
+}
+
+void EnemyManager::Spawn_S1P1_Huge()
+{
+	ENEMY_STATUS tStatus(10, 15, 1);
+	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+
+	Vector3 vPos = Pos_ScreenToWorld(WINCX / 2.f, WINCY / 2.f, 400.f);
+
+	Enemy_Spawn(vPos, Vector3(0.4f, 0.4f, 0.4f), ENEMY_STATE::IDLE, tStatus, tGun);
+
+}
+
+
+
+void EnemyManager::Spawn_S1P1_Quick()
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		ENEMY_STATUS tStatus(5, 25, 1);
+		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+
+		Vector2 vRand = Nalmak_Math::Rand(Vector2(-20.f, -20.f), Vector2((float)WINCX +20.f, (float)WINCY + 20.f));
+		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, -200.f);
+
 
 		Enemy_Spawn(vPos, Vector3(0.2f, 0.2f, 0.2f), ENEMY_STATE::HOLD, tStatus, tGun);
 	}
-	//ENEMY_STATUS tStatus(100, 20, 1);
-	//BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
-	//Vector2 vRand = Nalmak_Math::Rand(Vector2(0, 0), Vector2(1920.f, 1080.f));
-	//Enemy_Spawn(Vector3(vRand.x, vRand.y, 100.f), Vector3(0.3f, 0.3f, 0.3f), ENEMY_STATE::IDLE, tStatus, tGun);
-
-
 }

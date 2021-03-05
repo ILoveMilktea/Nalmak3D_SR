@@ -40,6 +40,9 @@ public:
 	
 	bool Fov_Check();
 
+	void Death_Check();
+	void Emp();
+
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
 	
@@ -75,6 +78,7 @@ public: /* Get */
 public: /* Set */
 	void Set_Damage(const int& _dmg);
 	void Set_OriginForward();
+	
 
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);
@@ -147,6 +151,6 @@ private:
 	Quaternion m_QuartRot = { 0.f, 0.f, 0.f, 0.f }; // for
 	
 
-
+	GameObject* m_pSmokeParticle = nullptr;
 };
 

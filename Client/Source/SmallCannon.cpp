@@ -16,7 +16,7 @@ void SmallCannon::ItemShot()
 	Matrix worldMat = m_bullet->GetTransform()->GetWorldMatrix();
 
 
-	m_bullet->GetTransform()->position = Vector3(worldMat._41, worldMat._42, worldMat._43) + Vector3(worldMat._31, worldMat._32, worldMat._33) * 2;
+	//m_bullet->GetTransform()->position = Vector3(worldMat._41, worldMat._42, worldMat._43) + Vector3(worldMat._31, worldMat._32, worldMat._33) * 2;
 	m_bullet->GetTransform()->DeleteParent();
 
 	BulletEffect_StretchBillboard::Desc bulletinfo;

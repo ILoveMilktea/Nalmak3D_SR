@@ -29,5 +29,7 @@ private:
 	float		m_fFallDelta = 0.f;
 	float		m_fFallingSpd = 0.f;
 	float		m_fTurnSpd = 0.f;
+
+	GameObject* m_pSmokeParticle = nullptr;
 };
 

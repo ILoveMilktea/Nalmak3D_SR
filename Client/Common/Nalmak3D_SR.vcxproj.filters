@@ -304,7 +304,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
-    <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\Enemy_Bullet_Manager.h">
       <Filter>02.Component\00.Manager\Enemy_BulletManager\Manager</Filter>
     </ClInclude>
@@ -350,6 +349,8 @@
     <ClInclude Include="..\Include\Enemy_Evasion.h">
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
+    <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
   </ItemGroup>
   <ItemGroup>
@@ -628,7 +629,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
-    <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\Enemy_Bullet_Manager.cpp">
       <Filter>02.Component\00.Manager\Enemy_BulletManager\Manager</Filter>
     </ClCompile>
@@ -675,6 +675,8 @@
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Player_AirTrailEffect.cpp" />
+    <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
+    <ClCompile Include="..\Source\GeunHee_Fps_Shoot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

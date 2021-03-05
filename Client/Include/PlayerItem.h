@@ -19,6 +19,7 @@ public:
 	virtual void CreateBullet() = 0;
 	virtual void DeleteBullet() = 0;
 
+	
 protected:
 	ITEMINFO m_itemInfo;
 	bool m_shotCheck = false;

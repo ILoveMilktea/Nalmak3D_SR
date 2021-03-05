@@ -31,12 +31,15 @@ void Enemy::Update()
 	Reloading_Gun();
 	Reloading_Missile();
 
+	Death_Check();
+
 	//Decelerate();
 	//Accelerate();
 
 
 #pragma region DebugLog
 	DEBUG_LOG(L"CurPos", m_transform->position);
+	DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
 	//DEBUG_LOG(L"타겟 까지의 거리",		m_fDist_Target);
 	//DEBUG_LOG(L"forward벡터와 사이벡터의 내적",		m_fInner);
 	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
@@ -53,11 +56,28 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 	{ 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
 		{
-			//m_gameObject->GetComponent<StateControl>()
-			//	->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
-			m_gameObject->GetComponent<StateControl>()
-					->SetState(L"Falling");
-		
+			//데미지 입는건 거 Player bullet에서 해줌.
+
+			
+
+
+			//if (m_pSmokeParticle == nullptr)
+			//{
+			//	m_pSmokeParticle = INSTANTIATE();
+			//	
+			//	ParticleRenderer::Desc smoke_desc;
+			//	smoke_desc.particleDataName = L"enemy_smoke_0";
+			//	smoke_desc.PlayOnAwake = true; //기냥 객체 생성과 동시에 파티클 on
+			//	//파티클 삭제는 EnemyDeath에 자세히 적어놨음.
+
+			//	if (m_pSmokeParticle != nullptr)
+			//	{
+			//		m_pSmokeParticle->AddComponent<ParticleRenderer>(&smoke_desc);
+			//	}
+			//}
+
+			
+
 		}
 	}
 }
@@ -154,8 +174,32 @@ bool Enemy::Fov_Check()
 	}
 }
 
+void Enemy::Death_Check()
+{
+	if (m_tStatus.m_iCurHp <= 0)
+	{
+		//지금 Falling, Death, Explosion상태 아닐때만 가능하게.
+		if (m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Falling"
+			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Explosion"
+			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Death")
+		{
+			m_gameObject->GetComponent<StateControl>()
+				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
+
+			m_gameObject->DeleteComponent<SphereCollider>();
+
+		}
+	}
+}
+
 void Enemy::Damaged(const int & _playerDmg)
 {
+	m_tStatus.m_iCurHp -= _playerDmg;
+
+	if (m_tStatus.m_iCurHp <= 0.f)
+	{
+		m_tStatus.m_iCurHp = 0;
+	}
 }
 
 const ENEMY_STATUS & Enemy::Get_Status() const

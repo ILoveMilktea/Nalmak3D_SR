@@ -365,7 +365,7 @@ public:
 				{
 					//EventHandler evetFunc = EventHandler([=]() {ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp"); });
 					EventHandler eventFunc 
-						= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp"); });
+						= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Emp"); });
 					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) Weapon - First Parts : Emp", CANVAS_GROUP_MAINWND);
 					menu->SetPosition(1600.f, 850.f);
 				
@@ -853,13 +853,13 @@ public:
 
 			list.emplace_back(dialogue);
 
-			script = L"MooGi Test gogo!";
+			script = L"MooGi Test gogo!\nJotBoBs 4Mari Cut";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< SCRIPT3 >>";
+			script = L"The Big one cant damaged Machinegun, use Missile!";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< SCRIPT4 >>";
+			script = L"Faster is Die faster. show what u got";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 			script = L"<< SCRIPT5 >>";

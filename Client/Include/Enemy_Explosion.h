@@ -19,5 +19,8 @@ public:
 
 private:
 	class Enemy* m_pEnemy = nullptr;
+
+	GameObject* m_pExplosionParticle = nullptr;
+	GameObject*	m_pSmokeParticle = nullptr;
 };
 

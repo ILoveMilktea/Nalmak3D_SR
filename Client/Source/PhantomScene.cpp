@@ -7,7 +7,6 @@
 #include "PlayerIdle.h"
 #include "PlayerMove.h"
 
-#include "FixToTarget.h"
 #include "MouseOption.h"
 #include "SmoothFollow.h"
 
@@ -16,6 +15,7 @@
 #include "StageManager.h"
 
 #include "UIWindowFactory.h"
+
 PhantomScene::PhantomScene()
 {
 
