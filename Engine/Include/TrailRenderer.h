@@ -1,5 +1,7 @@
 #pragma once
 #include "IRenderer.h"
+#include "DynamicInstanceBuffer.h"
+
 class NALMAK_DLL TrailRenderer :
 	public IRenderer
 {
@@ -9,6 +11,9 @@ public:
 		wstring mtrlName = L"default";
 		Material* mtrl = nullptr;
 
+		int trailCountPerSec = 60;
+		int maxTrailCount = 60;
+		int detailCount = 3;
 		int layer = 0;
 	};
 public:
@@ -30,10 +35,23 @@ public:
 	virtual void SetMaterial(const wstring & _mtrlName, int _index = 0) override;
 
 private:
-	VIBuffer* m_viBuffer;
 	Material* m_material;
-	class DynamicInstanceBuffer* m_instanceBuffer;
+
+	int m_maxTrailCount;
+	int m_currentTrailCount;
+
+	int m_catmullrom_divideCount;
+
+	int m_maxCatmullrom_TrailCount;
+	int m_currentCatmullrom_TrailCount;
+
+	float m_secPerTrail;
+	float m_timer;
+	class DynamicInstanceBuffer<INPUT_LAYOUT_POSITION_UV>* m_instanceBuffer;
+	INPUT_LAYOUT_POSITION_UV* m_trailData;
+	INPUT_LAYOUT_POSITION_UV* m_trailCatmullromData;
+
 private:
-	int m_currentCount;
+	void CreateDynamicBuffer();
 };
 

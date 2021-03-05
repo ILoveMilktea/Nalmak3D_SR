@@ -87,7 +87,7 @@ private:
 	float m_spriteIndexRatio;
 	class Camera* m_camera;
 private:
-	DynamicInstanceBuffer* m_instanceBuffer;
+	DynamicInstanceBuffer<INPUT_LAYOUT_PARTICLE> * m_instanceBuffer;
 	void ParticleUpdate();
 
 

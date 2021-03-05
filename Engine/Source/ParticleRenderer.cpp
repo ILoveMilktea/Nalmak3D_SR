@@ -76,8 +76,7 @@ void ParticleRenderer::Update()
 		{
 			worldMat = particleTrans * rotation * trans;
 		}
-		DEBUG_LOG(L"player rot", m_transform);
-		DEBUG_LOG(L"worldPos", Vector3(worldMat._41, worldMat._42, worldMat._43));
+		
 		// Burst Emit
 		if (m_currentBurst)
 		{
@@ -194,7 +193,7 @@ void ParticleRenderer::UpdateParticleInfo(int _maxCount)
 	SAFE_DELETE_ARR(m_particlesInfo);
 	SAFE_DELETE(m_instanceBuffer);
 
-	m_instanceBuffer = new DynamicInstanceBuffer(m_info.maxParticleCount);
+	m_instanceBuffer = new DynamicInstanceBuffer<INPUT_LAYOUT_PARTICLE>(m_info.maxParticleCount);
 	m_particlesInfo = new INPUT_LAYOUT_PARTICLE[m_info.maxParticleCount];
 	
 	SetAnimationCount(m_info.animationTileX *  m_info.animationTileY);
