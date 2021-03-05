@@ -42,27 +42,6 @@ void GarageSceneCameraInfo::Update()
 	
 	m_yTargetAxisAngle += m_yAxisRot * dTime;
 
-
-	/*int cycle = m_yTargetAxisAngle / 360;
-
-	float targetAngle1 = abs(m_yCurrentAxisAngle - m_yTargetAxisAngle - (cycle - 1) * 360);
-	float targetAngle2 = abs(m_yCurrentAxisAngle - m_yTargetAxisAngle - cycle * 360);
-	float targetAngle3 = abs(m_yCurrentAxisAngle - m_yTargetAxisAngle - (cycle + 1) * 360);
-
-	float minAngle = min(min(targetAngle1, targetAngle2), targetAngle3);
-
-	if (minAngle == targetAngle1)
-	{
-		m_yCurrentAxisAngle = Nalmak_Math::Lerp(m_yCurrentAxisAngle, m_yTargetAxisAngle - (cycle - 1) * 360, dTime * m_rotateSpeed);
-	}
-	else if (minAngle == targetAngle2)
-	{
-		m_yCurrentAxisAngle = Nalmak_Math::Lerp(m_yCurrentAxisAngle, m_yTargetAxisAngle - cycle * 360, dTime * m_rotateSpeed);
-	}
-	else if (minAngle == targetAngle3)
-	{
-		m_yCurrentAxisAngle = Nalmak_Math::Lerp(m_yCurrentAxisAngle, m_yTargetAxisAngle - (cycle + 1) * 360, dTime * m_rotateSpeed);
-	}*/
 	m_yCurrentAxisAngle = Nalmak_Math::Lerp(m_yCurrentAxisAngle, m_yTargetAxisAngle, dTime * m_rotateSpeed);
 	m_xCurrentAxisAngle = Nalmak_Math::Lerp(m_xCurrentAxisAngle, m_xTargetAxisAngle, dTime * m_rotateSpeed);
 	m_playerAxis->SetRotation(m_xCurrentAxisAngle, m_yCurrentAxisAngle, 0);

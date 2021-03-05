@@ -77,7 +77,7 @@ void ClusterBulletMove::Release()
 		guidebulletInfo.speed = m_speed;
 		for (int i = 0; i < m_bulletCount; ++i)
 		{
-			auto child = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"clusterChild")->AddComponent<VIBufferRenderer>(&render);
+			auto child = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER)->AddComponent<VIBufferRenderer>(&render);
 			
 
 			float x = m_transform->position.x + cosf(D3DXToRadian(i * angleInterval)) * length;

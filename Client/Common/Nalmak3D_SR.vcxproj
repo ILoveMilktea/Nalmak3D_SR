@@ -203,7 +203,8 @@
     <ClInclude Include="..\Include\CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
-    <ClInclude Include="..\Include\FieldCameraZoomInState.h" />
+    <ClInclude Include="..\Include\FieldCameraInfo.h" />
+    <ClInclude Include="..\Include\FieldCameraSmoothFollowState.h" />
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
@@ -301,7 +302,6 @@
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="..\Include\verticalBillboard.h" />
-    <ClInclude Include="FieldCameraFollowPlayerState.h" />
     <ClInclude Include="GarageSceneCameraAutoRotate.h" />
     <ClInclude Include="GarageSceneCameraZoomIn.h" />
     <ClInclude Include="Nalmak3D_SR.h" />
@@ -320,7 +320,8 @@
     <ClCompile Include="..\Source\CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
-    <ClCompile Include="..\Source\FieldCameraZoomInState.cpp" />
+    <ClCompile Include="..\Source\FieldCameraInfo.cpp" />
+    <ClCompile Include="..\Source\FieldCameraSmoothFollowState.cpp" />
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
@@ -412,7 +413,6 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="..\Source\verticalBillboard.cpp" />
-    <ClCompile Include="FieldCameraFollowPlayerState.cpp" />
     <ClCompile Include="GarageSceneCameraAutoRotate.cpp" />
     <ClCompile Include="GarageSceneCameraZoomIn.cpp" />
     <ClCompile Include="Nalmak3D_SR.cpp" />

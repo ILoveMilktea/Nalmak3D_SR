@@ -1,11 +1,11 @@
 #pragma once
 #include "IState.h"
-class FieldCameraFollowPlayerState :
+class FieldCameraSmoothFollowState :
 	public IState
 {
 public:
-	FieldCameraFollowPlayerState();
-	virtual ~FieldCameraFollowPlayerState();
+	FieldCameraSmoothFollowState();
+	virtual ~FieldCameraSmoothFollowState();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -14,7 +14,7 @@ public:
 	virtual void ExitState() override;
 
 private:
-	GameObject* m_lookAtTarget;
 	InputManager* m_inputMgr;
+	GameObject* m_lookAtTarget;
 };
 

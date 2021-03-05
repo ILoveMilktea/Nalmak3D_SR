@@ -19,6 +19,7 @@ void StageSelectCamera_Idle::Initialize()
 void StageSelectCamera_Idle::EnterState()
 {
 	m_stageCam->SetXMyAngle(30);
+
 	m_stageCam->SetDistance(-35);
 	m_stageCam->SetFollowSpeed(3);
 	m_stageCam->SetRotateSpeed(3);

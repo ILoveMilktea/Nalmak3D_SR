@@ -26,8 +26,7 @@
 //스킬 상태별 상태
 #include "PlayerEscapeState.h"
 // camera state 정렬
-#include "FieldCameraZoomInState.h"
-#include "FieldCameraFollowPlayerState.h"
+#include "FieldCameraSmoothFollowState.h"
 
 DogFightState::DogFightState()
 {
@@ -111,8 +110,7 @@ void DogFightState::EnterState()
 		{
 			//auto cameraStateControl = INSTANTIATE(OBJECT_TAG_CAMERA)
 			m_MainCamera->AddComponent<StateControl>();
-			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraZoomInState>(L"cameraZoomIn");
-			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraFollowPlayerState>(L"CameraFollow");
+			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraSmoothFollowState>(L"CameraFollow");
 			m_MainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
 		}
 	}
