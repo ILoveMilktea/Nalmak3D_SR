@@ -107,6 +107,7 @@
     <ClCompile Include="..\Source\Texture.cpp" />
     <ClCompile Include="..\Source\TimeManager.cpp" />
     <ClCompile Include="..\Source\Toggle.cpp" />
+    <ClCompile Include="..\Source\TrailRenderer.cpp" />
     <ClCompile Include="..\Source\Transform.cpp" />
     <ClCompile Include="..\Source\Triangle.cpp" />
     <ClCompile Include="..\Source\UIInteractor.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="..\Include\Texture.h" />
     <ClInclude Include="..\Include\TimeManager.h" />
     <ClInclude Include="..\Include\Toggle.h" />
+    <ClInclude Include="..\Include\TrailRenderer.h" />
     <ClInclude Include="..\Include\Transform.h" />
     <ClInclude Include="..\Include\Triangle.h" />
     <ClInclude Include="..\Include\UIInteractor.h" />

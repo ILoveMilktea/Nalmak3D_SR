@@ -123,6 +123,7 @@ struct INPUT_LAYOUT_PARTICLE
 };
 
 
+
 // ¿œ¥‹ æ»æ∏
 //struct INPUT_LAYOUT_STATIC_MESH
 //{
