@@ -16,5 +16,7 @@ public:
 private:
 	InputManager* m_inputMgr;
 	GameObject* m_lookAtTarget;
+	class FieldCameraInfo* m_FieldCam;
+
 };
 

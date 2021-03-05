@@ -42,6 +42,7 @@ public:
 	void AddDistance(float _distance);
 
 	//
+	void Reset();
 
 	void SetTarget(Transform * _targetTransform);
 public: // Getter

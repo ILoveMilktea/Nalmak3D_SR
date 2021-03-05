@@ -14,7 +14,7 @@ public:
 	virtual void ExitState() override;
 
 private:
-	class GarageSceneCameraInfo* m_FieldCam;
-
+	class FieldCameraInfo* m_FieldCam;
+	Transform* m_player;
 };
 

@@ -25,7 +25,7 @@ void FieldCameraInfo::Initialize()
 
 void FieldCameraInfo::Update()
 {
-
+	
 	m_targetAxisAngle.x += m_xAxisRot * dTime;
 	m_targetAxisAngle.y += m_yAxisRot * dTime;
 
@@ -35,14 +35,21 @@ void FieldCameraInfo::Update()
 	m_targetAxis->SetRotation(m_currentAxisAngle.x, m_currentAxisAngle.y , m_currentAxisAngle.z);
 
 
-	// 자식
+	// 자식 
 	m_observerCurrentAngle.x = Nalmak_Math::Lerp(m_observerCurrentAngle.x, m_observerAngle.x, dTime * m_lookSpeed);
 	m_observerCurrentAngle.y = Nalmak_Math::Lerp(m_observerCurrentAngle.y, m_observerAngle.y, dTime * m_lookSpeed);
-	m_observerCurrentAngle.z = Nalmak_Math::Lerp(m_observerCurrentAngle.z, m_observerAngle.y, dTime * m_lookSpeed);
+	m_observerCurrentAngle.z = Nalmak_Math::Lerp(m_observerCurrentAngle.z, m_observerAngle.z, dTime * m_lookSpeed);
 	
-	m_transform->position = Nalmak_Math::Lerp(m_transform->position, Vector3(0, 0, m_targetDistance), dTime * m_followSpeed);
-	m_transform->SetRotation(m_observerCurrentAngle.x, m_observerCurrentAngle.y, 0.f);
+	m_transform->position.x = Nalmak_Math::Lerp(m_transform->position.x, 0.f, dTime * m_followSpeed);
+	m_transform->position.y = Nalmak_Math::Lerp(m_transform->position.y, 0.f, dTime * m_followSpeed);
+	m_transform->position.z = Nalmak_Math::Lerp(m_transform->position.z, -m_targetDistance, dTime * m_followSpeed);
 
+	m_transform->SetRotation(m_observerCurrentAngle.x, m_observerCurrentAngle.y, 0.f);
+	DEBUG_LOG(L"로컬", m_transform->position);
+	DEBUG_LOG(L"월드", m_transform->GetWorldPosition());
+
+
+	Matrix test = m_transform->GetWorldMatrix();
 
 	m_targetAxis->GetTransform()->position = Nalmak_Math::Lerp(m_targetAxis->GetTransform()->position, m_axisTargetPos, dTime * m_followSpeed);
 
@@ -131,6 +138,18 @@ void FieldCameraInfo::AddZAxisAngle(float _angle)
 void FieldCameraInfo::AddDistance(float _distance)
 {
 	m_targetDistance += _distance;
+}
+
+void FieldCameraInfo::Reset()
+{
+	m_targetAxis->SetRotation(0, 0, 0);
+
+	m_currentAxisAngle = {0,0,0};
+	m_observerCurrentAngle = {0,0,0};
+
+	
+	m_axisTargetPos = {0,0,0};
+	m_targetDistance = 0;
 }
 
 void FieldCameraInfo::SetTarget(Transform * _targetTransform)

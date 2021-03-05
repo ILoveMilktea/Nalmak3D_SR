@@ -106,13 +106,17 @@ void DogFightState::EnterState()
 	smoothFollowDesc.toTarget = m_Player;
 	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);*/
 
+	
 	{
 		m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 		if (m_MainCamera)
 		{
+			SmoothFollow::Desc followInfo;
+			followInfo.toTarget = m_Player;
+
 			//auto cameraStateControl = INSTANTIATE(OBJECT_TAG_CAMERA)
 			m_MainCamera->AddComponent<FieldCameraInfo>();
-
+			m_MainCamera->AddComponent<SmoothFollow>(&followInfo);
 			m_MainCamera->AddComponent<StateControl>();
 			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraSmoothFollowState>(L"CameraFollow");
 			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");

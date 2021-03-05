@@ -20,11 +20,30 @@ void FieldCameraSmoothFollowState::Initialize()
 void FieldCameraSmoothFollowState::EnterState()
 {
 
-	m_lookAtTarget = PlayerInfoManager::GetInstance()->GetPlayer();
-	SmoothFollow::Desc followInfo;
-	followInfo.toTarget = m_lookAtTarget;
-	m_gameObject->DeleteComponent<FieldCameraInfo>();
-	m_gameObject->AddComponent<SmoothFollow>(&followInfo);
+	m_FieldCam = GetComponent<FieldCameraInfo>();
+
+	/*m_FieldCam->SetXMyAngle(0.f);
+	m_FieldCam->SetYMyAngle(-90.f);
+	m_FieldCam->SetZMyAngle(0.f);
+
+
+	m_FieldCam->SetXAxisAngle(0);
+	m_FieldCam->SetYAxisAngle(90.f);
+	m_FieldCam->SetZAxisAngle(0);
+
+	m_FieldCam->RotateXAxisAngle(0.f);
+	m_FieldCam->RotateYAxisAngle(0.f);
+
+
+	m_FieldCam->SetDistance(20);
+	m_FieldCam->SetFollowSpeed(1.f);
+	m_FieldCam->SetRotateSpeed(1.f);
+	m_FieldCam->SetLookSpeed(1.f);*/
+
+	m_gameObject->GetComponent<FieldCameraInfo>()->SetActive(false);
+	m_gameObject->GetComponent<SmoothFollow>()->SetActive(true);
+
+	
 }
 
 void FieldCameraSmoothFollowState::UpdateState()
@@ -37,6 +56,7 @@ void FieldCameraSmoothFollowState::UpdateState()
 
 void FieldCameraSmoothFollowState::ExitState()
 {
-	m_lookAtTarget->DeleteComponent<SmoothFollow>();
-	m_gameObject->AddComponent<FieldCameraInfo>();
+	m_gameObject->GetComponent<SmoothFollow>()->SetActive(false);
+	m_gameObject->GetComponent<FieldCameraInfo>()->SetActive(true);
+
 }

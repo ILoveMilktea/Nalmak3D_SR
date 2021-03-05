@@ -8,6 +8,8 @@
 class NALMAK_DLL Nalmak_Math
 {
 public:
+
+
 	template<typename T>
 	constexpr static T Lerp(T _src, T _dst, float _t)
 	{
