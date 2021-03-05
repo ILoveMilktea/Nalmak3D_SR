@@ -20,6 +20,7 @@ void MenuAnimator::Update()
 
 void MenuAnimator::InAnim()
 {
+	m_moveAnim.SetActor(m_gameObject);
 	m_moveAnim.SetStartPosition();
 	m_moveAnim.SetDestPosition(Vector3(m_transform->position.x + m_amount, m_transform->position.y, 0.f));
 	m_moveAnim.SetPlayDuration(m_duration);
@@ -29,6 +30,7 @@ void MenuAnimator::InAnim()
 
 void MenuAnimator::OutAnim()
 {
+	m_moveAnim.SetActor(m_gameObject);
 	m_moveAnim.SetStartPosition();
 	m_moveAnim.SetDestPosition(Vector3(m_transform->position.x - m_amount, m_transform->position.y, 0.f));
 	m_moveAnim.SetPlayDuration(m_duration);

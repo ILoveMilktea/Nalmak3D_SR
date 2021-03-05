@@ -14,7 +14,7 @@ class NALMAK_DLL SingleImage :
 public:
 	struct Desc
 	{
-		wstring textureName = L"UIWhite";
+		wstring textureName = L"default";
 	};
 	SingleImage(Desc* _desc);
 

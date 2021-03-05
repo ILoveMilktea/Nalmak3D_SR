@@ -85,7 +85,7 @@ void Rader::Update()
 		return;
 
 	m_timer += TimeManager::GetInstance()->GetdeltaTime();
-	if (0.1f <= m_timer)
+	if (0.01f <= m_timer)
 	{
 		UpdateTarget();
 		SetFlightPoint();
@@ -146,10 +146,15 @@ void Rader::SetFlightPoint()
 	Transform* playerTr = m_playerInfoManager->GetPlayer()->GetTransform();
 	Vector3 forward = playerTr->GetForward();
 	Vector2 rotateDir = Vector2(forward.x, forward.z);
+	D3DXVec2Normalize(&rotateDir,&rotateDir);
 	Vector2 up = Vector2(0.f, 1.f);
 	float cosValue = D3DXVec2Dot(&rotateDir, &up);
 	//m_pivot->GetTransform()->SetRotation(0.f, 0.f, 0.f);
-	m_pivot->GetTransform()->SetRotationZ(Rad2Deg * -acosf(cosValue));
+	if(forward.x < 0.f)
+		m_pivot->GetTransform()->SetRotationZ(Rad2Deg * acosf(cosValue));
+	else if (forward.x >= 0.f)
+		m_pivot->GetTransform()->SetRotationZ(Rad2Deg * -acosf(cosValue));
+
 	//m_pivot->GetTransform()->RotateAxis(Vector3(0.f, 0.f, 1.f), Rad2Deg * cosf(cosValue));
 }
 

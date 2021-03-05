@@ -340,8 +340,12 @@
     </ClInclude>
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
-    <ClInclude Include="..\Include\UIManager.h" />
-    <ClInclude Include="..\Include\UI_Alarm.h" />
+    <ClInclude Include="..\Include\UI_Alarm.h">
+      <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIManager.h">
+      <Filter>02.Component\00.Manager\UIManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -655,8 +659,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
-    <ClCompile Include="..\Source\UIManager.cpp" />
-    <ClCompile Include="..\Source\UI_Alarm.cpp" />
+    <ClCompile Include="..\Source\UI_Alarm.cpp">
+      <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\UIManager.cpp">
+      <Filter>02.Component\00.Manager\UIManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -867,6 +875,9 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Player\FixCamera\BossStageCamera">
       <UniqueIdentifier>{80bf70f9-492b-41d5-9ff8-eb38719eb005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\UIManager">
+      <UniqueIdentifier>{572f57df-b7cb-417c-bb88-babf45c0b953}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

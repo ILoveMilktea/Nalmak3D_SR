@@ -8,6 +8,7 @@
 #include "Event.h"
 #include "Nalmak_Include.h"
 
+class Text;
 class Texture;
 class InputManager;
 class CanvasRenderer;
@@ -18,6 +19,7 @@ class  NALMAK_DLL Button :
 public:
 	struct Desc
 	{
+		GameObject* targetText = nullptr;
 		EventHandler eventFunc = nullptr;
 
 		wstring normalImage = L"UIWhite";
@@ -71,6 +73,7 @@ protected:
 	Event m_event;
 	ResourceManager* m_resource;
 	CanvasRenderer* m_renderer;
+	GameObject* m_text;
 
 protected:
 	BUTTON_TRANSITION m_currentTransition;

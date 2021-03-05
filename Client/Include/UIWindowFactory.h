@@ -42,6 +42,9 @@ public:
 				title->SetPosition(576.f, 124.f);
 			}
 
+			float inoutAmount = 1000.f;
+			float inoutSpeed = 0.5f;
+
 			// Menu 1 - START STAGE	(Button)
 			{
 				EventHandler eventFunc = EventHandler([=]() {
@@ -54,8 +57,8 @@ public:
 				//desc_ma.duration = 0.5f;
 				//menu->AddComponent<MenuAnimator>(&desc_ma);
 				menu->AddComponent<MenuAnimator>();
-				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 230.f);
 			}
@@ -79,8 +82,8 @@ public:
 				});
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"WEAPON SHOP", CANVAS_GROUP_MAINWND_MAIN);
 				menu->AddComponent<MenuAnimator>();
-				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.1f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 270.f);
@@ -107,10 +110,10 @@ public:
 						auto menu = UIFactory::Prefab_MenuButton(returnFunc, L"RETURN", CANVAS_GROUP_MAINWND_SHOP);
 
 						menu->AddComponent<MenuAnimator>();
-						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 
-						menu->SetPosition(576.f - 1200.f, 230.f);
+						menu->SetPosition(576.f - inoutAmount, 230.f);
 					}
 					// Menu 1 - [ Weapon - AimMissile ] 
 					{
@@ -122,10 +125,10 @@ public:
 						auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"[ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND_SHOP);
 
 						menu->AddComponent<MenuAnimator>();
-						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.3f);
-						menu->SetPosition(576.f - 1200.f, 310.f);
+						menu->SetPosition(576.f - inoutAmount, 310.f);
 					}
 					// Menu 2 - [ Weapon - Cannon ] 
 					{
@@ -137,10 +140,10 @@ public:
 						auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"[ Weapon - Cannon ] ", CANVAS_GROUP_MAINWND_SHOP);
 
 						menu->AddComponent<MenuAnimator>();
-						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
-						menu->SetPosition(576.f - 1200.f, 350.f);
+						menu->SetPosition(576.f - inoutAmount, 350.f);
 					}
 
 
@@ -207,8 +210,8 @@ public:
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"EQUIP", CANVAS_GROUP_MAINWND_MAIN);
 
 				menu->AddComponent<MenuAnimator>();
-				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.2f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 				menu->SetPosition(576.f, 310.f);
@@ -238,10 +241,10 @@ public:
 						auto menu = UIFactory::Prefab_MenuButton(returnFunc, L"RETURN", CANVAS_GROUP_MAINWND_EQUIP);
 
 						menu->AddComponent<MenuAnimator>();
-						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 
-						menu->SetPosition(576.f - 1200.f, 230.f);
+						menu->SetPosition(576.f - inoutAmount, 230.f);
 					}
 					// Slot 1
 					{
@@ -249,15 +252,15 @@ public:
 						auto menu = UIFactory::Prefab_ItemMenuButton(eventFunc, L"SLOT", CANVAS_GROUP_MAINWND_EQUIP);
 
 						menu->AddComponent<MenuAnimator>();
-						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.3f);
 
 						menu->GetComponent<ItemButton>()->SetPartsNumber(FIRST_PARTS);
 
 
 
-						menu->SetPosition(576.f - 1200.f, 310.f);
+						menu->SetPosition(576.f - inoutAmount, 310.f);
 					}
 					// Slot 2
 					{
@@ -265,13 +268,13 @@ public:
 						auto menu = UIFactory::Prefab_ItemMenuButton(eventFunc, L"SLOT", CANVAS_GROUP_MAINWND_EQUIP);
 
 						menu->AddComponent<MenuAnimator>();
-						menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-						menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+						menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+						menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 						menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
 
 						menu->GetComponent<ItemButton>()->SetPartsNumber(SECOND_PARTS);
 
-						menu->SetPosition(576.f - 1200.f, 350.f);
+						menu->SetPosition(576.f - inoutAmount, 350.f);
 					}
 				}
 			}
@@ -283,8 +286,8 @@ public:
 				menu->GetComponent<CanvasRenderer>()->SetInteractive(false);
 
 				menu->AddComponent<MenuAnimator>();
-				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
-				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
+				menu->GetComponent<MenuAnimator>()->SetMoveDuration(inoutSpeed);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.4f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 
@@ -299,7 +302,7 @@ public:
 				//menu->GetComponent<CanvasRenderer>()->SetInteractive(true);
 
 				menu->AddComponent<MenuAnimator>();
-				menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+				menu->GetComponent<MenuAnimator>()->SetMoveAmount(inoutAmount);
 				menu->GetComponent<MenuAnimator>()->SetMoveDuration(0.5f);
 				menu->GetComponent<MenuAnimator>()->SetStartDelay(0.5f);
 				menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
@@ -495,7 +498,7 @@ public:
 					bar->SetPosition(1740.f, 350.f);
 				}
 
-				// ���߿� �߰�
+				// add
 				{
 					auto name = UIFactory::Prefab_ItemContents_Name(L"ADDITIANAL");
 					name->SetPosition(1555.f, 380.f);

@@ -134,6 +134,22 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 	switch (type)
 	{
 	case RENDERER_TYPE_MESH:
+	{
+		//float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
+
+		//Transform* trs = _renderer->GetTransform();
+		//Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
+		//float scale = max(trs->scale.z, max(trs->scale.x, trs->scale.y));
+		//radius *= scale;
+		//for (int i = 0; i < 6; ++i)
+		//{
+		//	float distance = Vector::Dot(Center, Vector3(m_frustumPlane[i].a, m_frustumPlane[i].b, m_frustumPlane[i].c)) + m_frustumPlane[i].d + radius;
+		//	if (distance < 0)
+		//	{
+		//		return false;
+		//	}
+		//}
+	}
 	case RENDERER_TYPE_PARTICLE:
 	{
 		/*float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;

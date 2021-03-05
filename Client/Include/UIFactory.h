@@ -197,13 +197,27 @@ public:
 	}
 	static GameObject* Prefab_MenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
-		// button
+		// text
 		CanvasRenderer::Desc desc_cr;
-		desc_cr.group = _group;
+		desc_cr.group = CANVAS_GROUP_MAINWND;
 
+		Text::Desc desc;
+		desc.width = 10;
+		desc.height = 25;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")
+			->AddComponent<CanvasRenderer>(&desc_cr)
+			->AddComponent<Text>(&desc);
+
+		// button
 		Button::Desc desc_bt;
+		desc_bt.targetText = text;
 		desc_bt.eventFunc = _eventFunc;
 
+		desc_cr.group = _group;
 		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"MenuButton");
 		menu->AddComponent<CanvasRenderer>(&desc_cr);
 		menu->AddComponent<Button>(&desc_bt);
@@ -213,7 +227,17 @@ public:
 		menu->GetComponent<Button>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
 		menu->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
 
+		//text->SetParents(menu);
+		text->SetScale(760.f, 30.f);
+		menu->SetScale(760.f, 30.f);
+		return menu;
+	}
+	static GameObject* Prefab_ItemMenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
 		// text
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = CANVAS_GROUP_MAINWND;
+
 		Text::Desc desc;
 		desc.width = 10;
 		desc.height = 25;
@@ -221,23 +245,20 @@ public:
 		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
-		menu->AddComponent<Text>(&desc);
+		auto text =
+			INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")
+			->AddComponent<CanvasRenderer>(&desc_cr)
+			->AddComponent<Text>(&desc);
 
-		menu->SetScale(760.f, 30.f);
-		return menu;
-	}
-	static GameObject* Prefab_ItemMenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
-	{
 		// button
-		CanvasRenderer::Desc desc_cr;
-		desc_cr.group = _group;
-
 		Button::Desc desc_bt;
+		desc_bt.targetText = text;
 		desc_bt.eventFunc = _eventFunc;
 
 		ItemButton::Desc desc_ib;
 		desc_ib.desc_button = desc_bt;
 
+		desc_cr.group = _group;
 		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"ItemMenuButton");
 		menu->AddComponent<CanvasRenderer>(&desc_cr);
 		menu->AddComponent<ItemButton>(&desc_ib);
@@ -247,16 +268,8 @@ public:
 		menu->GetComponent<ItemButton>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
 		menu->GetComponent<ItemButton>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
 
-		// text
-		Text::Desc desc;
-		desc.width = 10;
-		desc.height = 25;
-		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
-		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
-
-		menu->AddComponent<Text>(&desc);
-
+		//text->SetParents(menu);
+		text->SetScale(760.f, 30.f);
 		menu->SetScale(760.f, 30.f);
 		return menu;
 	}
@@ -375,6 +388,9 @@ public:
 
 		return bar;
 	}
+
+
+
 #pragma endregion
 
 public:

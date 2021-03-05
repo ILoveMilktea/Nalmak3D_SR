@@ -5,6 +5,8 @@
 
 Button::Button(Desc * _desc)
 {
+	m_text = _desc->targetText;
+
 	if (_desc->eventFunc != nullptr)
 		m_event += _desc->eventFunc;
 
@@ -38,6 +40,8 @@ void Button::Initialize()
 
 void Button::Update()
 {
+	m_text->SetPosition(m_transform->position);
+
 	// interactive(highlight) operation
 	if (m_renderer->IsPickingBlocked())
 		return;
