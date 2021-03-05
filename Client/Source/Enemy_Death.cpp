@@ -27,6 +27,9 @@ void Enemy_Death::EnterState()
 	//m_pEnemy->Target_Setting(false);
 	
 	EnemyManager::GetInstance()->Add_EnemyCount(-1);
+
+
+
 	//파티클 삭제//
 	//삭제하면 나왔던거 다 사라짐.
 	//죽으면 파티클 재생만 정지했다가

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\BulletDirMove.h"
+#include "Enemy.h"
 
 
 
@@ -24,4 +25,23 @@ void BulletDirMove::Update()
 
 
 	DEBUG_LOG(L"À§Ä¡", m_transform->position);
+}
+
+void BulletDirMove::OnTriggerEnter(Collisions & _collision)
+{
+	for (auto& obj : _collision)
+	{
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
+		{
+			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(-1);
+		}
+	}
+}
+
+void BulletDirMove::OnTriggerStay(Collisions & _collision)
+{
+}
+
+void BulletDirMove::OnTriggerExit(Collisions & _collision)
+{
 }

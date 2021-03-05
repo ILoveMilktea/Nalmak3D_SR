@@ -40,7 +40,7 @@ public:
 	
 	bool Fov_Check();
 
-	void Death();
+	void Death_Check();
 	void Emp();
 
 public: /* Affect Status */
@@ -78,6 +78,7 @@ public: /* Get */
 public: /* Set */
 	void Set_Damage(const int& _dmg);
 	void Set_OriginForward();
+	
 
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);

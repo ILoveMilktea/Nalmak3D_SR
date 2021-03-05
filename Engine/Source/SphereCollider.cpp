@@ -18,17 +18,17 @@ void SphereCollider::Initialize()
 	Collider::Initialize();
 
 
-	VIBufferRenderer::Desc render;
-	render.mtrlName = L"debugCollider";
-	render.meshName = L"sphere";
-	m_colliderDebug = INSTANTIATE()->AddComponent<VIBufferRenderer>(&render);
-	m_colliderDebug->SetParents(m_gameObject);
-	m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
+	//VIBufferRenderer::Desc render;
+	//render.mtrlName = L"debugCollider";
+	//render.meshName = L"sphere";
+	//m_colliderDebug = INSTANTIATE()->AddComponent<VIBufferRenderer>(&render);
+	//m_colliderDebug->SetParents(m_gameObject);
+	//m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
 }
 
 void SphereCollider::Update()
 {
-	m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
+	//m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
 }
 
 

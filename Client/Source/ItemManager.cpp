@@ -49,13 +49,13 @@ void ItemManager::Initialize()
 	//BuyItem(L"Weapon", L"Player_Weapon_Homing");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
-	BuyItem(L"Weapon", L"Homing");
-	m_playerMgr->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
-	//}
+	//BuyItem(L"Weapon", L"ClusterMissile");
+	//m_playerMgr->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
+	////}
 
 
-	BuyItem(L"Weapon", L"Emp");
-	m_playerMgr->EquipItem(SECOND_PARTS, L"Weapon", L"Emp");
+	//BuyItem(L"Weapon", L"Emp");
+	//m_playerMgr->EquipItem(SECOND_PARTS, L"Weapon", L"Emp");
 
 
 
@@ -91,6 +91,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"Player_Weapon_Homing";
+		info.weaponAttak = 1;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;

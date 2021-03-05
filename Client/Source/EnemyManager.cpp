@@ -185,7 +185,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
-	Enemy_col.radius = 1.f;
+	Enemy_col.radius = 5.f;
 	Enemy_col.collisionLayer = COLLISION_LAYER_ENEMY;
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
 
@@ -472,6 +472,8 @@ void EnemyManager::Spawn_S1P1_Huge()
 
 }
 
+
+
 void EnemyManager::Spawn_S1P1_Quick()
 {
 	for (int i = 0; i < 4; ++i)
@@ -480,9 +482,9 @@ void EnemyManager::Spawn_S1P1_Quick()
 		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 
 		Vector2 vRand = Nalmak_Math::Rand(Vector2(-20.f, -20.f), Vector2((float)WINCX +20.f, (float)WINCY + 20.f));
-		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, 400.f);
+		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, -200.f);
 
 
-		Enemy_Spawn(vPos, Vector3(0.2f, 0.2f, 0.2f), ENEMY_STATE::IDLE, tStatus, tGun);
+		Enemy_Spawn(vPos, Vector3(0.2f, 0.2f, 0.2f), ENEMY_STATE::HOLD, tStatus, tGun);
 	}
 }

@@ -46,9 +46,13 @@ void DogFightState::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
-	ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
-	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"AimMissile");
 
+
+	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
+	//PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"AimMissile");
+
+	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Player_Weapon_Homing");
+	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
 	m_Player->SetScale(0.2f, 0.2f, 0.2f);
@@ -164,11 +168,23 @@ void DogFightState::UpdateState()
 			m_bPattern2[1] = true;
 		}
 
-		if (m_bPattern2[0] == true && m_bPattern2[1] == true
+		if (m_bPattern2[1] == true && m_bPattern3[0] == false
 			&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
 		{
+			EnemyManager::GetInstance()->Spawn_S1P1_Quick();
+			m_bPattern3[0] = true;
+		}
+
+		if (m_bPattern3[0] == true && m_bPattern3[1] == false
+			&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+		{
+			m_bPattern3[1] = true;
 			m_bProduce = true;
 		}
+
+		
+
+
 
 
 

@@ -16,7 +16,7 @@ Player_ClusterMissile::~Player_ClusterMissile()
 
 void Player_ClusterMissile::ItemShot()
 {
-	m_bullet->GetTransform()->position = m_bullet->GetTransform()->GetWorldPosition();
+	//m_bullet->GetTransform()->position = m_bullet->GetTransform()->GetWorldPosition();
 	m_bullet->GetTransform()->DeleteParent();
 
 	ClusterBulletMove::Desc bulletinfo;

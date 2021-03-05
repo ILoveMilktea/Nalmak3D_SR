@@ -23,7 +23,7 @@ void PlayerMove::Initialize()
 	m_playerInfo->SetRollAngle(15.f);
 	m_playerInfo->SetDirSeneser(0.5f);
 
-	m_playerInfo->SetMinSpeed(10.f);
+	m_playerInfo->SetMinSpeed(0.f);
 	m_playerInfo->SetMaxSpeed(20.f);
 
 	

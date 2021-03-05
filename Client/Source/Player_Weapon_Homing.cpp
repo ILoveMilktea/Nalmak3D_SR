@@ -44,7 +44,7 @@ void Player_Weapon_Homing::ItemShot()
 	{
 		auto bullet = m_bullet.front();
 
-		bullet->GetTransform()->position = bullet->GetTransform()->GetWorldPosition();
+		//bullet->GetTransform()->position = bullet->GetTransform()->GetWorldPosition();
 		bullet->GetTransform()->DeleteParent();
 
 		Rigidbody::Desc desc_rb;
@@ -59,6 +59,12 @@ void Player_Weapon_Homing::ItemShot()
 
 		bullet->AddComponent<Rigidbody>(&desc_rb);
 		bullet->AddComponent<HomingBulletMove>(&desc_hbm);
+
+		SphereCollider::Desc single_col;
+		single_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
+		single_col.radius = 1.f;
+		bullet->AddComponent<SphereCollider>(&single_col);
+
 
 		m_bullet.erase(m_bullet.begin());
 	}
@@ -102,6 +108,11 @@ void Player_Weapon_Homing::ItemShot()
 			++target;
 			if (target == m_detector->GetDetectedTargetList().end())
 				target = m_detector->GetDetectedTargetList().begin();
+
+			SphereCollider::Desc multi_col;
+			multi_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
+			multi_col.radius = 1.f;
+			bullet->AddComponent<SphereCollider>(&multi_col);
 		}
 
 
