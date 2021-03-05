@@ -8,6 +8,7 @@
 
 class Texture;
 class Animator;
+class RenderManager;
 class NALMAK_DLL CanvasRenderer :
 	public IRenderer, public ICanvasGroup
 {
@@ -67,6 +68,7 @@ public:
 
 private:
 	InputManager* m_input;
+	RenderManager* m_renderManager;
 
 private:
 	Animator* m_animator = nullptr;

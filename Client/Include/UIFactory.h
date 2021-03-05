@@ -362,10 +362,10 @@ public:
 	{
 		auto bar = INSTANTIATE();
 
-		auto background = CreateImage(_group, L"niniz");
+		auto background = CreateImage(CANVAS_GROUP_MAINWND, L"niniz");
 		background->SetPosition(0.f, 0.f, 0.f);
 		background->SetScale(160.f, 25.f);
-		auto fill = CreateImage(_group, L"UIRed");
+		auto fill = CreateImage(CANVAS_GROUP_MAINWND, L"UIRed");
 		fill->SetPosition(0.f, 0.f, 0.f);
 		fill->SetScale(152.f, 21.f);
 

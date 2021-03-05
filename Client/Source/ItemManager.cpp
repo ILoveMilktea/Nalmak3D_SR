@@ -90,7 +90,7 @@ void ItemManager::CreateItem()
 	}
 
 	{
-		info.itemName = L"Player_Weapon_Homing";
+		info.itemName = L"HomingMissile";
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;

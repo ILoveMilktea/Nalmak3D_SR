@@ -1,5 +1,6 @@
 #include "..\Include\CanvasRenderer.h"
 
+#include "RenderManager.h"
 #include "CanvasGroup.h"
 #include "ResourceManager.h"
 #include "Transform.h"
@@ -26,6 +27,7 @@ CanvasRenderer::CanvasRenderer(Desc * _desc)
 
 void CanvasRenderer::Initialize()
 {
+	m_renderManager = RenderManager::GetInstance();
 	m_input = InputManager::GetInstance();
 	m_animator = GetComponent<Animator>();
 
@@ -44,6 +46,7 @@ void CanvasRenderer::Initialize()
 
 void CanvasRenderer::Update()
 {
+	UpdateBoundary();
 	if (m_observedPosition != m_transform->position)
 	{
 		UpdateBoundary();
@@ -132,6 +135,12 @@ void CanvasRenderer::UpdateBoundary()
 	{
 		auto worldMatrix = m_transform->GetUIWorldMatrix();
 		Vector3 position = { worldMatrix.m[3][0], worldMatrix.m[3][1], worldMatrix.m[3][2] };
+
+		float half_wincx = (float)m_renderManager->GetWindowWidth() * 0.5f;
+		float half_wincy = (float)m_renderManager->GetWindowHeight() * 0.5f;
+
+		position.x = half_wincx + position.x * half_wincx;
+		position.y = half_wincy - position.y * half_wincy;
 
 		m_boundary.left = LONG(position.x - m_transform->scale.x * 0.5f);
 		m_boundary.top = LONG(position.y - m_transform->scale.y * 0.5f);
