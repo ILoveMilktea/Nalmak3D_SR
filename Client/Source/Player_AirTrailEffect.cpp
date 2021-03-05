@@ -37,19 +37,19 @@ void Player_AirTrailEffect::CreateMesh()
 	auto mesh = GameObject::Instantiate();
 	MeshRenderer::Desc render;
 	render.mtrl = m_material;
-	render.layer = RENDER_LAYER::RENDER_LAYER_EFFECT;
-	ColorFadeDestroy::Desc color;
+	//render.layer = RENDER_LAYER::RENDER_LAYER_EFFECT;
+	/*ColorFadeDestroy::Desc color;
 	color.startColor = m_color;
 	color.endColor = Vector4(0, 0, 0, 0);
-	color.lifeTime = m_lifeTime;
-	mesh->AddComponent<MeshRenderer>(&render)->AddComponent<ColorFadeDestroy>(&color);
+	color.lifeTime = m_lifeTime;*/
+	mesh->AddComponent<MeshRenderer>(&render);// ->AddComponent<ColorFadeDestroy>(&color);
 
 	mesh->GetTransform()->position = (m_curPosition + m_prePosition) * 0.5f + m_offset;
-	mesh->GetTransform()->scale = Vector3(Vector::Distance(m_curPosition, m_prePosition), m_thick, 0);
+	mesh->GetTransform()->scale = Vector3(Nalmak_Math::Distance(m_curPosition, m_prePosition), m_thick, 0);
 
-	Vector3 dir = Vector::Normalize(m_prePosition - m_curPosition);
-	float angle = acos(Vector::Dot(dir, Vector3(1, 0, 0)));
-	if (Vector::Cross(dir, Vector3(1, 0, 0)).z > 0)
+	Vector3 dir = Nalmak_Math::Normalize(m_prePosition - m_curPosition);
+	float angle = acos(Nalmak_Math::Dot(dir, Vector3(1, 0, 0)));
+	if (Nalmak_Math::Cross(dir, Vector3(1, 0, 0)).z > 0)
 		angle *= -1.f;
 	Quaternion quaternion;
 	D3DXQuaternionRotationYawPitchRoll(&quaternion, 0, 0, angle);
