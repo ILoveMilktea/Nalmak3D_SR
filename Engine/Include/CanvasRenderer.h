@@ -8,6 +8,7 @@
 
 class Texture;
 class Animator;
+class RenderManager;
 class NALMAK_DLL CanvasRenderer :
 	public IRenderer, public ICanvasGroup
 {
@@ -46,8 +47,9 @@ public:
 	bool IsCursorOnRect();
 
 	void SetImage(IDirect3DBaseTexture9* _Image) { m_targetImage = _Image; }
-	void SetColor(Vector4 _color) { m_color = _color; }
+	void SetColor(Vector4 _color);
 
+	const Vector4& GetColor() { return m_color; }
 	RECT* GetBoundary() { return &m_boundary; }
 
 public:
@@ -66,6 +68,7 @@ public:
 
 private:
 	InputManager* m_input;
+	RenderManager* m_renderManager;
 
 private:
 	Animator* m_animator = nullptr;

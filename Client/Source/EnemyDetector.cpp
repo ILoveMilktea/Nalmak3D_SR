@@ -109,6 +109,10 @@ void EnemyDetector::UpdateTarget()
 	Transform* playerTr = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform();
 	for (auto& enemy : enemyList)
 	{
+		Camera* mainCam = Core::GetInstance()->GetMainCamera();
+		if (mainCam->IsInFrustumCulling(enemy->GetComponent<VIBufferRenderer>()))
+			continue;		// 현재 비워놓은....
+
 		Vector3 playerToEnemy = playerTr->position - enemy->GetTransform()->position;
 		float dist = D3DXVec3Length(&playerToEnemy);
 		if (dist > m_detectRange)

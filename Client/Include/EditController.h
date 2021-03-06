@@ -19,5 +19,8 @@ public:
 private:
 	InputManager* m_input;
 	bool m_editMode;
+
+	GameObject* m_popup;
+
 };
 

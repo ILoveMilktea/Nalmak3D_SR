@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\EditController.h"
 #include "EnemyManager.h"
+#include "UIManager.h"
 
 EditController::EditController(Desc * _desc)
 {
@@ -30,10 +31,17 @@ void EditController::Update()
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F2))
 	{
+		m_popup = UIFactory::CreateImage(CANVAS_GROUP_MAINWND, L"UIBlue");
+		m_popup->SetPosition(WINCX * 0.5f, WINCY * 0.5f);
+		m_popup->SetScale(600.f, 400.f);
 
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F3))
 	{
+		if (m_popup->IsActive())
+			m_popup->SetActive(false);
+		else
+			m_popup->SetActive(true);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F4))
 	{
@@ -41,20 +49,32 @@ void EditController::Update()
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F5))
 	{
+		auto alarm = UIFactory::Prefab_Stage_Alarm(UI_Alarm::WARNING, L"warning message", CANVAS_GROUP_STAGEWND);
+		alarm->GetComponent<UI_Alarm>()->AlarmOnAnim();
+		UIManager::GetInstance()->AddAlarm(alarm->GetComponent<UI_Alarm>());
+		//UIManager::GetInstance()->SkillRotateOn(0);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F6))
 	{
+		auto alarm = UIFactory::Prefab_Stage_Alarm(UI_Alarm::NOTICE, L"notice message", CANVAS_GROUP_STAGEWND);
+		alarm->GetComponent<UI_Alarm>()->AlarmOnAnim();
+		UIManager::GetInstance()->AddAlarm(alarm->GetComponent<UI_Alarm>());
+		//UIManager::GetInstance()->SkillRotateOn(1);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F7))
 	{
+		auto alarm = UIFactory::Prefab_Stage_Alarm(UI_Alarm::KILL, L"kill message", CANVAS_GROUP_STAGEWND);
+		alarm->GetComponent<UI_Alarm>()->AlarmOnAnim();
+		UIManager::GetInstance()->AddAlarm(alarm->GetComponent<UI_Alarm>());
+		//UIManager::GetInstance()->SkillRotateOn(2);
 
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F8))
 	{
-		CanvasGroup::GetInstance()->AllOn();
+		//UIManager::GetInstance()->SkillRotateOn(3);
 	}
 	if (m_input->GetKeyDown(KEY_STATE_F9))
 	{
-		CanvasGroup::GetInstance()->AllOff();
+		UIManager::GetInstance()->SkillRotateOn(4);
 	}
 }

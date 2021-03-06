@@ -368,6 +368,19 @@
     <ClInclude Include="..\Include\NoneState.h">
       <Filter>04.Combat State\NewFilter1</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\UI_Alarm.h">
+      <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIManager.h">
+      <Filter>02.Component\00.Manager\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ShopMenu_Animator.h">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ShopWnd_Animator.h">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ShopItemModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -708,6 +721,19 @@
     <ClCompile Include="..\Source\NoneState.cpp">
       <Filter>04.Combat State\NewFilter1</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\UI_Alarm.cpp">
+      <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\UIManager.cpp">
+      <Filter>02.Component\00.Manager\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ShopMenu_Animator.cpp">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ShopWnd_Animator.cpp">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ShopItemModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -948,6 +974,12 @@
     </Filter>
     <Filter Include="04.Combat State\NewFilter1">
       <UniqueIdentifier>{21f62d28-06cb-4a69-ae64-fc27885c00d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\UIManager">
+      <UniqueIdentifier>{572f57df-b7cb-417c-bb88-babf45c0b953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\05.Animator\Shop">
+      <UniqueIdentifier>{4246a242-eb69-4df9-8974-014e1fe84bfd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -58,10 +58,7 @@ void UILabScene::CreatePauseButton()
 
 	auto pauseButton = UIFactory::CreatePauseButton();
 	pauseButton->SetPosition(800.f, 500.f, 0.f);
-
-	auto toggle = UIFactory::CreateToggle();
-	toggle->SetPosition(1200.f, 500.f, 0.f);
-
+	
 }
 
 void UILabScene::CreateRader()

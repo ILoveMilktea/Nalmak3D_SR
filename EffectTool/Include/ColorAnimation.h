@@ -16,14 +16,17 @@ public:
 	virtual bool Play_CurrentAnimation() override;
 	virtual void End_Animation() override;
 
-	virtual void Play_ChangeRed();
-	virtual void Play_ChangeGreen();
-	virtual void Play_ChangeBlue();
+	virtual void Play_Lerp() override;
+	virtual void Play_Custom() override;
 
-	virtual void Play_FadeIn();
-	virtual void Play_FadeOut();
-	virtual void Play_FadeCustom();
+public:
+	void SetStartColor();
+	void SetStartColor(Vector4 _color);
+	void SetDestColor(Vector4 _dest) { m_destColor = _dest; }
 
+private:
+	Vector4 m_startColor;
+	Vector4 m_destColor;
 };
 
 

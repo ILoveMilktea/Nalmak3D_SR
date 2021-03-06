@@ -18,8 +18,10 @@ public:
 public:
 	Toggle(Desc* _desc);
 
+	void SelectToggle();
+	void UnselectToggle();
+
 private:
-	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -29,7 +31,6 @@ private:
 private:
 	bool m_isOn;
 
-	GameObject* m_toggleImage = nullptr;
 	IDirect3DBaseTexture9* m_waitSprite = nullptr;
 	Event m_changeEvent;
 	

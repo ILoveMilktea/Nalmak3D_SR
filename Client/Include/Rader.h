@@ -14,7 +14,7 @@ public:
 	{
 		float findRange = 100.f;
 
-		int readyIcon = 10;
+		int readyIcon = 30;
 	};
 
 public:
@@ -36,6 +36,7 @@ private:
 	GameObject* m_circleMask = nullptr;				// 레이더 마스크
 	GameObject* m_playerIcon = nullptr;				// 중심 플레이어 기체
 	GameObject* m_stick = nullptr;					// 막대기
+	GameObject* m_pivot = nullptr;		
 
 	PlayerInfoManager* m_playerInfoManager = nullptr;
 	EnemyManager* m_enemyManager = nullptr;
