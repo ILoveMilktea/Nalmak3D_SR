@@ -330,6 +330,9 @@
     <ClInclude Include="..\Include\FieldCameraStartState.h">
       <Filter>05. FieldCameraState</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\FieldCameraNearEnemyState.h">
+      <Filter>05. FieldCameraState</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -425,7 +428,6 @@
     <ClCompile Include="..\Source\TopViewCamera.cpp">
       <Filter>02.Component\00.Manager\Player\FixCamera\2DTopViewCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Ground.cpp" />
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp">
       <Filter>04.Combat State\00%29DogFight</Filter>
@@ -631,6 +633,10 @@
       <Filter>05. FieldCameraState</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\FieldCameraStartState.cpp">
+      <Filter>05. FieldCameraState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Ground.cpp" />
+    <ClCompile Include="..\Source\FieldCameraNearEnemyState.cpp">
       <Filter>05. FieldCameraState</Filter>
     </ClCompile>
   </ItemGroup>

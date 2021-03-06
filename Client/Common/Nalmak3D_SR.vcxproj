@@ -204,6 +204,7 @@
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\FieldCameraInfo.h" />
+    <ClInclude Include="..\Include\FieldCameraNearEnemyState.h" />
     <ClInclude Include="..\Include\FieldCameraSmoothFollowState.h" />
     <ClInclude Include="..\Include\FieldCameraStartState.h" />
     <ClInclude Include="..\Include\HomingBulletMove.h" />
@@ -322,6 +323,7 @@
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\FieldCameraInfo.cpp" />
+    <ClCompile Include="..\Source\FieldCameraNearEnemyState.cpp" />
     <ClCompile Include="..\Source\FieldCameraSmoothFollowState.cpp" />
     <ClCompile Include="..\Source\FieldCameraStartState.cpp" />
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />

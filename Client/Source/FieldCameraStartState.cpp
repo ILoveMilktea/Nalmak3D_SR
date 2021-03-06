@@ -17,7 +17,7 @@ void FieldCameraStartState::Initialize()
 {
 	
 
-
+	m_inputMgr = InputManager::GetInstance();
 }
 
 void FieldCameraStartState::EnterState()
@@ -27,8 +27,9 @@ void FieldCameraStartState::EnterState()
 
 	m_FieldCam = GetComponent<FieldCameraInfo>();
 	/*m_FieldCam->SetTarget(m_gameObject->GetTransform());*/
+	m_player = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform();
+	m_FieldCam->SetAxisTargetPos(m_player->GetWorldPosition() + Vector3(0.f,0.f, 2.f));
 
-	m_FieldCam->SetAxisTargetPos(PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->GetWorldPosition());
 
 
 	m_FieldCam->SetXMyAngle(0.f);
@@ -36,7 +37,7 @@ void FieldCameraStartState::EnterState()
 	m_FieldCam->SetZMyAngle(0.f);
 
 
-	m_FieldCam->SetXAxisAngle(0);
+	m_FieldCam->SetXAxisAngle(20.f);
 	m_FieldCam->SetYAxisAngle(180.f);
 	m_FieldCam->SetZAxisAngle(0);
 
@@ -49,19 +50,44 @@ void FieldCameraStartState::EnterState()
 	m_FieldCam->SetRotateSpeed(1.f);
 	m_FieldCam->SetLookSpeed(1.f);
 
-	m_player = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform();
+
 }
 
 void FieldCameraStartState::UpdateState()
 {
 
-	DEBUG_LOG(L"시작", L"dd");
-//	m_FieldCam->SetAxisTargetPos(m_player->position);
-	//m_FieldCam->SetAxisTargetPos({ 0.f, 0.f, 10.f });
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_C))
+	m_dampingAccel = Nalmak_Math::Lerp(m_dampingAccel, 1.f, dTime * 50);
+
+
+	if (m_FieldCam->GetDistance() >= 5.5f)
 	{
-		SetState(L"CameraFollow");
+		m_FieldCam->SetAxisTargetPos(m_player->GetWorldPosition() + Vector3(0.f, 0.f, 2.f));
+		
+		m_dampingSpeed += m_dampingAccel;
+		m_FieldCam->AddDistance(-m_dampingSpeed * dTime);
 	}
+	else
+	{
+		m_FieldCam->SetAxisTargetPos(m_player->GetWorldPosition() + Vector3(0.f, 0.f, 3.f));
+		m_FieldCam->RotateYAxisAngle(15.f);
+	}
+
+
+	if (m_FieldCam->GetYAxisAngle() >= 180.f + PI2)
+	{
+		SetState(L"CameraNearEnemy");
+		return;
+	}
+
+	if (m_inputMgr->GetKeyDown(KEY_STATE::KEY_STATE_0))
+	{
+		SetState(L"CameraNearEnemy");
+		return;
+	}
+
+
+	DEBUG_LOG(L"distance", m_FieldCam->GetDistance());
+	DEBUG_LOG(L"시작", m_FieldCam->GetYAxisAngle());
 }
 
 void FieldCameraStartState::ExitState()

@@ -40,10 +40,10 @@ public:
 
 	
 	void AddDistance(float _distance);
-
+	bool IsNearToTarget();
 	//
 	void Reset();
-
+	//
 	void SetTarget(Transform * _targetTransform);
 public: // Getter
 	float GetXAxisAngle();

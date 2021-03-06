@@ -20,15 +20,17 @@
 #include "PlayerNone.h"
 #include "PlayerShooter.h"
 
-// playerskill 시전자
+// playerskill ?�전??
 #include "PlayerSkillActor.h"
 
-//스킬 상태별 상태
+//?�킬 ?�태�??�태
 #include "PlayerEscapeState.h"
 #include "FieldCameraInfo.h"
-// camera state 정렬
+// camera state ?�렬
 #include "FieldCameraSmoothFollowState.h"
 #include "FieldCameraStartState.h"
+#include "FieldCameraNearEnemyState.h"
+
 
 DogFightState::DogFightState()
 {
@@ -61,7 +63,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
 
-	// 스킬관려된 스테이트
+	// ?�킬관?�된 ?�테?�트
 	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
 
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
@@ -69,7 +71,7 @@ void DogFightState::EnterState()
 	renderinfo.mtrlName = L"default";
 	renderinfo.meshName = L"flight";*/
 	MeshRenderer::Desc render;
-	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ �����?�ȳ��ͼ� ���� �ٲ���
 	render.meshName = L"f15";
 
 
@@ -100,7 +102,7 @@ void DogFightState::EnterState()
 	infoManager->SetPlayer(m_Player);
 
 
-	// 카메라 스테이트에서 관리해줌.
+	// 카메???�테?�트?�서 관리해�?
 	/*auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
 	SmoothFollow::Desc smoothFollowDesc;
 	smoothFollowDesc.toTarget = m_Player;
@@ -120,6 +122,7 @@ void DogFightState::EnterState()
 			m_MainCamera->AddComponent<StateControl>();
 			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraSmoothFollowState>(L"CameraFollow");
 			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");
+			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraNearEnemyState>(L"CameraNearEnemy");
 			m_MainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
 		}
 	}
@@ -138,7 +141,7 @@ void DogFightState::EnterState()
 		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 		BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 
-		EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, -30.f, 100.f), ENEMY_STATE::HOLD, tStatus, tGun, tMissile);
+		EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, -30.f, 100.f), ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
 
 	}
 	
@@ -196,9 +199,9 @@ void DogFightState::UpdateState()
 		{
 			SceneToEvasion();
 		}
-		//지금 Enter에서 에너미 생성하면 newGameobjectList에 담기니까
-		//gameobjectlist에는 Enemy가 없으니 바로 ScenetoEvasion으로 넘어옴.
-		//그리고 나서 Player도 newGameObjectList에 있으니 못 찾아와서 팅김.
+		//지�?Enter?�서 ?�너�??�성?�면 newGameobjectList???�기?�까
+		//gameobjectlist?�는 Enemy가 ?�으??바로 ScenetoEvasion?�로 ?�어??
+		//그리�??�서 Player??newGameObjectList???�으??�?찾아?�???��?.
 
 
 		if (m_bProduce)
@@ -222,7 +225,7 @@ void DogFightState::UpdateState()
 void DogFightState::ExitState()
 {
 	//DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
-	//monster들 다 없애기
+	//monster?????�애�?
 
 
 

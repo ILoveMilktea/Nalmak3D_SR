@@ -39,12 +39,14 @@ void FieldCameraInfo::Update()
 	m_observerCurrentAngle.x = Nalmak_Math::Lerp(m_observerCurrentAngle.x, m_observerAngle.x, dTime * m_lookSpeed);
 	m_observerCurrentAngle.y = Nalmak_Math::Lerp(m_observerCurrentAngle.y, m_observerAngle.y, dTime * m_lookSpeed);
 	m_observerCurrentAngle.z = Nalmak_Math::Lerp(m_observerCurrentAngle.z, m_observerAngle.z, dTime * m_lookSpeed);
-	
+	m_transform->SetRotation(m_observerCurrentAngle.x, m_observerCurrentAngle.y, m_observerCurrentAngle.z);
+
+
+
 	m_transform->position.x = Nalmak_Math::Lerp(m_transform->position.x, 0.f, dTime * m_followSpeed);
 	m_transform->position.y = Nalmak_Math::Lerp(m_transform->position.y, 0.f, dTime * m_followSpeed);
 	m_transform->position.z = Nalmak_Math::Lerp(m_transform->position.z, -m_targetDistance, dTime * m_followSpeed);
 
-	m_transform->SetRotation(m_observerCurrentAngle.x, m_observerCurrentAngle.y, 0.f);
 	DEBUG_LOG(L"로컬", m_transform->position);
 	DEBUG_LOG(L"월드", m_transform->GetWorldPosition());
 
@@ -138,6 +140,11 @@ void FieldCameraInfo::AddZAxisAngle(float _angle)
 void FieldCameraInfo::AddDistance(float _distance)
 {
 	m_targetDistance += _distance;
+}
+
+bool FieldCameraInfo::IsNearToTarget()
+{
+	return  Nalmak_Math::DistanceSq(m_axisTargetPos, m_targetAxis->GetTransform()->position) < 2;
 }
 
 void FieldCameraInfo::Reset()
