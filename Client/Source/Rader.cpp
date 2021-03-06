@@ -131,7 +131,8 @@ void Rader::SetFlightPoint()
 	int index = 0;
 	for (auto& point : m_iconPoint)
 	{		
-		m_IconContainer[index]->GetTransform()->position = Vector3(point.x, point.y, 0.f);
+		float distanceRate = m_transform->scale.y / m_findRange;
+		m_IconContainer[index]->GetTransform()->position = Vector3(point.x * distanceRate, point.y * distanceRate, 0.f);
 		m_IconContainer[index]->SetActive(true);
 		++index;
 	}

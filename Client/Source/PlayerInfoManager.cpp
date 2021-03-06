@@ -189,7 +189,7 @@ GameObject * PlayerInfoManager::Player_Create()
 	m_player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
-	render.mtrlName = L"f15_base";
+	render.mtrlName = L"f15";
 	render.meshName = L"f15";
 	m_player->AddComponent<MeshRenderer>(&render);
 	m_player->AddComponent<DrawGizmo>();

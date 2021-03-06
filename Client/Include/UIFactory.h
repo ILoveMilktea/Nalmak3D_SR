@@ -875,7 +875,7 @@ public:
 		desc_cr.group = _group;
 
 		Rader::Desc desc;
-		desc.findRange = 200.f;
+		desc.findRange = 500.f;
 		desc.readyIcon = 10;
 
 		auto rader = INSTANTIATE()->
@@ -897,6 +897,7 @@ public:
 
 		EnemyDetector::Desc desc_ed;
 		desc_ed.crosshair = _crosshair;
+		desc_ed.detectRange = 500.f;
 
 		auto enemyDetector = INSTANTIATE(OBJECT_TAG_UI, L"detector")->
 			AddComponent<CanvasRenderer>(&desc_cr)->
