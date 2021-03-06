@@ -354,7 +354,6 @@
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\Player_WindEffect.h" />
-    <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
     <ClInclude Include="..\Include\DogFight_Stage1.h">
       <Filter>04.Combat State\00%29DogFight</Filter>
     </ClInclude>
@@ -390,6 +389,18 @@
     </ClInclude>
     <ClInclude Include="..\Include\ItemButton.h">
       <Filter>02.Component\02.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player.h">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_FarAway.h">
+      <Filter>02.Component\08.Stage_DramaticProduce\PlayerFarAway_ToEvasion\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_Enter_Evasion.h">
+      <Filter>02.Component\08.Stage_DramaticProduce\PlayerEnter_Evasion\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Camera_TopView_Evasion.h">
+      <Filter>02.Component\08.Stage_DramaticProduce\PlayerEnter_Evasion\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -644,7 +655,7 @@
     </ClCompile>
     <ClCompile Include="..\Source\FieldCameraNearEnemyState.cpp">
       <Filter>05. FieldCameraState</Filter>
-     </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Source\StageSelectCamera.cpp">
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClCompile>
@@ -754,6 +765,18 @@
     </ClCompile>
     <ClCompile Include="..\Source\ItemButton.cpp">
       <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player.cpp">
+      <Filter>02.Component\00.Manager\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_FarAway.cpp">
+      <Filter>02.Component\08.Stage_DramaticProduce\PlayerFarAway_ToEvasion\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_Enter_Evasion.cpp">
+      <Filter>02.Component\08.Stage_DramaticProduce\PlayerEnter_Evasion\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Camera_TopView_Evasion.cpp">
+      <Filter>02.Component\08.Stage_DramaticProduce\PlayerEnter_Evasion\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1004,6 +1027,24 @@
     </Filter>
     <Filter Include="05. FieldCameraState">
       <UniqueIdentifier>{d0964a25-57af-4678-a4d2-066998ab8f19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\08.Stage_DramaticProduce">
+      <UniqueIdentifier>{e973a766-dee5-4e38-8df5-cb4272da0cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\08.Stage_DramaticProduce\PlayerFarAway_ToEvasion">
+      <UniqueIdentifier>{681e1749-bbd2-4c2b-b74e-e1ff820bba08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\08.Stage_DramaticProduce\PlayerFarAway_ToEvasion\Player">
+      <UniqueIdentifier>{2deedc5b-af6b-4c8c-a28b-0a42a810c166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\08.Stage_DramaticProduce\PlayerEnter_Evasion">
+      <UniqueIdentifier>{44d09f35-756c-4de6-b329-626fc9c7b1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\08.Stage_DramaticProduce\PlayerEnter_Evasion\Player">
+      <UniqueIdentifier>{be94a84d-0ff0-4739-9f11-4b211ebfe13f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\08.Stage_DramaticProduce\PlayerEnter_Evasion\Camera">
+      <UniqueIdentifier>{4a39ab71-96e0-4206-b321-dbbc267ce387}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

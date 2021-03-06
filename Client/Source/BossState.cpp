@@ -23,23 +23,27 @@ void BossState::Initialize()
 void BossState::EnterState()
 {
 
-	m_pMainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
+	//m_pMainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 
-	if (m_pMainCamera == nullptr)
-	{
-		assert(L"아 ㅋㅋ 카메라 못 찾앗다고 ㅋㅋ" && 0);
-	}
+	//if (m_pMainCamera == nullptr)
+	//{
+	//	assert(L"아 ㅋㅋ 카메라 못 찾앗다고 ㅋㅋ" && 0);
+	//}
 
-	//m_pMainCamera->SetPosition(0.f, 100.f, 0.f);
-	//m_pMainCamera->SetRotation(0.f, 0.f, 0.f);
-	//m_pMainCamera->GetTransform()->RotateX(90.f);
+	////m_pMainCamera->SetPosition(0.f, 100.f, 0.f);
+	////m_pMainCamera->SetRotation(0.f, 0.f, 0.f);
+	////m_pMainCamera->GetTransform()->RotateX(90.f);
+
+	//m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
+
+	//if (m_pPlayer == nullptr)
+	//{
+	//	assert(L"dk zz vmffpdldj aht qkedkTEkrh zz " && 0);
+	//}
 
 	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
-
-	if (m_pPlayer == nullptr)
-	{
-		assert(L"dk zz vmffpdldj aht qkedkTEkrh zz " && 0);
-	}
+	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fBossTime);
+	PlayerInfoManager::GetInstance()->SetScore(m_fBossScore);
 
 	EnemyManager::GetInstance()->Boss_Spawn();
 

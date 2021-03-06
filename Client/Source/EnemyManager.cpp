@@ -189,7 +189,6 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 
 
 	Enemy::Desc Enemy_desc(_status, _gun, _missile);
-	/*desc ?�팅*/
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
@@ -222,9 +221,6 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
 	m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
 	m_pStateControl->AddState<Exit_Evasion>(L"Exit");
-	//m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
-	//m_pStateControl->AddState<Enemy_Falling>(L"Falling");
-	//m_pStateControl->AddState<Enemy_Death>(L"Death");
 
 	switch (_initState)
 	{
@@ -482,7 +478,7 @@ void EnemyManager::Spawn_S1P1_Huge()
 
 	Vector3 vPos = Pos_ScreenToWorld(WINCX / 2.f, WINCY / 2.f, 400.f);
 
-	Enemy_Spawn(vPos, Vector3(0.4f, 0.4f, 0.4f), ENEMY_STATE::IDLE, tStatus, tGun);
+	Enemy_Spawn(vPos, Vector3(0.7f, 0.7f, 0.7f), ENEMY_STATE::IDLE, tStatus, tGun);
 
 }
 

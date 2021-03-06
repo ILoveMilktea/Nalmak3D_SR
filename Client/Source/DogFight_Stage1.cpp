@@ -48,6 +48,7 @@ void DogFight_Stage1::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
+#pragma region WeaponTest
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile");
 
@@ -57,24 +58,13 @@ void DogFight_Stage1::EnterState()
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
 	
-	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");
+	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");f
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp");
+#pragma endregion
 
-	m_Player = PlayerInfoManager::GetInstance()->Player_Create();
+	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fTutorialTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fTutorialScore);
-
-	//auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
-	//SmoothFollow::Desc smoothFollowDesc;
-	//smoothFollowDesc.toTarget = m_Player;
-	//smoothFollowDesc.minDistance = 5.f;
-	//smoothFollowDesc.maxDistance = 10.f;
-	//smoothFollowDesc.followRotationSpeed = 15.f;
-
-	//smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
-
-	//m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
-
 
 
 	EnemyManager::GetInstance();

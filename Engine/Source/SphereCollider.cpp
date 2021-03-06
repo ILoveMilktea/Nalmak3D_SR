@@ -29,7 +29,7 @@ void SphereCollider::Initialize()
 
 void SphereCollider::Update()
 {
-#ifdef _DEBUG	
+#ifdef _DEBUG
 	m_colliderDebug->SetScale(m_radius * 2, m_radius * 2, m_radius * 2);
 #endif
 }

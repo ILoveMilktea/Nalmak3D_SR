@@ -81,17 +81,22 @@ public:
 			if (component.first == typeid(T).name())
 			{
 				if (component.second->m_dead == false)
-				{	return (T*)component.second;	}
+				{
+					return (T*)component.second;
+				}
 			}
+				
 		}
 		for (auto& component : m_newComponents)
 		{
 			if (component.first == typeid(T).name())
 			{
 				if (component.second->m_dead == false)
-				{	return (T*)component.second;		}
+				{
+					return (T*)component.second;
+				}
 			}
-			
+				
 		}
 
 		return nullptr;

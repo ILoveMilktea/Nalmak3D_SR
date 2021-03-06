@@ -28,7 +28,7 @@ public:
 
 private:
 	GameObject* m_MainCamera = nullptr;
-	GameObject* m_Player = nullptr;
+	GameObject* m_pPlayer = nullptr;
 
 	bool m_bEnter = false;
 

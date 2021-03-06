@@ -12,6 +12,8 @@
 #include "PlayerSkillActor.h"
 #include "..\..\Engine\Include\UIInteractor.h"
 #include "UIWindowFactory.h"
+#include "Player_WindEffect.h"
+#include "Player.h"
 
 PlayerInfoManager*::PlayerInfoManager::m_instance = nullptr;
 
@@ -152,6 +154,7 @@ GameObject * PlayerInfoManager::Player_Create()
 {
 	m_player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
 
+
 	if (m_player == nullptr)
 	{
 #ifdef _DEBUG
@@ -162,6 +165,9 @@ GameObject * PlayerInfoManager::Player_Create()
 
 	m_player->SetScale(0.2f, 0.2f, 0.2f);
 
+	Player::Desc player_desc;
+	m_player->AddComponent<Player>(&player_desc);
+
 #pragma region Player Particle
 	{
 		ParticleRenderer::Desc render;
@@ -169,6 +175,14 @@ GameObject * PlayerInfoManager::Player_Create()
 		m_player->AddComponent<ParticleRenderer>(&render);
 		render.particleDataName = L"player_zet_muzzle_right";
 		m_player->AddComponent<ParticleRenderer>(&render);
+	}
+
+	{
+		Player_WindEffect::Desc wind;
+		wind.leftTrailPos = Vector3(-1.8f, 0.14f, -0.01f);
+		wind.rightTrailPos = Vector3(1.8f, 0.14f, -0.01f);
+		wind.trailThick = 0.2f;
+		m_player->AddComponent<Player_WindEffect>(&wind);
 	}
 #pragma endregion
 
@@ -179,13 +193,15 @@ GameObject * PlayerInfoManager::Player_Create()
 		lightDesc.diffuseIntensity = 5.f;
 		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0, 0, -1.5f);
 		light->SetParents(m_player);
-
 	}
+
 	m_player->AddComponent<StateControl>();
 	m_player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
 	m_player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
 	m_player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
+
 	m_player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
+
 	m_player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
 	//status is related to skill.
 	m_player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
@@ -210,6 +226,10 @@ GameObject * PlayerInfoManager::Player_Create()
 	return m_player;
 }
 
+void PlayerInfoManager::Player_Release()
+{
+	m_player = nullptr;
+}
 
 const int & PlayerInfoManager::GetHp() const
 {

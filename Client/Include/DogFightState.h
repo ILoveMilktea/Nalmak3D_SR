@@ -26,8 +26,8 @@ public:
 	void Accelerate();
 
 private:
-	GameObject* m_Player = nullptr;
-	GameObject* m_MainCamera = nullptr;
+	GameObject* m_pPlayer = nullptr;
+	Camera* m_pMainCamera = nullptr;
 
 
 	Vector3 vPlayerOrigin;

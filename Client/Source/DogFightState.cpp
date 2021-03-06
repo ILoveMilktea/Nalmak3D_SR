@@ -52,127 +52,27 @@ void DogFightState::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
+#pragma region WeaponTest
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
-	//PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"AimMissile");
+	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile");
 
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Player_Weapon_Homing");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
-	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
+	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
+	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
 
-	m_Player->SetScale(0.2f, 0.2f, 0.2f);
-#pragma region Player Particle
-
-	{
-		ParticleRenderer::Desc render;
-		render.particleDataName = L"player_zet_muzzle_left";
-		m_Player->AddComponent<ParticleRenderer>(&render);
-		render.particleDataName = L"player_zet_muzzle_right";
-		m_Player->AddComponent<ParticleRenderer>(&render);
-	}
+	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");
+	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp");
 #pragma endregion
 
-	{
-		PointLight::Desc lightDesc;
-		lightDesc.color = Vector3(1, 0.3f, 0);
-		lightDesc.radius = 2.f;
-		lightDesc.diffuseIntensity = 5.f;
-		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0, 0, -1.5f);
-		light->SetParents(m_Player);
-
-	}
-	Player_WindEffect::Desc wind;
-	wind.leftTrailPos = Vector3(-1.8f, 0.14f, -0.01f);
-	wind.rightTrailPos = Vector3(1.8f, 0.14f, -0.01f);
-	wind.trailThick = 0.2f;
-	m_Player->AddComponent<Player_WindEffect>(&wind);
-
-	m_Player->AddComponent<StateControl>();
-	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
-	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
-	m_Player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
-	m_Player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
-	m_Player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
-
-	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
-
-	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
-
-	MeshRenderer::Desc render;
-	render.mtrlName = L"f15";
-	render.meshName = L"f15";
-	m_Player->AddComponent<MeshRenderer>(&render);
-	m_Player->AddComponent<PlayerShooter>();
-	m_Player->AddComponent<PlayerSkillActor>();
-	SphereCollider::Desc player_col;
-	player_col.radius = 1.f;
-	//m_Player->AddComponent<SphereCollider>();
-
-	//ParticleRenderer::Desc particle;
-	//particle.particleDataName = L"20mmCannon";
-	//m_Player->AddComponent<ParticleRenderer>(&particle);
-
-	//m_Player->AddComponent<PlayerToTopView>();
-
-	/*SceneChanger::Desc SceneChangerDescInfo;
-	SceneChangerDescInfo.keyState = KEY_STATE_ENTER;
-	SceneChangerDescInfo.sceneName = L"garage";
-	auto SceneSelect = INSTANTIATE()->AddComponent<SceneChanger>(&SceneChangerDescInfo);
-	*/
+	m_pMainCamera = Core::GetInstance()->GetMainCamera();
 
 	auto infoManager = PlayerInfoManager::GetInstance();
-	infoManager->SetTimeLimit(2000.f);
-	infoManager->SetScore(123456.f);
-	infoManager->SetPlayer(m_Player);
+	m_pPlayer = infoManager->GetPlayer();
+	infoManager->SetTimeLimit(m_fDogFightTime);
+	infoManager->SetScore(m_fDogFightScore);
 
-
-	// ì¹´ë©”???ï¿½í…Œ?ï¿½íŠ¸?ï¿½ì„œ ê´€ë¦¬í•´ï¿½?
-	/*auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
-	SmoothFollow::Desc smoothFollowDesc;
-	smoothFollowDesc.toTarget = m_Player;
-	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);*/
-
-
-	{
-		m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
-		if (m_MainCamera)
-		{
-			SmoothFollow::Desc followInfo;
-			followInfo.minDistance = 5.f;
-			followInfo.maxDistance = 10.f;
-			followInfo.followRotationSpeed = 15.f;
-			followInfo.toTarget = m_Player;
-
-			//auto cameraStateControl = INSTANTIATE(OBJECT_TAG_CAMERA)
-			m_MainCamera->AddComponent<FieldCameraInfo>();
-			m_MainCamera->AddComponent<SmoothFollow>(&followInfo);
-			m_MainCamera->AddComponent<StateControl>();
-			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraSmoothFollowState>(L"CameraFollow");
-			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");
-			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraNearEnemyState>(L"CameraNearEnemy");
-			m_MainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
-		}
-	}
-	//smoothFollowDesc.minDistance = 5.f;
-	//smoothFollowDesc.maxDistance = 10.f;
-	//smoothFollowDesc.followRotationSpeed = 15.f;
-
-	//smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
-
-	{
-		m_Player->AddComponent<UIInteractor>();
-		UIWindowFactory::StageWindow(m_Player);
-	}
-
-
-
-	//ENEMY_STATUS tStatus(10, 20, 1);
-	//BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
-	//BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
-
-	//EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, 0.f, 100.f), Vector3(0.1f, 0.1f, 0.1f), ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
-
-	//EnemyManager::GetInstance()->Player_FovSpawnTest(true, 100.f);
 	EnemyManager::GetInstance()->Spawn_S1P1_Normal();
 	m_bPattern1[0] = true;
 }
@@ -217,20 +117,43 @@ void DogFightState::UpdateState()
 
 
 
-
-
 		if (m_bProduce)
 		{
+			m_pMainCamera->GetComponent<SmoothFollow>()->SetActive(false);
+
 			Accelerate();
 			Player_Faraway();
-
-			Vector3 Dir = m_Player->GetTransform()->position - vPlayerOrigin;
+			//ÇÃ·¹ÀÌ¾î farAway iState·Î »©ÁÖ°í, °Å¸® °è¼Ó ¹ÝÈ¯ ¹Þ¾Æ¼­ ¿ø·¡ °Å¸®º¸´Ù ¾ó¸¶ ÀÌ»ó °¡¸é
+			//TopViewCamera·Î MainCamera state ¹Ù²ãÁÖ°í
+			//¾À ³Ñ±â±â
+			//¾À ³Ñ±â°í ³ª¼­ ÇÃ·¹ÀÌ¾î µé¾î¿À´Â°É·Î State¹Ù²ãÁÖ°í
+			//ÀÏÁ¤ °Å¸®¿¡ µµ´ÞÇÏ¸é ¸ó½ºÅÍ »ý¼ºÇÏ°í ½ºÅ×ÀÌÁö ½ÃÀÛ.
+			//ÀÏÁ¤ ½Ã°£ ¹öÆ¼°í³ª¸é º¸½º¸÷ »ý¼ºÇÏ°í
+			//Ä«¸Þ¶ó ½¦ÀÌÅ· ³ÖÀ¸¸é¼­
+			//º¸½º¸÷ ´Ù°¡¿À´Â state·Î ¹Ù²ãÁØ´ÙÀ½¿¡ ÀÏÁ¤°Å¸® ÀÌ»ó µé¾î¿À¸é
+			//º¸½ºÇÊµå Àü¿ë Ä«¸Þ¶ó·Î ¿¬Ãâ ÇØÁØ µÚ ½ÃÀÛ.
+			
+			Vector3 Dir = m_pPlayer->GetTransform()->position - vPlayerOrigin;
 
 			if (D3DXVec3Length(&Dir) >= 1100.f)
 			{
 				StageManager::GetInstance()->ToScene(L"Evasion");
 			}
 		}
+
+
+		//if (m_bProduce)
+		//{
+		//	Accelerate();
+		//	Player_Faraway();
+
+		//	
+
+		//	if (D3DXVec3Length(&Dir) >= 1100.f)
+		//	{
+		//		StageManager::GetInstance()->ToScene(L"Evasion");
+		//	}
+		//}
 
 		m_fDogFightTime += dTime;
 	}
@@ -272,7 +195,7 @@ void DogFightState::SceneToEvasion()
 {
 	if (!m_bProduce)
 	{
-		m_Player->GetComponent<StateControl>()->SetState(L"playerNone");
+		m_pPlayer->GetComponent<StateControl>()->SetState(L"playerNone");
 
 
 		if (Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"))
@@ -282,12 +205,12 @@ void DogFightState::SceneToEvasion()
 
 			DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
 
-			m_MainCamera->GetTransform()->position = PosTemp;
-			m_MainCamera->GetTransform()->rotation = RotTemp;
+			m_pMainCamera->GetTransform()->position = PosTemp;
+			m_pMainCamera->GetTransform()->rotation = RotTemp;
 		}
 
 
-		vPlayerOrigin = m_Player->GetTransform()->position;
+		vPlayerOrigin = m_pPlayer->GetTransform()->position;
 
 		m_bProduce = true;
 	}
@@ -295,9 +218,9 @@ void DogFightState::SceneToEvasion()
 
 void DogFightState::Player_Faraway()
 {
-	Vector3 forward = m_Player->GetTransform()->GetForward();
+	Vector3 forward = m_pPlayer->GetTransform()->GetForward();
 
-	m_Player->GetTransform()->position += forward * m_fSpd;
+	m_pPlayer->GetTransform()->position += forward * m_fSpd;
 }
 
 void DogFightState::Accelerate()

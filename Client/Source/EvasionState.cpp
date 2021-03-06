@@ -21,25 +21,29 @@ void EvasionState::Initialize()
 
 void EvasionState::EnterState()
 {
-	m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
+	//m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 
-	if (m_MainCamera == nullptr)
-	{
-		assert(L"아 ㅋㅋ 메인 카메라 못찾겠다고 ㅋㅋ" && 0);
-	}
+	//if (m_MainCamera == nullptr)
+	//{
+	//	assert(L"아 ㅋㅋ 메인 카메라 못찾겠다고 ㅋㅋ" && 0);
+	//}
+
+	//m_MainCamera->SetPosition(0.f, 100.f, 0.f);
+	//m_MainCamera->SetRotation(0.f, 0.f, 0.f);
+	//m_MainCamera->GetTransform()->RotateX(90.f);
+	////컴포넌트 넣어서 
 	
-	m_MainCamera->SetPosition(0.f, 100.f, 0.f);
-	m_MainCamera->SetRotation(0.f, 0.f, 0.f);
-	m_MainCamera->GetTransform()->RotateX(90.f);
-	//컴포넌트 넣어서 
-	
-	m_Player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
-	if (m_Player == nullptr)
-	{
-		assert(L"플레이어 못받은거 같은데여 ㅋㅋ;;" && 0);
-	}
-	m_Player->GetTransform()->position = Vector3(0, 0, -50);
-	m_Player->GetTransform()->SetRotation(0, 0, 0);
+	//m_Player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+	//if (m_Player == nullptr)
+	//{
+	//	assert(L"플레이어 못받은거 같은데여 ㅋㅋ;;" && 0);
+	//}
+	//m_Player->GetTransform()->position = Vector3(0, 0, -50);
+	//m_Player->GetTransform()->SetRotation(0, 0, 0);
+
+	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
+	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fEvasionTime);
+	PlayerInfoManager::GetInstance()->SetScore(m_fEvasiontScore);
 
 	ENEMY_STATUS tStatus(10, 20, 1);
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
@@ -123,7 +127,7 @@ void EvasionState::UpdateState()
 
 void EvasionState::ExitState()
 {
-	m_Player->GetComponent<StateControl>()->SetState(L"playerNone");
+	m_pPlayer->GetComponent<StateControl>()->SetState(L"playerNone");
 
 	EnemyManager::GetInstance()->Destroy_AllEnemy();
 }
@@ -152,11 +156,11 @@ void EvasionState::EnterProduce()
 {
 	if (m_bEnter)
 	{
-		m_Player->GetTransform()->position.z += dTime * 50.f;
+		m_pPlayer->GetTransform()->position.z += dTime * 50.f;
 
-		if (m_Player->GetTransform()->position.z >= 0.f)
+		if (m_pPlayer->GetTransform()->position.z >= 0.f)
 		{
-			m_Player->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
+			m_pPlayer->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
 			m_bEnter = false;
 		}
 	}

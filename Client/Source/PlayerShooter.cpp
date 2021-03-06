@@ -43,11 +43,11 @@ void PlayerShooter::Update()
 	}
 
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_K))
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_1))
 	{
 		SetEquipment(FIRST_PARTS);
 	}
-	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_L))
+	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_2))
 	{
 		SetEquipment(SECOND_PARTS);
 	}

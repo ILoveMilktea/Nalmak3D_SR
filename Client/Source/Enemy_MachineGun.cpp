@@ -54,6 +54,7 @@ void MachineGun::OnTriggerEnter(Collisions & _collision)
 	{
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_PLAYER)
 		{
+			PlayerInfoManager::GetInstance()->SetDamage(m_iDamage);
 			DESTROY(m_gameObject);
 		}
 	}

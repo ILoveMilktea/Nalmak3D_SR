@@ -69,7 +69,7 @@ public: //using
 	void MinGold(int _value);
 
 	GameObject* Player_Create();
-
+	void		Player_Release();
 
 private:
 	static PlayerInfoManager* m_instance;
@@ -91,11 +91,10 @@ private:
 	float m_score = 0.f;
 	GameObject* m_player = nullptr;
 
-
-
 private: // 이중stl쓰기 
 	// type, vector<itemname>
 	map<wstring, vector<wstring>> m_haveItemList;
+
 private:
 	wstring m_currentlySkill[PARTS_NUM::PARTS_MAX] = {};
 	wstring  m_currentlyWeapon[PARTS_NUM::PARTS_MAX] = {};
