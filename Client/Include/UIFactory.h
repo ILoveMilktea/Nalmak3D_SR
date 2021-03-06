@@ -101,14 +101,21 @@ public:
 		return toggle;
 	}
 
-	static GameObject* CreateToggle(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	static GameObject* CreateToggle(
+		EventHandler _on, EventHandler _off,
+		const wstring& _onImage = L"empty", const wstring& _offImage = L"checkmark",
+		CANVAS_GROUP _group = CANVAS_GROUP_NONE,
+		Button::Desc _desc_button = Button::Desc())
 	{
 		CanvasRenderer::Desc desc_cr;
 		desc_cr.group = _group;
 
 		Toggle::Desc desc;
-		desc.onEventFunc = NULLEVENT;
-		desc.offEventFunc = NULLEVENT;
+		desc.desc_button = &_desc_button;
+		desc.onEventFunc = _on;
+		desc.offEventFunc = _off;
+		desc.onImage = _onImage;
+		desc.offImage = _offImage;
 		auto toggle = INSTANTIATE();
 		toggle->AddComponent<CanvasRenderer>(&desc_cr);
 		toggle->AddComponent<Toggle>(&desc);
@@ -197,8 +204,24 @@ public:
 	}
 	static GameObject* Prefab_MenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
-		// text
+		// button
 		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+		desc_bt.allImage = L"Tip2_White";
+
+		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"MenuButton");
+		menu->AddComponent<CanvasRenderer>(&desc_cr);
+		menu->AddComponent<Button>(&desc_bt);
+
+		menu->GetComponent<Button>()->ChangeNormalColor(0.f, 0.4f, 0.75f, 0.4f);
+		menu->GetComponent<Button>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
+		menu->GetComponent<Button>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
+		menu->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
+
+		// text
 		desc_cr.group = CANVAS_GROUP_MAINWND;
 
 		Text::Desc desc;
@@ -212,30 +235,37 @@ public:
 			->AddComponent<CanvasRenderer>(&desc_cr)
 			->AddComponent<Text>(&desc);
 
-		// button
-		Button::Desc desc_bt;
-		desc_bt.targetText = text;
-		desc_bt.eventFunc = _eventFunc;
-
-		desc_cr.group = _group;
-		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"MenuButton");
-		menu->AddComponent<CanvasRenderer>(&desc_cr);
-		menu->AddComponent<Button>(&desc_bt);
-
-		menu->GetComponent<Button>()->ChangeNormalColor(1.f, 1.f, 1.f, 0.f);
-		menu->GetComponent<Button>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
-		menu->GetComponent<Button>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
-		menu->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
-
-		//text->SetParents(menu);
+		menu->GetComponent<Button>()->SetTextObject(text);
+		text->SetParents(menu);
 		text->SetScale(760.f, 30.f);
+		text->SetPosition(40.f, 0.f);
 		menu->SetScale(760.f, 30.f);
 		return menu;
 	}
 	static GameObject* Prefab_ItemMenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
-		// text
+		// button
 		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+		desc_bt.allImage = L"Tip2_White";
+
+		ItemButton::Desc desc_ib;
+		desc_ib.desc_button = desc_bt;
+
+		desc_cr.group = _group;
+		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"ItemMenuButton");
+		menu->AddComponent<CanvasRenderer>(&desc_cr);
+		menu->AddComponent<ItemButton>(&desc_ib);
+
+		menu->GetComponent<ItemButton>()->ChangeNormalColor(0.f, 0.4f, 0.75f, 0.4f);
+		menu->GetComponent<ItemButton>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
+		menu->GetComponent<ItemButton>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
+		menu->GetComponent<ItemButton>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
+
+		// text
 		desc_cr.group = CANVAS_GROUP_MAINWND;
 
 		Text::Desc desc;
@@ -250,26 +280,10 @@ public:
 			->AddComponent<CanvasRenderer>(&desc_cr)
 			->AddComponent<Text>(&desc);
 
-		// button
-		Button::Desc desc_bt;
-		desc_bt.targetText = text;
-		desc_bt.eventFunc = _eventFunc;
-
-		ItemButton::Desc desc_ib;
-		desc_ib.desc_button = desc_bt;
-
-		desc_cr.group = _group;
-		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"ItemMenuButton");
-		menu->AddComponent<CanvasRenderer>(&desc_cr);
-		menu->AddComponent<ItemButton>(&desc_ib);
-
-		menu->GetComponent<ItemButton>()->ChangeNormalColor(1.f, 1.f, 1.f, 0.f);
-		menu->GetComponent<ItemButton>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
-		menu->GetComponent<ItemButton>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
-		menu->GetComponent<ItemButton>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
-
-		//text->SetParents(menu);
+		menu->GetComponent<ItemButton>()->SetTextObject(text);
+		text->SetParents(menu);
 		text->SetScale(760.f, 30.f);
+		text->SetPosition(40.f, 0.f);
 		menu->SetScale(760.f, 30.f);
 		return menu;
 	}
@@ -362,7 +376,7 @@ public:
 	{
 		auto bar = INSTANTIATE();
 
-		auto background = CreateImage(CANVAS_GROUP_MAINWND, L"niniz");
+		auto background = CreateImage(CANVAS_GROUP_MAINWND, L"Popup04_White2");
 		background->SetPosition(0.f, 0.f, 0.f);
 		background->SetScale(160.f, 25.f);
 		auto fill = CreateImage(CANVAS_GROUP_MAINWND, L"UIRed");
@@ -389,6 +403,115 @@ public:
 		return bar;
 	}
 
+	static GameObject* Prefab_ShopMenuToggle(EventHandler _on, EventHandler _off, const wstring _weaponImage, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// Toggle
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Button::Desc desc_bt;
+
+		auto menu = CreateToggle(_on, _off, _weaponImage, _weaponImage, _group);
+
+		/*menu->GetComponent<Toggle>()->ChangeNormalColor(1.f, 1.f, 1.f, 0.f);
+		menu->GetComponent<Toggle>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
+		menu->GetComponent<Toggle>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
+		menu->GetComponent<Toggle>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);*/
+
+		//menu->GetComponent<CanvasRenderer>()->SetActive(false);
+		menu->SetScale(160.f, 60.f);
+		return menu;
+	}
+	
+	static GameObject* Prefab_ItemStat_Text(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Text::Desc desc;
+		desc.width = 10;
+		desc.height = 25;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"ItemStat_Text");
+		text->AddComponent<CanvasRenderer>(&desc_cr);
+		text->AddComponent<Text>(&desc);
+		text->SetScale(120.f, 30.f);
+		return text;
+	}
+	static GameObject* Prefab_ItemStat_Slider(CANVAS_GROUP _group = CANVAS_GROUP_NONE, float _maxValue = 100.f, float _minValue = 0.f)
+	{
+		auto slider = INSTANTIATE(OBJECT_TAG_UI, L"ItemStat_Slider");
+
+		auto background = CreateImage(_group, L"Title02_Panel_White");
+		background->SetPosition(0.f, 0.f, 0.f);
+		background->SetScale(360.f, 25.f);
+		auto fill = CreateImage(_group, L"UIRed");
+		fill->SetPosition(80.f, 5.f, 0.f);
+		fill->SetScale(200.f, 10.f);
+
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Slider::Desc desc;
+		desc.background = background->GetTransform();
+		desc.fill = fill->GetTransform();
+		desc.maxValue = _maxValue;
+		desc.minValue = _minValue;
+
+		slider->AddComponent<CanvasRenderer>(&desc_cr);
+		slider->AddComponent<Slider>(&desc);
+
+		slider->GetComponent<Slider>()->SetCurrentValue(_maxValue);
+
+		background->SetParents(slider);
+		fill->SetParents(slider);
+
+		return slider;
+	}
+	static GameObject* Prefab_ItemBuy_Button(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// button
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = CANVAS_GROUP_MAINWND_SHOP_NOANIM;
+
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+		desc_bt.allImage = L"Btn_LargeButton03Yellow_p";
+		desc_cr.group = _group;
+		auto btn = INSTANTIATE(OBJECT_TAG_UI, L"BuyButton");
+		btn->AddComponent<CanvasRenderer>(&desc_cr);
+		btn->AddComponent<Button>(&desc_bt);
+
+		btn->GetComponent<Button>()->ChangeNormalColor(1.f, 1.f, 1.f, 1.f);
+		btn->GetComponent<Button>()->ChangeHighlightColor(1.f, 1.f, 1.f, 1.f);
+		btn->GetComponent<Button>()->ChangePressedColor(0.6f, 0.6f, 0.6f, 1.f);
+		btn->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 1.f);
+
+		// text
+		desc_cr.group = CANVAS_GROUP_MAINWND_SHOP_NOANIM;
+
+		Text::Desc desc;
+		desc.width = 40;
+		desc.height = 80;
+		desc.text = _text;
+		desc.color = D3DCOLOR_RGBA(50, 50, 150, 255);
+		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")
+			->AddComponent<CanvasRenderer>(&desc_cr)
+			->AddComponent<Text>(&desc);
+
+		btn->GetComponent<Button>()->SetTextObject(text);
+		text->SetParents(btn);
+		text->SetScale(400.f, 200.f);
+		btn->SetScale(400.f, 200.f);
+		btn->SetPosition(1000.f, 800.f);
+		return btn;
+	}
 
 
 #pragma endregion

@@ -29,7 +29,7 @@ void ScaleAnimation::End_Animation()
 {
 	IAnimation::End_Animation();
 
-	m_actor->SetPosition(m_destScale);
+	m_actor->SetScale(m_destScale);
 }
 
 void ScaleAnimation::Play_Lerp()

@@ -4,10 +4,9 @@
 #include "Transform.h"
 
 Toggle::Toggle(Desc * _desc)
-	:Button(&Button::Desc())
+	:Button(_desc->desc_button)
 {
-	if (_desc->desc_button)
-		Button(_desc->desc_button);
+	ChangeAllTexture(_desc->offImage);
 
 	// dont switch two code lines
 	if (_desc->offEventFunc != nullptr)
@@ -17,14 +16,52 @@ Toggle::Toggle(Desc * _desc)
 	// dont switch two code lines
 
 
-	SingleImage::Desc desc_img;
-	desc_img.textureName = _desc->offImage;
-	m_toggleImage =
-		INSTANTIATE()->
-		AddComponent<SingleImage>(&desc_img);
-
 	m_waitSprite = ResourceManager::GetInstance()->
 		GetResource<Texture>(_desc->onImage)->GetTexure(0);
+}
+
+void Toggle::SelectToggle()
+{
+	if (m_isOn)
+		return;
+
+	// 1. value change event
+	m_changeEvent[(int)true];
+
+	// 2. button event
+	m_event.NotifyHandlers();
+
+	m_isOn = true;
+
+	IDirect3DBaseTexture9* swap = m_normalImage;
+	ChangeAllTexture(m_waitSprite);
+	m_waitSprite = swap;
+
+	m_renderer->SetImage(*m_targetImage);
+
+	ChangeState(BUTTON_STATE_PRESSED);
+}
+
+void Toggle::UnselectToggle()
+{
+	if (!m_isOn)
+		return;
+
+	// 1. value change event
+	m_changeEvent[(int)false];
+
+	// 2. button event
+	m_event.NotifyHandlers();
+
+	m_isOn = false;
+
+	IDirect3DBaseTexture9* swap = m_normalImage;
+	ChangeAllTexture(m_waitSprite);
+	m_waitSprite = swap;
+
+	m_renderer->SetImage(*m_targetImage);
+
+	ChangeState(BUTTON_STATE_NORMAL);
 }
 
 void Toggle::Initialize()
@@ -33,9 +70,6 @@ void Toggle::Initialize()
 
 	m_isOn = false;
 
-
-	m_toggleImage->SetParents(m_gameObject);
-	m_toggleImage->SetPosition(0.f, 0.f, 0.f);
 }
 
 void Toggle::Update()
@@ -53,27 +87,32 @@ void Toggle::LateUpdate()
 	{
 		if (m_renderer->IsInteractive())
 		{
-			m_isOn = !m_isOn;
-
-			IDirect3DBaseTexture9* swap = m_toggleImage->GetComponent<SingleImage>()->GetTexture();
-			m_toggleImage->GetComponent<SingleImage>()->SetTexture(m_waitSprite);
-			m_waitSprite = swap;
-
 			// 1. value change event
-			m_changeEvent[(int)m_isOn];
+			m_changeEvent[(int)!m_isOn];
 
 			// 2. button event
 			m_event.NotifyHandlers();
+
+			m_isOn = !m_isOn;
+
+			IDirect3DBaseTexture9* swap = m_normalImage;
+			ChangeAllTexture(m_waitSprite);
+			m_waitSprite = swap;
+
+			m_renderer->SetImage(*m_targetImage);
+
 		}
 
-		ChangeState(BUTTON_STATE_NORMAL);
-
+		if(m_isOn)
+			ChangeState(BUTTON_STATE_PRESSED);
+		else
+			ChangeState(BUTTON_STATE_NORMAL);
 	}
-	else if (m_renderer->MouseClickDown())
+	else if (m_renderer->MouseClickDown() && !m_isOn)
 	{
 		ChangeState(BUTTON_STATE_PRESSED);
 	}
-	else if (m_renderer->MouseClickUp_OutRect())
+	else if (m_renderer->MouseClickUp_OutRect() && !m_isOn)
 	{
 		ChangeState(BUTTON_STATE_NORMAL);
 	}

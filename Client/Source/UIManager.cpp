@@ -121,7 +121,7 @@ bool UIManager::SkillSingleRotate(bool _inverse, int _speed)
 	{
 		m_skillRotatePivot->GetTransform()->SetRotationZ(120.f * (m_nextSkillIndex - m_curSkillIndex));
 
-		int count = m_skillRotatePivot->GetTransform()->GetChildCount();
+		size_t count = m_skillRotatePivot->GetTransform()->GetChildCount();
 		for (int i = 0; i < count; ++i)
 		{
 			Transform* child = m_skillRotatePivot->GetTransform()->GetChild(i);
@@ -133,7 +133,7 @@ bool UIManager::SkillSingleRotate(bool _inverse, int _speed)
 
 	m_skillRotatePivot->GetTransform()->RotateZ(angle * dTime * _speed);
 
-	int count = m_skillRotatePivot->GetTransform()->GetChildCount();
+	size_t count = m_skillRotatePivot->GetTransform()->GetChildCount();
 	for (int i = 0; i < count; ++i)
 	{
 		Transform* child = m_skillRotatePivot->GetTransform()->GetChild(i);

@@ -346,6 +346,13 @@
     <ClInclude Include="..\Include\UIManager.h">
       <Filter>02.Component\00.Manager\UIManager</Filter>
     </ClInclude>
+    <ClInclude Include="UI_ShopMenu_Animator.h">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ShopWnd_Animator.h">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_ShopItemModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -665,6 +672,13 @@
     <ClCompile Include="..\Source\UIManager.cpp">
       <Filter>02.Component\00.Manager\UIManager</Filter>
     </ClCompile>
+    <ClCompile Include="UI_ShopMenu_Animator.cpp">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ShopWnd_Animator.cpp">
+      <Filter>02.Component\05.Animator\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_ShopItemModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -878,6 +892,9 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\UIManager">
       <UniqueIdentifier>{572f57df-b7cb-417c-bb88-babf45c0b953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\05.Animator\Shop">
+      <UniqueIdentifier>{4246a242-eb69-4df9-8974-014e1fe84bfd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

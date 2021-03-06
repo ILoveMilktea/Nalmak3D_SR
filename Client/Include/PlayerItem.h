@@ -11,6 +11,8 @@ public:
 public:
 	const ITEMINFO& GetItmeInfo() { return m_itemInfo; }
 	const bool& GetShotCheck() { return m_shotCheck; }
+	const wstring& GetModelName() { return m_itemInfo.modelName; }
+	
 	//setter
 public:
 	void SetShotCheck(bool _check) { m_shotCheck = _check; }

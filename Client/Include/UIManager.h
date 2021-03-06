@@ -52,5 +52,20 @@ public:
 
 private:
 	static UIManager* m_Instance;
+
+	//===========================
+	// shop 
+
+public:
+	void SetShopItemModel(GameObject* _model) { m_model = _model; }
+	void SetCurrentSelectItem(const wstring& _name) { m_itemName = _name; }
+
+	GameObject* GetShopItemModel() { return m_model; }
+	const wstring&  GetCurrentSelectItem() { return m_itemName; }
+
+private:
+	GameObject* m_model;
+
+	wstring m_itemName;
 };
 
