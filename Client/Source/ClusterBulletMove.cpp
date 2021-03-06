@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "..\Include\ClusterBulletMove.h"
 
+#include "ItemManager.h"
+#include "PlayerItem.h"
+#include "Enemy_Boss.h"
+#include "Enemy.h"
 
 
 
@@ -34,6 +38,30 @@ void ClusterBulletMove::Update()
 	m_transform->position += m_firstDir * dTime * 5;
 
 	DEBUG_LOG(L"Near Enemy ", FindEnemy(OBJECT_TAG_ENEMY , 80));
+}
+
+void ClusterBulletMove::OnTriggerEnter(Collisions & _collision)
+{
+
+	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"ClusterMissile")->GetItmeInfo().weaponAttak;
+
+	for (auto& obj : _collision)
+	{
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
+		{
+			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
+		{
+			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+
+		}
+	}
 }
 
 GameObject* ClusterBulletMove::FindEnemy(OBJECT_TAG _enum, float _mimDis)

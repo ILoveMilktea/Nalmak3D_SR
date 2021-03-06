@@ -74,6 +74,7 @@ void ItemManager::CreateItem()
 	{
 
 		info.itemName = L"AimMissile";
+		info.weaponAttak = 50;
 		info.costGold = 200;
 		info.delay = 2.5f;
 		info.weaponSpeed = 35.f;
@@ -82,6 +83,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"Cannon";
+		info.weaponAttak = 1;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
@@ -91,7 +93,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"Player_Weapon_Homing";
-		info.weaponAttak = 1;
+		info.weaponAttak = 10;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
@@ -109,6 +111,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"ClusterMissile";
+		info.weaponAttak = 10;
 		info.costGold = 50;
 		info.delay = 1.f;
 		info.weaponSpeed = 45.f;
@@ -118,6 +121,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"Emp";
+		info.weaponAttak = 0;
 		info.costGold = 0;
 		info.delay = 1.f;
 		info.weaponSpeed = 100.f;

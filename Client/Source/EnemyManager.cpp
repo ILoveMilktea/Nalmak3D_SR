@@ -66,11 +66,6 @@ void EnemyManager::Initialize()
 void EnemyManager::Update()
 {
 
-	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
-	//{
-	//	Player_FovSpawnTest(true, 100.f);
-	//	//Spawn_S1P1();
-	//}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
 	{
@@ -96,15 +91,13 @@ list<GameObject*> EnemyManager::Get_EnemyList() const
 
 int EnemyManager::Get_BossHp() const
 {
-	return Core::GetInstance()->FindObjectByName(OBJECT_TAG_ENEMY, L"Boss")->GetComponent<Boss>()->Get_CurHp();
+	return Core::GetInstance()->FindObjectByName(OBJECT_TAG_BOSS, L"Boss")->GetComponent<Boss>()->Get_CurHp();
 }
 
 void EnemyManager::Add_EnemyCount(int _count)
 {
 	m_iEnemyCount += _count;
 }
-
-
 
 void EnemyManager::Destroy_AllEnemy()
 {

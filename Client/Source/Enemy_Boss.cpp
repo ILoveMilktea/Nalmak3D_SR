@@ -27,7 +27,9 @@ void Boss::OnTriggerEnter(Collisions & _collision)
 	{
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
 		{
-			m_tBossStatus.m_iCurHp -= 10;
+			//m_tBossStatus.m_iCurHp -= 10;
+
+
 		}
 	}
 }
@@ -48,4 +50,14 @@ int Boss::Get_FullHp() const
 int Boss::Get_CurHp() const
 {
 	return m_tBossStatus.m_iCurHp;
+}
+
+void Boss::Damaged(int _dmg)
+{
+	m_tBossStatus.m_iCurHp -= _dmg;
+
+	if (m_tBossStatus.m_iCurHp < 0)
+	{
+		m_tBossStatus.m_iCurHp = 0;
+	}
 }

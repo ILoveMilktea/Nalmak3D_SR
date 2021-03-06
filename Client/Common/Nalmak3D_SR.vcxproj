@@ -194,6 +194,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\AimMissile.h" />
+    <ClInclude Include="..\Include\DogFight_Stage1.h" />
+    <ClInclude Include="..\Include\EndingScene.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_Boss.h" />
     <ClInclude Include="..\Include\BossStageCamera.h" />
@@ -206,10 +208,12 @@
     <ClInclude Include="..\Include\Enemy_AirFire_TargetPlane.h" />
     <ClInclude Include="..\Include\Enemy_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_Exit_Evasion.h" />
+    <ClInclude Include="..\Include\GameManager.h" />
     <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
+    <ClInclude Include="..\Include\NoneState.h" />
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
     <ClInclude Include="..\Include\Player_Missile.h" />
@@ -275,6 +279,7 @@
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\Enemy_Prymide_Evasion.h" />
     <ClInclude Include="..\Include\Player_WindEffect.h" />
+    <ClInclude Include="..\Include\ResultScene.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\ScaleDampingDeffender.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
@@ -316,6 +321,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\AimMissile.cpp" />
+    <ClCompile Include="..\Source\DogFight_Stage1.cpp" />
+    <ClCompile Include="..\Source\EndingScene.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_Boss.cpp" />
     <ClCompile Include="..\Source\BossStageCamera.cpp" />
@@ -328,10 +335,12 @@
     <ClCompile Include="..\Source\Enemy_AirFire_TargetPlane.cpp" />
     <ClCompile Include="..\Source\Enemy_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_Exit_Evasion.cpp" />
+    <ClCompile Include="..\Source\GameManager.cpp" />
     <ClCompile Include="..\Source\GeunHee_Fps_Shoot.cpp" />
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
+    <ClCompile Include="..\Source\NoneState.cpp" />
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
     <ClCompile Include="..\Source\Player_Missile.cpp" />
@@ -394,6 +403,7 @@
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\Enemy_Prymide_Evasion.cpp" />
     <ClCompile Include="..\Source\Player_WindEffect.cpp" />
+    <ClCompile Include="..\Source\ResultScene.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\ScaleDampingDeffender.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />

@@ -30,8 +30,10 @@ public: /* Get */
 	int		Get_CurHp() const;
 
 public: /* Set */
+	
 
 public: /* Function */
+	void Damaged(int _dmg);
 
 private: 
 	ENEMY_STATUS m_tBossStatus;

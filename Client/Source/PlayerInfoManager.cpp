@@ -3,6 +3,15 @@
 #include "ItemManager.h"
 #include "PlayerShooter.h"
 #include "PlayerItem.h"
+#include "PlayerNone.h"
+#include "PlayerIdle.h"
+#include "PlayerMove.h"
+#include "PlayerTopViewMove.h"
+#include "PlayerBossStageMove.h"
+#include "PlayerEscapeState.h"
+#include "PlayerSkillActor.h"
+#include "..\..\Engine\Include\UIInteractor.h"
+#include "UIWindowFactory.h"
 
 PlayerInfoManager*::PlayerInfoManager::m_instance = nullptr;
 
@@ -135,6 +144,70 @@ void PlayerInfoManager::MinGold(int _value)
 	m_gold -= _value;
 }
 
+GameObject * PlayerInfoManager::Player_Create()
+{
+	m_player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
+
+	if (m_player == nullptr)
+	{
+#ifdef _DEBUG
+		assert(L"아ㅋㅋ; 플레이어 못 만든듯 ㅈㅅ ㅋㅋㅋ;;" && m_player);
+#endif
+		return nullptr;
+	}
+
+	m_player->SetScale(0.2f, 0.2f, 0.2f);
+
+#pragma region Player Particle
+	{
+		ParticleRenderer::Desc render;
+		render.particleDataName = L"player_zet_muzzle_left";
+		m_player->AddComponent<ParticleRenderer>(&render);
+		render.particleDataName = L"player_zet_muzzle_right";
+		m_player->AddComponent<ParticleRenderer>(&render);
+	}
+#pragma endregion
+
+	{
+		PointLight::Desc lightDesc;
+		lightDesc.color = Vector3(1, 0.3f, 0);
+		lightDesc.radius = 2.f;
+		lightDesc.diffuseIntensity = 5.f;
+		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0, 0, -1.5f);
+		light->SetParents(m_player);
+
+	}
+	m_player->AddComponent<StateControl>();
+	m_player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
+	m_player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
+	m_player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
+	m_player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
+	m_player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
+	//status is related to skill.
+	m_player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
+
+	m_player->GetComponent<StateControl>()->InitState(L"playerIdle");
+
+	MeshRenderer::Desc render;
+	render.mtrlName = L"f15_base";
+	render.meshName = L"f15";
+	m_player->AddComponent<MeshRenderer>(&render);
+	m_player->AddComponent<DrawGizmo>();
+	m_player->AddComponent<PlayerShooter>();
+	m_player->AddComponent<PlayerSkillActor>();
+
+	SphereCollider::Desc player_col;
+	player_col.radius = 1.f;
+	m_player->AddComponent<SphereCollider>(&player_col);
+
+	m_player->AddComponent<UIInteractor>();
+	UIWindowFactory::StageWindow(m_player);
+
+
+	return m_player;
+}
+
+
 const int & PlayerInfoManager::GetHp() const
 {
 	return m_hp;
@@ -158,6 +231,17 @@ const float & PlayerInfoManager::GetSpeed() const
 const float & PlayerInfoManager::GetDirSenser() const
 {
 	return m_dirsensor;
+}
+
+GameObject * PlayerInfoManager::GetPlayer()
+{
+	if (m_player == nullptr)
+	{
+		Player_Create();
+		return m_player;
+	}
+
+	return m_player;
 }
 
 bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const wstring & _equipItemName)

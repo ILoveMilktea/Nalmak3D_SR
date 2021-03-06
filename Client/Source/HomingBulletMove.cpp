@@ -6,6 +6,7 @@
 #include "PlayerShooter.h"
 #include "ItemManager.h"
 #include "Enemy.h"
+#include "Enemy_Boss.h"
 
 HomingBulletMove::HomingBulletMove(Desc* _desc)
 {
@@ -56,14 +57,23 @@ void HomingBulletMove::Update()
 
 void HomingBulletMove::OnTriggerEnter(Collisions & _collision)
 {
+	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"Player_Weapon_Homing")->GetItmeInfo().weaponAttak;
+
 	for (auto& obj : _collision)
 	{
+		
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
 		{
-			//PlayerInfoManager::GetInstance()->GetPlayer()->GetComponent<PlayerShooter>()
-			int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"Player_Weapon_Homing")->GetItmeInfo().weaponAttak;
 			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
 				
+			DESTROY(m_gameObject);
+		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
+		{
+			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
 		}
 
 	}

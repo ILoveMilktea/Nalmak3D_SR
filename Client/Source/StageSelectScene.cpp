@@ -30,7 +30,6 @@ void StageSelectScene::Initialize()
 	INSTANTIATE()->AddComponent<DirectionalLight>(&dir)->SetRotation(50, 20, 0);
 
 	{
-		
 		auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<StageSelectCamera>()->AddComponent<StateControl>();
 		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Idle>(L"idle");
 		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Intro>(L"intro");

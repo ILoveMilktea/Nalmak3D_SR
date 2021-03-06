@@ -15,6 +15,12 @@ AimMissile::~AimMissile()
 
 void AimMissile::ItemShot()
 {
+	SphereCollider::Desc missile_col;
+	missile_col.radius = 1.f;
+	missile_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
+	m_bullet[0]->AddComponent<SphereCollider>(&missile_col);
+	m_bullet[1]->AddComponent<SphereCollider>(&missile_col);
+
 	m_bullet[0]->GetTransform()->DeleteParent();
 	m_bullet[1]->GetTransform()->DeleteParent();
 
@@ -23,8 +29,6 @@ void AimMissile::ItemShot()
 	bulletinfo.deadTimer = 5.f;
 	m_bullet[0]->AddComponent<Player_AimMissile>(&bulletinfo);
 	m_bullet[1]->AddComponent<Player_AimMissile>(&bulletinfo);
-
-	
 
 	m_bullet[0] = nullptr;
 	m_bullet[1] = nullptr;

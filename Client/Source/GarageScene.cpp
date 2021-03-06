@@ -17,6 +17,7 @@
 #include "GarageSceneCameraMouseInput.h"
 #include "GarageSceneCameraInfo.h"
 #include "CustomDebuger.h"
+
 GarageScene::GarageScene()
 {
 }

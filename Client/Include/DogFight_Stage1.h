@@ -1,11 +1,13 @@
 #pragma once
 #include "IState.h"
-class DogFightState : public IState
+class DogFight_Stage1 :
+	public IState
 {
 public:
-	DogFightState();
-	~DogFightState();
+	DogFight_Stage1();
+	virtual ~DogFight_Stage1();
 
+	// IState¿ª(∏¶) ≈Î«ÿ ªÛº”µ 
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
@@ -20,27 +22,27 @@ public: /* Set */
 	void Add_Score(float _score);
 
 public:
-	void SceneToEvasion();
 
 	void Player_Faraway();
 	void Accelerate();
 
 private:
 	GameObject* m_Player = nullptr;
-	GameObject* m_MainCamera = nullptr;
+	//GameObject* m_MainCamera = nullptr;
 
 
 	Vector3 vPlayerOrigin;
-	bool	m_bProduce = false;
+	bool	m_bSceneChange = false;
 	float	m_fSpd = 0.f;
-							//ÏÉùÏÑ±	//ÌÅ¥Î¶¨Ïñ¥
+
+							//ª˝º∫	//≈¨∏ÆæÓ
 	bool	m_bPattern1[2] = { false, false };
 	bool	m_bPattern2[2] = { false, false };
 	bool	m_bPattern3[2] = { false, false };
-	
 
-	float	m_fDogFightTime = 0.f;
-	float	m_fDogFightScore = 0.f;
+	float	m_fTutorialTime = 0.f;
+	float	m_fTutorialScore = 0.f;
 
 	int		m_iFrame = 0;
 };
+

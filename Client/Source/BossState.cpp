@@ -34,7 +34,8 @@ void BossState::EnterState()
 	//m_pMainCamera->SetRotation(0.f, 0.f, 0.f);
 	//m_pMainCamera->GetTransform()->RotateX(90.f);
 
-	m_pPlayer = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
+
 	if (m_pPlayer == nullptr)
 	{
 		assert(L"dk zz vmffpdldj aht qkedkTEkrh zz " && 0);
@@ -52,6 +53,8 @@ void BossState::EnterState()
 
 void BossState::UpdateState()
 {
+	m_fBossTime += dTime;
+
 	if (m_bEnter)
 	{
 		if (EnterProduce())
@@ -60,14 +63,21 @@ void BossState::UpdateState()
 			m_bEnter = false;
 		}
 	}
+	if (m_bEnter == false)
+	{
+		if (/*EnemyManager::GetInstance()->Get_BossHp() <= 0*/ 
+			EnemyManager::GetInstance()->Get_EnemyCount()<=0&& GameManager::GetInstance()->Get_StageClear(2) == false)
+		{
+			GameManager::GetInstance()->Set_StageClear(2);
+			Core::GetInstance()->LoadScene(L"result");
 
-
-
-	DEBUG_LOG(L"Player Pos", m_pPlayer->GetTransform()->position);
-	DEBUG_LOG(L"Camera Pos", m_pMainCamera->GetTransform()->position);
+			return;
+		}
+	}
+	
+	//DEBUG_LOG(L"Player Pos", m_pPlayer->GetTransform()->position);
+	//DEBUG_LOG(L"Camera Pos", m_pMainCamera->GetTransform()->position);
 	DEBUG_LOG(L"Current Combat State : ", L"Boss State");
-
-	m_fBossTime += dTime;
 }
 
 void BossState::ExitState()
