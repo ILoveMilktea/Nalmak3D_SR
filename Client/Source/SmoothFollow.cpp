@@ -58,7 +58,7 @@ void SmoothFollow::Initialize()
 void SmoothFollow::Update()
 {
 	
-	DEBUG_LOG(L"��󰡱�", L"dd");
+	DEBUG_LOG(L"NOOOOOO", L"dd");
 }
 
 void SmoothFollow::LateUpdate()

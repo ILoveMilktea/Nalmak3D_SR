@@ -48,7 +48,7 @@ void ClusterBulletMove::Update()
 
 	float ratioValue = fromEnemyLenght / EnemyPlayerLenght;
 
-	DEBUG_LOG(L"���", ratioValue);
+	DEBUG_LOG(L"NOOOOO", ratioValue);
 	if (ratioValue <= 0.5f)
 	{
 		DESTROY(m_gameObject);

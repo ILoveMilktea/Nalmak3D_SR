@@ -61,7 +61,7 @@ void DogFightState::EnterState()
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
 	m_Player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
-  
+
 	m_Player->SetScale(0.2f, 0.2f, 0.2f);
 #pragma region Player Particle
 
@@ -79,7 +79,7 @@ void DogFightState::EnterState()
 		lightDesc.color = Vector3(1, 0.3f, 0);
 		lightDesc.radius = 2.f;
 		lightDesc.diffuseIntensity = 5.f;
-		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0,0,-1.5f);
+		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0, 0, -1.5f);
 		light->SetParents(m_Player);
 
 	}
@@ -101,7 +101,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
-	render.mtrlName = L"f15"; 
+	render.mtrlName = L"f15";
 	render.meshName = L"f15";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<PlayerShooter>();
@@ -134,15 +134,15 @@ void DogFightState::EnterState()
 	smoothFollowDesc.toTarget = m_Player;
 	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);*/
 
-	
+
 	{
 		m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 		if (m_MainCamera)
 		{
 			SmoothFollow::Desc followInfo;
-	    followInfo.minDistance = 5.f;
-  	  followInfo.maxDistance = 10.f;
-	    followInfo.followRotationSpeed = 15.f;
+			followInfo.minDistance = 5.f;
+			followInfo.maxDistance = 10.f;
+			followInfo.followRotationSpeed = 15.f;
 			followInfo.toTarget = m_Player;
 
 			//auto cameraStateControl = INSTANTIATE(OBJECT_TAG_CAMERA)
@@ -155,12 +155,12 @@ void DogFightState::EnterState()
 			m_MainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
 		}
 	}
-  
+
 	{
 		m_Player->AddComponent<UIInteractor>();
 		UIWindowFactory::StageWindow(m_Player);
 	}
-	
+
 
 
 	{
@@ -171,9 +171,10 @@ void DogFightState::EnterState()
 		BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 
 
-	//EnemyManager::GetInstance()->Player_FovSpawnTest(true, 100.f);
-	EnemyManager::GetInstance()->Spawn_S1P1_Normal();
-	m_bPattern1[0] = true;
+		//EnemyManager::GetInstance()->Player_FovSpawnTest(true, 100.f);
+		EnemyManager::GetInstance()->Spawn_S1P1_Normal();
+		m_bPattern1[0] = true;
+	}
 }
 
 

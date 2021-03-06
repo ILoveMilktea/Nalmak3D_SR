@@ -276,6 +276,7 @@
     </ClInclude>
     <ClInclude Include="..\Include\FieldCameraNearEnemyState.h">
       <Filter>05. FieldCameraState</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\StageSelectCamera.h">
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClInclude>
