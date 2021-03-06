@@ -23,7 +23,7 @@ private:
 	virtual void PreRender() override;
 	virtual void Release() override = 0;
 public:
-	virtual void Render(Shader* _shader,int _index) = 0;
+	virtual void Render(Shader* _shader) = 0;
 	virtual void BindingStreamSource() = 0;
 public:
 	void RenderRequest();

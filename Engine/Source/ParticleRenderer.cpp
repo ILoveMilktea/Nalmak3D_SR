@@ -141,7 +141,7 @@ void ParticleRenderer::Release()
 	SAFE_DELETE(m_instanceBuffer);
 }
 
-void ParticleRenderer::Render(Shader * _shader, int _index)
+void ParticleRenderer::Render(Shader * _shader)
 {
 	if (m_currentCount == 0)
 		return;

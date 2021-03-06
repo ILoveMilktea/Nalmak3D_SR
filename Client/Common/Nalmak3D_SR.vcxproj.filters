@@ -351,7 +351,7 @@
     </ClInclude>
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
-    <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
+    <ClInclude Include="..\Include\Player_WindEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -674,9 +674,9 @@
     <ClCompile Include="..\Source\Enemy_Evasion.cpp">
       <Filter>02.Component\00.Manager\Enemy\03%29Enemy_Evasion</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Player_AirTrailEffect.cpp" />
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\GeunHee_Fps_Shoot.cpp" />
+    <ClCompile Include="..\Source\Player_WindEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

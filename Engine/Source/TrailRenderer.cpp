@@ -10,10 +10,7 @@ TrailRenderer::TrailRenderer(Desc * _desc)
 	else
 	{
 		m_material = _desc->mtrl;
-
 	}
-
-
 	m_layer = _desc->layer;
 
 	m_maxTrailCount = _desc->maxTrailCount;
@@ -28,20 +25,89 @@ TrailRenderer::TrailRenderer(Desc * _desc)
 	m_timer = 0;
 
 	m_type = RENDERER_TYPE_MESH;
+
+	CreateDynamicBuffer();
 }
+
+void TrailRenderer::CreateDynamicBuffer()
+{
+	m_instanceBuffer = new DynamicInstanceBuffer<INPUT_LAYOUT_POSITION_UV>(m_maxCatmullrom_TrailCount * 4);
+	m_instanceBuffer->CreateIndexBufferUsedByTrail(m_maxCatmullrom_TrailCount * 2);
+
+	m_trailVertexData = new INPUT_LAYOUT_POSITION_UV[m_maxTrailCount * 4];
+	m_trailCatmullromVertexData = new INPUT_LAYOUT_POSITION_UV[m_maxCatmullrom_TrailCount * 4];
+
+	for (int i = 0; i < m_maxTrailCount * 4; ++i)
+	{
+		m_trailVertexData[i].position = { 0,0,0 };
+	}
+	for (int i = 0; i < m_maxCatmullrom_TrailCount * 4; ++i)
+	{
+		m_trailCatmullromVertexData[i].position = { 0,0,0 };
+	}
+	for (int i = 0; i < m_maxCatmullrom_TrailCount; i += 4)
+	{
+		m_trailCatmullromVertexData[i].uv = {i / (float)m_maxCatmullrom_TrailCount, 1 };
+		m_trailCatmullromVertexData[i + 1].uv = { (i + 1) / (float)m_maxCatmullrom_TrailCount, 1 };
+		m_trailCatmullromVertexData[i + 2].uv = { (i + 1) / (float)m_maxCatmullrom_TrailCount, 0 };
+		m_trailCatmullromVertexData[i + 3].uv = { i / (float)m_maxCatmullrom_TrailCount, 0 };
+
+	}
+}
+
+
 
 TrailRenderer::~TrailRenderer()
 {
+
 }
 
 void TrailRenderer::Initialize()
 {
-	CreateDynamicBuffer();
+	//Vector3 worldPos = m_transform->GetWorldPosition();
+	//for (int i = 0; i < m_maxTrailCount * 4; ++i)
+	//{
+	//	m_trailVertexData[i].position = worldPos;
+	//}
+	//for (int i = 0; i < m_maxCatmullrom_TrailCount * 4; ++i)
+	//{
+	//	m_trailCatmullromVertexData[i].position = worldPos;
+	//}
 }
 
 void TrailRenderer::Update()
 {
 	
+}
+
+void TrailRenderer::LateUpdate()
+{
+	if (m_currentTrailCount < 3)
+		return;
+	DEBUG_LOG(L"trailCount ", m_currentTrailCount);
+
+	m_instanceBuffer->UpdateInstanceBuffer(m_trailCatmullromVertexData, m_currentTrailCount * m_catmullrom_divideCount);
+}
+
+void TrailRenderer::Release()
+{
+	SAFE_DELETE_ARR(m_trailVertexData);
+	SAFE_DELETE_ARR(m_trailCatmullromVertexData);
+	SAFE_DELETE(m_instanceBuffer);
+}
+
+void TrailRenderer::Render(Shader * _shader)
+{
+	if (m_currentTrailCount < 3)
+		return;
+	assert("Current Shader is nullptr! " && _shader);
+
+	_shader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(_shader->GetPrimitiveType(), 0, 0, 4 * m_currentTrailCount * m_catmullrom_divideCount, 0, m_currentTrailCount * m_catmullrom_divideCount * 2));
+}
+
+void TrailRenderer::RecordTrail(const Vector3 & _startPos, const Vector3 & _endPos)
+{
 	m_timer += dTime;
 
 	if (m_timer < m_secPerTrail) // 업데이트 주기 확인
@@ -51,9 +117,8 @@ void TrailRenderer::Update()
 
 	m_timer -= m_secPerTrail;
 
-	if(m_currentTrailCount <= m_maxTrailCount)
+	if (m_currentTrailCount < m_maxTrailCount)
 		++m_currentTrailCount;
-
 
 	Vector3 currentRect[4];
 	Vector3 nextRect[4];
@@ -62,96 +127,78 @@ void TrailRenderer::Update()
 	{
 		int index = i * 4;
 
-		// 첫번째 사각형
+		// 첫번째 사각형w
 		if (i == 0)
 		{
 			for (int j = 0; j < 4; ++j)
 			{
-				nextRect[j] = m_trailData[index + j].position;
-				m_trailData[index + j].position = worldPos;
+				nextRect[j] = m_trailVertexData[index + j].position;
 			}
+			m_trailVertexData[index + 1].position = m_trailVertexData[index + 0].position;
+			m_trailVertexData[index + 2].position = m_trailVertexData[index + 3].position;
+			m_trailVertexData[index + 0].position = _startPos;
+			m_trailVertexData[index + 3].position = _endPos;
+
 		}
 		else
 		{
 			for (int j = 0; j < 4; ++j)
 			{
-
 				currentRect[j] = nextRect[j];
-
-				nextRect[j] = m_trailData[index + j].position;
-
-				m_trailData[index + j].position = currentRect[j];
+			}
+			for (int j = 0; j < 4; ++j)
+			{
+				nextRect[j] = m_trailVertexData[index + j].position;
+			}
+			for (int j = 0; j < 4; ++j)
+			{
+				m_trailVertexData[index + j].position = currentRect[j];
 			}
 		}
 	}
 
-	for (int i = 0; i < m_currentCatmullrom_TrailCount; ++i)
+
+
+	for (int i = 0; i < m_currentTrailCount * m_catmullrom_divideCount; ++i)
 	{
 		int index = i * 4;
 
-		if( i / (float)m_catmullrom_divideCount < 1)
+		if (i / (float)m_catmullrom_divideCount < 1)
 			continue;
 
-		if(i / (float)m_catmullrom_divideCount >= m_currentTrailCount - 2)
+		if (i / (float)m_catmullrom_divideCount >= m_currentTrailCount - 2)
 			continue;
 
-		D3DXVec3CatmullRom(&m_trailCatmullromData[index + 0].position,
-			&m_trailData[(i / m_maxTrailCount - 1) * 4 + 0].position,
-			&m_trailData[(i / m_maxTrailCount + 0) * 4 + 0].position,
-			&m_trailData[(i / m_maxTrailCount + 1) * 4 + 0].position,
-			&m_trailData[(i / m_maxTrailCount + 2) * 4 + 0].position,
-			float(i % m_maxTrailCount) / float(m_maxTrailCount));
-		
+		D3DXVec3CatmullRom(&m_trailCatmullromVertexData[index + 0].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount - 1) * 4 + 0].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 0) * 4 + 0].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 1) * 4 + 0].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 2) * 4 + 0].position,
+			float(i % m_catmullrom_divideCount) / float(m_catmullrom_divideCount));
 
-		D3DXVec3CatmullRom(&m_trailCatmullromData[index + 1].position,
-			&m_trailData[(i / m_maxTrailCount - 1) * 4 + 0].position,
-			&m_trailData[(i / m_maxTrailCount + 0) * 4 + 0].position,
-			&m_trailData[(i / m_maxTrailCount + 1) * 4 + 0].position,
-			&m_trailData[(i / m_maxTrailCount + 2) * 4 + 0].position,
-			float(i % m_maxTrailCount + 1) / float(m_maxTrailCount));
+		D3DXVec3CatmullRom(&m_trailCatmullromVertexData[index + 1].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount - 1) * 4 + 0].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 0) * 4 + 0].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 1) * 4 + 0].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 2) * 4 + 0].position,
+			float(i % m_catmullrom_divideCount + 1) / float(m_catmullrom_divideCount));
 
-		D3DXVec3CatmullRom(&m_trailCatmullromData[index + 2].position,
-			&m_trailData[(i / m_maxTrailCount - 1) * 4 + 3].position,
-			&m_trailData[(i / m_maxTrailCount + 0) * 4 + 3].position,
-			&m_trailData[(i / m_maxTrailCount + 1) * 4 + 3].position,
-			&m_trailData[(i / m_maxTrailCount + 2) * 4 + 3].position,
-			float(i % m_maxTrailCount + 1) / float(m_maxTrailCount));
+		D3DXVec3CatmullRom(&m_trailCatmullromVertexData[index + 2].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount - 1) * 4 + 3].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 0) * 4 + 3].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 1) * 4 + 3].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 2) * 4 + 3].position,
+			float(i % m_catmullrom_divideCount + 1) / float(m_catmullrom_divideCount));
 
-		D3DXVec3CatmullRom(&m_trailCatmullromData[index + 3].position,
-			&m_trailData[(i / m_maxTrailCount - 1) * 4 + 3].position,
-			&m_trailData[(i / m_maxTrailCount + 0) * 4 + 3].position,
-			&m_trailData[(i / m_maxTrailCount + 1) * 4 + 3].position,
-			&m_trailData[(i / m_maxTrailCount + 2) * 4 + 3].position,
-			float(i % m_maxTrailCount) / float(m_maxTrailCount));
+		D3DXVec3CatmullRom(&m_trailCatmullromVertexData[index + 3].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount - 1) * 4 + 3].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 0) * 4 + 3].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 1) * 4 + 3].position,
+			&m_trailVertexData[(i / m_catmullrom_divideCount + 2) * 4 + 3].position,
+			float(i % m_catmullrom_divideCount) / float(m_catmullrom_divideCount));
 	}
 
 
-}
-
-void TrailRenderer::LateUpdate()
-{
-	if (m_currentTrailCount < 3)
-		return;
-
-	m_instanceBuffer->UpdateInstanceBuffer(m_trailData, m_currentTrailCount);
-}
-
-void TrailRenderer::Release()
-{
-	SAFE_DELETE(m_instanceBuffer);
-	SAFE_DELETE_ARR(m_trailData);
-	SAFE_DELETE_ARR(m_trailCatmullromData);
-}
-
-void TrailRenderer::Render(Shader * _shader, int _index)
-{
-	if (m_currentTrailCount < 3)
-		return;
-
-	assert("Current Shader is nullptr! " && _shader);
-
-	_shader->CommitChanges();
-	ThrowIfFailed(m_device->DrawIndexedPrimitive(_shader->GetPrimitiveType(), 0, 0, 4 * m_currentTrailCount, 0, m_instanceBuffer->GetFigureCount()));
 }
 
 void TrailRenderer::BindingStreamSource()
@@ -181,12 +228,3 @@ void TrailRenderer::SetMaterial(const wstring & _mtrlName, int _index)
 
 }
 
-void TrailRenderer::CreateDynamicBuffer()
-{
-	m_instanceBuffer = new DynamicInstanceBuffer<INPUT_LAYOUT_POSITION_UV>(m_maxCatmullrom_TrailCount);
-	m_instanceBuffer->CreateIndexBufferUsedByTrail(m_maxCatmullrom_TrailCount);
-
-	m_trailData = new INPUT_LAYOUT_POSITION_UV[m_maxTrailCount * 4];
-	m_trailCatmullromData = new INPUT_LAYOUT_POSITION_UV[m_maxCatmullrom_TrailCount * 4];
-
-}

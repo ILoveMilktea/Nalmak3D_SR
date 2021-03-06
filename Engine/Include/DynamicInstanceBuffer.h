@@ -55,16 +55,27 @@ inline void DynamicInstanceBuffer<T>::CreateIndexBuffer()
 }
 
 template<typename T>
-inline void DynamicInstanceBuffer<T>::CreateIndexBufferUsedByTrail(int _catmullomMaxCount)
+inline void DynamicInstanceBuffer<T>::CreateIndexBufferUsedByTrail(int _triCount)
 {
+
+	m_figureCount = _triCount;
+
+	ThrowIfFailed(m_device->CreateIndexBuffer(
+		sizeof(INDEX32) * _triCount,
+		0,
+		D3DFMT_INDEX32,
+		D3DPOOL_MANAGED,
+		&m_iBuffer,
+		nullptr));
+
 	INDEX32*		indexBuffer = nullptr;
 
 	m_iBuffer->Lock(0, 0, (void**)&indexBuffer, 0);
 
 	int triCount = 0;
 	int index  = 0;
-
-	for (int i = 0; i < _catmullomMaxCount; ++i)
+	int CatmullromCount = _triCount * 0.5f;
+	for (int i = 0; i < CatmullromCount; ++i)
 	{
 		index = i * 4;
 

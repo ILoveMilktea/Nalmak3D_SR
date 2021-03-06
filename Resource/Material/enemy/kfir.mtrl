@@ -2,16 +2,16 @@
 ##  Material Data Setting
 #########################################################
 
-shader "standard_normal"
+shader "standard"
 
-texture "g_mainTex" "F 15A"
-texture "g_normalTex" "F-15C normal"
+texture "g_mainTex" "kfir"
+//texture "g_normalTex" "F-15C normal"
 
 
 vector4 "g_mainTexColor" "1,1,1,1.f"
-float "g_f0" "0.2f"
-float "g_roughness" "0.05f"
-float "g_normalPower" "1.f"
+float "g_f0" "0.25f"
+float "g_roughness" "0.3f"
+
 
 renderQueue "1000"
 

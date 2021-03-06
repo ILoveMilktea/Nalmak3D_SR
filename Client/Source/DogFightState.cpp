@@ -26,6 +26,8 @@
 //스킬 상태별 상태
 #include "PlayerEscapeState.h"
 
+#include "Player_WindEffect.h"
+
 DogFightState::DogFightState()
 {
 
@@ -76,6 +78,12 @@ void DogFightState::EnterState()
 		light->SetParents(m_Player);
 
 	}
+	Player_WindEffect::Desc wind;
+	wind.leftTrailPos = Vector3(-1.8f, 0.14f, -0.01f);
+	wind.rightTrailPos = Vector3(1.8f, 0.14f, -0.01f);
+	wind.trailThick = 0.2f;
+	m_Player->AddComponent<Player_WindEffect>(&wind);
+
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
@@ -89,13 +97,11 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 	
 	MeshRenderer::Desc render;
-	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
-	render.meshName = L"f15";
+	render.mtrlName = L"su34"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.meshName = L"su34";
 	m_Player->AddComponent<MeshRenderer>(&render);
-	m_Player->AddComponent<DrawGizmo>();
 	m_Player->AddComponent<PlayerShooter>();
 	m_Player->AddComponent<PlayerSkillActor>();
-
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	//m_Player->AddComponent<SphereCollider>();

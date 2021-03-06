@@ -37,7 +37,7 @@ void MeshRenderer::Release()
 {
 }
 
-void MeshRenderer::Render(Shader* _shader, int _index)
+void MeshRenderer::Render(Shader* _shader)
 {
 	assert("Current Shader is nullptr! " && _shader);
 
@@ -48,7 +48,12 @@ void MeshRenderer::Render(Shader* _shader, int _index)
 												   ////////////////////////////////////////////////////////////////////////////////////
 												   // DrawPrimitive (index 사용 x)
 												   // Type, 이번에 이용될 인데스, 최소 참조갯수, 호출될 버텍스 수, 인덱스 버퍼내에서 읽기 시작할 인덱스, 그리는 도형 수
-	m_mesh->Draw(_index);
+	int subCount = m_mesh->GetSubsetCount();
+
+	for (int i = 0; i < subCount; ++i)
+	{
+		m_mesh->Draw(i);
+	}
 }
 
 void MeshRenderer::BindingStreamSource()

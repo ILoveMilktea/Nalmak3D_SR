@@ -381,13 +381,11 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 				if (_cam->IsInFrustumCulling(renderer))
 				{
 					renderer->BindingStreamSource();
-					for (int i = 0; i < renderer->GetMaterialCount(); ++i)
-					{
-						Material* material = renderer->GetMaterial(i);
-						UpdateMaterial(material, _cBuffer);
+				
+					Material* material = renderer->GetMaterial(0);
+					UpdateMaterial(material, _cBuffer);
 
-						renderer->Render(m_currentShader, i);
-					}
+					renderer->Render(m_currentShader);
 				}
 			}
 		}
@@ -425,7 +423,7 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 				Material* material = renderer->GetMaterial();
 				UpdateMaterial(material, _cBuffer);
 
-				renderer->Render(m_currentShader, 0);
+				renderer->Render(m_currentShader);
 			}
 		}
 	}
@@ -454,13 +452,10 @@ void RenderManager::RenderNoneAlpha(Camera * _cam, ConstantBuffer & _cBuffer, RE
 				{
 					renderer->BindingStreamSource();
 
-					for (int i = 0; i < renderer->GetMaterialCount(); ++i)
-					{
-						Material* material = renderer->GetMaterial(i);
-						UpdateMaterial(material, _cBuffer);
-						UpdateRenderTarget();
-						renderer->Render(m_currentShader, i);
-					}
+					Material* material = renderer->GetMaterial(0);
+					UpdateMaterial(material, _cBuffer);
+					UpdateRenderTarget();
+					renderer->Render(m_currentShader);
 				}
 			}
 		}

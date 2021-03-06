@@ -8,12 +8,12 @@ class NALMAK_DLL TrailRenderer :
 public:
 	struct Desc
 	{
-		wstring mtrlName = L"default";
+		wstring mtrlName = L"trail_default";
 		Material* mtrl = nullptr;
 
 		int trailCountPerSec = 60;
-		int maxTrailCount = 60;
-		int detailCount = 3;
+		int maxTrailCount = 300;
+		int detailCount = 1;
 		int layer = 0;
 	};
 public:
@@ -25,10 +25,11 @@ private:
 	virtual void Update() override;
 	virtual void LateUpdate() override;
 	virtual void Release() override;
-	virtual void Render(Shader * _shader, int _index) override;
+	virtual void Render(Shader * _shader) override;
 private:
 	virtual void BindingStreamSource() override;
 public:
+	void RecordTrail(const Vector3& _startPos, const Vector3& _endPos);
 	virtual int GetMaterialCount() override;
 	virtual Material * GetMaterial(int _index = 0) override;
 	virtual void SetMaterial(Material * _material, int _index = 0) override;
@@ -47,9 +48,9 @@ private:
 
 	float m_secPerTrail;
 	float m_timer;
-	class DynamicInstanceBuffer<INPUT_LAYOUT_POSITION_UV>* m_instanceBuffer;
-	INPUT_LAYOUT_POSITION_UV* m_trailData;
-	INPUT_LAYOUT_POSITION_UV* m_trailCatmullromData;
+	class DynamicInstanceBuffer<INPUT_LAYOUT_POSITION_UV>* m_instanceBuffer = nullptr;
+	INPUT_LAYOUT_POSITION_UV* m_trailVertexData = nullptr;
+	INPUT_LAYOUT_POSITION_UV* m_trailCatmullromVertexData = nullptr;
 
 private:
 	void CreateDynamicBuffer();

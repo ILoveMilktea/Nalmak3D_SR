@@ -46,7 +46,7 @@ void PlayerMove::UpdateState()
 	float speed = 0;
 	float xSensitive = 40.f;
 	float ySensitive = 30.f;
-	float zSensitive = 250.f;
+	float zSensitive = 350.f;
 	
 
 	if (m_inputManager->GetKeyPress(KEY_STATE_D))
@@ -73,7 +73,7 @@ void PlayerMove::UpdateState()
 
 	m_rotXAngle += mouseDT.y * ySensitive * dTime;
 	m_rotYAngle += mouseDT.x * xSensitive * dTime;
-	m_rotZAngle -= sin(normMouse.x * PI * 0.5f)  * zSensitive * dTime;
+	m_rotZAngle -= asinf(mouseDT.x) * 2.f / PI * zSensitive * dTime;
 
 	/*m_rotZAngle -= mouseDT.x + zSensitive * dTime;
 	m_rotZAngle = Nalmak_Math::Lerp(m_rotZAngle, 0.f, dTime * 4);*/

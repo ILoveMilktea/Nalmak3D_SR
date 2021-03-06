@@ -212,7 +212,6 @@
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
-    <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_Weapon_Homing.h" />
     <ClInclude Include="..\Include\Player_ClusterMissile.h" />
@@ -275,6 +274,7 @@
     <ClInclude Include="..\Include\PlayerSkillActor.h" />
     <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\Enemy_Prymide_Evasion.h" />
+    <ClInclude Include="..\Include\Player_WindEffect.h" />
     <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\ScaleDampingDeffender.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
@@ -334,7 +334,6 @@
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
-    <ClCompile Include="..\Source\Player_AirTrailEffect.cpp" />
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_Weapon_Homing.cpp" />
     <ClCompile Include="..\Source\Player_ClusterMissile.cpp" />
@@ -394,6 +393,7 @@
     <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
     <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\Enemy_Prymide_Evasion.cpp" />
+    <ClCompile Include="..\Source\Player_WindEffect.cpp" />
     <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\ScaleDampingDeffender.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />

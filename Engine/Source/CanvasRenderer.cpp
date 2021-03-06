@@ -67,7 +67,7 @@ void CanvasRenderer::Release()
 	
 }
 
-void CanvasRenderer::Render(Shader * _shader, int _index)
+void CanvasRenderer::Render(Shader * _shader)
 {
 	
 	Render_Image();
