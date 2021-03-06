@@ -64,14 +64,14 @@ void DogFight_Stage1::EnterState()
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fTutorialTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fTutorialScore);
 
-	auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
-	SmoothFollow::Desc smoothFollowDesc;
-	smoothFollowDesc.toTarget = m_Player;
-	smoothFollowDesc.minDistance = 5.f;
-	smoothFollowDesc.maxDistance = 10.f;
-	smoothFollowDesc.followRotationSpeed = 15.f;
+	//auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
+	//SmoothFollow::Desc smoothFollowDesc;
+	//smoothFollowDesc.toTarget = m_Player;
+	//smoothFollowDesc.minDistance = 5.f;
+	//smoothFollowDesc.maxDistance = 10.f;
+	//smoothFollowDesc.followRotationSpeed = 15.f;
 
-	smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
+	//smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
 
 	//m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
 

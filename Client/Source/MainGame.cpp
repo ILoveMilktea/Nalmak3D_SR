@@ -115,7 +115,7 @@ void MainGame::SystemSetting()
 #pragma endregion
 
 
-	m_engine->SetStartScene(L"garage");
+	m_engine->SetStartScene(L"stageSelect");
 
 }
 

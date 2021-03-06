@@ -53,19 +53,19 @@ void StageManager::Initialize()
 	//m_stateControl->AddState<BossState>(L"Boss");
 	//
 
-<<<<<<< Updated upstream
-	m_gameObject->AddComponent<StateControl>();
-	m_stateControl = GetComponent<StateControl>();
-	m_stateControl->AddState<DogFight_Stage1>(L"Tutorial");
-	m_stateControl->AddState<DogFightState>(L"Dog_Fight");
-	m_stateControl->AddState<EvasionState>(L"Evasion");
-	m_stateControl->AddState<BossState>(L"Boss");
+
+	//m_gameObject->AddComponent<StateControl>();
+	//m_stateControl = GetComponent<StateControl>();
+	//m_stateControl->AddState<DogFight_Stage1>(L"Tutorial");
+	//m_stateControl->AddState<DogFightState>(L"Dog_Fight");
+	//m_stateControl->AddState<EvasionState>(L"Evasion");
+	//m_stateControl->AddState<BossState>(L"Boss");
 
 
-	m_stateControl->InitState(L"Dog_Fight");
-=======
+	//m_stateControl->InitState(L"Dog_Fight");
+
 	//m_stateControl->InitState(L"");
->>>>>>> Stashed changes
+
 }
 
 void StageManager::Update()

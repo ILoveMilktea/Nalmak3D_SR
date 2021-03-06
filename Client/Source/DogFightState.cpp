@@ -219,18 +219,6 @@ void DogFightState::UpdateState()
 
 
 
-
-
-
-		//if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-		//{
-		//	SceneToEvasion();
-		//}
-		//지금 Enter에서 에너미 생성하면 newGameobjectList에 담기니까
-		//gameobjectlist에는 Enemy가 없으니 바로 ScenetoEvasion으로 넘어옴.
-		//그리고 나서 Player도 newGameObjectList에 있으니 못 찾아와서 팅김.
-
-
 		if (m_bProduce)
 		{
 			Accelerate();
