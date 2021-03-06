@@ -25,7 +25,13 @@ private:
 private:
 	float m_culTime;
 	Vector3 m_ShakingPosition;
-	float m_shakingX;
-	float m_shakingY;
+	int		 m_shakingX;
+	int  m_shakingY;
+	int m_shakingZ;
+
+	//bool m_bCheck = 0.f;
+private:
+	float m_minValue;
+	float m_maxValue;
 };
 
