@@ -27,9 +27,6 @@ void PlayerShooter::Initialize()
 
 void PlayerShooter::Update()
 {
-	// 키값받아서 호출
-	
-
 	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
 	{
 		if (m_useEquipment && m_shootTime < 0)
@@ -44,17 +41,6 @@ void PlayerShooter::Update()
 		if (m_shootTime <= 0)
 			m_useEquipment->CreateBullet();
 	}
-	//if (m_useEquipment->GetShotCheck()) // 쐈으면
-	//{
-	//	m_shootTime -= dTime;
-	//	if (m_shootTime <= 0)
-	//	{
-	//		m_shootTime = m_useEquipment->GetItmeInfo().delay;
-	//		
-	//		m_useEquipment->CreateBullet();
-	//		m_useEquipment->SetShotCheck(false);
-	//	}
-	//}
 
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_K))

@@ -21,6 +21,8 @@ public:
 	virtual ~SmoothFollow();
 
 	// Component을(를) 통해 상속됨
+	virtual void OnDisable() override;
+	virtual void OnEnable() override;
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;

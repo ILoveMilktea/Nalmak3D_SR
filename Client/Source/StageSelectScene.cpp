@@ -10,6 +10,10 @@
 #include "ExplosionButton.h"
 #include "verticalBillboard.h"
 #include "MoveStageByMeshPicking.h"
+
+//test
+
+
 StageSelectScene::StageSelectScene()
 {
 }
@@ -21,7 +25,6 @@ StageSelectScene::~StageSelectScene()
 
 void StageSelectScene::Initialize()
 {
-
 	DirectionalLight::Desc dir;
 	dir.diffuseIntensity = 2.f;
 	dir.ambientIntensity = 0.05f;
@@ -31,8 +34,8 @@ void StageSelectScene::Initialize()
 
 	{
 		auto cam = INSTANTIATE()->AddComponent<Camera>()->AddComponent<StageSelectCamera>()->AddComponent<StateControl>();
-		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Idle>(L"idle");
 		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Intro>(L"intro");
+		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Idle>(L"idle");
 		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage1>(L"stage1");
 		cam->GetComponent<StateControl>()->AddState<StageSelectCamera_Stage2>(L"stage2");
 		cam->GetComponent<StateControl>()->InitState(L"intro");

@@ -28,7 +28,6 @@ PhantomScene::~PhantomScene()
 
 void PhantomScene::Initialize()
 {
-	//Core::GetInstance()->SetSkyBox(L"skybox_gradation");
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
 	DirectionalLight::Desc light;
@@ -65,11 +64,6 @@ void PhantomScene::Initialize()
 	//ground.meshName = L"ground";
 	//auto groundObj = INSTANTIATE()->AddComponent<MeshRenderer>(&ground)->SetRotation(90, 0, 0);
 	//groundObj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
-
-
-
-
-
 
 	//GameObject* player;
 

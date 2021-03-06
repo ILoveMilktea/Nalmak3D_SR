@@ -50,7 +50,7 @@ public:
 	void AddDistance(float _distance);
 public:
 	float GetXAxisAngle();
-	float GetYAxisAngle();
+	float GetYAxisAngle(); 
 	float GetXMyAngle();
 	float GetYMyAngle();
 	float GetDistance();

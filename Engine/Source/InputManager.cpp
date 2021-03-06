@@ -174,7 +174,9 @@ void InputManager::ProcessKeyState()
 		case KEY_STATE_3:
 			res[KEY_STATE_3] = GetAsyncKeyState('3');
 			break;
-
+		case KEY_STATE_0:
+			res[KEY_STATE_0] = GetAsyncKeyState('0');
+			break;
 
 		default:
 			break;

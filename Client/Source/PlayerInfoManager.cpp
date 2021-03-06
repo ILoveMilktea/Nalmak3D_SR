@@ -30,6 +30,7 @@ PlayerInfoManager::PlayerInfoManager(Desc * _Desc)
 
 PlayerInfoManager::~PlayerInfoManager()
 {
+	int a = 10;
 }
 
 void PlayerInfoManager::Initialize()
@@ -61,7 +62,10 @@ PlayerInfoManager * PlayerInfoManager::GetInstance()
 void PlayerInfoManager::DeleteInstance()
 {
 	if (m_instance)
+	{
 		DESTROY(m_instance->GetGameObject());
+		m_instance = nullptr;
+	}
 
 }
 

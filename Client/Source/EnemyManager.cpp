@@ -36,13 +36,13 @@ EnemyManager::~EnemyManager()
 EnemyManager * EnemyManager::GetInstance()
 {
 	if (!m_Instance)
-	{//업데이트를 쓰기 위해서 야를 Component를 상속받은 컴포넌트 객체루다가 만듦.
+	{//?�데?�트�??�기 ?�해???��? Component�??�속받�? 컴포?�트 객체루다가 만듦.
 
 		auto Instance = INSTANTIATE();
 		Instance->AddComponent<EnemyManager>();
 		m_Instance = Instance->GetComponent<EnemyManager>();
 
-		Instance->SetDontDestroy(true);//씬 넘어가도 지우지마라 이거야.
+		Instance->SetDontDestroy(true);//???�어가??지?��?마라 ?�거??
 	}
 
 	return m_Instance;
@@ -58,7 +58,7 @@ void EnemyManager::DeleteInstance()
 }
 
 void EnemyManager::Initialize()
-{//유니티의 스따뜨
+{//?�니?�의 ?�따??
 
 
 }
@@ -80,7 +80,7 @@ void EnemyManager::Update()
 int EnemyManager::Get_EnemyCount() const
 {
 	//size_t size = Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY).size();
-	//최적화를 위해서 그냥 멤버 변수루다가 넘기자
+	//최적?��? ?�해??그냥 멤버 변?�루?��? ?�기??
 	return  m_iEnemyCount;
 }
 
@@ -97,6 +97,26 @@ int EnemyManager::Get_BossHp() const
 void EnemyManager::Add_EnemyCount(int _count)
 {
 	m_iEnemyCount += _count;
+}
+
+GameObject * EnemyManager::NearFindEenemy( GameObject * _finderObj, float _minDis)
+{
+	GameObject* target = nullptr;
+	float mindis = _minDis;
+	for (auto& value : Get_EnemyList())
+	{
+		float lenght = Nalmak_Math::Distance(value->GetTransform()->position, _finderObj->GetTransform()->position);
+		//value->
+
+		if (mindis > lenght || !target)
+		{
+			mindis = lenght;
+			target = value;
+			break;
+		}
+	}
+
+	return target;
 }
 
 void EnemyManager::Destroy_AllEnemy()
@@ -125,6 +145,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
 	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
 	m_pStateControl->AddState<Enemy_Death>(L"Death");
+	
 	switch (_initState)
 	{
 	case IDLE:
@@ -168,7 +189,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 
 
 	Enemy::Desc Enemy_desc(_status, _gun, _missile);
-	/*desc 세팅*/
+	/*desc ?�팅*/
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
@@ -236,7 +257,7 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 
 
 	Enemy::Desc Enemy_desc;
-	/*desc 세팅*/
+	/*desc ?�팅*/
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
@@ -263,7 +284,7 @@ void EnemyManager::Boss_Spawn()
 	ENEMY_STATUS Boss_Status(1000, 0, 0);
 
 	Boss::Desc Boss_Desc(Boss_Status);
-	/*desc 세팅*/
+	/*desc ?�팅*/
 	Boss_obj->AddComponent<Boss>(&Boss_Desc);
 
 	VIBufferRenderer::Desc Boss_Mesh;

@@ -7,26 +7,33 @@ public:
 	struct Desc
 	{
 		float speed = 0.f;
+		float accAngle = 10.f;
+		int bulletCount = 10;
+		GameObject* target = nullptr;
+		Vector2 screenPos = {};
 	};
 
 public:
 	ClusterBulletMove(Desc* _desc);
 	virtual ~ClusterBulletMove();
 
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// ComponentÃ€Â»(Â¸Â¦) Ã…Ã«Ã‡Ã˜ Â»Ã³Â¼Ã“ÂµÃŠ
 	virtual void Initialize() override;
 	virtual void Update() override;
-
-	virtual void OnTriggerEnter(Collisions& _collision)override;
-public:
-	GameObject* FindEnemy(OBJECT_TAG _enum , float _mimDis = 0);
+	virtual void Release() override;
+//	GameObject* FindEnemy(OBJECT_TAG _enum , float _mimDis = 0);
 
 private:
 	GameObject* m_player = nullptr;
-	
+	GameObject* m_target = nullptr;
+	Vector2 m_screenPos = {};
 	Vector3 m_firstDir = {};
+private:
+	float m_accAngle;
 	float m_speed;
-	float m_bFirstShot;
+	int m_bulletCount;
 
+private: 
+	bool m_start = false;
 };
 

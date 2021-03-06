@@ -14,7 +14,7 @@
 /* for TopView Moving's lean */
 #define LEFT	1
 #define RIGHT	-1
-
+#define  PI2 360.f
 
 typedef pair<wstring, wstring> Dialogue;
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\SmoothFollow.h"
 #include "PlayerInfoManager.h"
+#include "FieldCameraInfo.h"
 #include "PlayerMove.h"
 
 SmoothFollow::SmoothFollow(Desc * _desc)
@@ -24,14 +25,30 @@ SmoothFollow::~SmoothFollow()
 
 }
 
+void SmoothFollow::OnDisable()
+{
+	m_gameObject->GetComponent<FieldCameraInfo>()->Reset();
+
+}
+
+void SmoothFollow::OnEnable()
+{
+	//m_transform->rotation = { 0,0,0,1 };
+	//m_transform->GetParents()->rotation = { 0,0,0,1 };
+	m_gameObject->GetComponent<FieldCameraInfo>()->Reset();
+}
+
 void SmoothFollow::Initialize()
 {
+	//assert(L"Please Set Target!" && m_toTarget);
+	//m_playerInfo = PlayerInfoManager::GetInstance();
+	//m_fromObject =  Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
+	//m_fromObject->SetParents(m_gameObject);
+	//m_lookDirection = m_toTarget->GetTransform()->rotation;
+
 	assert(L"Please Set Target!" && m_playerMoveInfo);
 	m_fromObject =  Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
 	m_fromObject->SetParents(m_gameObject);
-	//SetParents : �θ� �������ִ°ǵ�
-	//�θ� �����ϸ� �ش� ������Ʈ�� ��ġ, �����̼��� world ������ �ƴ϶� �� �θ��� ��ǥ�� �ٲ�.
-	//�� �ڵ� �ؼ� => SmoothFollow : "im ur father, mainCamera"
 
 	m_playerInfo = PlayerInfoManager::GetInstance();
 
@@ -41,7 +58,7 @@ void SmoothFollow::Initialize()
 void SmoothFollow::Update()
 {
 	
-
+	DEBUG_LOG(L"��󰡱�", L"dd");
 }
 
 void SmoothFollow::LateUpdate()
@@ -63,8 +80,13 @@ void SmoothFollow::LateUpdate()
 	// 플레이어의 현재 속도 비율 0~1
 	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());
 
-	Vector3 targetPos = (m_player->position) + m_followDirection * (Ratio * 2 + 8) + Vector3(0, 1.7f, 0);
+	//float Interval = Nalmak_Math::Lerp(m_playerInfo->GetMinSpeed(), m_playerInfo->GetMaxSpeed(), Ratio);
 
+	//m_followDirection = Nalmak_Math::Normalize(m_followDirection);
+	//Vector3 targetPos = (m_toTarget->GetTransform()->position) + m_followDirection * (Interval + m_culDistance);
+
+
+	Vector3 targetPos = (m_player->position) + m_followDirection * (Ratio * 2 + 8) + Vector3(0, 1.7f, 0);
 	
 	m_transform->position = Nalmak_Math::Lerp(m_transform->position, targetPos, dTime * 4.f);
 	m_transform->SetRotation(m_playerMoveInfo->GetRotXAngle(), m_playerMoveInfo->GetRotYAngle(),0);
