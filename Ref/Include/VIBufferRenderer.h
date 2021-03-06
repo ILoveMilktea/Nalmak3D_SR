@@ -10,10 +10,10 @@ class NALMAK_DLL VIBufferRenderer :
 public:
 	struct Desc
 	{
-		wstring mtrlName = L"defulat";
+		wstring mtrlName = L"default";
 		Material* mtrl = nullptr;
 
-		wstring meshName = L"meshName";
+		wstring meshName = L"box";
 		int layer = 0;
 	};
 public:
@@ -31,6 +31,9 @@ public:
 	virtual Material * GetMaterial(int _index = 0) override;
 	virtual void SetMaterial(Material * _material, int _index = 0) override;
 	virtual void SetMaterial(const wstring & _mtrlName, int _index = 0) override;
+
+	VIBuffer* GetVIBuffer() { return m_viBuffer; }
+	void SetVIBuffer(const wstring& _meshName);
 private:
 	virtual void BindingStreamSource() override;
 private:

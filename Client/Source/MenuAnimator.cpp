@@ -10,7 +10,7 @@ MenuAnimator::MenuAnimator(Desc * _desc)
 void MenuAnimator::Initialize()
 {
 	m_moveAnim.SetActor(m_gameObject);
-	m_moveAnim.SetAnimation(MoveAnimation::LERP);
+	m_moveAnim.SetAnimation(IAnimation::LERP);
 }
 
 void MenuAnimator::Update()
@@ -20,7 +20,9 @@ void MenuAnimator::Update()
 
 void MenuAnimator::InAnim()
 {
-	m_moveAnim.SetDestination(Vector3(m_transform->position.x + m_amount, m_transform->position.y, 0.f));
+	m_moveAnim.SetActor(m_gameObject);
+	m_moveAnim.SetStartPosition();
+	m_moveAnim.SetDestPosition(Vector3(m_transform->position.x + m_amount, m_transform->position.y, 0.f));
 	m_moveAnim.SetPlayDuration(m_duration);
 	m_moveAnim.SetStartDelay(m_delay);
 	m_moveAnim.Start_Animation();
@@ -28,9 +30,18 @@ void MenuAnimator::InAnim()
 
 void MenuAnimator::OutAnim()
 {
-	//m_moveAnim.set
-	m_moveAnim.SetDestination(Vector3(m_transform->position.x - m_amount, m_transform->position.y, 0.f));
+	m_moveAnim.SetActor(m_gameObject);
+	m_moveAnim.SetStartPosition();
+	m_moveAnim.SetDestPosition(Vector3(m_transform->position.x - m_amount, m_transform->position.y, 0.f));
 	m_moveAnim.SetPlayDuration(m_duration);
 	m_moveAnim.SetStartDelay(m_delay);
 	m_moveAnim.Start_Animation();
+}
+
+void MenuAnimator::SetAnimator(float _amount, float _duration, float _delay, Vector3 _pos)
+{
+	SetMoveAmount(_amount);
+	SetMoveDuration(_duration);
+	SetStartDelay(_delay);
+	SetPosition(_pos);
 }

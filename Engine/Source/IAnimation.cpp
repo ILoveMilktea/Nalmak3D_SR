@@ -4,6 +4,12 @@
 IAnimation::IAnimation()
 {
 	m_timeManager = TimeManager::GetInstance();
+
+	m_isPlay = false;
+	m_playTimer = 0.f;
+	m_playDuration = 1.f;
+
+	m_currentAnimation = LERP;
 }
 
 void IAnimation::Start_Animation()
@@ -26,6 +32,16 @@ bool IAnimation::Play_CurrentAnimation()
 	{
 		End_Animation();
 		return false;
+	}
+
+	switch (m_currentAnimation)
+	{
+	case IAnimation::LERP:
+		Play_Lerp();
+		break;
+	case IAnimation::CUSTOM:
+		Play_Custom();
+		break;
 	}
 
 	return true;

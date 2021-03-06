@@ -77,6 +77,7 @@ typedef struct tagItemInfo
 		delay = other.delay;
 		weaponAttak = other.weaponAttak;
 		weaponAmmo = other.weaponAmmo;
+		modelName = other.modelName;
 	};
 
 	tagItemInfo(const wstring& _itemName, float& _weaponSpeed, float& _delay, int& _weaponAttak, int& _weaponAmmo, int& _gold) :
@@ -93,4 +94,5 @@ typedef struct tagItemInfo
 	int  weaponAmmo; //Round
 	int  costGold;
 
+	wstring modelName;
 }ITEMINFO;

@@ -16,10 +16,9 @@ public:
 	virtual bool Play_CurrentAnimation() override;
 	virtual void End_Animation() override;
 
-	virtual bool Play_RotateX();
-	virtual bool Play_RotateY();
-	virtual bool Play_RotateZ();
-	virtual bool Play_RotateCustom();
+	virtual void Play_Lerp() override;
+	virtual void Play_Custom() override;
+
 
 };
 

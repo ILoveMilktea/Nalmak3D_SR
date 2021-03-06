@@ -22,6 +22,8 @@ public:
 	void InAnim();
 	void OutAnim();
 
+	void SetAnimator(float _amount, float _duration, float _delay, Vector3 _pos);
+
 	void SetMoveAmount(float _amount) { m_amount = _amount; }
 	void SetMoveDuration(float _duration) { m_duration = _duration; }
 	void SetStartDelay(float _delay) { m_delay = _delay; }

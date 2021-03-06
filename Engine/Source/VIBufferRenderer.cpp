@@ -80,6 +80,11 @@ void VIBufferRenderer::SetMaterial(const wstring & _mtrlName, int _index)
 	m_material = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
 }
 
+void VIBufferRenderer::SetVIBuffer(const wstring & _meshName)
+{
+	m_viBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(_meshName);
+}
+
 void VIBufferRenderer::BindingStreamSource()
 {
 	ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_material->GetShader()->GetInputLayoutSize()));

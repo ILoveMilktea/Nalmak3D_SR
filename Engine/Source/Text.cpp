@@ -27,7 +27,7 @@ void Text::Initialize()
 	fontDesc.Width = m_width;
 	fontDesc.Height = m_height;
 	fontDesc.Weight = m_weight;
-	fontDesc.CharSet = HANGUL_CHARSET;
+	//fontDesc.CharSet = HANGUL_CHARSET;
 	lstrcpy(fontDesc.FaceName, m_fontName);
 	ThrowIfFailed(D3DXCreateFontIndirect(m_device, &fontDesc, &m_font));
 

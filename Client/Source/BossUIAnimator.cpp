@@ -18,12 +18,14 @@ void BossUIAnimator::Update()
 
 void BossUIAnimator::StartMoveDown(float _amount)
 {
-	m_moveAnim.SetDestination(Vector3(m_transform->position.x, m_transform->position.y + _amount, 0.f));
+	m_moveAnim.SetStartPosition();
+	m_moveAnim.SetDestPosition(Vector3(m_transform->position.x, m_transform->position.y + _amount, 0.f));
 	m_moveAnim.Start_Animation();
 }
 
 void BossUIAnimator::StartMoveUp(float _amount)
 {
-	m_moveAnim.SetDestination(Vector3(m_transform->position.x, m_transform->position.y - _amount, 0.f));
+	m_moveAnim.SetStartPosition();
+	m_moveAnim.SetDestPosition(Vector3(m_transform->position.x, m_transform->position.y - _amount, 0.f));
 	m_moveAnim.Start_Animation();
 }

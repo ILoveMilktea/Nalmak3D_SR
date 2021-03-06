@@ -8,6 +8,7 @@
 #include "Event.h"
 #include "Nalmak_Include.h"
 
+class Text;
 class Texture;
 class InputManager;
 class CanvasRenderer;
@@ -18,8 +19,10 @@ class  NALMAK_DLL Button :
 public:
 	struct Desc
 	{
+		GameObject* targetText = nullptr;
 		EventHandler eventFunc = nullptr;
 
+		wstring allImage = L"";
 		wstring normalImage = L"UIWhite";
 		wstring highlightImage = L"UIRed";
 		wstring pressedImage = L"UIBlue";
@@ -46,6 +49,7 @@ public:
 	void ChangeDisableColor(Vector4 _color) { m_disableColor = _color; }
 	void ChangeDisableColor(float _r, float _g, float _b, float _a) { m_disableColor = Vector4(_r, _g, _b, _a); }
 
+	void ChangeAllTexture(IDirect3DBaseTexture9* _tex);
 	void ChangeAllTexture(wstring _name);
 	void ChangeNormalTexture(wstring _name);
 	void ChangeHighlightTexture(wstring _name);
@@ -56,7 +60,8 @@ public:
 	BUTTON_TRANSITION GetTransition() { return m_currentTransition; }
 
 	void SetTransition(BUTTON_TRANSITION _tr) { m_currentTransition = _tr; }
-
+	void SetText(const wstring& _text);
+	void SetTextObject(GameObject* _text);
 public:
 	void AddEventHandler(EventHandler _eventFunc);
 
@@ -71,6 +76,7 @@ protected:
 	Event m_event;
 	ResourceManager* m_resource;
 	CanvasRenderer* m_renderer;
+	GameObject* m_text;
 
 protected:
 	BUTTON_TRANSITION m_currentTransition;

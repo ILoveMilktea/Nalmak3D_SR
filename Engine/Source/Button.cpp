@@ -2,9 +2,12 @@
 #include "Transform.h"
 #include "CanvasRenderer.h"
 #include "ResourceManager.h"
+#include "Text.h"
 
 Button::Button(Desc * _desc)
 {
+	m_text = _desc->targetText;
+
 	if (_desc->eventFunc != nullptr)
 		m_event += _desc->eventFunc;
 
@@ -14,10 +17,18 @@ Button::Button(Desc * _desc)
 	m_disableColor = { 0.2f,0.2f,0.2f,1.f };
 
 	m_resource = ResourceManager::GetInstance();
-	m_normalImage = m_resource->GetResource<Texture>(_desc->normalImage)->GetTexure(0);
-	m_highlightImage = m_resource->GetResource<Texture>(_desc->highlightImage)->GetTexure(0);
-	m_pressedImage = m_resource->GetResource<Texture>(_desc->pressedImage)->GetTexure(0);
-	m_disableImage = m_resource->GetResource<Texture>(_desc->disableImage)->GetTexure(0);
+
+	if (_desc->allImage != L"")
+	{
+		ChangeAllTexture(_desc->allImage);
+	}
+	else
+	{
+		m_normalImage = m_resource->GetResource<Texture>(_desc->normalImage)->GetTexure(0);
+		m_highlightImage = m_resource->GetResource<Texture>(_desc->highlightImage)->GetTexure(0);
+		m_pressedImage = m_resource->GetResource<Texture>(_desc->pressedImage)->GetTexure(0);
+		m_disableImage = m_resource->GetResource<Texture>(_desc->disableImage)->GetTexure(0);
+	}
 }
 
 void Button::Initialize()
@@ -99,7 +110,7 @@ void Button::ChangeTransition(BUTTON_TRANSITION _transition)
 		m_renderer->SetActive(false);
 		break;
 	case BUTTON_TRANSITION_COLOR:
-		m_renderer->SetActive(false);
+		m_renderer->SetActive(true);
 		break;
 	case BUTTON_TRANSITION_SWAP:
 		m_renderer->SetActive(true);
@@ -165,7 +176,14 @@ void Button::ChangeAllColor(Vector4 _color)
 	ChangeHighlightColor(_color);
 	ChangePressedColor(_color);
 	ChangeDisableColor(_color);
+}
 
+void Button::ChangeAllTexture(IDirect3DBaseTexture9 * _tex)
+{
+	m_normalImage = _tex;
+	m_highlightImage = _tex;
+	m_pressedImage = _tex;
+	m_disableImage = _tex;
 }
 
 void Button::ChangeAllTexture(wstring _name)
@@ -194,6 +212,16 @@ void Button::ChangePressedTexture(wstring _name)
 void Button::ChangeDisableTexture(wstring _name)
 {
 	m_disableImage = m_resource->GetResource<Texture>(_name)->GetTexure(0);
+}
+
+void Button::SetText(const wstring & _text)
+{
+	m_text->GetComponent<Text>()->SetText(_text);
+}
+
+void Button::SetTextObject(GameObject * _text)
+{
+	m_text = _text;	
 }
 
 void Button::AddEventHandler(EventHandler _eventFunc)

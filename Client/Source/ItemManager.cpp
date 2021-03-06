@@ -78,6 +78,7 @@ void ItemManager::CreateItem()
 		info.costGold = 200;
 		info.delay = 2.5f;
 		info.weaponSpeed = 35.f;
+		info.modelName = L"box";
 		m_mapShopItem[L"Weapon"].emplace_back(new AimMissile(info));
 	}
 
@@ -87,17 +88,17 @@ void ItemManager::CreateItem()
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
-
+		info.modelName = L"box";
 		m_mapShopItem[L"Weapon"].emplace_back(new SmallCannon(info));
 	}
 
 	{
-		info.itemName = L"Player_Weapon_Homing";
+		info.itemName = L"HomingMissile";
 		info.weaponAttak = 10;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
-
+		info.modelName = L"box";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_Weapon_Homing(info));
 	}
 
@@ -115,7 +116,7 @@ void ItemManager::CreateItem()
 		info.costGold = 50;
 		info.delay = 1.f;
 		info.weaponSpeed = 45.f;
-
+		info.modelName = L"box";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_ClusterMissile(info));
 	}
 
@@ -125,7 +126,7 @@ void ItemManager::CreateItem()
 		info.costGold = 0;
 		info.delay = 1.f;
 		info.weaponSpeed = 100.f;
-
+		info.modelName = L"box";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_EmpMissile(info));
 	}
 
@@ -207,4 +208,14 @@ bool ItemManager::BuyItem(const wstring & _itemName, const wstring & _typeValueN
 	{
 		return  false;
 	}
+}
+
+wstring ItemManager::LoadItemModel(const wstring & _itemtype, const wstring & _itemName)
+{
+	PlayerItem* item = FindItemObject(_itemtype, _itemName);
+
+	if (item)
+		return item->GetModelName();
+	else
+		return L"";
 }

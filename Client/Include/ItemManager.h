@@ -32,6 +32,8 @@ public:
 		const wstring& _typeValueName);
 
 	bool BuyItem(const wstring& _itemName , const wstring& _typeValueName);
+	wstring LoadItemModel(const wstring & _itemtype, const wstring& _itemName);
+
 private:
 	// <itemtype, vector<item>
 	// ÀÌ¸§ : playeritem -> get info -> name
