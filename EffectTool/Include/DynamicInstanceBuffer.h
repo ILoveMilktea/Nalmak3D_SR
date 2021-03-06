@@ -74,7 +74,7 @@ inline void DynamicInstanceBuffer<T>::CreateIndexBufferUsedByTrail(int _triCount
 
 	int triCount = 0;
 	int index  = 0;
-	int CatmullromCount = _triCount * 0.5f;
+	int CatmullromCount = (int)(_triCount * 0.5f);
 	for (int i = 0; i < CatmullromCount; ++i)
 	{
 		index = i * 4;

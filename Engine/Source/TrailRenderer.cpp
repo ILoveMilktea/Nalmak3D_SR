@@ -24,7 +24,7 @@ TrailRenderer::TrailRenderer(Desc * _desc)
 	m_secPerTrail = 1.f / _desc->trailCountPerSec;
 	m_timer = 0;
 
-	m_type = RENDERER_TYPE_MESH;
+	m_type = RENDERER_TYPE_TRAIL;
 
 	CreateDynamicBuffer();
 }

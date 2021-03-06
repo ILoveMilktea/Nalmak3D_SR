@@ -138,12 +138,11 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 	switch (type)
 	{
 	case RENDERER_TYPE_MESH:
-	case RENDERER_TYPE_PARTICLE:
 	{
-		/*float radius = _renderer->GetVIBuffer()->GetBoundingSphereRadius() * 2;
-	
+		float radius = _renderer->GetBoundingRadius() * 2;
+
 		Transform* trs = _renderer->GetTransform();
-		Vector3 Center = trs->GetWorldPosition() + _renderer->GetVIBuffer()->GetBoundingSphereCenter();
+		Vector3 Center = trs->GetWorldPosition() + _renderer->GetBoundingCenter();
 		float scale = max(trs->scale.z, max(trs->scale.x, trs->scale.y));
 		radius *= scale;
 		for (int i = 0; i < 6; ++i)
@@ -153,11 +152,32 @@ bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 			{
 				return false;
 			}
-		}*/
+		}
+		break;
 	}
-	break;
+	case RENDERER_TYPE_VIBUFFER:
+	{
+		float radius = _renderer->GetBoundingRadius() * 2;
+
+		Transform* trs = _renderer->GetTransform();
+		Vector3 Center = trs->GetWorldPosition() + _renderer->GetBoundingCenter();
+		float scale = max(trs->scale.z, max(trs->scale.x, trs->scale.y));
+		radius *= scale;
+		for (int i = 0; i < 6; ++i)
+		{
+			float distance = Vector::Dot(Center, Vector3(m_frustumPlane[i].a, m_frustumPlane[i].b, m_frustumPlane[i].c)) + m_frustumPlane[i].d + radius;
+			if (distance < 0)
+			{
+				return false;
+			}
+		}
+		break;
+	}
+	case RENDERER_TYPE_PARTICLE:
+	case RENDERER_TYPE_TRAIL:
+		break;
 	case RENDERER_TYPE_CANVAS:
-		RECT* boundary = _renderer->GetComponent<CanvasRenderer>()->GetBoundary();
+		RECT* boundary = ((CanvasRenderer*)_renderer)->GetBoundary();
 		if (boundary->left >= (LONG)RenderManager::GetInstance()->GetWindowWidth() ||
 			boundary->right <= 0 ||
 			boundary->top >= (LONG)RenderManager::GetInstance()->GetWindowHeight() ||

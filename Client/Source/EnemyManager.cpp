@@ -172,10 +172,10 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
-	VIBufferRenderer::Desc Enemy_Mesh;
-	Enemy_Mesh.mtrlName = L"default";
-	Enemy_Mesh.meshName = L"flight";
-	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
+	MeshRenderer::Desc Enemy_Mesh;
+	Enemy_Mesh.mtrlName = L"su34";
+	Enemy_Mesh.meshName = L"su34";
+	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
 	Enemy_col.radius = 5.f;

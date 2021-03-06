@@ -27,8 +27,13 @@ private:
 	unsigned long	 m_vertexCount;
 	unsigned long	 m_triCount;
 
+	float m_boundingSphereRadius;
+	Vector3 m_boundingSphereCenter;
+
 public:
 	virtual void Draw(unsigned int _subsetIndex) override;
 	unsigned long GetSubsetCount() { return m_subsetCount; }
+	float GetBoundingSphereRadius();
+	Vector3 GetBoundingSphereCenter();
 };
 

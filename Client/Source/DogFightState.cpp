@@ -82,6 +82,8 @@ void DogFightState::EnterState()
 	wind.trailThick = 0.2f;
 	m_Player->AddComponent<Player_WindEffect>(&wind);
 
+
+
 	m_Player->AddComponent<StateControl>();
 	m_Player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
 	m_Player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
@@ -93,7 +95,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
 
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
-	
+	// x file -> mesh renderer
 	MeshRenderer::Desc render;
 	render.mtrlName = L"f15"; 
 	render.meshName = L"f15";
@@ -102,7 +104,7 @@ void DogFightState::EnterState()
 	m_Player->AddComponent<PlayerSkillActor>();
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
-	//m_Player->AddComponent<SphereCollider>();
+	m_Player->AddComponent<SphereCollider>();
 
 	//ParticleRenderer::Desc particle;
 	//particle.particleDataName = L"20mmCannon";

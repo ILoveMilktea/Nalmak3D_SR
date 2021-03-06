@@ -2,7 +2,7 @@
 ##  Material Data Setting
 #########################################################
 
-shader "standard"
+shader "standard_normal"
 
 texture "g_mainTex" "kfir"
 //texture "g_normalTex" "F-15C normal"

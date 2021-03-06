@@ -78,7 +78,6 @@ private:
 	RECT m_boundary;
 
 
-
 };
 
 

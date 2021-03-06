@@ -29,7 +29,9 @@ private:
 public:
 	virtual void Render(Shader* _shader) override;
 	virtual void BindingStreamSource() override;
-
+public:
+	virtual float GetBoundingRadius() override;
+	virtual Vector3 GetBoundingCenter() override;
 	// IRenderer을(를) 통해 상속됨
 	void AddMaterial(const wstring& _mtrl);
 	virtual int GetMaterialCount() override;
@@ -41,7 +43,7 @@ private:
 	class StaticMesh* m_mesh;
 
 	unsigned long GetSubsetCount();
-
+	
 
 };
 

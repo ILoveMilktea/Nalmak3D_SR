@@ -52,7 +52,7 @@ void StageManager::Initialize()
 	m_stateControl->AddState<BossState>(L"Boss");
 	
 
-	m_stateControl->InitState(L"Tutorial");
+	m_stateControl->InitState(L"Dog_Fight");
 }
 
 void StageManager::Update()

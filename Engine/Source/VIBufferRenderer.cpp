@@ -18,7 +18,7 @@ VIBufferRenderer::VIBufferRenderer(struct Desc* _desc)
 
 	m_layer = _desc->layer;
 
-	m_type = RENDERER_TYPE_MESH;
+	m_type = RENDERER_TYPE_VIBUFFER;
 }
 
 
@@ -84,4 +84,13 @@ void VIBufferRenderer::BindingStreamSource()
 {
 	ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, m_material->GetShader()->GetInputLayoutSize()));
 	ThrowIfFailed(m_device->SetIndices(m_viBuffer->GetIndexBuffer()));
+}
+
+float VIBufferRenderer::GetBoundingRadius()
+{
+	return m_viBuffer->GetBoundingSphereRadius();
+}
+Vector3 VIBufferRenderer::GetBoundingCenter()
+{
+	return m_viBuffer->GetBoundingSphereCenter();
 }

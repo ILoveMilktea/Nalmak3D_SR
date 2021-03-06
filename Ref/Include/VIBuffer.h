@@ -41,7 +41,7 @@ public:
 	INPUT_LAYOUT_POSITION_NORMAL_UV* GetVertices() { return m_vertices; }
 	short* GetIndices() { return m_indices; }
 protected:
-	Vector3 m_boundingSphereCenter;
+	Vector3 m_boundingSphereCenter = { 0,0,0 };
 	float m_boundingSphereRadius = 0;
 public:
 	Vector3 GetBoundingSphereCenter() { return m_boundingSphereCenter; }

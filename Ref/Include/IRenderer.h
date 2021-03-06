@@ -40,9 +40,9 @@ protected:
 	int m_layer;
 	bool m_isFrustumCulling = true;
 public:
-	//PDIRECT3DVERTEXBUFFER9 GetVertexBuffer() const;
-	//PDIRECT3DINDEXBUFFER9 GetIndexBuffer() const;
-
+	virtual float GetBoundingRadius();
+	virtual Vector3 GetBoundingCenter();
+public:
 	int GetLayer() const { return m_layer; }
 	bool IsFrustumCulling() { return m_isFrustumCulling; }
 public:

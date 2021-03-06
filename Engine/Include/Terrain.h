@@ -51,5 +51,10 @@ private:
 	class Camera* m_mainCam;
 
 
+
+	// IRenderer을(를) 통해 상속됨
+	virtual float GetBoundingRadius() override;
+	virtual Vector3 GetBoundingCenter() override;
+
 };
 
