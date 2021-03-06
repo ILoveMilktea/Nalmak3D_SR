@@ -7,7 +7,7 @@ class EnemyManager : public Component
 public:
 	struct Desc
 	{
-	
+
 	};
 
 
@@ -29,7 +29,7 @@ public: /* Gettttt */
 	int Get_EnemyCount() const;
 	list<GameObject*> Get_EnemyList() const;
 	int Get_BossHp() const;
-	
+
 public: /* Settttt */
 	void Add_EnemyCount(int _count);
 	GameObject* NearFindEenemy( GameObject* _finderObj, float _minDis =0 );
@@ -42,14 +42,14 @@ public: /* Funcs */
 		//Quaternion _rot = Quaternion(0.f,0.f,0.f,0.f),
 		ENEMY_STATE _initState =ENEMY_STATE::IDLE,
 		ENEMY_STATUS _status = ENEMY_STATUS(),
-		BULLET_STATUS _gun = BULLET_STATUS(), 
-		BULLET_STATUS _missile = BULLET_STATUS(), 
+		BULLET_STATUS _gun = BULLET_STATUS(),
+		BULLET_STATUS _missile = BULLET_STATUS(),
 		BULLET_STATUS _homing = BULLET_STATUS());
-	
+
 	void Enemy_Spawn_Normal();
 	void Enemy_Spawn_Huge();
 	void Enemy_Spawn_Quick();
-	
+
 
 	void Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
 
@@ -66,7 +66,7 @@ public: /* Stage1 - tutorial + dogFight*/
 
 
 public: /* stage2 - phase1 (DogFight) */
-	
+
 
 public: /* stage2 - phase2 (Evasion) */
 

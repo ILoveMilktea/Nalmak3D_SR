@@ -21,7 +21,7 @@ public:
 	};
 	MeshRenderer(Desc* _desc);
 private:
-	// MeshRendererÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// MeshRendererï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -29,8 +29,10 @@ private:
 public:
 	virtual void Render(Shader* _shader) override;
 	virtual void BindingStreamSource() override;
-
-	// IRendererÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+public:
+	virtual float GetBoundingRadius() override;
+	virtual Vector3 GetBoundingCenter() override;
+	// IRendererï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	void AddMaterial(const wstring& _mtrl);
 	virtual int GetMaterialCount() override;
 	virtual Material * GetMaterial(int _index = 0) override;

@@ -136,6 +136,15 @@ float Terrain::GetHeight(const Vector3 & _pos)
 	return height;
 }
 
+float Terrain::GetBoundingRadius()
+{
+	return m_viBuffer->GetBoundingSphereRadius();
+}
+
+Vector3 Terrain::GetBoundingCenter()
+{
+	return m_viBuffer->GetBoundingSphereCenter();
+}
 
 
 int Terrain::GetMaterialCount()

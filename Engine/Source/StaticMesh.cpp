@@ -101,7 +101,11 @@ void StaticMesh::Initialize(wstring _fp)
 	m_mesh->UnlockIndexBuffer();
 
 
-
+	D3DXComputeBoundingSphere((Vector3*)vertex,
+		m_mesh->GetNumVertices(),
+		m_mesh->GetNumBytesPerVertex(),
+		&m_boundingSphereCenter,
+		&m_boundingSphereRadius);
 }
 
 void StaticMesh::Release()
@@ -118,4 +122,14 @@ void StaticMesh::Release()
 void StaticMesh::Draw(unsigned int _subsetIndex)
 {
 	m_mesh->DrawSubset(_subsetIndex);
+}
+
+float StaticMesh::GetBoundingSphereRadius()
+{
+	return m_boundingSphereRadius;
+}
+
+Vector3 StaticMesh::GetBoundingSphereCenter()
+{
+	return m_boundingSphereCenter;
 }

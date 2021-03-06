@@ -354,6 +354,7 @@
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\Player_WindEffect.h" />
+    <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
     <ClInclude Include="..\Include\DogFight_Stage1.h">
       <Filter>04.Combat State\00%29DogFight</Filter>
     </ClInclude>

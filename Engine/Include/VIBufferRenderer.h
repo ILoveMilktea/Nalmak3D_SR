@@ -39,6 +39,10 @@ private:
 private:
 	VIBuffer* m_viBuffer;
 	Material* m_material;
+
+	// IRenderer을(를) 통해 상속됨
+	virtual float GetBoundingRadius() override;
+	virtual Vector3 GetBoundingCenter() override;
 };
 
 #endif

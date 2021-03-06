@@ -39,10 +39,10 @@ void PlayerInfoManager::Initialize()
 
 void PlayerInfoManager::Update()
 {
-	
+
 	//DEBUG_LOG(L"Gold", m_gold);
-	//DEBUG_LOG(L"ÇöÀç ÀåÂøÁßÀÎ ÁÖ¹«±â ", m_currentlyWeapon[FIRST_PARTS]);
-	//DEBUG_LOG(L"ÇöÀç ÀåÂøÁßÀÎ ºÎ ¹«Àå¹«±â ", m_currentlyWeapon[SECOND_PARTS]);
+	//DEBUG_LOG(L"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¹ï¿½ï¿½ï¿½ ", m_currentlyWeapon[FIRST_PARTS]);
+	//DEBUG_LOG(L"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½å¹«ï¿½ï¿½ ", m_currentlyWeapon[SECOND_PARTS]);
 
 
 	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();
@@ -155,7 +155,7 @@ GameObject * PlayerInfoManager::Player_Create()
 	if (m_player == nullptr)
 	{
 #ifdef _DEBUG
-		assert(L"¾Æ¤»¤»; ÇÃ·¹ÀÌ¾î ¸ø ¸¸µçµí ¤¸¤µ ¤»¤»¤»;;" && m_player);
+		assert(L"noooooooooo" && m_player);
 #endif
 		return nullptr;
 	}
@@ -196,7 +196,6 @@ GameObject * PlayerInfoManager::Player_Create()
 	render.mtrlName = L"f15";
 	render.meshName = L"f15";
 	m_player->AddComponent<MeshRenderer>(&render);
-	m_player->AddComponent<DrawGizmo>();
 	m_player->AddComponent<PlayerShooter>();
 	m_player->AddComponent<PlayerSkillActor>();
 
@@ -250,9 +249,7 @@ GameObject * PlayerInfoManager::GetPlayer()
 
 bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const wstring & _equipItemName)
 {
-	// 1. ÀÎº¥¿¡ ÀÖ´Â ½ºÆ®¸µÀÌ¶û »óÁ¡¿¡ ÀÖ´Â µ¥ÀÌÅÍ  ½ºÆ®¸µÀÌ¶û ¸ÂÀ¸¸é
-
-	//L"Weapon" == ÀÓ½Ã
+	//L"Weapon" == ï¿½Ó½ï¿½
 	wstring findItemType = L"";
 	wstring findItemName = L"";
 
@@ -276,7 +273,6 @@ bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const
 	if (!equipItem)
 		return false;
 
-	// ¿©±â¼­ °Å¸£ÀÚ
 	if (findItemType == L"Weapon")
 	{
 		m_currentlyWeapon[eID] = equipItem->GetItmeInfo().itemName;

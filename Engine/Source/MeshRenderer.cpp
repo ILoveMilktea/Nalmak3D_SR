@@ -60,6 +60,16 @@ void MeshRenderer::BindingStreamSource()
 {
 }
 
+float MeshRenderer::GetBoundingRadius()
+{
+	return m_mesh->GetBoundingSphereRadius();
+}
+
+Vector3 MeshRenderer::GetBoundingCenter()
+{
+	return m_mesh->GetBoundingSphereCenter();
+}
+
 //void MeshRenderer::BindingStreamSource()
 //{
 //	//								 // 통로 소켓 넘버 //  주소               // 시작점  // 사이즈

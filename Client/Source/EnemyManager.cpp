@@ -72,7 +72,7 @@ void EnemyManager::Update()
 		Destroy_AllEnemy();
 	}
 
-	
+
 
 	DEBUG_LOG(L"Remianed Enemy Count", m_iEnemyCount);
 }
@@ -145,7 +145,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
 	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
 	m_pStateControl->AddState<Enemy_Death>(L"Death");
-	
+
 	switch (_initState)
 	{
 	case IDLE:
@@ -193,10 +193,10 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
-	VIBufferRenderer::Desc Enemy_Mesh;
-	Enemy_Mesh.mtrlName = L"default";
-	Enemy_Mesh.meshName = L"flight";
-	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
+	MeshRenderer::Desc Enemy_Mesh;
+	Enemy_Mesh.mtrlName = L"su34";
+	Enemy_Mesh.meshName = L"su34";
+	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
 	Enemy_col.radius = 5.f;
@@ -307,11 +307,11 @@ void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 		//킹론 : 플레이어 앞에서 생성되어야한다 -> 카메라랑 같은 방향
 				//플레이어 시야각 안에 생성되어야 한다 -> 카메라 안에 있어야 함.
 				// 즉 걍 카메라에 보이는 곳에 생성 되면 된다. 이말이야.
-				// 그래서 카메라 화면 즉 뷰포트의 랜덤 좌표를 넘겨줘서 
+				// 그래서 카메라 화면 즉 뷰포트의 랜덤 좌표를 넘겨줘서
 				// 월드 좌표로 옮긴 뒤 해당 위치에 에ㅡ너미를 생성 되게 하는 것.
 
 		//Vector3 vPlayerPos = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->position;
-		
+
 		Vector3 vResult;
 
 		Vector2 vScreenSpace = { WINCX/2.f, WINCY/2.f };
@@ -333,7 +333,7 @@ void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 		Matrix matView_Inverse;
 		D3DXMatrixInverse(&matView_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetViewMatrix());
 		D3DXVec3TransformCoord(&vResult, &vViewSpace, &matView_Inverse);
-		
+
 		//근데 너무 멂.
 		//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
 		//거리를 더 해주자.
@@ -427,7 +427,7 @@ Vector3 EnemyManager::Pos_ScreenToWorld(float _x, float _y, float _distance)
 //
 //	/* 뷰 포트(스크린좌표) -> 투영 스페이스*/
 //	Vector3 vScreenPos = { _x, _y, 0.f };
-//	Vector3 vProjSpace; 
+//	Vector3 vProjSpace;
 //	vProjSpace.x = vScreenPos.x / (WINCX * 0.5f) - 1.f;
 //	vProjSpace.y = 1.f - vScreenPos.y / (WINCY * 0.5f);
 //	vProjSpace.z = 1.f; //asdf
@@ -447,7 +447,7 @@ Vector3 EnemyManager::Pos_ScreenToWorld(float _x, float _y, float _distance)
 //	D3DXMatrixInverse(&InverseView, 0, &mainCam->GetComponent<Camera>()->GetViewMatrix());
 //	D3DXVec3TransformCoord(&vResult, &vResult, &InverseView);
 //
-//	//나온 결과 
+//	//나온 결과
 //	//vResult.z += _Distance; //
 //
 //	//D3DXVec3Normalize(&vResult, &vResult);

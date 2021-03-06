@@ -12,9 +12,9 @@ public:
 	{
 		ThrowIfFailed(m_device->CreateVertexBuffer(
 			sizeof(T) * _maxCount,
-			D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, // ÆÄÆ¼Å¬ÀÌ³ª °¢Á¾ ¿É¼Ç Á¶Àý
+			D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, // ï¿½ï¿½Æ¼Å¬ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 			NULL,
-			D3DPOOL_DEFAULT, // µ¿Àû ¹öÅØ½º ¹öÆÛ´Â °ü¸® ¸Þ¸ð¸®Ç®¿¡ º¸°ü ºÒ°¡
+			D3DPOOL_DEFAULT, // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½Û´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½
 			&m_vBuffer,
 			nullptr
 		));
@@ -74,7 +74,7 @@ inline void DynamicInstanceBuffer<T>::CreateIndexBufferUsedByTrail(int _triCount
 
 	int triCount = 0;
 	int index  = 0;
-	int CatmullromCount = _triCount * 0.5f;
+	int CatmullromCount = (int)(_triCount * 0.5f);
 	for (int i = 0; i < CatmullromCount; ++i)
 	{
 		index = i * 4;

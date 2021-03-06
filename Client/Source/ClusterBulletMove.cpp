@@ -2,6 +2,11 @@
 #include "..\Include\ClusterBulletMove.h"
 #include "Player_NearGuideBullet.h"
 
+#include "ItemManager.h"
+#include "PlayerItem.h"
+#include "Enemy_Boss.h"
+#include "Enemy.h"
+
 
 
 
@@ -31,12 +36,12 @@ void ClusterBulletMove::Initialize()
 	D3DXVec3Normalize(&winDir, &winDir);
 	m_firstDir = playerLook + winDir;
 
-	
+
 }
 
 void ClusterBulletMove::Update()
 {
-	
+
 	Vector3 dir = m_target->GetTransform()->position - m_transform->position;
 	D3DXVec3Normalize(&dir, &dir);
 	m_transform->LookAt(dir + m_transform->position, 1.5f);
@@ -72,7 +77,7 @@ void ClusterBulletMove::Release()
 		Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * length;
 		Vector3 offSetZ = Vector3(temproyWorldMatrix._31, temproyWorldMatrix._32, temproyWorldMatrix._33) * length;
 
-		
+
 		Player_NearGuideBullet::Desc guidebulletInfo;
 		SphereCollider::Desc sphereColInfo;
 		sphereColInfo.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
@@ -96,4 +101,3 @@ void ClusterBulletMove::Release()
 	}
 	m_gameObject = nullptr;
 }
-

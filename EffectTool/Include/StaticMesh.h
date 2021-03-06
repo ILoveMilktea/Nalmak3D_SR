@@ -7,15 +7,14 @@ public:
 	StaticMesh();
 	~StaticMesh();
 
-	// Mesh을(를) 통해 상속됨
 	virtual void Initialize(wstring _fp) override;
 	virtual void Release() override;
 
 private:
 	LPD3DXMESH			m_originMesh;
-	LPD3DXMESH			m_mesh; // 서브셋의 모임
+	LPD3DXMESH			m_mesh;
 	LPD3DXBUFFER		m_adjacency;
-	LPD3DXBUFFER		m_subset; // 폴리곤의 모임
+	LPD3DXBUFFER		m_subset;
 
 
 	Vector3* m_vertexPositionData;
@@ -27,8 +26,12 @@ private:
 	unsigned long	 m_vertexCount;
 	unsigned long	 m_triCount;
 
+	float m_boundingSphereRadius;
+	Vector3 m_boundingSphereCenter;
+
 public:
 	virtual void Draw(unsigned int _subsetIndex) override;
 	unsigned long GetSubsetCount() { return m_subsetCount; }
+	float GetBoundingSphereRadius();
+	Vector3 GetBoundingSphereCenter();
 };
-

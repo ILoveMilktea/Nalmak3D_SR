@@ -12,7 +12,7 @@ SmoothFollow::SmoothFollow(Desc * _desc)
 	m_culDistance = _desc->culDistance;
 	m_minDistance = _desc->minDistance;
 	m_maxDistance = _desc->maxDistance;
-	
+
 	m_followMoveSpeed = _desc->followMoveSpeed;
 	m_followRotationSpeed = _desc->followRotationSpeed;
 	m_Damping = _desc->ratioDamping;
@@ -57,7 +57,7 @@ void SmoothFollow::Initialize()
 
 void SmoothFollow::Update()
 {
-	
+
 	DEBUG_LOG(L"NOOOOOO", L"dd");
 }
 
@@ -75,8 +75,8 @@ void SmoothFollow::LateUpdate()
 	// 카메라가 바라보는 방향을 정해주는 값 // 플레이어가 바라보는 방향으로 가려함
 	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_player->rotation, dTime * 2.f);
 
-	
-	
+
+
 	// 플레이어의 현재 속도 비율 0~1
 	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());
 
@@ -87,7 +87,7 @@ void SmoothFollow::LateUpdate()
 
 
 	Vector3 targetPos = (m_player->position) + m_followDirection * (Ratio * 2 + 8) + Vector3(0, 1.7f, 0);
-	
+
 	m_transform->position = Nalmak_Math::Lerp(m_transform->position, targetPos, dTime * 4.f);
 	m_transform->SetRotation(m_playerMoveInfo->GetRotXAngle(), m_playerMoveInfo->GetRotYAngle(),0);
 

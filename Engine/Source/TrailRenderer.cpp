@@ -24,7 +24,7 @@ TrailRenderer::TrailRenderer(Desc * _desc)
 	m_secPerTrail = 1.f / _desc->trailCountPerSec;
 	m_timer = 0;
 
-	m_type = RENDERER_TYPE_MESH;
+	m_type = RENDERER_TYPE_TRAIL;
 
 	CreateDynamicBuffer();
 }
@@ -77,7 +77,7 @@ void TrailRenderer::Initialize()
 
 void TrailRenderer::Update()
 {
-	
+
 }
 
 void TrailRenderer::LateUpdate()
@@ -110,7 +110,7 @@ void TrailRenderer::RecordTrail(const Vector3 & _startPos, const Vector3 & _endP
 {
 	m_timer += dTime;
 
-	if (m_timer < m_secPerTrail) // ¾÷µ¥ÀÌÆ® ÁÖ±â È®ÀÎ
+	if (m_timer < m_secPerTrail) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ö±ï¿½ È®ï¿½ï¿½
 		return;
 
 	Vector3 worldPos = m_transform->GetWorldPosition();
@@ -127,7 +127,7 @@ void TrailRenderer::RecordTrail(const Vector3 & _startPos, const Vector3 & _endP
 	{
 		int index = i * 4;
 
-		// Ã¹¹øÂ° »ç°¢Çüw
+		// Ã¹ï¿½ï¿½Â° ï¿½ç°¢ï¿½ï¿½w
 		if (i == 0)
 		{
 			for (int j = 0; j < 4; ++j)
@@ -227,4 +227,3 @@ void TrailRenderer::SetMaterial(const wstring & _mtrlName, int _index)
 	m_material = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
 
 }
-

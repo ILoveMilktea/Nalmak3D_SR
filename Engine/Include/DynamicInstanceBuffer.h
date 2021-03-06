@@ -12,9 +12,9 @@ public:
 	{
 		ThrowIfFailed(m_device->CreateVertexBuffer(
 			sizeof(T) * _maxCount,
-			D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, // 파티클이나 각종 옵션 조절
+			D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY,
 			NULL,
-			D3DPOOL_DEFAULT, // 동적 버텍스 버퍼는 관리 메모리풀에 보관 불가
+			D3DPOOL_DEFAULT,
 			&m_vBuffer,
 			nullptr
 		));
@@ -74,7 +74,7 @@ inline void DynamicInstanceBuffer<T>::CreateIndexBufferUsedByTrail(int _triCount
 
 	int triCount = 0;
 	int index  = 0;
-	int CatmullromCount = _triCount * 0.5f;
+	int CatmullromCount = (int)(_triCount * 0.5f);
 	for (int i = 0; i < CatmullromCount; ++i)
 	{
 		index = i * 4;

@@ -108,27 +108,5 @@ void StageSelectScene::Initialize()
 
 
 
-	//{
-	//	PointLight::Desc point;
-	//	point.color = Vector3(1.f, 1.f, 0.8f);
-	//	point.diffuseIntensity = 1.f;
-	//	point.radius = 6.f;
 
-	//	MeshRenderer::Desc render;
-	//	render.mtrlName = L"standard";
-	//	render.meshName = L"box";
-	//	INSTANTIATE()->AddComponent<MeshRenderer>(&render)->AddComponent<MeshPicking>()->AddComponent<DrawGizmo>()->AddComponent<PointLight>(&point)->SetScale(0.1f, 0.1f, 0.1f);
-	//}
-	//{
-	//	MeshRenderer::Desc render;
-	//	render.mtrlName = L"iron_normal";
-	//	render.meshName = L"Tbox";
-	//	INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(1, 0, 0)->SetScale(1,1,1);
-	//}
-	//{
-	//	MeshRenderer::Desc render;
-	//	render.mtrlName = L"iron";
-	//	render.meshName = L"box";
-	//	INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(3, 0, 0)->SetScale(1, 1, 1);
-	//}
 }

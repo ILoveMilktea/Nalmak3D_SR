@@ -34,7 +34,7 @@ StageManager::StageManager(Desc * _desc)
 {
 
 
-	
+
 }
 
 StageManager::~StageManager()
@@ -50,9 +50,9 @@ void StageManager::Initialize()
 	m_stateControl->AddState<DogFightState>(L"Dog_Fight");
 	m_stateControl->AddState<EvasionState>(L"Evasion");
 	m_stateControl->AddState<BossState>(L"Boss");
-	
 
-	m_stateControl->InitState(L"Tutorial");
+
+	m_stateControl->InitState(L"Dog_Fight");
 }
 
 void StageManager::Update()

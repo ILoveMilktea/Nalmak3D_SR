@@ -4,7 +4,7 @@
 
 
 
-Player_ClusterMissile::Player_ClusterMissile(const ITEMINFO & copy) 
+Player_ClusterMissile::Player_ClusterMissile(const ITEMINFO & copy)
 	:PlayerItem(copy)
 {
 
@@ -30,6 +30,12 @@ void Player_ClusterMissile::ItemShot()
 
 
 	m_bullet->GetTransform()->position = m_bullet->GetTransform()->GetWorldPosition();
+
+	//SphereCollider::Desc cluster_col;
+	//cluster_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
+	//m_bullet->AddComponent<SphereCollider>(&cluster_col);
+
+	//m_bullet->GetTransform()->position = m_bullet->GetTransform()->GetWorldPosition();
 	m_bullet->GetTransform()->DeleteParent();
 
 	ClusterBulletMove::Desc bulletinfo;

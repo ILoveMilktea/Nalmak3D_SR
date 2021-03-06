@@ -33,7 +33,6 @@ private:
 	float m_speed;
 	int m_bulletCount;
 
-private: 
+private:
 	bool m_start = false;
 };
-

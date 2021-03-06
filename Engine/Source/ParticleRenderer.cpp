@@ -589,6 +589,7 @@ void ParticleRenderer::ParticleUpdate()
 	m_currentCount = i;
 }
 
+
 int ParticleRenderer::GetMaterialCount()
 {
 	return 1;
