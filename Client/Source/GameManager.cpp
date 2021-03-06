@@ -45,6 +45,11 @@ bool GameManager::Get_StageClear(int _i) const
 	return m_bStageClear[_i - 1];
 }
 
+const wstring & GameManager::Get_NextStage() const
+{
+	return m_strSelectStage;
+}
+
 
 void GameManager::Set_StageClear(int _i)
 {
@@ -54,4 +59,9 @@ void GameManager::Set_StageClear(int _i)
 	}
 
 	m_bStageClear[_i - 1] = true;
+}
+
+void GameManager::Set_NestStage(const wstring & _selectStage)
+{
+	m_strSelectStage = _selectStage;
 }

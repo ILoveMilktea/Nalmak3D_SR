@@ -5,5 +5,8 @@ class StageScene :
 {
 public:
 	virtual void Initialize() override;
+
+private:
+	GameObject* m_StageManager = nullptr;
 };
 

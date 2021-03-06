@@ -12,7 +12,7 @@ public:
 public:
 	struct Desc
 	{
-
+		//wstring firstScene;
 	};
 public:
 	StageManager(Desc* _desc);
@@ -23,6 +23,8 @@ public:
 	virtual void Update() override;
 
 public: /* Get */
+	StateControl* Get_StateControl() const;
+
 	template <class T>
 	float Get_StageTime(const wstring& _name) const
 	{
@@ -47,6 +49,8 @@ public: /* Get */
 
 
 public: /* Set */
+	void Set_StateControl();
+
 	template <class T>
 	float Set_StageScore(const wstring& _name, float _score) const
 	{
@@ -79,7 +83,7 @@ public:
 
 private:
 	StateControl*	m_stateControl;
-	
+	wstring			m_strFirstScene;
 	
 
 };

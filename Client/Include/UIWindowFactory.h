@@ -57,11 +57,8 @@ public:
 			{
 				EventHandler eventFunc;
 
-				if (GameManager::GetInstance()->Get_StageClear(1) == false)
-				{
-					eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stage1");	});
-				}
-				else { eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stage2");	}); }
+				wstring temp = GameManager::GetInstance()->Get_NextStage();
+				eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(temp);});
 				
 
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND_MAIN);

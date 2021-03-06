@@ -4,6 +4,10 @@
 
 #include "NextSceneLoad.h"
 #include "StageManager.h"
+#include "DogFight_Stage1.h"
+#include "DogFightState.h"
+#include "EvasionState.h"
+#include "BossState.h"
 
 
 void StageScene::Initialize()
@@ -25,5 +29,10 @@ void StageScene::Initialize()
 
 	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
 
-	StageManager::GetInstance();
+	m_StageManager = StageManager::GetInstance()->GetGameObject();
+	StageManager::GetInstance()->Set_StateControl();
+	StageManager::GetInstance()->Get_StateControl()->AddState<DogFight_Stage1>(L"Tutorial");
+	StageManager::GetInstance()->Get_StateControl()->InitState(L"Tutorial");
+
+	
 }

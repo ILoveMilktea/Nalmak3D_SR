@@ -60,6 +60,7 @@ void StageSelectScene::Initialize()
 		auto obj = INSTANTIATE(OBJECT_TAG_DEFAULT, L"background")->AddComponent<MeshRenderer>(&render)->SetScale(2, 2, 1);
 		obj->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 	}*/
+
 	{
 		VIBufferRenderer::Desc render;
 		render.mtrlName = L"StageSelect_BG";

@@ -79,12 +79,20 @@ public:
 		for (auto& component : m_components)
 		{
 			if (component.first == typeid(T).name())
-				return (T*)component.second;
+			{
+				if (component.second->m_dead == false)
+				{		return (T*)component.second;	}
+			}
 		}
 		for (auto& component : m_newComponents)
 		{
 			if (component.first == typeid(T).name())
-				return (T*)component.second;
+			{
+				if (component.second->m_dead == false)
+				{
+					return (T*)component.second;
+				}
+			}
 		}
 
 		return nullptr;

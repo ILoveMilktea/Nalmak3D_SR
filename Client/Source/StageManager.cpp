@@ -7,6 +7,7 @@
 #include "BossState.h"
 
 #include "EnemyManager.h"
+#include "NoneState.h"
 
 StageManager* StageManager::m_instance = nullptr;
 
@@ -32,7 +33,7 @@ void StageManager::DeleteInstance()
 
 StageManager::StageManager(Desc * _desc)
 {
-
+	//m_strFirstScene = _desc->firstScene;
 
 
 }
@@ -43,7 +44,16 @@ StageManager::~StageManager()
 
 void StageManager::Initialize()
 {
+	//m_gameObject->AddComponent<StateControl>();
+	//
+	//m_stateControl->AddState<NoneState>(L"none");
+	//m_stateControl->AddState<DogFight_Stage1>(L"Tutorial");
+	//m_stateControl->AddState<DogFightState>(L"Dog_Fight");
+	//m_stateControl->AddState<EvasionState>(L"Evasion");
+	//m_stateControl->AddState<BossState>(L"Boss");
+	//
 
+<<<<<<< Updated upstream
 	m_gameObject->AddComponent<StateControl>();
 	m_stateControl = GetComponent<StateControl>();
 	m_stateControl->AddState<DogFight_Stage1>(L"Tutorial");
@@ -53,12 +63,22 @@ void StageManager::Initialize()
 
 
 	m_stateControl->InitState(L"Dog_Fight");
+=======
+	//m_stateControl->InitState(L"");
+>>>>>>> Stashed changes
 }
 
 void StageManager::Update()
 {
 
 
+}
+
+StateControl * StageManager::Get_StateControl() const
+{
+	assert(L"state Control hasn't exit" && m_stateControl);
+
+	return m_stateControl;
 }
 
 float StageManager::Get_DogTime() const
@@ -90,6 +110,26 @@ float StageManager::Get_BossSocre() const
 {
 	return m_stateControl->GetState<BossState>(L"Boss")->Get_Score();
 }
+
+void StageManager::Set_StateControl()
+{
+	if (m_stateControl == nullptr)
+	{
+		m_gameObject->AddComponent<StateControl>();
+		m_stateControl = m_gameObject->GetComponent<StateControl>();
+	}
+	else 
+	{
+		m_gameObject->DeleteComponent<StateControl>();
+
+		m_gameObject->AddComponent<StateControl>();
+		m_stateControl = m_gameObject->GetComponent<StateControl>();
+	}
+
+}
+
+
+
 
 
 

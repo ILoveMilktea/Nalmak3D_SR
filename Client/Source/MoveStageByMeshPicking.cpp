@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\MoveStageByMeshPicking.h"
+#include "GameManager.h"
 
 
 
@@ -23,7 +24,8 @@ void MoveStageByMeshPicking::Update()
 	{
 		if (m_meshPicking->IsMousePicking())
 		{
-			Core::GetInstance()->LoadScene(m_targetScene);
+			Core::GetInstance()->LoadScene(L"garage");
+			GameManager::GetInstance()->Set_NestStage(m_targetScene);
 			return;
 		}
 	}

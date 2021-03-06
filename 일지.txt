@@ -1,4 +1,14 @@
-﻿18:12 2021-03-06
+﻿19:30 2021-03-06
+준엽이형 요청 사항 : 기관총쏠때 총구에 point light 달기 -> 계속 생성하지말고 생성해놓고 껏다, 켯다하는 방법으루다가.
+에너미 날개 바람가르기 효과 넣기
+
+StageSelectCamera Stage1에서 메쉬 피킹함.
+	-> bool값말구 wstring 주고 받아서 gameobject랑 해가지구 하기.
+	-> stageManager, GetComponent 수정
+		=>22:18 2021-03-06완성.
+
+
+18:12 2021-03-06
 근희 
 무기들 콜라이더 다 달기
 small cannon - 

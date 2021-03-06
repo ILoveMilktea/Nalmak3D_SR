@@ -15,6 +15,7 @@ public:
 public:
 	virtual void Initialize() override;
 	virtual void Update() override;
+
 private:
 	MeshPicking* m_meshPicking;
 	wstring m_targetScene;

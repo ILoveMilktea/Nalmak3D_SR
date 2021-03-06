@@ -42,7 +42,7 @@ void StageSelectCamera_Stage2::Initialize()
 		render.mtrlName = L"default_red";
 		render.meshName = L"box";
 		MoveStageByMeshPicking::Desc target;
-		target.targetStage = L"garage";
+		target.targetStage = L"stage2";
 		INSTANTIATE()->AddComponent<VIBufferRenderer>(&render)->AddComponent<MeshPicking>()
 			->AddComponent<MoveStageByMeshPicking>(&target)->SetPosition(m_stage2_position);
 	}
