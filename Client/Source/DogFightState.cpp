@@ -20,13 +20,10 @@
 #include "PlayerNone.h"
 #include "PlayerShooter.h"
 
-// playerskill ?�전??
 #include "PlayerSkillActor.h"
 
-//?�킬 ?�태�??�태
 #include "PlayerEscapeState.h"
 #include "FieldCameraInfo.h"
-// camera state ?�렬
 #include "FieldCameraSmoothFollowState.h"
 #include "FieldCameraStartState.h"
 #include "FieldCameraNearEnemyState.h"
@@ -34,7 +31,6 @@
 
 #include "Player_WindEffect.h"
 
-#include "Player_WindEffect.h"
 
 DogFightState::DogFightState()
 {
@@ -234,12 +230,6 @@ void DogFightState::UpdateState()
 		//gameobjectlist에는 Enemy가 없으니 바로 ScenetoEvasion으로 넘어옴.
 		//그리고 나서 Player도 newGameObjectList에 있으니 못 찾아와서 팅김.
 
-		if (m_bPattern3[0] == true && m_bPattern3[1] == false
-			&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-		{
-			m_bPattern3[1] = true;
-			m_bProduce = true;
-		}
 
 		if (m_bProduce)
 		{
@@ -262,7 +252,7 @@ void DogFightState::UpdateState()
 void DogFightState::ExitState()
 {
 	//DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
-	//monster?????�애�?
+
 
 
 

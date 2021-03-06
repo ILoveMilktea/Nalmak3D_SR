@@ -12,9 +12,9 @@ public:
 	{
 		ThrowIfFailed(m_device->CreateVertexBuffer(
 			sizeof(T) * _maxCount,
-			D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, // ��ƼŬ�̳� ���� �ɼ� ����
+			D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY,
 			NULL,
-			D3DPOOL_DEFAULT, // ���� ���ؽ� ���۴� ���� �޸���Ǯ�� ���� �Ұ�
+			D3DPOOL_DEFAULT,
 			&m_vBuffer,
 			nullptr
 		));

@@ -48,8 +48,6 @@ void SmoothFollow::Initialize()
 
 	assert(L"Please Set Target!" && m_playerMoveInfo);
 	m_fromObject =  Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
-	m_fromObject->SetParents(m_gameObject);
-
 	m_playerInfo = PlayerInfoManager::GetInstance();
 
 	m_lookDirection = m_player->rotation;

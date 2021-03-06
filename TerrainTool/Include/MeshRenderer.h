@@ -21,6 +21,7 @@ public:
 	};
 	MeshRenderer(Desc* _desc);
 private:
+	// MeshRenderer��(��) ���� ���ӵ�
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;
@@ -31,6 +32,7 @@ public:
 public:
 	virtual float GetBoundingRadius() override;
 	virtual Vector3 GetBoundingCenter() override;
+	// IRenderer��(��) ���� ���ӵ�
 	void AddMaterial(const wstring& _mtrl);
 	virtual int GetMaterialCount() override;
 	virtual Material * GetMaterial(int _index = 0) override;

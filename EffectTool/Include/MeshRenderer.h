@@ -21,6 +21,7 @@ public:
 	};
 	MeshRenderer(Desc* _desc);
 private:
+	// MeshRenderer��(��) ���� ���ӵ�
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void LateUpdate() override;

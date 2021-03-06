@@ -16,6 +16,7 @@ private:
 	LPD3DXBUFFER		m_adjacency;
 	LPD3DXBUFFER		m_subset;
 
+
 	Vector3* m_vertexPositionData;
 	unsigned int* m_indexData;
 
