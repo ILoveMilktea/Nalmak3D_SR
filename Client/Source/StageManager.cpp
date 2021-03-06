@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "..\Include\StageManager.h"
 
+#include "DogFight_Stage1.h"
 #include "DogFightState.h"
 #include "EvasionState.h"
 #include "BossState.h"
 
 #include "EnemyManager.h"
-
 
 StageManager* StageManager::m_instance = nullptr;
 
@@ -16,7 +16,7 @@ StageManager * StageManager::GetInstance()
 	{
 		auto instance = INSTANTIATE()->AddComponent<StageManager>();
 		m_instance = instance->GetComponent<StageManager>();
-		//instance->SetDontDestroy(true);
+		instance->SetDontDestroy(true);
 	}
 
 	return m_instance;
@@ -33,6 +33,8 @@ void StageManager::DeleteInstance()
 StageManager::StageManager(Desc * _desc)
 {
 
+
+	
 }
 
 StageManager::~StageManager()
@@ -41,21 +43,20 @@ StageManager::~StageManager()
 
 void StageManager::Initialize()
 {
+
 	m_gameObject->AddComponent<StateControl>();
 	m_stateControl = GetComponent<StateControl>();
+	m_stateControl->AddState<DogFight_Stage1>(L"Tutorial");
 	m_stateControl->AddState<DogFightState>(L"Dog_Fight");
 	m_stateControl->AddState<EvasionState>(L"Evasion");
 	m_stateControl->AddState<BossState>(L"Boss");
-	m_stateControl->InitState(L"Dog_Fight");
+	
+
+	m_stateControl->InitState(L"Tutorial");
 }
 
 void StageManager::Update()
 {
-
-	if (m_stateControl->CompareState(L"Dog_Fight"))
-	{
-
-	}
 
 
 }
@@ -90,6 +91,8 @@ float StageManager::Get_BossSocre() const
 	return m_stateControl->GetState<BossState>(L"Boss")->Get_Score();
 }
 
+
+
 void StageManager::Set_DogScore(float _score)
 {
 	m_stateControl->GetState<DogFightState>(L"Dog_Fight")->Set_Score(_score);
@@ -118,6 +121,12 @@ void StageManager::Set_BossScore(float _score)
 void StageManager::Add_BossScore(float _score)
 {
 	m_stateControl->GetState<BossState>(L"Boss")->Add_Score(_score);
+}
+
+
+void StageManager::ToTutorial()
+{
+	m_stateControl->SetState(L"Tutorial");
 }
 
 void StageManager::ToDog()

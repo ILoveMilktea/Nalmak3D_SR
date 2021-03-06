@@ -12,6 +12,8 @@
 #include "ItemManager.h"
 #include "MenuAnimator.h"
 #include "ItemButton.h"
+#include "StageManager.h"
+#include "GameManager.h"
 
 class UIWindowFactory
 {
@@ -43,9 +45,15 @@ public:
 
 			// Menu 1 - START STAGE	(Button)
 			{
-				EventHandler eventFunc = EventHandler([=]() {
-					Core::GetInstance()->LoadScene(L"phantom");
-				});
+				EventHandler eventFunc;
+
+				if (GameManager::GetInstance()->Get_StageClear(1) == false)
+				{
+					eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stage1");	});
+				}
+				else { eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stage2");	}); }
+				
+
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND_MAIN);
 
 				//MenuAnimator::Desc desc_ma;
@@ -891,6 +899,22 @@ public:
 		auto slider = UIFactory::Prefab_Stage_BossHpSlider();
 		slider->SetPosition(WINCX * 0.5f, -40.f);
 	}
+
+	static void ResultSceneTest()
+	{
+		// ==== Result Scene Test ====
+		{
+			EventHandler eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stageSelect"); });
+			auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"OK ~ReturnToStageSelectScene~", CANVAS_GROUP_RESULT);
+
+			menu->AddComponent<MenuAnimator>();
+			menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+			menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+			menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+			menu->SetPosition(960.f, 540.f);
+		}
+	}
+
 };
 
 

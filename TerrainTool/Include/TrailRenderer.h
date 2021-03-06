@@ -35,7 +35,6 @@ public:
 	virtual void SetMaterial(const wstring & _mtrlName, int _index = 0) override;
 
 private:
-	VIBuffer* m_viBuffer;
 	Material* m_material;
 
 	int m_maxTrailCount;

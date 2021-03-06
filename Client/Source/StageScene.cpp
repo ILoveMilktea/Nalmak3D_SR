@@ -3,20 +3,27 @@
 #include "Nalmak_Include.h"
 
 #include "NextSceneLoad.h"
+#include "StageManager.h"
 
 
 void StageScene::Initialize()
 {
-	auto cam = INSTANTIATE()->AddComponent<Camera>();
-	cam->GetTransform()->position = Vector3(0, 0, -1.f);
-	VIBufferRenderer::Desc render;
+	srand((unsigned int)time(NULL));
 
+	Core::GetInstance()->SetSkyBox(L"SkyBox1");
+	
+	DirectionalLight::Desc light;
+	light.diffuseIntensity = 0.6f;
+	light.ambientIntensity = 0.02f;
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 
+	VIBufferRenderer::Desc ground;
+	ground.mtrlName = L"ground";
+	ground.meshName = L"ground";
+	auto groundObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
+	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 
+	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
 
-	auto obj1 = INSTANTIATE()->AddComponent<VIBufferRenderer>(&render);
-	obj1->SetScale(Vector3(1, 1, 3));
-
-
-	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(0, 0, 0);
+	StageManager::GetInstance();
 }

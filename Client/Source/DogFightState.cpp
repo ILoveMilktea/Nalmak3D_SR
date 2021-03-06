@@ -46,8 +46,6 @@ void DogFightState::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
-
-
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"AimMissile");
 
@@ -89,7 +87,7 @@ void DogFightState::EnterState()
 	m_Player->GetComponent<StateControl>()->InitState(L"playerIdle");
 	
 	MeshRenderer::Desc render;
-	render.mtrlName = L"f15_base"; // 210223ȭ 12:50 ������ ����� �ȳ��ͼ� ���� �ٲ���
+	render.mtrlName = L"f15_base"; 
 	render.meshName = L"f15";
 	m_Player->AddComponent<MeshRenderer>(&render);
 	m_Player->AddComponent<DrawGizmo>();

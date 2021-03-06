@@ -13,6 +13,7 @@
 #include "UILabScene.h"
 #include "HeeTestScene.h"
 #include "NalmakScene.h"
+#include "ResultScene.h"
 
 TimeManager* g_time;
 // rendering pipeline
@@ -100,17 +101,18 @@ void MainGame::SystemSetting()
 	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_ENEMY, COLLISION_LAYER_SHIELD);
 
 	m_engine->AddScene(L"title", Scene::Instantiate<TitleScene>());
-	m_engine->AddScene(L"garage", Scene::Instantiate<GarageScene>());
 	m_engine->AddScene(L"stageSelect", Scene::Instantiate<StageSelectScene>());
-	m_engine->AddScene(L"stage", Scene::Instantiate<StageScene>());
+	m_engine->AddScene(L"garage", Scene::Instantiate<GarageScene>());
+	m_engine->AddScene(L"stage1", Scene::Instantiate<StageScene>());
 	m_engine->AddScene(L"stage2", Scene::Instantiate<Stage2Scene>());
+	m_engine->AddScene(L"result", Scene::Instantiate<ResultScene>());
+
+#pragma region forTest
 	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
-
-
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
-
+#pragma endregion
 
 	m_engine->SetStartScene(L"stageSelect");
 

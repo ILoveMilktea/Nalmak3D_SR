@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "..\Include\Player_AimMissile.h"
 #include "ParticleDead_IfCount0.h"
+#include "ItemManager.h"
+#include "Enemy.h"
+#include "PlayerItem.h"
+#include "Enemy_Boss.h"
 Player_AimMissile::Player_AimMissile(Desc * _desc)
 {
 	m_speed = _desc->speed;
@@ -115,7 +119,24 @@ void Player_AimMissile::Bomb()
 
 void Player_AimMissile::OnTriggerEnter(Collisions & _collision)
 {
-	Bomb();
+	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"AimMissile")->GetItmeInfo().weaponAttak;
+
+	for (auto& obj : _collision)
+	{
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
+		{
+			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
+		{
+			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+		}
+	}
 	
 }
 

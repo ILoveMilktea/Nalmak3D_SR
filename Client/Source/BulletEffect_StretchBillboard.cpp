@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "..\Include\BulletEffect_StretchBillboard.h"
+
 #include "Enemy.h"
+
+#include "ItemManager.h"
+#include "PlayerItem.h"
+#include "Enemy_Boss.h"
 
 
 
@@ -63,11 +68,20 @@ void BulletEffect_StretchBillboard::Update()
 
 void BulletEffect_StretchBillboard::OnTriggerEnter(Collisions & _collision)
 {
+	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"Cannon")->GetItmeInfo().weaponAttak;
+
 	for (auto& obj : _collision)
 	{
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
 		{
-			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(1);
+			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
+		{
+			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
 
 			DESTROY(m_gameObject);
 		}

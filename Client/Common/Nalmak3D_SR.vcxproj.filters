@@ -138,9 +138,6 @@
     <ClInclude Include="..\Include\UIFactory.h">
       <Filter>97.Factory</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\UIWindowFactory.h">
-      <Filter>97.Factory</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\ScriptReady.h">
       <Filter>02.Component\03.Script\State</Filter>
     </ClInclude>
@@ -352,6 +349,24 @@
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\Player_AirTrailEffect.h" />
+    <ClInclude Include="..\Include\DogFight_Stage1.h">
+      <Filter>04.Combat State\00%29DogFight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ResultScene.h">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\UIWindowFactory.h">
+      <Filter>97.Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GameManager.h">
+      <Filter>02.Component\00.Manager\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EndingScene.h">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\NoneState.h">
+      <Filter>04.Combat State\NewFilter1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -677,6 +692,21 @@
     <ClCompile Include="..\Source\Player_AirTrailEffect.cpp" />
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\GeunHee_Fps_Shoot.cpp" />
+    <ClCompile Include="..\Source\DogFight_Stage1.cpp">
+      <Filter>04.Combat State\00%29DogFight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ResultScene.cpp">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GameManager.cpp">
+      <Filter>02.Component\00.Manager\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EndingScene.cpp">
+      <Filter>01.Scene\00.Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\NoneState.cpp">
+      <Filter>04.Combat State\NewFilter1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -911,6 +941,12 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\03%29Enemy_Evasion\Exit">
       <UniqueIdentifier>{49878f57-b735-4e94-b68d-7fa050af020b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\GameManager">
+      <UniqueIdentifier>{d705ca4a-5970-4b94-9130-5629546d893c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\NewFilter1">
+      <UniqueIdentifier>{21f62d28-06cb-4a69-ae64-fc27885c00d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

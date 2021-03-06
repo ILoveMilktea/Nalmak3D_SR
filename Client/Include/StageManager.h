@@ -44,6 +44,8 @@ public: /* Get */
 	float Get_BossTime()const;
 	float Get_BossSocre()const;
 
+
+
 public: /* Set */
 	template <class T>
 	float Set_StageScore(const wstring& _name, float _score) const
@@ -66,13 +68,19 @@ public: /* Set */
 	void Set_BossScore(float _score);
 	void Add_BossScore(float _score);
 
+
+
 public:
+	void ToTutorial();
 	void ToDog();
 	void ToEvasion();
 	void ToBoss();
 	void ToScene(const wstring& _sceneName);
 
 private:
-	StateControl* m_stateControl;
+	StateControl*	m_stateControl;
+	
+	
+
 };
 

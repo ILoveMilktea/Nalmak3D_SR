@@ -33,6 +33,7 @@ public:
 		memcpy(instanceData, _instanceList, sizeof(T)* _count);
 		m_vBuffer->Unlock();
 	}
+
 	void CreateIndexBufferUsedByTrail(int _catmullomMaxCount);
 };
 
