@@ -27,8 +27,8 @@ void FieldCameraNearEnemyState::EnterState()
 
 
 	m_rotValue = 2;
-	m_minRandom = 2;
-	m_maxRandom = 5;
+	m_minRandom = 0;
+	m_maxRandom = 2;
 	//
 
 	m_FieldCam->SetAxisTargetPos(m_NearObject->GetWorldPosition() + Vector3(0.f, 0.f, 2.f));
@@ -74,13 +74,13 @@ void FieldCameraNearEnemyState::UpdateState()
 
 	if (m_culTime > m_randomTimer)
 	{
+		m_shakingX = rand() % (2 + 1  +2)  -2;
+		m_shakingY = rand() % (2 + 1 + 2) - 2;
 		m_randomTimer = rand() % (m_maxRandom + 1 - m_minRandom) + m_minRandom;
 		m_culTime = 0.f;
 	}
 	else
 	{
-		m_shakingX = rand() % 2;
-		m_shakingY = rand() % 2;
 		//m_shakingZ = rand() % (4 + 1 - 0) + 0;
 		m_ShakingPosition = Nalmak_Math::Lerp(m_ShakingPosition, Vector3((float)m_shakingX, (float)m_shakingY, (float)m_shakingZ), dTime * 2.f);
 	}

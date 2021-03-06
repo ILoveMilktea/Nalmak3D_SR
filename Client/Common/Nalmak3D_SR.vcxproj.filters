@@ -333,6 +333,7 @@
     <ClInclude Include="..\Include\FieldCameraNearEnemyState.h">
       <Filter>05. FieldCameraState</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\FieldCameraLookAtIdle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -639,6 +640,7 @@
     <ClCompile Include="..\Source\FieldCameraNearEnemyState.cpp">
       <Filter>05. FieldCameraState</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\FieldCameraLookAtIdle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
