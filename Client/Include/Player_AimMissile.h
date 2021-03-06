@@ -7,6 +7,7 @@ public:
 	struct Desc
 	{
 		float speed = 30;
+		float deadTimer = 5.f;
 		Vector3 lastPlayerVelocity = { 0,0,0 };
 	};
 public:
@@ -29,10 +30,9 @@ private:
 	float m_fallingTimer;
 	Vector3 m_dir;
 	Vector3 m_lastPlayerVelocity;
-
+	float m_deadTimer;
 private:
 	ParticleRenderer* m_smokeParticle;
-	ParticleRenderer* m_smokeLaunchParticle;
 
 };
 

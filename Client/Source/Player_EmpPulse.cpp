@@ -33,7 +33,7 @@ void Player_EmpPulse::OnTriggerEnter(Collisions & _collision)
 	{
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
 		{
-			
+			int i = 0;
 		}
 	}
 }

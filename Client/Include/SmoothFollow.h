@@ -31,7 +31,8 @@ private:
 	GameObject* m_fromObject = nullptr;
 
 private:
-	GameObject* m_toTarget = nullptr;
+	class PlayerMove* m_playerMoveInfo = nullptr;
+	Transform* m_player = nullptr;
 	float		m_culDistance = 0;
 	float		m_minDistance = 0;
 	float		m_maxDistance = 0;

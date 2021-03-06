@@ -436,7 +436,6 @@
     <ClCompile Include="..\Source\CanvasRenderer.cpp">
       <Filter>05.Component\01.Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\GroundVIBuffer.cpp" />
     <ClCompile Include="..\Source\SplineCurve.cpp">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClCompile>
@@ -509,6 +508,10 @@
     </ClCompile>
     <ClCompile Include="..\Source\ParticleInfo.cpp">
       <Filter>06.Resource\06.ParticleInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TrailRenderer.cpp" />
+    <ClCompile Include="..\Source\GroundVIBuffer.cpp">
+      <Filter>06.Resource\01.VIBuffer\09.Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -735,7 +738,6 @@
     <ClInclude Include="..\Include\CanvasRenderer.h">
       <Filter>05.Component\01.Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\GroundVIBuffer.h" />
     <ClInclude Include="..\Include\SplineCurve.h">
       <Filter>99.PreCompile\99.Utility</Filter>
     </ClInclude>
@@ -812,6 +814,10 @@
     <ClInclude Include="..\..\Client\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\ParticleInfo.h">
       <Filter>06.Resource\06.ParticleInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TrailRenderer.h" />
+    <ClInclude Include="..\Include\GroundVIBuffer.h">
+      <Filter>06.Resource\01.VIBuffer\09.Ground</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

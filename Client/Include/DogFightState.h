@@ -6,11 +6,11 @@ public:
 	DogFightState();
 	~DogFightState();
 
-	// IState��(��) ���� ���ӵ�
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
+
 public: /* Get */
 	float Get_Time() const;
 	float Get_Score() const;
@@ -29,9 +29,15 @@ private:
 	GameObject* m_Player = nullptr;
 	GameObject* m_MainCamera = nullptr;
 
+
 	Vector3 vPlayerOrigin;
 	bool	m_bProduce = false;
 	float	m_fSpd = 0.f;
+							//생성	//클리어
+	bool	m_bPattern1[2] = { false, false };
+	bool	m_bPattern2[2] = { false, false };
+	bool	m_bPattern3[2] = { false, false };
+	
 
 	float	m_fDogFightTime = 0.f;
 	float	m_fDogFightScore = 0.f;

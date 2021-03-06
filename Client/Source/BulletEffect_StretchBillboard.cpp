@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "..\Include\BulletEffect_StretchBillboard.h"
 
+#include "Enemy.h"
+
+#include "ItemManager.h"
+#include "PlayerItem.h"
+#include "Enemy_Boss.h"
+
 
 
 
@@ -22,7 +28,7 @@ void BulletEffect_StretchBillboard::Initialize()
 	 auto player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 	m_dir = player->GetTransform()->GetForward();
 
-	m_transform->SetScale(Vector3(1, m_stretchRatio, 1));
+	m_transform->SetScale(Vector3(1, m_stretchRatio *2.45f, 1) * 0.35f);
 
 	m_material = GetComponent<VIBufferRenderer>()->GetMaterial();
 
@@ -58,6 +64,36 @@ void BulletEffect_StretchBillboard::Update()
 
 	m_material->SetMatrix("g_invViewForBillboard", billboard);
 
+}
+
+void BulletEffect_StretchBillboard::OnTriggerEnter(Collisions & _collision)
+{
+	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"Cannon")->GetItmeInfo().weaponAttak;
+
+	for (auto& obj : _collision)
+	{
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
+		{
+			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
+		{
+			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+		}
+	}
+}
+
+void BulletEffect_StretchBillboard::OnTriggerStay(Collisions & _collision)
+{
+}
+
+void BulletEffect_StretchBillboard::OnTriggerExit(Collisions & _collision)
+{
 }
 
 

@@ -21,30 +21,16 @@ void PlayerIdle::Initialize()
 
 void PlayerIdle::EnterState()
 {
+	m_stateControl->SetState(L"playerMove");
 }
 
 void PlayerIdle::UpdateState()
 {
-	if (m_inputManager->GetKeyPress(KEY_STATE_W))
+	/*if (m_inputManager->GetKeyPress(KEY_STATE_W))
 	{
 		SetInteger(L"MoveDir", 0);
 		m_stateControl->SetState(L"playerMove");
 
-	}
-	/*else if (m_inputManager->GetKeyPress(KEY_STATE_A))
-	{
-		SetInteger(L"MoveDir", 1);
-		m_stateControl->SetState(L"playerMove");
-	}
-	else if (m_inputManager->GetKeyPress(KEY_STATE_S))
-	{
-		SetInteger(L"MoveDir", 2);
-		m_stateControl->SetState(L"playerMove");
-	}
-	else if (m_inputManager->GetKeyPress(KEY_STATE_W))
-	{
-		SetInteger(L"MoveDir", 3);
-		m_stateControl->SetState(L"playerMove");
 	}*/
 
 

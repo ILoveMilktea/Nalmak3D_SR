@@ -8,7 +8,7 @@ texture "g_mainTex" "niniz"
 
 renderQueue "3000"
 
-blendingMode "0"
+blendingMode "2"
 
 fillMode "0"
 

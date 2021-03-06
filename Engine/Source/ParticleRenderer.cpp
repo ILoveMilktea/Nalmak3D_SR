@@ -16,6 +16,7 @@ ParticleRenderer::ParticleRenderer(Desc * _desc)
 		assert(L"Particle Renderer must have particle Shader Material!" && 0);
 
 
+	m_info.isPlay = _desc->PlayOnAwake;
 
 	m_currentCount = 0;
 	m_playTime = 0.f;
@@ -58,21 +59,24 @@ void ParticleRenderer::Update()
 			}
 		}
 
-		Vector3 pos = m_transform->position + m_info.posOffset;
-		Matrix trans, rotation;
-		D3DXMatrixTranslation(&trans, pos.x, pos.y, pos.z);
-		D3DXMatrixRotationQuaternion(&rotation, &(m_transform->rotation * m_info.rotOffset));
+		
+		Vector3 particlePos =  m_info.posOffset;
+		Matrix particleTrans, trans, rotation;
+		D3DXMatrixTranslation(&trans, m_transform->position.x, m_transform->position.y, m_transform->position.z);
+		D3DXMatrixTranslation(&particleTrans, particlePos.x, particlePos.y, particlePos.z);
+		D3DXMatrixRotationQuaternion(&rotation, &(m_info.rotOffset * m_transform->rotation));
 		
 		Transform* parents = m_transform->GetParents();
 		Matrix worldMat;
 		if (parents)
 		{
-			worldMat = rotation * trans * parents->GetNoneScaleWorldMatrix();
+			worldMat = particleTrans * rotation * trans * parents->GetNoneScaleWorldMatrix();
 		}
 		else
 		{
-			worldMat = rotation * trans;
+			worldMat = particleTrans * rotation * trans;
 		}
+		
 		// Burst Emit
 		if (m_currentBurst)
 		{
@@ -137,7 +141,7 @@ void ParticleRenderer::Release()
 	SAFE_DELETE(m_instanceBuffer);
 }
 
-void ParticleRenderer::Render(Shader * _shader, int _index)
+void ParticleRenderer::Render(Shader * _shader)
 {
 	if (m_currentCount == 0)
 		return;
@@ -189,7 +193,7 @@ void ParticleRenderer::UpdateParticleInfo(int _maxCount)
 	SAFE_DELETE_ARR(m_particlesInfo);
 	SAFE_DELETE(m_instanceBuffer);
 
-	m_instanceBuffer = new DynamicInstanceBuffer(m_info.maxParticleCount);
+	m_instanceBuffer = new DynamicInstanceBuffer<INPUT_LAYOUT_PARTICLE>(m_info.maxParticleCount);
 	m_particlesInfo = new INPUT_LAYOUT_PARTICLE[m_info.maxParticleCount];
 	
 	SetAnimationCount(m_info.animationTileX *  m_info.animationTileY);
@@ -212,6 +216,11 @@ void ParticleRenderer::UpdateParticleInfo(int _maxCount)
 void ParticleRenderer::SetAnimationCount(int _count)
 {
 	m_spriteIndexRatio = 1.f / _count;
+}
+
+size_t ParticleRenderer::GetActivedParticleCount()
+{
+	return m_activedParticles.size();
 }
 
 
@@ -612,6 +621,11 @@ void ParticleRenderer::Stop()
 	m_playTime = 0.f;
 }
 
+void ParticleRenderer::StopEmit()
+{
+	m_info.isPlay = false;
+}
+
 void ParticleRenderer::Play()
 {
 	m_info.isPlay = true;
@@ -623,6 +637,11 @@ void ParticleRenderer::Play()
 	m_currentCount = 0;
 	m_playTime = 0.f;
 	m_awakeTime = Nalmak_Math::Rand(m_info.minAwakeTime, m_info.maxAwakeTime);
+}
+
+bool ParticleRenderer::IsPlaying()
+{
+	return m_info.isPlay;
 }
 
 void ParticleRenderer::AddBurst(Burst _burst)

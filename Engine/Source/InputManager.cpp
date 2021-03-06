@@ -15,13 +15,15 @@ InputManager::~InputManager()
 
 void InputManager::Initialize()
 {
-	/*for (UINT16 i = 0; i < KEY_STATE::KEY_STATE_MAX; ++i)
+	/*
+	for (UINT16 i = 0; i < KEY_STATE::KEY_STATE_MAX; ++i)
 	{
 	m_isButtonDown.emplace_back(pair<i,)
 	m_bButtonUp[i] = false;
 	m_bButtonDown[i] = false;
 	m_bButtonPress[i] = false;
-	}*/
+	}
+	*/
 }
 
 void InputManager::Update()

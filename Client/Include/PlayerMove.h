@@ -20,8 +20,17 @@ private:
 	InputManager* m_inputManager;
 	TimeManager*  m_timeMananger;
 	class PlayerInfoManager* m_playerInfo;
-	class MouseOption* m_mouse;
 	float m_accel = 0;
+
+	float m_rotZAngle = 0;
+	float m_rotXAngle = 0;
+	float m_rotYAngle = 0;
+
+
+public:
+	float GetRotXAngle();
+	float GetRotYAngle();
+	float GetRotZAngle();
 
 
 };

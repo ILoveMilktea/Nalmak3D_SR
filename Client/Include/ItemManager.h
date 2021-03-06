@@ -40,6 +40,7 @@ private:
 	unordered_map<wstring, vector<class PlayerItem*>> m_mapShopItem;
 
 	
+
 private:
 	PlayerInfoManager* m_playerMgr;
 };

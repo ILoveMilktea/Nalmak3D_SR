@@ -2,6 +2,11 @@
 #include "..\Include\HomingBulletMove.h"
 
 #include "Player_Weapon_Homing.h"
+#include "PlayerInfoManager.h"
+#include "PlayerShooter.h"
+#include "ItemManager.h"
+#include "Enemy.h"
+#include "Enemy_Boss.h"
 
 HomingBulletMove::HomingBulletMove(Desc* _desc)
 {
@@ -30,6 +35,8 @@ void HomingBulletMove::Initialize()
 
 	// temp destroy
 	m_tempTimer = 0.f;
+
+
 }
 
 void HomingBulletMove::Update()
@@ -46,4 +53,36 @@ void HomingBulletMove::Update()
 	m_tempTimer += TimeManager::GetInstance()->GetdeltaTime();
 	if (3.f < m_tempTimer)
 		DESTROY(m_gameObject);
+}
+
+void HomingBulletMove::OnTriggerEnter(Collisions & _collision)
+{
+	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"Player_Weapon_Homing")->GetItmeInfo().weaponAttak;
+
+	for (auto& obj : _collision)
+	{
+		
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
+		{
+			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
+				
+			DESTROY(m_gameObject);
+		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
+		{
+			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
+
+			DESTROY(m_gameObject);
+		}
+
+	}
+}
+
+void HomingBulletMove::OnTriggerStay(Collisions & _collision)
+{
+}
+
+void HomingBulletMove::OnTriggerExit(Collisions & _collision)
+{
 }

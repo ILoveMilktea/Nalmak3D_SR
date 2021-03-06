@@ -7,7 +7,6 @@
 #include "PlayerIdle.h"
 #include "PlayerMove.h"
 
-#include "FixToTarget.h"
 #include "MouseOption.h"
 #include "SmoothFollow.h"
 
@@ -16,9 +15,10 @@
 #include "StageManager.h"
 
 #include "UIWindowFactory.h"
+
 PhantomScene::PhantomScene()
 {
-	
+
 }
 
 
@@ -32,7 +32,7 @@ void PhantomScene::Initialize()
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
 	DirectionalLight::Desc light;
-	light.diffuseIntensity = 0.9f;
+	light.diffuseIntensity = 0.6f;
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 
@@ -68,29 +68,29 @@ void PhantomScene::Initialize()
 
 
 
-	
-	
-	
+
+
+
 	//GameObject* player;
-	
-	
+
+
 
 	//INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	//INSTANTIATE()->AddComponent<Grid>();
 
 	//{
 	//	MeshRenderer::Desc render;
-	//	render.mtrlName = L"default"; // 210223È­ 12:50 Àü±ÙÈñ Á¦´ë·Î ¾È³ª¿Í¼­ ¼³Á¤ ¹Ù²åÀ½
+	//	render.mtrlName = L"default"; // 210223È­ 12:50 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È³ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½
 	//	render.meshName = L"flight";
 
 	//	player = INSTANTIATE(OBJECT_TAG_PLAYER,L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<StateControl>()->AddComponent<PlayerInfoManager>()->AddComponent<DrawGizmo>()->AddComponent<MouseOption>();;
-	//	/*±ÙÈñ Ãß°¡*/
+	//	/*ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½*/
 	//	player->AddComponent<PlayerToTopView>();
 
 	//	player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle")->AddState<PlayerMove>(L"playerMove");
 	//	player->GetComponent<StateControl>()->InitState(L"playerIdle");
 	//	player->SetScale(0.1f, 0.1f, 0.1f);
-	//		
+	//
 	//}
 
 	//{
@@ -111,7 +111,7 @@ void PhantomScene::Initialize()
 
 
 
-	
 
-	
+
+
 }

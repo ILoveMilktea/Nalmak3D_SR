@@ -17,6 +17,9 @@ public:
 private:
 	virtual void Initialize() override;
 	virtual void Update() override;
+	virtual void OnTriggerEnter(Collisions& _collision)override;
+	virtual void OnTriggerStay(Collisions& _collision)override;
+	virtual void OnTriggerExit(Collisions& _collision)override;
 private:
 	float m_lifeTime;
 	float m_speed;

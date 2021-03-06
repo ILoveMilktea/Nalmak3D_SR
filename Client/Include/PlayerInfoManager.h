@@ -57,7 +57,7 @@ public:
 	// temporary members
 	const float& GetTimeLimit() { return m_timelimit; }
 	const float& GetScore() { return m_score; }
-	GameObject* GetPlayer() { return m_player; }
+	GameObject* GetPlayer();
 	map<wstring, vector<wstring>>& GetInven() { return m_haveItemList; }
 	const wstring* GetWeaponArray() { return m_currentlyWeapon; }
 
@@ -68,6 +68,7 @@ public: //using
 	bool EquipItem(PARTS_NUM eID , const wstring& _itemtype  ,const wstring& _equipItemName);
 	void MinGold(int _value);
 
+	GameObject* Player_Create();
 
 
 private:
@@ -88,7 +89,9 @@ private:
 	// temporary members
 	float m_timelimit = 0.f;
 	float m_score = 0.f;
-	GameObject* m_player;
+	GameObject* m_player = nullptr;
+
+
 
 private: // 이중stl쓰기 
 	// type, vector<itemname>

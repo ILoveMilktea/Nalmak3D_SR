@@ -69,7 +69,7 @@ void Terrain::Release()
 	SAFE_DELETE_ARR(m_vertexInfo);
 }
 
-void Terrain::Render(Shader * _shader, int _index)
+void Terrain::Render(Shader * _shader)
 {
 	assert("Current Shader is nullptr! " && _shader);
 

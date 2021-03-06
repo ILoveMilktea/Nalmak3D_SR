@@ -65,6 +65,8 @@
 #include "Toggle.h"
 #include "Slider.h"
 #include "Number.h"
+#include "TrailRenderer.h"
+
 #pragma endregion
 
 class CollisionManager;

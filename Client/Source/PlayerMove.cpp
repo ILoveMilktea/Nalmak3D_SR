@@ -3,7 +3,7 @@
 #include "PlayerInfoManager.h"
 #include "MouseOption.h"
 
-#include "Bullet_Manager.h"
+#include "Enemy_Bullet_Manager.h"
 
 PlayerMove::PlayerMove()
 {
@@ -24,15 +24,13 @@ void PlayerMove::Initialize()
 	m_playerInfo->SetDirSeneser(0.5f);
 
 	m_playerInfo->SetMinSpeed(0.f);
-	m_playerInfo->SetMaxSpeed(22.f);
-
+	m_playerInfo->SetMaxSpeed(20.f);
 
 	
 	Vector3 eulerRot = m_transform->GetEulerRotation();
 	m_playerInfo->GetAddRot().x = Deg2Rad * eulerRot.x;
 	m_playerInfo->GetAddRot().y = Deg2Rad * eulerRot.y;
 	m_playerInfo->GetAddRot().z = Deg2Rad * eulerRot.z;
-	m_mouse = GetComponent<MouseOption>();
 
 
 
@@ -46,33 +44,47 @@ void PlayerMove::EnterState()
 void PlayerMove::UpdateState()
 {
 	float speed = 0;
-	D3DXVec2Normalize(&m_mouse->GetMouseMoveDir(), &m_mouse->GetMouseMoveDir());
+	float xSensitive = 40.f;
+	float ySensitive = 30.f;
+	float zSensitive = 350.f;
+	
+
 	if (m_inputManager->GetKeyPress(KEY_STATE_D))
-		m_playerInfo->SetRollAngle(-15.f);
+		m_rotZAngle -= dTime * 3.f;
 	else if (m_inputManager->GetKeyPress(KEY_STATE_A))
-		m_playerInfo->SetRollAngle(15.f);
+		m_rotZAngle += dTime * 3.f;
 	else
-		m_playerInfo->SetRollAngle(0.f);
+	{
+		m_rotZAngle = Nalmak_Math::Lerp(m_rotZAngle, 0.f, dTime * 3);
+	}
 
-	float dirY = m_mouse->GetMouseMoveDir().x;
-	float dirX = m_mouse->GetMouseMoveDir().y;
 
-	float sensitive = m_playerInfo->GetDirSenser();
-	dirX = Nalmak_Math::Clamp(dirX, -sensitive, +sensitive);
-	dirY = Nalmak_Math::Clamp(dirY, -sensitive, +sensitive);
+	//m_rotZAngle = Nalmak_Math::Clamp(m_rotZAngle, -15.f, 15.f);
 
-	
-	Quaternion quaterRotX , quaterRotY, quaterRotZ;
-	D3DXQuaternionRotationAxis(&quaterRotY, &m_transform->GetUp(), dirY * dTime * 1.5f);
-	D3DXQuaternionRotationAxis(&quaterRotX, &m_transform->GetRight(), dirX * dTime* 1.5f);
-	D3DXQuaternionRotationAxis(&quaterRotZ, &m_transform->GetForward(), m_playerInfo->GetRollAngle() * dTime * 0.1f);
-	m_transform->rotation *=  (quaterRotX * quaterRotY * quaterRotZ);
-	
-	//1. 공기저항
+	Vector2 mouseDT = InputManager::GetInstance()->GetMouseScreenPos();
+	mouseDT.x = Nalmak_Math::Clamp(mouseDT.x, WINCX * 0.25f, WINCX * 0.75f);
+	mouseDT.y = Nalmak_Math::Clamp(mouseDT.y, WINCY * 0.25f, WINCY * 0.75f);
+	mouseDT = mouseDT - Vector2(HALF_WINCX, HALF_WINCY);
+	mouseDT.x /= (float)HALF_WINCX;
+	mouseDT.y /= (float)HALF_WINCY;
+	Vector2 normMouse = Nalmak_Math::Normalize(mouseDT);
+	normMouse.x = min(mouseDT.x, normMouse.x);
+	//rotaionByMouse.z = Nalmak_Math::Clamp(rotaionByMouse.z, -dTime * 30, dTime * 30);
+
+	m_rotXAngle += mouseDT.y * ySensitive * dTime;
+	m_rotYAngle += mouseDT.x * xSensitive * dTime;
+	m_rotZAngle -= asinf(mouseDT.x) * 2.f / PI * zSensitive * dTime;
+
+	/*m_rotZAngle -= mouseDT.x + zSensitive * dTime;
+	m_rotZAngle = Nalmak_Math::Lerp(m_rotZAngle, 0.f, dTime * 4);*/
+
+
+	m_transform->SetRotation(m_rotXAngle, m_rotYAngle, m_rotZAngle);
+
 	 speed -= 3.f;
 
-	 if (m_inputManager->GetKeyPress(KEY_STATE_W))
-		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 50);
+	if (m_inputManager->GetKeyPress(KEY_STATE_W))
+		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 10);
 	else
 		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10);
 
@@ -101,4 +113,19 @@ Quaternion* PlayerMove::Rotation(const Vector3 & _dir)
 	m_playerInfo->GetAddRot().x += D3DXToRadian(_dir.y) * m_playerInfo->GetDirSenser() * dTime;
 
 	return D3DXQuaternionRotationYawPitchRoll(&rot, m_playerInfo->GetAddRot().y, m_playerInfo->GetAddRot().x, m_playerInfo->GetAddRot().z);
+}
+
+float PlayerMove::GetRotXAngle()
+{
+	return m_rotXAngle;
+}
+
+float PlayerMove::GetRotYAngle()
+{
+	return m_rotYAngle;
+}
+
+float PlayerMove::GetRotZAngle()
+{
+	return m_rotZAngle;
 }

@@ -46,16 +46,16 @@ void ItemManager::Initialize()
 	//{
 	//	BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
 
-	//	BuyItem(L"Weapon", L"Player_Weapon_Homing");
-	//	PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
+	//BuyItem(L"Weapon", L"Player_Weapon_Homing");
+	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
-	//	//BuyItem(L"Weapon", L"ClusterMissile");
-	//	//m_playerMgr->EquipItem(THIRD_PARTS, L"Weapon", L"ClusterMissile");
-	//}
+	//BuyItem(L"Weapon", L"ClusterMissile");
+	//m_playerMgr->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
+	////}
 
 
 	//BuyItem(L"Weapon", L"Emp");
-
+	//m_playerMgr->EquipItem(SECOND_PARTS, L"Weapon", L"Emp");
 
 
 
@@ -74,6 +74,7 @@ void ItemManager::CreateItem()
 	{
 
 		info.itemName = L"AimMissile";
+		info.weaponAttak = 50;
 		info.costGold = 200;
 		info.delay = 2.5f;
 		info.weaponSpeed = 35.f;
@@ -83,6 +84,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"Cannon";
+		info.weaponAttak = 1;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
@@ -92,6 +94,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"HomingMissile";
+		info.weaponAttak = 10;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
@@ -109,6 +112,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"ClusterMissile";
+		info.weaponAttak = 10;
 		info.costGold = 50;
 		info.delay = 1.f;
 		info.weaponSpeed = 45.f;
@@ -118,6 +122,7 @@ void ItemManager::CreateItem()
 
 	{
 		info.itemName = L"Emp";
+		info.weaponAttak = 0;
 		info.costGold = 0;
 		info.delay = 1.f;
 		info.weaponSpeed = 100.f;

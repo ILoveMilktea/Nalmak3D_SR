@@ -42,7 +42,7 @@ void VIBufferRenderer::Release()
 {
 }
 
-void VIBufferRenderer::Render(Shader * _shader, int _index)
+void VIBufferRenderer::Render(Shader * _shader)
 {
 
 	Shader* currentShader = m_material->GetShader();

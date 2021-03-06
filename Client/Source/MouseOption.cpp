@@ -21,14 +21,20 @@ void MouseOption::Initialize()
 
 void MouseOption::Update()
 {
-	if (!m_mouseShadow)
+	/*m_preMousePoint = m_curMousePoint;
+	POINT point = {};
+	GetCursorPos(&point);
+	m_curMousePoint.x += (float)(point.x - m_core->GetWindowWidth() * 0.5f);
+	m_curMousePoint.y += (float)(m_core->GetWindowHeight() * 0.5f - point.y);*/
+
+	/*if (!m_mouseShadow)
 	{
 		m_preMousePoint = m_curMousePoint;
 		POINT point = {};
 		GetCursorPos(&point);
 		m_curMousePoint.x += (float)(point.x - m_core->GetWindowWidth() * 0.5f);
 		m_curMousePoint.y += (float)(m_core->GetWindowHeight() * 0.5f - point.y);
-	}
+	}*/
 	
 }
 

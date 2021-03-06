@@ -12,6 +12,9 @@
 #include "ItemManager.h"
 #include "MenuAnimator.h"
 #include "ItemButton.h"
+#include "StageManager.h"
+#include "GameManager.h"
+
 #include "UIManager.h"
 
 #include "UI_ShopMenu_Animator.h"
@@ -52,9 +55,15 @@ public:
 
 			// Menu 1 - START STAGE	(Button)
 			{
-				EventHandler eventFunc = EventHandler([=]() {
-					Core::GetInstance()->LoadScene(L"phantom");
-				});
+				EventHandler eventFunc;
+
+				if (GameManager::GetInstance()->Get_StageClear(1) == false)
+				{
+					eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stage1");	});
+				}
+				else { eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stage2");	}); }
+				
+
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND_MAIN);
 
 				menu->AddComponent<MenuAnimator>();
@@ -325,15 +334,15 @@ public:
 				//	menu->SetPosition(1600.f, 800.f);
 				//}
 
-				////For EmpMissile tes.t
-				//{
-				//	//EventHandler evetFunc = EventHandler([=]() {ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp"); });
-				//	EventHandler eventFunc
-				//		= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp"); });
-				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) Weapon - First Parts : Emp", CANVAS_GROUP_MAINWND);
-				//	menu->SetPosition(1600.f, 850.f);
-
-				//}
+				//For EmpMissile tes.t
+				{
+					//EventHandler evetFunc = EventHandler([=]() {ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp"); });
+					EventHandler eventFunc 
+						= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Emp"); });
+					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) Weapon - First Parts : Emp", CANVAS_GROUP_MAINWND);
+					menu->SetPosition(1600.f, 850.f);
+				
+				}
 			}
 
 
@@ -946,13 +955,13 @@ public:
 
 			list.emplace_back(dialogue);
 
-			script = L"<< SCRIPT2 >>";
+			script = L"MooGi Test gogo!\nJotBoBs 4Mari Cut";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< SCRIPT3 >>";
+			script = L"The Big one cant damaged Machinegun, use Missile!";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< SCRIPT4 >>";
+			script = L"Faster is Die faster. show what u got";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 			script = L"<< SCRIPT5 >>";
@@ -984,6 +993,22 @@ public:
 		auto slider = UIFactory::Prefab_Stage_BossHpSlider();
 		slider->SetPosition(WINCX * 0.5f, -40.f);
 	}
+
+	static void ResultSceneTest()
+	{
+		// ==== Result Scene Test ====
+		{
+			EventHandler eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(L"stageSelect"); });
+			auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"OK ~ReturnToStageSelectScene~", CANVAS_GROUP_RESULT);
+
+			menu->AddComponent<MenuAnimator>();
+			menu->GetComponent<MenuAnimator>()->SetMoveAmount(1200.f);
+			menu->GetComponent<MenuAnimator>()->SetMoveDuration(1.f);
+			menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
+			menu->SetPosition(960.f, 540.f);
+		}
+	}
+
 };
 
 

@@ -12,6 +12,7 @@ class NALMAK_DLL ParticleRenderer :
 public:
 	struct Desc
 	{
+		bool PlayOnAwake = true;
 		wstring particleDataName = L"default";
 	};
 
@@ -28,7 +29,7 @@ private:
 	virtual void LateUpdate() override;
 	virtual void Release() override;
 public:
-	virtual void Render(Shader* _shader, int _index) override;
+	virtual void Render(Shader* _shader) override;
 private:
 	virtual void BindingStreamSource();
 public:
@@ -63,13 +64,16 @@ private:
 	void EmitCone(int _count, const Matrix& _world);
 public:
 	void Stop();
+	void StopEmit();
 	void Play();
+	bool IsPlaying();
+
 public:
 	const vector<Burst>& GetBurstList() { return m_emitBursts; }
 	void AddBurst(Burst _burst);
 	void DeleteBurst(size_t _index);
 	void SetAnimationCount(int _count);
-
+	size_t GetActivedParticleCount();
 
 private:
 	list<Particle*> m_activedParticles;
@@ -83,7 +87,7 @@ private:
 	float m_spriteIndexRatio;
 	class Camera* m_camera;
 private:
-	DynamicInstanceBuffer* m_instanceBuffer;
+	DynamicInstanceBuffer<INPUT_LAYOUT_PARTICLE> * m_instanceBuffer;
 	void ParticleUpdate();
 
 

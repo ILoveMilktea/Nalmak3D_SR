@@ -13,10 +13,15 @@ SmallCannon::~SmallCannon()
 
 void SmallCannon::ItemShot()
 {
+	SphereCollider::Desc SmallCannon_col;
+	SmallCannon_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
+	m_bullet->AddComponent<SphereCollider>(&SmallCannon_col);
+
+
 	Matrix worldMat = m_bullet->GetTransform()->GetWorldMatrix();
 
 
-	m_bullet->GetTransform()->position = Vector3(worldMat._41, worldMat._42, worldMat._43) + Vector3(worldMat._31, worldMat._32, worldMat._33) * 2;
+	//m_bullet->GetTransform()->position = Vector3(worldMat._41, worldMat._42, worldMat._43) + Vector3(worldMat._31, worldMat._32, worldMat._33) * 2;
 	m_bullet->GetTransform()->DeleteParent();
 
 	BulletEffect_StretchBillboard::Desc bulletinfo;
@@ -45,9 +50,7 @@ void SmallCannon::CreateBullet()
 	m_bullet->SetParents(m_parents);
 	m_bullet->SetPosition(0.f, 0.f, 0.f);
 
-	SphereCollider::Desc SmallCannon_col;
-	SmallCannon_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
-	m_bullet->AddComponent<SphereCollider>(&SmallCannon_col);
+
 	
 
 }

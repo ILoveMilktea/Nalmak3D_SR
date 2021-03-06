@@ -59,6 +59,22 @@ struct ConstantBuffer
 /////////////////////////////////////////////////////////////////////////////////
 
 
+typedef struct INDEX16
+{
+	unsigned short	_0;
+	unsigned short	_1;
+	unsigned short	_2;
+
+}INDEX16;
+
+typedef struct INDEX32
+{
+	unsigned long  _0;
+	unsigned long  _1;
+	unsigned long  _2;
+
+}INDEX32;
+
 /////////////////////////////////////////////////////////////////////////////////
 // INPUT LAYOUT 추가 시 꼭 해야할것!!
 //  1. VERTEX_INPUT_LAYOUT enum 추가 
@@ -121,6 +137,8 @@ struct INPUT_LAYOUT_PARTICLE
 	Vector4 color;
 	Vector3 spriteX_spriteY_index;
 };
+
+
 
 
 // 일단 안씀

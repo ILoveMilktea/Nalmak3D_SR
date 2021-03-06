@@ -811,6 +811,7 @@ public:
 		text->SetScale(96.f, 36.f);
 		return text;
 	}
+
 	static GameObject* Prefab_Stage_PlayerInfoBar(CANVAS_GROUP _group = CANVAS_GROUP_NONE, float _maxValue = 100.f, float _minValue = 0.f)
 	{
 		auto bar = INSTANTIATE();
@@ -841,6 +842,7 @@ public:
 
 		return bar;
 	}
+
 	static GameObject* Prefab_Stage_PlayerInfoNumber(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// Number
