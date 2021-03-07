@@ -68,8 +68,11 @@ public: //using
 	bool EquipItem(PARTS_NUM eID , const wstring& _itemtype  ,const wstring& _equipItemName);
 	void MinGold(int _value);
 
+	void SetWeaponSpawnPos(PARTS_NUM eID ,bool _gargeCheck = true);
+
 	GameObject* Player_Create();
 	void		Player_Release();
+	void		GrageWeaponRelease();
 
 private:
 	static PlayerInfoManager* m_instance;
@@ -99,5 +102,6 @@ private:
 	wstring m_currentlySkill[PARTS_NUM::PARTS_MAX] = {};
 	wstring  m_currentlyWeapon[PARTS_NUM::PARTS_MAX] = {};
 
-
+	GameObject * m_pSingleWeapon = nullptr;
+	GameObject * m_pSideWeapon[2] = {};
 };

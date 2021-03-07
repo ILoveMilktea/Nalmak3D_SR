@@ -167,6 +167,7 @@ public:
 									wstring itemName = item->second[itemIndex];
 									EventHandler eventFunc = EventHandler([=]() {
 										PlayerInfoManager::GetInstance()->EquipItem(num, type, itemName);
+										PlayerInfoManager::GetInstance()->SetWeaponSpawnPos(num);
 									});
 									button->ResetEvent(eventFunc);
 
@@ -238,6 +239,7 @@ public:
 					int slotCount = 6;
 					float delayInterval = 0.1f;
 					float slotInterval = 40.f;
+					int partNum = 0;
 					for (int i = 0; i < slotCount; ++i)
 					{
 						// Slot
@@ -248,7 +250,7 @@ public:
 							menu->AddComponent<MenuAnimator>();
 							menu->GetComponent<MenuAnimator>()->SetAnimator(inoutAmount, inoutSpeed, delayInterval * i, Vector3(576.f - inoutAmount, 310.f + slotInterval * i, 0.f));
 
-							menu->GetComponent<ItemButton>()->SetPartsNumber(FIRST_PARTS);
+							menu->GetComponent<ItemButton>()->SetPartsNumber(PARTS_NUM(i));
 						}
 					}
 				}
@@ -291,7 +293,7 @@ public:
 				//{
 				//	EventHandler eventFunc = EventHandler([=]() {
 
-				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 주무장으로 에임미사일을
+				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 주무?�으�??�임미사?�을
 
 				//	});
 				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
@@ -312,7 +314,7 @@ public:
 				//{
 				//	EventHandler eventFunc = EventHandler([=]() {
 
-				//		PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Cannon"); // 보조무장으로 캐논을
+				//		PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Cannon"); // 보조무장?�로 캐논??
 
 				//	});
 				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon -Cannon ] ", CANVAS_GROUP_MAINWND);
@@ -324,7 +326,7 @@ public:
 				//{
 				//	EventHandler eventFunc = EventHandler([=]() {
 
-				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Skill", L"EscapeMove"); //스킬슬롯 첫번째 파츠에 스킬을 셋하겠다.
+				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Skill", L"EscapeMove"); //?�킬?�롯 첫번�??�츠???�킬???�하겠다.
 
 				//	});
 				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) SkillSlot - First Parts : EscapeMove", CANVAS_GROUP_MAINWND);
@@ -517,11 +519,11 @@ public:
 			}
 
 			// model test
-			VIBufferRenderer::Desc desc_vi;
-			desc_vi.meshName = L"box";
+			MeshRenderer::Desc desc_Mesh;
+			desc_Mesh.meshName = L"kfir_weapon1";
 
 			auto weaponModel = INSTANTIATE();
-			weaponModel->AddComponent<VIBufferRenderer>(&desc_vi);
+			weaponModel->AddComponent<MeshRenderer>(&desc_Mesh);
 			weaponModel->AddComponent<UI_ShopItemModel>();
 			weaponModel->SetParents(Core::GetInstance()->GetMainCamera()->GetGameObject());
 			weaponModel->SetPosition(-2.f, 0.f, 5.f);
@@ -530,11 +532,14 @@ public:
 			UIManager::GetInstance()->SetShopItemModel(weaponModel);
 
 			// 5 weapon button
-			int slotCount = 5;
+			int slotCount = 4;
 			float delayInterval = 0.1f;
 			float slotInterval = 80.f;
-			wstring itemNames[5] = { L"AimMissile" , L"Cannon" , L"HomingMissile" , L"ClusterMissile" , L"Emp" };
-			wstring itmeMtrl[5] = { L"default" , L"default_blue" , L"default_red" , L"default_yellow" , L"default_green" };
+
+
+									//L"kfir_weapon1", //L"su34_weapon1" //L"su34_weapon2" // L"su34_weapon3 //L"su34_weapon3"
+			wstring itemNames[5] = { L"AimMissile" ,  L"HomingMissile" , L"ClusterMissile" , L"Emp" };
+			wstring itmeMtrl[5] = { L"kfir" , L"su34" , L"su34" , L"su34" , L"su34" };
 
 			for (int i = 0; i < slotCount; ++i)
 			{
@@ -553,8 +558,8 @@ public:
 					wstring modelName = ItemManager::GetInstance()->LoadItemModel(L"Weapon", curItemName);
 
 					auto model = UIManager::GetInstance()->GetShopItemModel();
-					model->GetComponent<VIBufferRenderer>()->SetVIBuffer(modelName);
-					model->GetComponent<VIBufferRenderer>()->SetMaterial(mtrlName);
+					model->GetComponent<MeshRenderer>()->SetMesh(modelName);
+					model->GetComponent<MeshRenderer>()->SetMaterial(mtrlName);
 					model->SetActive(true);
 					// 2. load status at slider
 					UIManager::GetInstance()->SetCurrentSelectItem(curItemName);

@@ -4,14 +4,12 @@
 
 #include "PlayerInfoManager.h"
 
-//플레이어 아이템
 #include "AimMissile.h"
 #include "SmallCannon.h"
 #include "Player_Weapon_Homing.h"
 #include "Player_ClusterMissile.h"
 #include "Player_EmpMissile.h"
 
-// �÷��̾� ��ų
 #include "EscapeSkill.h"
 
 
@@ -39,25 +37,6 @@ ItemManager::~ItemManager()
 
 void ItemManager::Initialize()
 {
-	//// 겟인스턴스 이후 컴퍼넌트가 추가된 이후 이니셜라이즈
-	//// unordered_map<wstring, vector<class PlayerItem*>> m_mapShopItem;
-	//
-	////��ų �缭���� �׳� ���������� ������ �ϴ� ������.
-	//{
-	//	BuyItem(L"Skill", L"EscapeMove");// 말만 이스케이프 무브지 , 이동에 시간버리기 싫어서 일단 방어막 스킬로 넣어놓음.
-
-	//BuyItem(L"Weapon", L"Player_Weapon_Homing");
-	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
-
-	//BuyItem(L"Weapon", L"ClusterMissile");
-	//m_playerMgr->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
-	////}
-
-
-	//BuyItem(L"Weapon", L"Emp");
-	//m_playerMgr->EquipItem(SECOND_PARTS, L"Weapon", L"Emp");
-
-
 
 }
 
@@ -74,62 +53,69 @@ void ItemManager::CreateItem()
 	{
 
 		info.itemName = L"AimMissile";
+		info.weaponType = WEAPON_MISSILE;
 		info.weaponAttak = 50;
 		info.costGold = 200;
 		info.delay = 2.5f;
 		info.weaponSpeed = 35.f;
-		info.modelName = L"box";
+		info.modelName = L"kfir_weapon1";
 		m_mapShopItem[L"Weapon"].emplace_back(new AimMissile(info));
 	}
 
 	{
 		info.itemName = L"Cannon";
+		info.weaponType = WEAPON_CANNON;
 		info.weaponAttak = 1;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
-		info.modelName = L"box";
+		info.modelName = L"su34_weapon1";
 		m_mapShopItem[L"Weapon"].emplace_back(new SmallCannon(info));
 	}
 
 	{
 		info.itemName = L"HomingMissile";
+		info.weaponType = WEAPON_SINGLE_MISSILE;
 		info.weaponAttak = 10;
 		info.costGold = 100;
 		info.delay = 0.25f;
 		info.weaponSpeed = 45.f;
-		info.modelName = L"box";
+		info.modelName = L"su34_weapon2";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_Weapon_Homing(info));
 	}
 
-	{
-		info.itemName = L"EscapeMove";
-		info.costGold = 0;
-		info.delay = 5.f;
-		m_mapShopItem[L"Skill"].emplace_back(new EscapeSkill(info));
 
-	}
 
 	{
 		info.itemName = L"ClusterMissile";
+		info.weaponType = WEAPON_SINGLE_MISSILE;
 		info.weaponAttak = 10;
 		info.costGold = 50;
 		info.delay = 1.f;
 		info.weaponSpeed = 45.f;
-		info.modelName = L"box";
+		info.modelName = L"su34_weapon3";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_ClusterMissile(info));
 	}
 
 	{
 		info.itemName = L"Emp";
+		info.weaponType = WEAPON_SINGLE_MISSILE;
 		info.weaponAttak = 0;
 		info.costGold = 0;
 		info.delay = 1.f;
 		info.weaponSpeed = 100.f;
-		info.modelName = L"box";
+		info.modelName = L"su34_weapon3";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_EmpMissile(info));
 	}
 
+	/////////////////////
+	{
+		info.itemName = L"EscapeMove";
+		info.costGold = 0;
+		info.delay = 5.f;
+		m_mapShopItem[L"Skill"].emplace_back(new EscapeSkill(info));
+	}
+	////////////////////
 }
 
 ItemManager * ItemManager::GetInstance()
@@ -185,12 +171,12 @@ bool ItemManager::BuyItem(const wstring & _itemName, const wstring & _typeValueN
 			for(auto & ItemName : inven.second)
 			{
 				if(_typeValueName == ItemName)
-					return false;// 인벤에 같은이름이있으면 사지않는다.
+					return false;// ?�벤??같�??�름?�있?�면 ?��??�는??
 			}
 		}
 
 	}
-	// 찾는 아이템이 없는 경우! 여기 수정함 - 준엽
+	// 찾는 ?�이?�이 ?�는 경우! ?�기 ?�정??- 준??
 	if (!findItem)
 		return false;
 

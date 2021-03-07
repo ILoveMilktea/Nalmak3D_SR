@@ -39,6 +39,7 @@ EnemyManager * EnemyManager::GetInstance()
 {
 	if (!m_Instance)
 	{
+
 		auto Instance = INSTANTIATE();
 		Instance->AddComponent<EnemyManager>();
 		m_Instance = Instance->GetComponent<EnemyManager>();
@@ -59,7 +60,7 @@ void EnemyManager::DeleteInstance()
 }
 
 void EnemyManager::Initialize()
-{//?�니?�의 ?�따??
+{
 
 
 }
@@ -140,12 +141,13 @@ GameObject * EnemyManager::NearFindEenemy( GameObject * _finderObj, float _minDi
 	for (auto& value : Get_EnemyList())
 	{
 		float lenght = Nalmak_Math::Distance(value->GetTransform()->position, _finderObj->GetTransform()->position);
+		lenght = abs(lenght);
 		//value->
 
 		if (mindis > lenght || !target)
 		{
-			mindis = lenght;
 			target = value;
+			mindis =lenght;
 			break;
 		}
 	}
@@ -293,7 +295,7 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 
 
 	Enemy::Desc Enemy_desc;
-	/*desc ?�팅*/
+	
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
@@ -320,7 +322,7 @@ GameObject* EnemyManager::Boss_Spawn()
 	ENEMY_STATUS Boss_Status(1000, 0, 0);
 
 	Boss::Desc Boss_Desc(Boss_Status);
-	/*desc ?�팅*/
+	
 	Boss_obj->AddComponent<Boss>(&Boss_Desc);
 
 	VIBufferRenderer::Desc Boss_Mesh;
@@ -349,51 +351,40 @@ GameObject* EnemyManager::Boss_Spawn()
 
 void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 {
-	if (_front) //앞에서 생성.
+	if (_front) 
 	{
-		//킹론 : 플레이어 앞에서 생성되어야한다 -> 카메라랑 같은 방향
-				//플레이어 시야각 안에 생성되어야 한다 -> 카메라 안에 있어야 함.
-				// 즉 걍 카메라에 보이는 곳에 생성 되면 된다. 이말이야.
-				// 그래서 카메라 화면 즉 뷰포트의 랜덤 좌표를 넘겨줘서
-				// 월드 좌표로 옮긴 뒤 해당 위치에 에ㅡ너미를 생성 되게 하는 것.
-
-		//Vector3 vPlayerPos = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->position;
+		
 
 		Vector3 vResult;
 
 		Vector2 vScreenSpace = { WINCX/2.f, WINCY/2.f };
 		Vector3 vProjSpace;
 
-		/* 뷰 포트(스크린 좌표) -> 투영 스페이스 좌표 */
 		vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
 		vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
 		vProjSpace.z = 1.f;
-		//->스크린 좌표를 반반 줬기때문에 원래 계획대로라면 투영 스페이스 좌표는 0,0,1 이 나와야함.
-
-		/* 투영 스페이스 -> 뷰 스페이스 (투영 매트릭스 역행렬 곱해주기.) */
+		
 		Matrix matProj_Inverse;
 		D3DXMatrixInverse(&matProj_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetProjMatrix());
 		Vector3 vViewSpace;
 		D3DXVec3TransformCoord(&vViewSpace, &vProjSpace, &matProj_Inverse);
 
-		/* 뷰 스페이스 -> 월드 스페이스 (뷰 매트릭스 역행렬 곱해주기.) */
+		
 		Matrix matView_Inverse;
 		D3DXMatrixInverse(&matView_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetViewMatrix());
 		D3DXVec3TransformCoord(&vResult, &vViewSpace, &matView_Inverse);
 
-		//근데 너무 멂.
-		//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
-		//거리를 더 해주자.
+		
 		D3DXVec3Normalize(&vResult, &vResult);
 		Vector3 temp = Core::GetInstance()->GetMainCamera()->GetTransform()->position + vResult * 100.f;
-		//기준 위치 + (거리{생성된 방향벡터 * 거리});
+		
 
 		Enemy_Spawn(temp);
 
-		//근데 Camera 기준으로 할꺼면 Camera-> GetCamToMouseWorldDirection 함수 있음 ㅎㅎ;
+		
 	}
 
-	if (!_front) //뒤에서 생성.
+	if (!_front) 
 	{
 		Vector3 vPlayerPos = PlayerInfoManager::GetInstance()->GetPlayer()->GetTransform()->position;
 
@@ -402,29 +393,25 @@ void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 		Vector2 vScreenSpace = { WINCX / 2.f, WINCY / 2.f };
 		Vector3 vProjSpace;
 
-		/* 뷰 포트(스크린 좌표) -> 투영 스페이스 좌표 */
+	
 		vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
 		vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
 		vProjSpace.z = 1.f;
-		//->스크린 좌표를 반반 줬기때문에 원래 계획대로라면 투영 스페이스 좌표는 0,0,1 이 나와야함.
-
-		/* 투영 스페이스 -> 뷰 스페이스 (투영 매트릭스 역행렬 곱해주기.) */
+		
 		Matrix matProj_Inverse;
 		D3DXMatrixInverse(&matProj_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetProjMatrix());
 		Vector3 vViewSpace;
 		D3DXVec3TransformCoord(&vViewSpace, &vProjSpace, &matProj_Inverse);
 
-		/* 뷰 스페이스 -> 월드 스페이스 (뷰 매트릭스 역행렬 곱해주기.) */
+		
 		Matrix matView_Inverse;
 		D3DXMatrixInverse(&matView_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetViewMatrix());
 		D3DXVec3TransformCoord(&vResult, &vViewSpace, &matView_Inverse);
 
-		//근데 너무 멂.
-		//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
-		//거리를 더 해주자.
+		
 		D3DXVec3Normalize(&vResult, &(vResult));
 		Vector3 temp = Core::GetInstance()->GetMainCamera()->GetTransform()->position + vResult * _distance * -1.f;
-		//기준 위치 + (거리{생성된 방향벡터 * 거리});
+		
 
 		Enemy_Spawn(temp);
 	}
@@ -437,70 +424,27 @@ Vector3 EnemyManager::Pos_ScreenToWorld(float _x, float _y, float _distance)
 	Vector2 vScreenSpace = { _x, _y };
 	Vector3 vProjSpace;
 
-	/* 뷰 포트(스크린 좌표) -> 투영 스페이스 좌표 */
+	
 	vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
 	vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
-	vProjSpace.z = 1.f;
-	//->스크린 좌표를 반반 줬기때문에 원래 계획대로라면 투영 스페이스 좌표는 0,0,1 이 나와야함.
-
-	/* 투영 스페이스 -> 뷰 스페이스 (투영 매트릭스 역행렬 곱해주기.) */
+	
 	Matrix matProj_Inverse;
 	D3DXMatrixInverse(&matProj_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetProjMatrix());
 	Vector3 vViewSpace;
 	D3DXVec3TransformCoord(&vViewSpace, &vProjSpace, &matProj_Inverse);
 
-	/* 뷰 스페이스 -> 월드 스페이스 (뷰 매트릭스 역행렬 곱해주기.) */
+	
 	Matrix matView_Inverse;
 	D3DXMatrixInverse(&matView_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetViewMatrix());
 	D3DXVec3TransformCoord(&vResult, &vViewSpace, &matView_Inverse);
 
-	//근데 너무 멂.
-	//vResult를 바로 Normalize 해벌이고 넘기면 그냥 0,0,0에 생성됨.
-	//거리를 더 해주자.
+	
 	D3DXVec3Normalize(&vResult, &vResult);
 	Vector3 temp = Core::GetInstance()->GetMainCamera()->GetTransform()->position + vResult * _distance;
-	//기준 위치 + (거리{생성된 방향벡터 * 거리});
 
 	return temp;
 }
 
-//Vector3 EnemyManager::Pos_ViewToWorld(float _x, float _y, float _Distance)
-//{
-//	/* x,y : 0 ~ 1.0 */
-//	/* z : 100 ~ 1000 */
-//	GameObject* mainCam = Core::GetInstance()->FindObjectByName(OBJECT_TAG_CAMERA, L"mainCamera");
-//
-//	Vector3 vResult;
-//
-//	/* 뷰 포트(스크린좌표) -> 투영 스페이스*/
-//	Vector3 vScreenPos = { _x, _y, 0.f };
-//	Vector3 vProjSpace;
-//	vProjSpace.x = vScreenPos.x / (WINCX * 0.5f) - 1.f;
-//	vProjSpace.y = 1.f - vScreenPos.y / (WINCY * 0.5f);
-//	vProjSpace.z = 1.f; //asdf
-//
-//
-//	/* 투영스페이스 -> 뷰 스페이스*/
-//	Matrix InverseProj;
-//	D3DXMatrixInverse(&InverseProj, 0, &mainCam->GetComponent<Camera>()->GetProjMatrix());
-//	D3DXVec3TransformCoord(&vResult, &vScreenPos, &InverseProj);
-//	//두번째 인자를 계산 끝난 투영 스페이스를 줘야지 시! 팔새기야 ! 씨팔 이거때문에 두시간동안 지1랄 햇네
-//
-//	//카메라 기준으로 멀어지는걸 원한다면 여기서 쁘라스 해줘야함.
-//	//vResult.z += _Distance;
-//
-//	/* 뷰스페이스 -> 월드 스페이스*/
-//	Matrix InverseView;
-//	D3DXMatrixInverse(&InverseView, 0, &mainCam->GetComponent<Camera>()->GetViewMatrix());
-//	D3DXVec3TransformCoord(&vResult, &vResult, &InverseView);
-//
-//	//나온 결과
-//	//vResult.z += _Distance; //
-//
-//	//D3DXVec3Normalize(&vResult, &vResult);
-//
-//	return vResult;
-//}
 
 
 void EnemyManager::Spawn_S1P1_Normal()

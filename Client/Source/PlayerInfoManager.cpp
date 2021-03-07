@@ -46,11 +46,6 @@ void PlayerInfoManager::Initialize()
 void PlayerInfoManager::Update()
 {
 
-	//DEBUG_LOG(L"Gold", m_gold);
-	//DEBUG_LOG(L"���� �������� �ֹ��� ", m_currentlyWeapon[FIRST_PARTS]);
-	//DEBUG_LOG(L"���� �������� �� ���幫�� ", m_currentlyWeapon[SECOND_PARTS]);
-
-
 	m_timelimit -= TimeManager::GetInstance()->GetdeltaTime();
 }
 
@@ -154,6 +149,86 @@ void PlayerInfoManager::MinGold(int _value)
 	m_gold -= _value;
 }
 
+void PlayerInfoManager::SetWeaponSpawnPos(PARTS_NUM eID, bool _gargeCheck)
+{
+	wstring findWeaponName =  GetWeapon(eID);
+
+	PlayerItem* findItem = ItemManager::GetInstance()->FindItemObject(L"Weapon", findWeaponName);
+
+	//Mesh
+	MeshRenderer::Desc meshInfo;
+	//
+
+
+
+
+	switch (findItem->GetItmeInfo().weaponType)
+	{
+	case WEAPON_CANNON:
+		meshInfo.meshName = findItem->GetItmeInfo().modelName;
+		findItem->SetCreatePos(Vector3(0.f, 0.f, 1.f));
+		break;
+	case WEAPON_MISSILE:
+		if (m_pSideWeapon[0] || m_pSideWeapon[1])
+		{
+			DESTROY(m_pSideWeapon[0]);
+			DESTROY(m_pSideWeapon[1]);
+
+			m_pSideWeapon[0] = nullptr;
+			m_pSideWeapon[1] = nullptr;
+		}
+
+
+		meshInfo.meshName = findItem->GetItmeInfo().modelName;
+		meshInfo.mtrlName = L"default";
+		findItem->SetCreatePos(Vector3(3.f, -1.f, 0.f));
+
+
+		
+			m_pSideWeapon[0] = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo);
+			m_pSideWeapon[1] = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo);
+
+			if (_gargeCheck)
+			{
+				m_pSideWeapon[0]->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
+				m_pSideWeapon[1]->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
+			}
+			else
+			{
+				m_pSideWeapon[0]->SetParents(GetPlayer());
+				m_pSideWeapon[1]->SetParents(GetPlayer());
+			}
+
+
+
+			m_pSideWeapon[0]->SetPosition(findItem->GetItmeInfo().createPos);
+			m_pSideWeapon[1]->SetPosition({ findItem->GetItmeInfo().createPos.x * -1.f,
+				findItem->GetItmeInfo().createPos.y,
+				findItem->GetItmeInfo().createPos.z });
+
+		break;
+	case WEAPON_SINGLE_MISSILE:
+		if (m_pSingleWeapon)
+		{
+			DESTROY(m_pSingleWeapon);
+			m_pSingleWeapon = nullptr;
+		}
+
+		meshInfo.meshName = findItem->GetItmeInfo().modelName;
+		meshInfo.mtrlName = L"default";
+		findItem->SetCreatePos(Vector3(0.f, -1.f, 0.f));
+
+		m_pSingleWeapon = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo);
+		if (_gargeCheck)
+			m_pSingleWeapon->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
+		else
+			m_pSingleWeapon->SetParents(GetPlayer());
+		
+		m_pSingleWeapon->SetPosition(findItem->GetItmeInfo().createPos);
+		break;
+	}
+}
+
 GameObject * PlayerInfoManager::Player_Create()
 {
 	m_player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player");
@@ -238,6 +313,24 @@ GameObject * PlayerInfoManager::Player_Create()
 void PlayerInfoManager::Player_Release()
 {
 	m_player = nullptr;
+}
+
+void PlayerInfoManager::GrageWeaponRelease()
+{
+	if (m_pSideWeapon[0] || m_pSideWeapon[1])
+	{
+		DESTROY(m_pSideWeapon[0]);
+		DESTROY(m_pSideWeapon[1]);
+
+		m_pSideWeapon[0] = nullptr;
+		m_pSideWeapon[1] = nullptr;
+	}
+
+	if (m_pSingleWeapon)
+	{
+		DESTROY(m_pSingleWeapon);
+		m_pSingleWeapon = nullptr;
+	}
 }
 
 const int & PlayerInfoManager::GetHp() const

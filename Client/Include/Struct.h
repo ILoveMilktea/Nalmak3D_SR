@@ -78,6 +78,8 @@ typedef struct tagItemInfo
 		weaponAttak = other.weaponAttak;
 		weaponAmmo = other.weaponAmmo;
 		modelName = other.modelName;
+		createPos = other.createPos;
+		weaponType = other.weaponType;
 	};
 
 	tagItemInfo(const wstring& _itemName, float& _weaponSpeed, float& _delay, int& _weaponAttak, int& _weaponAmmo, int& _gold) :
@@ -93,6 +95,8 @@ typedef struct tagItemInfo
 	int	 weaponAttak;
 	int  weaponAmmo; //Round
 	int  costGold;
-
+	//
 	wstring modelName;
+	WEAPON_TYPE weaponType;
+	Vector3 createPos;
 }ITEMINFO;

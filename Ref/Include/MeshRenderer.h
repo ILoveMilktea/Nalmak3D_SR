@@ -38,6 +38,8 @@ public:
 	virtual Material * GetMaterial(int _index = 0) override;
 	virtual void SetMaterial(Material * _material, int _index = 0) override;
 	virtual void SetMaterial(const wstring& _mtrlName, int _index = 0) override;
+
+	void SetMesh(const wstring& _meshName);
 private:
 	vector<Material*> m_materials;
 	class StaticMesh* m_mesh;

@@ -59,12 +59,12 @@ void Player_EmpMissile::CreateBullet()
 	Emp = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Emp_Missile");
 	Emp->SetScale(Vector3(1.f, 1.f, 2.f));
 	Emp->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
-	Emp->SetPosition(0.f, -1.f, 0.f);
+	Emp->SetPosition(m_itemInfo.createPos);
 
-	VIBufferRenderer::Desc Emp_render;
-	Emp_render.meshName = L"box";
-	Emp_render.mtrlName = L"default";
-	Emp->AddComponent<VIBufferRenderer>(&Emp_render);
+	MeshRenderer::Desc Emp_render;
+	Emp_render.meshName = m_itemInfo.modelName;
+	Emp_render.mtrlName = L"su34";
+	Emp->AddComponent<MeshRenderer>(&Emp_render);
 
 	SphereCollider::Desc Emp_col;
 	Emp_col.radius = 1.f;
@@ -77,5 +77,9 @@ void Player_EmpMissile::CreateBullet()
 
 void Player_EmpMissile::DeleteBullet()
 {
-
+	if (Emp)
+	{
+		DESTROY(Emp);
+		Emp = nullptr;
+	}
 }

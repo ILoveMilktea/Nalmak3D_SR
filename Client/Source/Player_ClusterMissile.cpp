@@ -28,14 +28,6 @@ void Player_ClusterMissile::ItemShot()
 
 
 
-
-	m_bullet->GetTransform()->position = m_bullet->GetTransform()->GetWorldPosition();
-
-	//SphereCollider::Desc cluster_col;
-	//cluster_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
-	//m_bullet->AddComponent<SphereCollider>(&cluster_col);
-
-	//m_bullet->GetTransform()->position = m_bullet->GetTransform()->GetWorldPosition();
 	m_bullet->GetTransform()->DeleteParent();
 
 	ClusterBulletMove::Desc bulletinfo;
@@ -56,16 +48,16 @@ void Player_ClusterMissile::CreateBullet()
 {
 	if (m_bullet)
 		return;
-	m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+	m_parents = PlayerInfoManager::GetInstance()->GetPlayer();
 
-	VIBufferRenderer::Desc meshInfo;
-	meshInfo.meshName = L"box";
-	meshInfo.mtrlName = L"default";
+	MeshRenderer::Desc meshInfo;
+	meshInfo.meshName = m_itemInfo.modelName;
+	meshInfo.mtrlName = L"su34";
 
 	m_bullet = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"cluster");
-	m_bullet->AddComponent<VIBufferRenderer>(&meshInfo);
+	m_bullet->AddComponent<MeshRenderer>(&meshInfo);
 	m_bullet->SetParents(m_parents);
-	m_bullet->SetPosition(0.f, -1.f, 0.f);
+	m_bullet->SetPosition(m_itemInfo.createPos);
 }
 
 void Player_ClusterMissile::DeleteBullet()

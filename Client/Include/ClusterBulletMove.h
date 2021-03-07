@@ -17,7 +17,6 @@ public:
 	ClusterBulletMove(Desc* _desc);
 	virtual ~ClusterBulletMove();
 
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void Release() override;

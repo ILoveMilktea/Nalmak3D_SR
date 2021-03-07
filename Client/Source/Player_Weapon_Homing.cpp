@@ -129,17 +129,17 @@ void Player_Weapon_Homing::CreateBullet()
 
 	for (int i = 0; i < 4; ++i)
 	{
-		VIBufferRenderer::Desc meshInfo;
-		meshInfo.meshName = L"box";
-		meshInfo.mtrlName = L"default";
+		MeshRenderer::Desc meshInfo;
+		meshInfo.meshName = m_itemInfo.modelName;
+		meshInfo.mtrlName = L"su34";
 
 
-		m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+		m_parents = PlayerInfoManager::GetInstance()->GetPlayer();
 
 		auto bullet = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Homing");
-		bullet->AddComponent<VIBufferRenderer>(&meshInfo);
+		bullet->AddComponent<MeshRenderer>(&meshInfo);
 		bullet->SetParents(m_parents);
-		bullet->SetPosition(0.f, -1.f, 0.f);
+		bullet->SetPosition(m_itemInfo.createPos);
 		bullet->SetScale(0.5f, 0.5f, 3.f);
 		//bullet->GetTransform()->SetRotation(eulerRotate.x, eulerRotate.y, eulerRotate.z);
 
