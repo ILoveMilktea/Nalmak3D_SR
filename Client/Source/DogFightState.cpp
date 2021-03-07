@@ -14,7 +14,6 @@
 #include "StageManager.h"
 #include "UIWindowFactory.h"
 #include "SceneChanger.h"
-#include "PlayerBossStageMove.h"
 #include "PlayerShooter.h"
 
 #include "PlayerSkillActor.h"
