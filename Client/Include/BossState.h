@@ -34,7 +34,7 @@ private:
 	bool	m_bEnter = false;
 
 	GameObject*	m_pPlayer = nullptr;
-	GameObject*	m_pMainCamera = nullptr;
+	Camera*	m_pMainCamera = nullptr;
 	GameObject* m_pBoss = nullptr;
 
 	//1. player move to certain pos + rotate reset

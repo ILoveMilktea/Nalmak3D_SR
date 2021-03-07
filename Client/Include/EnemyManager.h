@@ -29,10 +29,14 @@ public: /* Gettttt */
 	int Get_EnemyCount() const;
 	list<GameObject*> Get_EnemyList() const;
 	int Get_BossHp() const;
+	const Vector3& Get_BossPos() const;
+	int	Get_BossCount() const;
+	GameObject*	Get_Boss();
 
 public: /* Settttt */
 	void Add_EnemyCount(int _count);
 	GameObject* NearFindEenemy( GameObject* _finderObj, float _minDis =0 );
+	void	Boss_Release();
 
 public: /* Funcs */
 	void Destroy_AllEnemy();
@@ -53,7 +57,7 @@ public: /* Funcs */
 
 	void Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
 
-	void Boss_Spawn();
+	GameObject* Boss_Spawn();
 
 	void Player_FovSpawnTest(bool _front, float _distance);
 	Vector3 Pos_ScreenToWorld(float _x, float _y, float _distance);
@@ -75,9 +79,11 @@ public: /* stage2 - phase3 (B0ss)*/
 
 
 private:
-	StateControl* m_pStateControl = nullptr;
-	int				m_iEnemyCount = 0;
+	StateControl*	m_pStateControl = nullptr;
 
+	GameObject*		m_pBoss = nullptr;
+	int				m_iEnemyCount = 0;
+	int				m_iBossCount = 0;
 
 
 };

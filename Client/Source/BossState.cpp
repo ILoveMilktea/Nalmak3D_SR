@@ -2,7 +2,6 @@
 #include "..\Include\BossState.h"
 
 #include "EnemyManager.h"
-#include "PlayerTopViewMove.h"
 #include "PlayerBossStageMove.h"
 #include "UIWindowFactory.h"
 
@@ -22,30 +21,16 @@ void BossState::Initialize()
 
 void BossState::EnterState()
 {
-
-	//m_pMainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
-
-	//if (m_pMainCamera == nullptr)
-	//{
-	//	assert(L"아 ㅋㅋ 카메라 못 찾앗다고 ㅋㅋ" && 0);
-	//}
-
-	////m_pMainCamera->SetPosition(0.f, 100.f, 0.f);
-	////m_pMainCamera->SetRotation(0.f, 0.f, 0.f);
-	////m_pMainCamera->GetTransform()->RotateX(90.f);
-
-	//m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
-
-	//if (m_pPlayer == nullptr)
-	//{
-	//	assert(L"dk zz vmffpdldj aht qkedkTEkrh zz " && 0);
-	//}
+	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+	m_pMainCamera->GetComponent<StateControl>()->SetState(L"CameraBoss_Appear");
 
 	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fBossTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fBossScore);
+	m_pPlayer->GetComponent<StateControl>()->SetState(L"playerBoss_Enter");
 
-	EnemyManager::GetInstance()->Boss_Spawn();
+	m_pBoss = EnemyManager::GetInstance()->Get_Boss();
+
 
 	// ==== UI ====
 	UIWindowFactory::BossUI();
@@ -58,27 +43,30 @@ void BossState::EnterState()
 void BossState::UpdateState()
 {
 	m_fBossTime += dTime;
-
-	if (m_bEnter)
-	{
-		if (EnterProduce())
-		{
-			m_pPlayer->GetComponent<StateControl>()->SetState(L"playerBossMove");
-			m_bEnter = false;
-		}
-	}
-	if (m_bEnter == false)
-	{
-		if (/*EnemyManager::GetInstance()->Get_BossHp() <= 0*/ 
-			EnemyManager::GetInstance()->Get_EnemyCount()<=0&& GameManager::GetInstance()->Get_StageClear(2) == false)
-		{
-			GameManager::GetInstance()->Set_StageClear(2);
-			Core::GetInstance()->LoadScene(L"result");
-
-			return;
-		}
-	}
 	
+
+	
+
+	//if (m_bEnter)
+	//{
+	//	if (EnterProduce())
+	//	{
+	//		m_pPlayer->GetComponent<StateControl>()->SetState(L"playerBossMove");
+	//		m_bEnter = false;
+	//	}
+	//}
+	//if (m_bEnter == false)
+	//{
+	//	if (/*EnemyManager::GetInstance()->Get_BossHp() <= 0*/ 
+	//		EnemyManager::GetInstance()->Get_EnemyCount()<=0&& GameManager::GetInstance()->Get_StageClear(2) == false)
+	//	{
+	//		GameManager::GetInstance()->Set_StageClear(2);
+	//		Core::GetInstance()->LoadScene(L"result");
+
+	//		return;
+	//	}
+	//}
+	//
 	//DEBUG_LOG(L"Player Pos", m_pPlayer->GetTransform()->position);
 	//DEBUG_LOG(L"Camera Pos", m_pMainCamera->GetTransform()->position);
 	DEBUG_LOG(L"Current Combat State : ", L"Boss State");
@@ -222,7 +210,7 @@ bool BossState::EnterProduce()
 
 const Vector3 & BossState::RandForShaking()
 {
-	return vCameraRand = Vector3(rand() % 3 - 1.f, rand() % 3 - 1.f, rand() % 3 - 1.f);;
+	return vCameraRand = Vector3(rand() % 3 - 1.f, rand() % 3 - 1.f, rand() % 3 - 1.f);
 }
 
 void BossState::CameraShaking()

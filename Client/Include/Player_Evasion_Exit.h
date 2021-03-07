@@ -1,11 +1,11 @@
 #pragma once
 #include "IState.h"
-class Camera_Evasion :
+class Player_Evasion_Exit :
 	public IState
 {
 public:
-	Camera_Evasion();
-	virtual ~Camera_Evasion();
+	Player_Evasion_Exit();
+	virtual ~Player_Evasion_Exit();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -14,10 +14,13 @@ public:
 	virtual void ExitState() override;
 
 public:
-
-public:
+	void CalcDir();
+	void RotReset();
 
 private:
-	
+	float m_fSpd = 0.f;
+	Vector3 m_vDir = { 0.f,0.f,0.f };
+	//must be init setting vaulue upper 0.1
+	bool	m_bNext = false;
 };
 

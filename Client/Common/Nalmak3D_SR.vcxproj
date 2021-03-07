@@ -194,13 +194,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\AimMissile.h" />
+    <ClInclude Include="..\Include\Boss_Enter.h" />
+    <ClInclude Include="..\Include\Boss_Interrupt.h" />
     <ClInclude Include="..\Include\Camera_Boss.h" />
+    <ClInclude Include="..\Include\Camera_Boss_Appear.h" />
     <ClInclude Include="..\Include\Camera_Evasion.h" />
     <ClInclude Include="..\Include\DogFight_Stage1.h" />
     <ClInclude Include="..\Include\EndingScene.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_Boss.h" />
-    <ClInclude Include="..\Include\BossStageCamera.h" />
     <ClInclude Include="..\Include\BossState.h" />
     <ClInclude Include="..\Include\Enemy_Circle_Evasion.h" />
     <ClInclude Include="..\Include\ClusterBulletMove.h" />
@@ -211,8 +213,12 @@
     <ClInclude Include="..\Include\FieldCameraSmoothFollowState.h" />
     <ClInclude Include="..\Include\FieldCameraStartState.h" />
     <ClInclude Include="..\Include\Player.h" />
-    <ClInclude Include="..\Include\Player_Enter_Evasion.h" />
+    <ClInclude Include="..\Include\Player_Boss_Enter.h" />
+    <ClInclude Include="..\Include\Player_Evasion_Enter.h" />
+    <ClInclude Include="..\Include\Player_Evasion_Exit.h" />
     <ClInclude Include="..\Include\Player_FarAway.h" />
+    <ClInclude Include="..\Include\Player_Boss_Move.h" />
+    <ClInclude Include="..\Include\Player_Evasion_Move.h" />
     <ClInclude Include="..\Include\Player_NearGuideBullet.h" />
     <ClInclude Include="..\Include\Enemy_Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_TargetPlane.h" />
@@ -284,7 +290,6 @@
     <ClInclude Include="..\Include\PlayerNone.h" />
     <ClInclude Include="..\Include\PlayerShooter.h" />
     <ClInclude Include="..\Include\PlayerSkillActor.h" />
-    <ClInclude Include="..\Include\PlayerTopViewMove.h" />
     <ClInclude Include="..\Include\Enemy_Prymide_Evasion.h" />
     <ClInclude Include="..\Include\Player_WindEffect.h" />
     <ClInclude Include="..\Include\ResultScene.h" />
@@ -314,7 +319,6 @@
     <ClInclude Include="..\Include\StageSelectSceneManager.h" />
     <ClInclude Include="..\Include\Struct.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
-    <ClInclude Include="..\Include\TopViewCamera.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
     <ClInclude Include="..\Include\UIManager.h" />
@@ -333,13 +337,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\AimMissile.cpp" />
+    <ClCompile Include="..\Source\Boss_Enter.cpp" />
+    <ClCompile Include="..\Source\Boss_Interrupt.cpp" />
     <ClCompile Include="..\Source\Camera_Boss.cpp" />
+    <ClCompile Include="..\Source\Camera_Boss_Appear.cpp" />
     <ClCompile Include="..\Source\Camera_Evasion.cpp" />
     <ClCompile Include="..\Source\DogFight_Stage1.cpp" />
     <ClCompile Include="..\Source\EndingScene.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_Boss.cpp" />
-    <ClCompile Include="..\Source\BossStageCamera.cpp" />
     <ClCompile Include="..\Source\BossState.cpp" />
     <ClCompile Include="..\Source\Enemy_Circle_Evasion.cpp" />
     <ClCompile Include="..\Source\ClusterBulletMove.cpp" />
@@ -350,8 +356,12 @@
     <ClCompile Include="..\Source\FieldCameraSmoothFollowState.cpp" />
     <ClCompile Include="..\Source\FieldCameraStartState.cpp" />
     <ClCompile Include="..\Source\Player.cpp" />
-    <ClCompile Include="..\Source\Player_Enter_Evasion.cpp" />
+    <ClCompile Include="..\Source\Player_Boss_Enter.cpp" />
+    <ClCompile Include="..\Source\Player_Evasion_Enter.cpp" />
+    <ClCompile Include="..\Source\Player_Evasion_Exit.cpp" />
     <ClCompile Include="..\Source\Player_FarAway.cpp" />
+    <ClCompile Include="..\Source\Player_Boss_Move.cpp" />
+    <ClCompile Include="..\Source\Player_Evasion_Move.cpp" />
     <ClCompile Include="..\Source\Player_NearGuideBullet.cpp" />
     <ClCompile Include="..\Source\Enemy_Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_TargetPlane.cpp" />
@@ -420,7 +430,6 @@
     <ClCompile Include="..\Source\PlayerNone.cpp" />
     <ClCompile Include="..\Source\PlayerShooter.cpp" />
     <ClCompile Include="..\Source\PlayerSkillActor.cpp" />
-    <ClCompile Include="..\Source\PlayerTopViewMove.cpp" />
     <ClCompile Include="..\Source\Enemy_Prymide_Evasion.cpp" />
     <ClCompile Include="..\Source\Player_WindEffect.cpp" />
     <ClCompile Include="..\Source\ResultScene.cpp" />
@@ -449,7 +458,6 @@
     <ClCompile Include="..\Source\StageSelectScene.cpp" />
     <ClCompile Include="..\Source\StageSelectSceneManager.cpp" />
     <ClCompile Include="..\Source\TitleScene.cpp" />
-    <ClCompile Include="..\Source\TopViewCamera.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="..\Source\UIManager.cpp" />
     <ClCompile Include="..\Source\UI_Alarm.cpp" />

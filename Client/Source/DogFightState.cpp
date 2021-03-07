@@ -4,8 +4,6 @@
 #include "PlayerInfoManager.h"
 #include "PlayerIdle.h"
 #include "PlayerMove.h"
-#include "PlayerTopViewMove.h"
-
 
 #include "MouseOption.h"
 #include "SmoothFollow.h"
@@ -17,7 +15,6 @@
 #include "UIWindowFactory.h"
 #include "SceneChanger.h"
 #include "PlayerBossStageMove.h"
-#include "PlayerNone.h"
 #include "PlayerShooter.h"
 
 #include "PlayerSkillActor.h"
@@ -49,8 +46,8 @@ void DogFightState::Initialize()
 
 void DogFightState::EnterState()
 {
-	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
-	INSTANTIATE()->AddComponent<Grid>();
+	//INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
+	//INSTANTIATE()->AddComponent<Grid>();
 
 #pragma region WeaponTest
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");

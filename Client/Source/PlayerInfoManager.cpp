@@ -6,8 +6,6 @@
 #include "PlayerNone.h"
 #include "PlayerIdle.h"
 #include "PlayerMove.h"
-#include "PlayerTopViewMove.h"
-#include "PlayerBossStageMove.h"
 #include "PlayerEscapeState.h"
 #include "PlayerSkillActor.h"
 #include "..\..\Engine\Include\UIInteractor.h"
@@ -15,6 +13,11 @@
 #include "Player_WindEffect.h"
 #include "Player.h"
 #include "Player_FarAway.h"
+#include "Player_Evasion_Enter.h"
+#include "Player_Evasion_Move.h"
+#include "Player_Boss_Move.h"
+#include "Player_Boss_Enter.h"
+#include "Player_Evasion_Exit.h"
 
 PlayerInfoManager*::PlayerInfoManager::m_instance = nullptr;
 
@@ -202,8 +205,14 @@ GameObject * PlayerInfoManager::Player_Create()
 	m_player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
 	
 	m_player->GetComponent<StateControl>()->AddState<Player_FarAway>(L"playerFarAway");
-	m_player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
-	m_player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
+
+	m_player->GetComponent<StateControl>()->AddState<Player_Evasion_Enter>(L"playerEvasion_Enter");
+	m_player->GetComponent<StateControl>()->AddState<Player_Evasion_Move>(L"playerEvasion_Move");
+	m_player->GetComponent<StateControl>()->AddState<Player_Evasion_Exit>(L"playerEvasion_Exit");
+	
+	m_player->GetComponent<StateControl>()->AddState<Player_Boss_Enter>(L"playerBoss_Enter");
+	m_player->GetComponent<StateControl>()->AddState<Player_Boss_Move>(L"playerBoss_Move");
+
 	//status is related to skill.
 	m_player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
 	m_player->GetComponent<StateControl>()->InitState(L"playerIdle");

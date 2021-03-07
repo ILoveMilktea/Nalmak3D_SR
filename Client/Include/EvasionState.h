@@ -34,5 +34,7 @@ private:
 
 	float	m_fEvasionTime = 0.f;
 	float	m_fEvasiontScore = 0.f;
+
+	bool	m_bNext = false;
 };
 

@@ -6,5 +6,11 @@ class Camera_Boss :
 public:
 	Camera_Boss();
 	virtual ~Camera_Boss();
+
+	// IState을(를) 통해 상속됨
+	virtual void Initialize() override;
+	virtual void EnterState() override;
+	virtual void UpdateState() override;
+	virtual void ExitState() override;
 };
 

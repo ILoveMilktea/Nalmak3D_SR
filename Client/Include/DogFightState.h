@@ -27,6 +27,7 @@ public:
 
 private:
 	GameObject* m_pPlayer = nullptr;
+	GameObject* m_pBoss = nullptr;
 	Camera* m_pMainCamera = nullptr;
 
 

@@ -1,11 +1,11 @@
 #pragma once
 #include "IState.h"
-class Camera_Evasion :
+class Player_Evasion_Move :
 	public IState
 {
 public:
-	Camera_Evasion();
-	virtual ~Camera_Evasion();
+	Player_Evasion_Move();
+	virtual ~Player_Evasion_Move();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -16,8 +16,15 @@ public:
 public:
 
 public:
+	
+public:
+	void Lean(int _a);
 
 private:
+	float m_fRotZ = 0.f; 
+
+	float	 m_fClamp_x;
+	float	 m_fClamp_y;
 	
 };
 

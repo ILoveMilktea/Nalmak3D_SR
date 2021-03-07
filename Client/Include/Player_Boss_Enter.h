@@ -1,11 +1,11 @@
 #pragma once
 #include "IState.h"
-class Camera_Evasion :
+class Player_Boss_Enter :
 	public IState
 {
 public:
-	Camera_Evasion();
-	virtual ~Camera_Evasion();
+	Player_Boss_Enter();
+	virtual ~Player_Boss_Enter();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -18,6 +18,7 @@ public:
 public:
 
 private:
-	
+	bool	m_bBackStep = false;
+
 };
 

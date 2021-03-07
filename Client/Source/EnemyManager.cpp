@@ -20,6 +20,8 @@
 #include "Enemy_AirFire_Evasion.h"
 #include "Enemy_Look_Evasion.h"
 #include "Enemy_Exit_Evasion.h"
+#include "Boss_Enter.h"
+#include "Boss_Interrupt.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -36,13 +38,12 @@ EnemyManager::~EnemyManager()
 EnemyManager * EnemyManager::GetInstance()
 {
 	if (!m_Instance)
-	{//?�데?�트�??�기 ?�해???��? Component�??�속받�? 컴포?�트 객체루다가 만듦.
-
+	{
 		auto Instance = INSTANTIATE();
 		Instance->AddComponent<EnemyManager>();
 		m_Instance = Instance->GetComponent<EnemyManager>();
 
-		Instance->SetDontDestroy(true);//???�어가??지?��?마라 ?�거??
+		Instance->SetDontDestroy(true);
 	}
 
 	return m_Instance;
@@ -89,7 +90,6 @@ void EnemyManager::Update()
 int EnemyManager::Get_EnemyCount() const
 {
 	//size_t size = Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY).size();
-	//최적?��? ?�해??그냥 멤버 변?�루?��? ?�기??
 	return  m_iEnemyCount;
 }
 
@@ -101,6 +101,31 @@ list<GameObject*> EnemyManager::Get_EnemyList() const
 int EnemyManager::Get_BossHp() const
 {
 	return Core::GetInstance()->FindObjectByName(OBJECT_TAG_BOSS, L"Boss")->GetComponent<Boss>()->Get_CurHp();
+}
+
+const Vector3 & EnemyManager::Get_BossPos() const
+{
+	if (m_pBoss)
+	{
+		return m_pBoss->GetTransform()->position;
+	}
+	else { return Vector3(0.f, 0.f, 0.f); }
+}
+
+int EnemyManager::Get_BossCount() const
+{
+	return m_iBossCount;
+}
+
+GameObject * EnemyManager::Get_Boss()
+{
+	if (m_pBoss == nullptr)
+	{
+		Boss_Spawn();
+		return m_pBoss;
+	}
+
+	return m_pBoss;
 }
 
 void EnemyManager::Add_EnemyCount(int _count)
@@ -126,6 +151,12 @@ GameObject * EnemyManager::NearFindEenemy( GameObject * _finderObj, float _minDi
 	}
 
 	return target;
+}
+
+void EnemyManager::Boss_Release()
+{
+	--m_iBossCount;
+	m_pBoss = nullptr;
 }
 
 void EnemyManager::Destroy_AllEnemy()
@@ -280,10 +311,10 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 
 }
 
-void EnemyManager::Boss_Spawn()
+GameObject* EnemyManager::Boss_Spawn()
 {
 	GameObject* Boss_obj = INSTANTIATE(OBJECT_TAG_BOSS, L"Boss");
-	Boss_obj->SetPosition(Vector3(0.f, 0.f, 200.f));
+	Boss_obj->SetPosition(Vector3(0.f, 0.f, 120.f));
 	Boss_obj->SetScale(100.f, 100.f, 100.f);
 
 	ENEMY_STATUS Boss_Status(1000, 0, 0);
@@ -296,13 +327,24 @@ void EnemyManager::Boss_Spawn()
 	Boss_Mesh.mtrlName = L"boss";
 	Boss_Mesh.meshName = L"box";
 	Boss_obj->AddComponent<VIBufferRenderer>(&Boss_Mesh);
-
+	
 	SphereCollider::Desc Boss_col;
-	Boss_col.radius = 100.f;
+	Boss_col.radius = 50.f;
 	Boss_col.collisionLayer = COLLISION_LAYER_ENEMY;
 	Boss_obj->AddComponent<SphereCollider>(&Boss_col);
 
+	Boss_obj->AddComponent<StateControl>();
+	StateControl* Boss_stateControler = Boss_obj->GetComponent<StateControl>();
+	Boss_stateControler->AddState<Boss_Enter>(L"Boss_Enter");
+	Boss_stateControler->AddState<Boss_Interrupt>(L"Boss_Interrupt");
+
+	Boss_stateControler->InitState(L"Boss_Enter");
+
 	++m_iEnemyCount;
+	++m_iBossCount;
+	m_pBoss = Boss_obj;
+
+	return m_pBoss;
 }
 
 void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)

@@ -3,7 +3,6 @@
 
 #include "EnemyManager.h"
 #include "StageManager.h"
-#include "PlayerTopViewMove.h"
 
 EvasionState::EvasionState()
 {
@@ -21,16 +20,18 @@ void EvasionState::Initialize()
 
 void EvasionState::EnterState()
 {
+
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+	m_pMainCamera->GetComponent<StateControl>()->SetState(L"CameraEvasion");
 
 	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fEvasionTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fEvasiontScore);
+	m_pPlayer->GetComponent<StateControl>()->SetState(L"playerEvasion_Enter");
 
 	ENEMY_STATUS tStatus(10, 20, 1);
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
-	
 	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-20.f, 0.f, 30.f), Vector3(0.1f, 0.1f, 0.1f),
 		ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
 
@@ -44,7 +45,13 @@ void EvasionState::UpdateState()
 {
 	//Enter에서 카메라 세팅, 그리고 플레이어 중앙으로.
 	
-	EnterProduce();
+	if (m_bEnter)
+	{
+		if (m_pPlayer->GetComponent<StateControl>()->GetCurStateString() == L"playerEvasion_Move")
+		{
+			m_bEnter = false;
+		}
+	}
 		
 	if (!m_bEnter)
 	{
@@ -81,29 +88,35 @@ void EvasionState::UpdateState()
 		{
 			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(PRYMIDE);
 		}
+		 
 
 
 
+		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+		{	
+			if (!m_bNext)
+			{
+				m_pPlayer->GetComponent<StateControl>()->SetState(L"playerEvasion_Exit");
+				m_bNext = true;
+			}
 
-		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0
-			/*InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2)*/)
-		{
-			SceneToBoss();
+			wstring temp = m_pPlayer->GetComponent<StateControl>()->GetCurStateString();
+			if (temp == L"playerBoss_Enter")
+			{
+				StageManager::GetInstance()->ToScene(L"Boss");
+			}
 		}
-
-
-
-
+		
 
 	}
 
 
 		
 	//DEBUG_LOG(L"Current Combat State : ", L"Evasion State");
-	//DEBUG_LOG(L"MainCam POS", m_MainCamera->GetTransform()->position);
-	//DEBUG_LOG(L"MainCam Rotx", m_MainCamera->GetTransform()->rotation.x);
-	//DEBUG_LOG(L"MainCam Roty", m_MainCamera->GetTransform()->rotation.y);
-	//DEBUG_LOG(L"MainCam Rotz", m_MainCamera->GetTransform()->rotation.z);
+	//DEBUG_LOG(L"MainCam POS", m_pMainCamera->GetGameObject()->GetTransform()->position);
+	//DEBUG_LOG(L"MainCam Rotx", m_pMainCamera->GetGameObject()->GetTransform()->rotation.x);
+	//DEBUG_LOG(L"MainCam Roty", m_pMainCamera->GetGameObject()->GetTransform()->rotation.y);
+	//DEBUG_LOG(L"MainCam Rotz", m_pMainCamera->GetGameObject()->GetTransform()->rotation.z);
 	//DEBUG_LOG(L"Player Rotz", m_Player->GetTransform()->rotation.z);
 
 	m_fEvasionTime += dTime;
@@ -111,9 +124,7 @@ void EvasionState::UpdateState()
 
 void EvasionState::ExitState()
 {
-	m_pPlayer->GetComponent<StateControl>()->SetState(L"playerNone");
-
-	EnemyManager::GetInstance()->Destroy_AllEnemy();
+	
 }
 
 float EvasionState::Get_Time() const
@@ -134,20 +145,6 @@ void EvasionState::Set_Score(float _score)
 void EvasionState::Add_Score(float _score)
 {
 	m_fEvasiontScore += _score;
-}
-
-void EvasionState::EnterProduce()
-{
-	if (m_bEnter)
-	{
-		m_pPlayer->GetTransform()->position.z += dTime * 50.f;
-
-		if (m_pPlayer->GetTransform()->position.z >= 0.f)
-		{
-			m_pPlayer->GetComponent<StateControl>()->SetState(L"playerTopViewMove");
-			m_bEnter = false;
-		}
-	}
 }
 
 void EvasionState::SceneToBoss()

@@ -85,9 +85,6 @@
     <ClInclude Include="..\Include\NalmakScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\TopViewCamera.h">
-      <Filter>02.Component\00.Manager\Camera\State\2Phase_EvasionCamera</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\MoveBySpline.h" />
     <ClInclude Include="..\Include\DogFightState.h">
       <Filter>04.Combat State\00%29DogFight</Filter>
@@ -115,9 +112,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\Struct.h">
       <Filter>98.PreCompile\03.Struct</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\PlayerTopViewMove.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_Explosion.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
@@ -157,9 +151,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\PlayerBossStageMove.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\BossStageCamera.h">
-      <Filter>02.Component\00.Manager\Camera\State\3Phase_BossCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Crosshair.h">
       <Filter>02.Component\02.UI</Filter>
@@ -384,9 +375,6 @@
     <ClInclude Include="..\Include\Player_FarAway.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Player_Enter_Evasion.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\SmoothFollow.h">
       <Filter>02.Component\00.Manager\Camera\Component\SmoothFollow</Filter>
     </ClInclude>
@@ -395,6 +383,30 @@
     </ClInclude>
     <ClInclude Include="..\Include\Camera_Boss.h">
       <Filter>02.Component\00.Manager\Camera\State\3Phase_BossCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Camera_Boss_Appear.h">
+      <Filter>02.Component\00.Manager\Camera\State\3Phase_BossCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_Boss_Move.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_Evasion_Enter.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_Evasion_Move.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_Boss_Enter.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_Evasion_Exit.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Boss_Enter.h">
+      <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Boss_Interrupt.h">
+      <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -470,9 +482,6 @@
     <ClCompile Include="..\Source\NalmakScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\TopViewCamera.cpp">
-      <Filter>02.Component\00.Manager\Camera\State\2Phase_EvasionCamera</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
     <ClCompile Include="..\Source\DogFightState.cpp">
       <Filter>04.Combat State\00%29DogFight</Filter>
@@ -494,9 +503,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Death.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PlayerTopViewMove.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\ToTopView</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Explosion.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Explosion</Filter>
@@ -524,9 +530,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\PlayerBossStageMove.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\BossStageCamera.cpp">
-      <Filter>02.Component\00.Manager\Camera\State\3Phase_BossCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ItemManager.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
@@ -754,9 +757,6 @@
     <ClCompile Include="..\Source\Player_FarAway.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Player_Enter_Evasion.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\SmoothFollow.cpp">
       <Filter>02.Component\00.Manager\Camera\Component\SmoothFollow</Filter>
     </ClCompile>
@@ -765,6 +765,30 @@
     </ClCompile>
     <ClCompile Include="..\Source\Camera_Boss.cpp">
       <Filter>02.Component\00.Manager\Camera\State\3Phase_BossCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Camera_Boss_Appear.cpp">
+      <Filter>02.Component\00.Manager\Camera\State\3Phase_BossCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_Boss_Move.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_Evasion_Enter.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_Evasion_Move.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_Boss_Enter.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_Evasion_Exit.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Boss_Enter.cpp">
+      <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Boss_Interrupt.cpp">
+      <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -947,9 +971,6 @@
     <Filter Include="02.Component\00.Manager\Player\PlayerFSM">
       <UniqueIdentifier>{a323ffc7-d61c-4058-b946-29056b0ca33e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\BossStageMove">
-      <UniqueIdentifier>{579c4214-40c5-4439-ad3d-35a3f2a7c402}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\00.Manager\Enemy_BulletManager">
       <UniqueIdentifier>{a6b1d829-360d-4132-b12c-68c488218c23}</UniqueIdentifier>
     </Filter>
@@ -1001,9 +1022,6 @@
     <Filter Include="05. FieldCameraState">
       <UniqueIdentifier>{d0964a25-57af-4678-a4d2-066998ab8f19}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\ToTopView">
-      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\00.Manager\Camera">
       <UniqueIdentifier>{55e4567d-ddb8-4fa2-b78d-65321c051a15}</UniqueIdentifier>
     </Filter>
@@ -1021,6 +1039,12 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Camera\State\3Phase_BossCamera">
       <UniqueIdentifier>{80bf70f9-492b-41d5-9ff8-eb38719eb005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\BossStageMove">
+      <UniqueIdentifier>{579c4214-40c5-4439-ad3d-35a3f2a7c402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove">
+      <UniqueIdentifier>{ba1dbbf5-d567-4401-aa78-139f6cf1b08f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
