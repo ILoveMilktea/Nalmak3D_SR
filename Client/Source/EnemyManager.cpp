@@ -21,6 +21,9 @@
 #include "Enemy_Look_Evasion.h"
 #include "Enemy_Exit_Evasion.h"
 
+#include "MidBoss_Headers.h"
+#include "MidBoss_Define.h"
+
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
 
@@ -36,13 +39,13 @@ EnemyManager::~EnemyManager()
 EnemyManager * EnemyManager::GetInstance()
 {
 	if (!m_Instance)
-	{//?�데?�트�??�기 ?�해???��? Component�??�속받�? 컴포?�트 객체루다가 만듦.
+	{
 
 		auto Instance = INSTANTIATE();
 		Instance->AddComponent<EnemyManager>();
 		m_Instance = Instance->GetComponent<EnemyManager>();
 
-		Instance->SetDontDestroy(true);//???�어가??지?��?마라 ?�거??
+		Instance->SetDontDestroy(true);
 	}
 
 	return m_Instance;
@@ -58,7 +61,7 @@ void EnemyManager::DeleteInstance()
 }
 
 void EnemyManager::Initialize()
-{//?�니?�의 ?�따??
+{
 
 
 }
@@ -80,7 +83,6 @@ void EnemyManager::Update()
 int EnemyManager::Get_EnemyCount() const
 {
 	//size_t size = Core::GetInstance()->GetObjectList(OBJECT_TAG_ENEMY).size();
-	//최적?��? ?�해??그냥 멤버 변?�루?��? ?�기??
 	return  m_iEnemyCount;
 }
 
@@ -189,7 +191,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 
 
 	Enemy::Desc Enemy_desc(_status, _gun, _missile);
-	/*desc ?�팅*/
+	/*desc */
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
@@ -222,9 +224,13 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
 	m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
 	m_pStateControl->AddState<Exit_Evasion>(L"Exit");
+	
 	//m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
 	//m_pStateControl->AddState<Enemy_Falling>(L"Falling");
 	//m_pStateControl->AddState<Enemy_Death>(L"Death");
+	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
+	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
+	m_pStateControl->AddState<Enemy_Death>(L"Death");
 
 	switch (_initState)
 	{
@@ -275,6 +281,119 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 
 }
 
+void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
+{
+	GameObject* boss = INSTANTIATE(OBJECT_TAG_BOSS, L"MidBoss");
+	boss->SetPosition(-30.f, 0.f, 30.f);
+	boss->SetRotation(0.f, 180.f, 0.f);
+	boss->SetScale(20.f, 20.f, 20.f);
+
+	boss->AddComponent<StateControl>();
+	auto stateControl = boss->GetComponent<StateControl>();
+
+	// add staaaaaaaaate
+	{
+		stateControl->AddState<MidBoss_Idle>(_sn_idle);
+		stateControl->AddState<MidBoss_Move>(_sn_move);
+		stateControl->AddState<MidBoss_MoveToCenter>(_sn_moveToCenter);
+		stateControl->AddState<MidBoss_Rotate180>(_sn_rotate180);
+
+		stateControl->AddState<MidBoss_Wave_Start>(_sn_waveStart);
+		stateControl->AddState<MidBoss_Wave_Idle>(_sn_waveIdle);
+		stateControl->AddState<MidBoss_Wave_Attack>(_sn_waveAttack);
+
+		stateControl->AddState<MidBoss_Sweep_Start>(_sn_sweepStart);
+		stateControl->AddState<MidBoss_Sweep_Left>(_sn_sweepLeft);
+		stateControl->AddState<MidBoss_Sweep_Right>(_sn_sweepRight);
+		stateControl->AddState<MidBoss_Sweep_MoveToForward>(_sn_sweepMoveToForward);
+
+		stateControl->AddState<MidBoss_Laser_Start>(_sn_laserStart);
+		stateControl->AddState<MidBoss_Laser_Siege>(_sn_laserSiege);
+		stateControl->AddState<MidBoss_Laser_Charge>(_sn_laserCharge);
+		stateControl->AddState<MidBoss_Laser_Discharge>(_sn_laserDischarge);
+		stateControl->AddState<MidBoss_Laser_Fire>(_sn_laserFire);
+		stateControl->AddState<MidBoss_Laser_Attach>(_sn_laserAttach);
+		stateControl->AddState<MidBoss_Laser_Detach>(_sn_laserDetach);
+
+		stateControl->AddState<MidBoss_Defense_Start>(_sn_defenseStart);
+		stateControl->AddState<MidBoss_Defense_Move>(_sn_defenseMove);
+
+		stateControl->InitState(_sn_idle);
+	}
+
+	auto bulletproofPivot = INSTANTIATE();
+	bulletproofPivot->SetParents(boss);
+	bulletproofPivot->SetPosition(0.f, 0.f, 0.f);
+
+	ENEMY_STATUS Boss_Status(1000, 0, 0);
+
+	Enemy_MidBoss::Desc Boss_Desc(Boss_Status);
+	Boss_Desc.pivot = bulletproofPivot;
+	/*desc */
+	boss->AddComponent<Enemy_MidBoss>(&Boss_Desc);
+
+	VIBufferRenderer::Desc Boss_Mesh;
+	Boss_Mesh.mtrlName = L"boss";
+	Boss_Mesh.meshName = L"sphere";
+	boss->AddComponent<VIBufferRenderer>(&Boss_Mesh);
+
+	SphereCollider::Desc Boss_col;
+	float colRadius = boss->GetTransform()->scale.x * 0.5f;
+	Boss_col.radius = colRadius;
+	Boss_col.collisionLayer = COLLISION_LAYER_ENEMY;
+	boss->AddComponent<SphereCollider>(&Boss_col);
+
+
+
+	// bulletproof plates
+
+	Vector3 shieldModePos[4];
+	for (int i = 0; i < 4; ++i)
+	{
+		float cosValue = cosf(Deg2Rad * (225.f + 90.f * i));
+		float sinValue = sinf(Deg2Rad * (225.f + 90.f * i));
+		shieldModePos[i] = Vector3(colRadius * cosValue, 0.f, colRadius * sinValue);
+
+	}
+
+	Vector3 attackModePos[4] =
+	{
+		Vector3(-colRadius * 3.f, 0.f, 0.f),
+		Vector3(-colRadius * 2.f, 0.f, colRadius * 2.f),
+		Vector3(colRadius * 2.f, 0.f, colRadius * 2.f),
+		Vector3(colRadius * 3.f, 0.f, 0.f)
+	};
+
+	colRadius *= 0.8f;
+	for (int i = 0; i < 4; ++i)
+	{
+		ENEMY_STATUS plate_status(9999, 0, 0);
+
+		Enemy_BulletProof::Desc desc_bp(plate_status);
+		desc_bp.shieldModePos = shieldModePos[i];
+		desc_bp.attackModePos = attackModePos[i];
+
+		VIBufferRenderer::Desc desc_plate;
+		desc_plate.mtrlName = L"default_blue";
+		desc_plate.meshName = L"sphere";
+
+		SphereCollider::Desc desc_col;
+		desc_col.radius = colRadius * 0.5f;
+		desc_col.collisionLayer = COLLISION_LAYER_ENEMY_SHIELD;
+
+		auto plate = INSTANTIATE();
+		plate->AddComponent<Enemy_BulletProof>(&desc_bp);
+		plate->AddComponent<VIBufferRenderer>(&desc_plate);
+		plate->AddComponent<SphereCollider>(&desc_col);
+
+		plate->SetParents(bulletproofPivot);
+		plate->SetScale(colRadius, colRadius, colRadius);
+	}
+
+
+	++m_iEnemyCount;
+}
+
 void EnemyManager::Boss_Spawn()
 {
 	GameObject* Boss_obj = INSTANTIATE(OBJECT_TAG_BOSS, L"Boss");
@@ -284,7 +403,7 @@ void EnemyManager::Boss_Spawn()
 	ENEMY_STATUS Boss_Status(1000, 0, 0);
 
 	Boss::Desc Boss_Desc(Boss_Status);
-	/*desc ?�팅*/
+	/*desc */
 	Boss_obj->AddComponent<Boss>(&Boss_Desc);
 
 	VIBufferRenderer::Desc Boss_Mesh;

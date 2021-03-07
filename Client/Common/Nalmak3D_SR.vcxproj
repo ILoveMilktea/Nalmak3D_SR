@@ -204,10 +204,36 @@
     <ClInclude Include="..\Include\ClusterBulletMove.h" />
     <ClInclude Include="..\Include\Enemy_CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
+    <ClInclude Include="..\Include\Enemy_MidBoss.h" />
+    <ClInclude Include="..\Include\FieldCameraEvationState.h" />
     <ClInclude Include="..\Include\FieldCameraInfo.h" />
     <ClInclude Include="..\Include\FieldCameraNearEnemyState.h" />
     <ClInclude Include="..\Include\FieldCameraSmoothFollowState.h" />
     <ClInclude Include="..\Include\FieldCameraStartState.h" />
+    <ClInclude Include="..\Include\Enemy_BulletProof.h" />
+    <ClInclude Include="..\Include\MidBoss_Defense_Move.h" />
+    <ClInclude Include="..\Include\MidBoss_Defense_Start.h" />
+    <ClInclude Include="..\Include\MidBoss_Define.h" />
+    <ClInclude Include="..\Include\MidBoss_Headers.h" />
+    <ClInclude Include="..\Include\MidBoss_Laser_Attach.h" />
+    <ClInclude Include="..\Include\MidBoss_Laser_Charge.h" />
+    <ClInclude Include="..\Include\MidBoss_Laser_Discharge.h" />
+    <ClInclude Include="..\Include\MidBoss_Laser_Fire.h" />
+    <ClInclude Include="..\Include\MidBoss_Laser_Detach.h" />
+    <ClInclude Include="..\Include\MidBoss_Laser_Siege.h" />
+    <ClInclude Include="..\Include\MidBoss_Laser_Start.h" />
+    <ClInclude Include="..\Include\MidBoss_Idle.h" />
+    <ClInclude Include="..\Include\MidBoss_SingleBullet.h" />
+    <ClInclude Include="..\Include\MidBoss_Sweep_MoveToForward.h" />
+    <ClInclude Include="..\Include\MidBoss_Wave_Attack.h" />
+    <ClInclude Include="..\Include\MidBoss_Wave_Idle.h" />
+    <ClInclude Include="..\Include\MidBoss_Move.h" />
+    <ClInclude Include="..\Include\MidBoss_Sweep_Left.h" />
+    <ClInclude Include="..\Include\MidBoss_Sweep_Right.h" />
+    <ClInclude Include="..\Include\MidBoss_MoveToCenter.h" />
+    <ClInclude Include="..\Include\MidBoss_Rotate180.h" />
+    <ClInclude Include="..\Include\MidBoss_Sweep_Start.h" />
+    <ClInclude Include="..\Include\MidBoss_Wave_Start.h" />
     <ClInclude Include="..\Include\Player_NearGuideBullet.h" />
     <ClInclude Include="..\Include\Enemy_Diagonal_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_TargetPlane.h" />
@@ -318,6 +344,9 @@
     <ClInclude Include="..\Include\UIManager.h" />
     <ClInclude Include="..\Include\UIWindowFactory.h" />
     <ClInclude Include="..\Include\UI_Alarm.h" />
+    <ClInclude Include="..\Include\UI_ShopItemModel.h" />
+    <ClInclude Include="..\Include\UI_ShopMenu_Animator.h" />
+    <ClInclude Include="..\Include\UI_ShopWnd_Animator.h" />
     <ClInclude Include="..\Include\verticalBillboard.h" />
     <ClInclude Include="GarageSceneCameraAutoRotate.h" />
     <ClInclude Include="GarageSceneCameraZoomIn.h" />
@@ -325,9 +354,6 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="UI_ShopItemModel.h" />
-    <ClInclude Include="UI_ShopMenu_Animator.h" />
-    <ClInclude Include="UI_ShopWnd_Animator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\AimMissile.cpp" />
@@ -341,10 +367,34 @@
     <ClCompile Include="..\Source\ClusterBulletMove.cpp" />
     <ClCompile Include="..\Source\Enemy_CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
+    <ClCompile Include="..\Source\Enemy_MidBoss.cpp" />
+    <ClCompile Include="..\Source\FieldCameraEvationState.cpp" />
     <ClCompile Include="..\Source\FieldCameraInfo.cpp" />
     <ClCompile Include="..\Source\FieldCameraNearEnemyState.cpp" />
     <ClCompile Include="..\Source\FieldCameraSmoothFollowState.cpp" />
     <ClCompile Include="..\Source\FieldCameraStartState.cpp" />
+    <ClCompile Include="..\Source\Enemy_BulletProof.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Defense_Move.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Defense_Start.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Laser_Attach.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Laser_Charge.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Laser_Discharge.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Laser_Fire.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Laser_Detach.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Laser_Siege.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Laser_Start.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Idle.cpp" />
+    <ClCompile Include="..\Source\MidBoss_SingleBullet.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Sweep_MoveToForward.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Wave_Attack.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Wave_Idle.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Move.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Sweep_Left.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Sweep_Right.cpp" />
+    <ClCompile Include="..\Source\MidBoss_MoveToCenter.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Rotate180.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Sweep_Start.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Wave_Start.cpp" />
     <ClCompile Include="..\Source\Player_NearGuideBullet.cpp" />
     <ClCompile Include="..\Source\Enemy_Diagonal_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_TargetPlane.cpp" />
@@ -449,6 +499,9 @@
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="..\Source\UIManager.cpp" />
     <ClCompile Include="..\Source\UI_Alarm.cpp" />
+    <ClCompile Include="..\Source\UI_ShopItemModel.cpp" />
+    <ClCompile Include="..\Source\UI_ShopMenu_Animator.cpp" />
+    <ClCompile Include="..\Source\UI_ShopWnd_Animator.cpp" />
     <ClCompile Include="..\Source\verticalBillboard.cpp" />
     <ClCompile Include="GarageSceneCameraAutoRotate.cpp" />
     <ClCompile Include="GarageSceneCameraZoomIn.cpp" />
@@ -459,9 +512,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="UI_ShopItemModel.cpp" />
-    <ClCompile Include="UI_ShopMenu_Animator.cpp" />
-    <ClCompile Include="UI_ShopWnd_Animator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc" />

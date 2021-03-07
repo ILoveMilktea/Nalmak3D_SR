@@ -6,7 +6,9 @@ USING(Nalmak)
 
 Transform::Transform(Desc * _desc)
 {
-
+	fixRotationX = false;
+	fixRotationY = false;
+	fixRotationZ = false;
 }
 
 
@@ -193,6 +195,7 @@ void Transform::GetRotationY(Vector3 * _out, Vector3 _in)
 	0	0	0	1
 	*/
 
+
 	_out->x = _in.x * cosf(radian) + _in.z * sinf(radian);
 	_out->z = _in.x * -sinf(radian) + _in.z * cosf(radian);
 }
@@ -210,6 +213,7 @@ void Transform::GetRotationZ(Vector3 * _out, Vector3 _in)
 	0	0	1	0
 	0	0	0	1
 	*/
+
 
 	_out->x = _in.x * cosf(radian) - _in.y * sinf(radian);
 	_out->y = _in.x * sinf(radian) + _in.y * cosf(radian);

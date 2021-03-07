@@ -28,6 +28,9 @@ void EvasionState::EnterState()
 		assert(L"아 ㅋㅋ 메인 카메라 못찾겠다고 ㅋㅋ" && 0);
 	}
 	
+	m_MainCamera->GetComponent<StateControl>()->SetState(L"CameraEvationState");
+
+	
 	m_MainCamera->SetPosition(0.f, 100.f, 0.f);
 	m_MainCamera->SetRotation(0.f, 0.f, 0.f);
 	m_MainCamera->GetTransform()->RotateX(90.f);
@@ -41,11 +44,17 @@ void EvasionState::EnterState()
 	m_Player->GetTransform()->position = Vector3(0, 0, -50);
 	m_Player->GetTransform()->SetRotation(0, 0, 0);
 
+	//m_Player->GetTransform()->fixRotationX = true;
+	//m_Player->GetTransform()->fixRotationY = true;
+	//m_Player->GetTransform()->fixRotationZ = true;
+
+	m_Player->GetTransform()->SetScale(Vector3(0.4f, 0.4f, 0.4f));
+
 	ENEMY_STATUS tStatus(10, 20, 1);
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 	BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
 	
-	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(-20.f, 0.f, 30.f), Vector3(0.1f, 0.1f, 0.1f),
+	EnemyManager::GetInstance()->Enemy_Spawn(Vector3(20.f, 0.f, 30.f), Vector3(0.1f, 0.1f, 0.1f),
 		ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
 
 	m_bEnter = true;
@@ -60,39 +69,39 @@ void EvasionState::UpdateState()
 		
 	if (!m_bEnter)
 	{
-		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
-		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(SLIDE);
-		}
-
-		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
-		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(DIAGONAL);
-		}
-
-		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
-		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(LOOK);
-		}
-
-		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F5))
-		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(CROSSFIRE);
-		}
-
 		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F6))
 		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(AIRFIRE);
+			EnemyManager::GetInstance()->MidBoss_Spawn(IDLE);
 		}
 
-		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F7))
-		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(CIRCLE);
-		}
-		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F8))
-		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(PRYMIDE);
-		}
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+		//{
+		//	//EnemyManager::GetInstance()->Enemy_Spwan_Evasion(SLIDE);
+		//	EnemyManager::GetInstance()->MidBoss_Spawn(IDLE);
+		//}
+
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
+		//{
+		//	EnemyManager::GetInstance()->Enemy_Spwan_Evasion(DIAGONAL);
+		//}
+
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
+		//{
+		//	EnemyManager::GetInstance()->Enemy_Spwan_Evasion(LOOK);
+		//}
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F6))
+		//{
+		//	EnemyManager::GetInstance()->Enemy_Spwan_Evasion(AIRFIRE);
+		//}
+
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F7))
+		//{
+		//	EnemyManager::GetInstance()->Enemy_Spwan_Evasion(CIRCLE);
+		//}
+		//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F8))
+		//{
+		//	EnemyManager::GetInstance()->Enemy_Spwan_Evasion(PRYMIDE);
+		//}
 
 
 

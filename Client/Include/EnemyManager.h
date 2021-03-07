@@ -53,6 +53,7 @@ public: /* Funcs */
 
 	void Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
 
+	void MidBoss_Spawn(ENEMY_STATE _initState);
 	void Boss_Spawn();
 
 	void Player_FovSpawnTest(bool _front, float _distance);

@@ -27,7 +27,7 @@
 #include "FieldCameraSmoothFollowState.h"
 #include "FieldCameraStartState.h"
 #include "FieldCameraNearEnemyState.h"
-
+#include "FieldCameraEvationState.h"
 
 #include "Player_WindEffect.h"
 
@@ -151,6 +151,8 @@ void DogFightState::EnterState()
 			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");
 			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraNearEnemyState>(L"CameraNearEnemy");
 			m_MainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
+
+			m_MainCamera->GetComponent<StateControl>()->AddState<FieldCameraEvationState>(L"CameraEvationState");
 		}
 	}
 	//smoothFollowDesc.minDistance = 5.f;
