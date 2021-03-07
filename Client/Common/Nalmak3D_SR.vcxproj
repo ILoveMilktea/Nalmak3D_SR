@@ -281,7 +281,6 @@
     <ClInclude Include="..\Include\ObjLoader.h" />
     <ClInclude Include="..\Include\PhantomScene.h" />
     <ClInclude Include="..\Include\PlayerAttak.h" />
-    <ClInclude Include="..\Include\PlayerBossStageMove.h" />
     <ClInclude Include="..\Include\PlayerEscapeState.h" />
     <ClInclude Include="..\Include\PlayerIdle.h" />
     <ClInclude Include="..\Include\PlayerInfoManager.h" />
@@ -421,7 +420,6 @@
     <ClCompile Include="..\Source\ObjLoader.cpp" />
     <ClCompile Include="..\Source\PhantomScene.cpp" />
     <ClCompile Include="..\Source\PlayerAttak.cpp" />
-    <ClCompile Include="..\Source\PlayerBossStageMove.cpp" />
     <ClCompile Include="..\Source\PlayerEscapeState.cpp" />
     <ClCompile Include="..\Source\PlayerIdle.cpp" />
     <ClCompile Include="..\Source\PlayerInfoManager.cpp" />

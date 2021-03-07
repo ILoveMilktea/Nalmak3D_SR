@@ -149,9 +149,6 @@
     <ClInclude Include="..\Include\Enemy.h">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\PlayerBossStageMove.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Crosshair.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
@@ -527,9 +524,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Enemy.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\PlayerBossStageMove.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\ItemManager.cpp">
       <Filter>02.Component\00.Manager\ItemManger</Filter>

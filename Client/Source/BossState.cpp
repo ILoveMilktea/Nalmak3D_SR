@@ -2,7 +2,6 @@
 #include "..\Include\BossState.h"
 
 #include "EnemyManager.h"
-#include "PlayerBossStageMove.h"
 #include "UIWindowFactory.h"
 
 BossState::BossState()
