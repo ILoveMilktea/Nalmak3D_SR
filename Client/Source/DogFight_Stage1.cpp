@@ -7,7 +7,7 @@
 #include "PlayerMove.h"
 #include "PlayerTopViewMove.h"
 
-#include "FixToTarget.h"
+
 #include "MouseOption.h"
 #include "SmoothFollow.h"
 
@@ -62,6 +62,8 @@ void DogFight_Stage1::EnterState()
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp");
 #pragma endregion
 
+	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+
 	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fTutorialTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fTutorialScore);
@@ -110,24 +112,38 @@ void DogFight_Stage1::UpdateState()
 	}
 
 
+	
 
 
 
 
 
+	
 
 
 
-
-
-
-	DEBUG_LOG(L"Current Combat State : ", L"Stage1 Phase1 : tutorial");
-
+	
 	if (m_bSceneChange && !GameManager::GetInstance()->Get_StageClear(1))
 	{
 		GameManager::GetInstance()->Set_StageClear(1);
-		Core::GetInstance()->LoadScene(L"result");
+		m_Player->GetComponent<StateControl>()->SetState(L"playerFarAway");
+		m_pMainCamera->GetComponent<SmoothFollow>()->SetActive(false);
 	}
+
+	if (m_bSceneChange)
+	{
+		m_fProduceDelta += dTime;
+
+		if (m_fProduceDelta >= 2.f)
+		{
+			Core::GetInstance()->LoadScene(L"result");
+			m_fProduceDelta = 0.f;
+			m_bSceneChange = false;
+		}
+	}
+
+	DEBUG_LOG(L"Produce Delta", m_fProduceDelta);
+	DEBUG_LOG(L"Current Combat State : ", L"Stage1 Phase1 : tutorial"); 
 }
 
 void DogFight_Stage1::ExitState()

@@ -28,7 +28,7 @@ public:
 
 private:
 	GameObject* m_Player = nullptr;
-	//GameObject* m_MainCamera = nullptr;
+	Camera* m_pMainCamera = nullptr;
 
 
 	Vector3 vPlayerOrigin;
@@ -44,5 +44,6 @@ private:
 	float	m_fTutorialScore = 0.f;
 
 	int		m_iFrame = 0;
+	float	m_fProduceDelta = 0.f;
 };
 

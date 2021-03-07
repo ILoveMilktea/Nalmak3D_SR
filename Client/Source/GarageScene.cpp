@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\GarageScene.h"
-#include "RevolvesToTarget.h"
+
 #include "core.h"
 #include "SceneChanger.h"
 #include "PlayerInfoManager.h"
@@ -50,9 +50,6 @@ void GarageScene::Initialize()
 	mainCam->GetComponent<StateControl>()->AddState<GarageSceneCameraZoomIn>(L"zoomIn");
 	mainCam->GetComponent<StateControl>()->AddState<GarageSceneCameraMouseInput>(L"mouseInput");
 	mainCam->GetComponent<StateControl>()->InitState(L"intro");
-
-
-
 
 
 	GameObject* player;

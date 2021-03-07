@@ -42,7 +42,7 @@ typedef struct tagEnemyBullet
 typedef struct tagEnemy
 {
 	tagEnemy(
-	int _iHp = 0, float _fMaxSpd = 0.f, float _fLookSpd = 0.f)
+	int _iHp = 10, float _fMaxSpd = 20.f, float _fLookSpd = 1.f)
 	{
 		m_iFullHp = _iHp;
 		m_iCurHp = m_iFullHp;
@@ -53,12 +53,12 @@ typedef struct tagEnemy
 		m_fLookSpd = _fLookSpd;
 	};
 	
-	int		m_iFullHp;
-	int		m_iCurHp;
+	int		m_iFullHp = 10;
+	int		m_iCurHp = 10;
 
-	float	m_fMaxSpd;
-	float	m_fCurSpd;
-	float	m_fLookSpd;
+	float	m_fMaxSpd = 20.f;
+	float	m_fCurSpd = 0.f;
+	float	m_fLookSpd = 1.f;
 
 	
 

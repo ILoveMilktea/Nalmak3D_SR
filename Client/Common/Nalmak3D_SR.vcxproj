@@ -194,7 +194,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\AimMissile.h" />
-    <ClInclude Include="..\Include\Camera_TopView_Evasion.h" />
+    <ClInclude Include="..\Include\Camera_Boss.h" />
+    <ClInclude Include="..\Include\Camera_Evasion.h" />
     <ClInclude Include="..\Include\DogFight_Stage1.h" />
     <ClInclude Include="..\Include\EndingScene.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_Evasion.h" />
@@ -222,7 +223,6 @@
     <ClInclude Include="..\Include\HomingBulletMove.h" />
     <ClInclude Include="..\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\MoveStageByMeshPicking.h" />
-    <ClInclude Include="..\Include\NoneState.h" />
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
     <ClInclude Include="..\Include\Player_Missile.h" />
@@ -262,7 +262,6 @@
     <ClInclude Include="..\Include\Enum.h" />
     <ClInclude Include="..\Include\EvasionState.h" />
     <ClInclude Include="..\Include\Extern.h" />
-    <ClInclude Include="..\Include\FixToTarget.h" />
     <ClInclude Include="..\Include\GarageScene.h" />
     <ClInclude Include="..\Include\Ground.h" />
     <ClInclude Include="..\Include\HeeTestScene.h" />
@@ -289,7 +288,6 @@
     <ClInclude Include="..\Include\Enemy_Prymide_Evasion.h" />
     <ClInclude Include="..\Include\Player_WindEffect.h" />
     <ClInclude Include="..\Include\ResultScene.h" />
-    <ClInclude Include="..\Include\RevolvesToTarget.h" />
     <ClInclude Include="..\Include\ScaleDampingDeffender.h" />
     <ClInclude Include="..\Include\SceneChanger.h" />
     <ClInclude Include="..\Include\ScriptEnd.h" />
@@ -300,10 +298,10 @@
     <ClInclude Include="..\Include\ScriptWait.h" />
     <ClInclude Include="..\Include\BossUIAnimator.h" />
     <ClInclude Include="..\Include\SmallCannon.h" />
-    <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\PrintInfo.h" />
     <ClInclude Include="..\Include\Rader.h" />
     <ClInclude Include="..\Include\SingleLine.h" />
+    <ClInclude Include="..\Include\SmoothFollow.h" />
     <ClInclude Include="..\Include\Stage2Scene.h" />
     <ClInclude Include="..\Include\StageManager.h" />
     <ClInclude Include="..\Include\StageScene.h" />
@@ -335,7 +333,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\AimMissile.cpp" />
-    <ClCompile Include="..\Source\Camera_TopView_Evasion.cpp" />
+    <ClCompile Include="..\Source\Camera_Boss.cpp" />
+    <ClCompile Include="..\Source\Camera_Evasion.cpp" />
     <ClCompile Include="..\Source\DogFight_Stage1.cpp" />
     <ClCompile Include="..\Source\EndingScene.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_Evasion.cpp" />
@@ -363,7 +362,6 @@
     <ClCompile Include="..\Source\HomingBulletMove.cpp" />
     <ClCompile Include="..\Source\MenuAnimator.cpp" />
     <ClCompile Include="..\Source\MoveStageByMeshPicking.cpp" />
-    <ClCompile Include="..\Source\NoneState.cpp" />
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
     <ClCompile Include="..\Source\Player_Missile.cpp" />
@@ -400,7 +398,6 @@
     <ClCompile Include="..\Source\Enemy_Hold.cpp" />
     <ClCompile Include="..\Source\Enemy_Idle.cpp" />
     <ClCompile Include="..\Source\EvasionState.cpp" />
-    <ClCompile Include="..\Source\FixToTarget.cpp" />
     <ClCompile Include="..\Source\GarageScene.cpp" />
     <ClCompile Include="..\Source\Ground.cpp" />
     <ClCompile Include="..\Source\HeeTestScene.cpp" />
@@ -427,7 +424,6 @@
     <ClCompile Include="..\Source\Enemy_Prymide_Evasion.cpp" />
     <ClCompile Include="..\Source\Player_WindEffect.cpp" />
     <ClCompile Include="..\Source\ResultScene.cpp" />
-    <ClCompile Include="..\Source\RevolvesToTarget.cpp" />
     <ClCompile Include="..\Source\ScaleDampingDeffender.cpp" />
     <ClCompile Include="..\Source\SceneChanger.cpp" />
     <ClCompile Include="..\Source\ScriptEnd.cpp" />
@@ -438,10 +434,10 @@
     <ClCompile Include="..\Source\ScriptWait.cpp" />
     <ClCompile Include="..\Source\BossUIAnimator.cpp" />
     <ClCompile Include="..\Source\SmallCannon.cpp" />
-    <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />
     <ClCompile Include="..\Source\SingleLine.cpp" />
+    <ClCompile Include="..\Source\SmoothFollow.cpp" />
     <ClCompile Include="..\Source\Stage2Scene.cpp" />
     <ClCompile Include="..\Source\StageManager.cpp" />
     <ClCompile Include="..\Source\StageScene.cpp" />

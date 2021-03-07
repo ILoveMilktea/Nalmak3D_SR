@@ -21,25 +21,7 @@ void EvasionState::Initialize()
 
 void EvasionState::EnterState()
 {
-	//m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
-
-	//if (m_MainCamera == nullptr)
-	//{
-	//	assert(L"아 ㅋㅋ 메인 카메라 못찾겠다고 ㅋㅋ" && 0);
-	//}
-
-	//m_MainCamera->SetPosition(0.f, 100.f, 0.f);
-	//m_MainCamera->SetRotation(0.f, 0.f, 0.f);
-	//m_MainCamera->GetTransform()->RotateX(90.f);
-	////컴포넌트 넣어서 
-	
-	//m_Player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
-	//if (m_Player == nullptr)
-	//{
-	//	assert(L"플레이어 못받은거 같은데여 ㅋㅋ;;" && 0);
-	//}
-	//m_Player->GetTransform()->position = Vector3(0, 0, -50);
-	//m_Player->GetTransform()->SetRotation(0, 0, 0);
+	m_pMainCamera = Core::GetInstance()->GetMainCamera();
 
 	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fEvasionTime);
@@ -60,6 +42,8 @@ void EvasionState::EnterState()
 
 void EvasionState::UpdateState()
 {
+	//Enter에서 카메라 세팅, 그리고 플레이어 중앙으로.
+	
 	EnterProduce();
 		
 	if (!m_bEnter)

@@ -20,19 +20,21 @@ public: /* Set */
 	void Add_Score(float _score);
 
 public:
-	void SceneToEvasion();
+	//void SceneToEvasion();
 
-	void Player_Faraway();
-	void Accelerate();
+	//void Player_Faraway();
+	//void Accelerate();
 
 private:
 	GameObject* m_pPlayer = nullptr;
 	Camera* m_pMainCamera = nullptr;
 
 
-	Vector3 vPlayerOrigin;
+	//Vector3 vPlayerOrigin;
+
+	bool	m_bNextPhase = false;
 	bool	m_bProduce = false;
-	float	m_fSpd = 0.f;
+	float	m_fProduceDelta = 0.f;
 							//생성	//클리어
 	bool	m_bPattern1[2] = { false, false };
 	bool	m_bPattern2[2] = { false, false };

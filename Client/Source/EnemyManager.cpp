@@ -66,6 +66,15 @@ void EnemyManager::Initialize()
 void EnemyManager::Update()
 {
 
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_K))
+	{
+		ENEMY_STATUS temp;
+		temp.m_iFullHp = 10;
+		temp.m_iCurHp = 10;
+
+		Enemy_Spawn(Vector3(50.f, 50.f, 50.f), Vector3(0.2f, 0.2f, 0.2f), IDLE, temp);
+	}
+
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
 	{

@@ -14,6 +14,7 @@
 #include "UIWindowFactory.h"
 #include "Player_WindEffect.h"
 #include "Player.h"
+#include "Player_FarAway.h"
 
 PlayerInfoManager*::PlayerInfoManager::m_instance = nullptr;
 
@@ -199,13 +200,12 @@ GameObject * PlayerInfoManager::Player_Create()
 	m_player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
 	m_player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
 	m_player->GetComponent<StateControl>()->AddState<PlayerMove>(L"playerMove");
-
+	
+	m_player->GetComponent<StateControl>()->AddState<Player_FarAway>(L"playerFarAway");
 	m_player->GetComponent<StateControl>()->AddState<PlayerTopViewMove>(L"playerTopViewMove");
-
 	m_player->GetComponent<StateControl>()->AddState<PlayerBossStageMove>(L"playerBossMove");
 	//status is related to skill.
 	m_player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
-
 	m_player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
 	MeshRenderer::Desc render;
