@@ -25,7 +25,7 @@ void Enemy_MidBoss::Update()
 {
 	if (m_pivotRotate)
 	{
-		m_bulletproofPivot->GetTransform()->RotateY(5.f * dTime);
+		m_bulletproofPivot->GetTransform()->RotateY(10.f * dTime);
 	}
 }
 

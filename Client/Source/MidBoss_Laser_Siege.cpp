@@ -19,16 +19,17 @@ void MidBoss_Laser_Siege::Initialize()
 
 void MidBoss_Laser_Siege::EnterState()
 {
+	GetComponent<Enemy_MidBoss>()->PivotRotateOff();
+	m_rotatePivot = GetComponent<Enemy_MidBoss>()->GetBulletproofPivot()->GetTransform();
+
 	m_startPosition = m_transform->position;
-	m_startRot = m_transform->rotation;
+	m_startRot = m_rotatePivot->rotation;
 	m_siegeRot = _MIDBOSS_CENTERROT;
 
 	g_siegeDuration = GetFloat(_g_laserSiegeDuration);
 
 	m_timer = 0.f;
 
-	GetComponent<Enemy_MidBoss>()->PivotRotateOff();
-	m_rotatePivot = GetComponent<Enemy_MidBoss>()->GetBulletproofPivot()->GetTransform();
 }
 
 void MidBoss_Laser_Siege::UpdateState()
@@ -43,7 +44,7 @@ void MidBoss_Laser_Siege::UpdateState()
 	if (m_timer >= g_siegeDuration)
 	{
 		m_transform->position = _MIDBOSS_CENTERPOS;
-		m_transform->rotation = _MIDBOSS_CENTERROT;
+		m_rotatePivot->rotation = _MIDBOSS_CENTERROT;
 		SetState(_sn_laserDetach);
 		return;
 	}

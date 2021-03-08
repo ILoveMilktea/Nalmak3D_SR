@@ -350,18 +350,18 @@ void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
 	Vector3 shieldModePos[4];
 	for (int i = 0; i < 4; ++i)
 	{
-		float cosValue = cosf(Deg2Rad * (225.f + 90.f * i));
-		float sinValue = sinf(Deg2Rad * (225.f + 90.f * i));
+		float cosValue = cosf(Deg2Rad * (45.f - 90.f * i));
+		float sinValue = sinf(Deg2Rad * (45.f - 90.f * i));
 		shieldModePos[i] = Vector3(colRadius * cosValue, 0.f, colRadius * sinValue);
 
 	}
 
 	Vector3 attackModePos[4] =
 	{
-		Vector3(-colRadius * 3.f, 0.f, 0.f),
-		Vector3(-colRadius * 2.f, 0.f, colRadius * 2.f),
-		Vector3(colRadius * 2.f, 0.f, colRadius * 2.f),
-		Vector3(colRadius * 3.f, 0.f, 0.f)
+		Vector3(colRadius * 3.f, 0.f, 0.f),
+		Vector3(colRadius * 2.f, 0.f, -colRadius * 2.f),
+		Vector3(-colRadius * 2.f, 0.f, -colRadius * 2.f),
+		Vector3(-colRadius * 3.f, 0.f, 0.f)
 	};
 
 	colRadius *= 0.8f;
