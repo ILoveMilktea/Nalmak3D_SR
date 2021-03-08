@@ -41,9 +41,7 @@ void Enemy_Death::EnterState()
 
 
 	DESTROY(m_gameObject); //°ž!
-	
-
-
+	m_gameObject = nullptr; 
 }
 
 void Enemy_Death::UpdateState()

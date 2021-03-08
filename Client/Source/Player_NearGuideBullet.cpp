@@ -28,6 +28,7 @@ void Player_NearGuideBullet::Initialize()
 	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
 	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 	m_target = m_enemyDetector->GetLockOnTarget();
+	m_stateControl = m_target->GetComponent<StateControl>();
 }
 
 void Player_NearGuideBullet::Update()
@@ -55,18 +56,16 @@ void Player_NearGuideBullet::Update()
 		return;
 
 
-	if (m_target)
+	if (L"Falling" != m_stateControl->GetCurStateString())
 	{
 		Vector3 toDistance = m_target->GetTransform()->position - m_transform->position;
 		D3DXVec3Normalize(&toDistance, &toDistance);
-
-
 		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_target->GetTransform()->position, dTime * 5.f);
 		m_transform->LookAt(toDistance + m_transform->position, 5.5f);
 	}
 	else
 	{
-		m_target = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject);
+		//GameObject* enemy = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject ,50.f);
 	}
 
 }
@@ -87,6 +86,7 @@ void Player_NearGuideBullet::OnTriggerEnter(Collisions & _collision)
 			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(m_dmg);
 
 			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
 		}
 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
@@ -94,6 +94,8 @@ void Player_NearGuideBullet::OnTriggerEnter(Collisions & _collision)
 			obj.GetGameObject()->GetComponent<Boss>()->Damaged(m_dmg);
 
 			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
+
 		}
 	}
 }

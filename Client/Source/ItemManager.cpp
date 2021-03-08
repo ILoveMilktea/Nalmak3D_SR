@@ -89,7 +89,7 @@ void ItemManager::CreateItem()
 	{
 		info.itemName = L"ClusterMissile";
 		info.weaponType = WEAPON_SINGLE_MISSILE;
-		info.weaponAttak = 10;
+		info.weaponAttak = 0.5f;
 		info.costGold = 50;
 		info.delay = 1.f;
 		info.weaponSpeed = 45.f;

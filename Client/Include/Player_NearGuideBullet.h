@@ -35,6 +35,7 @@ private:
 	GameObject* m_target;
 	EnemyDetector* m_enemyDetector;
 	Vector3 m_firstDir;
+	StateControl * m_stateControl;
 	float m_speed;
 	int m_dmg;
 };

@@ -72,7 +72,11 @@ void DogFight_Stage1::EnterState()
 
 	EnemyManager::GetInstance();
 
-	EnemyManager::GetInstance()->Spawn_S1P1_Normal();
+	//EnemyManager::GetInstance()->Spawn_S1P1_Normal();
+	EnemyManager::GetInstance()->Enemy_Spawn({ 0,0,50 });
+	EnemyManager::GetInstance()->Enemy_Spawn({ 50,0,50 });
+	EnemyManager::GetInstance()->Enemy_Spawn({ 25,25,50 });
+
 	m_bPattern1[0] = true;
 }
 

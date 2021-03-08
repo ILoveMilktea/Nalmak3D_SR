@@ -25,6 +25,9 @@ public:
 private:
 	GameObject* m_player = nullptr;
 	GameObject* m_target = nullptr;
+	GameObject* m_Neartarget = nullptr;
+
+	EnemyDetector* m_enemyDetector;
 	Vector2 m_screenPos = {};
 	Vector3 m_firstDir = {};
 private:
@@ -34,5 +37,5 @@ private:
 	int m_dmg;
 
 private:
-	bool m_start = false;
+	bool m_deadCheck = false;
 };

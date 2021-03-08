@@ -57,7 +57,7 @@ void HomingBulletMove::Update()
 
 void HomingBulletMove::OnTriggerEnter(Collisions & _collision)
 {
-	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"Player_Weapon_Homing")->GetItmeInfo().weaponAttak;
+	int iDmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"HomingMissile")->GetItmeInfo().weaponAttak;
 
 	for (auto& obj : _collision)
 	{

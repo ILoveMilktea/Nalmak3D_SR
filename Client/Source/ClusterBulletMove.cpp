@@ -6,7 +6,7 @@
 #include "PlayerItem.h"
 #include "Enemy_Boss.h"
 #include "Enemy.h"
-
+#include "EnemyManager.h"
 
 
 
@@ -26,46 +26,68 @@ ClusterBulletMove::~ClusterBulletMove()
 
 void ClusterBulletMove::Initialize()
 {
-	m_player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
 
-	Vector3 playerLook = m_player->GetTransform()->GetForward();
-	Vector3 playerRight = m_player->GetTransform()->GetRight();
-	Vector3 playerUp = m_player->GetTransform()->GetUp();
+	Matrix worldMat = m_player->GetTransform()->GetWorldMatrix();
+	Vector3 dirX = { worldMat._11, worldMat._12, worldMat._13 };
+	Vector3 dirY = { worldMat._21, worldMat._22, worldMat._23 };
+	Vector3 dirZ = { worldMat._31, worldMat._32, worldMat._33 };
 
-	Vector3 winDir = playerRight * m_screenPos.x + playerUp * m_screenPos.y;
-	D3DXVec3Normalize(&winDir, &winDir);
-	m_firstDir = playerLook + winDir;
+	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 
+	m_target = m_enemyDetector->GetLockOnTarget();
+	if (m_target)
+	{
+		Vector2 screenPos = Core::GetInstance()->GetMainCamera()->WorldToScreenPos(m_target->GetTransform()->position);
+		Vector2 enemyScreenPos = Vector2(screenPos.x * cosf(D3DXToRadian(90.f)), screenPos.y * sinf(D3DXToRadian(90.f)));
+
+		Vector3 screenDir = dirX * enemyScreenPos.x + dirY * enemyScreenPos.y;
+		D3DXVec3Normalize(&screenDir, &screenDir);
+		m_firstDir = dirZ + screenDir;
+	}
+
+	m_Neartarget = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject, 250.f);
 }
 
 void ClusterBulletMove::Update()
 {
+	if (m_enemyDetector == nullptr)
+		return;
+	m_target = m_enemyDetector->GetLockOnTarget();
 	if (m_target)
 	{
+		// screen Pos Set, for.VERTICAL Range
 		Vector3 dir = m_target->GetTransform()->position - m_transform->position;
 		D3DXVec3Normalize(&dir, &dir);
-		m_transform->LookAt(dir + m_transform->position, 1.5f);
 		m_firstDir = Nalmak_Math::Lerp(m_firstDir, m_player->GetTransform()->GetForward(), dTime);
 		m_transform->position += ((dir + m_firstDir)  * 45.f * dTime);
 
 		float EnemyPlayerLenght = Nalmak_Math::Distance(m_player->GetTransform()->position, m_target->GetTransform()->position);
 		float fromEnemyLenght = Nalmak_Math::Distance(m_target->GetTransform()->position, m_gameObject->GetTransform()->position);
-
 		float ratioValue = fromEnemyLenght / EnemyPlayerLenght;
-
-		DEBUG_LOG(L"NOOOOO", ratioValue);
 		if (ratioValue <= 0.5f)
 		{
 			DESTROY(m_gameObject);
-			m_start = true;
+			m_deadCheck = true;
 		}
+	}
+	else
+	{
+		m_transform->position += ((m_player->GetTransform()->GetForward())  * 45.f * dTime);
+		
+	}
+
+	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 250.f)
+	{
+		DESTROY(m_gameObject);
+		m_gameObject = nullptr;
 	}
 
 }
 
 void ClusterBulletMove::Release()
 {
-	if (m_start)
+	if (m_deadCheck)
 	{
 		MeshRenderer::Desc render;
 		render.meshName = L"kfir_weapon1";
@@ -115,8 +137,7 @@ void ClusterBulletMove::Release()
 		}
 
 		SAFE_DELETE_ARR(axis);
-
-		m_start = false;
+		m_deadCheck = false;
 	}
 	m_gameObject = nullptr;
 }
