@@ -20,7 +20,7 @@ void SmallCannon::ItemShot()
 
 	Matrix worldMat = m_bullet->GetTransform()->GetWorldMatrix();
 	m_bullet->GetTransform()->DeleteParent();
-
+	m_bullet->SetRotation(0, 0, 0);
 	BulletEffect_StretchBillboard::Desc bulletinfo;
 	bulletinfo.lifeTime = 5.f;
 	bulletinfo.speed = 150.f;	
@@ -45,7 +45,7 @@ void SmallCannon::CreateBullet()
 	m_bullet = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"cannon");
 	m_bullet->AddComponent<VIBufferRenderer>(&meshInfo);
 	m_bullet->SetParents(m_parents);
-	m_bullet->SetPosition(0.f, 0.f, 0.f);
+	m_bullet->SetPosition(0.f, 0.f, 1.f);
 
 
 	

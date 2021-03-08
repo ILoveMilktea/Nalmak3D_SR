@@ -34,7 +34,7 @@ void Player_EmpMissile::ItemShot()
 	Add Component ex)Move */
 
 	//Emp->GetTransform()->position = Emp->GetTransform()->GetWorldPosition();
-	Emp->GetTransform()->rotation = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER)->GetTransform()->rotation;
+	//Emp->GetTransform()->rotation = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER)->GetTransform()->rotation;
 	Emp->GetTransform()->DeleteParent();
 
 	Player_EmpMove::Desc Move_desc;

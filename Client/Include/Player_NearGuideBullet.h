@@ -21,6 +21,9 @@ public:
 	virtual void Release()override;
 
 
+	virtual void OnTriggerEnter(Collisions& _collision)override;
+	virtual void OnTriggerStay(Collisions& _collision)override;
+	virtual void OnTriggerExit(Collisions& _collision)override;
 
 private:
 	//GameObject * FindEnemy(OBJECT_TAG _enum, float _mimDis = 0);
@@ -29,7 +32,10 @@ private:
 	bool	m_bFinish;
 private:
 	GameObject* m_player;
+	GameObject* m_target;
+	EnemyDetector* m_enemyDetector;
 	Vector3 m_firstDir;
 	float m_speed;
+	int m_dmg;
 };
 

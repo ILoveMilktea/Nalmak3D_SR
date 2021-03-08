@@ -117,14 +117,14 @@ void EnemyDetector::UpdateTarget()
 			continue;
 
 		if (!mainCam->IsInFrustumCulling(renderer))
-			continue;		// 현재 비워놓은....
+			continue;		
 
-		Vector3 playerToEnemy = playerTr->position - enemy->GetTransform()->position;
-		float dist = D3DXVec3Length(&playerToEnemy);
-		if (dist > m_detectRange)
-		{
-			continue;
-		}
+		/*	Vector3 playerToEnemy = playerTr->position - enemy->GetTransform()->position;
+			float dist = D3DXVec3Length(&playerToEnemy);
+			if (dist > m_detectRange)
+			{
+				continue;
+			}*/
 		
 		Vector2 screenPos = m_mainCamera->WorldToScreenPos(enemy->GetTransform()->position);
 		
@@ -158,7 +158,7 @@ void EnemyDetector::UpdateTarget()
 		Vector2 crosshairPos = Vector2(m_crosshair->GetTransform()->position.x, m_crosshair->GetTransform()->position.y);
 		Vector2 enemyToCrosshair = screenPos - crosshairPos;
 		float len = D3DXVec2Length(&enemyToCrosshair);
-		if (len < minDistance)
+		if (len < minDistance) // red cross hair
 		{
 			// closest target
 			m_lockonTarget = enemy;

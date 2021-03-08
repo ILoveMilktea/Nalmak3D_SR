@@ -55,7 +55,7 @@ void GarageScene::Initialize()
 		MeshRenderer::Desc render;
 		render.mtrlName = L"f15";
 		render.meshName = L"f15";
-		player = INSTANTIATE(OBJECT_TAG_PLAYER,L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<PlayerShooter>();
+		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<MeshRenderer>(&render);
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
 

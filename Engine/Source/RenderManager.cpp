@@ -123,7 +123,7 @@ void RenderManager::Render(Camera * _cam)
 void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 {
 	
-	_cam->ClearRenderTarget();
+	//_cam->ClearRenderTarget();
 	//ClearDepthStencil(L"Stencil_Transparent");
 
 	SkyboxPass(_cBuffer);
@@ -140,13 +140,13 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	EndRenderTarget();
 
-	_cam->RecordRenderTarget();
+	//_cam->RecordRenderTarget();
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Final")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
 	UIPass(_cam, _cBuffer);
 
-	_cam->EndRenderTarget();
+	//_cam->EndRenderTarget();
 
 }
 
@@ -526,7 +526,6 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	UpdateMaterial(_mtrl, _cBuffer);
 	UpdateRenderTarget();
 
-
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 
 	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0,  sizeof(INPUT_LAYOUT_POSITION_UV)));
@@ -537,8 +536,6 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 	m_currentShader->EndPass();
-	EndRenderTarget();
-
 
 }
 

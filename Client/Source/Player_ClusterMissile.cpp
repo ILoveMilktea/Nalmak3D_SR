@@ -57,7 +57,8 @@ void Player_ClusterMissile::CreateBullet()
 	m_bullet = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"cluster");
 	m_bullet->AddComponent<MeshRenderer>(&meshInfo);
 	m_bullet->SetParents(m_parents);
-	m_bullet->SetPosition(m_itemInfo.createPos);
+	m_bullet->SetPosition({ 0.f, -0.2f, 0.f });
+	m_bullet->SetScale(0.2f, 0.2f, 0.2f);
 }
 
 void Player_ClusterMissile::DeleteBullet()
@@ -65,6 +66,6 @@ void Player_ClusterMissile::DeleteBullet()
 	if (m_bullet)
 	{
 		DESTROY(m_bullet);
-		m_bullet= nullptr;
+		m_bullet = nullptr;
 	}
 }
