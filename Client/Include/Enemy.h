@@ -76,7 +76,7 @@ public: /* Get */
 public: /* Set */
 	void Set_Damage(const int& _dmg);
 	void Set_OriginForward();
-	
+	void Set_Accel(bool _onoff);
 
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);
@@ -118,6 +118,8 @@ private:
 	BULLET_STATUS	m_tHoming;
 	float			m_fHomingFpmDelta = 0.f;
 	float			m_fHomingReload = 0.f;
+
+	bool			m_bAccel = true;
 
 	float m_fHorizonSpd = 10.f;
 

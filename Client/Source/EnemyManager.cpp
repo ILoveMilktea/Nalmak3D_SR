@@ -231,7 +231,9 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	}
 		break;
 	case EXPLOSION:
-	{m_pStateControl->InitState(L"Explosion"); }
+	{
+		m_pStateControl->InitState(L"Explosion"); 
+	}
 	break;
 
 	case FALLING:
@@ -272,6 +274,14 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
 
 	++m_iEnemyCount;
+}
+
+void EnemyManager::Enemy_Spawn_Test(ENEMY_STATE _initState)
+{
+	
+	Vector3 vRand = Nalmak_Math::Rand(Vector3(-100.f, -100.f, -100.f), Vector3(100.f, 100.f, 100.f));
+
+	Enemy_Spawn(vRand, Vector3(0.1f, 0.1f, 0.1f), _initState);
 }
 
 void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)

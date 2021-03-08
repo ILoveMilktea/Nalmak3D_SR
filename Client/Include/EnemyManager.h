@@ -54,6 +54,8 @@ public: /* Funcs */
 		BULLET_STATUS _missile = BULLET_STATUS(),
 		BULLET_STATUS _homing = BULLET_STATUS());
 
+	void Enemy_Spawn_Test(ENEMY_STATE _initState);
+
 	void Enemy_Spawn_Normal();
 	void Enemy_Spawn_Huge();
 	void Enemy_Spawn_Quick();

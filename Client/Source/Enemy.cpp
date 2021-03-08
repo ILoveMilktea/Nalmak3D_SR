@@ -33,8 +33,12 @@ void Enemy::Update()
 
 	Death_Check();
 
-	//Decelerate();
-	//Accelerate();
+	if (m_bAccel)
+	{
+		Accelerate();
+	}
+	else { Decelerate(); }
+
 
 
 #pragma region DebugLog
@@ -43,7 +47,8 @@ void Enemy::Update()
 	//DEBUG_LOG(L"타겟 까지의 거리",		m_fDist_Target);
 	//DEBUG_LOG(L"forward벡터와 사이벡터의 내적",		m_fInner);
 	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
-	//DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
+	DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
+	DEBUG_LOG(L"Max Spd", m_tStatus.m_fMaxSpd);
 	//DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
 	//DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
 	DEBUG_LOG(L"Current Pattern", m_gameObject->GetComponent<StateControl>()->GetCurStateString());
@@ -291,6 +296,11 @@ void Enemy::Set_OriginForward()
 	m_vOriginForward = m_transform->GetForward();
 }
 
+void Enemy::Set_Accel(bool _onoff)
+{
+	m_bAccel = _onoff;
+}
+
 void Enemy::Horizontally()
 {
 	//Player Axis is not always alinged to World Y axis
@@ -464,8 +474,8 @@ void Enemy::Accelerate()
 void Enemy::Decelerate()
 {	
 	if (/*m_fDist_Target <= 50.f
-		&& */m_tStatus.m_fCurSpd >= 5.f)
+		&& */m_tStatus.m_fCurSpd >= 0.f)
 	{
-		m_tStatus.m_fCurSpd -= dTime * 7.5f;
+		m_tStatus.m_fCurSpd -= dTime * 5.0f;
 	}
 }

@@ -6,8 +6,8 @@ typedef struct tagEnemyBullet
 {
 
 	tagEnemyBullet(
-		int mindmg=0, int maxdmg=0, int fullRound=0, float reloadtime=0.f, 
-		float fpm=0.f, float maxspd=0.f, float lookspd=0.f)
+		int mindmg=1, int maxdmg=1, int fullRound=50, float reloadtime=2.f, 
+		float fpm=120.f, float maxspd=100.f, float lookspd=0.f)
 	{
 		m_iDmg_Min = mindmg;
 		m_iDmg_Max = maxdmg;
