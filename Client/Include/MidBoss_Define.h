@@ -28,7 +28,7 @@
 
 // --- state control global variable
 #define _MIDBOSS_CENTERPOS	Vector3(0.f,0.f,30.f)
-#define _MIDBOSS_CENTERROT	Quaternion(0.f,0.f,0.f,0.f)
+#define _MIDBOSS_CENTERROT	Quaternion(0.f,0.f,0.f,1.f)
 
 #define _g_patternIndex			L"MidBoss_g_PatternIndex"
 #define _g_centerPosition		L"MidBoss_g_CenterPosition"
