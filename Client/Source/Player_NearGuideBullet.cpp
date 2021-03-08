@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "..\Include\Player_NearGuideBullet.h"
+#include "ItemManager.h"
+
+#include "PlayerItem.h"
 #include "EnemyManager.h"
+#include "Enemy.h"
+#include "Enemy_Boss.h"
+
 
 Player_NearGuideBullet::Player_NearGuideBullet(Desc * _desc)
 {
@@ -20,6 +26,8 @@ void Player_NearGuideBullet::Initialize()
 	m_firstDir = m_firstTarget - m_transform->position;
 	D3DXVec3Normalize(&m_firstDir, &m_firstDir);
 	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
+	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
+	m_target = m_enemyDetector->GetLockOnTarget();
 }
 
 void Player_NearGuideBullet::Update()
@@ -28,13 +36,15 @@ void Player_NearGuideBullet::Update()
 	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 600.f)
 	{
 		DESTROY(m_gameObject);
+		m_gameObject = nullptr;
 	}
 
-	if (!m_bFinish && Nalmak_Math::Distance(m_firstTarget, m_transform->position) > 5.f)
+	if (!m_bFinish && Nalmak_Math::Distance(m_firstTarget, m_transform->position) > 2.f)
 	{
-		m_transform->position += m_firstDir * (m_speed * 0.5f) * dTime;
+		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_firstTarget, dTime * 5.f);
+		//m_transform->position += m_firstDir * (m_speed * 0.5f) * dTime;
 		m_transform->LookAt(m_firstDir + m_transform->position, 1.f);
-		
+
 	}
 	else
 	{
@@ -44,24 +54,55 @@ void Player_NearGuideBullet::Update()
 	if (!m_bFinish)
 		return;
 
-	GameObject * target = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject);
-	if (target)
+
+	if (m_target)
 	{
-		Vector3 toDistance = target->GetTransform()->position - m_transform->position;
+		Vector3 toDistance = m_target->GetTransform()->position - m_transform->position;
 		D3DXVec3Normalize(&toDistance, &toDistance);
 
-		m_transform->position += toDistance * (m_speed)* dTime;
+
+		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_target->GetTransform()->position, dTime * 5.f);
 		m_transform->LookAt(toDistance + m_transform->position, 5.5f);
 	}
 	else
 	{
-		DESTROY(m_gameObject);
-		m_gameObject = nullptr;
+		m_target = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject);
 	}
 
 }
 
 void Player_NearGuideBullet::Release()
+{
+}
+
+void Player_NearGuideBullet::OnTriggerEnter(Collisions & _collision)
+{
+
+	m_dmg = ItemManager::GetInstance()->FindItemObject(L"Weapon", L"ClusterMissile")->GetItmeInfo().weaponAttak;
+
+	for (auto& obj : _collision)
+	{
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
+		{
+			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(m_dmg);
+
+			DESTROY(m_gameObject);
+		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
+		{
+			obj.GetGameObject()->GetComponent<Boss>()->Damaged(m_dmg);
+
+			DESTROY(m_gameObject);
+		}
+	}
+}
+
+void Player_NearGuideBullet::OnTriggerStay(Collisions & _collision)
+{
+}
+
+void Player_NearGuideBullet::OnTriggerExit(Collisions & _collision)
 {
 }
 

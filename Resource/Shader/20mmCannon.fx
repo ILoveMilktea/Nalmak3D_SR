@@ -41,7 +41,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 
 
 	float4x4 invView= mul(g_invViewForBillboard, g_world);
-	float4x4 wvp = mul(invView, g_cBuffer.viewProj);
+	float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), wvp);
 	o.uv = _input.uv;
 	//o.normal = float3(0, 0, 1);
@@ -57,6 +57,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	float4 diffuse = tex2D(mainSampler, _input.uv);
 	o.diffuse = diffuse * g_mainTexColor;
 	o.diffuse.w = 1;
+	o.diffuse = 1;
 	return o;
 }
 

@@ -29,7 +29,7 @@ void BulletEffect_StretchBillboard::Initialize()
 	 auto player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 	m_dir = player->GetTransform()->GetForward();
 
-	m_transform->SetScale(Vector3(1, m_stretchRatio *2.45f, 1) * 0.35f);
+	m_transform->SetScale(Vector3(1, m_stretchRatio, 1));
 
 	m_material = GetComponent<VIBufferRenderer>()->GetMaterial();
 
