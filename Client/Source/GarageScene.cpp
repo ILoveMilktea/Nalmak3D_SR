@@ -31,12 +31,37 @@ GarageScene::~GarageScene()
 
 void GarageScene::Initialize()
 {
-	INSTANTIATE()->AddComponent<DirectionalLight>()->SetRotation(90, 0, 0);
+	DirectionalLight::Desc  directional;
+	directional.diffuseIntensity = 0.5f;
+	INSTANTIATE()->AddComponent<DirectionalLight>(&directional)->SetRotation(50, 0, 0);
 	//StageManager::GetInstance();
 
 	ItemManager::GetInstance();
 
 
+
+	{
+		PointLight::Desc point;
+		point.radius = 8.f;
+		point.color = Vector3(1, 0.7f, 0.6f);
+		point.diffuseIntensity = 4.f;
+		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(3, 1, 4);
+
+	}
+	{
+		PointLight::Desc point;
+		point.radius = 12.f;
+		point.color = Vector3(0.5f, 0.5, 0.7f);
+		point.diffuseIntensity = 2.f;
+		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(2,-1,-4);
+	}
+	{
+		PointLight::Desc point;
+		point.radius = 10.f;
+		point.color = Vector3(0.9f, 0.9f, 0.7f);
+		point.diffuseIntensity = 2.5f;
+		INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(-3, 2, 4);
+	}
 	INSTANTIATE()->AddComponent<Grid>()->SetPosition(0,0,-5.f);
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);

@@ -117,7 +117,7 @@ void MainGame::SystemSetting()
 
 
 
-	m_engine->SetStartScene(L"phantom");
+	m_engine->SetStartScene(L"stageSelect");
 
 
 }

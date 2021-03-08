@@ -399,7 +399,7 @@ public:
 		auto background = CreateImage(CANVAS_GROUP_MAINWND, L"Popup04_White2");
 		background->SetPosition(0.f, 0.f, 0.f);
 		background->SetScale(160.f, 25.f);
-		auto fill = CreateImage(CANVAS_GROUP_MAINWND, L"UIRed");
+		auto fill = CreateImage(CANVAS_GROUP_MAINWND, L"Tip2");
 		fill->SetPosition(0.f, 0.f, 0.f);
 		fill->SetScale(152.f, 17.f);
 

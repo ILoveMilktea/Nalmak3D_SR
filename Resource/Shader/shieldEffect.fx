@@ -80,15 +80,13 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 
 
-
-
 	float alpha = o.diffuse.a;
 	alpha = min(pow(1.f - dot(-normal, view),3) * g_strength, alpha);
 	o.diffuse.a = alpha;
 
 	float3 worldPos = _in.worldPos;
 	
-	o.diffuse = 1 - (length(g_hitPosition.xyz - worldPos) / g_radius);
+	//o.diffuse = 1 - (length(g_hitPosition.xyz - worldPos) / g_radius);
 
 	return o;
 }
