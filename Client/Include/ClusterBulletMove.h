@@ -27,7 +27,7 @@ private:
 	GameObject* m_target = nullptr;
 	GameObject* m_Neartarget = nullptr;
 
-	EnemyDetector* m_enemyDetector;
+	class EnemyDetector* m_enemyDetector;
 	Vector2 m_screenPos = {};
 	Vector3 m_firstDir = {};
 private:

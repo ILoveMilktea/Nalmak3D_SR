@@ -8,7 +8,7 @@ textureRT "g_diffuse" "GBuffer_Diffuse"
 textureRT "g_depth" "GBuffer_Depth"
 textureRT "g_normal" "GBuffer_Normal"
 textureRT "g_light" "GBuffer_Light"
-textureRT "g_emission" "GBuffer_Emission"	
+
 
 renderQueue "1000"
 

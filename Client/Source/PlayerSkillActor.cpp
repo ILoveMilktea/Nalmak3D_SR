@@ -2,6 +2,7 @@
 #include "..\Include\PlayerSkillActor.h"
 #include "ItemManager.h"
 #include "PlayerItem.h"
+#include "PlayerInfoManager.h"
 
 PlayerSkillActor::PlayerSkillActor(Desc * _Desc)
 {

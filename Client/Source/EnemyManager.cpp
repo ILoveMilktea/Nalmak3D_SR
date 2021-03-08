@@ -26,6 +26,7 @@
 #include "MidBoss_Headers.h"
 #include "MidBoss_Define.h"
 #include "Enemy_Debugging.h"
+#include "PlayerInfoManager.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 

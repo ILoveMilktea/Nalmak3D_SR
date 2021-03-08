@@ -59,9 +59,14 @@ void GarageScene::Initialize()
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
 
+	{
+		VIBufferRenderer::Desc render;
+		render.mtrlName = L"Garage_BG";
+		render.meshName = L"screenQuad";
+		auto obj = INSTANTIATE(OBJECT_TAG_DEFAULT, L"background")->AddComponent<VIBufferRenderer>(&render);
+		obj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
+	}
 
-	auto window1 = UIFactory::CreateRenderTargetWindow(L"Garage_SkillPreview", CANVAS_GROUP_G1);
-	window1->SetPosition(500, 500, 0)->SetScale(500, 500, 0);
 
 	player->AddComponent<UIInteractor>();
 	UIWindowFactory::GarageMainWindow(player);

@@ -1307,5 +1307,8 @@
     <FxCompile Include="..\..\Resource\Shader\shieldEffect.fx">
       <Filter>03.Resource\02.Shader\Stage</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\BackGround.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

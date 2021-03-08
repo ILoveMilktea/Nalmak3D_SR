@@ -7,6 +7,7 @@
 #include "ItemManager.h"
 #include"PlayerInfoManager.h"
 #include "ScaleDampingDeffender.h"
+#include "UIFactory.h"
 
 NalmakScene::NalmakScene()
 {
@@ -27,16 +28,17 @@ void NalmakScene::Initialize()
 	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"Emp");
 
 	{
-		MeshRenderer::Desc render;
+		/*MeshRenderer::Desc render;
 		render.meshName = L"f15";
 		render.mtrlName = L"f15";
 
 		plane = INSTANTIATE(OBJECT_TAG_PLAYER)->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->SetScale(0.2f, 0.2f, 0.2f);
 		plane->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 		plane->AddComponent<PlayerShooter>();
-		plane->AddComponent<PlayerSkillActor>();
+		plane->AddComponent<PlayerSkillActor>();*/
 	}
 
+	PlayerInfoManager::GetInstance()->GetPlayer();
 
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.9f;
@@ -55,7 +57,7 @@ void NalmakScene::Initialize()
 
 
 
-	INSTANTIATE()->AddComponent<SphereCollider>();
+
 
 	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
 	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
@@ -67,17 +69,15 @@ void NalmakScene::Initialize()
 	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
 	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Distortion", CANVAS_GROUP_G1);
 	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
-
-	auto window6 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Emission", CANVAS_GROUP_G1);
+	auto window6 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Debug", CANVAS_GROUP_G1);
 	window6->SetPosition(300, 100, 0)->SetScale(200, 200, 0);
-
-	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50,0);
+	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 
 
 	{
 		ParticleRenderer::Desc	distortion;
 		distortion.particleDataName = L"player_zet_distortion";
-		INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(0.15f,0.1f,-0.7f);
+		INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(0.15f, 0.1f, -0.7f);
 	}
 	{
 		ParticleRenderer::Desc	distortion;
@@ -97,7 +97,7 @@ void NalmakScene::Initialize()
 		VIBufferRenderer::Desc ground;
 		ground.mtrlName = L"ground";
 		ground.meshName = L"ground";
-		auto groundObj =  INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
+		auto groundObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
 		groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 	}
 
