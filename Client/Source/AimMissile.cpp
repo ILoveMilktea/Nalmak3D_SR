@@ -43,7 +43,7 @@ void AimMissile::CreateBullet()
 	// 1. RENDER
 	MeshRenderer::Desc meshInfo;
 	meshInfo.meshName = m_itemInfo.modelName;
-	meshInfo.mtrlName = L"kfir";
+	meshInfo.mtrlName = m_mtrlName;
 	// 2. BULLET INFO
 
 	m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
@@ -53,13 +53,13 @@ void AimMissile::CreateBullet()
 	m_bullet[0]->AddComponent<MeshRenderer>(&meshInfo);
 	m_bullet[0]->SetParents(m_parents);
 	m_bullet[0]->SetPosition({ m_itemInfo.createPos.x * -1.f, m_itemInfo.createPos.y,m_itemInfo.createPos.z});
-	m_bullet[0]->SetScale(0.3f, 0.3f, 1.5f);
+	m_bullet[0]->SetScale({0.3f, 0.3f, 0.3f});
 
 	m_bullet[1] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Right");
 	m_bullet[1]->AddComponent<MeshRenderer>(&meshInfo);
 	m_bullet[1]->SetParents(m_parents);
 	m_bullet[1]->SetPosition(m_itemInfo.createPos);
-	m_bullet[1]->SetScale(0.3f, 0.3f, 1.5f);
+	m_bullet[1]->SetScale({ 0.3f, 0.3f, 0.3f });
 
 
 }

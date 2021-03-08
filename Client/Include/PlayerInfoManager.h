@@ -42,6 +42,7 @@ public:
 	void SetTimeLimit(const float& _value);
 	void SetScore(const float& _value);
 	void SetPlayer(GameObject* _player);
+	void SetKillCheck(const bool& _check);
 public:
 	const int& GetHp() const;
 	const int& GetAttack() const;
@@ -57,6 +58,8 @@ public:
 	// temporary members
 	const float& GetTimeLimit() { return m_timelimit; }
 	const float& GetScore() { return m_score; }
+	const bool& GetKillCheck() { return m_killCheck; }
+
 	GameObject* GetPlayer();
 	map<wstring, vector<wstring>>& GetInven() { return m_haveItemList; }
 	const wstring* GetWeaponArray() { return m_currentlyWeapon; }
@@ -104,4 +107,7 @@ private:
 
 	GameObject * m_pSingleWeapon = nullptr;
 	GameObject * m_pSideWeapon[2] = {};
+
+private:
+	bool m_killCheck = false;
 };

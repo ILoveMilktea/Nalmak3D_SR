@@ -18,7 +18,6 @@ Player_NearGuideBullet::Player_NearGuideBullet(Desc * _desc)
 Player_NearGuideBullet::~Player_NearGuideBullet()
 {
 	m_gameObject = nullptr;
-
 }
 
 void Player_NearGuideBullet::Initialize()
@@ -29,6 +28,7 @@ void Player_NearGuideBullet::Initialize()
 	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 	m_target = m_enemyDetector->GetLockOnTarget();
 	m_stateControl = m_target->GetComponent<StateControl>();
+	m_finalTargetPos = m_target->GetTransform()->position;
 }
 
 void Player_NearGuideBullet::Update()
@@ -55,17 +55,19 @@ void Player_NearGuideBullet::Update()
 	if (!m_bFinish)
 		return;
 
-
-	if (L"Falling" != m_stateControl->GetCurStateString())
+	
+	
+	if (Nalmak_Math::Distance(m_finalTargetPos, m_transform->position) >= 1.f)
 	{
-		Vector3 toDistance = m_target->GetTransform()->position - m_transform->position;
+		Vector3 toDistance = m_finalTargetPos - m_transform->position;
 		D3DXVec3Normalize(&toDistance, &toDistance);
-		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_target->GetTransform()->position, dTime * 5.f);
+		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_finalTargetPos, dTime * 5.f);
 		m_transform->LookAt(toDistance + m_transform->position, 5.5f);
 	}
 	else
 	{
-		//GameObject* enemy = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject ,50.f);
+		m_transform->position += m_transform->GetForward() * 45 * dTime;
+		m_transform->SetRotation(0, 0, 0);
 	}
 
 }
@@ -92,7 +94,6 @@ void Player_NearGuideBullet::OnTriggerEnter(Collisions & _collision)
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
 		{
 			obj.GetGameObject()->GetComponent<Boss>()->Damaged(m_dmg);
-
 			DESTROY(m_gameObject);
 			m_gameObject = nullptr;
 

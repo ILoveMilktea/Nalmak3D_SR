@@ -29,12 +29,15 @@ private:
 	//GameObject * FindEnemy(OBJECT_TAG _enum, float _mimDis = 0);
 private:
 	Vector3 m_firstTarget;
+	Vector3 m_firstDir;
+	Vector3 m_finalTargetPos;
 	bool	m_bFinish;
 private:
 	GameObject* m_player;
 	GameObject* m_target;
+	GameObject* m_finder = nullptr;
 	EnemyDetector* m_enemyDetector;
-	Vector3 m_firstDir;
+	
 	StateControl * m_stateControl;
 	float m_speed;
 	int m_dmg;

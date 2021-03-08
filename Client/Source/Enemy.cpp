@@ -63,7 +63,6 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 		{
 			//데미지 입는건 거 Player bullet에서 해줌.
 
-
 			//if (m_pSmokeParticle == nullptr)
 			//{
 			//	m_pSmokeParticle = INSTANTIATE();
@@ -179,7 +178,7 @@ void Enemy::Death_Check()
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
 
-			m_gameObject->DeleteComponent<SphereCollider>();
+			
 
 		}
 	}

@@ -32,31 +32,29 @@ void PlayerEscapeState::EnterState()
 	m_skillActor = m_gameObject->GetComponent<PlayerSkillActor>();
 	m_skillInfo = m_skillActor->GetSkillInfo();
 
-	// test skill;
-	// test defender skill; 
-	m_dealy = m_skillInfo->GetItmeInfo().delay;
+	//m_dealy = m_skillInfo->GetItmeInfo().delay;
 
-	{
-		VIBufferRenderer::Desc meshInfo;
-		//meshInfo.mtrlName = L"debugCollider";
-		meshInfo.mtrlName = L"default_red";
-		meshInfo.meshName  = L"sphere";
+	//{
+	//	VIBufferRenderer::Desc meshInfo;
+	//	//meshInfo.mtrlName = L"debugCollider";
+	//	meshInfo.mtrlName = L"default_red";
+	//	meshInfo.meshName  = L"sphere";
 
-		ScaleDampingDeffender::Desc scaleDamping;
-		scaleDamping.dampingSpeed = 3.f;
-		scaleDamping.maximumScale = 15.0f;
-		scaleDamping.axisDir = Vector3(0.f, 1.f, 0.f);
-		
-		SphereCollider::Desc sphereColliderInfo;
-		sphereColliderInfo.collisionLayer = COLLISION_LAYER_SHIELD;
-		sphereColliderInfo.radius = 1.f;
+	//	ScaleDampingDeffender::Desc scaleDamping;
+	//	scaleDamping.dampingSpeed = 3.f;
+	//	scaleDamping.maximumScale = 15.0f;
+	//	scaleDamping.axisDir = Vector3(0.f, 1.f, 0.f);
+	//	
+	//	SphereCollider::Desc sphereColliderInfo;
+	//	sphereColliderInfo.collisionLayer = COLLISION_LAYER_SHIELD;
+	//	sphereColliderInfo.radius = 1.f;
 
-		auto shield = INSTANTIATE( OBJECT_TAG_PLAYER_SHIELD , L"playerNormalShield")->
-			AddComponent<VIBufferRenderer>(&meshInfo)->
-			AddComponent<ScaleDampingDeffender>(&scaleDamping)->
-			AddComponent<SphereCollider>(&sphereColliderInfo);
-		shield->SetParents(m_gameObject);
-	}
+	//	auto shield = INSTANTIATE( OBJECT_TAG_PLAYER_SHIELD , L"playerNormalShield")->
+	//		AddComponent<VIBufferRenderer>(&meshInfo)->
+	//		AddComponent<ScaleDampingDeffender>(&scaleDamping)->
+	//		AddComponent<SphereCollider>(&sphereColliderInfo);
+	//	shield->SetParents(m_gameObject);
+	//}
 	
 }
 

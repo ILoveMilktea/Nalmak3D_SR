@@ -48,7 +48,9 @@ void ScaleDampingDeffender::Update()
 
 	if (m_retainTime <= 0.f) // 작아지기
 	{
-		
+		m_transform->scale.x -= dTime * m_dampingSpeed;
+		m_transform->scale.y -= dTime * m_dampingSpeed;
+		m_transform->scale.z -= dTime * m_dampingSpeed;
 	}
 	else if (m_retainTime > 0.f)
 	{
