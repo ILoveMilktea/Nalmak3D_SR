@@ -73,7 +73,7 @@ void SmoothFollow::LateUpdate()
 	// 카메?��? 바라보는 방향???�해주는 �?// ?�레?�어가 바라보는 방향?�로 가?�함
 	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_player->rotation, dTime * 2.f);
 
-
+	
 
 	// ?�레?�어???�재 ?�도 비율 0~1
 	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());

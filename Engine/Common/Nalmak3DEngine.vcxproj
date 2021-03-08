@@ -90,6 +90,7 @@
     <ClCompile Include="..\Source\ScaleHandle_2D.cpp" />
     <ClCompile Include="..\Source\Scene.cpp" />
     <ClCompile Include="..\Source\SceneManager.cpp" />
+    <ClCompile Include="..\Source\ScreenQuad.cpp" />
     <ClCompile Include="..\Source\Shader.cpp" />
     <ClCompile Include="..\Source\SingleImage.cpp" />
     <ClCompile Include="..\Source\SkyBox.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\Include\ScaleHandle_2D.h" />
     <ClInclude Include="..\Include\Scene.h" />
     <ClInclude Include="..\Include\SceneManager.h" />
+    <ClInclude Include="..\Include\ScreenQuad.h" />
     <ClInclude Include="..\Include\Shader.h" />
     <ClInclude Include="..\Include\SingleImage.h" />
     <ClInclude Include="..\Include\SkyBox.h" />

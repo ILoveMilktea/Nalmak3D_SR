@@ -89,12 +89,12 @@ void Player_EmpMove::Boom()
 	Pulse->SetPosition(m_transform->position);
 
 	Player_EmpPulse::Desc Pulse_desc;
-	Pulse_desc.max_Radius = 10.f;
+	Pulse_desc.max_Radius = 50.f;
 	Pulse->AddComponent<Player_EmpPulse>(&Pulse_desc);
 	
 	VIBufferRenderer::Desc Pulse_render;
-	Pulse_render.meshName = L"sphere";
-	Pulse_render.mtrlName = L"default_blue";
+	Pulse_render.meshName = L"screenQuad";
+	Pulse_render.mtrlName = L"screenDistortion";
 	Pulse->AddComponent<VIBufferRenderer>(&Pulse_render);
 
 	SphereCollider::Desc Pulse_col;

@@ -55,8 +55,23 @@ void DogFightState::EnterState()
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Player_Weapon_Homing");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
 
-	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
-	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
+
+#pragma region Player Particle
+
+	//{
+	//	ParticleRenderer::Desc render;
+	//	render.particleDataName = L"player_zet_muzzle_left";
+	//	m_Player->AddComponent<ParticleRenderer>(&render);
+	//	render.particleDataName = L"player_zet_muzzle_right";
+	//	m_Player->AddComponent<ParticleRenderer>(&render);
+	//}
+#pragma endregion
+
+
+
+
+
+
 
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp");
@@ -65,10 +80,30 @@ void DogFightState::EnterState()
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
 
 	auto infoManager = PlayerInfoManager::GetInstance();
-	m_pPlayer = infoManager->GetPlayer();
+	auto player = infoManager->GetPlayer();
+
+
+
 	infoManager->SetTimeLimit(m_fDogFightTime);
 	infoManager->SetScore(m_fDogFightScore);
 
+	infoManager->SetTimeLimit(2000.f);
+	infoManager->SetScore(123456.f);
+	infoManager->SetPlayer(player);
+
+
+	player->AddComponent<UIInteractor>();
+	UIWindowFactory::StageWindow(player);
+
+	EnemyManager::GetInstance();
+
+	//ENEMY_STATUS tStatus(10, 20, 1);
+	//BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
+	//BULLET_STATUS tMissile(10, 50, 5, 10, 30, 50, 0);
+
+	//EnemyManager::GetInstance()->Enemy_Spawn(Vector3(0.f, 0.f, 100.f), Vector3(0.1f, 0.1f, 0.1f), ENEMY_STATE::IDLE, tStatus, tGun, tMissile);
+
+	//EnemyManager::GetInstance()->Player_FovSpawnTest(true, 100.f);
 	EnemyManager::GetInstance()->Spawn_S1P1_Normal();
 	m_bPattern1[0] = true;
 }

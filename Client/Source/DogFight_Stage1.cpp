@@ -56,13 +56,16 @@ void DogFight_Stage1::EnterState()
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
 	
-	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");f
-	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp");
+
 #pragma endregion
+
 
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
 
 	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
+
+	
+
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fTutorialTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fTutorialScore);
 

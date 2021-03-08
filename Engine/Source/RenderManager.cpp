@@ -55,7 +55,7 @@ void RenderManager::Initialize()
 	D3DVIEWPORT9 vp = { 0,0,m_wincx,m_wincy,0,1 };
 	m_device->SetViewport(&vp);
 
-	m_imageVIBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"quadNoneNormal");
+	m_imageVIBuffer = ResourceManager::GetInstance()->GetResource<VIBuffer>(L"screenQuad");
 	m_fullScreenMtrl = ResourceManager::GetInstance()->GetResource<Material>(L"FullScreen");
 }
 
@@ -63,7 +63,7 @@ void RenderManager::Render()
 {
 	assert(L"Please Set Camera at least one" &&m_cameraList.size());
 
-	ThrowIfFailed(m_device->Clear(0, NULL,  D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,0, 1, 0));
+	
 
 	for (auto& cam : m_cameraList)
 	{
@@ -80,6 +80,17 @@ void RenderManager::Render()
 
 void RenderManager::Render(Camera * _cam)
 {
+	ThrowIfFailed(m_device->Clear(0, NULL, D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, 0, 1, 0));
+
+	ClearRenderTarget(L"GBuffer_Diffuse");
+	ClearRenderTarget(L"GBuffer_Normal");
+	ClearRenderTarget(L"GBuffer_Depth");
+	ClearRenderTarget(L"GBuffer_CookTorrance");
+	ClearRenderTarget(L"GBuffer_Light");
+	ClearRenderTarget(L"GBuffer_Debug");
+	ClearRenderTarget(L"GBuffer_Distortion");
+	ClearRenderTarget(L"GBuffer_Final");
+
 	///////////////////////////////////////////////////////
 	// public const buffer
 	ConstantBuffer cBuffer;
@@ -99,7 +110,7 @@ void RenderManager::Render(Camera * _cam)
 
 	cBuffer.invView = invView;
 	cBuffer.invProj = invProj;
-
+	cBuffer.time = TimeManager::GetInstance()->GetTotalTime();
 	////////////////////////////////////////////////////////
 	ThrowIfFailed(m_device->BeginScene());
 	DeferredRender(_cam, cBuffer);
@@ -110,34 +121,33 @@ void RenderManager::Render(Camera * _cam)
 
 void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 {
-	ClearRenderTarget(L"GBuffer_Diffuse");
-	ClearRenderTarget(L"GBuffer_Normal");
-	ClearRenderTarget(L"GBuffer_Depth");
-	ClearRenderTarget(L"GBuffer_CookTorrance");
-	ClearRenderTarget(L"GBuffer_Light");
-	ClearRenderTarget(L"GBuffer_Shade");
-	ClearRenderTarget(L"GBuffer_Debug");
-	ClearRenderTarget(L"GBuffer_Transparent");
-	ClearDepthStencil(L"Stencil_Transparent");
+	
+	_cam->ClearRenderTarget();
+	//ClearDepthStencil(L"Stencil_Transparent");
 
 	SkyboxPass(_cBuffer);
 
 	GBufferPass(_cam, _cBuffer);
 
-
 	LightPass(_cam,_cBuffer);
 
 	ShadePass(_cBuffer);
 
-
-
 	DebugPass(_cBuffer);
-
-	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Shade")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 
 	TransparentPass(_cam, _cBuffer);
 
+	PostProcessPass(_cam, _cBuffer);
+
+	EndRenderTarget();
+
+	_cam->RecordRenderTarget();
+
+	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Final")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
 	UIPass(_cam, _cBuffer);
+
+	_cam->EndRenderTarget();
+
 }
 
 void RenderManager::SkyboxPass(ConstantBuffer & _cBuffer)
@@ -365,8 +375,6 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
-	//RecordRenderTarget(0, L"GBuffer_Transparent");
-
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
@@ -384,7 +392,7 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 				
 					Material* material = renderer->GetMaterial(0);
 					UpdateMaterial(material, _cBuffer);
-
+					UpdateRenderTarget();
 					renderer->Render(m_currentShader);
 				}
 			}
@@ -399,7 +407,36 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 
-	//EndRenderTarget(L"GBuffer_Transparent");
+}
+
+void RenderManager::PostProcessPass(Camera * _cam, ConstantBuffer & _cBuffer)
+{
+	m_currentShader = nullptr;
+	m_currentMaterial = nullptr;
+
+	for (auto& MeshRendererList : m_renderLists[RENDERING_MODE_OVERLAY])
+	{
+		for (auto& renderer : MeshRendererList.second)
+		{
+			if (_cam->CompareLayer(renderer->GetLayer()))
+			{
+				if (_cam->IsInFrustumCulling(renderer))
+				{
+					renderer->BindingStreamSource();
+
+					Material* material = renderer->GetMaterial(0);
+					UpdateMaterial(material, _cBuffer);
+					UpdateRenderTarget();
+					renderer->Render(m_currentShader);
+				}
+			}
+		}
+	}
+
+	if (m_currentShader)
+	{
+		m_currentShader->EndPass();
+	}
 }
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
@@ -422,7 +459,7 @@ void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
 
 				Material* material = renderer->GetMaterial();
 				UpdateMaterial(material, _cBuffer);
-
+				//UpdateRenderTarget();
 				renderer->Render(m_currentShader);
 			}
 		}
@@ -489,9 +526,6 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	UpdateMaterial(_mtrl, _cBuffer);
 	UpdateRenderTarget();
 
-	Matrix mat;
-	D3DXMatrixScaling(&mat, 2, 2, 2);
-	m_currentShader->SetMatrix("g_world", mat);
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 
@@ -515,10 +549,8 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 	m_currentMaterial = nullptr;
 
 	UpdateMaterial(m_fullScreenMtrl, _cBuffer);
+	
 	m_currentShader->SetTexture("g_mainTex", _tex);
-	Matrix mat;
-	D3DXMatrixScaling(&mat, 2, 2, 2);
-	m_currentShader->SetMatrix("g_world", mat);
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 

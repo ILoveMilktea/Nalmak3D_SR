@@ -23,3 +23,4 @@ void EscapeSkill::CreateBullet()
 void EscapeSkill::DeleteBullet()
 {
 }
+

@@ -21,7 +21,6 @@ public:
 	virtual void ItemShot() = 0;
 	virtual void CreateBullet() = 0;
 	virtual void DeleteBullet() = 0;
-
 	
 protected:
 	ITEMINFO m_itemInfo;

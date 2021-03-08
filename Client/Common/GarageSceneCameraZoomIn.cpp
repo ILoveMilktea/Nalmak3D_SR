@@ -13,7 +13,6 @@ GarageSceneCameraZoomIn::~GarageSceneCameraZoomIn()
 
 void GarageSceneCameraZoomIn::Initialize()
 {
-	m_player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER)->GetTransform();
 	m_garageCam = GetComponent<GarageSceneCameraInfo>();
 
 }

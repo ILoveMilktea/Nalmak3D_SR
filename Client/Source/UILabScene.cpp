@@ -14,7 +14,6 @@ void UILabScene::Initialize()
 	
 	{
 		auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()->AddComponent<FreeMove>();
-		mainCam->GetComponent<Camera>()->OffLayer(RENDER_LAYER_UI);
 		mainCam->SetPosition(0, 5, -5);
 		mainCam->SetRotation(30, 0, 0);
 	}

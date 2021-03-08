@@ -248,6 +248,7 @@ GameObject * PlayerInfoManager::Player_Create()
 	m_player->AddComponent<Player>(&player_desc);
 
 #pragma region Player Particle
+	// zet fire
 	{
 		ParticleRenderer::Desc render;
 		render.particleDataName = L"player_zet_muzzle_left";
@@ -263,8 +264,30 @@ GameObject * PlayerInfoManager::Player_Create()
 		wind.trailThick = 0.2f;
 		m_player->AddComponent<Player_WindEffect>(&wind);
 	}
-#pragma endregion
+	// zet distortion
+	{
+		ParticleRenderer::Desc	distortion;
+		distortion.particleDataName = L"player_zet_distortion";
+		auto effect = INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(0.15f, 0.1f, -0.9f);
+		effect->SetParents(m_player);
+	}
+	{
+		ParticleRenderer::Desc	distortion;
+		distortion.particleDataName = L"player_zet_distortion";
+		auto effect = INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(-0.15f, 0.1f, -0.9f);
+		effect->SetParents(m_player);
+	}
 
+
+	{
+		VIBufferRenderer::Desc vibuffer;
+		vibuffer.meshName = L"screenQuad";
+		vibuffer.mtrlName = L"particleDistortion";
+		auto dist = INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
+		dist->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
+	}
+#pragma endregion
+	// light
 	{
 		PointLight::Desc lightDesc;
 		lightDesc.color = Vector3(1, 0.3f, 0);
@@ -273,7 +296,7 @@ GameObject * PlayerInfoManager::Player_Create()
 		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0, 0, -1.5f);
 		light->SetParents(m_player);
 	}
-
+	// state
 	m_player->AddComponent<StateControl>();
 	m_player->GetComponent<StateControl>()->AddState<PlayerNone>(L"playerNone");
 	m_player->GetComponent<StateControl>()->AddState<PlayerIdle>(L"playerIdle");
@@ -292,6 +315,7 @@ GameObject * PlayerInfoManager::Player_Create()
 	m_player->GetComponent<StateControl>()->AddState<PlayerEscapeState>(L"playerEscape");
 	m_player->GetComponent<StateControl>()->InitState(L"playerIdle");
 
+	// mesh render
 	MeshRenderer::Desc render;
 	render.mtrlName = L"f15";
 	render.meshName = L"f15";
@@ -299,10 +323,12 @@ GameObject * PlayerInfoManager::Player_Create()
 	m_player->AddComponent<PlayerShooter>();
 	m_player->AddComponent<PlayerSkillActor>();
 
+	// collider
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
 	m_player->AddComponent<SphereCollider>(&player_col);
 
+	// ui
 	m_player->AddComponent<UIInteractor>();
 	UIWindowFactory::StageWindow(m_player);
 

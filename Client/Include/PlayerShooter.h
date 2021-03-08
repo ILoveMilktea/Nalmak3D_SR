@@ -17,7 +17,9 @@ public:
 	virtual void Update() override;
 
 	void SetEquipment(PARTS_NUM _weaponName);
-
+public:
+	void Shoot();
+	void EquipByItemName(const wstring& _itemName);
 public: /* Get */
 	
 private:

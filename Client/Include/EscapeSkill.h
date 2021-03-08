@@ -11,5 +11,7 @@ public:
 	virtual void ItemShot() override;
 	virtual void CreateBullet() override;
 	virtual void DeleteBullet() override;
+
+	// PlayerItem을(를) 통해 상속됨
 };
 

@@ -34,6 +34,7 @@ private:
 	Vector3	 m_axis;
 private:
 	SphereCollider* m_spherCollider;
+	Material* m_material;
 
 };
 

@@ -146,3 +146,17 @@ void PlayerShooter::SetEquipment(PARTS_NUM _weaponName)
 
 }
 
+void PlayerShooter::Shoot()
+{
+	m_useEquipment->CreateBullet();
+	m_useEquipment->ItemShot();
+}
+
+void PlayerShooter::EquipByItemName(const wstring & _itemName)
+{
+	if (m_useEquipment)
+		m_useEquipment->DeleteBullet();
+
+	m_useEquipment = m_ItemManager->FindItemObject(L"Weapon", _itemName);
+}
+

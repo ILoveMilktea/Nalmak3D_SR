@@ -1,7 +1,6 @@
 #include "H_common.fx"
 #include "H_light.fx"
 
-matrix g_world;
 DirectionalLight g_directionalLight;
 
 texture g_diffuse;
@@ -55,8 +54,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _in)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0;
 
-	o.pos = mul(float4(_in.pos, 1), g_world);
-	o.pos.w = 1;
+	o.pos = float4(_in.pos, 1);
 	o.uv = _in.uv;
 
 

@@ -232,6 +232,9 @@
     <Filter Include="11.Animation">
       <UniqueIdentifier>{e112055a-4177-46e8-be8e-654b03cba67c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06.Resource\01.VIBuffer\10.ScreenQuad">
+      <UniqueIdentifier>{905c63fa-fe96-4a0b-8238-dbf9a9f04541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -512,6 +515,9 @@
     <ClCompile Include="..\Source\TrailRenderer.cpp" />
     <ClCompile Include="..\Source\GroundVIBuffer.cpp">
       <Filter>06.Resource\01.VIBuffer\09.Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScreenQuad.cpp">
+      <Filter>06.Resource\01.VIBuffer\02.Quad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -818,6 +824,9 @@
     <ClInclude Include="..\Include\TrailRenderer.h" />
     <ClInclude Include="..\Include\GroundVIBuffer.h">
       <Filter>06.Resource\01.VIBuffer\09.Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScreenQuad.h">
+      <Filter>06.Resource\01.VIBuffer\02.Quad</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

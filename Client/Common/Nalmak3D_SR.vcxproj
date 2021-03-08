@@ -569,6 +569,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\D_PointLight.fx" />
+    <FxCompile Include="..\..\Resource\Shader\particleDistortion.fx" />
+    <FxCompile Include="..\..\Resource\Shader\particleDistortionMask.fx" />
+    <FxCompile Include="..\..\Resource\Shader\screenDistortion.fx" />
+    <FxCompile Include="..\..\Resource\Shader\shieldEffect.fx" />
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx" />
     <FxCompile Include="..\..\Resource\Shader\StageSelectFloor.fx" />
     <FxCompile Include="..\..\Resource\Shader\standard.fx">

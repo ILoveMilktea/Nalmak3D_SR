@@ -18,12 +18,11 @@ void BaseScene::Initialize()
 	{
 		MeshRenderer::Desc render;
 		render.meshName = L"f15";
-		render.mtrlName = L"f15_base";
+		render.mtrlName = L"f15";
 
 		auto plane = INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->SetScale(0.2f, 0.2f, 0.2f);
 		plane->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
-		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_glass");
-		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_base");
+
 	}
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.9f;
@@ -34,6 +33,13 @@ void BaseScene::Initialize()
 	INSTANTIATE()->AddComponent<Grid>();
 
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(350, 350, 0);
+
+	{
+		VIBufferRenderer::Desc vibuffer;
+		vibuffer.meshName = L"screenQuad";
+		vibuffer.mtrlName = L"particleDistortion";
+		INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
+	}
 	//ParticleRenderer::Desc particle;
 	//particle.startMinScale = 1;
 	//particle.startMaxScale = 1;

@@ -63,7 +63,7 @@ public:
 	Vector2 WorldToScreenPos(const Vector3& _pos);
 
 
-	vector<RenderTarget*>& GetRenderTargets() { return m_renderTargets; }
+	
 	bool CompareLayer(_RENDER_LAYER _layer) { return m_layer.Check(_layer); }
 	bool IsInFrustumCulling(IRenderer* _transform);
 	bool IsInFrustumCulling(const Vector3& _pos,float _radius);
@@ -72,11 +72,10 @@ public:
 	Vector3 GetCamToMouseWorldDirection();
 
 public:
-	void SetRenderTarget(UINT _index,wstring  _rtName);
-
+	void ClearRenderTarget();
 	void RecordRenderTarget();
 	void EndRenderTarget();	
-
+	void SetRenderTarget(const wstring& _rtName);
 	CAMERA_RENDERING_MODE GetRenderingMode() { return m_renderingMode; }
 public:
 	void AllOnLayer();
@@ -84,7 +83,7 @@ public:
 	void OnLayer(_RENDER_LAYER _layer);
 	void OffLayer(_RENDER_LAYER _layer);
 private:
-	vector<RenderTarget*> m_renderTargets;
+	RenderTarget* m_renderTarget;
 	D3DXPLANE m_frustumPlane[6];
 private:
 	void UpdateFrustumPlane();

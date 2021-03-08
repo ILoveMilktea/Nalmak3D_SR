@@ -27,12 +27,10 @@ GarageSceneCameraInfo::~GarageSceneCameraInfo()
 
 void GarageSceneCameraInfo::Initialize()
 {
-	m_player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER)->GetTransform();
-
 	m_transform->position = Vector3(0, 0, -100);
 	m_transform->SetRotation(-30,30,0);
 
-	m_playerAxis = INSTANTIATE()->SetPosition(m_player->position + m_axisTargetPos);
+	m_playerAxis = INSTANTIATE()->SetPosition(m_axisTargetPos);
 	m_transform->SetParents(m_playerAxis);
 }
 
@@ -122,7 +120,7 @@ void GarageSceneCameraInfo::AddYAxisAngle(float _angle)
 void GarageSceneCameraInfo::AddDistance(float _distance)
 {
 	m_targetDistance += _distance;
-	m_targetDistance = Nalmak_Math::Clamp(m_targetDistance, -30.f, -7.f);
+	m_targetDistance = Nalmak_Math::Clamp(m_targetDistance, -10.f, -3.f);
 }
 
 float GarageSceneCameraInfo::GetXAxisAngle()
