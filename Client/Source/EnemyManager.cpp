@@ -109,11 +109,7 @@ int EnemyManager::Get_BossHp() const
 
 const Vector3 & EnemyManager::Get_BossPos() const
 {
-	if (m_pBoss)
-	{
 		return m_pBoss->GetTransform()->position;
-	}
-	else { return Vector3(0.f, 0.f, 0.f); }
 }
 
 int EnemyManager::Get_BossCount() const

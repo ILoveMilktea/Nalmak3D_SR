@@ -33,7 +33,7 @@ void EvasionState::EnterState()
 	//m_Player->GetTransform()->fixRotationY = true;
 	//m_Player->GetTransform()->fixRotationZ = true;
 
-	m_Player->GetTransform()->SetScale(Vector3(0.4f, 0.4f, 0.4f));
+	m_pPlayer->GetTransform()->SetScale(Vector3(0.4f, 0.4f, 0.4f));
 
 	ENEMY_STATUS tStatus(10, 20, 1);
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);

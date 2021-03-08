@@ -85,7 +85,7 @@ public:
 					return (T*)component.second;
 				}
 			}
-
+				
 		}
 		for (auto& component : m_newComponents)
 		{
@@ -96,7 +96,7 @@ public:
 					return (T*)component.second;
 				}
 			}
-
+				
 		}
 
 		return nullptr;
