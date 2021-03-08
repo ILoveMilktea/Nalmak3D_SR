@@ -3,6 +3,7 @@
 
 #include "BulletDirMove.h"
 #include "BulletEffect_StretchBillboard.h"
+
 SmallCannon::SmallCannon(const ITEMINFO & copy) :PlayerItem(copy)
 {
 }

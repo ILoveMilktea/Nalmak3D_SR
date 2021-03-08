@@ -23,6 +23,8 @@ void MachineGun::Initialize()
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
 	m_transform->SetScale(Vector3(1, m_strechRatio, 1));
 	m_pMaterial = GetComponent<VIBufferRenderer>()->GetMaterial();
+	
+	m_vForwardDir = m_transform->GetForward();
 
 }
 
@@ -41,26 +43,27 @@ void MachineGun::Update()
 		Dest_Shoot();
 	}
 
-	float angle = Nalmak_Math::Dot(Vector3(0, 1, 0), m_transform->GetForward());
+	{
+		float angle = Nalmak_Math::Dot(Vector3(0, 1, 0), m_vForwardDir);
 
-	Vector3 axis;
-	D3DXVec3Cross(&axis, &Vector3(0, 1, 0), &m_transform->GetForward());
-	D3DXQuaternionRotationAxis(&m_transform->rotation, &axis, acos(angle));
-	//m_transform->SetRotation(90,0,0);
+		Vector3 axis;
+		D3DXVec3Cross(&axis, &Vector3(0, 1, 0), &m_vForwardDir);
+		D3DXQuaternionRotationAxis(&m_transform->rotation, &axis, acos(angle));
+		//m_transform->SetRotation(90,0,0);
 
-	m_transform->position += m_transform->GetForward() * m_fSpd * dTime;
+		m_transform->position += m_vForwardDir * m_fSpd * dTime;
 
-	Matrix view = m_pMainCamera->GetViewMatrix();
-	Matrix billboard;
-	D3DXMatrixIdentity(&billboard);
-	memcpy(&billboard.m[0][0], &view.m[0][0], sizeof(Vector3));
-	memcpy(&billboard.m[1][0], &view.m[1][0], sizeof(Vector3));
-	memcpy(&billboard.m[2][0], &view.m[2][0], sizeof(Vector3));
+		Matrix view = m_pMainCamera->GetViewMatrix();
+		Matrix billboard;
+		D3DXMatrixIdentity(&billboard);
+		memcpy(&billboard.m[0][0], &view.m[0][0], sizeof(Vector3));
+		memcpy(&billboard.m[1][0], &view.m[1][0], sizeof(Vector3));
+		memcpy(&billboard.m[2][0], &view.m[2][0], sizeof(Vector3));
 
-	D3DXMatrixInverse(&billboard, 0, &billboard);
+		D3DXMatrixInverse(&billboard, 0, &billboard);
 
-	m_pMaterial->SetMatrix("g_invViewForBillboard", billboard);
-
+		m_pMaterial->SetMatrix("g_invViewForBillboard", billboard);
+	}
 	
 	if (m_fDeltaTime >= 5.f) 
 	{

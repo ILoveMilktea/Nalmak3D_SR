@@ -40,6 +40,8 @@ private:
 	Material* m_pMaterial = nullptr;
 	
 
+	Vector3 m_vForwardDir;
+
 	bool	m_bStraight = true;
 	
 	bool	m_bFirst = true;
@@ -47,7 +49,7 @@ private:
 	Vector3	m_vDir;
 
 	
-	float m_strechRatio = 18.f;
+	float m_strechRatio = 10.f;
 
 	float m_fSpd = 150.f;
 	int m_iDamage = 0;
