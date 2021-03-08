@@ -84,7 +84,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	o.diffuse.a = alpha;
 
 	float3 worldPos = _in.worldPos;
-	float distance = (length(g_hitPosition.xyz - worldPos))
+	float distance = (length(g_hitPosition.xyz - worldPos));
 
 	//o.diffuse = 1 - (length(g_hitPosition.xyz - worldPos) / g_radius);
 

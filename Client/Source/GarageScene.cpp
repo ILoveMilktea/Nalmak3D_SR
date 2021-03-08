@@ -50,14 +50,6 @@ void GarageScene::Initialize()
 	mainCam->GetComponent<StateControl>()->AddState<GarageSceneCameraMouseInput>(L"mouseInput");
 	mainCam->GetComponent<StateControl>()->InitState(L"intro");
 
-
-
-	DirectionalLight::Desc light;
-	light.diffuseIntensity = 0.6f;
-	light.ambientIntensity = 0.02f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
-
-
 	GameObject* player;
 	{
 		MeshRenderer::Desc render;

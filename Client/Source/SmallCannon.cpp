@@ -37,7 +37,7 @@ void SmallCannon::CreateBullet()
 
 	VIBufferRenderer::Desc meshInfo;
 	meshInfo.meshName = L"quadNoneNormal";
-	meshInfo.mtrlName = L"fx_20mmCannon";
+	meshInfo.mtrl = ResourceManager::GetInstance()->GetResource<Material>(L"fx_20mmCannon"); 
 	// 2. BULLET INFO
 	
 	m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
