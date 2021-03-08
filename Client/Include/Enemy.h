@@ -49,7 +49,7 @@ public: /* Get */
 	const ENEMY_STATUS& Get_Status() const; 
 	const int&		Get_FullHp() const;
 	const int&		Get_CurHp() const;
-	const int&		Get_CurSpd() const;
+	const float&	Get_CurSpd() const;
 	
 	const BULLET_STATUS&	Get_GunStatus() const;
 	const BULLET_STATUS&	Get_MissileStatus() const;

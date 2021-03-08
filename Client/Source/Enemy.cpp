@@ -210,7 +210,7 @@ const int & Enemy::Get_CurHp() const
 	return m_tStatus.m_iCurHp;
 }
 
-const int & Enemy::Get_CurSpd() const
+const float & Enemy::Get_CurSpd() const
 {
 	return m_tStatus.m_fCurSpd;
 }
@@ -495,7 +495,7 @@ void Enemy::Decelerate()
 	if (/*m_fDist_Target <= 50.f
 		&& */m_tStatus.m_fCurSpd >= 0.f)
 	{
-		m_tStatus.m_fCurSpd -= dTime * 10.0f;
+		m_tStatus.m_fCurSpd -= dTime * 5.0f;
 	}
 
 	if(m_tStatus.m_fCurSpd < 0.f)
