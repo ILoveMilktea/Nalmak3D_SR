@@ -19,10 +19,10 @@
 #include "PlayerNone.h"
 #include "PlayerShooter.h"
 
-// playerskill ½ÃÀüÀÚ
+// playerskill ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #include "PlayerSkillActor.h"
 
-//½ºÅ³ »óÅÂº° »óÅÂ
+//ï¿½ï¿½Å³ ï¿½ï¿½ï¿½Âºï¿½ ï¿½ï¿½ï¿½ï¿½
 #include "PlayerEscapeState.h"
 #include "GameManager.h"
 
@@ -52,10 +52,10 @@ void DogFight_Stage1::EnterState()
 
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Player_Weapon_Homing");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Player_Weapon_Homing");
-	
+
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
-	
+
 
 #pragma endregion
 
@@ -64,7 +64,7 @@ void DogFight_Stage1::EnterState()
 
 	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
 
-	
+
 
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fTutorialTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fTutorialScore);
@@ -84,71 +84,71 @@ void DogFight_Stage1::UpdateState()
 {
 	m_fTutorialTime += dTime;
 
-	if (m_bPattern1[0] == true && m_bPattern1[1] == false
-		&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-	{
-		m_bPattern1[1] = true;
-	}
+	//if (m_bPattern1[0] == true && m_bPattern1[1] == false
+	//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+	//{
+	//	m_bPattern1[1] = true;
+	//}
 
-	if (m_bPattern1[1] == true && m_bPattern2[0] == false)
-	{
-		EnemyManager::GetInstance()->Spawn_S1P1_Huge();
-		m_bPattern2[0] = true;
-	}
+	//if (m_bPattern1[1] == true && m_bPattern2[0] == false)
+	//{
+	//	EnemyManager::GetInstance()->Spawn_S1P1_Huge();
+	//	m_bPattern2[0] = true;
+	//}
 
-	if (m_bPattern2[0] == true && m_bPattern2[1] == false
-		&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-	{
-		m_bPattern2[1] = true;
-	}
+	//if (m_bPattern2[0] == true && m_bPattern2[1] == false
+	//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+	//{
+	//	m_bPattern2[1] = true;
+	//}
 
-	if (m_bPattern2[1] == true && m_bPattern3[0] == false
-		&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-	{
-		EnemyManager::GetInstance()->Spawn_S1P1_Quick();
-		m_bPattern3[0] = true;
-	}
+	//if (m_bPattern2[1] == true && m_bPattern3[0] == false
+	//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+	//{
+	//	EnemyManager::GetInstance()->Spawn_S1P1_Quick();
+	//	m_bPattern3[0] = true;
+	//}
 
-	if (m_bPattern3[0] == true && m_bPattern3[1] == false
-		&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-	{
-		m_bPattern3[1] = true;
-		m_bSceneChange = true;
-	}
-
-
-	
+	//if (m_bPattern3[0] == true && m_bPattern3[1] == false
+	//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+	//{
+	//	m_bPattern3[1] = true;
+	//	m_bSceneChange = true;
+	//}
 
 
 
 
 
-	
 
 
 
-	
-	if (m_bSceneChange && !GameManager::GetInstance()->Get_StageClear(1))
-	{
-		GameManager::GetInstance()->Set_StageClear(1);
-		m_Player->GetComponent<StateControl>()->SetState(L"playerFarAway");
-		m_pMainCamera->GetComponent<SmoothFollow>()->SetActive(false);
-	}
 
-	if (m_bSceneChange)
-	{
-		m_fProduceDelta += dTime;
 
-		if (m_fProduceDelta >= 2.f)
-		{
-			Core::GetInstance()->LoadScene(L"result");
-			m_fProduceDelta = 0.f;
-			m_bSceneChange = false;
-		}
-	}
 
-	DEBUG_LOG(L"Produce Delta", m_fProduceDelta);
-	DEBUG_LOG(L"Current Combat State : ", L"Stage1 Phase1 : tutorial"); 
+
+
+	//if (m_bSceneChange && !GameManager::GetInstance()->Get_StageClear(1))
+	//{
+	//	GameManager::GetInstance()->Set_StageClear(1);
+	//	m_Player->GetComponent<StateControl>()->SetState(L"playerFarAway");
+	//	m_pMainCamera->GetComponent<SmoothFollow>()->SetActive(false);
+	//}
+
+	//if (m_bSceneChange)
+	//{
+	//	m_fProduceDelta += dTime;
+
+	//	if (m_fProduceDelta >= 2.f)
+	//	{
+	//		Core::GetInstance()->LoadScene(L"result");
+	//		m_fProduceDelta = 0.f;
+	//		m_bSceneChange = false;
+	//	}
+	//}
+
+	//DEBUG_LOG(L"Produce Delta", m_fProduceDelta);
+	DEBUG_LOG(L"Current Combat State : ", L"Stage1 Phase1 : tutorial");
 }
 
 void DogFight_Stage1::ExitState()

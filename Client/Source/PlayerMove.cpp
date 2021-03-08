@@ -47,7 +47,7 @@ void PlayerMove::UpdateState()
 	float xSensitive = 40.f;
 	float ySensitive = 30.f;
 	float zSensitive = 350.f;
-	
+
 
 	if (m_inputManager->GetKeyPress(KEY_STATE_D))
 		m_rotZAngle -= dTime * 3.f;
@@ -103,12 +103,22 @@ void PlayerMove::UpdateState()
 
 	m_transform->SetRotation(m_rotXAngle, m_rotYAngle, m_rotZAngle);
 
-	 speed -= 3.f;
+	speed -= 3.f;
 
 	if (m_inputManager->GetKeyPress(KEY_STATE_W))
-		 m_accel = Nalmak_Math::Lerp(m_accel , 1.f, dTime * 10);
+	{
+		m_accel = Nalmak_Math::Lerp(m_accel, 1.f, dTime * 30.f);	
+	}
 	else
-		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10);
+	{
+		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 10.f); 
+	}
+
+	if (m_inputManager->GetKeyPress(KEY_STATE_S))
+	{
+		m_accel = Nalmak_Math::Lerp(m_accel, 0.f, dTime * 50.f);
+	}
+
 
 	m_accel = Nalmak_Math::Clamp(m_accel, 0.f, 1.f);
 	speed += m_accel * 5;

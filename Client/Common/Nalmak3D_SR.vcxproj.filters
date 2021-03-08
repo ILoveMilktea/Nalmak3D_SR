@@ -483,6 +483,9 @@
     <ClInclude Include="..\Include\Boss_Interrupt.h">
       <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Debugging.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -934,6 +937,9 @@
     <ClCompile Include="..\Source\Boss_Interrupt.cpp">
       <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Debugging.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -1057,9 +1063,6 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Idle">
       <UniqueIdentifier>{057f3a40-069b-41bf-83d1-769f80e85d03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death">
-      <UniqueIdentifier>{d5f13b66-30ff-4c40-ba3c-319d661789ec}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\att_Chase">
       <UniqueIdentifier>{2ff71113-836e-4780-bc55-a381acfc1710}</UniqueIdentifier>
@@ -1210,6 +1213,12 @@
     </Filter>
     <Filter Include="__Phase2_Lab\State\3. Laser">
       <UniqueIdentifier>{cdd7a491-4266-4784-9cb3-0a063cd30b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death">
+      <UniqueIdentifier>{d5f13b66-30ff-4c40-ba3c-319d661789ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging">
+      <UniqueIdentifier>{e6a58e28-b6f8-4f06-b36e-e9a8e783f00c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
