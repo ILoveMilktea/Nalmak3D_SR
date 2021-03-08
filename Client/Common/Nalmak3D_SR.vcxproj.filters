@@ -495,12 +495,6 @@
     <ClInclude Include="..\Include\MidBoss_Define.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Mainstream_Define.h">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Mainstream_Headers.h">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\State_Camera_Evasion.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Camera</Filter>
     </ClInclude>
@@ -512,6 +506,15 @@
     </ClInclude>
     <ClInclude Include="..\Include\State_Player_Evasion.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage2_Mainstream_Define.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage2_Mainstream_Headers.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MidBoss_Appear.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -987,6 +990,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\State_Player_Evasion.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MidBoss_Appear.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

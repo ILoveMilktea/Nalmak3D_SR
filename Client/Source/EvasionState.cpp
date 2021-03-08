@@ -62,21 +62,19 @@ void EvasionState::UpdateState()
 	{
 		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F6))
 		{
-			EnemyManager::GetInstance()->MidBoss_Spawn(IDLE);
+			//EnemyManager::GetInstance()->MidBoss_Spawn(IDLE);
 		}
 
 		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F7))
 		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(CIRCLE);
+			//EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CIRCLE);
 		}
 		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F8))
 		{
-			EnemyManager::GetInstance()->Enemy_Spwan_Evasion(PRYMIDE);
+			//EnemyManager::GetInstance()->Enemy_Spawn_Evasion(PRYMIDE);
 		}
 
 
-
-		// 이거죠져야댐 다 지울겁니다
 		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
 		{
 			if (!m_bNext)

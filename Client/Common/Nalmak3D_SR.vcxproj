@@ -209,8 +209,9 @@
     <ClInclude Include="..\Include\Enemy_CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Enemy_MidBoss.h" />
-    <ClInclude Include="..\Include\Mainstream_Headers.h" />
-    <ClInclude Include="..\Include\Mainstream_Define.h" />
+    <ClInclude Include="..\Include\MidBoss_Appear.h" />
+    <ClInclude Include="..\Include\Stage2_Mainstream_Headers.h" />
+    <ClInclude Include="..\Include\Stage2_Mainstream_Define.h" />
     <ClInclude Include="..\Include\FieldCameraEvationState.h" />
     <ClInclude Include="..\Include\FieldCameraInfo.h" />
     <ClInclude Include="..\Include\FieldCameraNearEnemyState.h" />
@@ -393,6 +394,7 @@
     <ClCompile Include="..\Source\FieldCameraSmoothFollowState.cpp" />
     <ClCompile Include="..\Source\FieldCameraStartState.cpp" />
     <ClCompile Include="..\Source\Enemy_BulletProof.cpp" />
+    <ClCompile Include="..\Source\MidBoss_Appear.cpp" />
     <ClCompile Include="..\Source\MidBoss_Defense_Move.cpp" />
     <ClCompile Include="..\Source\MidBoss_Defense_Start.cpp" />
     <ClCompile Include="..\Source\MidBoss_Laser_Attach.cpp" />

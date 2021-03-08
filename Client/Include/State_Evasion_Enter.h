@@ -1,5 +1,6 @@
 #pragma once
 #include "IState.h"
+
 class State_Evasion_Enter :
 	public IState
 {
@@ -11,5 +12,9 @@ public:
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
+
+private:
+	GameObject* m_mainCamera;
+	GameObject* m_player;
 };
 

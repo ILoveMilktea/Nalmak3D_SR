@@ -16,7 +16,6 @@ MidBoss_Idle::~MidBoss_Idle()
 
 void MidBoss_Idle::Initialize()
 {
-	SetInteger(_g_patternIndex, 0);
 }
 
 void MidBoss_Idle::EnterState()

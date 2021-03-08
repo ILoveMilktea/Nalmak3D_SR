@@ -6,5 +6,10 @@ class State_Evasion_MidbossDead :
 public:
 	State_Evasion_MidbossDead();
 	~State_Evasion_MidbossDead();
+
+	virtual void Initialize() override;
+	virtual void EnterState() override;
+	virtual void UpdateState() override;
+	virtual void ExitState() override;
 };
 

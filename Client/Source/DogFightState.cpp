@@ -27,6 +27,7 @@
 
 #include "Player_WindEffect.h"
 
+#include "Stage2_Mainstream_Define.h"
 
 DogFightState::DogFightState()
 {
@@ -132,7 +133,9 @@ void DogFightState::UpdateState()
 
 			if (m_fProduceDelta >= 2.f)
 			{
-				StageManager::GetInstance()->ToScene(L"Evasion");
+				//StageManager::GetInstance()->ToScene(L"Evasion");
+				
+				StageManager::GetInstance()->ToScene(_sn_enter);
 				m_fProduceDelta = 0.f;
 				m_bNextPhase = false;
 			}

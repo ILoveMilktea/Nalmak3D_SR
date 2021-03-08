@@ -17,6 +17,9 @@
 #include "Camera_Boss.h"
 #include "Camera_Boss_Appear.h"
 
+#include "Stage2_Mainstream_Define.h"
+#include "Stage2_Mainstream_Headers.h"
+
 
 Stage2Scene::Stage2Scene()
 {
@@ -78,4 +81,8 @@ void Stage2Scene::Initialize()
 	StageManager::GetInstance()->Get_StateControl()->AddState<EvasionState>(L"Evasion");
 	StageManager::GetInstance()->Get_StateControl()->AddState<BossState>(L"Boss");
 	StageManager::GetInstance()->Get_StateControl()->InitState(L"Dog_Fight");
+
+
+
+	StageManager::GetInstance()->Get_StateControl()->AddState<State_Evasion_Enter>(_sn_enter);
 }

@@ -3,6 +3,7 @@
 #include "Enemy_MidBoss.h"
 #include "Enemy_BulletProof.h"
 
+#include "MidBoss_Appear.h"
 #include "MidBoss_Idle.h"
 #include "MidBoss_Move.h"
 #include "MidBoss_MoveToCenter.h"

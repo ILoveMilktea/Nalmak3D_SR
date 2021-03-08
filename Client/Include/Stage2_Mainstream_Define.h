@@ -1,7 +1,7 @@
 #pragma once
 
-#define _sn_airfire				L"State_Evasion_Airfire"
 #define _sn_enter				L"State_Evasion_Enter"
+#define _sn_airfire				L"State_Evasion_Airfire"
 #define _sn_midboss				L"State_Evasion_Midboss"
 #define _sn_midbossdead			L"State_Evasion_MidbossDead"
 

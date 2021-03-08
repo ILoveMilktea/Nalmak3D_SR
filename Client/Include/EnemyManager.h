@@ -55,9 +55,9 @@ public: /* Funcs */
 	void Enemy_Spawn_Quick();
 
 
-	void Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
+	void Enemy_Spawn_Evasion(Vector3 _pos, ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
 
-	void MidBoss_Spawn(ENEMY_STATE _initState);
+	void MidBoss_Spawn(Vector3 _pos);
 	GameObject* Boss_Spawn();
 
 	void Player_FovSpawnTest(bool _front, float _distance);

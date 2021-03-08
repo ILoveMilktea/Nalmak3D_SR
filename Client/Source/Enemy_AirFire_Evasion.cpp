@@ -20,7 +20,7 @@ void AirFire_Evasion::Initialize()
 void AirFire_Evasion::EnterState()
 {
 	m_pPlayer = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
-	m_transform->SetPosition(Vector3(50.f, -100.f, 30.f));
+	//m_transform->SetPosition(Vector3(50.f, -100.f, 30.f));
 }
 
 void AirFire_Evasion::UpdateState()

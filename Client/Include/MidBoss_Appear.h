@@ -1,25 +1,22 @@
 #pragma once
 #include "IState.h"
-class State_Evasion_Airfire :
+class MidBoss_Appear :
 	public IState
 {
 public:
-	State_Evasion_Airfire();
-	~State_Evasion_Airfire();
+	MidBoss_Appear();
+	~MidBoss_Appear();
 
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 
-	void Wave_1();
-	void Wave_2();
-
 private:
-	float m_spawnTimer;
+	float m_lerpTimer;
+	float m_lerpDuration;
 
-	int m_spawnIndex;
-
-	Vector3 m_spawnPos[8];
+	Vector3 m_startPosition;
+	Vector3 m_centerPosition;
 };
 

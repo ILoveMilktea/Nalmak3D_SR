@@ -246,9 +246,11 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	++m_iEnemyCount;
 }
 
-void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
+
+void EnemyManager::Enemy_Spawn_Evasion(Vector3 _pos, ENEMY_EVASION_STATE _initState)
 {
 	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
+	Enemy_obj->SetPosition(_pos);
 	Enemy_obj->SetRotation(0.f, 180.f, 0.f);
 	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
 
@@ -271,26 +273,26 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	switch (_initState)
 	{
 	case SLIDE:
-	{m_pStateControl->InitState(L"Slide"); } 
-		break;
+	{m_pStateControl->InitState(L"Slide"); }
+	break;
 	case DIAGONAL:
 	{m_pStateControl->InitState(L"Diagonal"); }
-		break;
+	break;
 	case CROSSFIRE:
-	{m_pStateControl->InitState(L"CrossFire"); } 
-		break;
+	{m_pStateControl->InitState(L"CrossFire"); }
+	break;
 	case LOOK:
 	{m_pStateControl->InitState(L"Look"); }
-		break;
+	break;
 	case CIRCLE:
 	{m_pStateControl->InitState(L"Circle"); }
-		break;
+	break;
 	case PRYMIDE:
-	{m_pStateControl->InitState(L"Prymide"); } 
-		break;
+	{m_pStateControl->InitState(L"Prymide"); }
+	break;
 	case AIRFIRE:
-	{m_pStateControl->InitState(L"AirFire"); } 
-		break;
+	{m_pStateControl->InitState(L"AirFire"); }
+	break;
 	case EVASION_STATE_MAX:
 		break;
 	default:
@@ -317,10 +319,10 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 
 }
 
-void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
+void EnemyManager::MidBoss_Spawn(Vector3 _pos)
 {
 	GameObject* boss = INSTANTIATE(OBJECT_TAG_BOSS, L"MidBoss");
-	boss->SetPosition(-30.f, 0.f, 30.f);
+	boss->SetPosition(_pos);
 	boss->SetRotation(0.f, 180.f, 0.f);
 	boss->SetScale(20.f, 20.f, 20.f);
 
@@ -329,6 +331,7 @@ void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
 
 	// add staaaaaaaaate
 	{
+		stateControl->AddState<MidBoss_Appear>(_sn_appear);
 		stateControl->AddState<MidBoss_Idle>(_sn_idle);
 		stateControl->AddState<MidBoss_Move>(_sn_move);
 		stateControl->AddState<MidBoss_MoveToCenter>(_sn_moveToCenter);
@@ -354,7 +357,7 @@ void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
 		stateControl->AddState<MidBoss_Defense_Start>(_sn_defenseStart);
 		stateControl->AddState<MidBoss_Defense_Move>(_sn_defenseMove);
 
-		stateControl->InitState(_sn_idle);
+		stateControl->InitState(_sn_appear);
 	}
 
 	auto bulletproofPivot = INSTANTIATE();
