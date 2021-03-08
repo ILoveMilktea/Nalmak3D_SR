@@ -56,7 +56,6 @@ public:
 	float GetDistance();
 
 private:
-	Transform* m_player;
 	GameObject* m_playerAxis;
 };
 

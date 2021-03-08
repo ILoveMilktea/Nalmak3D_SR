@@ -52,6 +52,8 @@ BEGIN(Nalmak)
 
 // https://holdimprovae.blogspot.com/2019/01/unityshaderstudy.html dissolve 
 
+//https://catlikecoding.com/unity/tutorials/flow/texture-distortion/ water
+
 class RenderManager
 {
 	DECLARE_SINGLETON(RenderManager)
@@ -78,6 +80,7 @@ private:
 	void PointLightPass(const Matrix& _matWorld, PointLightInfo _lightInfo, VIBuffer* _viBuffer, ConstantBuffer& _cBuffer, Material* _mtrlStencilLight, Material* _mtrlLight);
 	void DirectionalLightPass(ConstantBuffer& _cBuffer);
 	void TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer);
+	void PostProcessPass(Camera* _cam, ConstantBuffer& _cBuffer);
 	void UIPass(Camera* _cam, ConstantBuffer& _cBuffer);
 private:
 	void RenderNoneAlpha(Camera * _cam, ConstantBuffer& _cBuffer, RENDERING_MODE _mode);

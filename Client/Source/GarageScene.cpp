@@ -17,6 +17,8 @@
 #include "GarageSceneCameraMouseInput.h"
 #include "GarageSceneCameraInfo.h"
 #include "CustomDebuger.h"
+#include "PlayerShooter.h"
+#include "EnemyManager.h"
 
 GarageScene::GarageScene()
 {
@@ -29,15 +31,12 @@ GarageScene::~GarageScene()
 
 void GarageScene::Initialize()
 {
+	INSTANTIATE()->AddComponent<DirectionalLight>()->SetRotation(90, 0, 0);
 	//StageManager::GetInstance();
 
 	ItemManager::GetInstance(); 
 
-	// singlemanger instance
-	
 
-	//
-	//grid setting
 	INSTANTIATE()->AddComponent<Grid>()->SetPosition(0,0,-5.f);
 
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
@@ -54,44 +53,18 @@ void GarageScene::Initialize()
 
 	GameObject* player;
 	{
-		VIBufferRenderer::Desc render;
-		render.mtrlName = L"default"; 
-		render.meshName = L"flight";
-		player = INSTANTIATE(OBJECT_TAG_PLAYER, L"player")->AddComponent<VIBufferRenderer>(&render);
+		MeshRenderer::Desc render;
+		render.mtrlName = L"f15";
+		render.meshName = L"f15";
+		player = INSTANTIATE(OBJECT_TAG_PLAYER,L"player")->AddComponent<MeshRenderer>(&render)->AddComponent<PlayerShooter>();
 		player->SetScale(0.1f, 0.1f, 0.1f);
 	}
 
-	
-	/*{
-		RevolvesToTarget::Desc revolvesDesc;
-		revolvesDesc.targetParent = player;
-		revolvesDesc.roationSpeed = 1.f;
-		auto revolvesTarget = INSTANTIATE()->AddComponent<RevolvesToTarget>(&revolvesDesc);
-	}*/
-	
-	// test button ----> UILab
-	{
-		//auto mainEquipWepon = UIFactory::CreateButton(
-		//	EventHandler([]() {
-		//	ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
-		//	PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
-	 // �ֹ���
-		
 
-		//}));
-
-		//mainEquipWepon->SetPosition(1600.f, 500.f, 0.f);
-
-
-
-		//auto offTheFieldButton = UIFactory::CreateButton(
-		//	EventHandler([]() {
-		//	Core::GetInstance()->LoadScene(L"phantom");
-		//}));
-
-		//offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
-	}
+	auto window1 = UIFactory::CreateRenderTargetWindow(L"Garage_SkillPreview", CANVAS_GROUP_G1);
+	window1->SetPosition(500, 500, 0)->SetScale(500, 500, 0);
 
 	player->AddComponent<UIInteractor>();
 	UIWindowFactory::GarageMainWindow(player);
 }
+

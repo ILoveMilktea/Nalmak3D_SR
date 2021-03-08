@@ -23,6 +23,8 @@ CanvasRenderer::CanvasRenderer(Desc * _desc)
 	m_color = { 1.f,1.f,1.f,1.f };
 
 	m_group = _desc->group;
+
+	m_layer = 1;
 }
 
 void CanvasRenderer::Initialize()

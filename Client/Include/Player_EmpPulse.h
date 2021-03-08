@@ -30,6 +30,9 @@ private:
 	float	m_fMaxRadius;
 	float	m_fCurRadius = 0.5f;
 	float	m_bShrink = false;
-
+	float m_distanceToCam;
+private:
+	Material* m_empMaterial;
+	Transform* m_cam;
 };
 

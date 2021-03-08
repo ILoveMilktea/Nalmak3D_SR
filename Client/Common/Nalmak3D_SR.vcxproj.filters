@@ -1097,5 +1097,17 @@
     <FxCompile Include="..\..\Resource\Shader\billboard3DUI.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\screenDistortion.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\particleDistortion.fx">
+      <Filter>03.Resource\02.Shader\Stage</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\particleDistortionMask.fx">
+      <Filter>03.Resource\02.Shader\Stage</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\shieldEffect.fx">
+      <Filter>03.Resource\02.Shader\Stage</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

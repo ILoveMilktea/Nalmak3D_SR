@@ -14,7 +14,7 @@ struct cBuffer
 	matrix invProj;
 	float3 worldCamPos;
 	float3 worldCamLook;
-
+	float time;
 };
 
 cBuffer g_cBuffer;

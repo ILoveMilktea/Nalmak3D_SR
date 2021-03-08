@@ -29,6 +29,8 @@ private:
 	GameObject* m_parents = nullptr;
 	TimeManager* m_time = nullptr;
 	EnemyDetector* m_detector = nullptr;
+
+	// PlayerItem을(를) 통해 상속됨
 };
 
 

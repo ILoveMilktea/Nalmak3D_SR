@@ -15,6 +15,7 @@
 #include "TBox.h"
 #include "Core.h"
 #include "StaticMesh.h"
+#include "ScreenQuad.h"
 
 USING(Nalmak)
 IMPLEMENT_SINGLETON(ResourceManager)
@@ -101,6 +102,12 @@ void ResourceManager::CreateDefaultMesh()
 		assert("Fail to Create Mesh!" && mesh);
 		mesh->OnInitialize();
 		m_resoucreContainers[typeid(VIBuffer).name()][L"quad"] = mesh;
+	}
+	{
+		VIBuffer* mesh = new ScreenQuad();
+		assert("Fail to Create Mesh!" && mesh);
+		mesh->OnInitialize();
+		m_resoucreContainers[typeid(VIBuffer).name()][L"screenQuad"] = mesh;
 	}
 	{
 		VIBuffer* mesh = new GroundVIBuffer();

@@ -6,6 +6,7 @@
 #include "ItemManager.h"
 #include "PlayerItem.h"
 #include "Enemy_Boss.h"
+#include "ParticleDead_IfCount0.h"
 
 
 
@@ -76,12 +77,22 @@ void BulletEffect_StretchBillboard::OnTriggerEnter(Collisions & _collision)
 		{
 			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
 
+			ParticleRenderer::Desc effectDesc;
+			effectDesc.particleDataName = L"hit_effect_by_smallCannon";
+			auto effect = INSTANTIATE()->AddComponent<ParticleRenderer>(&effectDesc)->AddComponent<ParticleDead_IfCount0>();
+			effect->SetPosition(obj.GetGameObject()->GetTransform()->GetWorldPosition());
+
 			DESTROY(m_gameObject);
 		}
 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
 		{
 			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
+
+			ParticleRenderer::Desc effectDesc;
+			effectDesc.particleDataName = L"hit_effect_by_smallCannon";
+			auto effect = INSTANTIATE()->AddComponent<ParticleRenderer>(&effectDesc)->AddComponent<ParticleDead_IfCount0>();
+			effect->SetPosition(obj.GetGameObject()->GetTransform()->GetWorldPosition());
 
 			DESTROY(m_gameObject);
 		}

@@ -73,7 +73,7 @@ void SmoothFollow::LateUpdate()
 	// 카메라가 바라보는 방향을 정해주는 값 // 플레이어가 바라보는 방향으로 가려함
 	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_player->rotation, dTime * 2.f);
 
-
+	
 
 	// 플레이어의 현재 속도 비율 0~1
 	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());

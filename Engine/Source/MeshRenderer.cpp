@@ -4,7 +4,6 @@
 #include "Animator.h"
 #include "StaticMesh.h"
 
-
 MeshRenderer::MeshRenderer(Desc * _desc)
 {
 	if (!_desc->mtrl)

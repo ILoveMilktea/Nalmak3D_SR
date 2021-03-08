@@ -1,6 +1,5 @@
 #include "H_common.fx"
 
-matrix g_world;
 texture g_mainTex;
 
 
@@ -36,8 +35,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0;
 
-	o.position = mul(float4(_input.position,1), g_world);
-	o.position.w = 1;
+	o.position = float4(_input.position, 1);
 	o.uv = _input.uv;
 	//o.normal = float3(0, 0, 1);
 	

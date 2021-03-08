@@ -4,6 +4,7 @@
 
 inputLayout "1"
 
+renderTarget "GBuffer_Final"
 
 primitive "2"
 

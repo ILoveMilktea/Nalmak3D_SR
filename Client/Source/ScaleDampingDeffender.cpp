@@ -20,6 +20,8 @@ void ScaleDampingDeffender::Initialize()
 {
 	// 
 	m_spherCollider = m_gameObject->GetComponent<SphereCollider>();
+	m_material = GetComponent<VIBufferRenderer>()->GetMaterial();
+
 	assert(L"NULL" && m_spherCollider);
 
 }
@@ -30,11 +32,13 @@ void ScaleDampingDeffender::Update()
 
 	if (m_retainTime > 0 && m_maximumScale >= m_transform->scale.x
 		&& m_maximumScale >= m_transform->scale.y
-		&& m_maximumScale >= m_transform->scale.z )
+		&& m_maximumScale >= m_transform->scale.z ) // 커지기
 	{
 		 m_transform->scale.x += dTime * m_dampingSpeed;
 		m_transform->scale.y += dTime * m_dampingSpeed;
 		m_transform->scale.z += dTime * m_dampingSpeed;
+
+		//m_material->SetFloat("g_strength",  0.1f);
 	}
 	else
 	{
@@ -42,17 +46,13 @@ void ScaleDampingDeffender::Update()
 	}
 		
 
-	if (m_retainTime <= 0.f)
+	if (m_retainTime <= 0.f) // 작아지기
 	{
-		m_transform->scale.x -= dTime * m_dampingSpeed * 3.f;
-		m_transform->scale.y -= dTime * m_dampingSpeed * 3.f;
-		m_transform->scale.z -= dTime * m_dampingSpeed * 3.f;
 		
 	}
 	else if (m_retainTime > 0.f)
 	{
 		AxisRotate(m_axis);
-	 
 	}
 
 	if (0 >= m_transform->scale.x
@@ -62,8 +62,6 @@ void ScaleDampingDeffender::Update()
 		m_gameObject->GetTransform()->DeleteParent();
 		DESTROY(m_gameObject);
 		m_gameObject = nullptr;
-	
-
 	}
 }
 

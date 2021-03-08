@@ -55,7 +55,29 @@ void PlayerMove::UpdateState()
 		m_rotZAngle += dTime * 3.f;
 	else
 	{
-		m_rotZAngle = Nalmak_Math::Lerp(m_rotZAngle, 0.f, dTime * 3);
+		if (m_rotZAngle > 360)
+		{
+			m_rotZAngle -= (m_rotZAngle / 360) * 360;
+		}
+		else if (m_rotZAngle < -360)
+		{
+			m_rotZAngle += (1 + (abs(m_rotZAngle) / 360)) * 360;
+		}
+
+		if (m_rotZAngle < -180)
+		{
+			m_rotZAngle = Nalmak_Math::Lerp(m_rotZAngle, -360.f, dTime * 3);
+		}
+		else if (m_rotZAngle > 180)
+		{
+			m_rotZAngle = Nalmak_Math::Lerp(m_rotZAngle, 360.f, dTime * 3);
+		}
+		else
+		{
+			m_rotZAngle = Nalmak_Math::Lerp(m_rotZAngle, 0.f, dTime * 3);
+		}
+
+
 	}
 
 

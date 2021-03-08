@@ -20,6 +20,7 @@
 #include "UI_ShopMenu_Animator.h"
 #include "UI_ShopWnd_Animator.h"
 #include "UI_ShopItemModel.h"
+#include "PlayerShooter.h"
 
 class UIWindowFactory
 {
@@ -516,6 +517,8 @@ public:
 				// line effect image
 			}
 
+
+
 			// model test
 			VIBufferRenderer::Desc desc_vi;
 			desc_vi.meshName = L"box";
@@ -524,7 +527,7 @@ public:
 			weaponModel->AddComponent<VIBufferRenderer>(&desc_vi);
 			weaponModel->AddComponent<UI_ShopItemModel>();
 			weaponModel->SetParents(Core::GetInstance()->GetMainCamera()->GetGameObject());
-			weaponModel->SetPosition(-2.f, 0.f, 5.f);
+			weaponModel->SetPosition(0.f, 0.f, 0.f);
 			weaponModel->SetActive(false);
 
 			UIManager::GetInstance()->SetShopItemModel(weaponModel);
@@ -559,10 +562,16 @@ public:
 					// 2. load status at slider
 					UIManager::GetInstance()->SetCurrentSelectItem(curItemName);
 					// 3. load price
+
+
 				});
 				EventHandler offEvent = EventHandler([=]() {
 					// remove Item
 					weaponModel->SetActive(false);
+					auto player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+					player->GetTransform()->position = { 0,0,0 };
+					player->GetTransform()->SetRotation(0, 0, 0);
+
 				});
 				auto menu = UIFactory::Prefab_ShopMenuToggle(onEvent, offEvent, L"boss", CANVAS_GROUP_MAINWND_SHOPMENU);
 

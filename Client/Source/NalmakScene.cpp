@@ -6,6 +6,8 @@
 #include "PlayerSkillActor.h"
 #include "ItemManager.h"
 #include"PlayerInfoManager.h"
+#include "ScaleDampingDeffender.h"
+
 NalmakScene::NalmakScene()
 {
 }
@@ -18,36 +20,30 @@ void NalmakScene::Initialize()
 {
 	GameObject* plane;
 
-
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
-	ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
-	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"AimMissile");
 
+	ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");
+	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"Emp");
 
 	{
 		MeshRenderer::Desc render;
 		render.meshName = L"f15";
-		render.mtrlName = L"f15_base";
+		render.mtrlName = L"f15";
 
 		plane = INSTANTIATE(OBJECT_TAG_PLAYER)->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->SetScale(0.2f, 0.2f, 0.2f);
 		plane->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
-		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_glass");
-		plane->GetComponent<MeshRenderer>()->AddMaterial(L"f15_base");
 		plane->AddComponent<PlayerShooter>();
 		plane->AddComponent<PlayerSkillActor>();
-
-		
-
 	}
-
-
 
 
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.9f;
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
+
+
 	{
 		FreeMove::Desc free;
 		INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()
@@ -57,39 +53,9 @@ void NalmakScene::Initialize()
 			->SetRotation(30, 50, 0);
 	}
 
-	{
-		//
-		//for (int i = -5; i < 5; ++i)
-		//{
-		//	for (int j = -5; j < 5; ++j)
-		//	{
-		//		VIBufferRenderer::Desc mesh;
-		//		mesh.meshName = L"sphere";
-		//		mesh.mtrlName = L"standard";
-		//		INSTANTIATE()->AddComponent<VIBufferRenderer>(&mesh)->SetScale(Vector3(1.f, 1.f, 1.f) * Nalmak_Math::Rand(1.f, 3.f))->SetPosition(i * 3.f, 0, j * 3.f);
-		//	}
-		//}
 
-		{
-		/*	PointLight::Desc point;
-			point.diffuseIntensity = Nalmak_Math::Rand(1.f, 5.f);
-			point.ambientIntensity = 0.f;
 
-			for (int i = 0; i < 100; ++i)
-			{
-				point.color = Vector3(Nalmak_Math::Rand(0.f, 1.f), Nalmak_Math::Rand(0.f, 1.f), Nalmak_Math::Rand(0.f, 1.f));
-				point.diffuseIntensity = Nalmak_Math::Rand(1.f, 2.f);
-				point.radius = Nalmak_Math::Rand(5.f, 20.f);
-				INSTANTIATE()->AddComponent<PointLight>(&point)->SetPosition(Nalmak_Math::Rand(-15.f, 15.f), Nalmak_Math::Rand(-2.f, 2.f), Nalmak_Math::Rand(-15.f, 15.f));
-			}*/
-		}
-	
-			
-		VIBufferRenderer::Desc mesh;
-		mesh.mtrlName = L"transTest";
-		mesh.meshName = L"box";
-		INSTANTIATE()->AddComponent<VIBufferRenderer>(&mesh);
-	}
+
 
 	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
 	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
@@ -99,22 +65,31 @@ void NalmakScene::Initialize()
 	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
 	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
 	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
+	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Distortion", CANVAS_GROUP_G1);
+	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
 
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50,0);
 
+
 	{
-		
-
-
-			/*MeshRenderer::Desc render;
-			render.meshName = L"f15";
-			render.mtrlName = L"standardPlane";
-
-			auto obj = INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 6, -1);
-			obj->GetComponent<MeshRenderer>()->SetFrustumCullinwwwwwwwwwwwwwwwwwaaaaaaaag(false);
-			obj->GetComponent<MeshRenderer>()->AddMaterial(L"standardPlaneGlass");
-			obj->GetComponent<MeshRenderer>()->AddMaterial(L"standardPlane");*/
+		ParticleRenderer::Desc	distortion;
+		distortion.particleDataName = L"player_zet_distortion";
+		INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(0.15f,0.1f,-0.7f);
 	}
+	{
+		ParticleRenderer::Desc	distortion;
+		distortion.particleDataName = L"player_zet_distortion";
+		INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(-0.15f, 0.1f, -0.7f);
+	}
+
+	{
+		VIBufferRenderer::Desc vibuffer;
+		vibuffer.meshName = L"screenQuad";
+		vibuffer.mtrlName = L"particleDistortion";
+		INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
+	}
+
+
 	{
 		VIBufferRenderer::Desc ground;
 		ground.mtrlName = L"ground";
@@ -123,6 +98,18 @@ void NalmakScene::Initialize()
 		groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 	}
 
-	
+	{
+
+
+		ScaleDampingDeffender::Desc scaleDamping;
+		scaleDamping.dampingSpeed = 3.f;
+		scaleDamping.maximumScale = 15.0f;
+		scaleDamping.axisDir = Vector3(0.f, 1.f, 0.f);
+
+		VIBufferRenderer::Desc shield;
+		shield.meshName = L"sphere";
+		shield.mtrlName = L"fx_shield";
+		INSTANTIATE()->AddComponent<VIBufferRenderer>(&shield)->SetPosition(0, 0, 5)->AddComponent<ScaleDampingDeffender>(&scaleDamping)->AddComponent<SphereCollider>();
+	}
 
 }

@@ -30,7 +30,6 @@ Camera::Camera(Desc * _desc)
 		m_height = (float)_desc->height;
 	
 	m_aspect = m_width / m_height;
-	m_renderTargets.assign(4, nullptr);
 	m_renderingMode = _desc->renderMode;
 	if (m_renderingMode == CAMERA_RENDERING_MODE_DEFERRED)
 	{
@@ -134,6 +133,7 @@ Vector2 Camera::WorldToScreenPos(const Vector3 & _pos)
 
 bool Camera::IsInFrustumCulling(IRenderer * _renderer)
 {
+
 	if (!_renderer->IsFrustumCulling())
 		return true;
 
@@ -222,36 +222,27 @@ Vector3 Camera::GetCamToMouseWorldDirection()
 	
 }
 
-
-
-void Camera::SetRenderTarget(UINT _index, wstring  _rtName)
+void Camera::ClearRenderTarget()
 {
-	if (_index > 3 || _index < 0)
-	{
-		assert(0 && L"Directx9 can only use 4 render targets at a time");
-	}
-	m_renderTargets[_index] = ResourceManager::GetInstance()->GetResource<RenderTarget>(_rtName);
+	if (m_renderTarget)
+		m_renderTarget->Clear();
 }
-
 
 void Camera::RecordRenderTarget()
 {
-	int i = 0;
-	for (auto& rt : m_renderTargets)
-	{
-		if (rt)
-			rt->StartRecord(i);
-		++i;
-	}
+	if(m_renderTarget)
+		m_renderTarget->StartRecord(0);
 }
 
 void Camera::EndRenderTarget()
 {
-	for (auto& rt : m_renderTargets)
-	{
-		if (rt)
-			rt->EndRecord();
-	}
+	if (m_renderTarget)
+		m_renderTarget->EndRecord();
+}
+
+void Camera::SetRenderTarget(const wstring & _rtName)
+{
+	m_renderTarget = ResourceManager::GetInstance()->GetResource<RenderTarget>(_rtName);
 }
 
 void Camera::AllOnLayer()

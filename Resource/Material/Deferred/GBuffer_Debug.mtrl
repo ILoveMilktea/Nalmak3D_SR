@@ -4,7 +4,7 @@
 
 shader "D_Debug"
 
-textureRT "g_shade" "GBuffer_Shade"
+textureRT "g_shade" "GBuffer_Final"
 textureRT "g_debug" "GBuffer_Debug"
 
 renderQueue "1000"

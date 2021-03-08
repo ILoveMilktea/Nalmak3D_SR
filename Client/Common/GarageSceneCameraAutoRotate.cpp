@@ -21,12 +21,12 @@ void GarageSceneCameraAutoRotate::Initialize()
 void GarageSceneCameraAutoRotate::EnterState()
 {
 	m_garageCam->SetXMyAngle(20);
-	m_garageCam->SetDistance(-15);
+	m_garageCam->SetDistance(-5);
 	m_garageCam->SetFollowSpeed(3);
 	m_garageCam->SetRotateSpeed(3);
 	m_garageCam->SetLookSpeed(3);
 	m_garageCam->RotateYAxisAngle(5);
-	m_garageCam->SetAxisTargetPos(Vector3(0, 5, 0));
+	m_garageCam->SetAxisTargetPos(Vector3(0, 2, 0));
 
 
 }
