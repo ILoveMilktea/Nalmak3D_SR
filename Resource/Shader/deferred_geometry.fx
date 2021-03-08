@@ -5,6 +5,7 @@ texture g_diffuse;
 texture g_depth;
 texture g_normal;
 texture g_light;
+texture g_emission;
 
 sampler DiffuseSampler = sampler_state
 {
@@ -21,6 +22,10 @@ sampler NormalSampler = sampler_state
 sampler LightSampler = sampler_state
 {
 	texture = g_light;
+};
+sampler EmissionSampler = sampler_state
+{
+	texture = g_emission;
 };
 
 struct VS_INPUT
@@ -64,11 +69,17 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 
 	float2 uv = float2(_input.uv) + float2(perPixelX, perPixelY);
 
+	float3 emission = tex2D(EmissionSampler, uv).xyz;
+	if (emission.x != 0 || emission.y != 0 || emission.z != 0)
+	{
+		o.color = float4(emission, 1);
+		return o;
+	}
+
 	float3 diffuse = tex2D(DiffuseSampler, uv).xyz;
 	float3 normal = tex2D(NormalSampler, uv).xyz;
 	float3 light = tex2D(LightSampler, uv).xyz;
-
-
+	
 	float3 final;
 	if (normal.x == 0 && normal.y == 0 && normal.z == 0)
 	{
@@ -79,6 +90,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 		final = light * diffuse;
 	}
 	
+
 	o.color = float4(final, 1);
 
 	return o;
