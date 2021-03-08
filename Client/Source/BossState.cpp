@@ -68,6 +68,13 @@ void BossState::UpdateState()
 	//
 	//DEBUG_LOG(L"Player Pos", m_pPlayer->GetTransform()->position);
 	//DEBUG_LOG(L"Camera Pos", m_pMainCamera->GetTransform()->position);
+
+	if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0 && !m_bSceneChange)
+	{
+		Core::GetInstance()->LoadScene(L"result");
+		m_bSceneChange = true;
+	}
+
 	DEBUG_LOG(L"Current Combat State : ", L"Boss State");
 }
 

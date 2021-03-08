@@ -56,7 +56,7 @@ private:
 	bool	m_bCameraProduce = false;
 
 
-
+	bool	m_bSceneChange = false;
 
 	// UI test
 	bool	m_bossui = false;
