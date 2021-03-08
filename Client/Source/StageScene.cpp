@@ -13,7 +13,7 @@
 #include "FieldCameraSmoothFollowState.h"
 #include "FieldCameraStartState.h"
 #include "FieldCameraNearEnemyState.h"
-
+#include "UIFactory.h"
 
 void StageScene::Initialize()
 {
@@ -27,7 +27,7 @@ void StageScene::Initialize()
 	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
 	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
 	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
-	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Emission", CANVAS_GROUP_G1);
+	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Debug", CANVAS_GROUP_G1);
 	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
 
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");

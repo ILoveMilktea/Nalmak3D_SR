@@ -16,7 +16,7 @@
 #include "Camera_Evasion.h"
 #include "Camera_Boss.h"
 #include "Camera_Boss_Appear.h"
-
+#include "UIFactory.h"
 
 Stage2Scene::Stage2Scene()
 {

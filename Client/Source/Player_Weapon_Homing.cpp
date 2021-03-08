@@ -3,6 +3,7 @@
 
 #include "HomingBulletMove.h"
 #include "EnemyDetector.h"
+#include "UIFactory.h"
 
 Player_Weapon_Homing::Player_Weapon_Homing(const ITEMINFO & _copy)
 	:PlayerItem(_copy)

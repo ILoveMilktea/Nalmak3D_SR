@@ -27,6 +27,7 @@
 #include "MidBoss_Define.h"
 #include "Enemy_Debugging.h"
 #include "Player_WindEffect.h"
+#include "PlayerInfoManager.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -81,7 +82,7 @@ void EnemyManager::Update()
 
 		Enemy_Spawn(Vector3(50.f, 50.f, 50.f), Vector3(0.2f, 0.2f, 0.2f), IDLE, temp);
 	}
-	
+
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_SHIFT)
 		&& InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
 	{
@@ -174,7 +175,7 @@ void EnemyManager::Destroy_AllEnemy()
 	m_iEnemyCount = 0;
 }
 
-void EnemyManager::Enemy_Spawn_Debug(Vector3 _scale, 
+void EnemyManager::Enemy_Spawn_Debug(Vector3 _scale,
 	ENEMY_STATE _initState, ENEMY_STATUS _status)
 {
 	Camera* MainCamera = Core::GetInstance()->GetMainCamera();
@@ -233,7 +234,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 		break;
 	case EXPLOSION:
 	{
-		m_pStateControl->InitState(L"Explosion"); 
+		m_pStateControl->InitState(L"Explosion");
 	}
 	break;
 

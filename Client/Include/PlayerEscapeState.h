@@ -21,7 +21,7 @@ private:
 	float m_dealy;
 
 private:
-	PlayerInfoManager* m_playerInfo;
+	class PlayerInfoManager* m_playerInfo;
 	float m_accel = 0.f;
 };
 

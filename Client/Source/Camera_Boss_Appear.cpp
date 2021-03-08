@@ -2,6 +2,7 @@
 #include "..\Include\Camera_Boss_Appear.h"
 #include "EnemyManager.h"
 #include "FieldCameraInfo.h"
+#include "PlayerInfoManager.h"
 
 
 Camera_Boss_Appear::Camera_Boss_Appear()

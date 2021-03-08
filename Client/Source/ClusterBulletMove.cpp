@@ -7,7 +7,8 @@
 #include "Enemy_Boss.h"
 #include "Enemy.h"
 #include "EnemyManager.h"
-
+#include "PlayerInfoManager.h"
+#include "EnemyDetector.h"
 
 
 ClusterBulletMove::ClusterBulletMove(Desc * _desc)

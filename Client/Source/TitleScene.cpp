@@ -10,7 +10,7 @@
 #include "PlayerInfoManager.h"
 #include "SceneChanger.h"
 #include "PrintInfo.h"
-
+#include "UIFactory.h"
 
 //////////////////////////////////////////////////////////////////////////////////
 // 2021 02 22

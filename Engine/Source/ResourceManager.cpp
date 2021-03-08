@@ -50,6 +50,10 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 
 	// Font
 	AddFontResource(L"../../Resource/Font/Selected/Astrolab.ttf");
+
+	AddFontResource(L"../../Resource/Font/Selected/Optimus.otf");
+	AddFontResource(L"../../Resource/Font/Selected/earthorbiter.ttf");
+
 	//AddFontResource(L"../../Resource/Font/Selected/bladesingercond.ttf");
 	//AddFontResource(L"../../Resource/Font/Selected/DS-DIGI.otf");
 	//AddFontResource(L"../../Resource/Font/Selected/PCap Terminal Condensed.TTF");

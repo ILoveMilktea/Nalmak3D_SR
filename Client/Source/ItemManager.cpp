@@ -67,7 +67,7 @@ void ItemManager::CreateItem()
 		info.weaponType = WEAPON_CANNON;
 		info.weaponAttak = 1;
 		info.costGold = 100;
-		info.delay = 0.25f;
+		info.delay = 0.15f;
 		info.weaponSpeed = 45.f;
 		info.modelName = L"su34_weapon1";
 		m_mapShopItem[L"Weapon"].emplace_back(new SmallCannon(info));

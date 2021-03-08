@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\Enemy_MachineGun.h"
+#include "PlayerInfoManager.h"
 
 
 
