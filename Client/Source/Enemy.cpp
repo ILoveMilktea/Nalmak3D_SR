@@ -179,7 +179,7 @@ void Enemy::Death_Check()
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
 
-			m_gameObject->DeleteComponent<SphereCollider>();
+			//m_gameObject->DeleteComponent<SphereCollider>();
 
 		}
 	}

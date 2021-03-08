@@ -26,6 +26,7 @@
 #include "MidBoss_Headers.h"
 #include "MidBoss_Define.h"
 #include "Enemy_Debugging.h"
+#include "Player_WindEffect.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -268,6 +269,14 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	Enemy_Mesh.meshName = L"su34";
 	Enemy_obj->AddComponent<MeshRenderer>(&Enemy_Mesh);
 
+	Player_WindEffect::Desc wind;
+	wind.leftTrailPos = Vector3(-1.6f, 0.5f, 0.f);
+	wind.rightTrailPos = Vector3(1.6f, 0.5f, 0.f);
+	wind.trailThick = 0.2f;
+	Enemy_obj->AddComponent<Player_WindEffect>(&wind);
+
+
+
 	SphereCollider::Desc Enemy_col;
 	Enemy_col.radius = 5.f;
 	Enemy_col.collisionLayer = COLLISION_LAYER_ENEMY;
@@ -278,13 +287,13 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 
 void EnemyManager::Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos)
 {
-	if (pos == Vector3(0.f, 0.f, 0.f))
-	{
-		Vector3 vRand = Nalmak_Math::Rand(Vector3(-100.f, -100.f, -100.f), Vector3(100.f, 100.f, 100.f));
+	//if (pos == Vector3(0.f, 0.f, 0.f))
+	//{
+	//	Vector3 vRand = Nalmak_Math::Rand(Vector3(-100.f, -100.f, -100.f), Vector3(100.f, 100.f, 100.f));
 
-		Enemy_Spawn(vRand, Vector3(0.1f, 0.1f, 0.1f), _initState);
-	}
-	else { Enemy_Spawn(pos, Vector3(0.1f, 0.1f, 0.1f), _initState); }
+	//	Enemy_Spawn(vRand, Vector3(0.f, 0.1f, 0.1f), _initState);
+	//}
+/*	else {  */Enemy_Spawn(pos, Vector3(0.2f, 0.2f, 0.2f), _initState); //}
 
 }
 
