@@ -87,9 +87,10 @@ void RenderManager::Render(Camera * _cam)
 	ClearRenderTarget(L"GBuffer_Depth");
 	ClearRenderTarget(L"GBuffer_CookTorrance");
 	ClearRenderTarget(L"GBuffer_Light");
-	ClearRenderTarget(L"GBuffer_Debug");
 	ClearRenderTarget(L"GBuffer_Distortion");
+	ClearRenderTarget(L"GBuffer_Emission");
 	ClearRenderTarget(L"GBuffer_Final");
+
 
 	///////////////////////////////////////////////////////
 	// public const buffer
@@ -133,8 +134,6 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	ShadePass(_cBuffer);
 
-	DebugPass(_cBuffer);
-
 	TransparentPass(_cam, _cBuffer);
 
 	PostProcessPass(_cam, _cBuffer);
@@ -144,6 +143,7 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	_cam->RecordRenderTarget();
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Final")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
+
 	UIPass(_cam, _cBuffer);
 
 	_cam->EndRenderTarget();

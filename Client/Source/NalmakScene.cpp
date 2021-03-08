@@ -55,7 +55,7 @@ void NalmakScene::Initialize()
 
 
 
-
+	INSTANTIATE()->AddComponent<SphereCollider>();
 
 	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
 	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
@@ -67,6 +67,9 @@ void NalmakScene::Initialize()
 	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
 	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Distortion", CANVAS_GROUP_G1);
 	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
+
+	auto window6 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Emission", CANVAS_GROUP_G1);
+	window6->SetPosition(300, 100, 0)->SetScale(200, 200, 0);
 
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50,0);
 
