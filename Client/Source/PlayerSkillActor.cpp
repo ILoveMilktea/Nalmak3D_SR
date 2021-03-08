@@ -3,7 +3,7 @@
 #include "ItemManager.h"
 #include "PlayerItem.h"
 #include "ScaleDampingDeffender.h"
-
+#include "PlayerInfoManager.h"
 PlayerSkillActor::PlayerSkillActor(Desc * _Desc)
 {
 }
@@ -18,7 +18,7 @@ void PlayerSkillActor::Initialize()
 	m_inputMgr = InputManager::GetInstance();
 	m_stateControl = m_gameObject->GetComponent<StateControl>();
 	m_core = Core::GetInstance();
-	
+
 	//EquipSkill(FIRST_PARTS);
 }
 
@@ -33,7 +33,7 @@ void PlayerSkillActor::Update()
 		if (!m_core->GetObjectList(OBJECT_TAG_PLAYER_SHIELD).empty())
 			return;
 
-		
+
 			VIBufferRenderer::Desc meshInfo;
 			//meshInfo.mtrlName = L"debugCollider";
 			meshInfo.mtrlName = L"default_red";
@@ -54,7 +54,7 @@ void PlayerSkillActor::Update()
 				AddComponent<ScaleDampingDeffender>(&scaleDamping)->
 				AddComponent<SphereCollider>(&sphereColliderInfo);
 			shield->SetParents(m_gameObject);
-		
+
 
 
 	}
@@ -79,9 +79,9 @@ void PlayerSkillActor::FirstStart()
 bool PlayerSkillActor::EquipSkill(PARTS_NUM _partsType)
 {
 	wstring slotInvenSkill = m_playerMgr->GetSkill(_partsType);
-	if (L"" == slotInvenSkill) // ¾ø´Ù¸é?RETURN;
+	if (L"" == slotInvenSkill) // ï¿½ï¿½ï¿½Ù¸ï¿½?RETURN;
 		return false;
-	
+
 	m_skillInfo = ItemManager::GetInstance()->FindItemObject(L"Skill", slotInvenSkill);
 	return true;
 }

@@ -4,7 +4,7 @@
 #include "SingleLine.h"
 #include "SplineCurve.h"
 #include "CustomDebuger.h"
-
+#include "UIFactory.h"
 void UILabScene::Initialize()
 {
 	INSTANTIATE()->AddComponent<Grid>();

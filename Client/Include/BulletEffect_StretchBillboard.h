@@ -24,6 +24,7 @@ private:
 	float m_lifeTime;
 	float m_speed;
 	float m_stretchRatio;
+
 	Vector3 m_dir;
 	Camera* m_camera;
 	Material* m_material;

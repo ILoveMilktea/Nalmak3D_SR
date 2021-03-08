@@ -23,7 +23,7 @@ public:
 private:
 	//class PlayerItem* m_playerSkill;
 private:
-	PlayerInfoManager* m_playerMgr;
+	class PlayerInfoManager* m_playerMgr;
 	InputManager* m_inputMgr;
 	Core * m_core;
 

@@ -189,18 +189,34 @@ public:
 		desc_cr.group = _group;
 
 		Text::Desc desc;
-		desc.width = 12;
-		desc.height = 30;
+		desc.width = 16;
+		desc.height = 40;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.weight = 600;
+		desc.color = D3DCOLOR_RGBA(190, 227, 253, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
+		desc.fontName = L"earthorbiter";
 
 		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuTitle");
 		text->AddComponent<CanvasRenderer>(&desc_cr);
 		text->AddComponent<Text>(&desc);
-
+		
 		text->SetScale(760.f, 40.f);
 		return text;
+	}
+	static GameObject* Prefab_MenuBackground(CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+		SingleImage::Desc desc;
+		desc.textureName = L"title_top";
+		auto bg = INSTANTIATE(OBJECT_TAG_UI, L"MenuTitleBg");
+		bg->AddComponent<CanvasRenderer>(&desc_cr);
+		bg->AddComponent<SingleImage>(&desc);
+		bg->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.1f, 0.5f, 0.75f, 0.4f));
+		bg->SetScale(WINCX, 100.f);
+		return bg;
 	}
 	static GameObject* Prefab_MenuButton(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
@@ -210,14 +226,14 @@ public:
 
 		Button::Desc desc_bt;
 		desc_bt.eventFunc = _eventFunc;
-		desc_bt.allImage = L"Tip2_White";
+		desc_bt.allImage = L"Title01_Panel_White";
 
 		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"MenuButton");
 		menu->AddComponent<CanvasRenderer>(&desc_cr);
 		menu->AddComponent<Button>(&desc_bt);
 
 		menu->GetComponent<Button>()->ChangeNormalColor(0.f, 0.4f, 0.75f, 0.4f);
-		menu->GetComponent<Button>()->ChangeHighlightColor(0.f, 0.5f, 0.8f, 0.5f);
+		menu->GetComponent<Button>()->ChangeHighlightColor(0.4f, 0.6f, 0.9f, 0.5f);
 		menu->GetComponent<Button>()->ChangePressedColor(0.9f, 0.6f, 0.f, 0.5f);
 		menu->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);
 
@@ -225,12 +241,12 @@ public:
 		desc_cr.group = CANVAS_GROUP_MAINWND;
 
 		Text::Desc desc;
-		desc.width = 10;
-		desc.height = 25;
+		desc.width = 9;
+		desc.height = 22;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
-
+		desc.fontName = L"earthorbiter";
 		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")
 			->AddComponent<CanvasRenderer>(&desc_cr)
 			->AddComponent<Text>(&desc);
@@ -238,7 +254,7 @@ public:
 		menu->GetComponent<Button>()->SetTextObject(text);
 		text->SetParents(menu);
 		text->SetScale(760.f, 30.f);
-		text->SetPosition(40.f, 0.f);
+		text->SetPosition(40.f, -15.f);
 		menu->SetScale(760.f, 30.f);
 		return menu;
 	}
@@ -274,7 +290,7 @@ public:
 		desc.text = _text;
 		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
-
+		desc.fontName = L"earthorbiter";
 		auto text =
 			INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")
 			->AddComponent<CanvasRenderer>(&desc_cr)
@@ -295,10 +311,11 @@ public:
 		desc_cr.group = _group;
 
 		Text::Desc desc;
-		desc.width = 10;
-		desc.height = 25;
+		desc.width = 11;
+		desc.height = 27;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"ItemTitle");
@@ -317,7 +334,8 @@ public:
 		desc.width = 8;
 		desc.height = 20;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto subtitle = INSTANTIATE(OBJECT_TAG_UI, L"ItemSubtitle");
@@ -333,10 +351,11 @@ public:
 		desc_cr.group = _group;
 
 		Text::Desc desc;
-		desc.width = 10;
-		desc.height = 25;
+		desc.width = 8;
+		desc.height = 20;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(130, 130, 120, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto contents = INSTANTIATE(OBJECT_TAG_UI, L"ItemContents_Name");
@@ -357,7 +376,8 @@ public:
 		desc.width = 12;
 		desc.height = 24;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto script = INSTANTIATE(OBJECT_TAG_UI, L"Script");
@@ -381,7 +401,7 @@ public:
 		background->SetScale(160.f, 25.f);
 		auto fill = CreateImage(CANVAS_GROUP_MAINWND, L"UIRed");
 		fill->SetPosition(0.f, 0.f, 0.f);
-		fill->SetScale(152.f, 21.f);
+		fill->SetScale(152.f, 17.f);
 
 		CanvasRenderer::Desc desc_cr;
 		desc_cr.group = _group;
@@ -433,7 +453,8 @@ public:
 		desc.width = 10;
 		desc.height = 25;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 200, 250, 255);
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
 		desc.option = DT_LEFT | DT_WORDBREAK | DT_VCENTER;
 
 		auto text = INSTANTIATE(OBJECT_TAG_UI, L"ItemStat_Text");
@@ -498,7 +519,8 @@ public:
 		desc.width = 40;
 		desc.height = 80;
 		desc.text = _text;
-		desc.color = D3DCOLOR_RGBA(50, 50, 150, 255);
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
 		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
 
 		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")

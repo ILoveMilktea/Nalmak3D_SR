@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\Player_ClusterMissile.h"
 #include "ClusterBulletMove.h"
-
+#include "PlayerInfoManager.h"
 
 
 Player_ClusterMissile::Player_ClusterMissile(const ITEMINFO & copy)

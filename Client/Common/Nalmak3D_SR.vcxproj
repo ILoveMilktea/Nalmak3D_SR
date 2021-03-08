@@ -534,6 +534,7 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\Resource\Shader\20mmCannon.fx" />
+    <FxCompile Include="..\..\Resource\Shader\BackGround.fx" />
     <FxCompile Include="..\..\Resource\Shader\billboard3DUI.fx" />
     <FxCompile Include="..\..\Resource\Shader\default.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

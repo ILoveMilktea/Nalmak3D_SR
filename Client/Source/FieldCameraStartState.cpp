@@ -4,6 +4,7 @@
 
 //test
 #include "GarageSceneCameraInfo.h"
+#include "PlayerInfoManager.h"
 FieldCameraStartState::FieldCameraStartState()
 {
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\Player.h"
+#include "PlayerInfoManager.h"
 
 Player::Player(Desc * _desc)
 {

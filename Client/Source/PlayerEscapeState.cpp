@@ -4,6 +4,7 @@
 #include "PlayerItem.h"
 #include "ScaleDampingDeffender.h"
 #include "MouseOption.h"
+#include "PlayerInfoManager.h"
 
 
 

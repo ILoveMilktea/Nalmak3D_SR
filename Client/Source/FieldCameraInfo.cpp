@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\FieldCameraInfo.h"
+#include "PlayerInfoManager.h"
 
 
 

@@ -15,7 +15,7 @@ public:
 	Player_NearGuideBullet(Desc * _desc);
 	virtual ~Player_NearGuideBullet();
 
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void Release()override;
@@ -37,9 +37,8 @@ private:
 	GameObject* m_target;
 	GameObject* m_finder = nullptr;
 	EnemyDetector* m_enemyDetector;
-	
+
 	StateControl * m_stateControl;
 	float m_speed;
 	int m_dmg;
 };
-

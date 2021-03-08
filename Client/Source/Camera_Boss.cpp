@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\Camera_Boss.h"
+#include "PlayerInfoManager.h"
 
 
 Camera_Boss::Camera_Boss()

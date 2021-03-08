@@ -2,6 +2,7 @@
 #include "..\Include\EditController.h"
 #include "EnemyManager.h"
 #include "UIManager.h"
+#include "UIFactory.h"
 
 EditController::EditController(Desc * _desc)
 {

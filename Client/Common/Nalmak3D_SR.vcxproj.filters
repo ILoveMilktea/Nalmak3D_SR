@@ -1220,6 +1220,9 @@
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging">
       <UniqueIdentifier>{e6a58e28-b6f8-4f06-b36e-e9a8e783f00c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\NewFilter1">
+      <UniqueIdentifier>{12936101-c3ef-476a-9928-2c95b650c811}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
@@ -1306,6 +1309,9 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\shieldEffect.fx">
       <Filter>03.Resource\02.Shader\Stage</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\BackGround.fx">
+      <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

@@ -2,15 +2,17 @@
 ##  Material Data Setting
 #########################################################
 
-shader "BackGround"
+shader "D_Debug"
 
-texture "g_mainTex" "stageSelectBG"
-vector4 "g_mainTexColor" "1,1,1,1"
-renderQueue "500"
+textureRT "g_shade" "GBuffer_Final"
+textureRT "g_debug" "GBuffer_Debug"
+
+renderQueue "1000"
 
 blendingMode "0"
 
 fillMode "0"
+
 #########################################################
 ##   1. Shander
 ##  ---------------------------------------------------------------------------------------
@@ -47,5 +49,7 @@ fillMode "0"
 ##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
+
+
 
 

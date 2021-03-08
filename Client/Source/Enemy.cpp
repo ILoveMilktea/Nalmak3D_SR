@@ -7,7 +7,7 @@
 Enemy::Enemy(Desc * _Desc)
 {
 	m_tStatus =		_Desc->tStatus;
-	
+
 	m_tMachineGun = _Desc->tGun;
 	m_tMissile =	_Desc->tMissile;
 	m_tHoming =		_Desc->tHoming;
@@ -27,7 +27,7 @@ void Enemy::Initialize()
 }
 
 void Enemy::Update()
-{	
+{
 	Reloading_Gun();
 	Reloading_Missile();
 
@@ -42,13 +42,13 @@ void Enemy::Update()
 
 
 #pragma region DebugLog
-	DEBUG_LOG(L"CurPos", m_transform->position);
-	DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
-	//DEBUG_LOG(L"Å¸°Ù ±îÁöÀÇ °Å¸®",		m_fDist_Target);
-	//DEBUG_LOG(L"forwardº¤ÅÍ¿Í »çÀÌº¤ÅÍÀÇ ³»Àû",		m_fInner);
+	DEBUG_LOG(L"Enemy CurPos", m_transform->position);
+	//DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
+	DEBUG_LOG(L"Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½",		m_fDist_Target);
+	//DEBUG_LOG(L"forwardï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½",		m_fInner);
 	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
 	DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
-	DEBUG_LOG(L"Max Spd", m_tStatus.m_fMaxSpd);
+	DEBUG_LOG(L"Enemy Max Spd", m_tStatus.m_fMaxSpd);
 	//DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
 	//DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
 	DEBUG_LOG(L"Current Pattern", m_gameObject->GetComponent<StateControl>()->GetCurStateString());
@@ -58,19 +58,19 @@ void Enemy::Update()
 void Enemy::OnTriggerEnter(Collisions & _collision)
 {
 	for (auto& obj : _collision)
-	{ 
+	{
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
 		{
-			//µ¥¹ÌÁö ÀÔ´Â°Ç °Å Player bullet¿¡¼­ ÇØÁÜ.
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Â°ï¿½ ï¿½ï¿½ Player bulletï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
 			//if (m_pSmokeParticle == nullptr)
 			//{
 			//	m_pSmokeParticle = INSTANTIATE();
-			//	
+			//
 			//	ParticleRenderer::Desc smoke_desc;
 			//	smoke_desc.particleDataName = L"enemy_smoke_0";
-			//	smoke_desc.PlayOnAwake = true; //±â³É °´Ã¼ »ý¼º°ú µ¿½Ã¿¡ ÆÄÆ¼Å¬ on
-			//	//ÆÄÆ¼Å¬ »èÁ¦´Â EnemyDeath¿¡ ÀÚ¼¼È÷ Àû¾î³ùÀ½.
+			//	smoke_desc.PlayOnAwake = true; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½Æ¼Å¬ on
+			//	//ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ EnemyDeathï¿½ï¿½ ï¿½Ú¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 
 			//	if (m_pSmokeParticle != nullptr)
 			//	{
@@ -84,7 +84,7 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 
 
 void Enemy::Target_Setting(bool _onoff)
- {	
+ {
 	if (_onoff == true)
 	{
 		m_pTarget = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
@@ -94,14 +94,14 @@ void Enemy::Target_Setting(bool _onoff)
 			/* First Inner Setting */
 			Vector3 vDir = m_pTarget->GetTransform()->position - m_transform->position;
 			D3DXVec3Normalize(&vDir, &vDir);
-			
+
 			m_fInner_First = D3DXVec3Dot(&vDir, &m_transform->GetForward());
 
 			bTarget = true;
 			return;
 		}
 	}
-	else 
+	else
 	{
 		m_pTarget = nullptr;
 		bTarget = false;
@@ -111,7 +111,7 @@ void Enemy::Target_Setting(bool _onoff)
 
 void Enemy::Target_Update()
 {
-	if (bTarget) 
+	if (bTarget)
 	{
 		/* Dot calc to Target Direction Vector */
 		/* for distance, fInner */
@@ -136,7 +136,7 @@ void Enemy::Target_Update()
 void Enemy::Go_ToPos(Vector3 _pos)
 {
 	m_transform->LookAt(_pos, m_tStatus.m_fLookSpd, &m_QuartRot);
-	Go_Straight();
+	//Go_Straight();
 }
 
 void Enemy::Go_Straight()
@@ -157,11 +157,11 @@ bool Enemy::Fov_Check()
 	if (D3DXToRadian(m_fFov/2.f) >= acosf(m_fInner))
 	{
 		m_bFov = true;
-		return true; 
+		return true;
 	}
-	else 
-	{ 
-		m_bFov = false; 
+	else
+	{
+		m_bFov = false;
 		return false;
 	}
 }
@@ -170,7 +170,7 @@ void Enemy::Death_Check()
 {
 	if (m_tStatus.m_iCurHp <= 0)
 	{
-		//Áö±Ý Falling, Death, Explosion»óÅÂ ¾Æ´Ò¶§¸¸ °¡´ÉÇÏ°Ô.
+		//ï¿½ï¿½ï¿½ï¿½ Falling, Death, Explosionï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ò¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½.
 		if (m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Falling"
 			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Explosion"
 			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Death")
@@ -178,7 +178,7 @@ void Enemy::Death_Check()
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
 
-			
+
 
 		}
 	}
@@ -207,6 +207,11 @@ const int & Enemy::Get_FullHp() const
 const int & Enemy::Get_CurHp() const
 {
 	return m_tStatus.m_iCurHp;
+}
+
+const float & Enemy::Get_CurSpd() const
+{
+	return m_tStatus.m_fCurSpd;
 }
 
 const BULLET_STATUS & Enemy::Get_GunStatus() const
@@ -295,16 +300,26 @@ void Enemy::Set_OriginForward()
 	m_vOriginForward = m_transform->GetForward();
 }
 
+void Enemy::Set_CurSpd(float _spd)
+{
+	m_tStatus.m_fCurSpd = 0.f;
+}
+
 void Enemy::Set_Accel(bool _onoff)
 {
 	m_bAccel = _onoff;
+}
+
+void Enemy::Set_LookSpd(float _lookSpd)
+{
+	m_tStatus.m_fLookSpd = _lookSpd;
 }
 
 void Enemy::Horizontally()
 {
 	//Player Axis is not always alinged to World Y axis
 	//therefore, need modify. alinged to Player Y axis.
-	
+
 	if (m_fInner >= 0.99f)
 	{
 		if (m_fUpAngle < 89.f)
@@ -332,21 +347,23 @@ void Enemy::Turn()
 bool Enemy::Dive()
 {
 	Target_Setting(false);
-	
+
 	Quaternion Xaxis = m_transform->RotateAxis(m_transform->GetRight(), dTime);
 	m_transform->rotation *= Xaxis;
 
-	// ´ÙÀÌºê,¼Ò¾î µÑ ´Ù ½ÃÀÛ ÇÒ¶§ ¿ø·¡ forward°ª ¹Þ¾Æ ³ù´Ù°¡ 
-	// ±× °ªÀÌ¶û ºñ±³ÇØ¼­ ¼öÁ÷ÀÌ µÉ¶§±îÁö ¸öÃ¼ µ¹±â
+	// ï¿½ï¿½ï¿½Ìºï¿½,ï¿½Ò¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ forwardï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	Vector3 vForward = m_transform->GetForward();
 	//Vector3 WorldY = { 0.f,1.f,0.f };
 
+	Go_Straight();
+
 	m_fDiveInner = D3DXVec3Dot(&vForward, &m_vOriginForward);
 
-	if (m_fDiveInner <= 0.1f && m_fDiveInner >= -0.1f) //¹üÀ§ 0¿¡ °¡±î¿ì¸é
+	if (m_fDiveInner <= 0.1f && m_fDiveInner >= -0.1f) //ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		//Go_Straight();
-		DEBUG_LOG(L"´ÙÀÌºê Inner", m_fDiveInner);
+		DEBUG_LOG(L"ï¿½ï¿½ï¿½Ìºï¿½ Inner", m_fDiveInner);
 		return true;
 	}
 	return false;
@@ -362,9 +379,11 @@ bool Enemy::Soar()
 	Vector3 vForward = m_transform->GetForward();
 	//Vector3 WorldY = { 0.f,1.f,0.f };
 
+	Go_Straight();
+
 	m_fSoarInner = D3DXVec3Dot(&vForward, &m_vOriginForward);
 
-	if (m_fSoarInner <= 0.1f && m_fSoarInner >= -0.1f) //¹üÀ§ 0¿¡ °¡±î¿ì¸é
+	if (m_fSoarInner <= 0.1f && m_fSoarInner >= -0.1f) //ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 		//Go_Straight();
 		DEBUG_LOG(L"Soar Inner", m_fSoarInner);
@@ -413,7 +432,7 @@ bool Enemy::Reloading_Gun()
 			m_tMachineGun.m_iRound_Cur = m_tMachineGun.m_iRound_Full;
 
 			m_fGunReload = 0.f;
-			
+
 			return true;
 		}
 		return false;
@@ -465,16 +484,21 @@ void Enemy::Accelerate()
 	if (/*m_fDist_Target >= 100
 		&& */m_tStatus.m_fCurSpd <= m_tStatus.m_fMaxSpd)
 	{
-		m_tStatus.m_fCurSpd += dTime * 5.f;
+		m_tStatus.m_fCurSpd += dTime * 10.f;
 	}
 }
 
 
 void Enemy::Decelerate()
-{	
+{
 	if (/*m_fDist_Target <= 50.f
 		&& */m_tStatus.m_fCurSpd >= 0.f)
 	{
 		m_tStatus.m_fCurSpd -= dTime * 5.0f;
+	}
+
+	if(m_tStatus.m_fCurSpd < 0.f)
+	{
+		m_tStatus.m_fCurSpd = 0.f;
 	}
 }

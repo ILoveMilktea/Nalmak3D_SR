@@ -7,7 +7,8 @@
 #include "Enemy.h"
 #include "Enemy_Boss.h"
 
-
+#include "PlayerInfoManager.h"
+#include "EnemyDetector.h"
 Player_NearGuideBullet::Player_NearGuideBullet(Desc * _desc)
 {
 	m_firstTarget = _desc->firstTarget;
