@@ -16,6 +16,7 @@ public:
 	//setter
 public:
 	void SetShotCheck(bool _check) { m_shotCheck = _check; }
+	void SetCreatePos(Vector3 _pos) { m_itemInfo.createPos = _pos;  }
 
 	virtual void ItemShot() = 0;
 	virtual void CreateBullet() = 0;

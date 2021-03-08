@@ -27,12 +27,14 @@ public:
 	void SceneToBoss();
 
 private:
-	GameObject* m_MainCamera = nullptr;
-	GameObject* m_Player = nullptr;
+	Camera* m_pMainCamera = nullptr;
+	GameObject* m_pPlayer = nullptr;
 
 	bool m_bEnter = false;
 
 	float	m_fEvasionTime = 0.f;
 	float	m_fEvasiontScore = 0.f;
+
+	bool	m_bNext = false;
 };
 

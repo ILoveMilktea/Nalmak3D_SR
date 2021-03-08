@@ -120,6 +120,11 @@ void MeshRenderer::SetMaterial(const wstring& _mtrlName, int _index)
 	m_materials[_index] = ResourceManager::GetInstance()->GetResource<Material>(_mtrlName);
 }
 
+void MeshRenderer::SetMesh(const wstring & _meshName)
+{
+	m_mesh = ResourceManager::GetInstance()->GetResource<StaticMesh>(_meshName);
+}
+
 unsigned long MeshRenderer::GetSubsetCount()
 {
 	return m_mesh->GetSubsetCount();

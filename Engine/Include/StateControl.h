@@ -7,10 +7,6 @@
 #include "Nalmak_Include.h"
 class IState;
 
-// 해당 컴포넌트 추가시 fsm 패턴 사용가능
-// IState를 상속받은 상태를 만들고 해당 컴포넌트에 AddState함수로 등록
-// SetState로 다른 상태로 전환 가능
-// SetInteger ,SetFloat 등으로 다른 상태로 전환하더라도 데이터 교환가능
 class NALMAK_DLL StateControl :
 	public Component
 {

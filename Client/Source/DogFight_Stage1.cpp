@@ -5,9 +5,8 @@
 #include "PlayerInfoManager.h"
 #include "PlayerIdle.h"
 #include "PlayerMove.h"
-#include "PlayerTopViewMove.h"
 
-#include "FixToTarget.h"
+
 #include "MouseOption.h"
 #include "SmoothFollow.h"
 
@@ -17,7 +16,6 @@
 #include "StageManager.h"
 #include "UIWindowFactory.h"
 #include "SceneChanger.h"
-#include "PlayerBossStageMove.h"
 #include "PlayerNone.h"
 #include "PlayerShooter.h"
 
@@ -48,6 +46,7 @@ void DogFight_Stage1::EnterState()
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
+#pragma region WeaponTest
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile");
 
@@ -57,24 +56,15 @@ void DogFight_Stage1::EnterState()
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
 	
-	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");
+	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");f
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"Emp");
+#pragma endregion
 
-	m_Player = PlayerInfoManager::GetInstance()->Player_Create();
+	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+
+	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fTutorialTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fTutorialScore);
-
-	//auto smoothFollow = INSTANTIATE(0, L"SmoothFollow");
-	//SmoothFollow::Desc smoothFollowDesc;
-	//smoothFollowDesc.toTarget = m_Player;
-	//smoothFollowDesc.minDistance = 5.f;
-	//smoothFollowDesc.maxDistance = 10.f;
-	//smoothFollowDesc.followRotationSpeed = 15.f;
-
-	//smoothFollow->AddComponent<SmoothFollow>(&smoothFollowDesc);
-
-	//m_MainCamera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA);
-
 
 
 	EnemyManager::GetInstance();
@@ -120,24 +110,38 @@ void DogFight_Stage1::UpdateState()
 	}
 
 
+	
 
 
 
 
 
+	
 
 
 
-
-
-
-	DEBUG_LOG(L"Current Combat State : ", L"Stage1 Phase1 : tutorial");
-
+	
 	if (m_bSceneChange && !GameManager::GetInstance()->Get_StageClear(1))
 	{
 		GameManager::GetInstance()->Set_StageClear(1);
-		Core::GetInstance()->LoadScene(L"result");
+		m_Player->GetComponent<StateControl>()->SetState(L"playerFarAway");
+		m_pMainCamera->GetComponent<SmoothFollow>()->SetActive(false);
 	}
+
+	if (m_bSceneChange)
+	{
+		m_fProduceDelta += dTime;
+
+		if (m_fProduceDelta >= 2.f)
+		{
+			Core::GetInstance()->LoadScene(L"result");
+			m_fProduceDelta = 0.f;
+			m_bSceneChange = false;
+		}
+	}
+
+	DEBUG_LOG(L"Produce Delta", m_fProduceDelta);
+	DEBUG_LOG(L"Current Combat State : ", L"Stage1 Phase1 : tutorial"); 
 }
 
 void DogFight_Stage1::ExitState()

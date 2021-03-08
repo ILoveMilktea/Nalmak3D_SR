@@ -13,7 +13,7 @@ StageManager* StageManager::m_instance = nullptr;
 
 StageManager * StageManager::GetInstance()
 {
-	if (!m_instance)
+	if (m_instance == nullptr)
 	{
 		auto instance = INSTANTIATE()->AddComponent<StageManager>();
 		m_instance = instance->GetComponent<StageManager>();

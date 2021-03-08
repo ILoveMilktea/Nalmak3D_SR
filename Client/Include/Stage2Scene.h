@@ -12,5 +12,6 @@ public:
 
 public:
 	GameObject* m_StageManager = nullptr;
+	Camera* m_pMainCamera = nullptr;
 };
 

@@ -132,9 +132,16 @@ void FieldCameraInfo::AddYAxisAngle(float _angle)
 	m_targetAxisAngle.y += _angle;
 }
 
-void FieldCameraInfo::AddZAxisAngle(float _angle)
+void FieldCameraInfo::AddZAxisAngle(float _angle , float _min, float _max)
 {
 	m_targetAxisAngle.z += _angle;
+
+	if (_min == 0 && _max == 0)
+		return;
+
+	
+	m_targetAxisAngle.z = Nalmak_Math::Clamp(m_targetAxisAngle.z, _min, _max);
+
 }
 
 void FieldCameraInfo::AddDistance(float _distance)

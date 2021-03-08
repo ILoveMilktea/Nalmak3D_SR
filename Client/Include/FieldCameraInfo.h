@@ -36,7 +36,7 @@ public:
 	void SetAxisTargetPos(const Vector3& _pos);
 	void AddXAxisAngle(float _angle);
 	void AddYAxisAngle(float _angle);
-	void AddZAxisAngle(float _angle);
+	void AddZAxisAngle(float _angle , float _min= 0, float _max = 0);
 
 	
 	void AddDistance(float _distance);

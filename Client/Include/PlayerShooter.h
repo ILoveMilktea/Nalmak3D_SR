@@ -22,6 +22,9 @@ public: /* Get */
 	
 private:
 	class PlayerItem* m_useEquipment = nullptr; //  shot 호출
+
+	class PlayerItem* m_cannon = nullptr; //  shot 호출
+
 	bool	m_shooterFire;
 private:
 	class PlayerInfoManager* m_playerMgr;
@@ -29,6 +32,8 @@ private:
 
 private:
 	float m_shootTime;
+	bool	m_cheatCheck  =false;
+	float m_cannonCoolTime;
 	PARTS_NUM m_prevParts = PARTS_MAX;
 };
 

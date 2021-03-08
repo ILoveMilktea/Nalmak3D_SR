@@ -8,6 +8,11 @@
 #include "DogFightState.h"
 #include "EvasionState.h"
 #include "BossState.h"
+#include "SmoothFollow.h"
+#include "FieldCameraInfo.h"
+#include "FieldCameraSmoothFollowState.h"
+#include "FieldCameraStartState.h"
+#include "FieldCameraNearEnemyState.h"
 
 
 void StageScene::Initialize()
@@ -27,12 +32,32 @@ void StageScene::Initialize()
 	auto groundObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
 	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 
-	auto mainCam = INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
+	INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
+	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+	
+	if (m_pMainCamera)
+	{
+		SmoothFollow::Desc follow_desc;
+		follow_desc.minDistance = 5.f;
+		follow_desc.maxDistance = 10.f;
+		follow_desc.followRotationSpeed = 15.f;
+		follow_desc.toTarget = PlayerInfoManager::GetInstance()->GetPlayer();
+
+		
+		m_pMainCamera->AddComponent<FieldCameraInfo>();
+		m_pMainCamera->AddComponent<SmoothFollow>(&follow_desc);
+		m_pMainCamera->AddComponent<StateControl>();
+		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraSmoothFollowState>(L"CameraFollow");
+		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");
+		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraNearEnemyState>(L"CameraNearEnemy");
+
+		m_pMainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
+	}
+
 
 	m_StageManager = StageManager::GetInstance()->GetGameObject();
 	StageManager::GetInstance()->Set_StateControl();
 	StageManager::GetInstance()->Get_StateControl()->AddState<DogFight_Stage1>(L"Tutorial");
 	StageManager::GetInstance()->Get_StateControl()->InitState(L"Tutorial");
-
 	
 }

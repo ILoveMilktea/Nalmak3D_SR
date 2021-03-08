@@ -25,7 +25,7 @@ void Player_NearGuideBullet::Initialize()
 void Player_NearGuideBullet::Update()
 {
 	// 데드 조건
-	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 150.f)
+	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 600.f)
 	{
 		DESTROY(m_gameObject);
 	}

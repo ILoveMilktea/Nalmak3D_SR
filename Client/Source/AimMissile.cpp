@@ -41,25 +41,24 @@ void AimMissile::CreateBullet()
 		return;
 
 	// 1. RENDER
-	VIBufferRenderer::Desc meshInfo;
-	meshInfo.meshName = L"sphere";
-	meshInfo.mtrlName = L"default";
+	MeshRenderer::Desc meshInfo;
+	meshInfo.meshName = m_itemInfo.modelName;
+	meshInfo.mtrlName = L"kfir";
 	// 2. BULLET INFO
-  
-	// 에임미사일은 단독 클래스 잖아 슛하고 크레이트만 해주는 
+
 	m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 
 
 	m_bullet[0] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Left");
-	m_bullet[0]->AddComponent<VIBufferRenderer>(&meshInfo);
+	m_bullet[0]->AddComponent<MeshRenderer>(&meshInfo);
 	m_bullet[0]->SetParents(m_parents);
-	m_bullet[0]->SetPosition(-1.f, -0.5f, 0.f);
+	m_bullet[0]->SetPosition({ m_itemInfo.createPos.x * -1.f, m_itemInfo.createPos.y,m_itemInfo.createPos.z});
 	m_bullet[0]->SetScale(0.3f, 0.3f, 1.5f);
 
 	m_bullet[1] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Right");
-	m_bullet[1]->AddComponent<VIBufferRenderer>(&meshInfo);
+	m_bullet[1]->AddComponent<MeshRenderer>(&meshInfo);
 	m_bullet[1]->SetParents(m_parents);
-	m_bullet[1]->SetPosition(1.f, -0.5f, 0.f);
+	m_bullet[1]->SetPosition(m_itemInfo.createPos);
 	m_bullet[1]->SetScale(0.3f, 0.3f, 1.5f);
 
 

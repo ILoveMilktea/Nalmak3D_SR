@@ -1,26 +1,26 @@
 #include "stdafx.h"
-#include "..\Include\PlayerBossStageMove.h"
-#include "Enemy_Bullet_Manager.h"
+#include "..\Include\Player_Boss_Move.h"
 
 
-PlayerBossStageMove::PlayerBossStageMove()
+Player_Boss_Move::Player_Boss_Move()
 {
 }
 
 
-PlayerBossStageMove::~PlayerBossStageMove()
+Player_Boss_Move::~Player_Boss_Move()
 {
 }
 
-void PlayerBossStageMove::Initialize()
+void Player_Boss_Move::Initialize()
 {
 }
 
-void PlayerBossStageMove::EnterState()
+void Player_Boss_Move::EnterState()
 {
+	
 }
 
-void PlayerBossStageMove::UpdateState()
+void Player_Boss_Move::UpdateState()
 {
 	if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_W))
 	{
@@ -39,14 +39,8 @@ void PlayerBossStageMove::UpdateState()
 	{
 		m_transform->position.x -= dTime *20.f;
 	}
-
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
-	{
-		Bullet_Manager::GetInstance()->Fire_Player(m_transform->position, m_transform->rotation, 150.f);
-	}
-
 }
 
-void PlayerBossStageMove::ExitState()
+void Player_Boss_Move::ExitState()
 {
 }

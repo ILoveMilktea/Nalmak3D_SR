@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\Enemy_Boss.h"
+#include "EnemyManager.h"
 
 Boss::Boss(Desc * _desc)
 {
@@ -12,6 +13,7 @@ Boss::~Boss()
 
 void Boss::Initialize()
 {
+	
 }
 
 void Boss::Update()
@@ -19,6 +21,11 @@ void Boss::Update()
 
 	DEBUG_LOG(L"Boss CurHP", m_tBossStatus.m_iCurHp);
 	DEBUG_LOG(L"Boss Pos", m_transform->position);
+}
+
+void Boss::Release()
+{
+	EnemyManager::GetInstance()->Boss_Release();
 }
 
 void Boss::OnTriggerEnter(Collisions & _collision)

@@ -66,25 +66,22 @@ void ClusterBulletMove::Release()
 {
 	if (m_start)
 	{
-		VIBufferRenderer::Desc render;
-		render.meshName = L"box";
-		render.mtrlName = L"default";
+		MeshRenderer::Desc render;
+		render.meshName = L"kfir_weapon1";
+		render.mtrlName = L"kfir";
 
 		float angleInterval = PI2 / m_bulletCount;
 		float length = 15.f;
-		Matrix temproyWorldMatrix = m_target->GetTransform()->GetWorldMatrix();
-		Vector3 offSetX = Vector3(temproyWorldMatrix._11, temproyWorldMatrix._12, temproyWorldMatrix._13) * length;
-		Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23) * length;
-		Vector3 offSetZ = Vector3(temproyWorldMatrix._31, temproyWorldMatrix._32, temproyWorldMatrix._33) * length;
-
 
 		Player_NearGuideBullet::Desc guidebulletInfo;
 		SphereCollider::Desc sphereColInfo;
 		sphereColInfo.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
 		guidebulletInfo.speed = m_speed;
+
+
 		for (int i = 0; i < m_bulletCount; ++i)
 		{
-			auto child = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER)->AddComponent<VIBufferRenderer>(&render);
+			auto child = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER)->AddComponent<MeshRenderer>(&render);
 			child->AddComponent<SphereCollider>(&sphereColInfo);
 
 			float x = m_transform->position.x + cosf(D3DXToRadian(i * angleInterval)) * length;
@@ -94,7 +91,6 @@ void ClusterBulletMove::Release()
 
 			child->AddComponent<Player_NearGuideBullet>(&guidebulletInfo);
 			child->SetPosition(m_transform->position);
-			child->SetScale(1.f, 1.f, 3.f);
 			child->GetTransform()->rotation = m_transform->rotation;
 		}
 		m_start = false;

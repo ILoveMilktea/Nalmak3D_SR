@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Include\GarageScene.h"
-#include "RevolvesToTarget.h"
+
 #include "core.h"
 #include "SceneChanger.h"
 #include "PlayerInfoManager.h"
@@ -53,6 +53,10 @@ void GarageScene::Initialize()
 
 
 
+	DirectionalLight::Desc light;
+	light.diffuseIntensity = 0.6f;
+	light.ambientIntensity = 0.02f;
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 
 
 	GameObject* player;
@@ -65,36 +69,7 @@ void GarageScene::Initialize()
 	}
 
 	
-	/*{
-		RevolvesToTarget::Desc revolvesDesc;
-		revolvesDesc.targetParent = player;
-		revolvesDesc.roationSpeed = 1.f;
-		auto revolvesTarget = INSTANTIATE()->AddComponent<RevolvesToTarget>(&revolvesDesc);
-	}*/
 	
-	// test button ----> UILab
-	{
-		//auto mainEquipWepon = UIFactory::CreateButton(
-		//	EventHandler([]() {
-		//	ItemDesc * ItemDescInfo = PlayerKitSelector::GetInstance()->FindSlotItme(L"Weapon", ITEMTYPE::ITEMTYPE_CANNON);
-		//	PlayerInfoManager::GetInstance()->EquipWepon(PARTS_NUM::FIRST_PARTS , ItemDescInfo);
-	 // �ֹ���
-		
-
-		//}));
-
-		//mainEquipWepon->SetPosition(1600.f, 500.f, 0.f);
-
-
-
-		//auto offTheFieldButton = UIFactory::CreateButton(
-		//	EventHandler([]() {
-		//	Core::GetInstance()->LoadScene(L"phantom");
-		//}));
-
-		//offTheFieldButton->SetPosition(1600.f, 800.f, 0.f);
-	}
-
 	player->AddComponent<UIInteractor>();
 	UIWindowFactory::GarageMainWindow(player);
 }
