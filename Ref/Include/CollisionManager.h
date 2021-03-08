@@ -26,6 +26,7 @@ private:
 	vector<Collider*>* m_colliderList;
 private:
 	void SphereToSphere(Collider* _colA, Collider* _colB);
+	void LineToSphere(Collider* _colLine, Collider* _colSphere);
 private:
 	vector<UINT> m_collisionLayer;
 	int m_collisionLayerCount;
