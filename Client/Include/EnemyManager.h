@@ -41,6 +41,10 @@ public: /* Settttt */
 public: /* Funcs */
 	void Destroy_AllEnemy();
 
+	void Enemy_Spawn_Debug(Vector3 _scale = Vector3(0.1f, 0.1f, 0.1f),
+		ENEMY_STATE _initState = ENEMY_STATE::DEBUGGING,
+		ENEMY_STATUS _status = ENEMY_STATUS());
+
 	void Enemy_Spawn(Vector3 _pos = Vector3(0.f,0.f,0.f),
 		Vector3 _scale = Vector3(0.1f, 0.1f, 0.1f),
 		//Quaternion _rot = Quaternion(0.f,0.f,0.f,0.f),
@@ -80,7 +84,7 @@ public: /* stage2 - phase3 (B0ss)*/
 
 
 private:
-	StateControl*	m_pStateControl = nullptr;
+	//StateControl*	m_pStateControl = nullptr;
 
 	GameObject*		m_pBoss = nullptr;
 	int				m_iEnemyCount = 0;

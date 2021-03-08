@@ -25,6 +25,7 @@
 
 #include "MidBoss_Headers.h"
 #include "MidBoss_Define.h"
+#include "Enemy_Debugging.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -79,14 +80,17 @@ void EnemyManager::Update()
 
 		Enemy_Spawn(Vector3(50.f, 50.f, 50.f), Vector3(0.2f, 0.2f, 0.2f), IDLE, temp);
 	}
-
+	
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_SHIFT)
+		&& InputManager::GetInstance()->GetKeyDown(KEY_STATE_LEFT_MOUSE))
+	{
+		Enemy_Spawn_Debug();
+	}
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
 	{
 		Destroy_AllEnemy();
 	}
-
-
 
 	DEBUG_LOG(L"Remianed Enemy Count", m_iEnemyCount);
 }
@@ -169,6 +173,20 @@ void EnemyManager::Destroy_AllEnemy()
 	m_iEnemyCount = 0;
 }
 
+void EnemyManager::Enemy_Spawn_Debug(Vector3 _scale, 
+	ENEMY_STATE _initState, ENEMY_STATUS _status)
+{
+	Camera* MainCamera = Core::GetInstance()->GetMainCamera();
+
+	Vector3 vMouseDir = MainCamera->GetCamToMouseWorldDirection();
+
+	float fDistance = 100.f;
+	Vector3 vResult = MainCamera->GetTransform()->position + vMouseDir * 100.f;
+
+	Enemy_Spawn(vResult, Vector3(0.1f, 0.1f, 0.1f), _initState, _status);
+}
+
+
 void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	ENEMY_STATE _initState, ENEMY_STATUS _status,
 	BULLET_STATUS _gun, BULLET_STATUS _missile, BULLET_STATUS _homing)
@@ -178,7 +196,7 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	Enemy_obj->GetTransform()->scale = _scale;
 
 	Enemy_obj->AddComponent<StateControl>();
-	m_pStateControl = Enemy_obj->GetComponent<StateControl>();
+	StateControl* m_pStateControl = Enemy_obj->GetComponent<StateControl>();
 	m_pStateControl->AddState<Enemy_Idle>(L"Idle");
 	m_pStateControl->AddState<Enemy_Chase>(L"Chase");
 	m_pStateControl->AddState<Enemy_Hold>(L"Hold");
@@ -186,6 +204,9 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
 	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
 	m_pStateControl->AddState<Enemy_Death>(L"Death");
+
+	m_pStateControl->AddState<Enemy_Debugging>(L"Debugging");
+
 
 	switch (_initState)
 	{
@@ -221,7 +242,14 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	{
 		m_pStateControl->InitState(L"Death");
 	}
-		break;
+	break;
+
+	case DEBUGGING:
+	{
+		m_pStateControl->InitState(L"Debugging");
+	}
+	break;
+
 	case ENEMY_STATE_MAX:
 		break;
 	default:
@@ -253,7 +281,7 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
 
 	Enemy_obj->AddComponent<StateControl>();
-	m_pStateControl = Enemy_obj->GetComponent<StateControl>();
+	StateControl* m_pStateControl = Enemy_obj->GetComponent<StateControl>();
 	m_pStateControl->AddState<Slide_Evasion>(L"Slide");
 	m_pStateControl->AddState<Diagonal_Evasion>(L"Diagonal");
 	m_pStateControl->AddState<CrossFire_Evasion>(L"CrossFire");
@@ -323,7 +351,7 @@ void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
 	boss->SetScale(20.f, 20.f, 20.f);
 
 	boss->AddComponent<StateControl>();
-	auto stateControl = boss->GetComponent<StateControl>();
+	StateControl* stateControl = boss->GetComponent<StateControl>();
 
 	// add staaaaaaaaate
 	{
