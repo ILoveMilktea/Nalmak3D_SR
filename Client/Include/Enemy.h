@@ -30,8 +30,6 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void OnTriggerEnter(Collisions& _collision)override;
-	virtual void OnTriggerStay(Collisions& _collision)override;
-	virtual void OnTriggerExit(Collisions& _collision)override;
 
 public:
 	void Target_Setting(bool _onoff);
@@ -41,11 +39,11 @@ public:
 	bool Fov_Check();
 
 	void Death_Check();
-	void Emp();
+	
 
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
-	
+	void Emp();
 
 public: /* Get */
 	const ENEMY_STATUS& Get_Status() const; 
@@ -83,7 +81,6 @@ public: /* Set */
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);
 	void Go_Straight(); 
-	//void Lean();
 	void Horizontally(); 
 	void Turn(); //Like Screw
 	

@@ -35,7 +35,8 @@ Camera::Camera(Desc * _desc)
 	{
 			
 	}
-	UpdateProjMatrix();
+
+	
 
 	RenderManager::GetInstance()->AddCamera(this);
 	
@@ -44,14 +45,14 @@ Camera::Camera(Desc * _desc)
 
 void Camera::Initialize()
 {
-
+	//UpdateProjMatrix();
 	
 	m_handle = DeviceManager::GetInstance()->GetHWND();
 }
 
 void Camera::Update()
 {
-	
+	//UpdateProjMatrix();
 }
 
 void Camera::LateUpdate()

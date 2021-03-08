@@ -58,8 +58,6 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 		{
 			//데미지 입는건 거 Player bullet에서 해줌.
 
-			
-
 
 			//if (m_pSmokeParticle == nullptr)
 			//{
@@ -75,20 +73,10 @@ void Enemy::OnTriggerEnter(Collisions & _collision)
 			//		m_pSmokeParticle->AddComponent<ParticleRenderer>(&smoke_desc);
 			//	}
 			//}
-
-			
-
 		}
 	}
 }
 
-void Enemy::OnTriggerStay(Collisions & _collision)
-{
-}
-
-void Enemy::OnTriggerExit(Collisions & _collision)
-{
-}
 
 
 void Enemy::Target_Setting(bool _onoff)

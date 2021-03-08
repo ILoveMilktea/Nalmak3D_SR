@@ -497,7 +497,6 @@ void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 	if (_front)
 	{
 
-
 		Vector3 vResult;
 
 		Vector2 vScreenSpace = { WINCX/2.f, WINCY/2.f };
@@ -536,7 +535,6 @@ void EnemyManager::Player_FovSpawnTest(bool _front, float _distance)
 		Vector2 vScreenSpace = { WINCX / 2.f, WINCY / 2.f };
 		Vector3 vProjSpace;
 
-
 		vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
 		vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
 		vProjSpace.z = 1.f;
@@ -570,6 +568,7 @@ Vector3 EnemyManager::Pos_ScreenToWorld(float _x, float _y, float _distance)
 
 	vProjSpace.x = vScreenSpace.x / (WINCX * 0.5f) - 1.f;
 	vProjSpace.y = 1.f - (vScreenSpace.y / (WINCY * 0.5f));
+	vProjSpace.z = 1.f;
 
 	Matrix matProj_Inverse;
 	D3DXMatrixInverse(&matProj_Inverse, 0, &Core::GetInstance()->GetMainCamera()->GetProjMatrix());

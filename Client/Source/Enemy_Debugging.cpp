@@ -19,7 +19,7 @@ void Enemy_Debugging::Initialize()
 void Enemy_Debugging::EnterState()
 {
 	m_pEnemy = m_gameObject->GetComponent<Enemy>();
-	assert(L"Can't find Enemy compoent", && m_pEnemy);
+	assert(L"Can't find Enemy compoent"&& m_pEnemy);
 
 	m_pEnemy->Target_Setting(true);
 	m_pEnemy->Target_Update();
