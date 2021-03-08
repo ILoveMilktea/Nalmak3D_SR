@@ -106,10 +106,10 @@ public:
 						member->GetComponent<UI_ShopMenu_Animator>()->OnAnim();
 					}
 
-					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 					for (auto member : group)
 					{
-						member->SetActive(true);
+						member->GetComponent<CanvasRenderer>()->SetActive(true);
 					}
 				});
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"WEAPON SHOP", CANVAS_GROUP_MAINWND_MAIN);
@@ -476,10 +476,10 @@ public:
 					member->GetComponent<MenuAnimator>()->InAnim();
 				}
 
-				group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+				group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 				for (auto member : group)
 				{
-					member->SetActive(false);
+					member->GetComponent<CanvasRenderer>()->SetActive(false);
 				}
 
 				auto model = UIManager::GetInstance()->GetShopItemModel();
@@ -578,7 +578,8 @@ public:
 					player->GetTransform()->SetRotation(0, 0, 0);
 
 				});
-				auto menu = UIFactory::Prefab_ShopMenuToggle(onEvent, offEvent, L"boss", CANVAS_GROUP_MAINWND_SHOPMENU);
+				wstring img = L"s" + to_wstring(i + 1);
+				auto menu = UIFactory::Prefab_ShopMenuToggle(onEvent, offEvent, img, CANVAS_GROUP_MAINWND_SHOPMENU);
 
 				menu->AddComponent<UI_ShopMenu_Animator>();
 				menu->GetComponent<UI_ShopMenu_Animator>()->SetAnimator(inoutAmount, inoutSpeed, delayInterval * i, Vector3(1680.f, 270.f + slotInterval * i, 0.f));
@@ -590,17 +591,18 @@ public:
 		// bottom menu
 		{
 			// single dpm text
-			auto singleDpm_text = UIFactory::Prefab_ItemStat_Text(L"SINGLE DPM", CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+			auto singleDpm_text = UIFactory::Prefab_ItemStat_Text(L"SINGLE DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 			// single dpm slider
-			auto singleDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+			auto singleDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 			singleDpm_text->SetParents(singleDpm_slider);
 			singleDpm_text->SetPosition(-140.f, 0.f);
 			singleDpm_slider->SetPosition(400.f, 800.f);
 
+
 			// multi dpm text
-			auto multiDpm_text = UIFactory::Prefab_ItemStat_Text(L"MULTI DPM", CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+			auto multiDpm_text = UIFactory::Prefab_ItemStat_Text(L"MULTI DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 			// multi targe dpm slider
-			auto multiDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+			auto multiDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 			multiDpm_text->SetParents(multiDpm_slider);
 			multiDpm_text->SetPosition(-140.f, 0.f);
 			multiDpm_slider->SetPosition(400.f, 830.f);
@@ -611,8 +613,13 @@ public:
 			EventHandler buyFunc = EventHandler([=]() {
 				ItemManager::GetInstance()->BuyItem(L"Weapon", UIManager::GetInstance()->GetCurrentSelectItem());
 			});
-			auto buyButton = UIFactory::Prefab_ItemBuy_Button(buyFunc, L"BUY", CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+			auto buyButton = UIFactory::Prefab_ItemBuy_Button(buyFunc, L"BUY", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 
+			singleDpm_text->GetComponent<CanvasRenderer>()->SetActive(false);
+			singleDpm_slider->GetComponent<CanvasRenderer>()->SetActive(false);
+			multiDpm_text->GetComponent<CanvasRenderer>()->SetActive(false);
+			multiDpm_slider->GetComponent<CanvasRenderer>()->SetActive(false);
+			buyButton->GetComponent<CanvasRenderer>()->SetActive(false);
 		}
 	}
 
