@@ -115,7 +115,9 @@ void MainGame::SystemSetting()
 #pragma endregion
 
 
-	m_engine->SetStartScene(L"stageSelect");
+#pragma  region GeunHeeTest
+	m_engine->SetStartScene(L"phantom");
+#pragma region
 
 }
 

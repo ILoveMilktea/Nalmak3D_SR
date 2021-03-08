@@ -276,12 +276,16 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	++m_iEnemyCount;
 }
 
-void EnemyManager::Enemy_Spawn_Test(ENEMY_STATE _initState)
+void EnemyManager::Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos)
 {
-	
-	Vector3 vRand = Nalmak_Math::Rand(Vector3(-100.f, -100.f, -100.f), Vector3(100.f, 100.f, 100.f));
+	if (pos == Vector3(0.f, 0.f, 0.f))
+	{
+		Vector3 vRand = Nalmak_Math::Rand(Vector3(-100.f, -100.f, -100.f), Vector3(100.f, 100.f, 100.f));
 
-	Enemy_Spawn(vRand, Vector3(0.1f, 0.1f, 0.1f), _initState);
+		Enemy_Spawn(vRand, Vector3(0.1f, 0.1f, 0.1f), _initState);
+	}
+	else { Enemy_Spawn(pos, Vector3(0.1f, 0.1f, 0.1f), _initState); }
+
 }
 
 void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
