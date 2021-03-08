@@ -3,6 +3,7 @@
 
 #include "BulletDirMove.h"
 #include "BulletEffect_StretchBillboard.h"
+
 SmallCannon::SmallCannon(const ITEMINFO & copy) :PlayerItem(copy)
 {
 }
@@ -26,7 +27,7 @@ void SmallCannon::ItemShot()
 
 	BulletEffect_StretchBillboard::Desc bulletinfo;
 	bulletinfo.lifeTime = 5.f;
-	bulletinfo.speed = 150.f;
+	bulletinfo.speed = 200.f;
 	bulletinfo.stretchRatio = 10.f;
 	m_bullet->AddComponent<BulletEffect_StretchBillboard>(&bulletinfo);
 	m_bullet = nullptr;

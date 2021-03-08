@@ -142,6 +142,11 @@ void PlayerInfoManager::SetPlayer(GameObject * _player)
 	m_player = _player;
 }
 
+void PlayerInfoManager::SetKillCheck(const bool & _check)
+{
+	m_killCheck = _check;
+}
+
 void PlayerInfoManager::MinGold(int _value)
 {
 	if (m_gold <= 0)
@@ -180,13 +185,14 @@ void PlayerInfoManager::SetWeaponSpawnPos(PARTS_NUM eID, bool _gargeCheck)
 
 
 		meshInfo.meshName = findItem->GetItmeInfo().modelName;
-		meshInfo.mtrlName = L"default";
-		findItem->SetCreatePos(Vector3(3.f, -1.f, 0.f));
-
-
+		meshInfo.mtrlName = L"su34";
+		findItem->SetCreatePos(Vector3(0.5f, -0.1f, 0.f));
+		findItem->SetMtrlName(meshInfo.mtrlName);
 		
 			m_pSideWeapon[0] = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo);
 			m_pSideWeapon[1] = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo);
+			m_pSideWeapon[0]->SetScale(0.2f, 0.2f, 0.2f);
+			m_pSideWeapon[1]->SetScale(0.2f, 0.2f, 0.2f);
 
 			if (_gargeCheck)
 			{
@@ -215,10 +221,15 @@ void PlayerInfoManager::SetWeaponSpawnPos(PARTS_NUM eID, bool _gargeCheck)
 		}
 
 		meshInfo.meshName = findItem->GetItmeInfo().modelName;
-		meshInfo.mtrlName = L"default";
-		findItem->SetCreatePos(Vector3(0.f, -1.f, 0.f));
+		meshInfo.mtrlName = L"kfir";
+		findItem->SetCreatePos(Vector3(0.f, -0.1f, 0.f));
+		findItem->SetMtrlName(meshInfo.mtrlName);
+
 
 		m_pSingleWeapon = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo);
+		m_pSingleWeapon->SetScale(0.2f, 0.2f, 0.2f);
+
+
 		if (_gargeCheck)
 			m_pSingleWeapon->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
 		else
@@ -397,7 +408,6 @@ GameObject * PlayerInfoManager::GetPlayer()
 
 bool PlayerInfoManager::EquipItem(PARTS_NUM eID, const wstring& _itemtype, const wstring & _equipItemName)
 {
-	//L"Weapon" == �ӽ�
 	wstring findItemType = L"";
 	wstring findItemName = L"";
 
