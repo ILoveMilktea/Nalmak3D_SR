@@ -42,13 +42,13 @@ void Enemy::Update()
 
 
 #pragma region DebugLog
-	DEBUG_LOG(L"CurPos", m_transform->position);
-	DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
-	//DEBUG_LOG(L"타겟 까지의 거리",		m_fDist_Target);
+	DEBUG_LOG(L"Enemy CurPos", m_transform->position);
+	//DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
+	DEBUG_LOG(L"타겟 까지의 거리",		m_fDist_Target);
 	//DEBUG_LOG(L"forward벡터와 사이벡터의 내적",		m_fInner);
 	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
 	DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
-	DEBUG_LOG(L"Max Spd", m_tStatus.m_fMaxSpd);
+	DEBUG_LOG(L"Enemy Max Spd", m_tStatus.m_fMaxSpd);
 	//DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
 	//DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
 	DEBUG_LOG(L"Current Pattern", m_gameObject->GetComponent<StateControl>()->GetCurStateString());
@@ -137,7 +137,7 @@ void Enemy::Target_Update()
 void Enemy::Go_ToPos(Vector3 _pos)
 {
 	m_transform->LookAt(_pos, m_tStatus.m_fLookSpd, &m_QuartRot);
-	Go_Straight();
+	//Go_Straight();
 }
 
 void Enemy::Go_Straight()
@@ -208,6 +208,11 @@ const int & Enemy::Get_FullHp() const
 const int & Enemy::Get_CurHp() const
 {
 	return m_tStatus.m_iCurHp;
+}
+
+const float & Enemy::Get_CurSpd() const
+{
+	return m_tStatus.m_fCurSpd;
 }
 
 const BULLET_STATUS & Enemy::Get_GunStatus() const
@@ -296,9 +301,19 @@ void Enemy::Set_OriginForward()
 	m_vOriginForward = m_transform->GetForward();
 }
 
+void Enemy::Set_CurSpd(float _spd)
+{
+	m_tStatus.m_fCurSpd = 0.f;
+}
+
 void Enemy::Set_Accel(bool _onoff)
 {
 	m_bAccel = _onoff;
+}
+
+void Enemy::Set_LookSpd(float _lookSpd)
+{
+	m_tStatus.m_fLookSpd = _lookSpd;
 }
 
 void Enemy::Horizontally()
@@ -342,6 +357,8 @@ bool Enemy::Dive()
 	Vector3 vForward = m_transform->GetForward();
 	//Vector3 WorldY = { 0.f,1.f,0.f };
 
+	Go_Straight();
+
 	m_fDiveInner = D3DXVec3Dot(&vForward, &m_vOriginForward);
 
 	if (m_fDiveInner <= 0.1f && m_fDiveInner >= -0.1f) //범위 0에 가까우면
@@ -362,6 +379,8 @@ bool Enemy::Soar()
 
 	Vector3 vForward = m_transform->GetForward();
 	//Vector3 WorldY = { 0.f,1.f,0.f };
+
+	Go_Straight();
 
 	m_fSoarInner = D3DXVec3Dot(&vForward, &m_vOriginForward);
 
@@ -466,7 +485,7 @@ void Enemy::Accelerate()
 	if (/*m_fDist_Target >= 100
 		&& */m_tStatus.m_fCurSpd <= m_tStatus.m_fMaxSpd)
 	{
-		m_tStatus.m_fCurSpd += dTime * 5.f;
+		m_tStatus.m_fCurSpd += dTime * 10.f;
 	}
 }
 
@@ -477,5 +496,10 @@ void Enemy::Decelerate()
 		&& */m_tStatus.m_fCurSpd >= 0.f)
 	{
 		m_tStatus.m_fCurSpd -= dTime * 5.0f;
+	}
+
+	if(m_tStatus.m_fCurSpd < 0.f)
+	{
+		m_tStatus.m_fCurSpd = 0.f;
 	}
 }

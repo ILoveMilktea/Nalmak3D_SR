@@ -25,48 +25,55 @@ void Enemy_Hold::EnterState()
 	m_pEnemy->Target_Update();
 	m_pEnemy->Look_Target();
 
+	m_pEnemy->Set_LookSpd(3.f);
 }
 
 void Enemy_Hold::UpdateState()
 {
+
+	m_pEnemy->Target_Update();
+
+
 	if (!m_bAvoid)
 	{
-		//if (m_pEnemy->Get_Distance() >= 50.f || m_pEnemy->Get_GunCurRound() > 0)
-		//{
-			m_pEnemy->Target_Update();
-			m_pEnemy->Look_Target();
-			m_pEnemy->Fire_Gun();
-			m_bAvoid = false;
-		//}
+		//m_pEnemy->Target_Update();
+		m_pEnemy->Look_Target();
+		m_pEnemy->Fire_Gun();
+		m_bAvoid = false;
+
 		if(m_pEnemy->Get_Distance() < 50.f || m_pEnemy->Get_GunCurRound() <= 0)
 		{
 			m_pEnemy->Create_RandPos();
+			m_pEnemy->Set_Accel(true);
 			m_bAvoid = true;
 		}
 	}
 
 	if (m_bAvoid)
 	{//그냥 일정 시간동안 움직이기
-	 //m_bHoldMove = true;
-
-		if (m_fAvoidDelta == 0.f)
-		{ //이거보다 플레이어 기준에서 얼마정도 떨어진 곳?
-		  //원래 랜덤위치 있었음.
-		}
 
 		m_fAvoidDelta += dTime;
 		
 		m_pEnemy->Go_ToPos(m_pEnemy->Get_RandPos());
-
-		m_pEnemy->Accelerate();
 		m_pEnemy->Go_Straight();
 
 
-		if (m_fAvoidDelta >= 3.f)
+		if (m_fAvoidDelta >= 5.f)
+		{
+			m_pEnemy->Set_Accel(false);
+		}
+
+		if (m_pEnemy->Get_CurSpd() <= 3.f)
 		{
 			m_fAvoidDelta = 0.f;
 			m_bAvoid = false;
 		}
+
+		//if (m_fAvoidDelta >= 4.f)
+		//{
+		//	m_fAvoidDelta = 0.f;
+		//	m_bAvoid = false;
+		//}
 	}
 }
 

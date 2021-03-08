@@ -71,4 +71,6 @@ void StageScene::Initialize()
 	StageManager::GetInstance()->Get_StateControl()->AddState<DogFight_Stage1>(L"Tutorial");
 	StageManager::GetInstance()->Get_StateControl()->InitState(L"Tutorial");
 	
+
+
 }

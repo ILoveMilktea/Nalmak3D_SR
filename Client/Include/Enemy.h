@@ -49,6 +49,7 @@ public: /* Get */
 	const ENEMY_STATUS& Get_Status() const; 
 	const int&		Get_FullHp() const;
 	const int&		Get_CurHp() const;
+	const float&	Get_CurSpd() const;
 	
 	const BULLET_STATUS&	Get_GunStatus() const;
 	const BULLET_STATUS&	Get_MissileStatus() const;
@@ -76,7 +77,9 @@ public: /* Get */
 public: /* Set */
 	void Set_Damage(const int& _dmg);
 	void Set_OriginForward();
+	void Set_CurSpd(float _spd);
 	void Set_Accel(bool _onoff);
+	void Set_LookSpd(float _lookSpd);
 
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);
