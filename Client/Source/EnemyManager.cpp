@@ -266,16 +266,18 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
 	m_pStateControl->AddState<Enemy_Death>(L"Death");
 
+
+	// 1발씩 cannon 발사,
 	switch (_initState)
 	{
 	case SLIDE:
-	{m_pStateControl->InitState(L"Slide"); }
+	{m_pStateControl->InitState(L"Slide"); } 
 		break;
 	case DIAGONAL:
 	{m_pStateControl->InitState(L"Diagonal"); }
 		break;
 	case CROSSFIRE:
-	{m_pStateControl->InitState(L"CrossFire"); }
+	{m_pStateControl->InitState(L"CrossFire"); } 
 		break;
 	case LOOK:
 	{m_pStateControl->InitState(L"Look"); }
@@ -284,10 +286,10 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 	{m_pStateControl->InitState(L"Circle"); }
 		break;
 	case PRYMIDE:
-	{m_pStateControl->InitState(L"Prymide"); }
+	{m_pStateControl->InitState(L"Prymide"); } 
 		break;
 	case AIRFIRE:
-	{m_pStateControl->InitState(L"AirFire"); }
+	{m_pStateControl->InitState(L"AirFire"); } 
 		break;
 	case EVASION_STATE_MAX:
 		break;

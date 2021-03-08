@@ -76,7 +76,7 @@ void EvasionState::UpdateState()
 
 
 
-
+		// 이거죠져야댐 다 지울겁니다
 		if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
 		{
 			if (!m_bNext)
