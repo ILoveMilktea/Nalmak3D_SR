@@ -1,6 +1,7 @@
 #include "..\Include\CollisionManager.h"
 #include "Collider.h"
 #include "SphereCollider.h"
+#include "LineCollider.h"
 #include "Transform.h"
 
 IMPLEMENT_SINGLETON(CollisionManager)
@@ -122,6 +123,47 @@ void CollisionManager::SphereToSphere(Collider * _colA, Collider * _colB)
 		colB->GetGameObject()->CollisionNotify(Collision(colA->m_gameObject, hitPoint));
 	}
 	
+}
+
+void CollisionManager::LineToSphere(Collider * _colLine, Collider * _colSphere)
+{
+	// make ray
+	LineCollider* colLine = (LineCollider*)(_colLine);
+	SphereCollider* colSphere = (SphereCollider*)(_colSphere);
+	
+	Vector3 lineStartPos = colLine->GetStartPoint();
+	Vector3 lineEndPos = colLine->GetEndPoint();
+
+	Vector3 sphereCenter = colSphere->GetTransform()->GetWorldPosition() + colSphere->GetCenter();
+
+
+	float rayLength = sqrt(pow(lineEndPos.x - lineStartPos.x, 2) +
+		pow(lineEndPos.y - lineStartPos.y, 2) +
+		pow(lineEndPos.z - lineStartPos.z, 2));
+
+	float rayDx = (lineEndPos.x - lineStartPos.x) / rayLength;
+	float rayDy = (lineEndPos.y - lineStartPos.y) / rayLength;
+	float rayDz = (lineEndPos.z - lineStartPos.z) / rayLength;
+
+	float t = rayDx * (sphereCenter.x - lineStartPos.x) +
+		rayDy * (sphereCenter.y - lineStartPos.y) +
+		rayDz * (sphereCenter.z - lineStartPos.z);
+
+	float Ex = t * rayDx + lineStartPos.x;
+	float Ey = t * rayDy + lineStartPos.y;
+	float Ez = t * rayDz + lineStartPos.z;
+
+
+	float LineToSphereMinDistance = sqrt(pow(Ex - sphereCenter.x, 2) + pow(Ey - sphereCenter.y, 2) + pow(Ez - sphereCenter.z, 2));
+
+	if (LineToSphereMinDistance <= colSphere->GetRadius() + colLine->GetRadius())
+	{
+		Vector3 hitPoint;
+
+		_colLine->GetGameObject()->CollisionNotify(Collision(_colSphere->m_gameObject, hitPoint));
+		_colSphere->GetGameObject()->CollisionNotify(Collision(_colLine->m_gameObject, hitPoint));
+	}
+
 }
 
 void CollisionManager::ActiveCollsionLayer(int _layer1, int _layer2)

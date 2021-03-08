@@ -519,6 +519,9 @@
     <ClCompile Include="..\Source\ScreenQuad.cpp">
       <Filter>06.Resource\01.VIBuffer\02.Quad</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\LineCollider.cpp">
+      <Filter>05.Component\04.Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -827,6 +830,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\ScreenQuad.h">
       <Filter>06.Resource\01.VIBuffer\02.Quad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\LineCollider.h">
+      <Filter>05.Component\04.Collider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

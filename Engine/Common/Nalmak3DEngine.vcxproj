@@ -53,6 +53,7 @@
     <ClCompile Include="..\Source\ICanvasGroup.cpp" />
     <ClCompile Include="..\Source\ColorAnimation.cpp" />
     <ClCompile Include="..\Source\ICycle.cpp" />
+    <ClCompile Include="..\Source\LineCollider.cpp" />
     <ClCompile Include="..\Source\MoveAnimation.cpp" />
     <ClCompile Include="..\Source\InputManager.cpp" />
     <ClCompile Include="..\Source\IRenderer.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="..\Include\ICanvasGroup.h" />
     <ClInclude Include="..\Include\ColorAnimation.h" />
     <ClInclude Include="..\Include\ICycle.h" />
+    <ClInclude Include="..\Include\LineCollider.h" />
     <ClInclude Include="..\Include\MoveAnimation.h" />
     <ClInclude Include="..\Include\InputManager.h" />
     <ClInclude Include="..\Include\IRenderer.h" />

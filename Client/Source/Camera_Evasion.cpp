@@ -22,7 +22,7 @@ void Camera_Evasion::EnterState()
 	m_gameObject->GetComponent<FieldCameraInfo>()->SetActive(false);
 	//if u want setting MainCamera's real transform, must be Set false 'FieldCameraInfo' component
 
-	m_transform->SetPosition(Vector3(0.f, 50.f, 0.f));
+	m_transform->SetPosition(Vector3(0.f, 100.f, 0.f));
 	m_transform->SetRotation(90.f, 0.f, 0.f);
 }
 
