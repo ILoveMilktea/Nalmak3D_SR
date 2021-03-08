@@ -28,7 +28,6 @@ void Player_NearGuideBullet::Initialize()
 	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
 	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 	m_target = m_enemyDetector->GetLockOnTarget();
-	m_stateControl = m_target->GetComponent<StateControl>();
 	m_finalTargetPos = m_target->GetTransform()->position;
 }
 
@@ -44,7 +43,6 @@ void Player_NearGuideBullet::Update()
 	if (!m_bFinish && Nalmak_Math::Distance(m_firstTarget, m_transform->position) > 2.f)
 	{
 		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_firstTarget, dTime * 5.f);
-		//m_transform->position += m_firstDir * (m_speed * 0.5f) * dTime;
 		m_transform->LookAt(m_firstDir + m_transform->position, 1.f);
 
 	}
@@ -68,7 +66,7 @@ void Player_NearGuideBullet::Update()
 	else
 	{
 		m_transform->position += m_transform->GetForward() * 45 * dTime;
-		m_transform->SetRotation(0, 0, 0);
+		//m_transform->SetRotation(0, 0, 0);
 	}
 
 }

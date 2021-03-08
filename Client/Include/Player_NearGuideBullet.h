@@ -36,7 +36,7 @@ private:
 	GameObject* m_player;
 	GameObject* m_target;
 	GameObject* m_finder = nullptr;
-	EnemyDetector* m_enemyDetector;
+	class EnemyDetector* m_enemyDetector;
 
 	StateControl * m_stateControl;
 	float m_speed;
