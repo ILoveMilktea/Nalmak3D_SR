@@ -60,8 +60,9 @@ public:
 	const Matrix GetViewMatrix() const;
 	const Matrix& GetProjMatrix() { return m_projMatrix; }
 	const Matrix GetViewportMatrix() const;
+	
 	Vector2 WorldToScreenPos(const Vector3& _pos);
-
+	Vector3 ScreenPosToWorld(const Vector2& _screenPos, float Distance_FromCam);
 
 	
 	bool CompareLayer(_RENDER_LAYER _layer) { return m_layer.Check(_layer); }

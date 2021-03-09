@@ -84,7 +84,7 @@ void TrailRenderer::LateUpdate()
 {
 	if (m_currentTrailCount < 3)
 		return;
-	DEBUG_LOG(L"trailCount ", m_currentTrailCount);
+	//DEBUG_LOG(L"trailCount ", m_currentTrailCount);
 
 	m_instanceBuffer->UpdateInstanceBuffer(m_trailCatmullromVertexData, m_currentTrailCount * m_catmullrom_divideCount);
 }

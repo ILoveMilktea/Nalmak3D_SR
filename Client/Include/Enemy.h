@@ -20,6 +20,8 @@ public:
 		BULLET_STATUS		tGun;
 		BULLET_STATUS		tMissile;
 		BULLET_STATUS		tHoming;
+
+		GameObject*			pArrow = nullptr;
 	};
 
 public:
@@ -40,7 +42,8 @@ public:
 
 	void Death_Check();
 	
-
+	bool Screen_Check();
+	void Indicator_OnOff();
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
 	void Emp();
@@ -152,7 +155,11 @@ private:
 	float m_fQuartRotZ = 0.f;
 	Quaternion m_QuartRot = { 0.f, 0.f, 0.f, 0.f }; // for
 	
+	Camera*		m_pMainCamera = nullptr;
 
 	GameObject* m_pSmokeParticle = nullptr;
+	
+	GameObject* m_pArrow_Indicator = nullptr;
+
 };
 

@@ -128,7 +128,7 @@ void PlayerMove::UpdateState()
 	m_transform->position += m_transform->GetForward() * m_playerInfo->GetSpeed() * dTime;
 
 
-
+	DEBUG_LOG(L"Player Pos", m_transform->position);
 }
 
 void PlayerMove::ExitState()

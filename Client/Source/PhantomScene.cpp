@@ -57,7 +57,7 @@ void PhantomScene::Initialize()
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
 	DirectionalLight::Desc light;
-	light.diffuseIntensity = 0.6f;
+	light.diffuseIntensity = 0.5f;
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 
@@ -66,6 +66,9 @@ void PhantomScene::Initialize()
 	ground.meshName = L"ground";
 	auto groundObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
 	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
+
+	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
+	INSTANTIATE()->AddComponent<Grid>();
 
 	INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
@@ -78,7 +81,8 @@ void PhantomScene::Initialize()
 		follow_desc.followRotationSpeed = 15.f;
 		follow_desc.toTarget = PlayerInfoManager::GetInstance()->GetPlayer();
 
-
+		FreeMove::Desc freeMove_desc;
+		//m_pMainCamera->AddComponent<FreeMove>(&freeMove_desc);
 		m_pMainCamera->AddComponent<FieldCameraInfo>();
 		m_pMainCamera->AddComponent<SmoothFollow>(&follow_desc);
 		m_pMainCamera->AddComponent<StateControl>();
@@ -89,17 +93,16 @@ void PhantomScene::Initialize()
 		m_pMainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
 	}
 
-	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
-	INSTANTIATE()->AddComponent<Grid>();
+
 
 	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
 
-	EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE,Vector3(50.f,50.f,100.f));
-	EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(0.f, 0.f, 200.f));
+	EnemyManager::GetInstance()->Enemy_Spawn_Test(IDLE,Vector3(50.f,50.f,100.f));
+	//EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(0.f, 0.f, 0.f));
 
-	EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(150.f, 50.f, 200.f));
-	EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(50.f, 150.f, 200.f));
-	EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(50.f, 0.f, 200.f));
+	//EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(150.f, 50.f, 200.f));
+	//EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(50.f, 150.f, 200.f));
+	//EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(50.f, 0.f, 200.f));
 
 
 }

@@ -41,6 +41,8 @@ public: /* Settttt */
 public: /* Funcs */
 	void		Destroy_AllEnemy();
 
+
+
 	void		Enemy_Spawn_Debug(Vector3 _scale = Vector3(0.2f, 0.2f, 0.2f),
 		ENEMY_STATE _initState = ENEMY_STATE::DEBUGGING,
 		ENEMY_STATUS _status = ENEMY_STATUS());

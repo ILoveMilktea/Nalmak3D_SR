@@ -2,6 +2,7 @@
 #include "..\Include\Enemy.h"
 
 #include "Enemy_Bullet_Manager.h"
+#include "Indicator_EnemyPos.h"
 
 
 Enemy::Enemy(Desc * _Desc)
@@ -11,6 +12,8 @@ Enemy::Enemy(Desc * _Desc)
 	m_tMachineGun = _Desc->tGun;
 	m_tMissile =	_Desc->tMissile;
 	m_tHoming =		_Desc->tHoming;
+
+	m_pArrow_Indicator = _Desc->pArrow;
 }
 
 Enemy::~Enemy()
@@ -24,6 +27,9 @@ void Enemy::Initialize()
 	Look_Target();
 
 	m_vOriginForward = m_transform->GetForward();
+
+	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+	assert(L"거 에너미에서 메인카메라 못찾았다 이말이야"&&m_pMainCamera);
 }
 
 void Enemy::Update()
@@ -31,7 +37,9 @@ void Enemy::Update()
 	Reloading_Gun();
 	Reloading_Missile();
 
+
 	Death_Check();
+	Indicator_OnOff();
 
 	if (m_bAccel)
 	{
@@ -172,15 +180,45 @@ void Enemy::Death_Check()
 	{
 		//���� Falling, Death, Explosion���� �ƴҶ��� �����ϰ�.
 		if (m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Falling"
-			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Explosion"
-			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Death")
+			&& m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Explosion"
+			&& m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Death")
 		{
+			m_pArrow_Indicator->GetComponent<Indicator_EnemyPos>()->Release_Target();
+			DESTROY(m_pArrow_Indicator);
+			m_pArrow_Indicator = nullptr;
+
 
 		 //death State ->
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
-
 		}
+	}
+}
+
+bool Enemy::Screen_Check()
+{
+
+	Vector2 ScreenPos = m_pMainCamera->WorldToScreenPos(m_transform->position);
+
+/*	if (ScreenPos.x >= -(WINCX /2.f)&& ScreenPos.x <= (WINCX/2.f)
+		&&
+		ScreenPos.y >= -(WINCY /2.f) && ScreenPos.y <= (WINCY/2.f))*/
+	if(ScreenPos.x >= -(TARGET_RANGE/2.f) && ScreenPos.x <= (TARGET_RANGE/2.f)
+		&&
+		ScreenPos.y >= -(TARGET_RANGE/ 2.f) && ScreenPos.y <= (TARGET_RANGE / 2.f))
+	{//Inside Range
+		return false;
+	}
+
+	return true;
+
+}
+
+void Enemy::Indicator_OnOff()
+{
+	if (m_pArrow_Indicator != nullptr)
+	{
+		m_pArrow_Indicator->SetActive(Screen_Check());
 	}
 }
 

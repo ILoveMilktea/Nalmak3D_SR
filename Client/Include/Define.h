@@ -19,7 +19,7 @@
 #define DoDive	0
 #define DoSoar	1
 
-
+#define TARGET_RANGE 480
 
 #define  PI2 360.f
 

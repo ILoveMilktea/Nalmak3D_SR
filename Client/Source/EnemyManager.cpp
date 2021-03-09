@@ -30,6 +30,7 @@
 #include "Enemy_Debugging.h"
 #include "Player_WindEffect.h"
 #include "PlayerInfoManager.h"
+#include "Indicator_EnemyPos.h"
 
 EnemyManager* EnemyManager::m_Instance = nullptr;
 
@@ -90,6 +91,28 @@ void EnemyManager::Update()
 	{
 		Enemy_Spawn_Debug();
 	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F1))
+	{
+		Enemy_Spawn_Test(CHASE, Vector3(50.f, 50.f, 100.f));
+	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F2))
+	{
+		Enemy_Spawn_Test(HOLD, Vector3(50.f, 50.f, 100.f));
+	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F3))
+	{
+		Enemy_Spawn_Test(DROP, Vector3(50.f, 50.f, 100.f));
+	}
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F4))
+	{
+		Enemy_Spawn_Test(IDLE, Vector3((float)(rand()%100), (float)(rand() % 100), (float)(rand() % 100)));
+	}
+	
+
 
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
 	{
@@ -262,8 +285,30 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 		break;
 	}
 
+#pragma region EnemyIndicatorForPlayer
+	GameObject* Indicator = INSTANTIATE();
+	//Indicator->SetScale(Vector3(0.08f,0.08f, 0.2f));
+	Indicator->SetScale(Vector3(40.f, 20.f, 60.f));
+	//Indicator->SetScale(Vector3(1.f, 1.f, 5.f));
+	Indicator->SetPosition(Vector3(0.f, 0.f, 0.f));
+
+	//VIBufferRenderer::Desc Arrow;
+	//Arrow.meshName = L"box";
+	//Arrow.mtrlName = L"standard";
+	//Indicator->AddComponent<VIBufferRenderer>(&Arrow);
+
+	MeshRenderer::Desc Arrow;
+	Arrow.meshName = L"Indicator_arrow";
+	Arrow.mtrlName = L"stage_arrowIndicator";
+	Indicator->AddComponent<MeshRenderer>(&Arrow);
+
+	Indicator_EnemyPos::Desc Indicator_desc;
+	Indicator_desc.Target = Enemy_obj;
+	Indicator->AddComponent<Indicator_EnemyPos>(&Indicator_desc);
+#pragma endregion
 
 	Enemy::Desc Enemy_desc(_status, _gun, _missile);
+	Enemy_desc.pArrow = Indicator;
 	Enemy_obj->AddComponent<Enemy>(&Enemy_desc);
 
 
@@ -278,18 +323,19 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	wind.trailThick = 0.2f;
 	Enemy_obj->AddComponent<Player_WindEffect>(&wind);
 
-
-
 	SphereCollider::Desc Enemy_col;
 	Enemy_col.radius = 5.f;
 	Enemy_col.collisionLayer = COLLISION_LAYER_ENEMY;
 	Enemy_obj->AddComponent<SphereCollider>(&Enemy_col);
+
+
 
 	++m_iEnemyCount;
 }
 
 void EnemyManager::Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos)
 {
+	Enemy_Spawn(pos, Vector3(0.2f, 0.2f, 0.2f), _initState);
 }
 
 

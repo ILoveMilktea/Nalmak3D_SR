@@ -528,6 +528,7 @@
     <ClInclude Include="..\Include\Enemy_Debugging.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Indicator_EnemyPos.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -1018,6 +1019,7 @@
     <ClCompile Include="..\Source\Enemy_Debugging.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Indicator_EnemyPos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -1416,6 +1418,9 @@
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\deferred_emission.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\stage_arrowIndicator.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>

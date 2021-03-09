@@ -130,6 +130,31 @@ Vector2 Camera::WorldToScreenPos(const Vector3 & _pos)
 	return Vector2(temp.x - halfWincx, halfWincy - temp.y);
 }
 
+Vector3 Camera::ScreenPosToWorld(const Vector2 & _screenPos, float Distance_FromCam)
+{
+	float wincx = (float)RenderManager::GetInstance()->GetWindowWidth();
+	float wincy = (float)RenderManager::GetInstance()->GetWindowHeight();
+
+	Vector2 screenPos = _screenPos;
+
+	Vector3 ViewSpace;
+	Vector3 WorldSpace;
+	Matrix invView;
+	ViewSpace.x = (((2.0f * screenPos.x) / wincx) - 1.0f) / GetProjMatrix()._11;
+	ViewSpace.y = (((-2.0f * screenPos.y) / wincy) + 1.0f) / GetProjMatrix()._22;
+	ViewSpace.z = 1.0f;
+
+	D3DXMatrixInverse(&invView, 0, &GetViewMatrix());
+
+	D3DXVec3TransformCoord(&WorldSpace, &ViewSpace, &invView);
+	
+	//D3DXVec3Normalize(&WorldSpace, &WorldSpace);
+	//Vector3 Result_World = m_transform->position + WorldSpace * Distance_FromCam;
+	//return Result_World;
+
+	return WorldSpace;
+}
+
 
 
 bool Camera::IsInFrustumCulling(IRenderer * _renderer)
