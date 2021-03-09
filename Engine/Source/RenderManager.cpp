@@ -90,6 +90,9 @@ void RenderManager::Render(Camera * _cam)
 	ClearRenderTarget(L"GBuffer_Debug");
 	ClearRenderTarget(L"GBuffer_Distortion");
 	ClearRenderTarget(L"GBuffer_Final");
+	ClearRenderTarget(L"GBuffer_Emission");
+	ClearRenderTarget(L"Emisson_HorizontalBlur");
+	ClearRenderTarget(L"Emisson_FinalBlur");
 
 	///////////////////////////////////////////////////////
 	// public const buffer
@@ -135,9 +138,16 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	DebugPass(_cBuffer);
 
+	RenderByMaterialToScreen(L"emissionHorizontalBlur", _cBuffer);
+
+	RenderByMaterialToScreen(L"emissionVerticalBlur", _cBuffer);
+
+	RenderByMaterialToScreen(L"GBuffer_Emission", _cBuffer);
+	
 	TransparentPass(_cam, _cBuffer);
 
 	PostProcessPass(_cam, _cBuffer);
+
 
 	EndRenderTarget();
 
@@ -414,6 +424,10 @@ void RenderManager::PostProcessPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+
 	for (auto& MeshRendererList : m_renderLists[RENDERING_MODE_OVERLAY])
 	{
 		for (auto& renderer : MeshRendererList.second)
@@ -437,6 +451,10 @@ void RenderManager::PostProcessPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->EndPass();
 	}
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 }
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
@@ -540,6 +558,28 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	EndRenderTarget();
 
 
+}
+
+void RenderManager::RenderByMaterialToScreen(const wstring & _mtrlName, ConstantBuffer & _cBuffer)
+{
+	m_currentMaterial = nullptr;
+	m_currentShader = nullptr;
+
+	UpdateMaterial(ResourceManager::GetInstance()->GetResource<Material>(_mtrlName), _cBuffer);
+	UpdateRenderTarget();
+
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
+	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_UV)));
+	ThrowIfFailed(m_device->SetIndices(m_imageVIBuffer->GetIndexBuffer()));
+
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+	m_currentShader->EndPass();
+	EndRenderTarget();
 }
 
 
@@ -696,8 +736,7 @@ void RenderManager::UpdateRenderTarget()
 	{
 		RenderTarget* newRendertarget = m_currentShader->GetRenderTarget(i);
 
-		if (!newRendertarget)
-			return;
+		
 
 		if (m_currentRenderTarget[i] != newRendertarget)
 		{
@@ -705,6 +744,9 @@ void RenderManager::UpdateRenderTarget()
 				m_currentRenderTarget[i]->EndRecord();
 
 			m_currentRenderTarget[i] = newRendertarget;
+			if (!newRendertarget)
+				return;
+
 			m_currentRenderTarget[i]->StartRecord(i);
 		}
 	}

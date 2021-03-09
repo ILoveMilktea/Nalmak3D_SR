@@ -41,7 +41,7 @@ void NalmakScene::Initialize()
 	PlayerInfoManager::GetInstance()->GetPlayer();
 
 	DirectionalLight::Desc light;
-	light.diffuseIntensity = 0.9f;
+	light.diffuseIntensity = 0.6f;
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 
@@ -71,8 +71,21 @@ void NalmakScene::Initialize()
 	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
 	auto window6 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Debug", CANVAS_GROUP_G1);
 	window6->SetPosition(300, 100, 0)->SetScale(200, 200, 0);
-	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
+	auto window7 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Emission", CANVAS_GROUP_G1);
+	window7->SetPosition(300, 300, 0)->SetScale(200, 200, 0);
+	auto window8 = UIFactory::CreateRenderTargetWindow(L"Emisson_HorizontalBlur", CANVAS_GROUP_G1);
+	window8->SetPosition(300, 500, 0)->SetScale(200, 200, 0);
+	auto window9 = UIFactory::CreateRenderTargetWindow(L"Emisson_FinalBlur", CANVAS_GROUP_G1);
+	window9->SetPosition(300, 700, 0)->SetScale(200, 200, 0);
 
+	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
+	/*{
+		VIBufferRenderer::Desc vibuffer;
+		vibuffer.meshName = L"quadNoneNormal";	
+		vibuffer.mtrlName = L"fx_20mmCannon";
+		auto temp = INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
+		temp->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
+	}*/
 
 	{
 		ParticleRenderer::Desc	distortion;
@@ -91,7 +104,7 @@ void NalmakScene::Initialize()
 		vibuffer.mtrlName = L"particleDistortion";
 		INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
 	}
-
+	
 
 	{
 		VIBufferRenderer::Desc ground;
@@ -102,8 +115,6 @@ void NalmakScene::Initialize()
 	}
 
 	{
-
-
 		ScaleDampingDeffender::Desc scaleDamping;
 		scaleDamping.dampingSpeed = 3.f;
 		scaleDamping.maximumScale = 15.0f;

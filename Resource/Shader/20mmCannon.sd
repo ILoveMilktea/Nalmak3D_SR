@@ -4,7 +4,7 @@
 
 inputLayout "1"
 
-renderTarget "GBuffer_Final"
+renderTarget "GBuffer_Emission"
 
 primitive "2"
 

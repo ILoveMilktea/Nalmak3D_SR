@@ -36,7 +36,6 @@ PlayerInfoManager::PlayerInfoManager(Desc * _Desc)
 
 PlayerInfoManager::~PlayerInfoManager()
 {
-	int a = 10;
 }
 
 void PlayerInfoManager::Initialize()
@@ -302,8 +301,8 @@ GameObject * PlayerInfoManager::Player_Create()
 	{
 		PointLight::Desc lightDesc;
 		lightDesc.color = Vector3(1, 0.3f, 0);
-		lightDesc.radius = 2.f;
-		lightDesc.diffuseIntensity = 5.f;
+		lightDesc.radius = 1.f;
+		lightDesc.diffuseIntensity = 2.f;
 		auto light = INSTANTIATE()->AddComponent<PointLight>(&lightDesc)->SetPosition(0, 0, -1.5f);
 		light->SetParents(m_player);
 	}

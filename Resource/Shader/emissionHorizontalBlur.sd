@@ -2,9 +2,9 @@
 ## Shader Data Setting (sd)
 #########################################################
 
-inputLayout "2"
+inputLayout "1"
 
-renderTarget "GBuffer_Emission"
+renderTarget "Emisson_HorizontalBlur"
 
 primitive "2"
 

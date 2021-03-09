@@ -1,16 +1,21 @@
 #include "H_common.fx"
 
 matrix g_world;
+texture g_final;
+texture g_emission;
+texture g_emissionBlur;
 
-
-texture g_mainTex;
-float4 g_mainTexColor;
-float4x4 g_invViewForBillboard;
-
-sampler mainSampler = sampler_state
+sampler FinalSampler = sampler_state
 {
-	texture = g_mainTex;
-
+	texture = g_final;
+};
+sampler EmissionSampler = sampler_state
+{
+	texture = g_emission;
+};
+sampler EmissionBlurSampler = sampler_state
+{
+	texture = g_emissionBlur;
 };
 
 struct VS_INPUT
@@ -22,29 +27,26 @@ struct VS_INPUT
 struct VS_OUTPUT
 {
 	float4 position : POSITION;
-	float2 uv : TEXCOORD0;
+	float2 uv : TEXCOORD0; 
+	
 };
 
 struct PS_INPUT
 {
-	float2 uv : TEXCOORD0;
+	float2 uv :TEXCOORD0;
 };
 
 struct PS_OUTPUT
 {
-	float4 diffuse : COLOR0;
+	float4 color : COLOR0;
 };
 
 VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 {
 	VS_OUTPUT o = (VS_OUTPUT)0; 
 
-
-	float4x4 invView= mul(g_invViewForBillboard, g_world);
-	float4x4 wvp = mul(invView, g_cBuffer.viewProj);
-	o.position = mul(float4(_input.position,1), wvp);
+	o.position = float4(_input.position, 1);
 	o.uv = _input.uv;
-	//o.normal = float3(0, 0, 1);
 	
 	
 	return o;
@@ -54,9 +56,17 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 PS_OUTPUT PS_Main_Default(PS_INPUT  _input) 
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
-	float4 diffuse = tex2D(mainSampler, _input.uv);
-	o.diffuse = diffuse * g_mainTexColor;
-	o.diffuse.w = 1;
+
+	float2 uv = float2(_input.uv) + float2(perPixelX, perPixelY);
+
+	float3 final = tex2D(FinalSampler, uv).xyz;
+	float3 emission = tex2D(EmissionSampler, uv).xyz;
+	float3 emissionBlur = tex2D(EmissionBlurSampler, uv).xyz;
+
+
+	
+	o.color = float4(final + emission + emissionBlur, 1);
+
 	return o;
 }
 
@@ -68,10 +78,7 @@ technique DefaultTechnique
 	{
 		//https://blueswamp.tistory.com/entry/D3DRSZENABLE-D3DRSZWRITEENABLE Z 값에대한 활용
 
-		//ZEnable = true;
-		//ZWriteEnable = true;
-		alphablendEnable = true;
-		CullMode = NONE;
+
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();
 

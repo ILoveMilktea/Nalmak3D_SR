@@ -2,11 +2,13 @@
 ##  Material Data Setting
 #########################################################
 
-shader "20mmCannon"
+shader "deferred_emission"
 
-texture "g_mainTex" "fx20mmCannon"
-vector4   "g_mainTexColor" "0.6f,0.6f,0.2f,1"
-renderQueue "1000"
+textureRT "g_final" "GBuffer_Final"
+textureRT "g_emission" "GBuffer_Emission"
+textureRT "g_emissionBlur" "Emisson_FinalBlur"
+
+renderQueue "4002"
 
 blendingMode "0"
 
@@ -48,5 +50,7 @@ fillMode "0"
 ##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
+
+
 
 
