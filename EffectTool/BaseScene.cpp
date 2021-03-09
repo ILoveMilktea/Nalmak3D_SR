@@ -15,7 +15,7 @@ void BaseScene::Initialize()
 {
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
-	{
+	/*{
 		MeshRenderer::Desc render;
 		render.meshName = L"f15";
 		render.mtrlName = L"f15";
@@ -23,9 +23,9 @@ void BaseScene::Initialize()
 		auto plane = INSTANTIATE()->AddComponent<MeshRenderer>(&render)->SetPosition(0, 0, 0)->SetScale(0.2f, 0.2f, 0.2f);
 		plane->GetComponent<MeshRenderer>()->SetFrustumCulling(false);
 
-	}
+	}*/
 	DirectionalLight::Desc light;
-	light.diffuseIntensity = 0.9f;
+	light.diffuseIntensity = 0.6f;
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
 
@@ -34,12 +34,14 @@ void BaseScene::Initialize()
 
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(350, 350, 0);
 
-	{
-		VIBufferRenderer::Desc vibuffer;
-		vibuffer.meshName = L"screenQuad";
-		vibuffer.mtrlName = L"particleDistortion";
-		INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
-	}
+	//{
+	//	VIBufferRenderer::Desc vibuffer;
+	//	vibuffer.meshName = L"screenQuad";
+	//	vibuffer.mtrlName = L"particleDistortion";
+	//	INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
+	//}
+
+
 	//ParticleRenderer::Desc particle;
 	//particle.startMinScale = 1;
 	//particle.startMaxScale = 1;

@@ -3,6 +3,7 @@
 
 #include "EnemyManager.h"
 #include "StageManager.h"
+#include "PlayerInfoManager.h"
 
 EvasionState::EvasionState()
 {

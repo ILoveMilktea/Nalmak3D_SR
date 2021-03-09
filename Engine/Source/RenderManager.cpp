@@ -63,7 +63,7 @@ void RenderManager::Render()
 {
 	assert(L"Please Set Camera at least one" &&m_cameraList.size());
 
-	
+
 
 	for (auto& cam : m_cameraList)
 	{
@@ -87,10 +87,12 @@ void RenderManager::Render(Camera * _cam)
 	ClearRenderTarget(L"GBuffer_Depth");
 	ClearRenderTarget(L"GBuffer_CookTorrance");
 	ClearRenderTarget(L"GBuffer_Light");
+	ClearRenderTarget(L"GBuffer_Debug");
 	ClearRenderTarget(L"GBuffer_Distortion");
-	ClearRenderTarget(L"GBuffer_Emission");
 	ClearRenderTarget(L"GBuffer_Final");
-
+	ClearRenderTarget(L"GBuffer_Emission");
+	ClearRenderTarget(L"Emisson_HorizontalBlur");
+	ClearRenderTarget(L"Emisson_FinalBlur");
 
 	///////////////////////////////////////////////////////
 	// public const buffer
@@ -122,7 +124,7 @@ void RenderManager::Render(Camera * _cam)
 
 void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 {
-	
+
 	//_cam->ClearRenderTarget();
 	//ClearDepthStencil(L"Stencil_Transparent");
 
@@ -130,20 +132,28 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	GBufferPass(_cam, _cBuffer);
 
-	LightPass(_cam,_cBuffer);
+	LightPass(_cam, _cBuffer);
 
 	ShadePass(_cBuffer);
 
+	DebugPass(_cBuffer);
+
+	RenderByMaterialToScreen(L"emissionHorizontalBlur", _cBuffer);
+
+	RenderByMaterialToScreen(L"emissionVerticalBlur", _cBuffer);
+
+	RenderByMaterialToScreen(L"GBuffer_Emission", _cBuffer);
+	
 	TransparentPass(_cam, _cBuffer);
 
 	PostProcessPass(_cam, _cBuffer);
+
 
 	EndRenderTarget();
 
 	//_cam->RecordRenderTarget();
 
 	RenderImageToScreen(m_resourceManager->GetResource<RenderTarget>(L"GBuffer_Final")->GetTexture(), _cBuffer); // 원래화면에 띄워줌
-
 	UIPass(_cam, _cBuffer);
 
 	//_cam->EndRenderTarget();
@@ -221,7 +231,7 @@ void RenderManager::LightPass(Camera* _cam, ConstantBuffer& _cBuffer)
 
 	DirectionalLightPass(_cBuffer);
 
-	PointLightPass(_cam,_cBuffer);
+	PointLightPass(_cam, _cBuffer);
 
 
 }
@@ -277,7 +287,7 @@ void RenderManager::PointLightPass(Camera* _cam, ConstantBuffer & _cBuffer)
 			m_device->Clear(0, nullptr, D3DCLEAR_STENCIL, 0, 1, 0);
 		}
 	}
-	if(m_currentShader)
+	if (m_currentShader)
 		m_currentShader->EndPass();
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
@@ -389,7 +399,7 @@ void RenderManager::TransparentPass(Camera* _cam, ConstantBuffer& _cBuffer)
 				if (_cam->IsInFrustumCulling(renderer))
 				{
 					renderer->BindingStreamSource();
-				
+
 					Material* material = renderer->GetMaterial(0);
 					UpdateMaterial(material, _cBuffer);
 					UpdateRenderTarget();
@@ -414,6 +424,10 @@ void RenderManager::PostProcessPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	m_currentShader = nullptr;
 	m_currentMaterial = nullptr;
 
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, false));
+
 	for (auto& MeshRendererList : m_renderLists[RENDERING_MODE_OVERLAY])
 	{
 		for (auto& renderer : MeshRendererList.second)
@@ -437,6 +451,10 @@ void RenderManager::PostProcessPass(Camera * _cam, ConstantBuffer & _cBuffer)
 	{
 		m_currentShader->EndPass();
 	}
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ALPHABLENDENABLE, false));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZENABLE, true));
 }
 
 void RenderManager::UIPass(Camera * _cam, ConstantBuffer & _cBuffer)
@@ -508,11 +526,11 @@ void RenderManager::Reset()
 {
 	m_currentMaterial = nullptr;
 
-	for(int i = 0 ; i < RENDERING_MODE_MAX; ++i)
-	for (auto& renderList : m_renderLists[i])
-	{
-		renderList.second.clear();
-	}
+	for (int i = 0; i < RENDERING_MODE_MAX; ++i)
+		for (auto& renderList : m_renderLists[i])
+		{
+			renderList.second.clear();
+		}
 	m_renderUILists.clear();
 
 	m_debugManager->EraseTheRecord();
@@ -526,9 +544,10 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 	UpdateMaterial(_mtrl, _cBuffer);
 	UpdateRenderTarget();
 
+
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
 
-	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0,  sizeof(INPUT_LAYOUT_POSITION_UV)));
+	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_UV)));
 	ThrowIfFailed(m_device->SetIndices(m_imageVIBuffer->GetIndexBuffer()));
 
 	m_currentShader->CommitChanges();
@@ -536,7 +555,31 @@ void RenderManager::RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer & _
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
 	m_currentShader->EndPass();
+	EndRenderTarget();
 
+
+}
+
+void RenderManager::RenderByMaterialToScreen(const wstring & _mtrlName, ConstantBuffer & _cBuffer)
+{
+	m_currentMaterial = nullptr;
+	m_currentShader = nullptr;
+
+	UpdateMaterial(ResourceManager::GetInstance()->GetResource<Material>(_mtrlName), _cBuffer);
+	UpdateRenderTarget();
+
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
+
+	ThrowIfFailed(m_device->SetStreamSource(0, m_imageVIBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_UV)));
+	ThrowIfFailed(m_device->SetIndices(m_imageVIBuffer->GetIndexBuffer()));
+
+	m_currentShader->CommitChanges();
+	ThrowIfFailed(m_device->DrawIndexedPrimitive(m_currentShader->GetPrimitiveType(), 0, 0, m_imageVIBuffer->GetVertexCount(), 0, m_imageVIBuffer->GetFigureCount()));
+
+	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, true));
+	m_currentShader->EndPass();
+	EndRenderTarget();
 }
 
 
@@ -546,7 +589,7 @@ void RenderManager::RenderImageToScreen(IDirect3DBaseTexture9 * _tex, ConstantBu
 	m_currentMaterial = nullptr;
 
 	UpdateMaterial(m_fullScreenMtrl, _cBuffer);
-	
+
 	m_currentShader->SetTexture("g_mainTex", _tex);
 
 	ThrowIfFailed(m_device->SetRenderState(D3DRS_ZWRITEENABLE, false));
@@ -693,8 +736,7 @@ void RenderManager::UpdateRenderTarget()
 	{
 		RenderTarget* newRendertarget = m_currentShader->GetRenderTarget(i);
 
-		if (!newRendertarget)
-			return;
+		
 
 		if (m_currentRenderTarget[i] != newRendertarget)
 		{
@@ -702,6 +744,9 @@ void RenderManager::UpdateRenderTarget()
 				m_currentRenderTarget[i]->EndRecord();
 
 			m_currentRenderTarget[i] = newRendertarget;
+			if (!newRendertarget)
+				return;
+
 			m_currentRenderTarget[i]->StartRecord(i);
 		}
 	}

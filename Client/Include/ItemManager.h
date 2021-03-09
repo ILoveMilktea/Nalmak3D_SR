@@ -42,6 +42,6 @@ private:
 	
 
 private:
-	PlayerInfoManager* m_playerMgr;
+	class PlayerInfoManager* m_playerMgr;
 };
 

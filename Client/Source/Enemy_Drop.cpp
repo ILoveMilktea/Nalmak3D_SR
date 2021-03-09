@@ -20,8 +20,7 @@ void Enemy_Drop::Initialize()
 void Enemy_Drop::EnterState()
 {
 	m_pEnemy = m_gameObject->GetComponent<Enemy>();
-
-	assert(L"아 ㅋㅋ 에너미 못찾겠다고 ㅋㅋㄹㅇ" && m_pEnemy);
+	assert(L"Enemy Component can't find" && m_pEnemy);
 }
 
 void Enemy_Drop::UpdateState()
@@ -33,10 +32,16 @@ void Enemy_Drop::UpdateState()
 	{
 		m_pEnemy->Target_Update();
 		m_pEnemy->Look_Target();
-		m_pEnemy->Accelerate();
 		m_pEnemy->Go_Straight();
 
-		if (m_pEnemy->Get_Distance() <= 150.f && m_pEnemy->Get_Inner() >= 0.9f)
+		//if (m_pEnemy->Get_Distance() <= 70.f /*&& m_pEnemy->Get_Distance() > 50.f*/
+		//	&& m_pEnemy->Get_Inner() >= 0.8f)
+		//{
+		//	m_pEnemy->Set_Accel(false);
+		//}
+
+
+		if (m_pEnemy->Get_Distance() <= 50.f && m_pEnemy->Get_Inner() >= 0.9f)
 		{
 			if (m_pEnemy->Fire_Missile())
 			{
@@ -49,15 +54,17 @@ void Enemy_Drop::UpdateState()
 
 	if (m_bAvoid)
 	{
-		if (iRandPattern == 0)
+		if (iRandPattern == DoDive)
 		{
 			m_bDive = true;
 			iRandPattern = -1;
+			//m_pEnemy->Set_Accel(true);
 		}
-		if (iRandPattern == 1)
+		if (iRandPattern == DoSoar)
 		{
 			m_bSoar = true;
 			iRandPattern = -1;
+			//m_pEnemy->Set_Accel(true);
 		}
 
 
@@ -88,9 +95,8 @@ void Enemy_Drop::UpdateState()
 
 			m_fAvoidDelta += dTime;
 
-			if (m_fAvoidDelta >= 5.f)
+			if (m_fAvoidDelta >= 3.f)
 			{
-
 				m_fAvoidDelta = 0.f;
 
 				m_bRandMove = false;

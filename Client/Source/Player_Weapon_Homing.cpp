@@ -3,6 +3,7 @@
 
 #include "HomingBulletMove.h"
 #include "EnemyDetector.h"
+#include "UIFactory.h"
 
 Player_Weapon_Homing::Player_Weapon_Homing(const ITEMINFO & _copy)
 	:PlayerItem(_copy)
@@ -140,7 +141,7 @@ void Player_Weapon_Homing::CreateBullet()
 		bullet->AddComponent<MeshRenderer>(&meshInfo);
 		bullet->SetParents(m_parents);
 		bullet->SetPosition(m_itemInfo.createPos);
-		bullet->SetScale(0.5f, 0.5f, 3.f);
+		bullet->SetScale(0.2f, 0.2f, 0.3f);
 		//bullet->GetTransform()->SetRotation(eulerRotate.x, eulerRotate.y, eulerRotate.z);
 
 		m_bullet.emplace_back(bullet);

@@ -36,6 +36,6 @@ public: /* Set */
 
 private:
 	bool			m_bStageClear[2] = { false, false };
-	wstring			m_strSelectStage;
+	wstring			m_strSelectStage = L"stage1";
 };
 

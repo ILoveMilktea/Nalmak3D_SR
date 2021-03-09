@@ -26,29 +26,35 @@ public:
 	virtual void Update() override;
 
 public: /* Gettttt */
-	int Get_EnemyCount() const;
-	list<GameObject*> Get_EnemyList() const;
-	int Get_BossHp() const;
-	const Vector3& Get_BossPos() const;
-	int	Get_BossCount() const;
-	GameObject*	Get_Boss();
+	int					Get_EnemyCount() const;
+	list<GameObject*>	Get_EnemyList() const;
+	int					Get_BossHp() const;
+	const Vector3&		Get_BossPos() const;
+	int					Get_BossCount() const;
+	GameObject*			Get_Boss();
 
 public: /* Settttt */
-	void Add_EnemyCount(int _count);
+	void		Add_EnemyCount(int _count);
 	GameObject* NearFindEenemy( GameObject* _finderObj, float _minDis =0 );
-	void	Boss_Release();
+	void		Boss_Release();
 
 public: /* Funcs */
-	void Destroy_AllEnemy();
+	void		Destroy_AllEnemy();
 
-	void Enemy_Spawn(Vector3 _pos = Vector3(0.f,0.f,0.f),
-		Vector3 _scale = Vector3(0.1f, 0.1f, 0.1f),
+	void		Enemy_Spawn_Debug(Vector3 _scale = Vector3(0.2f, 0.2f, 0.2f),
+		ENEMY_STATE _initState = ENEMY_STATE::DEBUGGING,
+		ENEMY_STATUS _status = ENEMY_STATUS());
+
+	void		Enemy_Spawn(Vector3 _pos = Vector3(0.f,0.f,0.f),
+		Vector3 _scale = Vector3(0.2f, 0.2f, 0.2f),
 		//Quaternion _rot = Quaternion(0.f,0.f,0.f,0.f),
 		ENEMY_STATE _initState =ENEMY_STATE::IDLE,
 		ENEMY_STATUS _status = ENEMY_STATUS(),
 		BULLET_STATUS _gun = BULLET_STATUS(),
 		BULLET_STATUS _missile = BULLET_STATUS(),
 		BULLET_STATUS _homing = BULLET_STATUS());
+
+	void		Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos = Vector3(0.f,0.f,0.f));
 
 	void Enemy_Spawn_Normal();
 	void Enemy_Spawn_Huge();
@@ -64,8 +70,8 @@ public: /* Funcs */
 	void MidBoss_Spawn(Vector3 _pos);
 	GameObject* Boss_Spawn();
 
-	void Player_FovSpawnTest(bool _front, float _distance);
-	Vector3 Pos_ScreenToWorld(float _x, float _y, float _distance);
+	void		Player_FovSpawnTest(bool _front, float _distance);
+	Vector3		Pos_ScreenToWorld(float _x, float _y, float _distance);
 
 
 public: /* Stage1 - tutorial + dogFight*/
@@ -79,12 +85,13 @@ public: /* stage2 - phase1 (DogFight) */
 
 public: /* stage2 - phase2 (Evasion) */
 
-public: /* stage2 - phase3 (B0ss)*/
+
+public: /* stage2 - phase3 (Boss)*/
 
 
 
 private:
-	StateControl*	m_pStateControl = nullptr;
+	//StateControl*	m_pStateControl = nullptr;
 
 	GameObject*		m_pBoss = nullptr;
 	int				m_iEnemyCount = 0;

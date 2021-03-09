@@ -79,15 +79,14 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 
 
+
 	float alpha = o.diffuse.a;
 	alpha = min(pow(1.f - dot(-normal, view),3) * g_strength, alpha);
 	o.diffuse.a = alpha;
 
 	float3 worldPos = _in.worldPos;
-	float distance = (length(g_hitPosition.xyz - worldPos));
-
+	
 	//o.diffuse = 1 - (length(g_hitPosition.xyz - worldPos) / g_radius);
-
 
 	return o;
 }
@@ -103,7 +102,7 @@ technique DefaultTechnique
 	/*	ZEnable = true;
 		ZWriteEnable = true;
 		CullMode = CCW;*/
-		ZWriteEnable = true;
+		ZWriteEnable = false;
 		//CullMode = none;
 		VertexShader = compile vs_3_0 VS_Main_Default();
 		PixelShader = compile ps_3_0 PS_Main_Default();

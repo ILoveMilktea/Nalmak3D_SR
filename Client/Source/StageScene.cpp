@@ -13,7 +13,7 @@
 #include "FieldCameraSmoothFollowState.h"
 #include "FieldCameraStartState.h"
 #include "FieldCameraNearEnemyState.h"
-
+#include "UIFactory.h"
 
 void StageScene::Initialize()
 {
@@ -27,7 +27,7 @@ void StageScene::Initialize()
 	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
 	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
 	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
-	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Emission", CANVAS_GROUP_G1);
+	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Debug", CANVAS_GROUP_G1);
 	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
 
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
@@ -35,7 +35,7 @@ void StageScene::Initialize()
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.6f;
 	light.ambientIntensity = 0.02f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(70, 180, 0);
 
 	VIBufferRenderer::Desc ground;
 	ground.mtrlName = L"ground";
@@ -71,4 +71,6 @@ void StageScene::Initialize()
 	StageManager::GetInstance()->Get_StateControl()->AddState<DogFight_Stage1>(L"Tutorial");
 	StageManager::GetInstance()->Get_StateControl()->InitState(L"Tutorial");
 	
+
+
 }

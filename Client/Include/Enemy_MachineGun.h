@@ -38,6 +38,12 @@ public:
 	void Dest_Shoot();
 	
 private:
+	Camera*	m_pMainCamera = nullptr;
+	Material* m_pMaterial = nullptr;
+	
+
+	Vector3 m_vForwardDir;
+
 	bool	m_bStraight = true;
 	
 	bool	m_bFirst = true;
@@ -45,8 +51,9 @@ private:
 	Vector3	m_vDir;
 
 	
+	float m_strechRatio = 10.f;
 
-	float m_fSpd = 0.f;
+	float m_fSpd = 150.f;
 	int m_iDamage = 0;
 
 	float m_fDeltaTime = 0.f;

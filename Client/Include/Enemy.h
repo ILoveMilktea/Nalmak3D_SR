@@ -30,8 +30,6 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void OnTriggerEnter(Collisions& _collision)override;
-	virtual void OnTriggerStay(Collisions& _collision)override;
-	virtual void OnTriggerExit(Collisions& _collision)override;
 
 public:
 	void Target_Setting(bool _onoff);
@@ -41,16 +39,17 @@ public:
 	bool Fov_Check();
 
 	void Death_Check();
-	void Emp();
+	
 
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
-	
+	void Emp();
 
 public: /* Get */
 	const ENEMY_STATUS& Get_Status() const; 
 	const int&		Get_FullHp() const;
 	const int&		Get_CurHp() const;
+	const float&	Get_CurSpd() const;
 	
 	const BULLET_STATUS&	Get_GunStatus() const;
 	const BULLET_STATUS&	Get_MissileStatus() const;
@@ -78,12 +77,13 @@ public: /* Get */
 public: /* Set */
 	void Set_Damage(const int& _dmg);
 	void Set_OriginForward();
-	
+	void Set_CurSpd(float _spd);
+	void Set_Accel(bool _onoff);
+	void Set_LookSpd(float _lookSpd);
 
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);
 	void Go_Straight(); 
-	//void Lean();
 	void Horizontally(); 
 	void Turn(); //Like Screw
 	
@@ -121,6 +121,8 @@ private:
 	BULLET_STATUS	m_tHoming;
 	float			m_fHomingFpmDelta = 0.f;
 	float			m_fHomingReload = 0.f;
+
+	bool			m_bAccel = true;
 
 	float m_fHorizonSpd = 10.f;
 

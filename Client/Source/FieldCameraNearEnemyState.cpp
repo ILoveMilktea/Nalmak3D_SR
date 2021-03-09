@@ -2,6 +2,7 @@
 #include "..\Include\FieldCameraNearEnemyState.h"
 #include "EnemyManager.h"
 #include "FieldCameraInfo.h"
+#include "PlayerInfoManager.h"
 
 
 FieldCameraNearEnemyState::FieldCameraNearEnemyState()

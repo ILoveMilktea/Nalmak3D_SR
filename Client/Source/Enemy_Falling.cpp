@@ -98,7 +98,8 @@ void Enemy_Falling::UpdateState()
 void Enemy_Falling::ExitState()
 {
 	//m_gameObject->DeleteComponent<MeshRenderer>();
-
+	// for .Use player nearGuidBullet
+	
 
 }
 

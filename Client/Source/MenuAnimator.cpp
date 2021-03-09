@@ -38,10 +38,10 @@ void MenuAnimator::OutAnim()
 	m_moveAnim.Start_Animation();
 }
 
-void MenuAnimator::SetAnimator(float _amount, float _duration, float _delay, Vector3 _pos)
+void MenuAnimator::SetAnimator(float _amount, float _duration, float _delay, Vector3 _startPos)
 {
 	SetMoveAmount(_amount);
 	SetMoveDuration(_duration);
 	SetStartDelay(_delay);
-	SetPosition(_pos);
+	SetPosition(_startPos);
 }

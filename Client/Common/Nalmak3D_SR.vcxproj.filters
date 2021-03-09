@@ -525,6 +525,9 @@
     <ClInclude Include="..\Include\Enemy_Evasion_Appear.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Debugging.h">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -1011,6 +1014,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Evasion_Appear.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
+    </ClInclude>
+    <ClCompile Include="..\Source\Enemy_Debugging.cpp">
+      <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1135,9 +1141,6 @@
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Idle">
       <UniqueIdentifier>{057f3a40-069b-41bf-83d1-769f80e85d03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death">
-      <UniqueIdentifier>{d5f13b66-30ff-4c40-ba3c-319d661789ec}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\att_Chase">
       <UniqueIdentifier>{2ff71113-836e-4780-bc55-a381acfc1710}</UniqueIdentifier>
@@ -1307,6 +1310,15 @@
     <Filter Include="__Phase2_Lab\phaseFSM\Actor\Enemy">
       <UniqueIdentifier>{3c423167-0ac7-457a-93d9-fc2125fed6bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death">
+      <UniqueIdentifier>{d5f13b66-30ff-4c40-ba3c-319d661789ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging">
+      <UniqueIdentifier>{e6a58e28-b6f8-4f06-b36e-e9a8e783f00c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\NewFilter1">
+      <UniqueIdentifier>{12936101-c3ef-476a-9928-2c95b650c811}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
@@ -1393,6 +1405,18 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\shieldEffect.fx">
       <Filter>03.Resource\02.Shader\Stage</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\BackGround.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\emissionHorizontalBlur.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\emissionVerticalBlur.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\deferred_emission.fx">
+      <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

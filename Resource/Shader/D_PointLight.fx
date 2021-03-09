@@ -50,7 +50,8 @@ struct PS_INPUT
 
 struct PS_OUTPUT
 {
-	float4 diffuse : COLOR0;
+	float4 emission : COLOR0;
+	float4 light : COLOR1;
 };
 
 VS_OUTPUT VS_Main_Default(VS_INPUT _in)
@@ -123,7 +124,8 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 	specular = dotNL * D * F * V;
 	
-	o.diffuse = float4(diffuse, 1) * light + specular;
+	o.emission = specular * light;
+	o.light = float4(diffuse, 1) * light;
 	//o.diffuse = worldPos;
 	return o;
 }

@@ -14,6 +14,7 @@
 #include "HeeTestScene.h"
 #include "NalmakScene.h"
 #include "ResultScene.h"
+#include "EditController.h"
 
 TimeManager* g_time;
 // rendering pipeline
@@ -116,6 +117,7 @@ void MainGame::SystemSetting()
 
 
 	m_engine->SetStartScene(L"stage2");
+
 
 }
 

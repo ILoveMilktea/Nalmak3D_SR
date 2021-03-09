@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __UIWINDOWNFACTORY_H__
 #define __UIWINDOWNFACTORY_H__
 
@@ -22,6 +22,11 @@
 #include "UI_ShopItemModel.h"
 #include "PlayerShooter.h"
 
+#include "UIFactory.h"
+
+// menu animator -> left move
+
+// UI_ShopMenu_Animator ->
 class UIWindowFactory
 {
 public:
@@ -30,20 +35,20 @@ public:
 	{
 		auto interactiveController = INSTANTIATE();
 
-		// reference
-		{
-			SingleImage::Desc desc_si;
-			desc_si.textureName = L"garageSample";
-			auto background = INSTANTIATE();
-			background->AddComponent<CanvasRenderer>();
-			background->AddComponent<SingleImage>(&desc_si);
-			background->GetComponent<CanvasRenderer>()->SetFade(0.1f);
-			background->SetPosition(WINCX * 0.5f, WINCY * 0.5f);
-			background->SetScale(WINCX, WINCY);
-		}
+		//// reference
+		//{
+		//	SingleImage::Desc desc_si;
+		//	desc_si.textureName = L"garage_background";
+		//	auto background = INSTANTIATE();
+		//	background->AddComponent<CanvasRenderer>();
+		//	background->AddComponent<SingleImage>(&desc_si);
+		//	background->GetComponent<CanvasRenderer>()->SetFade(0.11f);
+		//	background->SetPosition(WINCX * 0.5f, WINCY * 0.5f);
+		//	background->SetScale(WINCX, WINCY);
+		//}
 
-		float inoutAmount = 1000.f;
-		float inoutSpeed = 0.5f;
+		float inoutAmount = 3000.f;
+		float inoutSpeed = 0.8f;
 		float secondAnimDelay = 1.2f;
 
 		// Menu
@@ -51,7 +56,10 @@ public:
 			// Title (text)
 			{
 				auto title = UIFactory::Prefab_MenuTitle(L"MAIN MENU", CANVAS_GROUP_MAINWND);
-				title->SetPosition(576.f, 124.f);
+				title->SetPosition(576.f, 120.f);
+
+				auto bg = UIFactory::Prefab_MenuBackground(CANVAS_GROUP_MAINWND);
+				bg->SetPosition(HALF_WINCX - 600, 110);
 			}
 
 			// Menu 1 - START STAGE	(Button)
@@ -60,7 +68,7 @@ public:
 
 				wstring temp = GameManager::GetInstance()->Get_NextStage();
 				eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(temp);});
-				
+
 
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND_MAIN);
 
@@ -72,41 +80,41 @@ public:
 			// Menu 2 - WEAPON SHOP
 			{
 				EventHandler eventFunc = EventHandler([=]() {
-					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
+					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN); // main menu 4 + return
 					for (auto member : group)
 					{
 						member->GetComponent<MenuAnimator>()->AddStartDelay(-secondAnimDelay);
 						member->GetComponent<MenuAnimator>()->OutAnim();
 					}
-					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_PLAYERINFO);
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_PLAYERINFO); // slider
 					for (auto member : group)
 					{
 						member->GetComponent<MenuAnimator>()->AddStartDelay(-secondAnimDelay);
 						member->GetComponent<MenuAnimator>()->OutAnim();
 					}
 
-					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP);
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP); // return
 					for (auto member : group)
 					{
 						member->GetComponent<MenuAnimator>()->AddStartDelay(secondAnimDelay);
 						member->GetComponent<MenuAnimator>()->InAnim();
 					}
 
-					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPWND);
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPWND); // shop panel
 					for (auto member : group)
 					{
 						member->GetComponent<UI_ShopWnd_Animator>()->AddStartDelay(secondAnimDelay);
 						member->GetComponent<UI_ShopWnd_Animator>()->OnAnim();
 					}
 
-					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPMENU);
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPMENU); // weapon icon
 					for (auto member : group)
 					{
 						member->GetComponent<UI_ShopMenu_Animator>()->AddStartDelay(secondAnimDelay);
 						member->GetComponent<UI_ShopMenu_Animator>()->OnAnim();
 					}
 
-					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOP_BUYMENU); // no animation -> enum shop no animation
 					for (auto member : group)
 					{
 						member->GetComponent<CanvasRenderer>()->SetActive(true);
@@ -114,7 +122,7 @@ public:
 				});
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"WEAPON SHOP", CANVAS_GROUP_MAINWND_MAIN);
 				menu->AddComponent<MenuAnimator>();
-				menu->GetComponent<MenuAnimator>()->SetAnimator(inoutAmount, inoutSpeed, secondAnimDelay + 0.1f, Vector3(576.f, 270.f, 0.f));
+				menu->GetComponent<MenuAnimator>()->SetAnimator(inoutAmount, inoutSpeed, secondAnimDelay + 0.1f, Vector3(576.f, 270.f, 0.f)); // left move
 
 				Garage_ShopWindow();
 			}
@@ -138,7 +146,7 @@ public:
 					for (auto member : group)
 					{
 						member->GetComponent<MenuAnimator>()->AddStartDelay(-secondAnimDelay);
-						member->GetComponent<MenuAnimator>()->OutAnim();
+						member->GetComponent<MenuAnimator>()->InAnim();
 					}
 
 					auto inven = PlayerInfoManager::GetInstance()->GetInven();
@@ -218,7 +226,7 @@ public:
 							for (auto member : group)
 							{
 								member->GetComponent<MenuAnimator>()->AddStartDelay(secondAnimDelay);
-								member->GetComponent<MenuAnimator>()->InAnim();
+								member->GetComponent<MenuAnimator>()->OutAnim();
 							}
 
 							group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
@@ -294,7 +302,7 @@ public:
 				//{
 				//	EventHandler eventFunc = EventHandler([=]() {
 
-				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 주무?�으�??�임미사?�을
+				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 二쇰Т?μ쑝濡??먯엫誘몄궗?쇱쓣
 
 				//	});
 				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
@@ -315,7 +323,7 @@ public:
 				//{
 				//	EventHandler eventFunc = EventHandler([=]() {
 
-				//		PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Cannon"); // 보조무장?�로 캐논??
+				//		PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Cannon"); // 蹂댁“臾댁옣?쇰줈 罹먮끉??
 
 				//	});
 				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon -Cannon ] ", CANVAS_GROUP_MAINWND);
@@ -327,7 +335,7 @@ public:
 				//{
 				//	EventHandler eventFunc = EventHandler([=]() {
 
-				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Skill", L"EscapeMove"); //?�킬?�롯 첫번�??�츠???�킬???�하겠다.
+				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Skill", L"EscapeMove"); //?ㅽ궗?щ’ 泥ル쾲吏??뚯툩???ㅽ궗???뗮븯寃좊떎.
 
 				//	});
 				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) SkillSlot - First Parts : EscapeMove", CANVAS_GROUP_MAINWND);
@@ -337,11 +345,11 @@ public:
 				//For EmpMissile tes.t
 				{
 					//EventHandler evetFunc = EventHandler([=]() {ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp"); });
-					EventHandler eventFunc 
+					EventHandler eventFunc
 						= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Emp"); });
 					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) Weapon - First Parts : Emp", CANVAS_GROUP_MAINWND);
 					menu->SetPosition(1600.f, 850.f);
-				
+
 				}
 			}
 
@@ -357,7 +365,7 @@ public:
 		{
 			// ItemTitle
 
-			auto title = UIFactory::Prefab_ItemTitle(L"AIRCRAFT NAME");
+			auto title = UIFactory::Prefab_ItemTitle(L"F - 15");
 			title->SetPosition(1640.f, 195.f);
 			// ItemSubtitle
 			auto subtitle = UIFactory::Prefab_ItemSubtitle(L"[Description about item]");
@@ -385,7 +393,7 @@ public:
 						//name->SetPosition(1555.f, 260.f + slotInterval * i);
 
 						GetFloatFunc getValueFunc;
-						
+
 						switch (i)
 						{
 						case 0:
@@ -412,9 +420,9 @@ public:
 						});
 
 						_player->GetComponent<UIInteractor>()->AddEventHandler(eventFunc);
-						
+
 						bar->AddComponent<MenuAnimator>();
-						bar->GetComponent<MenuAnimator>()->SetAnimator(-inoutAmount, inoutSpeed, secondAnimDelay + delayInterval * i, Vector3(1740.f, 260.f + slotInterval * i, 0.f));
+						bar->GetComponent<MenuAnimator>()->SetAnimator(inoutAmount, inoutSpeed, secondAnimDelay + delayInterval * i, Vector3(1740.f, 260.f + slotInterval * i, 0.f));
 
 						name->SetParents(bar);
 						name->SetPosition(-185.f, 0.f, 0.f);
@@ -499,21 +507,23 @@ public:
 				// background image
 				{
 					float animAmount = WINCY;
-					float animSpeed = 1.f;
-					float secondAnimDelay = 1.2f;
+					float animSpeed = 0.5f;
+					float secondAnimDelay = 0.5f;
 
-					auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOPWND, L"Panel07_White2");
-					background->SetScale(360.f, 720.f);
-					background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.f, 0.2f, 0.5f, 1.f));
+					//190, 227, 253, 255
 
-					auto gradation = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_NOANIM, L"Panel07_White1_Gradation");
+					auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOPWND, L"Popup02_White2");
+					background->SetScale(360.f, 550.f);
+					background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
+
+					auto gradation = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_NOANIM, L"Popup02_White3");
 					gradation->SetParents(background);
-					gradation->SetScale(360.f, 720.f);
-					gradation->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.f, 0.3f, 0.6f, 0.8f));
+					gradation->SetScale(350.f, 540.f);
+					gradation->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
 
 
 					background->AddComponent<UI_ShopWnd_Animator>();
-					background->GetComponent<UI_ShopWnd_Animator>()->SetAnimator(animAmount, animAmount * 0.1f, animSpeed, 0.f, Vector3(1680.f, -WINCY * 0.5f, 0.f));
+					background->GetComponent<UI_ShopWnd_Animator>()->SetAnimator(animAmount, animAmount * 0.1f, animSpeed, 0.f, Vector3(1680.f, -WINCY * 0.5f - 100, 0.f));
 				}
 
 				// line effect image
@@ -550,7 +560,7 @@ public:
 				wstring curItemName = itemNames[i];
 				wstring mtrlName = itmeMtrl[i];
 				EventHandler onEvent = EventHandler([=]() {
-					// Load Item 
+					// Load Item
 					// 0. unselect other toggle
 					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPMENU);
 					for (auto member : group)
@@ -598,7 +608,6 @@ public:
 			singleDpm_text->SetPosition(-140.f, 0.f);
 			singleDpm_slider->SetPosition(400.f, 800.f);
 
-
 			// multi dpm text
 			auto multiDpm_text = UIFactory::Prefab_ItemStat_Text(L"MULTI DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 			// multi targe dpm slider
@@ -607,19 +616,13 @@ public:
 			multiDpm_text->SetPosition(-140.f, 0.f);
 			multiDpm_slider->SetPosition(400.f, 830.f);
 
-			
 			// buy button
-			
+
 			EventHandler buyFunc = EventHandler([=]() {
 				ItemManager::GetInstance()->BuyItem(L"Weapon", UIManager::GetInstance()->GetCurrentSelectItem());
 			});
 			auto buyButton = UIFactory::Prefab_ItemBuy_Button(buyFunc, L"BUY", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 
-			singleDpm_text->GetComponent<CanvasRenderer>()->SetActive(false);
-			singleDpm_slider->GetComponent<CanvasRenderer>()->SetActive(false);
-			multiDpm_text->GetComponent<CanvasRenderer>()->SetActive(false);
-			multiDpm_slider->GetComponent<CanvasRenderer>()->SetActive(false);
-			buyButton->GetComponent<CanvasRenderer>()->SetActive(false);
 		}
 	}
 

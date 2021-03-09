@@ -6,8 +6,11 @@
 #include "PlayerItem.h"
 #include "Enemy_Boss.h"
 #include "Enemy.h"
-
-
+#include "EnemyManager.h"
+#include "PlayerInfoManager.h"
+#include "EnemyDetector.h"
+#include "ParticleRenderer.h"
+#include "ParticleDead_IfCount0.h"
 
 
 ClusterBulletMove::ClusterBulletMove(Desc * _desc)
@@ -22,50 +25,92 @@ ClusterBulletMove::~ClusterBulletMove()
 {
 	Release();
 
+	if (m_smokeParticle)
+	{
+		m_smokeParticle->AddComponent<ParticleDead_IfCount0>();
+		m_smokeParticle->StopEmit();
+		m_smokeParticle = nullptr;
+	}
+
+	m_gameObject = nullptr;
+
 }
 
 void ClusterBulletMove::Initialize()
 {
-	m_player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
 
-	Vector3 playerLook = m_player->GetTransform()->GetForward();
-	Vector3 playerRight = m_player->GetTransform()->GetRight();
-	Vector3 playerUp = m_player->GetTransform()->GetUp();
+	ParticleRenderer::Desc render;
+	render.particleDataName = L"missile_smoke";
+	auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
+	m_smokeParticle = obj->GetComponent<ParticleRenderer>();
+	obj->SetParents(m_gameObject);
 
-	Vector3 winDir = playerRight * m_screenPos.x + playerUp * m_screenPos.y;
-	D3DXVec3Normalize(&winDir, &winDir);
-	m_firstDir = playerLook + winDir;
+
+	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
+
+	Matrix worldMat = m_player->GetTransform()->GetWorldMatrix();
+	Vector3 dirX = { worldMat._11, worldMat._12, worldMat._13 };
+	Vector3 dirY = { worldMat._21, worldMat._22, worldMat._23 };
+	Vector3 dirZ = { worldMat._31, worldMat._32, worldMat._33 };
+
+
+	//m_target = m_enemyDetector->GetLockOnTarget();
+	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
+	if (m_target)
+	{
+		Vector2 screenPos = Core::GetInstance()->GetMainCamera()->WorldToScreenPos(m_target->GetTransform()->position);
+		Vector2 enemyScreenPos = Vector2(screenPos.x * cosf(D3DXToRadian(90.f)), screenPos.y * sinf(D3DXToRadian(90.f)));
+
+		Vector3 screenDir = dirX * enemyScreenPos.x + dirY * enemyScreenPos.y;
+		D3DXVec3Normalize(&screenDir, &screenDir);
+		m_firstDir = dirZ + screenDir;
+	}
 
 }
 
 void ClusterBulletMove::Update()
 {
+	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
+	m_target = m_enemyDetector->GetLockOnTarget();
+}
+
+void ClusterBulletMove::LateUpdate()
+{
 	if (m_target)
 	{
+		// screen Pos Set, for.VERTICAL Range
 		Vector3 dir = m_target->GetTransform()->position - m_transform->position;
 		D3DXVec3Normalize(&dir, &dir);
-		m_transform->LookAt(dir + m_transform->position, 1.5f);
 		m_firstDir = Nalmak_Math::Lerp(m_firstDir, m_player->GetTransform()->GetForward(), dTime);
 		m_transform->position += ((dir + m_firstDir)  * 45.f * dTime);
 
 		float EnemyPlayerLenght = Nalmak_Math::Distance(m_player->GetTransform()->position, m_target->GetTransform()->position);
 		float fromEnemyLenght = Nalmak_Math::Distance(m_target->GetTransform()->position, m_gameObject->GetTransform()->position);
-
 		float ratioValue = fromEnemyLenght / EnemyPlayerLenght;
-
-		DEBUG_LOG(L"NOOOOO", ratioValue);
 		if (ratioValue <= 0.5f)
 		{
+			Boom();
 			DESTROY(m_gameObject);
-			m_start = true;
+			m_deadCheck = true;
 		}
 	}
+	else
+	{
+		m_transform->position += ((m_player->GetTransform()->GetForward())  * 45.f * dTime);
 
+	}
+
+	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 250.f)
+	{
+		Boom();
+		DESTROY(m_gameObject);
+		m_gameObject = nullptr;
+	}
 }
 
 void ClusterBulletMove::Release()
 {
-	if (m_start)
+	if (m_deadCheck)
 	{
 		MeshRenderer::Desc render;
 		render.meshName = L"kfir_weapon1";
@@ -75,9 +120,11 @@ void ClusterBulletMove::Release()
 		float length = 10.f;
 
 		Player_NearGuideBullet::Desc guidebulletInfo;
+		guidebulletInfo.speed = m_speed;
+
 		SphereCollider::Desc sphereColInfo;
 		sphereColInfo.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
-		guidebulletInfo.speed = m_speed;
+		
 
 		Vector3 dir = m_target->GetTransform()->position - m_transform->position;
 		D3DXVec3Normalize(&dir, &dir);
@@ -115,8 +162,22 @@ void ClusterBulletMove::Release()
 		}
 
 		SAFE_DELETE_ARR(axis);
+		m_deadCheck = false;
 
-		m_start = false;
+		Boom();
+		m_gameObject = nullptr;
 	}
-	m_gameObject = nullptr;
+	
+}
+
+void ClusterBulletMove::Boom()
+{
+	Vector3 pos = m_transform->GetWorldPosition();
+	ParticleRenderer::Desc particle;
+	particle.particleDataName = L"explosion_Flame";
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
+	particle.particleDataName = L"explosion_smokeBomb";
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
+	particle.particleDataName = L"explosion_spark";
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
 }

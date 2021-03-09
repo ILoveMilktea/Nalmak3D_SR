@@ -15,27 +15,35 @@ public:
 	Player_NearGuideBullet(Desc * _desc);
 	virtual ~Player_NearGuideBullet();
 
-	// ComponentÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Componentï¿½ï¿½(ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Óµï¿½
 	virtual void Initialize() override;
 	virtual void Update() override;
+	virtual void LateUpdate()override;
 	virtual void Release()override;
 
 
 	virtual void OnTriggerEnter(Collisions& _collision)override;
 	virtual void OnTriggerStay(Collisions& _collision)override;
 	virtual void OnTriggerExit(Collisions& _collision)override;
-
+	
+	void Boom();
+	void SmokeCreate();
 private:
 	//GameObject * FindEnemy(OBJECT_TAG _enum, float _mimDis = 0);
 private:
 	Vector3 m_firstTarget;
+	Vector3 m_firstDir;
+	Vector3* m_finalTargetPos;
 	bool	m_bFinish;
+	bool	m_bState = false;
 private:
 	GameObject* m_player;
 	GameObject* m_target;
-	EnemyDetector* m_enemyDetector;
-	Vector3 m_firstDir;
+	GameObject* m_finder = nullptr;
+	class EnemyDetector* m_enemyDetector;
+	class ParticleRenderer* m_smokeParticle;
+
+	StateControl * m_stateControl;
 	float m_speed;
 	int m_dmg;
 };
-

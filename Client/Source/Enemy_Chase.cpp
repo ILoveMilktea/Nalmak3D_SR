@@ -48,6 +48,8 @@ void Enemy_Chase::UpdateState()
 
 		if (m_pEnemy->Get_Distance() <= 20.f)
 		{
+			//int iRotZ = rand() % 21 - 10;
+			//m_transform->RotateZ(iRotZ);
 			m_bAvoid = true;
 		}
 	}
@@ -57,19 +59,25 @@ void Enemy_Chase::UpdateState()
 		//if u wanna dramatic effect,
 		//Enemy located upper than player, soar.
 		//or Enemy located downner than player, dive.
-
+	
 		m_pEnemy->Go_Straight();
 		
 		m_fAvoidDelta += dTime;
+
+		if (m_fAvoidDelta >= 2.f)
+		{
+			m_pEnemy->Set_Accel(false);
+		}
 
 		if (m_fAvoidDelta >= 3.f)
 		{
 			m_fAvoidDelta = 0.f;
 			m_bAvoid = false;
+			m_pEnemy->Set_Accel(true);
 		}
 	}
 
-	
+
 }
 
 void Enemy_Chase::ExitState()

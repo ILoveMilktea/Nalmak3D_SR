@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "..\Include\Player_EmpMissile.h"
 #include "Player_EmpMove.h"
+#include "ParticleRenderer.h"
+
+#include "ParticleDead_IfCount0.h"
 
 /*
 1. Create ItemInfo and This Class via itemManager (and then, emplace_back to ItemManager class's 'm_mapShopItem')
@@ -35,6 +38,16 @@ void Player_EmpMissile::ItemShot()
 
 	//Emp->GetTransform()->position = Emp->GetTransform()->GetWorldPosition();
 	//Emp->GetTransform()->rotation = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER)->GetTransform()->rotation;
+	{
+		ParticleRenderer::Desc render;
+		render.particleDataName = L"missile_smokeLaunch";
+
+		auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render)->AddComponent<ParticleDead_IfCount0>();
+
+		obj->GetComponent<ParticleRenderer>()->Play();
+		obj->SetParents(Emp);
+	}
+	
 	Emp->GetTransform()->DeleteParent();
 
 	Player_EmpMove::Desc Move_desc;
@@ -57,7 +70,7 @@ void Player_EmpMissile::CreateBullet()
 	}
 
 	Emp = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Emp_Missile");
-	Emp->SetScale(Vector3(1.f, 1.f, 2.f));
+	Emp->SetScale(Vector3(0.2f, 0.2f, 0.3f));
 	Emp->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
 	Emp->SetPosition(m_itemInfo.createPos);
 
