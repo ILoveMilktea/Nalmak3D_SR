@@ -13,14 +13,6 @@ public:
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 
-public: 
-
-
-public:
-
-	
-public:
-
 	
 private:
 	int		m_iDirection = 0;

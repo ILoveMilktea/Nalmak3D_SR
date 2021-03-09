@@ -45,6 +45,15 @@ void MidBoss_Wave_Attack::UpdateState()
 
 		m_waveTimer = 0.f;
 	}
+
+
+#ifdef _DEBUG
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	{
+		SetState(_sn_idle);
+		return;
+	}
+#endif // _DEBUG
 }
 
 void MidBoss_Wave_Attack::ExitState()

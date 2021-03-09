@@ -46,6 +46,10 @@ void MachineGun::Update()
 
 }
 
+void MachineGun::Release()
+{
+}
+
 void MachineGun::OnTriggerEnter(Collisions & _collision)
 {
 	//MainGame에서 충돌 확인할 Layer설정 해줘야함.

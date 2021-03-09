@@ -15,6 +15,7 @@ public:
 public:
 	void Exit(); 
 public:
+	void SetExitTime(float time) { m_fExitTime = time; }
 
 private:
 	float	m_fExitTime;

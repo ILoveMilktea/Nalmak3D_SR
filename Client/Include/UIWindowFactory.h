@@ -858,7 +858,7 @@ public:
 
 				GetFloatFunc getValueFunc =
 					GetFloatFunc([=]() {
-					return 5.f/* ���߿� skill ������? */;
+					return 5.f;
 				});
 
 				EventHandler eventFunc =

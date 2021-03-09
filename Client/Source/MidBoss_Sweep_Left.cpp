@@ -73,6 +73,14 @@ void MidBoss_Sweep_Left::UpdateState()
 		SetState(_sn_idle);
 		return;
 	}
+
+#ifdef _DEBUG
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	{
+		SetState(_sn_idle);
+		return;
+	}
+#endif // _DEBUG
 }
 
 void MidBoss_Sweep_Left::ExitState()

@@ -52,6 +52,7 @@ void MidBoss_Laser_Detach::UpdateState()
 		SetState(_sn_laserCharge);
 		return;
 	}
+
 }
 
 void MidBoss_Laser_Detach::ExitState()

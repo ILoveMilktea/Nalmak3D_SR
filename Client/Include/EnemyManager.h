@@ -55,7 +55,10 @@ public: /* Funcs */
 	void Enemy_Spawn_Quick();
 
 
-	void Enemy_Spawn_Evasion(Vector3 _pos, ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
+	void Enemy_Spawn_Evasion(
+		ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE,
+		Vector3 _spawnPos = Vector3(0.f, 500.f, 0.f),
+		Vector3 _destpos = Vector3(0.f, 0.f, 0.f));
 
 	void MidBoss_Spawn(Vector3 _pos);
 	GameObject* Boss_Spawn();

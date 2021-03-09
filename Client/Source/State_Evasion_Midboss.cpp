@@ -2,6 +2,7 @@
 #include "..\Include\State_Evasion_Midboss.h"
 
 #include "Stage2_Mainstream_Define.h"
+#include "MidBoss_Define.h"
 
 #include "EnemyManager.h"
 
@@ -20,7 +21,7 @@ void State_Evasion_Midboss::Initialize()
 
 void State_Evasion_Midboss::EnterState()
 {
-	EnemyManager::GetInstance()->MidBoss_Spawn(Vector3(0.f, 100.f, 50.f));
+	EnemyManager::GetInstance()->MidBoss_Spawn(_MIDBOSS_SPAWNPOS);
 }
 
 void State_Evasion_Midboss::UpdateState()

@@ -4,6 +4,7 @@
 #include "Stage2_Mainstream_Define.h"
 
 #include "EnemyManager.h"
+#include "InputManager.h"
 
 State_Evasion_Airfire::State_Evasion_Airfire()
 {
@@ -40,6 +41,12 @@ void State_Evasion_Airfire::UpdateState()
 		Wave_1();
 	else
 		Wave_2();
+
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	{
+		SetState(_sn_midboss);
+		return;
+	}
 }
 
 void State_Evasion_Airfire::ExitState()
@@ -50,7 +57,7 @@ void State_Evasion_Airfire::Wave_1()
 {
 	if (m_spawnTimer > 2.f)
 	{
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(m_spawnPos[m_spawnIndex], AIRFIRE);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, m_spawnPos[m_spawnIndex]);
 		m_spawnTimer = 0.f;
 		++m_spawnIndex;
 	}
@@ -62,12 +69,12 @@ void State_Evasion_Airfire::Wave_2()
 	{
 		if (m_spawnIndex == 8)
 		{
-			m_stateControl->SetState(_sn_midboss);
+			SetState(_sn_midboss);
 			return;
 		}
 
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(m_spawnPos[m_spawnIndex - 4], AIRFIRE);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(m_spawnPos[m_spawnIndex], AIRFIRE);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, m_spawnPos[m_spawnIndex - 4]);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, m_spawnPos[m_spawnIndex]);
 		m_spawnTimer = 0.f;
 		++m_spawnIndex;
 	}

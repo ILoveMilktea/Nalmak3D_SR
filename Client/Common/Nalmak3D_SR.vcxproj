@@ -208,8 +208,10 @@
     <ClInclude Include="..\Include\ClusterBulletMove.h" />
     <ClInclude Include="..\Include\Enemy_CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
+    <ClInclude Include="..\Include\Enemy_Evasion_Appear.h" />
     <ClInclude Include="..\Include\Enemy_MidBoss.h" />
     <ClInclude Include="..\Include\MidBoss_Appear.h" />
+    <ClInclude Include="..\Include\MidBoss_MoveLeft.h" />
     <ClInclude Include="..\Include\Stage2_Mainstream_Headers.h" />
     <ClInclude Include="..\Include\Stage2_Mainstream_Define.h" />
     <ClInclude Include="..\Include\FieldCameraEvationState.h" />
@@ -234,7 +236,7 @@
     <ClInclude Include="..\Include\MidBoss_Sweep_MoveToForward.h" />
     <ClInclude Include="..\Include\MidBoss_Wave_Attack.h" />
     <ClInclude Include="..\Include\MidBoss_Wave_Idle.h" />
-    <ClInclude Include="..\Include\MidBoss_Move.h" />
+    <ClInclude Include="..\Include\MidBoss_MoveRight.h" />
     <ClInclude Include="..\Include\MidBoss_Sweep_Left.h" />
     <ClInclude Include="..\Include\MidBoss_Sweep_Right.h" />
     <ClInclude Include="..\Include\MidBoss_MoveToCenter.h" />
@@ -387,6 +389,7 @@
     <ClCompile Include="..\Source\ClusterBulletMove.cpp" />
     <ClCompile Include="..\Source\Enemy_CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
+    <ClCompile Include="..\Source\Enemy_Evasion_Appear.cpp" />
     <ClCompile Include="..\Source\Enemy_MidBoss.cpp" />
     <ClCompile Include="..\Source\FieldCameraEvationState.cpp" />
     <ClCompile Include="..\Source\FieldCameraInfo.cpp" />
@@ -405,11 +408,12 @@
     <ClCompile Include="..\Source\MidBoss_Laser_Siege.cpp" />
     <ClCompile Include="..\Source\MidBoss_Laser_Start.cpp" />
     <ClCompile Include="..\Source\MidBoss_Idle.cpp" />
+    <ClCompile Include="..\Source\MidBoss_MoveLeft.cpp" />
     <ClCompile Include="..\Source\MidBoss_SingleBullet.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_MoveToForward.cpp" />
     <ClCompile Include="..\Source\MidBoss_Wave_Attack.cpp" />
     <ClCompile Include="..\Source\MidBoss_Wave_Idle.cpp" />
-    <ClCompile Include="..\Source\MidBoss_Move.cpp" />
+    <ClCompile Include="..\Source\MidBoss_MoveRight.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_Left.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_Right.cpp" />
     <ClCompile Include="..\Source\MidBoss_MoveToCenter.cpp" />

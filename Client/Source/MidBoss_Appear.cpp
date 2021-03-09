@@ -25,7 +25,7 @@ void MidBoss_Appear::EnterState()
 	m_centerPosition = _MIDBOSS_CENTERPOS;
 
 	m_lerpTimer = 0.f;
-	m_lerpDuration = 2.f;
+	m_lerpDuration = 8.f;
 }
 
 void MidBoss_Appear::UpdateState()
