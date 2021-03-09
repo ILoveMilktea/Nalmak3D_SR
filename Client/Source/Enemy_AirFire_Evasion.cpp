@@ -20,7 +20,7 @@ void AirFire_Evasion::Initialize()
 void AirFire_Evasion::EnterState()
 {
 	m_pPlayer = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
-	m_transform->SetPosition(Vector3(50.f, -100.f, 30.f));
+	//m_transform->SetPosition(Vector3(50.f, -100.f, 30.f));
 }
 
 void AirFire_Evasion::UpdateState()
@@ -41,7 +41,7 @@ void AirFire_Evasion::UpdateState()
 			m_vDestPos.y = m_pPlayer->GetTransform()->position.y;
 			m_vDestPos.z = m_pPlayer->GetTransform()->position.z + (float)(rand() % 11 - 5);
 
-			Bullet_Manager::GetInstance()->Fire_Dest(m_transform->position, m_vDestPos, 150.f);
+			//Bullet_Manager::GetInstance()->Fire_Dest(m_transform->position, m_vDestPos, 150.f);
 
 			++m_iCount;
 			m_fBurstDelta = 0.f;

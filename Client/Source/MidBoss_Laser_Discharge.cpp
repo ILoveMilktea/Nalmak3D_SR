@@ -34,6 +34,14 @@ void MidBoss_Laser_Discharge::UpdateState()
 		SetState(_sn_laserAttach);
 		return;
 	}
+
+#ifdef _DEBUG
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	{
+		SetState(_sn_laserAttach);
+		return;
+	}
+#endif // _DEBUG
 }
 
 void MidBoss_Laser_Discharge::ExitState()

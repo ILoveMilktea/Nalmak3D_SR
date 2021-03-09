@@ -16,9 +16,10 @@ public:
 	virtual void ExitState() override;
 
 private:
-	int g_patternIndex;
-
 	float m_stateTimer;
-	float m_stateTerm;
+	float m_stateDuration;
+
+	vector<wstring>::iterator m_curOrder;
+	vector<wstring> m_stateOrder;
 };
 

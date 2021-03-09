@@ -37,5 +37,8 @@ private:
 	bool	m_cheatCheck  =false;
 	float m_cannonCoolTime;
 	PARTS_NUM m_prevParts = PARTS_MAX;
+	PointLight* m_pointLight;
+	float m_lightRadius;
+	float m_lightTargetRadius;
 };
 

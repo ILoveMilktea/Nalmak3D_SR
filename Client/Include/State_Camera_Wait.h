@@ -1,11 +1,11 @@
 #pragma once
 #include "IState.h"
-class MidBoss_Move :
+class State_Camera_Wait :
 	public IState
 {
 public:
-	MidBoss_Move();
-	~MidBoss_Move();
+	State_Camera_Wait();
+	~State_Camera_Wait();
 
 	virtual void Initialize() override;
 	virtual void EnterState() override;

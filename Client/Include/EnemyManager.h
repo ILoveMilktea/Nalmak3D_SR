@@ -54,16 +54,20 @@ public: /* Funcs */
 		BULLET_STATUS _missile = BULLET_STATUS(),
 		BULLET_STATUS _homing = BULLET_STATUS());
 
-	void		Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos = Vector3(0.f,0.f,0.f));
+	void Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos = Vector3(0.f,0.f,0.f));
 
 	void Enemy_Spawn_Normal();
 	void Enemy_Spawn_Huge();
 	void Enemy_Spawn_Quick();
 
 
-	void		Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE);
+	void Enemy_Spawn_Evasion(
+		ENEMY_EVASION_STATE _initState = ENEMY_EVASION_STATE::SLIDE,
+		Vector3 _spawnPos = Vector3(0.f, 500.f, 0.f),
+		Vector3 _destpos = Vector3(0.f, 0.f, 0.f),
+		float _lifeTime = 5.f);
 
-	void		MidBoss_Spawn(ENEMY_STATE _initState);
+	void MidBoss_Spawn(Vector3 _pos);
 	GameObject* Boss_Spawn();
 
 	void		Player_FovSpawnTest(bool _front, float _distance);
@@ -76,22 +80,10 @@ public: /* Stage1 - tutorial + dogFight*/
 	void Spawn_S1P1_Quick();
 
 
-public: /* stage2 - phase1 (DogFight) */
-
-
-public: /* stage2 - phase2 (Evasion) */
-
-
-public: /* stage2 - phase3 (Boss)*/
-
-
-
 private:
-	//StateControl*	m_pStateControl = nullptr;
-
 	GameObject*		m_pBoss = nullptr;
 	int				m_iEnemyCount = 0;
 	int				m_iBossCount = 0;
 
-
+	StateControl* m_pStateControl;
 };

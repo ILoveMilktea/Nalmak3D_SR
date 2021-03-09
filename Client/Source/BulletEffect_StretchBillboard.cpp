@@ -96,6 +96,19 @@ void BulletEffect_StretchBillboard::OnTriggerEnter(Collisions & _collision)
 
 			DESTROY(m_gameObject);
 		}
+
+		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMYSHIELD)
+		{
+			//obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
+
+			ParticleRenderer::Desc effectDesc;
+			effectDesc.particleDataName = L"hit_effect_by_smallCannon";
+			auto effect = INSTANTIATE()->AddComponent<ParticleRenderer>(&effectDesc)->AddComponent<ParticleDead_IfCount0>();
+			effect->SetPosition(obj.GetGameObject()->GetTransform()->GetWorldPosition());
+
+			DESTROY(m_gameObject);
+		}
+
 	}
 }
 

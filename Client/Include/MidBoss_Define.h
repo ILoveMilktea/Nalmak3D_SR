@@ -1,7 +1,9 @@
 #pragma once
 
+#define _sn_appear				L"MidBoss_Appear"
 #define _sn_idle				L"MidBoss_Idle"
-#define _sn_move				L"MidBoss_Move"
+#define _sn_moveLeft			L"MidBoss_MoveLeft"
+#define _sn_moveRight			L"MidBoss_MoveRight"
 #define _sn_moveToCenter		L"MidBoss_MoveToCenter"
 #define _sn_rotate180			L"MidBoss_Rotate180"
 
@@ -27,8 +29,23 @@
 #define _sn_sweepMoveToForward	L"MidBoss_SweepMoveToForward"	
 
 // --- state control global variable
-#define _MIDBOSS_CENTERPOS	Vector3(0.f,0.f,30.f)
+#define _MIDBOSS_SPAWNPOS	Vector3(0.f,500.f,50.f)
+#define _MIDBOSS_CENTERPOS	Vector3(0.f,0.f,50.f)
 #define _MIDBOSS_CENTERROT	Quaternion(0.f,0.f,0.f,1.f)
+
+#define _MIDBOSS_RANDAMOUNT	100
+#define _MIDBOSS_LEFTPOS	Vector3(-50.f,0.f,50.f)
+#define _MIDBOSS_RIGHTPOS	Vector3(50.f,0.f,50.f)
+
+#define _UPSPAWN			Vector3(0.f,100.f,0.f)
+#define _DOWNSPAWN			Vector3(0.f,-100.f,0.f)
+#define _LEFTSPAWN			Vector3(-150.f,0.f,0.f)
+#define _RIGHTSPAWN			Vector3(150.f,0.f,0.f)
+
+#define _CENTERDEST			Vector3(0.f,0.f,0.f)
+#define _LEFTDEST			Vector3(-50.f,0.f,0.f)
+#define _RIGHTDEST			Vector3(50.f,0.f,0.f)
+#define _UPDEST				Vector3(0.f,0.f,50.f)
 
 #define _g_patternIndex			L"MidBoss_g_PatternIndex"
 #define _g_centerPosition		L"MidBoss_g_CenterPosition"

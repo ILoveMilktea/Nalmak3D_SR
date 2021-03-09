@@ -2,6 +2,7 @@
 #include "..\Include\MidBoss_Wave_Idle.h"
 #include "MidBoss_Define.h"
 
+
 MidBoss_Wave_Idle::MidBoss_Wave_Idle()
 {
 }
@@ -25,6 +26,7 @@ void MidBoss_Wave_Idle::EnterState()
 	g_waveCount = GetInteger(_g_waveCount);
 
 	++g_waveIndex;
+
 }
 
 void MidBoss_Wave_Idle::UpdateState()
@@ -39,6 +41,15 @@ void MidBoss_Wave_Idle::UpdateState()
 			SetState(_sn_waveAttack);
 
 	}
+	
+
+#ifdef _DEBUG
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	{
+		SetState(_sn_idle);
+		return;
+	}
+#endif // _DEBUG
 }
 
 void MidBoss_Wave_Idle::ExitState()

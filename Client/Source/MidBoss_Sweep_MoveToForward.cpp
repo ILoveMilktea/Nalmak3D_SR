@@ -27,6 +27,7 @@ void MidBoss_Sweep_MoveToForward::EnterState()
 
 	m_lerpTimer = 0.f;
 	m_lerpDuration = 1.f;
+
 }
 
 void MidBoss_Sweep_MoveToForward::UpdateState()
@@ -43,6 +44,14 @@ void MidBoss_Sweep_MoveToForward::UpdateState()
 		SetState(_sn_sweepRight);
 		return;
 	}
+
+#ifdef _DEBUG
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	{
+		SetState(_sn_idle);
+		return;
+	}
+#endif // _DEBUG
 }
 
 void MidBoss_Sweep_MoveToForward::ExitState()

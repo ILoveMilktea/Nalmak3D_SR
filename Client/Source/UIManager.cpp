@@ -131,7 +131,7 @@ bool UIManager::SkillSingleRotate(bool _inverse, int _speed)
 		return false;
 	}
 
-	m_skillRotatePivot->GetTransform()->RotateZ(angle * dTime * _speed);
+	m_skillRotatePivot->GetTransform()->RotateZ(angle * dTime * _speed );
 
 	size_t count = m_skillRotatePivot->GetTransform()->GetChildCount();
 	for (int i = 0; i < count; ++i)

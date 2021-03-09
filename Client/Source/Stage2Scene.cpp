@@ -16,6 +16,10 @@
 #include "Camera_Evasion.h"
 #include "Camera_Boss.h"
 #include "Camera_Boss_Appear.h"
+
+#include "Stage2_Mainstream_Define.h"
+#include "Stage2_Mainstream_Headers.h"
+
 #include "UIFactory.h"
 
 Stage2Scene::Stage2Scene()
@@ -30,14 +34,14 @@ Stage2Scene::~Stage2Scene()
 void Stage2Scene::Initialize()
 {
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
-	
+
 	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	INSTANTIATE()->AddComponent<Grid>();
 
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.6f;
 	light.ambientIntensity = 0.02f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(70, 180, 0);
 
 	VIBufferRenderer::Desc ground;
 	ground.mtrlName = L"ground";
@@ -63,7 +67,7 @@ void Stage2Scene::Initialize()
 		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraSmoothFollowState>(L"CameraFollow");
 		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");
 		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraNearEnemyState>(L"CameraNearEnemy");
-		
+
 		m_pMainCamera->GetComponent<StateControl>()->AddState<Camera_Evasion>(L"CameraEvasion");
 
 		m_pMainCamera->GetComponent<StateControl>()->AddState<Camera_Boss_Appear>(L"CameraBoss_Appear");
@@ -78,4 +82,8 @@ void Stage2Scene::Initialize()
 	StageManager::GetInstance()->Get_StateControl()->AddState<EvasionState>(L"Evasion");
 	StageManager::GetInstance()->Get_StateControl()->AddState<BossState>(L"Boss");
 	StageManager::GetInstance()->Get_StateControl()->InitState(L"Dog_Fight");
+
+
+
+	StageManager::GetInstance()->Get_StateControl()->AddState<State_Evasion_Enter>(_sn_enter);
 }

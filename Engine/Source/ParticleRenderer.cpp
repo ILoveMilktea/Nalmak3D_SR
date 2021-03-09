@@ -412,6 +412,7 @@ void ParticleRenderer::EmitBox(int _count, const Matrix& _world)
 		particle->Reset();
 		Vector3 posOffset = Vector3(Nalmak_Math::Rand(-halfWidth, halfWidth), Nalmak_Math::Rand(-halfHeight, halfHeight), Nalmak_Math::Rand(-halfDepth, halfDepth));
 		
+		
 		if (parents)
 		{
 			particle->parents = parents;

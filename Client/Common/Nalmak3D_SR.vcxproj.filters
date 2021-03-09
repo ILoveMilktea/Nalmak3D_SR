@@ -373,76 +373,67 @@
       <Filter>__Phase2_Lab</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Defense_Start.h">
-      <Filter>__Phase2_Lab\State\4. Defense</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Sweep_Start.h">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Wave_Start.h">
-      <Filter>__Phase2_Lab\State\1. Wave</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\1. Wave</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Idle.h">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\MidBoss_Move.h">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_MoveToCenter.h">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Rotate180.h">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Sweep_Right.h">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Sweep_Left.h">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Wave_Idle.h">
-      <Filter>__Phase2_Lab\State\1. Wave</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\1. Wave</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Defense_Move.h">
-      <Filter>__Phase2_Lab\State\4. Defense</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\MidBoss_Headers.h">
-      <Filter>__Phase2_Lab</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\MidBoss_Define.h">
-      <Filter>__Phase2_Lab</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Wave_Attack.h">
-      <Filter>__Phase2_Lab\State\1. Wave</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\1. Wave</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_SingleBullet.h">
       <Filter>__Phase2_Lab</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Sweep_MoveToForward.h">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Fire.h">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Charge.h">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Discharge.h">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Detach.h">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Attach.h">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_BulletProof.h">
       <Filter>__Phase2_Lab</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Start.h">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Siege.h">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Player.h">
       <Filter>02.Component\00.Manager\Player</Filter>
@@ -474,14 +465,65 @@
     <ClInclude Include="..\Include\Player_Boss_Enter.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Player_Evasion_Exit.h">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Boss_Enter.h">
       <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Boss_Interrupt.h">
       <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Player_Evasion_Exit.h">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_Airfire.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_Enter.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_Midboss.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_MidbossDead.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MidBoss_Headers.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MidBoss_Define.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Camera_Evasion.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Camera_Wait.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Player_Wait.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Player_Evasion.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage2_Mainstream_Define.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage2_Mainstream_Headers.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MidBoss_Appear.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MidBoss_MoveLeft.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MidBoss_MoveRight.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Evasion_Disappear.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Evasion_Appear.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_Debugging.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
@@ -833,70 +875,67 @@
       <Filter>__Phase2_Lab</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Defense_Start.cpp">
-      <Filter>__Phase2_Lab\State\4. Defense</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Sweep_Start.cpp">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Wave_Start.cpp">
-      <Filter>__Phase2_Lab\State\1. Wave</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\1. Wave</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Idle.cpp">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\MidBoss_Move.cpp">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_MoveToCenter.cpp">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Rotate180.cpp">
-      <Filter>__Phase2_Lab\State\00. Static</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Sweep_Right.cpp">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Sweep_Left.cpp">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Wave_Idle.cpp">
-      <Filter>__Phase2_Lab\State\1. Wave</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\1. Wave</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Defense_Move.cpp">
-      <Filter>__Phase2_Lab\State\4. Defense</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Wave_Attack.cpp">
-      <Filter>__Phase2_Lab\State\1. Wave</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\1. Wave</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_SingleBullet.cpp">
       <Filter>__Phase2_Lab</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Sweep_MoveToForward.cpp">
-      <Filter>__Phase2_Lab\State\2. Sweep</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Fire.cpp">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Start.cpp">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Charge.cpp">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Discharge.cpp">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Detach.cpp">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Attach.cpp">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_BulletProof.cpp">
       <Filter>__Phase2_Lab</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Siege.cpp">
-      <Filter>__Phase2_Lab\State\3. Laser</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Player.cpp">
       <Filter>02.Component\00.Manager\Player</Filter>
@@ -928,14 +967,53 @@
     <ClCompile Include="..\Source\Player_Boss_Enter.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Player_Evasion_Exit.cpp">
-      <Filter>02.Component\00.Manager\Player\PlayerFSM\BossStageMove</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Boss_Enter.cpp">
       <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Boss_Interrupt.cpp">
       <Filter>02.Component\00.Manager\Enemy\04%29Boss_Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Player_Evasion_Exit.cpp">
+      <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Evasion_Airfire.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Evasion_Enter.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Evasion_Midboss.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Evasion_MidbossDead.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Camera_Evasion.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Camera_Wait.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Player_Wait.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Player_Evasion.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MidBoss_Appear.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MidBoss_MoveLeft.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MidBoss_MoveRight.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Evasion_Disappear.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Evasion_Appear.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Debugging.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
@@ -1196,23 +1274,41 @@
     <Filter Include="__Phase2_Lab">
       <UniqueIdentifier>{b345c6f1-1a73-4d4c-9952-e8adc9fe635d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="__Phase2_Lab\State">
+    <Filter Include="__Phase2_Lab\phaseFSM">
+      <UniqueIdentifier>{03bc531f-3754-4602-8d1c-437081c0e2f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\MainStream">
+      <UniqueIdentifier>{30e2b7fd-4fe7-4c5b-94d2-ec4f599c48ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor">
+      <UniqueIdentifier>{e8599a70-13fe-48c4-bc57-eb2a6b301557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Midboss">
       <UniqueIdentifier>{2cde3728-ae8d-4e12-9aea-018576de44dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="__Phase2_Lab\State\1. Wave">
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Midboss\1. Wave">
       <UniqueIdentifier>{cb08b216-592a-4e7d-98ee-34f2625cb52c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="__Phase2_Lab\State\2. Sweep">
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Midboss\2. Sweep">
       <UniqueIdentifier>{4c460477-33a8-48f1-b812-07b27ace54b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="__Phase2_Lab\State\4. Defense">
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense">
       <UniqueIdentifier>{160f1f0d-1bf3-41e0-9fd4-069e7e2b5084}</UniqueIdentifier>
     </Filter>
-    <Filter Include="__Phase2_Lab\State\00. Static">
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static">
       <UniqueIdentifier>{178414dd-fe34-4d31-80a1-396203ba9bda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="__Phase2_Lab\State\3. Laser">
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser">
       <UniqueIdentifier>{cdd7a491-4266-4784-9cb3-0a063cd30b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Player">
+      <UniqueIdentifier>{37201e8c-1b3d-4102-b776-664a03b55020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Camera">
+      <UniqueIdentifier>{211f8d6e-4e54-470c-b537-1949a85e936b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Enemy">
+      <UniqueIdentifier>{3c423167-0ac7-457a-93d9-fc2125fed6bd}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Death">
       <UniqueIdentifier>{d5f13b66-30ff-4c40-ba3c-319d661789ec}</UniqueIdentifier>

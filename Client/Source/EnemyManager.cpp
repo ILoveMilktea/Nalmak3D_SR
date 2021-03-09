@@ -23,6 +23,8 @@
 #include "Boss_Enter.h"
 #include "Boss_Interrupt.h"
 
+#include "Enemy_Evasion_Appear.h"
+#include "Enemy_Evasion_Disappear.h"
 #include "MidBoss_Headers.h"
 #include "MidBoss_Define.h"
 #include "Enemy_Debugging.h"
@@ -288,63 +290,97 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 
 void EnemyManager::Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos)
 {
-	//if (pos == Vector3(0.f, 0.f, 0.f))
-	//{
-	//	Vector3 vRand = Nalmak_Math::Rand(Vector3(-100.f, -100.f, -100.f), Vector3(100.f, 100.f, 100.f));
-
-	//	Enemy_Spawn(vRand, Vector3(0.f, 0.1f, 0.1f), _initState);
-	//}
-/*	else {  */Enemy_Spawn(pos, Vector3(0.2f, 0.2f, 0.2f), _initState); //}
-
 }
 
-void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
+
+void EnemyManager::Enemy_Spawn_Evasion(
+	ENEMY_EVASION_STATE _initState,
+	Vector3 _spawnPos,
+	Vector3 _destpos,
+	float _lifeTime)
 {
 	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
 	Enemy_obj->SetRotation(0.f, 180.f, 0.f);
 	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
 
 	Enemy_obj->AddComponent<StateControl>();
-	StateControl* m_pStateControl = Enemy_obj->GetComponent<StateControl>();
-	m_pStateControl->AddState<Slide_Evasion>(L"Slide");
-	m_pStateControl->AddState<Diagonal_Evasion>(L"Diagonal");
-	m_pStateControl->AddState<CrossFire_Evasion>(L"CrossFire");
-	m_pStateControl->AddState<Look_Evasion>(L"Look");
-	m_pStateControl->AddState<Circle_Evasion>(L"Circle");
-	m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
-	m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
+	m_pStateControl = Enemy_obj->GetComponent<StateControl>();
+
 	m_pStateControl->AddState<Exit_Evasion>(L"Exit");
 	m_pStateControl->AddState<Enemy_Explosion>(L"Explosion");
 	m_pStateControl->AddState<Enemy_Falling>(L"Falling");
 	m_pStateControl->AddState<Enemy_Death>(L"Death");
 
+	// appear
+	m_pStateControl->AddState<Enemy_Evasion_Appear>(L"Evasion_Appear");
+	Enemy_Evasion_Appear* appearState = m_pStateControl->GetState<Enemy_Evasion_Appear>(L"Evasion_Appear");
+	appearState->SetStartPos(_spawnPos);
+	appearState->SetDestPos(_destpos);
+
+	m_pStateControl->AddState<Enemy_Evasion_Disappear>(L"Evasion_Disappear");
+	Enemy_Evasion_Disappear* d_state = m_pStateControl->GetState<Enemy_Evasion_Disappear>(L"Evasion_Disappear");
+	d_state->SetDestPos(_spawnPos);
+
+	// pattern
 	switch (_initState)
 	{
 	case SLIDE:
-	{m_pStateControl->InitState(L"Slide"); }
-		break;
+	{
+		m_pStateControl->AddState<Slide_Evasion>(L"Slide");
+		m_pStateControl->InitState(L"Slide");
+	}
+	break;
 	case DIAGONAL:
-	{m_pStateControl->InitState(L"Diagonal"); }
-		break;
+	{
+		m_pStateControl->AddState<Diagonal_Evasion>(L"Diagonal");
+		m_pStateControl->InitState(L"Diagonal");
+	}
+	break;
 	case CROSSFIRE:
-	{m_pStateControl->InitState(L"CrossFire"); }
-		break;
+	{
+		Enemy_obj->SetPosition(_spawnPos);
+		m_pStateControl->AddState<CrossFire_Evasion>(L"CrossFire");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"CrossFire")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"CrossFire");
+		m_pStateControl->InitState(L"Evasion_Appear");
+	}
+	break;
 	case LOOK:
-	{m_pStateControl->InitState(L"Look"); }
-		break;
+	{
+		Enemy_obj->SetPosition(_spawnPos);
+		m_pStateControl->AddState<Look_Evasion>(L"Look");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"Look")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"Look");
+		m_pStateControl->InitState(L"Evasion_Appear");
+	}
+	break;
 	case CIRCLE:
-	{m_pStateControl->InitState(L"Circle"); }
-		break;
+	{
+		Enemy_obj->SetPosition(_spawnPos);
+		m_pStateControl->AddState<Circle_Evasion>(L"Circle");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"Circle")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"Circle");
+		m_pStateControl->InitState(L"Evasion_Appear");
+	}
+	break;
 	case PRYMIDE:
-	{m_pStateControl->InitState(L"Prymide"); }
-		break;
+	{
+		Enemy_obj->SetPosition(_spawnPos);
+		m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"Prymide")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"Prymide");
+		m_pStateControl->InitState(L"Evasion_Appear");
+	}
+	break;
 	case AIRFIRE:
-	{m_pStateControl->InitState(L"AirFire"); }
-		break;
-	case EVASION_STATE_MAX:
-		break;
-	default:
-		break;
+	{
+		Enemy_obj->SetPosition(_spawnPos);
+		m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"AirFire")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"AirFire");
+		m_pStateControl->InitState(L"Evasion_Appear");
+	}
+	break;
 	}
 
 
@@ -367,10 +403,10 @@ void EnemyManager::Enemy_Spwan_Evasion(ENEMY_EVASION_STATE _initState)
 
 }
 
-void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
+void EnemyManager::MidBoss_Spawn(Vector3 _pos)
 {
-	GameObject* boss = INSTANTIATE(OBJECT_TAG_BOSS, L"MidBoss");
-	boss->SetPosition(-30.f, 0.f, 30.f);
+	GameObject* boss = INSTANTIATE(OBJECT_TAG_MIDBOSS, L"MidBoss");
+	boss->SetPosition(_pos);
 	boss->SetRotation(0.f, 180.f, 0.f);
 	boss->SetScale(20.f, 20.f, 20.f);
 
@@ -379,8 +415,10 @@ void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
 
 	// add staaaaaaaaate
 	{
+		stateControl->AddState<MidBoss_Appear>(_sn_appear);
 		stateControl->AddState<MidBoss_Idle>(_sn_idle);
-		stateControl->AddState<MidBoss_Move>(_sn_move);
+		stateControl->AddState<MidBoss_MoveLeft>(_sn_moveLeft);
+		stateControl->AddState<MidBoss_MoveRight>(_sn_moveRight);
 		stateControl->AddState<MidBoss_MoveToCenter>(_sn_moveToCenter);
 		stateControl->AddState<MidBoss_Rotate180>(_sn_rotate180);
 
@@ -404,7 +442,7 @@ void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
 		stateControl->AddState<MidBoss_Defense_Start>(_sn_defenseStart);
 		stateControl->AddState<MidBoss_Defense_Move>(_sn_defenseMove);
 
-		stateControl->InitState(_sn_idle);
+		stateControl->InitState(_sn_appear);
 	}
 
 	auto bulletproofPivot = INSTANTIATE();
@@ -467,7 +505,7 @@ void EnemyManager::MidBoss_Spawn(ENEMY_STATE _initState)
 		desc_col.radius = colRadius * 0.5f;
 		desc_col.collisionLayer = COLLISION_LAYER_ENEMY_SHIELD;
 
-		auto plate = INSTANTIATE();
+		auto plate = INSTANTIATE(OBJECT_TAG_ENEMYSHIELD);
 		plate->AddComponent<Enemy_BulletProof>(&desc_bp);
 		plate->AddComponent<VIBufferRenderer>(&desc_plate);
 		plate->AddComponent<SphereCollider>(&desc_col);
