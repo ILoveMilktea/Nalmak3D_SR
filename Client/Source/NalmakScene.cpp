@@ -19,7 +19,6 @@ NalmakScene::~NalmakScene()
 
 void NalmakScene::Initialize()
 {
-	GameObject* plane;
 
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 

@@ -20,12 +20,15 @@ void MidBoss_Idle::Initialize()
 	m_stateOrder.emplace_back(_sn_moveLeft);
 	m_stateOrder.emplace_back(_sn_moveToCenter);
 	m_stateOrder.emplace_back(_sn_waveStart);
+	m_stateOrder.emplace_back(_sn_rotateAccel);
 	m_stateOrder.emplace_back(_sn_sweepStart);
 	m_stateOrder.emplace_back(_sn_laserStart);
 	m_stateOrder.emplace_back(_sn_moveRight);
+	m_stateOrder.emplace_back(_sn_rotateAccel);
 	m_stateOrder.emplace_back(_sn_waveStart);
 	m_stateOrder.emplace_back(_sn_moveLeft);
 	m_stateOrder.emplace_back(_sn_waveStart);
+	m_stateOrder.emplace_back(_sn_rotateAccel);
 	m_stateOrder.emplace_back(_sn_sweepStart);
 
 	m_curOrder = m_stateOrder.begin();
@@ -43,7 +46,6 @@ void MidBoss_Idle::EnterState()
 
 void MidBoss_Idle::UpdateState()
 {
-
 	m_stateTimer += dTime;
 	if (m_stateTimer > m_stateDuration)
 	{

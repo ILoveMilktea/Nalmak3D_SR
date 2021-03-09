@@ -43,8 +43,18 @@ void MidBoss_Appear::UpdateState()
 		return;
 	}
 
+#ifdef _DEBUG
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	{
+		m_transform->position = m_centerPosition;
+		SetState(_sn_idle);
+		return;
+	}
+#endif // _DEBUG
+
 }
 
 void MidBoss_Appear::ExitState()
 {
+	GetComponent<Enemy_MidBoss>()->SetRotateSpeed(_SPEED_LOW);
 }

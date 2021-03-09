@@ -5,7 +5,7 @@
 #define _sn_moveLeft			L"MidBoss_MoveLeft"
 #define _sn_moveRight			L"MidBoss_MoveRight"
 #define _sn_moveToCenter		L"MidBoss_MoveToCenter"
-#define _sn_rotate180			L"MidBoss_Rotate180"
+#define _sn_rotateAccel			L"MidBoss_RotateAccel"
 
 
 #define _sn_waveStart			L"MidBoss_WaveStart"
@@ -46,6 +46,10 @@
 #define _LEFTDEST			Vector3(-50.f,0.f,0.f)
 #define _RIGHTDEST			Vector3(50.f,0.f,0.f)
 #define _UPDEST				Vector3(0.f,0.f,50.f)
+
+#define _SPEED_HIGH				180.f
+#define _SPEED_MID				90.f
+#define _SPEED_LOW				60.f
 
 #define _g_patternIndex			L"MidBoss_g_PatternIndex"
 #define _g_centerPosition		L"MidBoss_g_CenterPosition"

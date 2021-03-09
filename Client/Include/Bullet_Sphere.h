@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-class MidBoss_SingleBullet :
+class Bullet_Sphere :
 	public Component
 {
 public:
@@ -15,8 +15,8 @@ public:
 	};
 
 public:
-	MidBoss_SingleBullet(Desc* _desc);
-	~MidBoss_SingleBullet();
+	Bullet_Sphere(Desc* _desc);
+	~Bullet_Sphere();
 
 	virtual void Initialize() override;
 	virtual void Update() override;

@@ -36,9 +36,12 @@ public: /* Get */
 	int		Get_CurHp() const;
 
 	GameObject* GetBulletproofPivot() { return m_bulletproofPivot; }
+
 public: /* Set */
 	void PivotRotateOn() { m_pivotRotate = true; }
 	void PivotRotateOff() { m_pivotRotate = false; }
+
+	void SetRotateSpeed(float _spead);
 
 public: /* Function */
 	void Damaged(int _dmg);
@@ -48,5 +51,11 @@ private:
 
 	GameObject* m_bulletproofPivot;
 	bool m_pivotRotate;
+
+	bool m_isAccelRotate;
+	float m_accelTimer;
+	float m_rotateSpeed;
+	float m_startSpeed;
+	float m_targetSpeed;
 };
 
