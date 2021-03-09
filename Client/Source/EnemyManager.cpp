@@ -349,7 +349,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Look_Evasion>(L"Look");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"Look")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<Look_Evasion>(L"Look")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"Look");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
@@ -358,7 +358,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Circle_Evasion>(L"Circle");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"Circle")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<Circle_Evasion>(L"Circle")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"Circle");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
@@ -367,7 +367,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"Prymide")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<Prymide_Evasion>(L"Prymide")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"Prymide");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
@@ -376,7 +376,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"AirFire")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<AirFire_Evasion>(L"AirFire")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"AirFire");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
