@@ -27,6 +27,7 @@ void MidBoss_Sweep_MoveToForward::EnterState()
 
 	m_lerpTimer = 0.f;
 	m_lerpDuration = 1.f;
+
 }
 
 void MidBoss_Sweep_MoveToForward::UpdateState()

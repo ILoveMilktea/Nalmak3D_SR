@@ -37,12 +37,15 @@
 #define _MIDBOSS_LEFTPOS	Vector3(-50.f,0.f,50.f)
 #define _MIDBOSS_RIGHTPOS	Vector3(50.f,0.f,50.f)
 
-#define _UPSPAWN			Vector3(-50.f,500.f,30.f)
-#define _LEFTSPAWN			Vector3(-550.f,0.f,30.f)
-#define _RIGHTSPAWN			Vector3(550.f,0.f,30.f)
+#define _UPSPAWN			Vector3(0.f,100.f,0.f)
+#define _DOWNSPAWN			Vector3(0.f,-100.f,0.f)
+#define _LEFTSPAWN			Vector3(-150.f,0.f,0.f)
+#define _RIGHTSPAWN			Vector3(150.f,0.f,0.f)
+
 #define _CENTERDEST			Vector3(0.f,0.f,0.f)
-#define _LEFTDEST			Vector3(-50.f,0.f,30.f)
-#define _RIGHTDEST			Vector3(50.f,0.f,30.f)
+#define _LEFTDEST			Vector3(-50.f,0.f,0.f)
+#define _RIGHTDEST			Vector3(50.f,0.f,0.f)
+#define _UPDEST				Vector3(0.f,0.f,50.f)
 
 #define _g_patternIndex			L"MidBoss_g_PatternIndex"
 #define _g_centerPosition		L"MidBoss_g_CenterPosition"

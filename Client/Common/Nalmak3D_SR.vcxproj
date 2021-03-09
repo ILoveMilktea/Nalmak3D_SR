@@ -209,6 +209,7 @@
     <ClInclude Include="..\Include\Enemy_CrossFire_Evasion.h" />
     <ClInclude Include="..\Include\DeadTimer.h" />
     <ClInclude Include="..\Include\Enemy_Evasion_Appear.h" />
+    <ClInclude Include="..\Include\Enemy_Evasion_Disappear.h" />
     <ClInclude Include="..\Include\Enemy_MidBoss.h" />
     <ClInclude Include="..\Include\MidBoss_Appear.h" />
     <ClInclude Include="..\Include\MidBoss_MoveLeft.h" />
@@ -390,6 +391,7 @@
     <ClCompile Include="..\Source\Enemy_CrossFire_Evasion.cpp" />
     <ClCompile Include="..\Source\DeadTimer.cpp" />
     <ClCompile Include="..\Source\Enemy_Evasion_Appear.cpp" />
+    <ClCompile Include="..\Source\Enemy_Evasion_Disappear.cpp" />
     <ClCompile Include="..\Source\Enemy_MidBoss.cpp" />
     <ClCompile Include="..\Source\FieldCameraEvationState.cpp" />
     <ClCompile Include="..\Source\FieldCameraInfo.cpp" />

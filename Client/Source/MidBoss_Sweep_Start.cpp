@@ -2,6 +2,8 @@
 #include "..\Include\MidBoss_Sweep_Start.h"
 #include "MidBoss_Define.h"
 
+#include "EnemyManager.h"
+
 MidBoss_Sweep_Start::MidBoss_Sweep_Start()
 {
 }
@@ -23,6 +25,9 @@ void MidBoss_Sweep_Start::EnterState()
 {
 	SetFloat(_g_sweepPatternTimer, 0.f);
 	SetFloat(_g_sweepFireTimer, 0.f);
+
+	EnemyManager::GetInstance()->Enemy_Spawn_Evasion(PRYMIDE, _LEFTSPAWN, _LEFTDEST + _UPDEST , 8.f);
+	EnemyManager::GetInstance()->Enemy_Spawn_Evasion(PRYMIDE, _RIGHTSPAWN, _RIGHTDEST  + _UPDEST, 8.f);
 }
 
 void MidBoss_Sweep_Start::UpdateState()

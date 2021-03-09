@@ -3,7 +3,7 @@
 
 
 Enemy_Evasion::Enemy_Evasion()
-	:m_fExitTime(10.f)
+	:m_fLifeTime(4.f)
 {
 }
 
@@ -34,8 +34,9 @@ void Enemy_Evasion::Exit()
 {
 	m_fExitDelta += dTime;
 
-	if (m_fExitDelta >= m_fExitTime)
+	if (m_fExitDelta >= m_fLifeTime)
 	{
-		m_gameObject->GetComponent<StateControl>()->SetState(L"Exit");
+		//m_gameObject->GetComponent<StateControl>()->SetState(L"Exit");
+		SetState(L"Evasion_Disappear");
 	}
 }

@@ -40,6 +40,12 @@ void State_Evasion_Enter::EnterState()
 
 	// phase 1 ui off
 	CanvasGroup::GetInstance()->SetObjectActive(CANVAS_GROUP_STAGE1, false);
+
+	// Cloud
+	//ParticleRenderer::Desc desc;
+	//desc.particleDataName = L"phase2_cloud";
+	//auto cloudFloor = INSTANTIATE()->AddComponent<ParticleRenderer>(&desc);
+	//cloudFloor->SetPosition(0.f, -50.f, 100.f);
 }
 
 void State_Evasion_Enter::UpdateState()
@@ -59,6 +65,7 @@ void State_Evasion_Enter::UpdateState()
 
 void State_Evasion_Enter::ExitState()
 {
+	m_mainCamera->AddComponent<FreeMove>();
 	m_mainCamera->GetComponent<StateControl>()->SetState(_sn_camera_evasion);
 	m_player->GetComponent<StateControl>()->SetState(_sn_player_evasion);
 }

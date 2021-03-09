@@ -26,7 +26,7 @@ void MidBoss_MoveLeft::EnterState()
 	m_stateTimer = 0.f;
 
 	m_wave1 = true;
-	m_spawnTerm = 1.f;
+	m_spawnTerm = 2.f;
 	m_stateDuration = 5.f;
 
 	int signX = (rand() % 2) == 0 ? -1 : 1;
@@ -85,15 +85,14 @@ void MidBoss_MoveLeft::Spawn()
 
 	if (m_wave1)
 	{
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(SLIDE);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(SLIDE);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(DIAGONAL);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(DIAGONAL);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(LOOK, _RIGHTSPAWN, _RIGHTDEST * 0.4f + _UPDEST * 1.2f, 6.f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(LOOK, _RIGHTSPAWN, _RIGHTDEST * 0.8f + _UPDEST * 0.8f, 6.f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(LOOK, _RIGHTSPAWN, _RIGHTDEST * 1.2f + _UPDEST * 0.5f, 6.f);
 	}
 	else
 	{
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CROSSFIRE, _UPSPAWN, _RIGHTDEST);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CROSSFIRE, _UPSPAWN, _CENTERDEST * 0.5f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CROSSFIRE, _UPSPAWN, _RIGHTDEST * 0.5f + _UPDEST, 6.f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CROSSFIRE, _UPSPAWN, _RIGHTDEST + _UPDEST * 0.5f, 6.f);
 	}
 
 	m_wave1 = !m_wave1;

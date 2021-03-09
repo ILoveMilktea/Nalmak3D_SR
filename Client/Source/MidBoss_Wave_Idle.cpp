@@ -2,7 +2,6 @@
 #include "..\Include\MidBoss_Wave_Idle.h"
 #include "MidBoss_Define.h"
 
-#include "EnemyManager.h"
 
 MidBoss_Wave_Idle::MidBoss_Wave_Idle()
 {
@@ -28,8 +27,6 @@ void MidBoss_Wave_Idle::EnterState()
 
 	++g_waveIndex;
 
-	EnemyManager::GetInstance()->Enemy_Spawn_Evasion(PRYMIDE, _MIDBOSS_LEFTPOS);
-	EnemyManager::GetInstance()->Enemy_Spawn_Evasion(PRYMIDE, _MIDBOSS_RIGHTPOS);
 }
 
 void MidBoss_Wave_Idle::UpdateState()

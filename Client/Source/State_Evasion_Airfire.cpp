@@ -2,7 +2,7 @@
 #include "..\Include\State_Evasion_Airfire.h"
 
 #include "Stage2_Mainstream_Define.h"
-
+#include "MidBoss_Define.h"
 #include "EnemyManager.h"
 #include "InputManager.h"
 
@@ -57,7 +57,7 @@ void State_Evasion_Airfire::Wave_1()
 {
 	if (m_spawnTimer > 2.f)
 	{
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, m_spawnPos[m_spawnIndex]);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, _DOWNSPAWN, m_spawnPos[m_spawnIndex]);
 		m_spawnTimer = 0.f;
 		++m_spawnIndex;
 	}
@@ -73,8 +73,8 @@ void State_Evasion_Airfire::Wave_2()
 			return;
 		}
 
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, m_spawnPos[m_spawnIndex - 4]);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, m_spawnPos[m_spawnIndex]);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, _DOWNSPAWN, m_spawnPos[m_spawnIndex - 4]);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(AIRFIRE, _DOWNSPAWN, m_spawnPos[m_spawnIndex]);
 		m_spawnTimer = 0.f;
 		++m_spawnIndex;
 	}

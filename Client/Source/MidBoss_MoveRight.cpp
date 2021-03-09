@@ -85,15 +85,14 @@ void MidBoss_MoveRight::Spawn()
 
 	if (m_wave1)
 	{
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(SLIDE);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(SLIDE);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(DIAGONAL);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(DIAGONAL);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(LOOK, _LEFTSPAWN, _LEFTDEST * 0.4f + _UPDEST * 1.2f, 6.f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(LOOK, _LEFTSPAWN, _LEFTDEST * 0.8f + _UPDEST * 0.8f, 6.f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(LOOK, _LEFTSPAWN, _LEFTDEST * 1.2f + _UPDEST * 0.5f, 6.f);
 	}
 	else
 	{
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CIRCLE, _UPSPAWN, _LEFTDEST);
-		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CIRCLE, _UPSPAWN, _LEFTDEST * 0.5f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CIRCLE, _UPSPAWN, _LEFTDEST * 0.5f + _UPDEST, 6.f);
+		EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CIRCLE, _UPSPAWN, _LEFTDEST + _UPDEST * 0.5f, 6.f);
 	}
 
 	m_wave1 = !m_wave1;

@@ -15,10 +15,10 @@ public:
 public:
 	void Exit(); 
 public:
-	void SetExitTime(float time) { m_fExitTime = time; }
+	void SetLifeTime(float time) { m_fLifeTime = time; }
 
 private:
-	float	m_fExitTime;
+	float	m_fLifeTime;
 	float	m_fExitDelta = 0.f;
 };
 

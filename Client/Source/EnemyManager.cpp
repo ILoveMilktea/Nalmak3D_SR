@@ -24,6 +24,7 @@
 #include "Boss_Interrupt.h"
 
 #include "Enemy_Evasion_Appear.h"
+#include "Enemy_Evasion_Disappear.h"
 #include "MidBoss_Headers.h"
 #include "MidBoss_Define.h"
 
@@ -251,7 +252,8 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 void EnemyManager::Enemy_Spawn_Evasion(
 	ENEMY_EVASION_STATE _initState,
 	Vector3 _spawnPos,
-	Vector3 _destpos)
+	Vector3 _destpos,
+	float _lifeTime)
 {
 	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
 	Enemy_obj->SetRotation(0.f, 180.f, 0.f);
@@ -267,9 +269,13 @@ void EnemyManager::Enemy_Spawn_Evasion(
 
 	// appear
 	m_pStateControl->AddState<Enemy_Evasion_Appear>(L"Evasion_Appear");
-	Enemy_Evasion_Appear* state = m_pStateControl->GetState<Enemy_Evasion_Appear>(L"Evasion_Appear");
-	state->SetStartPos(_spawnPos);
-	state->SetDestPos(_destpos);
+	Enemy_Evasion_Appear* appearState = m_pStateControl->GetState<Enemy_Evasion_Appear>(L"Evasion_Appear");
+	appearState->SetStartPos(_spawnPos);
+	appearState->SetDestPos(_destpos);
+
+	m_pStateControl->AddState<Enemy_Evasion_Disappear>(L"Evasion_Disappear");
+	Enemy_Evasion_Disappear* d_state = m_pStateControl->GetState<Enemy_Evasion_Disappear>(L"Evasion_Disappear");
+	d_state->SetDestPos(_spawnPos);
 
 	// pattern
 	switch (_initState)
@@ -290,7 +296,8 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<CrossFire_Evasion>(L"CrossFire");
-		state->SetNextState(L"CrossFire");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"CrossFire")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"CrossFire");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
 	break;
@@ -298,7 +305,8 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Look_Evasion>(L"Look");
-		state->SetNextState(L"Look");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"Look")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"Look");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
 	break;
@@ -306,7 +314,8 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Circle_Evasion>(L"Circle");
-		state->SetNextState(L"Circle");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"Circle")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"Circle");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
 	break;
@@ -314,7 +323,8 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
-		state->SetNextState(L"Prymide");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"Prymide")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"Prymide");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
 	break;
@@ -322,7 +332,8 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
-		state->SetNextState(L"AirFire");
+		m_pStateControl->GetState<CrossFire_Evasion>(L"AirFire")->SetLifeTime(_lifeTime);
+		appearState->SetNextState(L"AirFire");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
 	break;

@@ -3,6 +3,7 @@
 
 #include "MidBoss_Define.h"
 
+#include "EnemyManager.h"
 
 MidBoss_Wave_Start::MidBoss_Wave_Start()
 {
@@ -27,6 +28,9 @@ void MidBoss_Wave_Start::EnterState()
 	SetInteger(_g_waveBulletCount, 10);
 	SetInteger(_g_waveAttackCount, 3);
 	SetFloat(_g_waveIdleDuration, 1.f);
+
+	EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CROSSFIRE, _LEFTSPAWN, _LEFTDEST + _UPDEST, 8.f);
+	EnemyManager::GetInstance()->Enemy_Spawn_Evasion(CROSSFIRE, _RIGHTSPAWN, _RIGHTDEST + _UPDEST, 8.f);
 }
 
 void MidBoss_Wave_Start::UpdateState()

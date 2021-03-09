@@ -519,8 +519,11 @@
     <ClInclude Include="..\Include\MidBoss_MoveRight.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\Enemy_Evasion_Disappear.h">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\Enemy_Evasion_Appear.h">
-      <Filter>__Phase2_Lab</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1003,8 +1006,11 @@
     <ClCompile Include="..\Source\MidBoss_MoveRight.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\Enemy_Evasion_Disappear.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\Enemy_Evasion_Appear.cpp">
-      <Filter>__Phase2_Lab</Filter>
+      <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1297,6 +1303,9 @@
     </Filter>
     <Filter Include="__Phase2_Lab\phaseFSM\Actor\Camera">
       <UniqueIdentifier>{211f8d6e-4e54-470c-b537-1949a85e936b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\Actor\Enemy">
+      <UniqueIdentifier>{3c423167-0ac7-457a-93d9-fc2125fed6bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
