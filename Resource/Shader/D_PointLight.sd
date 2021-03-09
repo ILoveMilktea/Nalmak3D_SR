@@ -4,6 +4,7 @@
 
 inputLayout "2"
 
+renderTarget "GBuffer_Emission"
 renderTarget "GBuffer_Light"
 
 primitive "2"

@@ -9,8 +9,8 @@ texture "g_normalTex" "F-15C normal"
 
 
 vector4 "g_mainTexColor" "1,1,1,1.f"
-float "g_f0" "0.25f"
-float "g_roughness" "0.3f"
+float "g_f0" "0.15f"
+float "g_roughness" "0.45f"
 float "g_normalPower" "0.f"
 
 renderQueue "1000"

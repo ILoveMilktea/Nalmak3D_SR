@@ -47,7 +47,9 @@ struct PS_INPUT
 
 struct PS_OUTPUT
 {
-	float4 color : COLOR0;
+	float4 emission : COLOR0;
+	float4 light : COLOR1;
+
 };
 
 VS_OUTPUT VS_Main_Default(VS_INPUT _in)
@@ -134,7 +136,8 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 
 	
 	///////////////////////////
-	o.color = light + specular;
+	o.emission = light * specular;
+	o.light = light;
 	return o;
 }
 

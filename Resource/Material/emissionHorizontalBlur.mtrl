@@ -2,13 +2,13 @@
 ##  Material Data Setting
 #########################################################
 
-shader "20mmCannon"
+shader "emissionHorizontalBlur"
 
-texture "g_mainTex" "fx20mmCannon"
-vector4   "g_mainTexColor" "0.6f,0.6f,0.2f,1"
-renderQueue "1000"
+textureRT "g_mainTex" "GBuffer_Emission"
 
-blendingMode "0"
+renderQueue "4000"
+
+blendingMode "1"
 
 fillMode "0"
 
@@ -34,6 +34,7 @@ fillMode "0"
 ##    RENDER_QUEUE_OPAQUE          :    1000 
 ##    RENDER_QUEUE_CUTOUT          :    2000
 ##    RENDER_QUEUE_TRANSPARENT  :    3000
+##    RENDER_QUEUE_OVERLAY  :    4000
 ##  ---------------------------------------------------------------------------------------
 ##   4. BLENDING_MODE 
 ##  ---------------------------------------------------------------------------------------
@@ -48,5 +49,4 @@ fillMode "0"
 ##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
-
 

@@ -87,6 +87,8 @@ private:
 private:
 	// 기존 화면에 텍스쳐를 그려줌
 	void RenderByMaterialToScreen(Material* _mtrl, ConstantBuffer& _cBuffer);
+	void RenderByMaterialToScreen(const wstring& _mtrlName, ConstantBuffer& _cBuffer);
+
 	void RenderImageToScreen(IDirect3DBaseTexture9* _tex, ConstantBuffer& _cBuffer);
 private:
 	VIBuffer* m_imageVIBuffer;
