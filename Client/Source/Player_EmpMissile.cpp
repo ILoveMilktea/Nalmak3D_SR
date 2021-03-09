@@ -57,7 +57,7 @@ void Player_EmpMissile::CreateBullet()
 	}
 
 	Emp = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Emp_Missile");
-	Emp->SetScale(Vector3(1.f, 1.f, 2.f));
+	Emp->SetScale(Vector3(0.2f, 0.2f, 0.3f));
 	Emp->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
 	Emp->SetPosition(m_itemInfo.createPos);
 

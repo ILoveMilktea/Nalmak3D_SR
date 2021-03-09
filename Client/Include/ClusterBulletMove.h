@@ -22,12 +22,16 @@ public:
 	virtual void Release() override;
 	//	GameObject* FindEnemy(OBJECT_TAG _enum , float _mimDis = 0);
 
+	void Boom();
+
+
 private:
 	GameObject* m_player = nullptr;
 	GameObject* m_target = nullptr;
 	GameObject* m_Neartarget = nullptr;
 
 	class EnemyDetector* m_enemyDetector;
+	class ParticleRenderer* m_smokeParticle;
 	Vector2 m_screenPos = {};
 	Vector3 m_firstDir = {};
 private:

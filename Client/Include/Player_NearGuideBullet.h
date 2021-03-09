@@ -24,7 +24,9 @@ public:
 	virtual void OnTriggerEnter(Collisions& _collision)override;
 	virtual void OnTriggerStay(Collisions& _collision)override;
 	virtual void OnTriggerExit(Collisions& _collision)override;
-
+	
+	void Boom();
+	void SmokeCreate();
 private:
 	//GameObject * FindEnemy(OBJECT_TAG _enum, float _mimDis = 0);
 private:
@@ -32,11 +34,13 @@ private:
 	Vector3 m_firstDir;
 	Vector3 m_finalTargetPos;
 	bool	m_bFinish;
+	bool	m_bState = false;
 private:
 	GameObject* m_player;
 	GameObject* m_target;
 	GameObject* m_finder = nullptr;
 	class EnemyDetector* m_enemyDetector;
+	class ParticleRenderer* m_smokeParticle;
 
 	StateControl * m_stateControl;
 	float m_speed;
