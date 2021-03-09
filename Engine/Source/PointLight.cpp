@@ -37,6 +37,11 @@ float PointLight::GetRadius()
 	return m_lightInfo.radius;
 }
 
+void PointLight::SetRadius(float _radius)
+{
+	m_lightInfo.radius = _radius;
+}
+
 
 void PointLight::Release()
 {

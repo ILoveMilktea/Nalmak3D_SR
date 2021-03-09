@@ -37,7 +37,7 @@ void Stage2Scene::Initialize()
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.6f;
 	light.ambientIntensity = 0.02f;
-	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(60, 180, 0);
+	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(70, 180, 0);
 
 	VIBufferRenderer::Desc ground;
 	ground.mtrlName = L"ground";

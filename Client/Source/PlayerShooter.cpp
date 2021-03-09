@@ -24,16 +24,28 @@ void PlayerShooter::Initialize()
 	m_cannon = m_ItemManager->FindItemObject(L"Weapon", L"Cannon");
 	m_shootTime = 0.5f;
 	m_cannonCoolTime = 0.5f;
+
+	PointLight::Desc pointDesc;
+	pointDesc.radius = 0;
+	pointDesc.color = Vector3(0.8f, 0.7f, 0.3f);
+	pointDesc.diffuseIntensity = 8;
+	auto obj = INSTANTIATE()->AddComponent<PointLight>(&pointDesc)->SetPosition(0,0.3f,4.f);
+	m_pointLight = obj->GetComponent<PointLight>();
+	obj->SetParents(m_gameObject);
 }
 
 void PlayerShooter::Update()
 {
+
+	m_lightRadius = Nalmak_Math::Lerp(m_lightRadius, 0.f, dTime * 10);
+	m_pointLight->SetRadius(m_lightRadius);
 	if (m_useEquipment)
 	{
 		if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_LEFT_MOUSE))
 		{
 			if (m_shootTime < 0)
 			{
+				
 				m_useEquipment->ItemShot();
 				m_shootTime = m_useEquipment->GetItmeInfo().delay;
 			}
@@ -51,6 +63,7 @@ void PlayerShooter::Update()
 		{
 			if (m_cannonCoolTime < 0)
 			{
+				m_lightRadius = 6;
 				m_cannon->ItemShot();
 				m_cannonCoolTime = m_cannon->GetItmeInfo().delay;
 			}
