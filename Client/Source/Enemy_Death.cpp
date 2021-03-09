@@ -27,7 +27,8 @@ void Enemy_Death::EnterState()
 
 void Enemy_Death::UpdateState()
 {
-	
+	DESTROY(m_gameObject);
+	m_gameObject = nullptr;
 }
 
 void Enemy_Death::ExitState()

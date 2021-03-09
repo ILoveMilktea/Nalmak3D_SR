@@ -54,8 +54,11 @@ void ClusterBulletMove::Initialize()
 	Vector3 dirZ = { worldMat._31, worldMat._32, worldMat._33 };
 
 
-	//m_target = m_enemyDetector->GetLockOnTarget();
-	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
+	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector");
+	if (m_enemyDetector)
+		m_target = m_enemyDetector->GetComponent<EnemyDetector>()->GetLockOnTarget();
+
+
 	if (m_target)
 	{
 		Vector2 screenPos = Core::GetInstance()->GetMainCamera()->WorldToScreenPos(m_target->GetTransform()->position);
@@ -70,8 +73,7 @@ void ClusterBulletMove::Initialize()
 
 void ClusterBulletMove::Update()
 {
-	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
-	m_target = m_enemyDetector->GetLockOnTarget();
+	
 }
 
 void ClusterBulletMove::LateUpdate()
@@ -89,6 +91,7 @@ void ClusterBulletMove::LateUpdate()
 		float ratioValue = fromEnemyLenght / EnemyPlayerLenght;
 		if (ratioValue <= 0.5f)
 		{
+
 			Boom();
 			DESTROY(m_gameObject);
 			m_deadCheck = true;
@@ -121,6 +124,7 @@ void ClusterBulletMove::Release()
 
 		Player_NearGuideBullet::Desc guidebulletInfo;
 		guidebulletInfo.speed = m_speed;
+		guidebulletInfo.lockonTarget = m_enemyDetector;
 
 		SphereCollider::Desc sphereColInfo;
 		sphereColInfo.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;

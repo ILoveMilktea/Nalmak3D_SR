@@ -8,6 +8,7 @@ public:
 	{
 		Vector3 firstTarget;
 		float speed;
+		GameObject* lockonTarget;
 	};
 
 
@@ -39,8 +40,7 @@ private:
 private:
 	GameObject* m_player;
 	GameObject* m_target;
-	GameObject* m_finder = nullptr;
-	class EnemyDetector* m_enemyDetector;
+	GameObject* m_enemyDetector;
 	class ParticleRenderer* m_smokeParticle;
 
 	StateControl * m_stateControl;

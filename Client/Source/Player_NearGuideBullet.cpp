@@ -16,6 +16,7 @@ Player_NearGuideBullet::Player_NearGuideBullet(Desc * _desc)
 {
 	m_firstTarget = _desc->firstTarget;
 	m_speed = _desc->speed;
+	m_enemyDetector = _desc->lockonTarget;
 }
 
 
@@ -45,19 +46,24 @@ void Player_NearGuideBullet::Initialize()
 
 	m_firstDir = m_firstTarget - m_transform->position;
 	D3DXVec3Normalize(&m_firstDir, &m_firstDir);
+
 	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
-	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
-	m_target = m_enemyDetector->GetLockOnTarget();
-	if(m_target)
-		m_finalTargetPos =  new Vector3(m_target->GetTransform()->position);
+
+	if (m_enemyDetector)
+	{
+		m_target = m_enemyDetector->GetComponent<EnemyDetector>()->GetLockOnTarget();
+
+		if (m_target)
+			m_finalTargetPos = new Vector3(m_target->GetTransform()->position);
+	}
+	
 }
 
 void Player_NearGuideBullet::Update()
 {
 
 	SmokeCreate(); //awke
-	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
-	m_target = m_enemyDetector->GetLockOnTarget();
+	
 	 // 데드 조건
 	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 500.f)
 	{
@@ -68,7 +74,7 @@ void Player_NearGuideBullet::Update()
 
 	if (!m_bFinish && Nalmak_Math::Distance(m_firstTarget, m_transform->position) > 2.f)
 	{
-		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_firstTarget, dTime * 4.f);
+		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_firstTarget, dTime * 1.8f);
 		m_transform->LookAt(m_firstDir + m_transform->position, 1.f);
 
 	}
@@ -76,33 +82,6 @@ void Player_NearGuideBullet::Update()
 	{
 		m_bFinish = true;
 	}
-
-	
-
-	
-	/*if (Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) > 5.f)
-	{
-		if (m_target)
-		{
-			Vector3 toDistance = *m_finalTargetPos - m_transform->position;
-			D3DXVec3Normalize(&toDistance, &toDistance);
-			m_transform->position = Nalmak_Math::Lerp(m_transform->position, *m_finalTargetPos, dTime * 3.f);
-			m_transform->LookAt(toDistance + m_transform->position, 5.5f);
-		}
-	
-	}
-	else if(Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) <= 5.f)
-	{
-		m_target = nullptr;
-	}
-
-	if (!m_target)
-	{
-		m_transform->position += m_transform->GetForward() * 45 * dTime;
-		m_transform->LookAt(m_transform->GetForward() + m_transform->position, 5.5f);
-	}
-	*/
-
 }
 
 void Player_NearGuideBullet::LateUpdate()
@@ -110,31 +89,25 @@ void Player_NearGuideBullet::LateUpdate()
 	if (!m_bFinish)
 		return;
 
-
-	if (m_target)
+	if (m_finalTargetPos)
 	{
-		Vector3 toDistance = m_target->GetTransform()->position- m_transform->position;
-		D3DXVec3Normalize(&toDistance, &toDistance);
-		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_target->GetTransform()->position, dTime * 3.f);
-		m_transform->LookAt(toDistance + m_transform->position, 5.5f);
-	}
-	else 
-	{
-		GameObject* m_nearTarget = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject, 50.f);
-
-		if (m_nearTarget)
+		if (Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) > 5.f)
 		{
-			Vector3 toDistance = m_nearTarget->GetTransform()->position - m_transform->position;
+			Vector3 toDistance = *m_finalTargetPos - m_transform->position;
 			D3DXVec3Normalize(&toDistance, &toDistance);
-			m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_nearTarget->GetTransform()->position, dTime * 3.f);
+			m_transform->position += toDistance * m_speed * dTime;
 			m_transform->LookAt(toDistance + m_transform->position, 5.5f);
 		}
-		else
+		else if (Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) <= 5.f)
 		{
-			m_transform->position += m_transform->GetForward() * 45 * dTime;
-			m_transform->LookAt(m_transform->GetForward() + m_transform->position, 5.5f);
+			delete m_finalTargetPos;
+			m_finalTargetPos = nullptr;
 		}
-		
+	}
+	else
+	{
+		m_transform->position += m_transform->GetForward() * 45 * dTime;
+		m_transform->LookAt(m_transform->GetForward() + m_transform->position, 5.5f);
 	}
 }
 

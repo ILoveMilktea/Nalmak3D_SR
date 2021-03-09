@@ -46,13 +46,16 @@ void HomingBulletMove::Update()
 	Vector3 dir = m_target->position - m_transform->position;
 	D3DXVec3Normalize(&dir, &dir);
 
-	m_transform->LookAt(dir + m_transform->position, 1.5f);
+	m_transform->LookAt(dir + m_transform->position, 2.5f);
 	m_rigidbody->AddForce(dir * m_force);
 
 	// temp destroy
 	m_tempTimer += TimeManager::GetInstance()->GetdeltaTime();
 	if (3.f < m_tempTimer)
+	{
 		DESTROY(m_gameObject);
+		m_gameObject = nullptr;
+	}
 }
 
 void HomingBulletMove::OnTriggerEnter(Collisions & _collision)
@@ -67,6 +70,7 @@ void HomingBulletMove::OnTriggerEnter(Collisions & _collision)
 			obj.GetGameObject()->GetComponent<Enemy>()->Damaged(iDmg);
 				
 			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
 		}
 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
@@ -74,6 +78,8 @@ void HomingBulletMove::OnTriggerEnter(Collisions & _collision)
 			obj.GetGameObject()->GetComponent<Boss>()->Damaged(iDmg);
 
 			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
+
 		}
 
 	}

@@ -31,7 +31,7 @@ private:
 	GameObject* m_target = nullptr;
 	GameObject* m_Neartarget = nullptr;
 
-	class EnemyDetector* m_enemyDetector;
+	GameObject* m_enemyDetector;
 	class ParticleRenderer* m_smokeParticle;
 	Vector2 m_screenPos = {};
 	Vector3 m_firstDir = {};
