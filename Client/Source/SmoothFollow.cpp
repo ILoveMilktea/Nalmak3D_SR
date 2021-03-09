@@ -63,19 +63,15 @@ void SmoothFollow::LateUpdate()
 {
 	Matrix temproyWorldMatrix = m_player->GetWorldMatrix();
 
-	// ê¸°ì²´ë¡œë??°ì˜ ?ë????’ì´
 	Vector3 offSetY = Vector3(temproyWorldMatrix._21, temproyWorldMatrix._22, temproyWorldMatrix._23);
 
-	// ì¹´ë©”?¼ì˜ ?„ì¹˜ë¥??•í•´ì£¼ëŠ” ?Œë ˆ?´ì–´ë¡œë??°ì˜  ë°©í–¥
 	m_followDirection = Nalmak_Math::Lerp(m_followDirection, -m_player->GetForward() , dTime * 1.5f);
 	m_followDirection = Nalmak_Math::Normalize(m_followDirection);
 
-	// ì¹´ë©”?¼ê? ë°”ë¼ë³´ëŠ” ë°©í–¥???•í•´ì£¼ëŠ” ê°?// ?Œë ˆ?´ì–´ê°€ ë°”ë¼ë³´ëŠ” ë°©í–¥?¼ë¡œ ê°€?¤í•¨
 	m_lookDirection = Nalmak_Math::Lerp(m_lookDirection, m_player->rotation, dTime * 2.f);
 
 	
 
-	// ?Œë ˆ?´ì–´???„ìž¬ ?ë„ ë¹„ìœ¨ 0~1
 	float Ratio = (m_playerInfo->GetSpeed() - m_playerInfo->GetMinSpeed()) / (m_playerInfo->GetMaxSpeed() - m_playerInfo->GetMinSpeed());
 
 	//float Interval = Nalmak_Math::Lerp(m_playerInfo->GetMinSpeed(), m_playerInfo->GetMaxSpeed(), Ratio);
@@ -84,7 +80,7 @@ void SmoothFollow::LateUpdate()
 	//Vector3 targetPos = (m_toTarget->GetTransform()->position) + m_followDirection * (Interval + m_culDistance);
 
 
-	Vector3 targetPos = (m_player->position) + m_followDirection * (Ratio * 2 + 8) + Vector3(0, 1.7f, 0);
+	Vector3 targetPos = (m_player->position) + m_followDirection * (Ratio * 2 + 6) + Vector3(0, 1.7f, 0);
 
 	m_transform->position = Nalmak_Math::Lerp(m_transform->position, targetPos, dTime * 4.f);
 	m_transform->SetRotation(m_playerMoveInfo->GetRotXAngle(), m_playerMoveInfo->GetRotYAngle(),0);

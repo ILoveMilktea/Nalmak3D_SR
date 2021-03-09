@@ -347,7 +347,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 {
 	GameObject* Enemy_obj = INSTANTIATE(OBJECT_TAG_ENEMY, L"Enemy");
 	Enemy_obj->SetRotation(0.f, 180.f, 0.f);
-	Enemy_obj->SetScale(0.1f, 0.1f, 0.1f);
+	Enemy_obj->SetScale(2.f, 2.f, 2.f);
 
 	Enemy_obj->AddComponent<StateControl>();
 	m_pStateControl = Enemy_obj->GetComponent<StateControl>();
@@ -395,7 +395,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Look_Evasion>(L"Look");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"Look")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<Look_Evasion>(L"Look")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"Look");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
@@ -404,7 +404,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Circle_Evasion>(L"Circle");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"Circle")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<Circle_Evasion>(L"Circle")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"Circle");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
@@ -413,7 +413,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<Prymide_Evasion>(L"Prymide");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"Prymide")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<Prymide_Evasion>(L"Prymide")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"Prymide");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
@@ -422,7 +422,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 	{
 		Enemy_obj->SetPosition(_spawnPos);
 		m_pStateControl->AddState<AirFire_Evasion>(L"AirFire");
-		m_pStateControl->GetState<CrossFire_Evasion>(L"AirFire")->SetLifeTime(_lifeTime);
+		m_pStateControl->GetState<AirFire_Evasion>(L"AirFire")->SetLifeTime(_lifeTime);
 		appearState->SetNextState(L"AirFire");
 		m_pStateControl->InitState(L"Evasion_Appear");
 	}
@@ -436,8 +436,8 @@ void EnemyManager::Enemy_Spawn_Evasion(
 
 
 	VIBufferRenderer::Desc Enemy_Mesh;
-	Enemy_Mesh.mtrlName = L"default";
-	Enemy_Mesh.meshName = L"flight";
+	Enemy_Mesh.mtrlName = L"default_red";
+	Enemy_Mesh.meshName = L"sphere";
 	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
 
 	SphereCollider::Desc Enemy_col;
@@ -466,7 +466,7 @@ void EnemyManager::MidBoss_Spawn(Vector3 _pos)
 		stateControl->AddState<MidBoss_MoveLeft>(_sn_moveLeft);
 		stateControl->AddState<MidBoss_MoveRight>(_sn_moveRight);
 		stateControl->AddState<MidBoss_MoveToCenter>(_sn_moveToCenter);
-		stateControl->AddState<MidBoss_Rotate180>(_sn_rotate180);
+		stateControl->AddState<MidBoss_RotateAccel>(_sn_rotateAccel);
 
 		stateControl->AddState<MidBoss_Wave_Start>(_sn_waveStart);
 		stateControl->AddState<MidBoss_Wave_Idle>(_sn_waveIdle);

@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "..\Include\MidBoss_SingleBullet.h"
+#include "..\Include\Bullet_Sphere.h"
 
 #include "PlayerInfoManager.h"
 #include "ItemManager.h"
 
 
-MidBoss_SingleBullet::MidBoss_SingleBullet(Desc * _desc)
+Bullet_Sphere::Bullet_Sphere(Desc * _desc)
 {
 	m_lifeTime = _desc->lifeTime;
 	m_speed = _desc->speed;
@@ -15,20 +15,19 @@ MidBoss_SingleBullet::MidBoss_SingleBullet(Desc * _desc)
 	m_dmg = _desc->dmg;
 }
 
-MidBoss_SingleBullet::~MidBoss_SingleBullet()
+Bullet_Sphere::~Bullet_Sphere()
 {
 }
 
-void MidBoss_SingleBullet::Initialize()
+void Bullet_Sphere::Initialize()
 {
 	m_camera = Core::GetInstance()->FindFirstObject(OBJECT_TAG_CAMERA)->GetComponent<Camera>();
 
-	m_transform->SetScale(Vector3(1, m_stretchRatio *2.45f, 1) * 0.35f);
 
 	m_material = GetComponent<VIBufferRenderer>()->GetMaterial();
 }
 
-void MidBoss_SingleBullet::Update()
+void Bullet_Sphere::Update()
 {
 	if (m_lifeTime < 0)
 	{
@@ -47,19 +46,9 @@ void MidBoss_SingleBullet::Update()
 
 	m_transform->position += m_dir * m_speed * dTime;
 
-	Matrix view = m_camera->GetViewMatrix();
-	Matrix billboard;
-	D3DXMatrixIdentity(&billboard);
-	memcpy(&billboard.m[0][0], &view.m[0][0], sizeof(Vector3));
-	memcpy(&billboard.m[1][0], &view.m[1][0], sizeof(Vector3));
-	memcpy(&billboard.m[2][0], &view.m[2][0], sizeof(Vector3));
-
-	D3DXMatrixInverse(&billboard, 0, &billboard);
-
-	m_material->SetMatrix("g_invViewForBillboard", billboard);
 }
 
-void MidBoss_SingleBullet::OnTriggerEnter(Collisions & _collision)
+void Bullet_Sphere::OnTriggerEnter(Collisions & _collision)
 {
 	for (auto& obj : _collision)
 	{
@@ -72,10 +61,10 @@ void MidBoss_SingleBullet::OnTriggerEnter(Collisions & _collision)
 	}
 }
 
-void MidBoss_SingleBullet::OnTriggerStay(Collisions & _collision)
+void Bullet_Sphere::OnTriggerStay(Collisions & _collision)
 {
 }
 
-void MidBoss_SingleBullet::OnTriggerExit(Collisions & _collision)
+void Bullet_Sphere::OnTriggerExit(Collisions & _collision)
 {
 }

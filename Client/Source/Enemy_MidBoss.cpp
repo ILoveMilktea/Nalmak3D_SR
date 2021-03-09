@@ -11,6 +11,8 @@ Enemy_MidBoss::Enemy_MidBoss(Desc * _desc)
 	
 	m_bulletproofPivot = _desc->pivot;
 	m_pivotRotate = true;
+	m_rotateSpeed = 10.f;
+	m_isAccelRotate = false;
 }
 
 Enemy_MidBoss::~Enemy_MidBoss()
@@ -23,9 +25,24 @@ void Enemy_MidBoss::Initialize()
 
 void Enemy_MidBoss::Update()
 {
+	if (m_isAccelRotate)
+	{
+		float curSpeed = Nalmak_Math::Lerp(m_startSpeed, m_targetSpeed, m_accelTimer * 0.5f);
+
+		m_rotateSpeed = curSpeed;
+		m_accelTimer += dTime * 4.f;
+
+		if (m_accelTimer > 2.f)
+		{
+			m_isAccelRotate = false;
+			m_rotateSpeed = m_targetSpeed;
+			m_isAccelRotate = 0.f;
+		}
+	}
+
 	if (m_pivotRotate)
 	{
-		m_bulletproofPivot->GetTransform()->RotateY(10.f * dTime);
+		m_bulletproofPivot->GetTransform()->RotateY(m_rotateSpeed * dTime);
 	}
 }
 
@@ -89,6 +106,14 @@ int Enemy_MidBoss::Get_FullHp() const
 int Enemy_MidBoss::Get_CurHp() const
 {
 	return m_status.m_iCurHp;
+}
+
+void Enemy_MidBoss::SetRotateSpeed(float _spead)
+{
+	m_isAccelRotate = true;
+	m_accelTimer = 0.f;
+	m_startSpeed = m_rotateSpeed;
+	m_targetSpeed = _spead;
 }
 
 void Enemy_MidBoss::Damaged(int _dmg)

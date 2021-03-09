@@ -94,7 +94,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	{
 		color += tex2D(mainSampler, float2(
 			_in.uv.x + pixelKernel[i] * perPixelY,
-			_in.uv.y)) * blurWeights[i] * 0.5f;
+			_in.uv.y)) * blurWeights[i];
 	}
 
 

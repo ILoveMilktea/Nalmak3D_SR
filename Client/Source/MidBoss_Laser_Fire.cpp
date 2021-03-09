@@ -4,6 +4,7 @@
 #include "MidBoss_Define.h"
 #include "Enemy_MidBoss.h"
 #include "Enemy_BulletProof.h"
+#include "DeadTimer.h"
 
 MidBoss_Laser_Fire::MidBoss_Laser_Fire()
 {
@@ -32,30 +33,11 @@ void MidBoss_Laser_Fire::EnterState()
 	}
 
 	// temp laser
-	m_mainLaser = INSTANTIATE();
-	m_mainLaser->AddComponent<CanvasRenderer>();
-	m_mainLaser->AddComponent<SingleImage>();
-	m_mainLaser->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.6f, 0.f, 0.2f, 0.8f));
-	Camera* maincam = Core::GetInstance()->GetMainCamera();
-	Vector3 winpos = maincam->WorldToScreenPos(m_transform->position);
-	//winpos = Vector3(winpos.x + WINCX * 0.5f, )
-	m_mainLaser->SetPosition(winpos.x, winpos.y + (WINCY - winpos.y) * 0.5f);
-	Vector3 left = maincam->WorldToScreenPos(m_transform->position - Vector3(m_transform->scale.x * 0.5f, 0.f, 0.f));
-	Vector3 right = maincam->WorldToScreenPos(m_transform->position + Vector3(m_transform->scale.x * 0.5f, 0.f, 0.f));
-	m_mainLaser->SetScale(right.x - left.x, WINCY - winpos.y);
+	CreateLaser(m_transform->GetWorldPosition(), m_transform->GetWorldPosition() + Vector3(0.f, 0.f, -500.f), 10.f);
 
 	for (int i = 0; i < 4; ++i)
 	{
-		m_subLaser[i] = INSTANTIATE();
-		m_subLaser[i]->AddComponent<CanvasRenderer>();
-		m_subLaser[i]->AddComponent<SingleImage>();
-		m_subLaser[i]->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.6f, 0.f, 0.2f, 0.8f));
-		Camera* maincam = Core::GetInstance()->GetMainCamera();
-		Vector3 winpos = maincam->WorldToScreenPos(m_subLaser[i]->GetTransform()->GetWorldPosition());
-		m_subLaser[i]->SetPosition(winpos.x, winpos.y + (WINCY - winpos.y) * 0.5f);
-		Vector3 left = maincam->WorldToScreenPos(m_subLaser[i]->GetTransform()->GetWorldPosition() - Vector3(m_subLaser[i]->GetTransform()->scale.x * 0.5f, 0.f, 0.f));
-		Vector3 right = maincam->WorldToScreenPos(m_subLaser[i]->GetTransform()->GetWorldPosition() + Vector3(m_subLaser[i]->GetTransform()->scale.x * 0.5f, 0.f, 0.f));
-		m_subLaser[i]->SetScale(right.x - left.x, WINCY - winpos.y);
+		CreateLaser(m_bulletproof[i]->GetWorldPosition(), m_bulletproof[i]->GetWorldPosition() + Vector3(0.f, 0.f, -500.f), 10.f);
 	}
 }
 
@@ -78,4 +60,29 @@ void MidBoss_Laser_Fire::ExitState()
 	{
 		DESTROY(m_subLaser[i]);
 	}
+}
+
+void MidBoss_Laser_Fire::CreateLaser(Vector3 _startPoint, Vector3 _endPoint, float width)
+{
+	GameObject* laser = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"Bullet_Laser");
+	Vector3 laserDir = _endPoint - _startPoint;
+	laser->SetPosition(_startPoint + laserDir * 0.5);
+	laser->GetTransform()->RotateX(90.f);
+
+	float len = D3DXVec3Length(&laserDir);
+	laser->SetScale(width, len, width);
+
+
+	VIBufferRenderer::Desc desc_renderer;
+	desc_renderer.meshName = L"cylinder";
+	desc_renderer.mtrlName = L"default_green";
+	laser->AddComponent<VIBufferRenderer>(&desc_renderer);
+
+	LineCollider::Desc desc_col;
+	desc_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
+	laser->AddComponent<LineCollider>(&desc_col);
+
+	DeadTimer::Desc desc_timer;
+	desc_timer.timer = 3.f;
+	laser->AddComponent<DeadTimer>(&desc_timer);
 }

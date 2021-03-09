@@ -21,4 +21,7 @@ private:
 	Vector3 m_leftTrailPos;
 	Vector3 m_rightTrailPos;
 	float m_trailThick;
+	float m_trailCurrentThick;
+	float m_trailTargetThick;
+	float m_timer;
 };

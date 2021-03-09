@@ -2,23 +2,22 @@
 ##  Material Data Setting
 #########################################################
 
-shader "default"
+shader "particle"
 
-texture "g_mainTex" "default"
-vector4 "g_mainTexColor" "0.8,0,0,0.5"
-
+texture "g_mainTex" "smallCannon_bullet"
 
 renderQueue "3000"
 
 blendingMode "0"
 
-fillMode "1"
+fillMode "0"
+
 #########################################################
 ##   1. Shander
 ##  ---------------------------------------------------------------------------------------
-##    shader  "name"
+##    shader  "name" 
 ##  ---------------------------------------------------------------------------------------
-##   2. Constant Buffer 
+##   2. Constant Buffer // 다중 선택 가능
 ##  ---------------------------------------------------------------------------------------
 ##    bool      "handle"   "x"
 ##    int         "handle"   "x"
@@ -31,12 +30,12 @@ fillMode "1"
 ##  ---------------------------------------------------------------------------------------
 ##   3. Render Queue
 ##  ---------------------------------------------------------------------------------------
-##    RENDER_QUEUE_BACKGROUND  :    0
-##    RENDER_QUEUE_OPAQUE          :    1000
+##    RENDER_QUEUE_BACKGROUND  :    0 
+##    RENDER_QUEUE_OPAQUE          :    1000 
 ##    RENDER_QUEUE_CUTOUT          :    2000
 ##    RENDER_QUEUE_TRANSPARENT  :    3000
 ##  ---------------------------------------------------------------------------------------
-##   4. BLENDING_MODE
+##   4. BLENDING_MODE 
 ##  ---------------------------------------------------------------------------------------
 ##    BLENDING_MODE_DEFAULT
 ##    BLENDING_MODE_ADDITIVE
@@ -49,3 +48,4 @@ fillMode "1"
 ##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
+

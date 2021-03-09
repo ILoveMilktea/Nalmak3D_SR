@@ -101,6 +101,7 @@ void MainGame::SystemSetting()
 	// add _ col 11: 52 .JJY
 	m_engine->ActivateCollisionByLayer(COLLISION_LAYER_BULLET_ENEMY, COLLISION_LAYER_SHIELD);
 
+
 	m_engine->AddScene(L"title", Scene::Instantiate<TitleScene>());
 	m_engine->AddScene(L"stageSelect", Scene::Instantiate<StageSelectScene>());
 	m_engine->AddScene(L"garage", Scene::Instantiate<GarageScene>());
@@ -116,7 +117,7 @@ void MainGame::SystemSetting()
 #pragma endregion
 
 
-	m_engine->SetStartScene(L"phantom");
+	m_engine->SetStartScene(L"nalmak");
 
 
 }

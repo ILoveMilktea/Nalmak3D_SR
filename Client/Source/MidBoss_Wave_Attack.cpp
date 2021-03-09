@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\MidBoss_Wave_Attack.h"
 #include "MidBoss_Define.h"
-#include "MidBoss_SingleBullet.h"
+#include "Bullet_Sphere.h"
 
 MidBoss_Wave_Attack::MidBoss_Wave_Attack()
 {
@@ -69,14 +69,14 @@ void MidBoss_Wave_Attack::WaveAttack()
 
 		auto bullet = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"bullet");
 		VIBufferRenderer::Desc meshInfo;
-		meshInfo.meshName = L"quadNoneNormal";
-		meshInfo.mtrlName = L"fx_20mmCannon";
+		meshInfo.meshName = L"sphere";
+		meshInfo.mtrlName = L"default_green";
 
 		SphereCollider::Desc desc_col;
 		desc_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
 		desc_col.radius = 2.f;
 
-		MidBoss_SingleBullet::Desc bulletinfo;
+		Bullet_Sphere::Desc bulletinfo;
 		bulletinfo.lifeTime = 5.f;
 		bulletinfo.speed = 20.f;
 		bulletinfo.stretchRatio = 1.f;
@@ -87,7 +87,7 @@ void MidBoss_Wave_Attack::WaveAttack()
 
 		bullet->AddComponent<VIBufferRenderer>(&meshInfo);
 		bullet->AddComponent<SphereCollider>(&desc_col);
-		bullet->AddComponent<MidBoss_SingleBullet>(&bulletinfo);
+		bullet->AddComponent<Bullet_Sphere>(&bulletinfo);
 
 		bullet->SetPosition(m_transform->position);
 		bullet->SetScale(2.f, 2.f, 2.f);

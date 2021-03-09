@@ -39,6 +39,7 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 	//float4x4 wvp = mul(g_world, g_cBuffer.viewProj);
 	o.position = mul(float4(_input.position,1), g_cBuffer.viewProj);
 	o.uv = _input.uv;
+	o.uv.x -= g_cBuffer.time * 3;
 	//o.normal = float3(0, 0, 1);
 	
 	
@@ -51,6 +52,7 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	PS_OUTPUT o = (PS_OUTPUT)0;
 	float4 diffuse = tex2D(mainSampler, _input.uv);
 	o.diffuse = diffuse * g_mainTexColor;
+	clip(o.diffuse.a - 0.03f);
 	return o;
 }
 

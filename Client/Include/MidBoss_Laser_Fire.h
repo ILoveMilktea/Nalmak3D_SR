@@ -12,6 +12,7 @@ public:
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 
+	void CreateLaser(Vector3 _startPoint, Vector3 _endPoint, float width);
 
 private:
 	float g_fireDuration;

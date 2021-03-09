@@ -19,10 +19,25 @@ NalmakScene::~NalmakScene()
 
 void NalmakScene::Initialize()
 {
-	GameObject* plane;
 
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
+	VIBufferRenderer::Desc laser;
+	laser.mtrlName = L"fx_shield";
+	laser.meshName = L"cylinder";
+	INSTANTIATE()->AddComponent<VIBufferRenderer>(&laser)->SetPosition(3,0,0);
+
+	INSTANTIATE()->AddComponent<VIBufferRenderer>()->SetPosition(4, 0, 0);
+
+	laser.meshName = L"sphere";
+	laser.mtrlName = L"standard";
+	INSTANTIATE()->AddComponent<VIBufferRenderer>(&laser)->SetPosition(2, 0, 0);
+
+
+	/*MeshRenderer::Desc renderss;
+	renderss.meshName = L"indicator_arrow";
+	renderss.mtrlName = L"stage_arrowIndicator";
+	INSTANTIATE()->AddComponent<MeshRenderer>(&renderss)->SetPosition(0, 0, 5)->SetScale(30,60,80);*/
 
 	ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");
 	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"Emp");
