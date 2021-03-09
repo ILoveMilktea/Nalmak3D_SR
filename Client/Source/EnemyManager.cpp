@@ -288,6 +288,10 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 	++m_iEnemyCount;
 }
 
+void EnemyManager::Enemy_Spawn_Test(ENEMY_STATE _initState, Vector3 pos)
+{
+}
+
 
 void EnemyManager::Enemy_Spawn_Evasion(
 	ENEMY_EVASION_STATE _initState,

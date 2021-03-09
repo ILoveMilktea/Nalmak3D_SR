@@ -19,10 +19,8 @@
 #include "PlayerNone.h"
 #include "PlayerShooter.h"
 
-// playerskill ������
 #include "PlayerSkillActor.h"
 
-//��ų ���º� ����
 #include "PlayerEscapeState.h"
 #include "GameManager.h"
 

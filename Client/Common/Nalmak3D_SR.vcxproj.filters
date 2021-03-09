@@ -1014,7 +1014,7 @@
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Evasion_Appear.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Enemy</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="..\Source\Enemy_Debugging.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
     </ClCompile>
