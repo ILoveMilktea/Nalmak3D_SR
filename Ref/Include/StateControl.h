@@ -13,6 +13,7 @@ class NALMAK_DLL StateControl :
 public:
 	struct Desc
 	{
+
 	};
 public:
 	StateControl(Desc* _desc);

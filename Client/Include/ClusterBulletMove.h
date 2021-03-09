@@ -19,6 +19,7 @@ public:
 
 	virtual void Initialize() override;
 	virtual void Update() override;
+	virtual void LateUpdate()override;
 	virtual void Release() override;
 	//	GameObject* FindEnemy(OBJECT_TAG _enum , float _mimDis = 0);
 

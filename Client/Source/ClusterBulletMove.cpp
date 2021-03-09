@@ -53,9 +53,9 @@ void ClusterBulletMove::Initialize()
 	Vector3 dirY = { worldMat._21, worldMat._22, worldMat._23 };
 	Vector3 dirZ = { worldMat._31, worldMat._32, worldMat._33 };
 
-	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 
-	m_target = m_enemyDetector->GetLockOnTarget();
+	//m_target = m_enemyDetector->GetLockOnTarget();
+	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 	if (m_target)
 	{
 		Vector2 screenPos = Core::GetInstance()->GetMainCamera()->WorldToScreenPos(m_target->GetTransform()->position);
@@ -66,14 +66,16 @@ void ClusterBulletMove::Initialize()
 		m_firstDir = dirZ + screenDir;
 	}
 
-	m_Neartarget = EnemyManager::GetInstance()->NearFindEenemy(m_gameObject, 250.f);
 }
 
 void ClusterBulletMove::Update()
 {
-	if (m_enemyDetector == nullptr)
-		return;
+	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 	m_target = m_enemyDetector->GetLockOnTarget();
+}
+
+void ClusterBulletMove::LateUpdate()
+{
 	if (m_target)
 	{
 		// screen Pos Set, for.VERTICAL Range
@@ -95,15 +97,15 @@ void ClusterBulletMove::Update()
 	else
 	{
 		m_transform->position += ((m_player->GetTransform()->GetForward())  * 45.f * dTime);
-		
+
 	}
 
 	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 250.f)
 	{
 		Boom();
 		DESTROY(m_gameObject);
+		m_gameObject = nullptr;
 	}
-
 }
 
 void ClusterBulletMove::Release()

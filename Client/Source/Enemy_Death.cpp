@@ -20,26 +20,19 @@ void Enemy_Death::Initialize()
 
 void Enemy_Death::EnterState()
 {
-	//m_pEnemy = m_gameObject->GetComponent<Enemy>();
-
-	//assert(L"아 ㅋㅋ 에너미 못 찾은거 같다고 ㅋㅋ" && m_pEnemy);
-
-	//m_pEnemy->Target_Setting(false);
-	
 	EnemyManager::GetInstance()->Add_EnemyCount(-1);
-
-
-	DESTROY(m_gameObject); //컽!
-	m_gameObject = nullptr; 
+	DESTROY(m_gameObject);
+	m_gameObject = nullptr;
 }
 
 void Enemy_Death::UpdateState()
 {
-	DEBUG_LOG(L"Enemy State", L"Death");
+	
 }
 
 void Enemy_Death::ExitState()
 {
+
 }
 
 

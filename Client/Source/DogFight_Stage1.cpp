@@ -74,7 +74,14 @@ void DogFight_Stage1::EnterState()
 
 	//EnemyManager::GetInstance()->Spawn_S1P1_Normal();
 	EnemyManager::GetInstance()->Enemy_Spawn_Test(ENEMY_STATE::CHASE , { 0,0,50 });
-	//EnemyManager::GetInstance()->Enemy_Spawn({ 50,0,50 }, { 0.2f,0.2f,0.f }, ENEMY_STATE::CHASE);
+	
+	float dis = 30.f;
+
+	for (int i = 0; i < 5; ++i)
+	{
+		EnemyManager::GetInstance()->Enemy_Spawn({ 50 + (dis  * i),0,200 });
+	}
+
 	//EnemyManager::GetInstance()->Enemy_Spawn({ 25,25,50 }, { 0.2f,0.2f,0.f }, ENEMY_STATE::CHASE);
 
 	m_bPattern1[0] = true;

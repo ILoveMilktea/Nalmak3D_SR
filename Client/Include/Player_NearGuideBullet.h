@@ -18,6 +18,7 @@ public:
 	// Component��(��) ���� ���ӵ�
 	virtual void Initialize() override;
 	virtual void Update() override;
+	virtual void LateUpdate()override;
 	virtual void Release()override;
 
 
@@ -32,7 +33,7 @@ private:
 private:
 	Vector3 m_firstTarget;
 	Vector3 m_firstDir;
-	Vector3 m_finalTargetPos;
+	Vector3* m_finalTargetPos;
 	bool	m_bFinish;
 	bool	m_bState = false;
 private:

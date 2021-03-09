@@ -226,8 +226,8 @@ void PlayerInfoManager::SetWeaponSpawnPos(PARTS_NUM eID, bool _gargeCheck)
 
 
 		m_pSingleWeapon = INSTANTIATE()->AddComponent<MeshRenderer>(&meshInfo);
-		m_pSingleWeapon->SetScale(0.2f, 0.2f, 0.2f);
-
+		m_pSingleWeapon->SetScale(0.2f, 0.2f, 0.1f);
+		
 
 		if (_gargeCheck)
 			m_pSingleWeapon->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));

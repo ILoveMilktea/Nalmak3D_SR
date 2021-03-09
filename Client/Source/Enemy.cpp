@@ -175,10 +175,10 @@ void Enemy::Death_Check()
 			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Explosion"
 			&&m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Death")
 		{
+
+		 //death State ->
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
-
-
 
 		}
 	}
