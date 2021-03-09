@@ -66,6 +66,7 @@
 #include "Slider.h"
 #include "Number.h"
 #include "TrailRenderer.h"
+#include "LineCollider.h"
 
 #pragma endregion
 

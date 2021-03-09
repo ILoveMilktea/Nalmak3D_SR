@@ -41,7 +41,7 @@ void AirFire_Evasion::UpdateState()
 			m_vDestPos.y = m_pPlayer->GetTransform()->position.y;
 			m_vDestPos.z = m_pPlayer->GetTransform()->position.z + (float)(rand() % 11 - 5);
 
-			//Bullet_Manager::GetInstance()->Fire_Dest(m_transform->position, m_vDestPos, 150.f);
+			Bullet_Manager::GetInstance()->Fire_Dest(m_transform->position, m_vDestPos, 150.f);
 
 			++m_iCount;
 			m_fBurstDelta = 0.f;

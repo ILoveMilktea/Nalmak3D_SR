@@ -196,6 +196,7 @@
     <ClInclude Include="..\Include\AimMissile.h" />
     <ClInclude Include="..\Include\Boss_Enter.h" />
     <ClInclude Include="..\Include\Boss_Interrupt.h" />
+    <ClInclude Include="..\Include\Bullet_Laser.h" />
     <ClInclude Include="..\Include\Camera_Boss.h" />
     <ClInclude Include="..\Include\Camera_Boss_Appear.h" />
     <ClInclude Include="..\Include\Camera_Evasion.h" />
@@ -234,7 +235,7 @@
     <ClInclude Include="..\Include\MidBoss_Laser_Siege.h" />
     <ClInclude Include="..\Include\MidBoss_Laser_Start.h" />
     <ClInclude Include="..\Include\MidBoss_Idle.h" />
-    <ClInclude Include="..\Include\MidBoss_SingleBullet.h" />
+    <ClInclude Include="..\Include\Bullet_Sphere.h" />
     <ClInclude Include="..\Include\MidBoss_Sweep_MoveToForward.h" />
     <ClInclude Include="..\Include\MidBoss_Wave_Attack.h" />
     <ClInclude Include="..\Include\MidBoss_Wave_Idle.h" />
@@ -242,7 +243,7 @@
     <ClInclude Include="..\Include\MidBoss_Sweep_Left.h" />
     <ClInclude Include="..\Include\MidBoss_Sweep_Right.h" />
     <ClInclude Include="..\Include\MidBoss_MoveToCenter.h" />
-    <ClInclude Include="..\Include\MidBoss_Rotate180.h" />
+    <ClInclude Include="..\Include\MidBoss_RotateAccel.h" />
     <ClInclude Include="..\Include\MidBoss_Sweep_Start.h" />
     <ClInclude Include="..\Include\MidBoss_Wave_Start.h" />
     <ClInclude Include="..\Include\Player.h" />
@@ -379,6 +380,7 @@
     <ClCompile Include="..\Source\AimMissile.cpp" />
     <ClCompile Include="..\Source\Boss_Enter.cpp" />
     <ClCompile Include="..\Source\Boss_Interrupt.cpp" />
+    <ClCompile Include="..\Source\Bullet_Laser.cpp" />
     <ClCompile Include="..\Source\Camera_Boss.cpp" />
     <ClCompile Include="..\Source\Camera_Boss_Appear.cpp" />
     <ClCompile Include="..\Source\Camera_Evasion.cpp" />
@@ -413,7 +415,7 @@
     <ClCompile Include="..\Source\MidBoss_Laser_Start.cpp" />
     <ClCompile Include="..\Source\MidBoss_Idle.cpp" />
     <ClCompile Include="..\Source\MidBoss_MoveLeft.cpp" />
-    <ClCompile Include="..\Source\MidBoss_SingleBullet.cpp" />
+    <ClCompile Include="..\Source\Bullet_Sphere.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_MoveToForward.cpp" />
     <ClCompile Include="..\Source\MidBoss_Wave_Attack.cpp" />
     <ClCompile Include="..\Source\MidBoss_Wave_Idle.cpp" />
@@ -421,7 +423,7 @@
     <ClCompile Include="..\Source\MidBoss_Sweep_Left.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_Right.cpp" />
     <ClCompile Include="..\Source\MidBoss_MoveToCenter.cpp" />
-    <ClCompile Include="..\Source\MidBoss_Rotate180.cpp" />
+    <ClCompile Include="..\Source\MidBoss_RotateAccel.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_Start.cpp" />
     <ClCompile Include="..\Source\MidBoss_Wave_Start.cpp" />
     <ClCompile Include="..\Source\Player.cpp" />

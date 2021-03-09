@@ -57,4 +57,5 @@ void MidBoss_Laser_Attach::UpdateState()
 void MidBoss_Laser_Attach::ExitState()
 {
 	GetComponent<Enemy_MidBoss>()->PivotRotateOn();
+	GetComponent<Enemy_MidBoss>()->SetRotateSpeed(_SPEED_MID);
 }

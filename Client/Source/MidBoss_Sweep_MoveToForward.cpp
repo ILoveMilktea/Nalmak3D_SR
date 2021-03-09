@@ -2,6 +2,7 @@
 #include "..\Include\MidBoss_Sweep_MoveToForward.h"
 
 #include "MidBoss_Define.h"
+#include "Enemy_MidBoss.h"
 #include "PlayerInfoManager.h"
 
 MidBoss_Sweep_MoveToForward::MidBoss_Sweep_MoveToForward()
@@ -57,4 +58,5 @@ void MidBoss_Sweep_MoveToForward::UpdateState()
 void MidBoss_Sweep_MoveToForward::ExitState()
 {
 	SetInteger(_g_sweepIsFirstMove, true);
+	GetComponent<Enemy_MidBoss>()->SetRotateSpeed(_SPEED_HIGH);
 }
