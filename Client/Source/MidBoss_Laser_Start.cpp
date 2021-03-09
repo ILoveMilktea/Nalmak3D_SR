@@ -2,6 +2,7 @@
 #include "..\Include\MidBoss_Laser_Start.h"
 
 #include "MidBoss_Define.h"
+#include "Enemy_MidBoss.h"
 
 MidBoss_Laser_Start::MidBoss_Laser_Start()
 {
@@ -33,4 +34,5 @@ void MidBoss_Laser_Start::UpdateState()
 
 void MidBoss_Laser_Start::ExitState()
 {
+	GetComponent<Enemy_MidBoss>()->SetRotateSpeed(_SPEED_LOW);
 }

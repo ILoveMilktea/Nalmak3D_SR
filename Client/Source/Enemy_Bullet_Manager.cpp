@@ -106,27 +106,22 @@ void Bullet_Manager::Fire_Homing()
 
 }
 
-void Bullet_Manager::Gun_Evasion(Vector3 _start, Quaternion _rot, float _spd)
+void Bullet_Manager::Gun_Evasion(Vector3 _start, Quaternion _rot, float _spd, Vector3 _scale)
 {//_start.x => x //_start.y => z
 
 	GameObject* Gun_obj = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"Bullet_Enemy");
 	Gun_obj->SetPosition(_start);
 	Gun_obj->GetTransform()->rotation = _rot;
-	Gun_obj->SetScale(0.5f, 0.5f, 0.5f);
+	Gun_obj->SetScale(_scale);
 
 	MachineGun::Desc Gun_Desc;
 	Gun_Desc.fSpd = _spd;
 	Gun_obj->AddComponent<MachineGun>(&Gun_Desc);
 
 	VIBufferRenderer::Desc Gun_Mesh;
-	Gun_Mesh.meshName = L"quadNoneNormal";;
-	Gun_Mesh.mtrl = ResourceManager::GetInstance()->GetResource<Material>(L"fx_20mmCannon");
+	Gun_Mesh.meshName = L"sphere";
+	Gun_Mesh.mtrlName = L"default_green";
 	Gun_obj->AddComponent<VIBufferRenderer>(&Gun_Mesh);
-
-	//VIBufferRenderer::Desc Gun_Mesh;
-	//Gun_Mesh.mtrlName = L"default";
-	//Gun_Mesh.meshName = L"box";
-	//Gun_obj->AddComponent<VIBufferRenderer>(&Gun_Mesh);
 
 	SphereCollider::Desc Gun_col;
 	Gun_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
@@ -162,7 +157,7 @@ void Bullet_Manager::Fire_Dest(Vector3 _start, Vector3 _dest, float _spd)
 	GameObject* Gun_obj = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"Bullet_Enemy");	
 	Gun_obj->SetPosition(_start);
 	//Gun_obj->GetTransform()->rotation = 
-	Gun_obj->SetScale(0.5f, 0.5f, 0.5f);
+	Gun_obj->SetScale(1.f, 1.f, 1.f);
 
 	MachineGun::Desc Gun_Desc;
 	Gun_Desc.bStraight = false;
@@ -171,8 +166,8 @@ void Bullet_Manager::Fire_Dest(Vector3 _start, Vector3 _dest, float _spd)
 	Gun_obj->AddComponent<MachineGun>(&Gun_Desc);
 
 	VIBufferRenderer::Desc Gun_Mesh;
-	Gun_Mesh.meshName = L"box";
-	Gun_Mesh.mtrlName = L"default";
+	Gun_Mesh.meshName = L"sphere";
+	Gun_Mesh.mtrlName = L"default_green";
 	Gun_obj->AddComponent<VIBufferRenderer>(&Gun_Mesh);
 
 	SphereCollider::Desc Gun_col;
@@ -186,7 +181,7 @@ void Bullet_Manager::Fire_Player(Vector3 _start, Quaternion _rot, float _spd)
 	GameObject* Gun_obj = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Bullet_Player");
 	Gun_obj->SetPosition(_start);
 	Gun_obj->GetTransform()->rotation = _rot;
-	Gun_obj->SetScale(0.5f, 0.5f, 0.5f);
+	Gun_obj->SetScale(1.f, 1.f, 1.f);
 
 	MachineGun::Desc Gun_Desc;
 	Gun_Desc.fSpd = _spd;
@@ -194,7 +189,7 @@ void Bullet_Manager::Fire_Player(Vector3 _start, Quaternion _rot, float _spd)
 
 	VIBufferRenderer::Desc Gun_Mesh;
 	Gun_Mesh.mtrlName = L"default";
-	Gun_Mesh.meshName = L"box";
+	Gun_Mesh.meshName = L"default_green";
 	Gun_obj->AddComponent<VIBufferRenderer>(&Gun_Mesh);
 
 	SphereCollider::Desc Gun_col;

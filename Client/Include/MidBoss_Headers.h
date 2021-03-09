@@ -8,7 +8,7 @@
 #include "MidBoss_MoveLeft.h"
 #include "MidBoss_MoveRight.h"
 #include "MidBoss_MoveToCenter.h"
-#include "MidBoss_Rotate180.h"
+#include "MidBoss_RotateAccel.h"
 
 #include "MidBoss_Wave_Start.h"
 #include "MidBoss_Wave_Idle.h"

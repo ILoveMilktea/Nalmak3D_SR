@@ -7,7 +7,7 @@ shader "defaultDebug"
 texture "g_mainTex" "default"
 vector4 "g_mainTexColor" "0,1,0,1.f"
 
-renderQueue "0"
+renderQueue "3000"
 
 blendingMode "0"
 

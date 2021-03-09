@@ -2,7 +2,8 @@
 #include "..\Include\MidBoss_Sweep_Right.h"
 
 #include "MidBoss_Define.h"
-#include "MidBoss_SingleBullet.h"
+#include "Enemy_MidBoss.h"
+#include "Bullet_Sphere.h"
 
 MidBoss_Sweep_Right::MidBoss_Sweep_Right()
 {
@@ -90,6 +91,7 @@ void MidBoss_Sweep_Right::UpdateState()
 	// pattern Time over
 	if (g_patternTimer >= g_patternDuration)
 	{
+		GetComponent<Enemy_MidBoss>()->SetRotateSpeed(_SPEED_LOW);
 		SetState(_sn_idle);
 		return;
 	}
@@ -115,23 +117,23 @@ void MidBoss_Sweep_Right::SweepAttack()
 
 		auto bullet = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"bullet");
 		VIBufferRenderer::Desc meshInfo;
-		meshInfo.meshName = L"quadNoneNormal";
-		meshInfo.mtrlName = L"fx_20mmCannon";
+		meshInfo.meshName = L"sphere";
+		meshInfo.mtrlName = L"default_green";
 
 		SphereCollider::Desc desc_col;
 		desc_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
 		desc_col.radius = 1.f;
 
-		MidBoss_SingleBullet::Desc bulletinfo;
+		Bullet_Sphere::Desc bulletinfo;
 		bulletinfo.lifeTime = 5.f;
 		bulletinfo.speed = 50.f;
 		bulletinfo.stretchRatio = 1.f;
 		bulletinfo.dmg = 10.f;
-		bulletinfo.direction = Vector3(0.f, 0.f, -1.f);
+		bulletinfo.direction = Vector3((i - 1) * 0.1f, 0.f, -1.f);
 
 		bullet->AddComponent<VIBufferRenderer>(&meshInfo);
 		bullet->AddComponent<SphereCollider>(&desc_col);
-		bullet->AddComponent<MidBoss_SingleBullet>(&bulletinfo);
+		bullet->AddComponent<Bullet_Sphere>(&bulletinfo);
 
 		Vector3 muzzlePos = Vector3(muzzlePosX, m_transform->position.y, m_transform->position.z);
 		bullet->SetPosition(muzzlePos);
