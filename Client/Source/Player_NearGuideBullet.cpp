@@ -77,12 +77,10 @@ void Player_NearGuideBullet::Update()
 		m_bFinish = true;
 	}
 
-	if (!m_bFinish)
-		return;
-
+	
 
 	
-	if (Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) > 5.f)
+	/*if (Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) > 5.f)
 	{
 		if (m_target)
 		{
@@ -103,8 +101,29 @@ void Player_NearGuideBullet::Update()
 		m_transform->position += m_transform->GetForward() * 45 * dTime;
 		m_transform->LookAt(m_transform->GetForward() + m_transform->position, 5.5f);
 	}
-	
+	*/
 
+}
+
+void Player_NearGuideBullet::LateUpdate()
+{
+	if (!m_bFinish)
+		return;
+
+
+
+	if (m_target)
+	{
+		Vector3 toDistance = m_target->GetTransform()->position- m_transform->position;
+		D3DXVec3Normalize(&toDistance, &toDistance);
+		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_target->GetTransform()->position, dTime * 3.f);
+		m_transform->LookAt(toDistance + m_transform->position, 5.5f);
+	}
+	else 
+	{
+		m_transform->position += m_transform->GetForward() * 45 * dTime;
+		m_transform->LookAt(m_transform->GetForward() + m_transform->position, 5.5f);
+	}
 }
 
 void Player_NearGuideBullet::Release()
