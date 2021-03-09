@@ -35,6 +35,16 @@ public:
 		m_debugLog += L"\n   " + type;
 		m_debugLog += L"\n   " + value;
 	}
+	void DebugLog(const wstring&  _name, const Vector2& _log)
+	{
+		wstring type = L"Vector2";
+		wstring value = to_wstring(_log.x) + L", " + to_wstring(_log.y);
+
+		m_debugLog += L"\n-----------------------------------";
+		m_debugLog += L"\n   " + _name;
+		m_debugLog += L"\n   " + type;
+		m_debugLog += L"\n   " + value;
+	}
 	void DebugLog(const wstring&  _name, const TCHAR* _log)
 	{
 		wstring value = _log;
