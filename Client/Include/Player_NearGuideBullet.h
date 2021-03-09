@@ -32,7 +32,7 @@ private:
 private:
 	Vector3 m_firstTarget;
 	Vector3 m_firstDir;
-	Vector3 m_finalTargetPos;
+	Vector3* m_finalTargetPos;
 	bool	m_bFinish;
 	bool	m_bState = false;
 private:

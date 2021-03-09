@@ -27,7 +27,7 @@ Player_NearGuideBullet::~Player_NearGuideBullet()
 		m_smokeParticle->StopEmit();
 		m_smokeParticle = nullptr;
 	}
-
+	Release();
 
 	m_gameObject = nullptr;
 }
@@ -48,7 +48,9 @@ void Player_NearGuideBullet::Initialize()
 	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
 	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector")->GetComponent<EnemyDetector>();
 	m_target = m_enemyDetector->GetLockOnTarget();
-	m_finalTargetPos = m_target->GetTransform()->position;
+
+	if(m_target)
+		m_finalTargetPos =  new Vector3(m_target->GetTransform()->position);
 }
 
 void Player_NearGuideBullet::Update()
@@ -66,10 +68,6 @@ void Player_NearGuideBullet::Update()
 
 	if (!m_bFinish && Nalmak_Math::Distance(m_firstTarget, m_transform->position) > 2.f)
 	{
-
-	
-
-
 		m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_firstTarget, dTime * 5.f);
 		m_transform->LookAt(m_firstDir + m_transform->position, 1.f);
 
@@ -82,19 +80,20 @@ void Player_NearGuideBullet::Update()
 	if (!m_bFinish)
 		return;
 
+
 	
-	if (Nalmak_Math::Distance(m_finalTargetPos, m_transform->position) > 5.f)
+	if (Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) > 5.f)
 	{
 		if (m_target)
 		{
-			Vector3 toDistance = m_finalTargetPos - m_transform->position;
+			Vector3 toDistance = *m_finalTargetPos - m_transform->position;
 			D3DXVec3Normalize(&toDistance, &toDistance);
-			m_transform->position = Nalmak_Math::Lerp(m_transform->position, m_finalTargetPos, dTime * 3.f);
+			m_transform->position = Nalmak_Math::Lerp(m_transform->position, *m_finalTargetPos, dTime * 3.f);
 			m_transform->LookAt(toDistance + m_transform->position, 5.5f);
 		}
 	
 	}
-	else if(Nalmak_Math::Distance(m_finalTargetPos, m_transform->position) <= 5.f)
+	else if(Nalmak_Math::Distance(*m_finalTargetPos, m_transform->position) <= 5.f)
 	{
 		m_target = nullptr;
 	}
@@ -110,6 +109,11 @@ void Player_NearGuideBullet::Update()
 
 void Player_NearGuideBullet::Release()
 {
+	if (m_finalTargetPos)
+	{
+		delete m_finalTargetPos;
+		m_finalTargetPos = nullptr;
+	}
 }
 
 void Player_NearGuideBullet::OnTriggerEnter(Collisions & _collision)

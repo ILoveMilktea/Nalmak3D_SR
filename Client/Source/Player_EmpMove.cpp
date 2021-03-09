@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "..\Include\Player_EmpMove.h"
 #include "Player_EmpPulse.h"
+#include "ParticleRenderer.h"
+#include "ParticleDead_IfCount0.h"
+
 
 Player_EmpMove::Player_EmpMove(Desc * _desc)
 {
@@ -9,10 +12,23 @@ Player_EmpMove::Player_EmpMove(Desc * _desc)
 
 Player_EmpMove::~Player_EmpMove()
 {
+	if (m_smokeParticle)
+	{
+		m_smokeParticle->AddComponent<ParticleDead_IfCount0>();
+		m_smokeParticle->StopEmit();
+		m_smokeParticle = nullptr;
+	}
 }
 
 void Player_EmpMove::Initialize()
 {
+	{
+		ParticleRenderer::Desc render;
+		render.particleDataName = L"missile_smoke";
+		auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
+		m_smokeParticle = obj->GetComponent<ParticleRenderer>();
+		obj->SetParents(m_gameObject);
+	}
 }
 
 void Player_EmpMove::Update()
@@ -103,6 +119,7 @@ void Player_EmpMove::Boom()
 	Pulse->AddComponent<SphereCollider>(&Pulse_col);
 
 	DESTROY(m_gameObject);
+	m_gameObject = nullptr;
 }
 
 

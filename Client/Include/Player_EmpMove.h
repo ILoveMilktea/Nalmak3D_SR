@@ -37,6 +37,7 @@ private:
 	float	m_fEmpDelta = 0.f;
 
 	GameObject* Pulse = nullptr;
+	class ParticleRenderer* m_smokeParticle = nullptr;
 
 };
 

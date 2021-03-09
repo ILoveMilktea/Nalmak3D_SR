@@ -110,6 +110,8 @@ void PlayerShooter::Update()
 			PlayerInfoManager::GetInstance()->SetWeaponSpawnPos(FOURTH_PARTS, false);
 			PlayerInfoManager::GetInstance()->GrageWeaponRelease();
 			//SetEquipment(FIRST_PARTS);
+
+			SetEquipment(FIRST_PARTS);
 			m_cheatCheck = true;
 		}
 	
