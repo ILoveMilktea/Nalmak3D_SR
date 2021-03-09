@@ -42,13 +42,13 @@ void Enemy::Update()
 
 
 #pragma region DebugLog
-	DEBUG_LOG(L"Enemy CurPos", m_transform->position);
+	//DEBUG_LOG(L"Enemy CurPos", m_transform->position);
 	//DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
-	DEBUG_LOG(L"Ÿ�� ������ �Ÿ�",		m_fDist_Target);
+	//DEBUG_LOG(L"Ÿ�� ������ �Ÿ�",		m_fDist_Target);
 	//DEBUG_LOG(L"forward���Ϳ� ���̺����� ����",		m_fInner);
 	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
-	DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
-	DEBUG_LOG(L"Enemy Max Spd", m_tStatus.m_fMaxSpd);
+	//DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
+	//DEBUG_LOG(L"Enemy Max Spd", m_tStatus.m_fMaxSpd);
 	//DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
 	//DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
 	DEBUG_LOG(L"Current Pattern", m_gameObject->GetComponent<StateControl>()->GetCurStateString());
@@ -363,7 +363,7 @@ bool Enemy::Dive()
 	if (m_fDiveInner <= 0.1f && m_fDiveInner >= -0.1f) //���� 0�� ��������
 	{
 		//Go_Straight();
-		DEBUG_LOG(L"���̺� Inner", m_fDiveInner);
+		//DEBUG_LOG(L"���̺� Inner", m_fDiveInner);
 		return true;
 	}
 	return false;
@@ -386,7 +386,7 @@ bool Enemy::Soar()
 	if (m_fSoarInner <= 0.1f && m_fSoarInner >= -0.1f) //���� 0�� ��������
 	{
 		//Go_Straight();
-		DEBUG_LOG(L"Soar Inner", m_fSoarInner);
+		//DEBUG_LOG(L"Soar Inner", m_fSoarInner);
 		return true;
 	}
 	return false;

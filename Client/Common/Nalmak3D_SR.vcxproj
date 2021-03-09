@@ -607,6 +607,7 @@
     <FxCompile Include="..\..\Resource\Shader\shieldEffect.fx" />
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx" />
     <FxCompile Include="..\..\Resource\Shader\StageSelectFloor.fx" />
+    <FxCompile Include="..\..\Resource\Shader\stage_arrowIndicator.fx" />
     <FxCompile Include="..\..\Resource\Shader\standard.fx">
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

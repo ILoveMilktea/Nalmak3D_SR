@@ -74,7 +74,7 @@ void Camera_Boss_Appear::UpdateState()
 		}
 	}
 
-	DEBUG_LOG(L"Camera Pos", m_transform->position);
+	//DEBUG_LOG(L"Camera Pos", m_transform->position);
 }
 
 void Camera_Boss_Appear::ExitState()

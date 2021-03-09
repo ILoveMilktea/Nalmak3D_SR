@@ -2,20 +2,15 @@
 ##  Material Data Setting
 #########################################################
 
-shader "shieldEffect"
+shader "stage_arrowIndicator"
 
-texture "g_mainTex" "shield_test"
-vector4 "g_mainTexColor" "0.3f,0.9f,1,0.5f"
-float "g_strength" "0.5f"
-float "g_hitTimer" "4.f"
-vector4 "g_hitPosition" "0,0,9.f,0"
-float "g_radius" "5.f"
+vector4 "g_mainTexColor" "1,1,1,1.f"
 
-renderQueue "1000"
+renderQueue "3000"
 
-blendingMode "0"
+blendingMode "1"
 
-fillMode "0"
+fillMode "1"
 #########################################################
 ##   1. Shander
 ##  ---------------------------------------------------------------------------------------

@@ -251,7 +251,7 @@ GameObject * PlayerInfoManager::Player_Create()
 #endif
 		return nullptr;
 	}
-
+	
 	m_player->SetScale(0.2f, 0.2f, 0.2f);
 
 	Player::Desc player_desc;
@@ -269,9 +269,9 @@ GameObject * PlayerInfoManager::Player_Create()
 
 	{
 		Player_WindEffect::Desc wind;
-		wind.leftTrailPos = Vector3(-1.8f, 0.14f, -0.01f);
-		wind.rightTrailPos = Vector3(1.8f, 0.14f, -0.01f);
-		wind.trailThick = 0.2f;
+		wind.leftTrailPos = Vector3(-1.7f, 0.14f, -0.05f);
+		wind.rightTrailPos = Vector3(1.7f, 0.14f, -0.05f);
+		wind.trailThick = 0.16f;
 		m_player->AddComponent<Player_WindEffect>(&wind);
 	}
 	// zet distortion
