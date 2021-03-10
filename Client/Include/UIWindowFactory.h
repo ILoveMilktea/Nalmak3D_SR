@@ -654,7 +654,7 @@ public:
 					}
 				}
 			}
-			
+
 		}
 	}
 	static void StageWindow(GameObject* _player)
