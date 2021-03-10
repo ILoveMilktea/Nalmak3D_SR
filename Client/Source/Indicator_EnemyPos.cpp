@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\Indicator_EnemyPos.h"
 #include "PlayerInfoManager.h"
+#include "Enemy.h"
 
 Indicator_EnemyPos::Indicator_EnemyPos(Desc * _desc)
 {
