@@ -3,6 +3,7 @@
 
 #include "Enemy_Bullet_Manager.h"
 #include "Indicator_EnemyPos.h"
+#include "ParticleDead_IfCount0.h"
 
 
 Enemy::Enemy(Desc * _Desc)
@@ -30,6 +31,25 @@ void Enemy::Initialize()
 
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
 	assert(L"거 에너미에서 메인카메라 못찾았다 이말이야"&&m_pMainCamera);
+
+
+	if (m_pDamagedSmoke == nullptr)
+	{
+		m_pDamagedSmoke = INSTANTIATE(OBJECT_TAG_PARTICLE, L"enemy_Damaged_Smoke");
+
+		ParticleRenderer::Desc smoke_desc;
+		smoke_desc.particleDataName = L"enemy_smoke_Damaged";
+		smoke_desc.PlayOnAwake = false; //객체 생성과 동시에 파티클 on!
+
+		if (m_pDamagedSmoke != nullptr)
+		{
+			m_pDamagedSmoke->AddComponent<ParticleRenderer>(&smoke_desc);
+		}
+
+
+	}
+
+
 }
 
 void Enemy::Update()
@@ -38,6 +58,7 @@ void Enemy::Update()
 	Reloading_Missile();
 
 
+	CurHp_Check();
 	Death_Check();
 	Indicator_OnOff();
 
@@ -50,8 +71,11 @@ void Enemy::Update()
 
 
 #pragma region DebugLog
+
 	//DEBUG_LOG(L"Enemy CurPos", m_transform->position);
-	//DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
+	DEBUG_LOG(L"FullHP", m_tStatus.m_iFullHp);
+	DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
+	DEBUG_LOG(L"test", (1.f -(float)m_tStatus.m_iCurHp / m_tStatus.m_iFullHp));
 	//DEBUG_LOG(L"Ÿ�� ������ �Ÿ�",		m_fDist_Target);
 	//DEBUG_LOG(L"forward���Ϳ� ���̺����� ����",		m_fInner);
 	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
@@ -189,6 +213,13 @@ void Enemy::Death_Check()
 				m_pArrow_Indicator = nullptr;
 			}
 
+			m_pDamagedSmoke->GetComponent<ParticleRenderer>()->StopEmit();
+			m_pDamagedSmoke = nullptr;
+
+			m_pArrow_Indicator->GetComponent<Indicator_EnemyPos>()->Release_Target();
+			DESTROY(m_pArrow_Indicator);
+			m_pArrow_Indicator = nullptr;
+
 		 //death State ->
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
@@ -233,6 +264,34 @@ void Enemy::Damaged(const int & _playerDmg)
 	{
 		m_tStatus.m_iCurHp = 0;
 	}
+}
+
+void Enemy::CurHp_Check()
+{
+	float fPercent = (float)m_tStatus.m_iCurHp / (float)m_tStatus.m_iFullHp;
+
+	if (fPercent < 1.f)
+	{
+		if (m_pDamagedSmoke != nullptr)
+		{
+			//UINT temp = (UINT)(25.f * (1.f - fPercent));
+			//m_pDamagedSmoke->GetComponent<ParticleRenderer>()->m_info.emittorCount 
+			//	= (UINT)(25.f * (1.f - fPercent));
+
+			int temp = (int)(25.f * (1.f - fPercent));
+			
+			m_pDamagedSmoke->GetComponent<ParticleRenderer>()->SetEmitCount(temp);
+
+			m_pDamagedSmoke->GetTransform()->position = m_transform->position;
+			
+			if (m_pDamagedSmoke->GetComponent<ParticleRenderer>()->IsPlaying() == false)
+			{
+				m_pDamagedSmoke->AddComponent<ParticleDead_IfCount0>();
+				m_pDamagedSmoke->GetComponent<ParticleRenderer>()->Play();
+			}
+		}
+	}
+
 }
 
 const ENEMY_STATUS & Enemy::Get_Status() const

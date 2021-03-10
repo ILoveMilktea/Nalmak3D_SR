@@ -20,5 +20,6 @@ void ParticleDead_IfCount0::Update()
 	if (m_particle->GetActivedParticleCount() == 0 && !m_particle->IsPlaying())
 	{
 		DESTROY(m_gameObject);
+	//	m_gameObject = nullptr;
 	}
 }

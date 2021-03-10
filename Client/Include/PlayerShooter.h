@@ -15,7 +15,7 @@ public:
 	// Component을(를) 통해 상속됨
 	virtual void Initialize() override;
 	virtual void Update() override;
-
+	virtual void LateUpdate() override;
 	void SetEquipment(PARTS_NUM _weaponName);
 public:
 	void Shoot();

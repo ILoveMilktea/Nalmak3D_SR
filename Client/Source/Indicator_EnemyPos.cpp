@@ -30,14 +30,14 @@ void Indicator_EnemyPos::Initialize()
 
 void Indicator_EnemyPos::Update()
 {
-//1. 3D Obejct·Î ¶ç¿ï °æ¿ì : 
+//1. 3D Obejctï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ :
 
 
 
-	
+
 	//if (targetPos.x > playerPos.x)
 	//{//righter than player
-	//	
+	//
 	//}
 	//else if (targetPos.x < playerPos.x)
 	//{//leftter than player
@@ -50,7 +50,7 @@ void Indicator_EnemyPos::Update()
 
 	//}
 	//else if (targetPos.y < playerPos.y)
-	//{//lower than player 
+	//{//lower than player
 
 	//}
 
@@ -67,12 +67,12 @@ void Indicator_EnemyPos::LateUpdate()
 
 	Vector3 playerPos = m_pPlayer->GetTransform()->position;
 	Vector3 targetPos = m_pTarget->GetTransform()->position;
-	
+
 	m_transform->position = playerPos;
-	 
-	//°Å,,, ¾¾¹ß ½ºÅ©¸°ÁÂÇ¥ ´Ù Á¿±î½Ê¼î ±×³É ÀÏÁ¤ °Å¸®¿¡¼­ »ý¼º µÇ°Ô ÇÒ²¨¾ß 
-	//ÇÃ·¹ÀÌ¾î¸¦ °¨½Î°í ÀÖ´Â °¡»óÀÇ ±¸°¡ ÀÖ´Ù°í »ý°¢ÇÏ°í ±× ±¸ÀÇ ¹ÝÁö¸§ ¸¸Å­ 
-	//ÇÃ·¹ÀÌ¾î¿¡°Ô¼­ ¶³¾îÁø À§Ä¡¿¡ »ý¼ºÇÏÀÚ. ±×³É Â÷ÀÌ º¤ÅÍ ±¸ÇÏ°í ¹ÝÁö¸§¸¸Å­ °öÇØÁÖ¸é ´îµí
+
+	//ï¿½ï¿½,,, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½Ç¥ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ ï¿½Ò²ï¿½ï¿½ï¿½
+	//ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½Î°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­
+	//ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	Vector3 vDistance = targetPos - playerPos;
 	D3DXVec3Normalize(&vDistance, &vDistance);
@@ -88,7 +88,14 @@ void Indicator_EnemyPos::LateUpdate()
 	//Vector3 Cam = m_pMainCamera->GetTransform()->position;
 	////float Z = m_transform->position.z - Cam.z;
 
-	//Vector2 vScreen = m_pMainCamera->WorldToScreenPos(m_transform->position);
+	Vector2 vScreen = m_pMainCamera->WorldToScreenPos(m_transform->position);
+
+	if (vScreen.x < WINCX / 2.f * -1.f)
+	{
+
+	}
+
+
 	//DEBUG_LOG(L"Cursor Screen Pos", vScreen);
 
 	//Vector2 vClampScreen;
@@ -124,13 +131,13 @@ void Indicator_EnemyPos::LateUpdate()
 	////m_transform->position = vWolrd;
 
 	m_transform->LookAt(m_pTarget, 1.f);
-	//m_pAlpha->SetVector() ÀÌ°É·Î Åõ¸íµµ Á¶Àý°¡´É. »ç¸£¸¤ ¾ø¾îÁö°Ô ÇØº¸ÀÚ.
+	//m_pAlpha->SetVector() ï¿½Ì°É·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ç¸£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½.
 
 	DEBUG_LOG(L"Arrow Pos", m_transform->position);
 
 
 
-	/* Á¤ ¾ÈµÇ¸é ±×³É ¶ô¿Â ¹üÀ§¿¡´Ù°¡ À§, ¾Æ·¡¸¸ ÆÇ´ÜÇØ¼­ À§Ä¡ Á¤ÇØÁÖ°í LookAt¸¸ ÇØÁÖÀÚ*/
+	/* ï¿½ï¿½ ï¿½ÈµÇ¸ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½, ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ LookAtï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 }
 
 void Indicator_EnemyPos::Release_Target()
