@@ -2,13 +2,13 @@
 ##  Material Data Setting
 #########################################################
 
-shader "default"
+shader "standard"
 
 texture "g_mainTex" "boss"
 vector4 "g_mainTexColor" "1,1,1,1"
 
 
-renderQueue "3000"
+renderQueue "1000"
 
 blendingMode "0"
 

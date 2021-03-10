@@ -43,11 +43,11 @@ void Stage2Scene::Initialize()
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(70, 180, 0);
 
-	VIBufferRenderer::Desc ground;
+	/*VIBufferRenderer::Desc ground;
 	ground.mtrlName = L"ground";
 	ground.meshName = L"ground";
 	auto groundObj = INSTANTIATE()->AddComponent<VIBufferRenderer>(&ground)->SetRotation(90, 0, 0);
-	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
+	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);*/
 
 	INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
@@ -78,9 +78,15 @@ void Stage2Scene::Initialize()
 
 	m_StageManager = StageManager::GetInstance()->GetGameObject();
 	StageManager::GetInstance()->Set_StateControl();
-	StageManager::GetInstance()->Get_StateControl()->AddState<DogFightState>(L"Dog_Fight");
-	StageManager::GetInstance()->Get_StateControl()->AddState<EvasionState>(L"Evasion");
-	StageManager::GetInstance()->Get_StateControl()->AddState<BossState>(L"Boss");
+	auto stateControl = StageManager::GetInstance()->Get_StateControl();
+	stateControl->AddState<DogFightState>(L"Dog_Fight");
+	stateControl->AddState<EvasionState>(L"Evasion");
+	stateControl->AddState<BossState>(L"Boss");
+	stateControl->AddState<State_Evasion_Airfire>(_sn_airfire);
+	stateControl->AddState<State_Evasion_Midboss>(_sn_midboss);
+	stateControl->AddState<State_Evasion_MidbossDead>(_sn_midbossdead);
+
+
 	StageManager::GetInstance()->Get_StateControl()->InitState(L"Dog_Fight");
 
 

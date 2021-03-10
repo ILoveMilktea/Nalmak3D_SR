@@ -24,7 +24,7 @@ public:
 		float aspect = 0;
 		// 변경시 common shader 상수 값도 바꿔주기!
 		float zNear = 1.f;
-		float zFar = 1000.f; 
+		float zFar = 400.f; 
 		// for orthographic
 		UINT width = 0;
 		UINT height = 0; 

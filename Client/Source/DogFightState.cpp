@@ -142,10 +142,6 @@ void DogFightState::UpdateState()
 		}
 
 
-
-
-
-
 		//if (m_bProduce)
 		//{
 		//	Accelerate();

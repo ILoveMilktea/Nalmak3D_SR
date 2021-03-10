@@ -436,7 +436,7 @@ void EnemyManager::Enemy_Spawn_Evasion(
 
 
 	VIBufferRenderer::Desc Enemy_Mesh;
-	Enemy_Mesh.mtrlName = L"default_red";
+	Enemy_Mesh.mtrlName = L"standard";
 	Enemy_Mesh.meshName = L"sphere";
 	Enemy_obj->AddComponent<VIBufferRenderer>(&Enemy_Mesh);
 
@@ -454,7 +454,7 @@ void EnemyManager::MidBoss_Spawn(Vector3 _pos)
 	GameObject* boss = INSTANTIATE(OBJECT_TAG_MIDBOSS, L"MidBoss");
 	boss->SetPosition(_pos);
 	boss->SetRotation(0.f, 180.f, 0.f);
-	boss->SetScale(20.f, 20.f, 20.f);
+	boss->SetScale(40.f, 40.f, 40.f);
 
 	boss->AddComponent<StateControl>();
 	StateControl* stateControl = boss->GetComponent<StateControl>();
@@ -544,7 +544,7 @@ void EnemyManager::MidBoss_Spawn(Vector3 _pos)
 		desc_bp.attackModePos = attackModePos[i];
 
 		VIBufferRenderer::Desc desc_plate;
-		desc_plate.mtrlName = L"default_blue";
+		desc_plate.mtrlName = L"standard";
 		desc_plate.meshName = L"sphere";
 
 		SphereCollider::Desc desc_col;

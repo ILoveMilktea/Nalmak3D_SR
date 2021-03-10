@@ -30,14 +30,7 @@ void Player::Release()
 
 void Player::OnTriggerEnter(Collisions & _collision)
 {
-	for(auto& obj : _collision)
-	{
-		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_ENEMY)
-		{
-			
-		
-		}
-	}
+	
 }
 
 void Player::OnTriggerStay(Collisions & _collision)

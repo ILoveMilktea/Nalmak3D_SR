@@ -15,13 +15,20 @@ void Player_WindEffect::Initialize()
 	
 	TrailRenderer::Desc trail;
 	trail.trailCountPerSec = 5;
-	auto leftEffect = INSTANTIATE()->AddComponent<TrailRenderer>(&trail);
-	m_leftTrail = leftEffect->GetComponent<TrailRenderer>();
+	AddComponent<TrailRenderer>(&trail);
+	AddComponent<TrailRenderer>(&trail);
 
-	auto rightEffect = INSTANTIATE()->AddComponent<TrailRenderer>(&trail);
-	m_rightTrail = rightEffect->GetComponent<TrailRenderer>();
+	auto comList = GetComponents<TrailRenderer>();
+	m_leftTrail = comList[0];
+	m_rightTrail = comList[1];
 
 	m_timer = 1.f;
+}
+
+void Player_WindEffect::Release()
+{
+	DeleteComponent<TrailRenderer>();
+	DeleteComponent<TrailRenderer>();
 }
 
 void Player_WindEffect::Update()

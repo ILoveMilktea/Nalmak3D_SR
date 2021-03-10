@@ -14,5 +14,7 @@ public:
 
 private:
 	GameObject* m_midBoss;
+
+	Transform* m_mainCam;
 };
 

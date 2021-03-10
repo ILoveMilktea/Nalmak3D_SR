@@ -14,6 +14,7 @@ public:
 	~Player_WindEffect() = default;
 private:
 	virtual void Initialize() override;
+	virtual void Release() override;
 	virtual void Update() override;
 private:
 	class TrailRenderer* m_leftTrail;

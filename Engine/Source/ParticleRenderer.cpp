@@ -421,6 +421,7 @@ void ParticleRenderer::EmitBox(int _count, const Matrix& _world)
 		}
 		else
 		{
+			direction = Vector3(0, 1, 0);
 			D3DXVec3TransformNormal(&posOffset, &posOffset, &_world);
 			particle->position = pos + posOffset;
 			D3DXVec3TransformNormal(&direction, &direction, &_world);
