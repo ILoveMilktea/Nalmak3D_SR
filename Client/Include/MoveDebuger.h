@@ -1,21 +1,18 @@
 #pragma once
 #include "Component.h"
-class UI_ShopItemModel :
+class MoveDebuger :
 	public Component
 {
 public:
 	struct Desc
 	{
-		GameObject* cam;
+
 	};
 public:
-	UI_ShopItemModel(Desc* _desc);
-	~UI_ShopItemModel();
+	MoveDebuger(Desc* _desc);
+	~MoveDebuger();
 
 	virtual void Initialize() override;
 	virtual void Update() override;
-
-private:
-	GameObject* m_mainCam;
 };
 

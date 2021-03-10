@@ -51,6 +51,11 @@ public:
 		return m_gameObject->GetComponent<T>();
 	}
 	template <typename T>
+	const vector<T*> GetComponents()
+	{
+		return m_gameObject->GetComponents<T>();
+	}
+	template <typename T>
 	void DeleteComponent()
 	{
 		m_gameObject->DeleteComponent<T>();

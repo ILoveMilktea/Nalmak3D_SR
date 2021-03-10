@@ -54,8 +54,6 @@ void DogFight_Stage1::EnterState()
 
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
-
-
 #pragma endregion
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
 	assert(L"Can't find MainCam" && m_pMainCamera);
@@ -70,7 +68,7 @@ void DogFight_Stage1::EnterState()
 
 	//EnemyManager::GetInstance()->Spawn_S1P1_Normal();
 	//EnemyManager::GetInstance()->Enemy_Spawn_Test(ENEMY_STATE::CHASE , { 0,0,50 });
-	
+
 	m_pScripter = UIWindowFactory::DogfightScript();
 	assert(L"Can't find Scripter" && m_pScripter);
 
@@ -79,7 +77,7 @@ void DogFight_Stage1::EnterState()
 
 void DogFight_Stage1::UpdateState()
 {
-	m_fTutorialTime += dTime;	
+	m_fTutorialTime += dTime;
 
 	if (m_pScripter->GetComponent<Scripter>()->Get_DialogueIndex() == 5 && !bTest)
 	{

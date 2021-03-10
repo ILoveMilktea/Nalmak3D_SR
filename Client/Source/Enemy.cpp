@@ -202,11 +202,16 @@ void Enemy::Death_Check()
 {
 	if (m_tStatus.m_iCurHp <= 0)
 	{
-		//���� Falling, Death, Explosion���� �ƴҶ��� �����ϰ�.
 		if (m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Falling"
 			&& m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Explosion"
 			&& m_gameObject->GetComponent<StateControl>()->GetCurStateString() != L"Death")
 		{
+			if (m_pArrow_Indicator)
+			{
+				m_pArrow_Indicator->GetComponent<Indicator_EnemyPos>()->Release_Target();
+				DESTROY(m_pArrow_Indicator);
+				m_pArrow_Indicator = nullptr;
+			}
 
 			m_pDamagedSmoke->GetComponent<ParticleRenderer>()->StopEmit();
 			m_pDamagedSmoke = nullptr;
@@ -218,6 +223,8 @@ void Enemy::Death_Check()
 		 //death State ->
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
+
+			
 		}
 	}
 }

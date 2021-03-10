@@ -22,7 +22,7 @@ void PlayerShooter::Initialize()
 	
 	
 	m_cannon = m_ItemManager->FindItemObject(L"Weapon", L"Cannon");
-	m_shootTime = 0.5f;
+	m_shootTime = SHOT_STANDBY;
 
 	m_cannonCoolTime = m_cannon->GetItmeInfo().delay;
 	//m_cannonCoolTime = 0.5f;
@@ -58,6 +58,7 @@ void PlayerShooter::Update()
 				m_useEquipment->CreateBullet();
 		}
 	}
+
 	if (m_cannon)
 	{
 		if (InputManager::GetInstance()->GetKeyPress(KEY_STATE_RIGHT_MOUSE))
@@ -99,8 +100,8 @@ void PlayerShooter::Update()
 			PlayerInfoManager::GetInstance()->SetWeaponSpawnPos(FOURTH_PARTS, false);
 			PlayerInfoManager::GetInstance()->GrageWeaponRelease();
 			m_prevParts = PARTS_MAX;
-			m_shootTime = 0.5f;
 			SetEquipment(FIRST_PARTS);
+			m_shootTime = SHOT_STANDBY;
 			m_cheatCheck = true;
 		}
 	}

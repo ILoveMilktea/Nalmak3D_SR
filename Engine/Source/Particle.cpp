@@ -12,6 +12,7 @@ Particle::~Particle()
 void Particle::Reset()
 {
 	totalAcceleration = Vector3(0, 0, 0);
+	//direction = Vector3(0, 0, 0);
 	m_isAlive = true;
 	m_currentLifeTime = 0;
 	parents = nullptr;

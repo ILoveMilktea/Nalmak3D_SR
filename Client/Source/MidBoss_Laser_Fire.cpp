@@ -79,7 +79,10 @@ void MidBoss_Laser_Fire::CreateLaser(Vector3 _startPoint, Vector3 _endPoint, flo
 	laser->AddComponent<VIBufferRenderer>(&desc_renderer);
 
 	LineCollider::Desc desc_col;
+	desc_col.startPoint = _startPoint;
+	desc_col.endPoint = _endPoint;
 	desc_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
+	desc_col.radius = width * 0.5f;
 	laser->AddComponent<LineCollider>(&desc_col);
 
 	DeadTimer::Desc desc_timer;

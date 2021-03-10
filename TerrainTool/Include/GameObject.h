@@ -101,7 +101,35 @@ public:
 
 		return nullptr;
 	}
+	template <typename T>
+	const vector<T*> GetComponents()
+	{
+		vector<T*> componentsList;
+		for (auto& component : m_components)
+		{
+			if (component.first == typeid(T).name())
+			{
+				if (component.second->m_dead == false)
+				{
+					componentsList.emplace_back((T*)component.second);
+				}
+			}
 
+		}
+		for (auto& component : m_newComponents)
+		{
+			if (component.first == typeid(T).name())
+			{
+				if (component.second->m_dead == false)
+				{
+					componentsList.emplace_back((T*)component.second);
+				}
+			}
+
+		}
+
+		return componentsList;
+	}
 	template <typename T>
 	void DeleteComponent()
 	{

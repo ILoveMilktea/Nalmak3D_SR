@@ -17,10 +17,11 @@ State_Evasion_Airfire::~State_Evasion_Airfire()
 
 void State_Evasion_Airfire::Initialize()
 {
+	m_mainCam = Core::GetInstance()->GetMainCamera()->GetTransform();
 }
 
 void State_Evasion_Airfire::EnterState()
-{
+{	
 	m_spawnTimer = 0.f;
 
 	m_spawnPos[0] = Vector3(-70.f, -50.f, 150.f);
@@ -35,6 +36,8 @@ void State_Evasion_Airfire::EnterState()
 
 void State_Evasion_Airfire::UpdateState()
 {
+	DEBUG_LOG(L"cam", m_mainCam);
+
 	m_spawnTimer += dTime;
 
 	if (m_spawnIndex < 4)

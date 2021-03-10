@@ -221,6 +221,8 @@
     <ClInclude Include="..\Include\Indicator_EnemyPos.h" />
     <ClInclude Include="..\Include\MidBoss_Appear.h" />
     <ClInclude Include="..\Include\MidBoss_MoveLeft.h" />
+    <ClInclude Include="..\Include\MoveDebuger.h" />
+    <ClInclude Include="..\Include\SliderAnimator.h" />
     <ClInclude Include="..\Include\Stage2_Mainstream_Headers.h" />
     <ClInclude Include="..\Include\Stage2_Mainstream_Define.h" />
     <ClInclude Include="..\Include\FieldCameraEvationState.h" />
@@ -438,6 +440,7 @@
     <ClCompile Include="..\Source\MidBoss_RotateAccel.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_Start.cpp" />
     <ClCompile Include="..\Source\MidBoss_Wave_Start.cpp" />
+    <ClCompile Include="..\Source\MoveDebuger.cpp" />
     <ClCompile Include="..\Source\Player.cpp" />
     <ClCompile Include="..\Source\Player_Boss_Enter.cpp" />
     <ClCompile Include="..\Source\Player_Evasion_Enter.cpp" />
@@ -524,6 +527,7 @@
     <ClCompile Include="..\Source\ScriptReady.cpp" />
     <ClCompile Include="..\Source\ScriptWait.cpp" />
     <ClCompile Include="..\Source\BossUIAnimator.cpp" />
+    <ClCompile Include="..\Source\SliderAnimator.cpp" />
     <ClCompile Include="..\Source\SmallCannon.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />

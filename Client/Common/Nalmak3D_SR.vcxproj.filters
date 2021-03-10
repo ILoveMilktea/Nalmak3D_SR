@@ -363,9 +363,6 @@
     <ClInclude Include="..\Include\FieldCameraEvationState.h">
       <Filter>__Phase2_Lab</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Enemy_MidBoss.h">
-      <Filter>__Phase2_Lab</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Defense_Start.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClInclude>
@@ -414,9 +411,6 @@
     <ClInclude Include="..\Include\MidBoss_Laser_Attach.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Enemy_BulletProof.h">
-      <Filter>__Phase2_Lab</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Start.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClInclude>
@@ -461,18 +455,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\Player_Evasion_Exit.h">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\State_Evasion_Airfire.h">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\State_Evasion_Enter.h">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\State_Evasion_Midboss.h">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\State_Evasion_MidbossDead.h">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Headers.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss</Filter>
@@ -528,6 +510,18 @@
     <ClInclude Include="..\Include\Indicator_EnemyPos.h">
       <Filter>02.Component\02.UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_Airfire.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\01.AirFire</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_Midboss.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\02.MidBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_MidbossDead.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\03.MidBossDead</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\State_Evasion_Enter.h">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
+      </ClInclude>
     <ClInclude Include="..\Include\DogFight_Stage1.h">
       <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
     </ClInclude>
@@ -548,6 +542,18 @@
     </ClInclude>
     <ClInclude Include="..\Include\DogFightState_4.h">
       <Filter>04.Combat State\00%29DogFight\Stage2\Phase4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_BulletProof.h">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_MidBoss.h">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SliderAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MoveDebuger.h">
+      <Filter>96.Debuger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -886,9 +892,6 @@
     <ClCompile Include="..\Source\FieldCameraEvationState.cpp">
       <Filter>__Phase2_Lab</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Enemy_MidBoss.cpp">
-      <Filter>__Phase2_Lab</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Defense_Start.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClCompile>
@@ -940,9 +943,6 @@
     <ClCompile Include="..\Source\MidBoss_Laser_Attach.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Enemy_BulletProof.cpp">
-      <Filter>__Phase2_Lab</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Siege.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
     </ClCompile>
@@ -985,18 +985,6 @@
     <ClCompile Include="..\Source\Player_Evasion_Exit.cpp">
       <Filter>02.Component\00.Manager\Player\PlayerFSM\EvasionStageMove</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\State_Evasion_Airfire.cpp">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\State_Evasion_Enter.cpp">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\State_Evasion_Midboss.cpp">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\State_Evasion_MidbossDead.cpp">
-      <Filter>__Phase2_Lab\phaseFSM\MainStream</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\State_Camera_Evasion.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Camera</Filter>
     </ClCompile>
@@ -1038,6 +1026,17 @@
     </ClCompile>
     <ClCompile Include="..\Source\Indicator_EnemyPos.cpp">
       <Filter>02.Component\02.UI</Filter>
+    <ClCompile Include="..\Source\State_Evasion_Airfire.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\01.AirFire</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Evasion_Midboss.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\02.MidBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Evasion_MidbossDead.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\03.MidBossDead</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\State_Evasion_Enter.cpp">
+      <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\DogFight_Stage1.cpp">
       <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
@@ -1059,6 +1058,18 @@
     </ClCompile>
     <ClCompile Include="..\Source\DogFightState_4.cpp">
       <Filter>04.Combat State\00%29DogFight\Stage2\Phase4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_BulletProof.cpp">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_MidBoss.cpp">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SliderAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MoveDebuger.cpp">
+      <Filter>96.Debuger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1358,11 +1369,23 @@
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging">
       <UniqueIdentifier>{e6a58e28-b6f8-4f06-b36e-e9a8e783f00c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\NewFilter1">
+      <UniqueIdentifier>{12936101-c3ef-476a-9928-2c95b650c811}</UniqueIdentifier>
+    </Filter>
     <Filter Include="__Phase2_Lab\phaseFSM\Bullet">
       <UniqueIdentifier>{84520be7-9a80-4e03-9a61-c52dd5756f00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Run">
-      <UniqueIdentifier>{12936101-c3ef-476a-9928-2c95b650c811}</UniqueIdentifier>
+    <Filter Include="__Phase2_Lab\phaseFSM\MainStream\00.Enter">
+      <UniqueIdentifier>{b850a3b0-0aba-4022-a613-154ad178cced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\MainStream\01.AirFire">
+      <UniqueIdentifier>{2c94bffc-5387-402d-b00b-82a394ac39c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\MainStream\02.MidBoss">
+      <UniqueIdentifier>{7c74e4fe-d116-4474-b3e0-599831f9661b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\phaseFSM\MainStream\03.MidBossDead">
+      <UniqueIdentifier>{ece57446-3b9b-485f-b708-dbbdb6966042}</UniqueIdentifier>
     </Filter>
     <Filter Include="04.Combat State\00%29DogFight\Stage1">
       <UniqueIdentifier>{71d019b8-a324-4c20-a273-88af85ed78c1}</UniqueIdentifier>
@@ -1390,6 +1413,8 @@
     </Filter>
     <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase1">
       <UniqueIdentifier>{9ee6eea0-9642-4951-8118-e9dcbb9d5b6c}</UniqueIdentifier>
+    <Filter Include="__Phase2_Lab\Enemy_MidBoss">
+      <UniqueIdentifier>{586f917a-aefb-4e67-917c-c02ff6489455}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1487,9 +1512,18 @@
     <FxCompile Include="..\..\Resource\Shader\stage_arrowIndicator.fx">
       <Filter>03.Resource\02.Shader\Stage</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\brightHorizontalBlur.fx" />
-    <FxCompile Include="..\..\Resource\Shader\brightVerticalBlur.fx" />
-    <FxCompile Include="..\..\Resource\Shader\deferred_bright.fx" />
-    <FxCompile Include="..\..\Resource\Shader\postprocess_bloom.fx" />
+    <FxCompile Include="..\..\Resource\Shader\deferred_bright.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\brightHorizontalBlur.fx">
+      <Filter>03.Resource</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\brightVerticalBlur.fx">
+      <Filter>03.Resource</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\postprocess_bloom.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+
   </ItemGroup>
 </Project>

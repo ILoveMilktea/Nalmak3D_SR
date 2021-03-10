@@ -27,6 +27,11 @@ private:
 	void MoveShortDownAnim();
 	void MoveShortUpAnim();
 
+	void MoveLongRightAnim();
+	void MoveLongLeftAnim();
+	void MoveShortRightAnim();
+	void MoveShortLeftAnim();
+
 public:
 	void SetAnimator(float _longAmount, float _shortAmount, float _duration, float _delay, Vector3 _pos);
 

@@ -21,5 +21,7 @@ private:
 	int m_spawnIndex;
 
 	Vector3 m_spawnPos[8];
+
+	Transform* m_mainCam;
 };
 

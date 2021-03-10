@@ -1,5 +1,7 @@
 #pragma once
 #include "Component.h"
+
+#define SHOT_STANDBY -1.f
 class PlayerShooter :
 	public Component
 {

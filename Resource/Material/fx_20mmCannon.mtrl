@@ -6,9 +6,9 @@ shader "20mmCannon"
 
 texture "g_mainTex" "fx20mmCannon"
 vector4   "g_mainTexColor" "0.6f,0.6f,0.2f,1"
-renderQueue "1000"
+renderQueue "3000"
 
-blendingMode "0"
+blendingMode "1"
 
 fillMode "0"
 
