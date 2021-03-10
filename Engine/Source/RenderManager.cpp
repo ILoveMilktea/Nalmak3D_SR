@@ -91,9 +91,9 @@ void RenderManager::Render(Camera * _cam)
 	ClearRenderTarget(L"GBuffer_Distortion");
 	ClearRenderTarget(L"GBuffer_Final");
 	ClearRenderTarget(L"GBuffer_Emission");
-	ClearRenderTarget(L"Emisson_HorizontalBlur");
-	ClearRenderTarget(L"Emisson_FinalBlur");
 
+
+	
 	///////////////////////////////////////////////////////
 	// public const buffer
 	ConstantBuffer cBuffer;
@@ -137,17 +137,22 @@ void RenderManager::DeferredRender(Camera* _cam, ConstantBuffer& _cBuffer)
 	ShadePass(_cBuffer);
 
 	DebugPass(_cBuffer);
-
-	RenderByMaterialToScreen(L"emissionHorizontalBlur", _cBuffer);
-
-	RenderByMaterialToScreen(L"emissionVerticalBlur", _cBuffer);
-
-	RenderByMaterialToScreen(L"GBuffer_Emission", _cBuffer);
 	
-	TransparentPass(_cam, _cBuffer);
+	RenderByMaterialToScreen(L"GBuffer_Emission", _cBuffer); // emission target color + basic color
+
+	TransparentPass(_cam, _cBuffer); // transparent obect
+
+	//ClearRenderTarget(L"GBuffer_Bright");
+	//ClearRenderTarget(L"Bright_HorizontalBlur");
+	//RenderByMaterialToScreen(L"GBuffer_Bright", _cBuffer); // bright filter by basic color
+
+	//RenderByMaterialToScreen(L"brightHorizontalBlur", _cBuffer); // blur by basic color
+
+	//RenderByMaterialToScreen(L"brightVerticalBlur", _cBuffer);// Draw to GBuffer_Bright blur by basic color
+
+	//RenderByMaterialToScreen(L"GBuffer_Bloom", _cBuffer); // bloom ( blur + basic color)
 
 	PostProcessPass(_cam, _cBuffer);
-
 
 	EndRenderTarget();
 

@@ -88,10 +88,10 @@ void NalmakScene::Initialize()
 	window6->SetPosition(300, 100, 0)->SetScale(200, 200, 0);
 	auto window7 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Emission", CANVAS_GROUP_G1);
 	window7->SetPosition(300, 300, 0)->SetScale(200, 200, 0);
-	auto window8 = UIFactory::CreateRenderTargetWindow(L"Emisson_HorizontalBlur", CANVAS_GROUP_G1);
+	auto window8 = UIFactory::CreateRenderTargetWindow(L"Bright_HorizontalBlur", CANVAS_GROUP_G1);
 	window8->SetPosition(300, 500, 0)->SetScale(200, 200, 0);
-	auto window9 = UIFactory::CreateRenderTargetWindow(L"Emisson_FinalBlur", CANVAS_GROUP_G1);
-	window9->SetPosition(300, 700, 0)->SetScale(200, 200, 0);
+	auto window10 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Bright", CANVAS_GROUP_G1);
+	window10->SetPosition(500, 100, 0)->SetScale(200, 200, 0);
 
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	/*{

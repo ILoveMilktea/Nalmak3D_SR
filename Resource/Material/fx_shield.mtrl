@@ -11,7 +11,7 @@ float "g_hitTimer" "4.f"
 vector4 "g_hitPosition" "0,0,9.f,0"
 float "g_radius" "5.f"
 
-renderQueue "1000"
+renderQueue "3000"
 
 blendingMode "0"
 
