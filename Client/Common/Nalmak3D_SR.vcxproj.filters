@@ -1420,17 +1420,23 @@
     <FxCompile Include="..\..\Resource\Shader\BackGround.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\emissionHorizontalBlur.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\emissionVerticalBlur.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\deferred_emission.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\stage_arrowIndicator.fx">
       <Filter>03.Resource\02.Shader\Stage</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\deferred_bright.fx">
+      <Filter>03.Resource\02.Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\brightHorizontalBlur.fx">
+      <Filter>03.Resource</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\brightVerticalBlur.fx">
+      <Filter>03.Resource</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\postprocess_bloom.fx">
+      <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

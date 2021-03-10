@@ -2,11 +2,11 @@
 ##  Material Data Setting
 #########################################################
 
-shader "emissionVerticalBlur"
+shader "brightHorizontalBlur"
 
-textureRT "g_mainTex" "Emisson_HorizontalBlur"
+textureRT "g_mainTex" "GBuffer_Bright"
 
-renderQueue "4001"
+renderQueue "4000"
 
 blendingMode "1"
 

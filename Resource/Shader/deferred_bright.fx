@@ -1,16 +1,12 @@
 #include "H_common.fx"
 
+matrix g_world;
 texture g_final;
-texture g_emission;
+//texture g_emissionBlur;
 
 sampler FinalSampler = sampler_state
 {
 	texture = g_final;
-};
-
-sampler EmissionSampler = sampler_state
-{
-	texture = g_emission;
 };
 
 //sampler EmissionBlurSampler = sampler_state
@@ -60,9 +56,9 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _input)
 	float2 uv = float2(_input.uv) + float2(perPixelX, perPixelY);
 
 	float3 final = tex2D(FinalSampler, uv).xyz;
-	float3 emission = tex2D(EmissionSampler, uv).xyz;
 
-	o.color = float4(final + emission, 1);
+	float brightness = (final.r * 0.2116) + (final.g * 0.7152) + (final.b * 0.0722);
+	o.color = float4(final * brightness, 1);
 
 	return o;
 }

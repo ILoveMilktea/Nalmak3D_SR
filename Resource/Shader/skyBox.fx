@@ -63,10 +63,9 @@ VS_OUTPUT VS_Main_Default(VS_INPUT _input)
 PS_OUTPUT PS_Main_Default(PS_INPUT  _input) 
 {
 	PS_OUTPUT o = (PS_OUTPUT)0;
-	float diffuseFactor = max(dot(float3(0, 1, 0), -g_directionalLight.direction),0) + 0.2f;
+	//float diffuseFactor = max(dot(float3(0, 1, 0), -g_directionalLight.direction),0) + 0.2f;
 	o.diffuse = texCUBE(skyBoxSampler, _input.uvw);// *diffuseFactor;
 	//o.diffuse = float4(0.8f, 0.9f, 0.95f,1.f);
-
 	return o;
 }
 

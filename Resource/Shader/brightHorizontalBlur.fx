@@ -7,6 +7,11 @@ texture g_mainTex;
 sampler mainSampler = sampler_state
 {
 	texture = g_mainTex;
+
+	MipFilter = LINEAR;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+
 };
 
 struct VS_INPUT
@@ -83,6 +88,8 @@ float blurWeights[13] =
 	0.002216,
 };
 
+const float g_rtPerPixelX = 0.5f / 480;
+const float g_rtPerPixelY = 0.5f / 270;
 
 
 PS_OUTPUT PS_Main_Default(PS_INPUT  _in) 
@@ -93,8 +100,8 @@ PS_OUTPUT PS_Main_Default(PS_INPUT  _in)
 	for (int i = 0; i < 13; ++i)
 	{
 		color += tex2D(mainSampler, float2(
-			_in.uv.x + pixelKernel[i] * perPixelY,
-			_in.uv.y)) * blurWeights[i];
+			_in.uv.x + (pixelKernel[i] * g_rtPerPixelX) + g_rtPerPixelX,
+			_in.uv.y + g_rtPerPixelY))* blurWeights[i];
 	}
 
 
