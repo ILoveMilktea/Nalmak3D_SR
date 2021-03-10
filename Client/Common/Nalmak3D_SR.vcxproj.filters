@@ -86,9 +86,6 @@
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MoveBySpline.h" />
-    <ClInclude Include="..\Include\DogFightState.h">
-      <Filter>04.Combat State\00%29DogFight</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\BossState.h">
       <Filter>04.Combat State\02%29Boss</Filter>
     </ClInclude>
@@ -333,9 +330,6 @@
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\Player_WindEffect.h" />
-    <ClInclude Include="..\Include\DogFight_Stage1.h">
-      <Filter>04.Combat State\00%29DogFight</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\ResultScene.h">
       <Filter>01.Scene\00.Game</Filter>
     </ClInclude>
@@ -532,6 +526,12 @@
     <ClInclude Include="..\Include\MidBoss_RotateAccel.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -607,9 +607,6 @@
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MoveBySpline.cpp" />
-    <ClCompile Include="..\Source\DogFightState.cpp">
-      <Filter>04.Combat State\00%29DogFight</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\BossState.cpp">
       <Filter>04.Combat State\02%29Boss</Filter>
     </ClCompile>
@@ -842,9 +839,6 @@
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\GeunHee_Fps_Shoot.cpp" />
     <ClCompile Include="..\Source\Player_WindEffect.cpp" />
-    <ClCompile Include="..\Source\DogFight_Stage1.cpp">
-      <Filter>04.Combat State\00%29DogFight</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\ResultScene.cpp">
       <Filter>01.Scene\00.Game</Filter>
     </ClCompile>
@@ -1025,6 +1019,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_RotateAccel.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFightState.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1330,6 +1330,12 @@
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Run">
       <UniqueIdentifier>{12936101-c3ef-476a-9928-2c95b650c811}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1">
+      <UniqueIdentifier>{71d019b8-a324-4c20-a273-88af85ed78c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2">
+      <UniqueIdentifier>{3f61db9f-d7b5-4162-a94c-38e33c8fd638}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Nalmak3D_SR.rc">
@@ -1420,17 +1426,15 @@
     <FxCompile Include="..\..\Resource\Shader\BackGround.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\emissionHorizontalBlur.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\Resource\Shader\emissionVerticalBlur.fx">
-      <Filter>03.Resource\02.Shader</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\deferred_emission.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\stage_arrowIndicator.fx">
       <Filter>03.Resource\02.Shader\Stage</Filter>
     </FxCompile>
+    <FxCompile Include="..\..\Resource\Shader\brightHorizontalBlur.fx" />
+    <FxCompile Include="..\..\Resource\Shader\brightVerticalBlur.fx" />
+    <FxCompile Include="..\..\Resource\Shader\deferred_bright.fx" />
+    <FxCompile Include="..\..\Resource\Shader\postprocess_bloom.fx" />
   </ItemGroup>
 </Project>

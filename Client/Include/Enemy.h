@@ -159,9 +159,10 @@ private:
 	
 	Camera*		m_pMainCamera = nullptr;
 
-	GameObject* m_pSmokeParticle = nullptr;
+	//GameObject* m_pSmokeParticle = nullptr;
 	
 	GameObject* m_pArrow_Indicator = nullptr;
 
+	GameObject* m_pDamagedSmoke = nullptr;
 };
 
