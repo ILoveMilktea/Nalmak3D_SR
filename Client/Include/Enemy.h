@@ -46,6 +46,7 @@ public:
 	void Indicator_OnOff();
 public: /* Affect Status */
 	void Damaged(const int& _playerDmg);
+	void CurHp_Check();
 	void Emp();
 
 public: /* Get */
