@@ -72,12 +72,12 @@ void Player_EmpMove::OnTriggerEnter(Collisions & _collision)
 
 void Player_EmpMove::OnTriggerStay(Collisions & _collision)
 {
-	//DEBUG_LOG(L"CHECK", L"üũ");
+	
 }
 
 void Player_EmpMove::OnTriggerExit(Collisions & _collision)
 {
-	//DEBUG_LOG(L"CHECK", L"üũ");
+	
 }
 
 void Player_EmpMove::Go_Straight()

@@ -23,8 +23,9 @@ void PlayerShooter::Initialize()
 	
 	m_cannon = m_ItemManager->FindItemObject(L"Weapon", L"Cannon");
 	m_shootTime = 0.5f;
-	m_cannonCoolTime = 0.5f;
 
+	m_cannonCoolTime = m_cannon->GetItmeInfo().delay;
+	//m_cannonCoolTime = 0.5f;
 	PointLight::Desc pointDesc;
 	pointDesc.radius = 0;
 	pointDesc.color = Vector3(0.8f, 0.7f, 0.3f);
@@ -77,32 +78,7 @@ void PlayerShooter::Update()
 	}
 
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_1))
-	{
-		SetEquipment(FIRST_PARTS);
-	}
-	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_2))
-	{
-		SetEquipment(SECOND_PARTS);
-	}
-	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_3))
-	{
-		SetEquipment(THIRD_PARTS);
-	}
-	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_4))
-	{
-		SetEquipment(FOURTH_PARTS);
-	}
-	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_5))
-	{
-		SetEquipment(FIFTH_PARTS);
-	}
-	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_6))
-	{
-		SetEquipment(SIXTH_PARTS);
-	}
 	
-	//chet
 	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_C))
 	{
 		if (!m_cheatCheck)
@@ -122,13 +98,11 @@ void PlayerShooter::Update()
 			PlayerInfoManager::GetInstance()->SetWeaponSpawnPos(THIRD_PARTS, false);
 			PlayerInfoManager::GetInstance()->SetWeaponSpawnPos(FOURTH_PARTS, false);
 			PlayerInfoManager::GetInstance()->GrageWeaponRelease();
-			//SetEquipment(FIRST_PARTS);
-
+			m_prevParts = PARTS_MAX;
+			m_shootTime = 0.5f;
 			SetEquipment(FIRST_PARTS);
 			m_cheatCheck = true;
 		}
-	
-
 	}
 	
 
@@ -136,6 +110,26 @@ void PlayerShooter::Update()
 	{
 		
 		DEBUG_LOG(L"현재 장착한 무기", m_useEquipment->GetItmeInfo().itemName);
+	}
+}
+
+void PlayerShooter::LateUpdate()
+{
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_1))
+	{
+		SetEquipment(FIRST_PARTS);
+	}
+	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_2))
+	{
+		SetEquipment(SECOND_PARTS);
+	}
+	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_3))
+	{
+		SetEquipment(THIRD_PARTS);
+	}
+	else if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_4))
+	{
+		SetEquipment(FOURTH_PARTS);
 	}
 }
 

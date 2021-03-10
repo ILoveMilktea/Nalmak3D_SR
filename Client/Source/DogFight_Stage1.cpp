@@ -71,7 +71,7 @@ void DogFight_Stage1::EnterState()
 	EnemyManager::GetInstance();
 
 	//EnemyManager::GetInstance()->Spawn_S1P1_Normal();
-	EnemyManager::GetInstance()->Enemy_Spawn_Test(ENEMY_STATE::CHASE , { 0,0,50 });
+	//EnemyManager::GetInstance()->Enemy_Spawn_Test(ENEMY_STATE::CHASE , { 0,0,50 });
 	
 	float dis = 30.f;
 

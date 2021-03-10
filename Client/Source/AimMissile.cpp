@@ -4,6 +4,8 @@
 #include "BulletDirMove.h"
 #include "Player_AimMissile.h"
 #include "DeadTimer.h"
+#include "PlayerInfoManager.h"
+
 AimMissile::AimMissile(const ITEMINFO & _copy) 
 	: PlayerItem(_copy)
 {
@@ -15,14 +17,16 @@ AimMissile::~AimMissile()
 
 void AimMissile::ItemShot()
 {
+	m_bullet[0]->GetTransform()->DeleteParent();
+	m_bullet[1]->GetTransform()->DeleteParent();
+
+
 	SphereCollider::Desc missile_col;
 	missile_col.radius = 1.f;
 	missile_col.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
 	m_bullet[0]->AddComponent<SphereCollider>(&missile_col);
 	m_bullet[1]->AddComponent<SphereCollider>(&missile_col);
 
-	m_bullet[0]->GetTransform()->DeleteParent();
-	m_bullet[1]->GetTransform()->DeleteParent();
 
 	Player_AimMissile::Desc bulletinfo;
 	bulletinfo.speed = m_itemInfo.weaponSpeed;
@@ -46,7 +50,7 @@ void AimMissile::CreateBullet()
 	meshInfo.mtrlName = m_mtrlName;
 	// 2. BULLET INFO
 
-	m_parents = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+	m_parents = PlayerInfoManager::GetInstance()->GetPlayer();
 
 
 	m_bullet[0] = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Left");

@@ -39,7 +39,9 @@ void Player_Weapon_Homing::ItemShot()
 	if (lockonTarget == nullptr)
 		return;
 
-	switch (m_mode)
+	int randMode = int(rand() % 2);
+
+	switch (randMode)
 	{
 	case Player_Weapon_Homing::SINGLE:
 	{
@@ -86,6 +88,7 @@ void Player_Weapon_Homing::ItemShot()
 			desc_rb.isAirDrag = true;
 			desc_rb.dragCoefficient = 0.47f;
 			HomingBulletMove::Desc desc_hbm;
+			
 			desc_hbm.target = *target;
 			Vector2 screenPos = Core::GetInstance()->GetMainCamera()->WorldToScreenPos((*target)->GetTransform()->position);
 

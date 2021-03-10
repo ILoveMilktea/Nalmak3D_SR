@@ -56,6 +56,11 @@ void Indicator_EnemyPos::Update()
 
 void Indicator_EnemyPos::LateUpdate()
 {
+	if (!m_pPlayer || !m_pTarget)
+		return;
+
+
+
 	Vector3 playerPos = m_pPlayer->GetTransform()->position;
 	Vector3 targetPos = m_pTarget->GetTransform()->position;
 	

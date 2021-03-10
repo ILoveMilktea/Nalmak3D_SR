@@ -267,15 +267,15 @@ GameObject * PlayerInfoManager::Player_Create()
 		m_player->AddComponent<ParticleRenderer>(&render);
 	}
 
-	{
+	/*{
 		Player_WindEffect::Desc wind;
 		wind.leftTrailPos = Vector3(-1.7f, 0.14f, -0.05f);
 		wind.rightTrailPos = Vector3(1.7f, 0.14f, -0.05f);
 		wind.trailThick = 0.16f;
 		m_player->AddComponent<Player_WindEffect>(&wind);
-	}
+	}*/
 	// zet distortion
-	{
+	/*{
 		ParticleRenderer::Desc	distortion;
 		distortion.particleDataName = L"player_zet_distortion";
 		auto effect = INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(0.15f, 0.1f, -0.9f);
@@ -286,7 +286,7 @@ GameObject * PlayerInfoManager::Player_Create()
 		distortion.particleDataName = L"player_zet_distortion";
 		auto effect = INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(-0.15f, 0.1f, -0.9f);
 		effect->SetParents(m_player);
-	}
+	}*/
 
 
 	{
@@ -353,8 +353,14 @@ void PlayerInfoManager::Player_Release()
 
 void PlayerInfoManager::GrageWeaponRelease()
 {
+	
+
 	if (m_pSideWeapon[0] || m_pSideWeapon[1])
 	{
+		m_pSideWeapon[0]->GetTransform()->DeleteParent();
+		m_pSideWeapon[1]->GetTransform()->DeleteParent();
+
+
 		DESTROY(m_pSideWeapon[0]);
 		DESTROY(m_pSideWeapon[1]);
 
@@ -362,8 +368,12 @@ void PlayerInfoManager::GrageWeaponRelease()
 		m_pSideWeapon[1] = nullptr;
 	}
 
+	
+
 	if (m_pSingleWeapon)
 	{
+		m_pSingleWeapon->GetTransform()->DeleteParent();
+
 		DESTROY(m_pSingleWeapon);
 		m_pSingleWeapon = nullptr;
 	}

@@ -20,11 +20,11 @@ void Player_ClusterMissile::ItemShot()
 {
 	//effect Start!
 
-	ParticleRenderer::Desc render;
+	/*ParticleRenderer::Desc render;
 	render.particleDataName = L"missile_smokeLaunch";
 	auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render)->AddComponent<ParticleDead_IfCount0>();
 	obj->GetComponent<ParticleRenderer>()->Play();
-	obj->SetParents(m_bullet);
+	obj->SetParents(m_bullet);*/
 
 	//colision;
 	SphereCollider::Desc sphereColInfo;
