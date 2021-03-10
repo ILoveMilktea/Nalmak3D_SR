@@ -63,9 +63,26 @@ public:
 	GameObject* GetShopItemModel() { return m_model; }
 	const wstring&  GetCurrentSelectItem() { return m_itemName; }
 
+
 private:
 	GameObject* m_model;
 
 	wstring m_itemName;
+
+	//===========================
+	// buy popup
+
+public:
+	void BuyItem();
+	void BuyPopupOn();
+	void BuyPopupOff();
+
+	void SetBuyPopup(GameObject* _object) { m_buyPopup = _object; };
+	void SetSelectItem(const wstring& _itemName) { m_selectItemName = _itemName; }
+private:
+	GameObject*	m_buyPopup;
+	GameObject* m_buyButton;
+
+	wstring m_selectItemName;
 };
 
