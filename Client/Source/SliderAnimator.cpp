@@ -21,6 +21,7 @@ void SliderAnimator::Initialize()
 
 	m_scaleAnim.SetActor(m_gameObject);
 	m_scaleAnim.SetAnimation(IAnimation::LERP);
+
 }
 
 void SliderAnimator::Update()
@@ -44,14 +45,14 @@ void SliderAnimator::Refill(float _curValue, float _maxValue, float _duration)
 
 void SliderAnimator::Fill_MoveAnim()
 {
-	m_moveAnim_Slider.SetActor(m_gameObject);
-	m_moveAnim_Slider.SetStartPosition(m_fill_originLeft);
+	m_moveAnim_Fill.SetActor(m_fill);
+	m_moveAnim_Fill.SetStartPosition(m_fill_originLeft);
 	Vector3 dest = m_fill_originLeft;
 	dest.x += m_fill_originWidth * (m_fill_curValue / m_fill_maxValue) * 0.5f;
-	m_moveAnim_Slider.SetDestPosition(dest);
-	m_moveAnim_Slider.SetPlayDuration(0.5f);
-	m_moveAnim_Slider.SetStartDelay(0.f);
-	m_moveAnim_Slider.Start_Animation();
+	m_moveAnim_Fill.SetDestPosition(dest);
+	m_moveAnim_Fill.SetPlayDuration(0.5f);
+	m_moveAnim_Fill.SetStartDelay(0.f);
+	m_moveAnim_Fill.Start_Animation();
 }
 
 void SliderAnimator::Fill_ScaleAnim()
@@ -70,9 +71,9 @@ void SliderAnimator::Slider_InAnim()
 {
 	m_moveAnim_Slider.SetActor(m_gameObject);
 	m_moveAnim_Slider.SetStartPosition();
-	m_moveAnim_Slider.SetDestPosition(Vector3(m_transform->position.x + m_inout_Amount, m_transform->position.y, 0.f));
+	m_moveAnim_Slider.SetDestPosition(Vector3(m_transform->position.x, m_transform->position.y - m_inout_Amount, 0.f));
 	m_moveAnim_Slider.SetPlayDuration(m_inout_Duration);
-	m_moveAnim_Slider.SetStartDelay(m_inout_Delay);
+	m_moveAnim_Slider.SetStartDelay(1.2f);
 	m_moveAnim_Slider.Start_Animation();
 }
 
@@ -80,9 +81,9 @@ void SliderAnimator::Slider_OutAnim()
 {
 	m_moveAnim_Slider.SetActor(m_gameObject);
 	m_moveAnim_Slider.SetStartPosition();
-	m_moveAnim_Slider.SetDestPosition(Vector3(m_transform->position.x - m_inout_Amount, m_transform->position.y, 0.f));
+	m_moveAnim_Slider.SetDestPosition(Vector3(m_transform->position.x, m_transform->position.y + m_inout_Amount, 0.f));
 	m_moveAnim_Slider.SetPlayDuration(m_inout_Duration);
-	m_moveAnim_Slider.SetStartDelay(m_inout_Delay);
+	m_moveAnim_Slider.SetStartDelay(0.f);
 	m_moveAnim_Slider.Start_Animation();
 }
 
@@ -97,7 +98,4 @@ void SliderAnimator::SetInOutAnim(float _amount, float _duration, float _delay, 
 void SliderAnimator::SetFill(GameObject * _fill)
 {
 	m_fill = _fill;
-	RECT* rt = _fill->GetComponent<CanvasRenderer>()->GetBoundary();
-	m_fill_originWidth = float(rt->right - rt->left);
-	m_fill_originLeft = Vector3(rt->left,(rt->top + rt->bottom) * 0.5f,0.f);
 }

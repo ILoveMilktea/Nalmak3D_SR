@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "..\Include\UIManager.h"
 
+#include "ItemManager.h"
 #include "UI_Alarm.h"
+#include "PlayerItem.h"
+#include "SliderAnimator.h"
 
 UIManager* UIManager::m_Instance = nullptr;
 
@@ -143,6 +146,41 @@ bool UIManager::SkillSingleRotate(bool _inverse, int _speed)
 	return true;
 }
 
+void UIManager::Refill()
+{
+	float damage = 0.f;
+	float rpm = 0.f;
+
+	if (m_itemName == L"AimMissile")
+	{
+		damage = 50.f;
+		rpm = 10.f;
+	}
+	if (m_itemName == L"Cannon")
+	{
+		damage = 20.f;
+		rpm = 85.f;
+	}
+	if (m_itemName == L"HomingMissile")
+	{
+		damage = 40.f;
+		rpm = 75.f;
+	}
+	if (m_itemName == L"ClusterMissile")
+	{
+		damage = 65.f;
+		rpm = 40.f;
+	}
+	if (m_itemName == L"Emp")
+	{
+		damage = 100.f;
+		rpm = 40.f;
+	}
+
+	UIManager::GetInstance()->GetSingleDPM()->GetComponent<SliderAnimator>()->Refill(damage, 100.f);
+	UIManager::GetInstance()->GetMultiDPM()->GetComponent<SliderAnimator>()->Refill(rpm, 100.f);
+}
+
 void UIManager::AddAlarm(UI_Alarm* _alarm)
 {
 	m_alarmQueue.push(_alarm);
@@ -200,15 +238,11 @@ void UIManager::DeleteInstance()
 
 void UIManager::BuyItem()
 {
+	ItemManager::GetInstance()->BuyItem(L"Weapon", m_itemName);
 }
 
 void UIManager::BuyPopupOn()
 {
-	// weapon img
-	// weapon single dpm
-	// weapon multi dpm
-	// money
-	//buy button func
 	m_buyPopup->SetActive(true);
 }
 

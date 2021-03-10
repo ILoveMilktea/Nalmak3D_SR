@@ -171,12 +171,12 @@ bool ItemManager::BuyItem(const wstring & _itemName, const wstring & _typeValueN
 			for(auto & ItemName : inven.second)
 			{
 				if(_typeValueName == ItemName)
-					return false;// ?¸ë²¤??ê°™ì??´ë¦„?´ìˆ?¼ë©´ ?¬ì??ŠëŠ”??
+					return false;
 			}
 		}
 
 	}
-	// ì°¾ëŠ” ?„ì´?œì´ ?†ëŠ” ê²½ìš°! ?¬ê¸° ?˜ì •??- ì¤€??
+
 	if (!findItem)
 		return false;
 

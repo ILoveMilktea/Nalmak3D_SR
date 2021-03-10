@@ -521,7 +521,7 @@
     </ClInclude>
     <ClInclude Include="..\Include\State_Evasion_Enter.h">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Include\DogFight_Stage1.h">
       <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
     </ClInclude>
@@ -554,6 +554,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\MoveDebuger.h">
       <Filter>96.Debuger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TitleAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1072,6 +1075,9 @@
     <ClCompile Include="..\Source\MoveDebuger.cpp">
       <Filter>96.Debuger</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\TitleAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
@@ -1526,6 +1532,5 @@
     <FxCompile Include="..\..\Resource\Shader\postprocess_bloom.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-
   </ItemGroup>
 </Project>
