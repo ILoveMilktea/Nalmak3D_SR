@@ -79,7 +79,7 @@ void ItemManager::CreateItem()
 		info.weaponAttak = 10;
 		info.costGold = 100;
 		info.delay = 0.25f;
-		info.weaponSpeed = 45.f;
+		info.weaponSpeed = 20.f;
 		info.modelName = L"su34_weapon2";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_Weapon_Homing(info));
 	}

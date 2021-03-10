@@ -38,7 +38,7 @@ void Player_EmpMissile::ItemShot()
 
 	//Emp->GetTransform()->position = Emp->GetTransform()->GetWorldPosition();
 	//Emp->GetTransform()->rotation = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER)->GetTransform()->rotation;
-	{
+	/*{
 		ParticleRenderer::Desc render;
 		render.particleDataName = L"missile_smokeLaunch";
 
@@ -47,7 +47,7 @@ void Player_EmpMissile::ItemShot()
 		obj->GetComponent<ParticleRenderer>()->Play();
 		obj->SetParents(Emp);
 	}
-	
+	*/
 	Emp->GetTransform()->DeleteParent();
 
 	Player_EmpMove::Desc Move_desc;

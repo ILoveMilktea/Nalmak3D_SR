@@ -80,7 +80,6 @@ void Player_Weapon_Homing::ItemShot()
 
 		for (auto bullet : m_bullet)
 		{
-			bullet->GetTransform()->position = bullet->GetTransform()->GetWorldPosition();
 			bullet->GetTransform()->DeleteParent();
 
 			Rigidbody::Desc desc_rb;

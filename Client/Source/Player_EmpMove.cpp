@@ -22,13 +22,13 @@ Player_EmpMove::~Player_EmpMove()
 
 void Player_EmpMove::Initialize()
 {
-	{
+	/*{
 		ParticleRenderer::Desc render;
 		render.particleDataName = L"missile_smoke";
 		auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
 		m_smokeParticle = obj->GetComponent<ParticleRenderer>();
 		obj->SetParents(m_gameObject);
-	}
+	}*/
 }
 
 void Player_EmpMove::Update()
@@ -50,7 +50,7 @@ void Player_EmpMove::Update()
 		
 		if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_RIGHT_MOUSE))
 		{
-			Boom();
+			//Boom();
 		}
 	
 	}
@@ -64,7 +64,9 @@ void Player_EmpMove::OnTriggerEnter(Collisions & _collision)
 	{
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMY)
 		{
-			Boom();
+			//Boom();
+			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
 		}
 	}
 	
