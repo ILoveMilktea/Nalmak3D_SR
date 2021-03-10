@@ -110,7 +110,8 @@ public:
 					group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPMENU); // weapon icon
 					for (auto member : group)
 					{
-						member->GetComponent<UI_ShopMenu_Animator>()->AddStartDelay(secondAnimDelay);
+						member->GetComponent<CanvasRenderer>()->SetActive(true);
+						member->GetComponent<UI_ShopMenu_Animator>()->AddStartDelay(secondAnimDelay - 0.05f);
 						member->GetComponent<UI_ShopMenu_Animator>()->OnAnim();
 					}
 
@@ -286,80 +287,10 @@ public:
 				}
 			}
 
-			// ==== Test Menu ========
-			{
-
-				//// Menu (2 - 0) - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
-				//{
-				//	EventHandler eventFunc = EventHandler([=]() {
-
-				//		ItemManager::GetInstance()->BuyItem(L"Weapon", L"AimMissile");
-
-				//	});
-				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
-				//	menu->SetPosition(1600.f, 600.f);
-				//}
-				//{
-				//	EventHandler eventFunc = EventHandler([=]() {
-
-				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"AimMissile"); // 二쇰Т?μ쑝濡??먯엫誘몄궗?쇱쓣
-
-				//	});
-				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon - AimMissile ] ", CANVAS_GROUP_MAINWND);
-				//	menu->SetPosition(1600.f, 650.f);
-				//}
-				////
-
-				//// Menu (2 - 1) - WEAPON (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
-				//{
-				//	EventHandler eventFunc = EventHandler([=]() {
-
-				//		ItemManager::GetInstance()->BuyItem(L"Weapon", L"Cannon");
-
-				//	});
-				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)BUY WEAPON [ Weapon - Cannon ] ", CANVAS_GROUP_MAINWND);
-				//	menu->SetPosition(1600.f, 700.f);
-				//}
-				//{
-				//	EventHandler eventFunc = EventHandler([=]() {
-
-				//		PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Cannon"); // 蹂댁“臾댁옣?쇰줈 罹먮끉??
-
-				//	});
-				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"(TEST)EQUIP WEAPON [ Weapon -Cannon ] ", CANVAS_GROUP_MAINWND);
-				//	menu->SetPosition(1600.f, 750.f);
-				//}
-				////
-
-				//// Menu (2 - 2) - EQuipSkill (Button) !!!!!!!!!!!!!TEST!!!!!!!!!!!!!
-				//{
-				//	EventHandler eventFunc = EventHandler([=]() {
-
-				//		PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Skill", L"EscapeMove"); //?ㅽ궗?щ’ 泥ル쾲吏??뚯툩???ㅽ궗???뗮븯寃좊떎.
-
-				//	});
-				//	auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) SkillSlot - First Parts : EscapeMove", CANVAS_GROUP_MAINWND);
-				//	menu->SetPosition(1600.f, 800.f);
-				//}
-
-				//For EmpMissile tes.t
-				{
-					//EventHandler evetFunc = EventHandler([=]() {ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp"); });
-					EventHandler eventFunc
-						= EventHandler([=]() {PlayerInfoManager::GetInstance()->EquipItem(SECOND_PARTS, L"Weapon", L"Emp"); });
-					auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"Test) Weapon - First Parts : Emp", CANVAS_GROUP_MAINWND);
-					menu->SetPosition(1600.f, 850.f);
-
-				}
-			}
-
 
 
 		}
 
-
-		// key helper (image)
-		// key helper text (text)
 
 		// player info
 		{
@@ -466,8 +397,9 @@ public:
 				group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPMENU);
 				for (auto member : group)
 				{
-					member->GetComponent<UI_ShopMenu_Animator>()->AddStartDelay(-secondAnimDelay);
-					member->GetComponent<UI_ShopMenu_Animator>()->OffAnim();
+					//member->GetComponent<UI_ShopMenu_Animator>()->AddStartDelay(-secondAnimDelay);
+					//member->GetComponent<UI_ShopMenu_Animator>()->OffAnim();
+					member->GetComponent<CanvasRenderer>()->SetActive(false);
 				}
 
 				group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_MAIN);
@@ -506,24 +438,26 @@ public:
 			{
 				// background image
 				{
-					float animAmount = WINCY;
-					float animSpeed = 0.5f;
-					float secondAnimDelay = 0.5f;
+				float animAmount = -400.f;
+				float animSpeed = 0.5f;
+				float secondAnimDelay = 0.5f;
 
-					//190, 227, 253, 255
+				//190, 227, 253, 255
 
-					auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOPWND, L"Popup02_White2");
-					background->SetScale(360.f, 550.f);
-					background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
+				auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOPWND, L"ui_shopwnd_bg");
+				background->SetScale(360.f, 550.f);
+				background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
 
-					auto gradation = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_NOANIM, L"Popup02_White3");
-					gradation->SetParents(background);
-					gradation->SetScale(350.f, 540.f);
-					gradation->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
+				auto gradation = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_NOANIM, L"ui_shopwnd_gradation");
+				gradation->SetParents(background);
+				gradation->SetScale(350.f, 540.f);
+				gradation->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
 
 
-					background->AddComponent<UI_ShopWnd_Animator>();
-					background->GetComponent<UI_ShopWnd_Animator>()->SetAnimator(animAmount, animAmount * 0.1f, animSpeed, 0.f, Vector3(1680.f, -WINCY * 0.5f - 100, 0.f));
+				background->AddComponent<UI_ShopWnd_Animator>();
+				background->GetComponent<UI_ShopWnd_Animator>()->
+					SetAnimator(animAmount, animAmount * 0.1f, animSpeed, 0.f
+						, Vector3(WINCX + background->GetTransform()->scale.x * 0.5f, WINCY * 0.5f - 100.f, 0.f));
 				}
 
 				// line effect image
@@ -531,98 +465,166 @@ public:
 
 
 
-			// model test
+			// Model
+
 			MeshRenderer::Desc desc_Mesh;
 			desc_Mesh.meshName = L"kfir_weapon1";
 
+			UI_ShopItemModel::Desc desc_model;
+			desc_model.cam = Core::GetInstance()->GetMainCamera()->GetGameObject();
 			auto weaponModel = INSTANTIATE();
 			weaponModel->AddComponent<MeshRenderer>(&desc_Mesh);
-			weaponModel->AddComponent<UI_ShopItemModel>();
-			weaponModel->SetParents(Core::GetInstance()->GetMainCamera()->GetGameObject());
+			weaponModel->AddComponent<UI_ShopItemModel>(&desc_model);
 			weaponModel->SetPosition(0.f, 0.f, 0.f);
 			weaponModel->SetActive(false);
 
 			UIManager::GetInstance()->SetShopItemModel(weaponModel);
 
-			// 5 weapon button
-			int slotCount = 4;
-			float delayInterval = 0.1f;
-			float slotInterval = 80.f;
+			// Weapon buttons
+			{
+				int slotCount = 4;
+				float delayInterval = 0.05f;
+				float slotInterval = 80.f;
 
+
+				//L"kfir_weapon1", //L"su34_weapon1" //L"su34_weapon2" // L"su34_weapon3 //L"su34_weapon3"
+				wstring itemNames[5] = { L"AimMissile" ,  L"HomingMissile" , L"ClusterMissile" , L"Emp" };
+				wstring itmeMtrl[5] = { L"kfir" , L"su34" , L"su34" , L"su34" , L"su34" };
+
+				for (int i = 0; i < slotCount; ++i)
+				{
+					// Slot
+					wstring curItemName = itemNames[i];
+					wstring mtrlName = itmeMtrl[i];
+					EventHandler onEvent = EventHandler([=]() {
+						// Load Item
+						// 0. unselect other toggle
+						list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPMENU);
+						for (auto member : group)
+						{
+							member->GetComponent<Toggle>()->UnselectToggle();
+						}
+						// 1. load model
+						wstring modelName = ItemManager::GetInstance()->LoadItemModel(L"Weapon", curItemName);
+
+						auto model = UIManager::GetInstance()->GetShopItemModel();
+						model->GetComponent<MeshRenderer>()->SetMesh(modelName);
+						model->GetComponent<MeshRenderer>()->SetMaterial(mtrlName);
+						model->SetActive(true);
+						// 2. load status at slider
+						UIManager::GetInstance()->SetCurrentSelectItem(curItemName);
+						// 3. load price
+
+
+					});
+					EventHandler offEvent = EventHandler([=]() {
+						// remove Item
+						weaponModel->SetActive(false);
+						auto player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
+						player->GetTransform()->position = { 0,0,0 };
+						player->GetTransform()->SetRotation(0, 0, 0);
+
+					});
+					wstring img = L"s" + to_wstring(i + 1);
+					auto menu = UIFactory::Prefab_ShopMenuToggle(onEvent, offEvent, img, CANVAS_GROUP_MAINWND_SHOPMENU);
+
+					menu->AddComponent<UI_ShopMenu_Animator>();
+					menu->GetComponent<UI_ShopMenu_Animator>()->SetAnimator(0.f, 0.5f, delayInterval * i, Vector3(1680.f, 270.f + slotInterval * i, 0.f));
+					menu->GetComponent<CanvasRenderer>()->SetActive(false);
+				}
+
+				// left price img
+				// price number
+
+				// buy button
+				{
+					EventHandler openPopupFunc = EventHandler([=]() {
+						UIManager::GetInstance()->BuyPopupOn();
+					});
+					auto buyButton = UIFactory::Prefab_ItemBuy_Button(openPopupFunc, L"BUY ITEM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 
 									//L"kfir_weapon1", //L"su34_weapon1" //L"su34_weapon2" // L"su34_weapon3 //L"su34_weapon3"
 			wstring itemNames[5] = { L"AimMissile" ,  L"HomingMissile" , L"ClusterMissile" , L"Emp" };
 			wstring itmeMtrl[5] = { L"kfir" , L"su34" , L"su34" , L"su34" , L"emp" };
 
-			for (int i = 0; i < slotCount; ++i)
+			// Weapon Status Slider
 			{
-				// Slot
-				wstring curItemName = itemNames[i];
-				wstring mtrlName = itmeMtrl[i];
-				EventHandler onEvent = EventHandler([=]() {
-					// Load Item
-					// 0. unselect other toggle
-					list<CanvasRenderer*> group = CanvasGroup::GetInstance()->GetGroup(CANVAS_GROUP_MAINWND_SHOPMENU);
-					for (auto member : group)
-					{
-						member->GetComponent<Toggle>()->UnselectToggle();
-					}
-					// 1. load model
-					wstring modelName = ItemManager::GetInstance()->LoadItemModel(L"Weapon", curItemName);
+				// single dpm text
+				auto singleDpm_text = UIFactory::Prefab_ItemStat_Text(L"SINGLE DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+				// single dpm slider
+				auto singleDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+				singleDpm_text->SetParents(singleDpm_slider);
+				singleDpm_text->SetPosition(-140.f, 0.f);
+				singleDpm_slider->SetPosition(400.f, 800.f);
 
-					auto model = UIManager::GetInstance()->GetShopItemModel();
-					model->GetComponent<MeshRenderer>()->SetMesh(modelName);
-					model->GetComponent<MeshRenderer>()->SetMaterial(mtrlName);
-					model->SetActive(true);
-					// 2. load status at slider
-					UIManager::GetInstance()->SetCurrentSelectItem(curItemName);
-					// 3. load price
-
-
-				});
-				EventHandler offEvent = EventHandler([=]() {
-					// remove Item
-					weaponModel->SetActive(false);
-					auto player = Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER);
-					player->GetTransform()->position = { 0,0,0 };
-					player->GetTransform()->SetRotation(0, 0, 0);
-
-				});
-				wstring img = L"s" + to_wstring(i + 1);
-				auto menu = UIFactory::Prefab_ShopMenuToggle(onEvent, offEvent, img, CANVAS_GROUP_MAINWND_SHOPMENU);
-
-				menu->AddComponent<UI_ShopMenu_Animator>();
-				menu->GetComponent<UI_ShopMenu_Animator>()->SetAnimator(inoutAmount, inoutSpeed, delayInterval * i, Vector3(1680.f, 270.f + slotInterval * i, 0.f));
+				// multi dpm text
+				auto multiDpm_text = UIFactory::Prefab_ItemStat_Text(L"MULTI DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+				// multi targe dpm slider
+				auto multiDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+				multiDpm_text->SetParents(multiDpm_slider);
+				multiDpm_text->SetPosition(-140.f, 0.f);
+				multiDpm_slider->SetPosition(400.f, 830.f);
 			}
-			// left gold img
-			// gold number
+
+
+			// Popup
+			{
+				auto popup = INSTANTIATE(OBJECT_TAG_UI,L"UI_BuyPopup");
+				UIManager::GetInstance()->SetBuyPopup(popup);
+				popup->AddComponent<CanvasRenderer>();
+				popup->SetPosition(WINCX* 0.5f, WINCY * 0.5f);
+
+				// background
+
+				auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP, L"ui_popup");
+				background->SetParents(popup);
+				background->SetPosition(0.f,0.f,0.f);
+				background->SetScale(WINCX* 0.5f, WINCY * 0.5f);
+				background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.3f, 0.3f,0.5f, 0.5f));
+
+
+				// notice text
+				auto notice = UIFactory::Prefab_Popup_Text(L"구?매", CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+				notice->SetParents(popup);
+				background->SetPosition(0.f, 0.f, 0.f);
+				notice->SetScale(WINCX* 0.5f, WINCY * 0.5f);
+
+
+				// ok button
+				{
+					EventHandler buyFunc = EventHandler([=]() {
+						// popup off
+						UIManager::GetInstance()->BuyItem();
+						UIManager::GetInstance()->BuyPopupOff();
+					});
+					auto okButton = UIFactory::Prefab_Popup_OKButton(buyFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+					okButton->SetParents(popup);
+					okButton->SetPosition(-background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
+				}
+				// cancel button
+				{
+					EventHandler cancelFunc = EventHandler([=]() {
+						// popup off
+						UIManager::GetInstance()->BuyPopupOff();
+					});
+					auto cancelButton = UIFactory::Prefab_Popup_CancelButton(cancelFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+					cancelButton->SetParents(popup);
+					cancelButton->SetPosition(background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
+				}
+
+
+				// must be last operation
+				popup->SetActive(false);
+			}
 		}
+
 
 		// bottom menu
 		{
-			// single dpm text
-			auto singleDpm_text = UIFactory::Prefab_ItemStat_Text(L"SINGLE DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-			// single dpm slider
-			auto singleDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-			singleDpm_text->SetParents(singleDpm_slider);
-			singleDpm_text->SetPosition(-140.f, 0.f);
-			singleDpm_slider->SetPosition(400.f, 800.f);
+		/*
 
-			// multi dpm text
-			auto multiDpm_text = UIFactory::Prefab_ItemStat_Text(L"MULTI DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-			// multi targe dpm slider
-			auto multiDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-			multiDpm_text->SetParents(multiDpm_slider);
-			multiDpm_text->SetPosition(-140.f, 0.f);
-			multiDpm_slider->SetPosition(400.f, 830.f);
 
-			// buy button
-
-			EventHandler buyFunc = EventHandler([=]() {
-				ItemManager::GetInstance()->BuyItem(L"Weapon", UIManager::GetInstance()->GetCurrentSelectItem());
-			});
-			auto buyButton = UIFactory::Prefab_ItemBuy_Button(buyFunc, L"BUY", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-
+		*/
 		}
 	}
 
@@ -923,7 +925,6 @@ public:
 
 			}
 
-
 			// skill rolling center
 			auto pivot = INSTANTIATE(OBJECT_TAG_UI, L"SkiilRollPivot");
 			pivot->AddComponent<CanvasRenderer>();
@@ -955,7 +956,7 @@ public:
 
 	}
 
-	static void DogfightScript()
+	static GameObject* DogfightScript()
 	{
 		// dialogue title
 		auto titleText = UIFactory::Prefab_Stage_DialogueTitle(L"", CANVAS_GROUP_STAGE1);
@@ -967,25 +968,34 @@ public:
 		vector<Dialogue> list;
 
 		{
-			wstring title = L"SPEAKER";
-			wstring script = L"<< SCRIPT1 >>";
+			wstring title = L"<<SPEAKER>>";
+			wstring script = L"어 왔니?";
 
 			Dialogue dialogue;
 			dialogue.first = title;
 			dialogue.second = script;
-
 			list.emplace_back(dialogue);
 
-			script = L"MooGi Test gogo!\nJotBoBs 4Mari Cut";
+
+			script = L"어 왔니?";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"The Big one cant damaged Machinegun, use Missile!";
+			script = L"거 왔으면 인사를 해야지?";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"Faster is Die faster. show what u got";
+			script = L"어 그래 반갑다.";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< SCRIPT5 >>";
+			script = L"어,째,, 자네는,, 거,,, 총 좀 쏘나,,?";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"어 한번 쏴보렴,\n마우스 오른쪽 키를 눌러 기관총을 발사하십쇼. 싫음말고 ㅋㅋ;";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"어 그걸로 아프기나 하겠니?";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"얘, 봄 미사일이 맛있다더라\n큰걸루다가 한번 쏴보렴,";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 		}
@@ -995,9 +1005,11 @@ public:
 		desc_scr.title = titleText->GetComponent<Text>();
 		desc_scr.script = scriptText->GetComponent<Text>();
 		desc_scr.startDialogue = list;
-		auto scripter =
+		GameObject* scripter =
 			INSTANTIATE()->
 			AddComponent<Scripter>(&desc_scr);
+
+		return scripter;
 	}
 
 	static void EvasionAirFireScript()
@@ -1028,6 +1040,52 @@ public:
 			menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 			menu->SetPosition(960.f, 540.f);
 		}
+	}
+
+	// ------------------------------- //
+	/* For Stage1 DogFight */
+	static void Stage1_HelloWorld()
+	{
+		auto titleText = UIFactory::Prefab_Stage_DialogueTitle(L"", CANVAS_GROUP_STAGE1);
+		titleText->SetPosition(960.f, 60.f);
+
+		auto scriptText = UIFactory::Prefab_Stage_DialogueScript(L"", CANVAS_GROUP_STAGE1);
+		scriptText->SetPosition(960.f, 120.f);
+
+		vector<Dialogue> list;
+
+		{
+			wstring title = L"SPEAKER";
+			wstring script = L"<< SCRIPT1 >>";
+
+			Dialogue dialogue;
+			dialogue.first = title;
+			dialogue.second = script;
+
+			list.emplace_back(dialogue);
+
+			script = L"테스트 1번";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"Test 2번 ";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"asdf 3번";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"<< SCRIPT5 >>";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+		}
+
+		// scripter
+		Scripter::Desc desc_scr;
+		desc_scr.title = titleText->GetComponent<Text>();
+		desc_scr.script = scriptText->GetComponent<Text>();
+		desc_scr.startDialogue = list;
+		auto scripter =
+			INSTANTIATE()->
+			AddComponent<Scripter>(&desc_scr);
 	}
 
 };

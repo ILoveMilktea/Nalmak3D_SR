@@ -343,6 +343,7 @@ GameObject * PlayerInfoManager::Player_Create()
 	// collider
 	SphereCollider::Desc player_col;
 	player_col.radius = 1.f;
+	player_col.collisionLayer = COLLISION_LAYER_PLAYER;
 	m_player->AddComponent<SphereCollider>(&player_col);
 
 	// ui

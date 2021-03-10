@@ -197,3 +197,22 @@ void UIManager::DeleteInstance()
 		DESTROY(m_Instance->GetGameObject());
 	}
 }
+
+void UIManager::BuyItem()
+{
+}
+
+void UIManager::BuyPopupOn()
+{
+	// weapon img
+	// weapon single dpm
+	// weapon multi dpm
+	// money
+	//buy button func
+	m_buyPopup->SetActive(true);
+}
+
+void UIManager::BuyPopupOff()
+{
+	m_buyPopup->SetActive(false);
+}

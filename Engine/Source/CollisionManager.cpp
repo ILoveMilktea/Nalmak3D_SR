@@ -103,8 +103,12 @@ void CollisionManager::DeleteCollider(Collider * _col)
 
 void CollisionManager::Process(Collider * _colA, Collider * _colB)
 {
-	if (_colA->m_type == COLLIDER_TYPE_SPHERE || _colB->m_type == COLLIDER_TYPE_SPHERE)
+	if (_colA->m_type == COLLIDER_TYPE_SPHERE && _colB->m_type == COLLIDER_TYPE_SPHERE)
 		SphereToSphere(_colA, _colB);
+	else if (_colA->m_type == COLLIDER_TYPE_LINE && _colB->m_type == COLLIDER_TYPE_SPHERE)
+		LineToSphere(_colA, _colB);
+	else if (_colA->m_type == COLLIDER_TYPE_SPHERE && _colB->m_type == COLLIDER_TYPE_LINE)
+		LineToSphere(_colB, _colA);
 }
 
 void CollisionManager::SphereToSphere(Collider * _colA, Collider * _colB)

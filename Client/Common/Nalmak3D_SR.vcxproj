@@ -200,7 +200,12 @@
     <ClInclude Include="..\Include\Camera_Boss.h" />
     <ClInclude Include="..\Include\Camera_Boss_Appear.h" />
     <ClInclude Include="..\Include\Camera_Evasion.h" />
+    <ClInclude Include="..\Include\DogFightState_2.h" />
+    <ClInclude Include="..\Include\DogFightState_3.h" />
+    <ClInclude Include="..\Include\DogFightState_4.h" />
     <ClInclude Include="..\Include\DogFight_Stage1.h" />
+    <ClInclude Include="..\Include\DogFight_Stage1_2.h" />
+    <ClInclude Include="..\Include\DogFight_Stage1_3.h" />
     <ClInclude Include="..\Include\EndingScene.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_Boss.h" />
@@ -216,6 +221,8 @@
     <ClInclude Include="..\Include\Indicator_EnemyPos.h" />
     <ClInclude Include="..\Include\MidBoss_Appear.h" />
     <ClInclude Include="..\Include\MidBoss_MoveLeft.h" />
+    <ClInclude Include="..\Include\MoveDebuger.h" />
+    <ClInclude Include="..\Include\SliderAnimator.h" />
     <ClInclude Include="..\Include\Stage2_Mainstream_Headers.h" />
     <ClInclude Include="..\Include\Stage2_Mainstream_Define.h" />
     <ClInclude Include="..\Include\FieldCameraEvationState.h" />
@@ -385,7 +392,12 @@
     <ClCompile Include="..\Source\Camera_Boss.cpp" />
     <ClCompile Include="..\Source\Camera_Boss_Appear.cpp" />
     <ClCompile Include="..\Source\Camera_Evasion.cpp" />
+    <ClCompile Include="..\Source\DogFightState_2.cpp" />
+    <ClCompile Include="..\Source\DogFightState_3.cpp" />
+    <ClCompile Include="..\Source\DogFightState_4.cpp" />
     <ClCompile Include="..\Source\DogFight_Stage1.cpp" />
+    <ClCompile Include="..\Source\DogFight_Stage1_2.cpp" />
+    <ClCompile Include="..\Source\DogFight_Stage1_3.cpp" />
     <ClCompile Include="..\Source\EndingScene.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_Boss.cpp" />
@@ -428,6 +440,7 @@
     <ClCompile Include="..\Source\MidBoss_RotateAccel.cpp" />
     <ClCompile Include="..\Source\MidBoss_Sweep_Start.cpp" />
     <ClCompile Include="..\Source\MidBoss_Wave_Start.cpp" />
+    <ClCompile Include="..\Source\MoveDebuger.cpp" />
     <ClCompile Include="..\Source\Player.cpp" />
     <ClCompile Include="..\Source\Player_Boss_Enter.cpp" />
     <ClCompile Include="..\Source\Player_Evasion_Enter.cpp" />
@@ -514,6 +527,7 @@
     <ClCompile Include="..\Source\ScriptReady.cpp" />
     <ClCompile Include="..\Source\ScriptWait.cpp" />
     <ClCompile Include="..\Source\BossUIAnimator.cpp" />
+    <ClCompile Include="..\Source\SliderAnimator.cpp" />
     <ClCompile Include="..\Source\SmallCannon.cpp" />
     <ClCompile Include="..\Source\PrintInfo.cpp" />
     <ClCompile Include="..\Source\Rader.cpp" />

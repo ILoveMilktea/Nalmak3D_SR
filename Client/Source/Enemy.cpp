@@ -216,13 +216,13 @@ void Enemy::Death_Check()
 			m_pDamagedSmoke->GetComponent<ParticleRenderer>()->StopEmit();
 			m_pDamagedSmoke = nullptr;
 
-		
+
 
 		 //death State ->
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
 
-			
+
 		}
 	}
 }
@@ -273,15 +273,15 @@ void Enemy::CurHp_Check()
 		if (m_pDamagedSmoke != nullptr)
 		{
 			//UINT temp = (UINT)(25.f * (1.f - fPercent));
-			//m_pDamagedSmoke->GetComponent<ParticleRenderer>()->m_info.emittorCount 
+			//m_pDamagedSmoke->GetComponent<ParticleRenderer>()->m_info.emittorCount
 			//	= (UINT)(25.f * (1.f - fPercent));
 
 			int temp = (int)(25.f * (1.f - fPercent));
-			
+
 			m_pDamagedSmoke->GetComponent<ParticleRenderer>()->SetEmitCount(temp);
 
 			m_pDamagedSmoke->GetTransform()->position = m_transform->position;
-			
+
 			if (m_pDamagedSmoke->GetComponent<ParticleRenderer>()->IsPlaying() == false)
 			{
 				m_pDamagedSmoke->AddComponent<ParticleDead_IfCount0>();

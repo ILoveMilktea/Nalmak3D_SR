@@ -18,6 +18,8 @@ public:
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 	
+public:
+
 private:
 	Scripter* m_scripter;
 	TimeManager* m_timeManager;

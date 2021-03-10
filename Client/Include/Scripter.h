@@ -23,13 +23,19 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 	virtual void Release() override;
+
+public:
 	void ScriptOn();
 	void ScriptOff();
 
 
-public:
+public: /* Set */
 	void SetDialogue(vector<Dialogue> _titleList);
 
+public: /* Get */
+	int Get_DialogueIndex();
+
+public:
 	bool LoadNextScript();
 	void LoadScriptByIndex(int _index);
 
