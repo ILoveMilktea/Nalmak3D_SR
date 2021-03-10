@@ -117,7 +117,7 @@ void MainGame::SystemSetting()
 #pragma endregion
 
 
-	m_engine->SetStartScene(L"stage2");
+	m_engine->SetStartScene(L"stageSelect");
 
 
 }

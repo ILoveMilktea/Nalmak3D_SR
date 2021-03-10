@@ -48,8 +48,7 @@ void HomingBulletMove::Initialize()
 
 	if(m_target)
 		m_finalPos = new Vector3(m_target->position);
-	else
-		ZeroMemory(m_finalPos, sizeof(Vector3));
+	
 	
 }
 

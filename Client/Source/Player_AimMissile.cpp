@@ -22,6 +22,7 @@ void Player_AimMissile::Initialize()
 	m_fallingTimer = 0.3f; 
 
 	m_dir = m_transform->GetForward();
+	m_deadTimer = 1.f;
 }
 
 void Player_AimMissile::Update()
@@ -50,21 +51,21 @@ void Player_AimMissile::Release()
 
 void Player_AimMissile::Create()
 {
-	//{
-	//	ParticleRenderer::Desc render;
-	//	render.particleDataName = L"missile_smokeLaunch";
-	//	auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render)->AddComponent<ParticleDead_IfCount0>();
-	//	obj->GetComponent<ParticleRenderer>()->Play();
-	//	obj->SetParents(m_gameObject);
-	//}
+	{
+		ParticleRenderer::Desc render;
+		render.particleDataName = L"missile_smokeLaunch";
+		auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render)->AddComponent<ParticleDead_IfCount0>();
+		obj->GetComponent<ParticleRenderer>()->Play();
+		obj->SetParents(m_gameObject);
+	}
 
-	//{
-	//	ParticleRenderer::Desc render;
-	//	render.particleDataName = L"missile_smoke";
-	//	auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
-	//	m_smokeParticle = obj->GetComponent<ParticleRenderer>();
-	//	obj->SetParents(m_gameObject);
-	//}
+	{
+		ParticleRenderer::Desc render;
+		render.particleDataName = L"missile_smoke";
+		auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
+		m_smokeParticle = obj->GetComponent<ParticleRenderer>();
+		obj->SetParents(m_gameObject);
+	}
 	{
 		PointLight::Desc light;
 		light.radius = 15.f;
@@ -102,14 +103,14 @@ void Player_AimMissile::Bomb()
 		m_smokeParticle = nullptr;
 	}
 
-	//Vector3 pos = m_transform->GetWorldPosition();
-	//ParticleRenderer::Desc particle;
-	//particle.particleDataName = L"explosion_Flame";
-	//INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
-	//particle.particleDataName = L"explosion_smokeBomb";
-	//INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
-	//particle.particleDataName = L"explosion_spark";
-	//INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
+	Vector3 pos = m_transform->GetWorldPosition();
+	ParticleRenderer::Desc particle;
+	particle.particleDataName = L"explosion_Flame";
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
+	particle.particleDataName = L"explosion_smokeBomb";
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
+	particle.particleDataName = L"explosion_spark";
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
 
 	DESTROY(m_gameObject);
 	m_gameObject = nullptr;

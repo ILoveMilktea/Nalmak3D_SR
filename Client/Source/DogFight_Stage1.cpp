@@ -53,12 +53,12 @@ void DogFight_Stage1::EnterState()
 
 	//ItemManager::GetInstance()->BuyItem(L"Weapon", L"ClusterMissile");
 	//PlayerInfoManager::GetInstance()->EquipItem(FIRST_PARTS, L"Weapon", L"ClusterMissile");
-
-
 #pragma endregion
 
 
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+//	m_pMainCamera->GetComponent<StateControl>()->SetState(L"CameraEvasion");
+
 
 	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
 
