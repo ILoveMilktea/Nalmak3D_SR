@@ -88,7 +88,14 @@ void Indicator_EnemyPos::LateUpdate()
 	//Vector3 Cam = m_pMainCamera->GetTransform()->position;
 	////float Z = m_transform->position.z - Cam.z;
 
-	//Vector2 vScreen = m_pMainCamera->WorldToScreenPos(m_transform->position);
+	Vector2 vScreen = m_pMainCamera->WorldToScreenPos(m_transform->position);
+
+	if (vScreen.x < WINCX / 2.f * -1.f)
+	{
+
+	}
+
+
 	//DEBUG_LOG(L"Cursor Screen Pos", vScreen);
 
 	//Vector2 vClampScreen;
