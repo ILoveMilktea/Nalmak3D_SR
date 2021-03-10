@@ -110,14 +110,13 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"result", Scene::Instantiate<ResultScene>());
 
 #pragma region forTest
-	m_engine->AddScene(L"UILab", Scene::Instantiate<UILabScene>());
 	m_engine->AddScene(L"phantom", Scene::Instantiate<PhantomScene>());
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 #pragma endregion
 
 
-	m_engine->SetStartScene(L"stage2");
+	m_engine->SetStartScene(L"stageSelect");
 
 
 }

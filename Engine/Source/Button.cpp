@@ -49,6 +49,9 @@ void Button::Initialize()
 
 void Button::Update()
 {
+	if (!m_gameObject->IsActive())
+		return;
+
 	// interactive(highlight) operation
 	if (m_renderer->IsPickingBlocked())
 		return;
@@ -73,6 +76,9 @@ void Button::Update()
 
 void Button::LateUpdate()
 {
+	if (!m_gameObject->IsActive())
+		return;
+
 	// click operation
 	if (m_renderer->IsPickingBlocked())
 		return;

@@ -6,7 +6,7 @@ class UI_ShopItemModel :
 public:
 	struct Desc
 	{
-
+		GameObject* cam;
 	};
 public:
 	UI_ShopItemModel(Desc* _desc);
@@ -14,5 +14,8 @@ public:
 
 	virtual void Initialize() override;
 	virtual void Update() override;
+
+private:
+	GameObject* m_mainCam;
 };
 

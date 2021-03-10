@@ -34,11 +34,19 @@ void MoveAnimation::End_Animation()
 
 void MoveAnimation::Play_Lerp()
 {
+	/*
 	Vector3 curPos;
 	float curTime = (m_playTimer - m_startDelay) / m_playDuration;
 	D3DXVec3Lerp(&curPos, &m_startPos, &m_destPos, curTime);
 
-	m_actor->SetPosition(curPos);
+	m_actor->SetPosition(curPos);	
+	*/
+
+	Vector3 curPos;
+	float curTime = (m_playTimer - m_startDelay) / m_playDuration;
+	float inverseRate = 1.f - curTime;
+	float sLerpTimer = 1.f - inverseRate * inverseRate;
+	m_actor->SetPosition(Nalmak_Math::Lerp(m_startPos, m_destPos, sLerpTimer));
 }
 
 void MoveAnimation::Play_Custom()

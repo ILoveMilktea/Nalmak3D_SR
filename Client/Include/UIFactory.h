@@ -226,7 +226,7 @@ public:
 
 		Button::Desc desc_bt;
 		desc_bt.eventFunc = _eventFunc;
-		desc_bt.allImage = L"Title01_Panel_White";
+		desc_bt.allImage = L"ui_menubutton_img";
 
 		auto menu = INSTANTIATE(OBJECT_TAG_UI, L"MenuButton");
 		menu->AddComponent<CanvasRenderer>(&desc_cr);
@@ -396,12 +396,12 @@ public:
 	{
 		auto bar = INSTANTIATE();
 
-		auto background = CreateImage(CANVAS_GROUP_MAINWND, L"Popup04_White2");
+		auto background = CreateImage(CANVAS_GROUP_MAINWND, L"ui_statslider_bg");
 		background->SetPosition(0.f, 0.f, 0.f);
 		background->SetScale(160.f, 25.f);
-		auto fill = CreateImage(CANVAS_GROUP_MAINWND, L"Tip2");
+		auto fill = CreateImage(CANVAS_GROUP_MAINWND, L"ui_statslider_fill");
 		fill->SetPosition(0.f, 0.f, 0.f);
-		fill->SetScale(152.f, 17.f);
+		fill->SetScale(152.f, 13.f);
 
 		CanvasRenderer::Desc desc_cr;
 		desc_cr.group = _group;
@@ -467,10 +467,10 @@ public:
 	{
 		auto slider = INSTANTIATE(OBJECT_TAG_UI, L"ItemStat_Slider");
 
-		auto background = CreateImage(_group, L"Title02_Panel_White");
+		auto background = CreateImage(_group, L"ui_statslider_bg");
 		background->SetPosition(0.f, 0.f, 0.f);
 		background->SetScale(360.f, 25.f);
-		auto fill = CreateImage(_group, L"UIRed");
+		auto fill = CreateImage(_group, L"ui_statslider_fill");
 		fill->SetPosition(80.f, 5.f, 0.f);
 		fill->SetScale(200.f, 10.f);
 
@@ -493,6 +493,28 @@ public:
 
 		return slider;
 	}
+
+
+	static GameObject* Prefab_Popup_Text(const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// text
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = _group;
+
+		Text::Desc desc;
+		desc.width = 10;
+		desc.height = 25;
+		desc.text = _text;
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
+		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"ItemStat_Text");
+		text->AddComponent<CanvasRenderer>(&desc_cr);
+		text->AddComponent<Text>(&desc);
+		text->SetScale(120.f, 30.f);
+		return text;
+	}
 	static GameObject* Prefab_ItemBuy_Button(EventHandler _eventFunc, const wstring& _text, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
 	{
 		// button
@@ -501,7 +523,7 @@ public:
 
 		Button::Desc desc_bt;
 		desc_bt.eventFunc = _eventFunc;
-		desc_bt.allImage = L"Btn_LargeButton03Yellow_p";
+		desc_bt.allImage = L"ui_button_yellow";
 		desc_cr.group = _group;
 		auto btn = INSTANTIATE(OBJECT_TAG_UI, L"BuyButton");
 		btn->AddComponent<CanvasRenderer>(&desc_cr);
@@ -516,8 +538,8 @@ public:
 		desc_cr.group = CANVAS_GROUP_MAINWND_SHOP_NOANIM;
 
 		Text::Desc desc;
-		desc.width = 40;
-		desc.height = 80;
+		desc.width = 16;
+		desc.height = 40;
 		desc.text = _text;
 		desc.fontName = L"earthorbiter";
 		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
@@ -529,13 +551,95 @@ public:
 
 		btn->GetComponent<Button>()->SetTextObject(text);
 		text->SetParents(btn);
-		text->SetScale(400.f, 200.f);
-		btn->SetScale(400.f, 200.f);
-		btn->SetPosition(1000.f, 800.f);
+		text->SetScale(300.f, 150.f);
+		btn->SetScale(300.f, 150.f);
 		return btn;
 	}
 
+	static GameObject* Prefab_Popup_OKButton(EventHandler _eventFunc, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// button
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = CANVAS_GROUP_MAINWND_SHOP_NOANIM;
 
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+		desc_bt.allImage = L"ui_button_yellow";
+		desc_cr.group = _group;
+		auto btn = INSTANTIATE(OBJECT_TAG_UI, L"Popup_OKButton");
+		btn->AddComponent<CanvasRenderer>(&desc_cr);
+		btn->AddComponent<Button>(&desc_bt);
+
+		btn->GetComponent<Button>()->ChangeNormalColor(1.f, 1.f, 1.f, 1.f);
+		btn->GetComponent<Button>()->ChangeHighlightColor(1.f, 1.f, 1.f, 1.f);
+		btn->GetComponent<Button>()->ChangePressedColor(0.6f, 0.6f, 0.6f, 1.f);
+		btn->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 1.f);
+
+		// text
+		desc_cr.group = CANVAS_GROUP_MAINWND_SHOP_NOANIM;
+
+		Text::Desc desc;
+		desc.width = 16;
+		desc.height = 40;
+		desc.text = L"OK";
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
+		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")
+			->AddComponent<CanvasRenderer>(&desc_cr)
+			->AddComponent<Text>(&desc);
+
+		btn->GetComponent<Button>()->SetTextObject(text);
+		text->SetParents(btn);
+		text->SetScale(240.f, 120.f);
+
+		btn->SetScale(240.f, 120.f);
+		return btn;
+	}
+
+	static GameObject* Prefab_Popup_CancelButton(EventHandler _eventFunc, CANVAS_GROUP _group = CANVAS_GROUP_NONE)
+	{
+		// button
+		CanvasRenderer::Desc desc_cr;
+		desc_cr.group = CANVAS_GROUP_MAINWND_SHOP_NOANIM;
+
+		Button::Desc desc_bt;
+		desc_bt.eventFunc = _eventFunc;
+		desc_bt.allImage = L"ui_button_yellow";
+		desc_cr.group = _group;
+		auto btn = INSTANTIATE(OBJECT_TAG_UI, L"Popup_OKButton");
+		btn->AddComponent<CanvasRenderer>(&desc_cr);
+		btn->AddComponent<Button>(&desc_bt);
+
+		btn->GetComponent<Button>()->ChangeNormalColor(1.f, 1.f, 1.f, 1.f);
+		btn->GetComponent<Button>()->ChangeHighlightColor(1.f, 1.f, 1.f, 1.f);
+		btn->GetComponent<Button>()->ChangePressedColor(0.6f, 0.6f, 0.6f, 1.f);
+		btn->GetComponent<Button>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 1.f);
+
+		// text
+		desc_cr.group = CANVAS_GROUP_MAINWND_SHOP_NOANIM;
+
+		Text::Desc desc;
+		desc.width = 16;
+		desc.height = 40;
+		desc.text = L"CANCLE";
+		desc.fontName = L"earthorbiter";
+		desc.color = D3DCOLOR_RGBA(170, 217, 253, 255);
+		desc.option = DT_CENTER | DT_WORDBREAK | DT_VCENTER;
+
+		auto text = INSTANTIATE(OBJECT_TAG_UI, L"MenuButtonText")
+			->AddComponent<CanvasRenderer>(&desc_cr)
+			->AddComponent<Text>(&desc);
+
+		btn->GetComponent<Button>()->SetTextObject(text);
+		text->SetParents(btn);
+		text->SetScale(240.f, 120.f);
+
+		btn->SetScale(240.f, 120.f);
+		return btn;
+	}
+	
 #pragma endregion
 
 public:

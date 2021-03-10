@@ -369,9 +369,6 @@
     <ClInclude Include="..\Include\FieldCameraEvationState.h">
       <Filter>__Phase2_Lab</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Enemy_MidBoss.h">
-      <Filter>__Phase2_Lab</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Defense_Start.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClInclude>
@@ -419,9 +416,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Attach.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Enemy_BulletProof.h">
-      <Filter>__Phase2_Lab</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_Laser_Start.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
@@ -530,6 +524,12 @@
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_RotateAccel.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_BulletProof.h">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Enemy_MidBoss.h">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -874,9 +874,6 @@
     <ClCompile Include="..\Source\FieldCameraEvationState.cpp">
       <Filter>__Phase2_Lab</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Enemy_MidBoss.cpp">
-      <Filter>__Phase2_Lab</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Defense_Start.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\4. Defense</Filter>
     </ClCompile>
@@ -927,9 +924,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Attach.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Enemy_BulletProof.cpp">
-      <Filter>__Phase2_Lab</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_Laser_Siege.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\3. Laser</Filter>
@@ -1023,6 +1017,12 @@
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_RotateAccel.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_BulletProof.cpp">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Enemy_MidBoss.cpp">
+      <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1327,6 +1327,9 @@
     </Filter>
     <Filter Include="__Phase2_Lab\phaseFSM\Bullet">
       <UniqueIdentifier>{84520be7-9a80-4e03-9a61-c52dd5756f00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__Phase2_Lab\Enemy_MidBoss">
+      <UniqueIdentifier>{586f917a-aefb-4e67-917c-c02ff6489455}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
