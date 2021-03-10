@@ -83,6 +83,7 @@ public: /* Set */
 	void Set_CurSpd(float _spd);
 	void Set_Accel(bool _onoff);
 	void Set_LookSpd(float _lookSpd);
+	void Set_CurHp(int _hp);
 
 public: /* Move */
 	void Go_ToPos(Vector3 _pos);

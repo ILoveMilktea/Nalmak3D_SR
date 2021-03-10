@@ -7,7 +7,7 @@ public:
 	struct Desc
 	{
 		GameObject* Target = nullptr;
-
+		float fDist = 5.0f;
 
 	};
 public:
@@ -25,8 +25,6 @@ private:
 	Camera*		m_pMainCamera = nullptr;
 	GameObject* m_pTarget = nullptr;
 	GameObject* m_pPlayer = nullptr;
-
-	GameObject* Test = nullptr;
 
 	Material*	m_pAlpha = nullptr;
 
