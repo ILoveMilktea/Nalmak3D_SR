@@ -216,10 +216,6 @@ void Enemy::Death_Check()
 			m_pDamagedSmoke->GetComponent<ParticleRenderer>()->StopEmit();
 			m_pDamagedSmoke = nullptr;
 
-			m_pArrow_Indicator->GetComponent<Indicator_EnemyPos>()->Release_Target();
-			DESTROY(m_pArrow_Indicator);
-			m_pArrow_Indicator = nullptr;
-
 		 //death State ->
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
