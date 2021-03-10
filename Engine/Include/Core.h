@@ -6,6 +6,7 @@
 
 #include <windows.h>
 
+#pragma comment(lib, "fmodex64_vc.lib")
 
 #include "Nalmak_Struct.h"
 #include "Nalmak_Define.h"
@@ -24,6 +25,7 @@
 #include "DebugManager.h"
 #include "LightManager.h"
 #include "CanvasGroup.h"
+#include "SoundManager.h"
 
 #include "BitFlag.h"
 #include "Exception.h"
@@ -67,6 +69,7 @@
 #include "Number.h"
 #include "TrailRenderer.h"
 #include "LineCollider.h"
+#include "AudioSource.h"
 
 #pragma endregion
 
@@ -139,6 +142,7 @@ public:
 public:
 	void SetSkyBox(const wstring& _skyBoxName);
 private:
+	SoundManager* m_soundManager;
 	SceneManager* m_sceneManager;
 	PrototypeManager* m_prototypeManager;
 	ObjectManager* m_objectManager;

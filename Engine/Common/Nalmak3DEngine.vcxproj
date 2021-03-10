@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClCompile Include="..\Include\Nalmak_String.cpp" />
     <ClCompile Include="..\Source\Animator.cpp" />
+    <ClCompile Include="..\Source\AudioClip.cpp" />
+    <ClCompile Include="..\Source\AudioSource.cpp" />
     <ClCompile Include="..\Source\AutoRotate.cpp" />
     <ClCompile Include="..\Source\Bezier.cpp" />
     <ClCompile Include="..\Source\BitFlag.cpp" />
@@ -96,6 +98,7 @@
     <ClCompile Include="..\Source\SingleImage.cpp" />
     <ClCompile Include="..\Source\SkyBox.cpp" />
     <ClCompile Include="..\Source\Slider.cpp" />
+    <ClCompile Include="..\Source\SoundManager.cpp" />
     <ClCompile Include="..\Source\Sphere.cpp" />
     <ClCompile Include="..\Source\SphereCollider.cpp" />
     <ClCompile Include="..\Source\SplineCurve.cpp" />
@@ -119,6 +122,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\Client\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\Animator.h" />
+    <ClInclude Include="..\Include\AudioClip.h" />
+    <ClInclude Include="..\Include\AudioSource.h" />
     <ClInclude Include="..\Include\AutoRotate.h" />
     <ClInclude Include="..\Include\Bezier.h" />
     <ClInclude Include="..\Include\BitFlag.h" />
@@ -202,6 +207,7 @@
     <ClInclude Include="..\Include\SingleImage.h" />
     <ClInclude Include="..\Include\SkyBox.h" />
     <ClInclude Include="..\Include\Slider.h" />
+    <ClInclude Include="..\Include\SoundManager.h" />
     <ClInclude Include="..\Include\Sphere.h" />
     <ClInclude Include="..\Include\SphereCollider.h" />
     <ClInclude Include="..\Include\SplineCurve.h" />
@@ -332,7 +338,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <LargeAddressAware>true</LargeAddressAware>
-      <AdditionalLibraryDirectories>../Lib/x64/debug/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../Bin/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmodex64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>UpdateEngine.bat</Command>

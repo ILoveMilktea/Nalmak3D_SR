@@ -235,6 +235,18 @@
     <Filter Include="06.Resource\01.VIBuffer\10.ScreenQuad">
       <UniqueIdentifier>{905c63fa-fe96-4a0b-8238-dbf9a9f04541}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Manager\13.SoundManager">
+      <UniqueIdentifier>{ca20b04f-ffb1-4db6-9bc4-5813917c08b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Resource\08.AudioClip">
+      <UniqueIdentifier>{4082843c-bd2d-46b2-8816-da68128cc25b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.PreCompile\09.Define">
+      <UniqueIdentifier>{1d1c44c8-2739-4fbb-a6ac-9518e6818fe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Component\12.Audio">
+      <UniqueIdentifier>{7e04b739-a428-476b-be73-4de2ee5bd6ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Source\Core.cpp">
@@ -512,7 +524,6 @@
     <ClCompile Include="..\Source\ParticleInfo.cpp">
       <Filter>06.Resource\06.ParticleInfo</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\TrailRenderer.cpp" />
     <ClCompile Include="..\Source\GroundVIBuffer.cpp">
       <Filter>06.Resource\01.VIBuffer\09.Ground</Filter>
     </ClCompile>
@@ -521,6 +532,18 @@
     </ClCompile>
     <ClCompile Include="..\Source\LineCollider.cpp">
       <Filter>05.Component\04.Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AudioClip.cpp">
+      <Filter>06.Resource\08.AudioClip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\AudioSource.cpp">
+      <Filter>05.Component\12.Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\SoundManager.cpp">
+      <Filter>02.Manager\13.SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TrailRenderer.cpp">
+      <Filter>05.Component\01.Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -824,7 +847,6 @@
     <ClInclude Include="..\Include\ParticleInfo.h">
       <Filter>06.Resource\06.ParticleInfo</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\TrailRenderer.h" />
     <ClInclude Include="..\Include\GroundVIBuffer.h">
       <Filter>06.Resource\01.VIBuffer\09.Ground</Filter>
     </ClInclude>
@@ -833,6 +855,18 @@
     </ClInclude>
     <ClInclude Include="..\Include\LineCollider.h">
       <Filter>05.Component\04.Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AudioClip.h">
+      <Filter>06.Resource\08.AudioClip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AudioSource.h">
+      <Filter>05.Component\12.Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\SoundManager.h">
+      <Filter>02.Manager\13.SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TrailRenderer.h">
+      <Filter>05.Component\01.Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

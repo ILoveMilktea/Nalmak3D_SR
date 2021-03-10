@@ -43,13 +43,12 @@
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "d3dx9.lib")
-
-
-
+#pragma comment(lib, "fmodex64_vc.lib")
 
 using namespace DirectX;
 using namespace std;
 
+#include "fmod.h"
 
 #include "Nalmak_Define.h"
 #include "Nalmak_Enum.h"

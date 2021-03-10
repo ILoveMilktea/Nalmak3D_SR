@@ -16,20 +16,15 @@
 
 USING(Nalmak)
 
-
-
-
 IMPLEMENT_SINGLETON(Core)
-
 
 // Core changes 02.22 for.jjy
 // Device Getter Func 1Add;
 // Renderman GetterFunc 2Add;
 
-
 Core::Core()
 {
-	
+	m_soundManager = SoundManager::GetInstance();
 	m_sceneManager = SceneManager::GetInstance();
 	m_prototypeManager = PrototypeManager::GetInstance();
 	m_objectManager = ObjectManager::GetInstance();
@@ -52,6 +47,7 @@ Core::Core()
 Core::~Core()
 {
 	ResourceManager::DestroyInstance();
+	SoundManager::DestroyInstance();
 	InputManager::DestroyInstance();
 	SceneManager::DestroyInstance();
 	RenderManager::DestroyInstance();
@@ -76,6 +72,7 @@ void Core::Initialize(HWND handle, Desc * _desc)
 	DeviceManager::GetInstance()->Initialize(_desc->wincx, _desc->wincy, handle, _desc->windowMode);
 
 	m_collisionManager->Initialize(_desc->COLLISION_LAYER_COUNT);
+	m_soundManager->Initialize();
 	m_resourceManager->Initialize(_desc->resourceDirectoryPath);
 	m_resourceManager->CreateDefaultResource();
 
@@ -94,6 +91,7 @@ void Core::Run()
 	
 	m_timeManager->Tick();
 	m_systemManager->Update();
+	m_soundManager->Update();
 	m_inputManager->Update();
 
 	m_sceneManager->Update();

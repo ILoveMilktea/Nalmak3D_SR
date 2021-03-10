@@ -438,26 +438,26 @@ public:
 			{
 				// background image
 				{
-				float animAmount = -400.f;
-				float animSpeed = 0.5f;
-				float secondAnimDelay = 0.5f;
+					float animAmount = -400.f;
+					float animSpeed = 0.5f;
+					float secondAnimDelay = 0.5f;
 
-				//190, 227, 253, 255
+					//190, 227, 253, 255
 
-				auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOPWND, L"ui_shopwnd_bg");
-				background->SetScale(360.f, 550.f);
-				background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
+					auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOPWND, L"ui_shopwnd_bg");
+					background->SetScale(360.f, 550.f);
+					background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
 
-				auto gradation = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_NOANIM, L"ui_shopwnd_gradation");
-				gradation->SetParents(background);
-				gradation->SetScale(350.f, 540.f);
-				gradation->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
+					auto gradation = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_NOANIM, L"ui_shopwnd_gradation");
+					gradation->SetParents(background);
+					gradation->SetScale(350.f, 540.f);
+					gradation->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.74f, 0.89f, 1.f, 1.f));
 
 
-				background->AddComponent<UI_ShopWnd_Animator>();
-				background->GetComponent<UI_ShopWnd_Animator>()->
-					SetAnimator(animAmount, animAmount * 0.1f, animSpeed, 0.f
-						, Vector3(WINCX + background->GetTransform()->scale.x * 0.5f, WINCY * 0.5f - 100.f, 0.f));
+					background->AddComponent<UI_ShopWnd_Animator>();
+					background->GetComponent<UI_ShopWnd_Animator>()->
+						SetAnimator(animAmount, animAmount * 0.1f, animSpeed, 0.f
+							, Vector3(WINCX + background->GetTransform()->scale.x * 0.5f, WINCY * 0.5f - 100.f, 0.f));
 				}
 
 				// line effect image
@@ -543,91 +543,92 @@ public:
 					});
 					auto buyButton = UIFactory::Prefab_ItemBuy_Button(openPopupFunc, L"BUY ITEM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
 
-									//L"kfir_weapon1", //L"su34_weapon1" //L"su34_weapon2" // L"su34_weapon3 //L"su34_weapon3"
-			wstring itemNames[5] = { L"AimMissile" ,  L"HomingMissile" , L"ClusterMissile" , L"Emp" };
-			wstring itmeMtrl[5] = { L"kfir" , L"su34" , L"su34" , L"su34" , L"emp" };
+					//L"kfir_weapon1", //L"su34_weapon1" //L"su34_weapon2" // L"su34_weapon3 //L"su34_weapon3"
+					wstring itemNames[5] = { L"AimMissile" ,  L"HomingMissile" , L"ClusterMissile" , L"Emp" };
+					wstring itmeMtrl[5] = { L"kfir" , L"su34" , L"su34" , L"su34" , L"emp" };
 
-			// Weapon Status Slider
-			{
-				// single dpm text
-				auto singleDpm_text = UIFactory::Prefab_ItemStat_Text(L"SINGLE DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-				// single dpm slider
-				auto singleDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-				singleDpm_text->SetParents(singleDpm_slider);
-				singleDpm_text->SetPosition(-140.f, 0.f);
-				singleDpm_slider->SetPosition(400.f, 800.f);
+					// Weapon Status Slider
+					{
+						// single dpm text
+						auto singleDpm_text = UIFactory::Prefab_ItemStat_Text(L"SINGLE DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+						// single dpm slider
+						auto singleDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+						singleDpm_text->SetParents(singleDpm_slider);
+						singleDpm_text->SetPosition(-140.f, 0.f);
+						singleDpm_slider->SetPosition(400.f, 800.f);
 
-				// multi dpm text
-				auto multiDpm_text = UIFactory::Prefab_ItemStat_Text(L"MULTI DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-				// multi targe dpm slider
-				auto multiDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
-				multiDpm_text->SetParents(multiDpm_slider);
-				multiDpm_text->SetPosition(-140.f, 0.f);
-				multiDpm_slider->SetPosition(400.f, 830.f);
-			}
-
-
-			// Popup
-			{
-				auto popup = INSTANTIATE(OBJECT_TAG_UI,L"UI_BuyPopup");
-				UIManager::GetInstance()->SetBuyPopup(popup);
-				popup->AddComponent<CanvasRenderer>();
-				popup->SetPosition(WINCX* 0.5f, WINCY * 0.5f);
-
-				// background
-
-				auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP, L"ui_popup");
-				background->SetParents(popup);
-				background->SetPosition(0.f,0.f,0.f);
-				background->SetScale(WINCX* 0.5f, WINCY * 0.5f);
-				background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.3f, 0.3f,0.5f, 0.5f));
+						// multi dpm text
+						auto multiDpm_text = UIFactory::Prefab_ItemStat_Text(L"MULTI DPM", CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+						// multi targe dpm slider
+						auto multiDpm_slider = UIFactory::Prefab_ItemStat_Slider(CANVAS_GROUP_MAINWND_SHOP_BUYMENU);
+						multiDpm_text->SetParents(multiDpm_slider);
+						multiDpm_text->SetPosition(-140.f, 0.f);
+						multiDpm_slider->SetPosition(400.f, 830.f);
+					}
 
 
-				// notice text
-				auto notice = UIFactory::Prefab_Popup_Text(L"구?매", CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
-				notice->SetParents(popup);
-				background->SetPosition(0.f, 0.f, 0.f);
-				notice->SetScale(WINCX* 0.5f, WINCY * 0.5f);
+					// Popup
+					{
+						auto popup = INSTANTIATE(OBJECT_TAG_UI, L"UI_BuyPopup");
+						UIManager::GetInstance()->SetBuyPopup(popup);
+						popup->AddComponent<CanvasRenderer>();
+						popup->SetPosition(WINCX* 0.5f, WINCY * 0.5f);
+
+						// background
+
+						auto background = UIFactory::CreateImage(CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP, L"ui_popup");
+						background->SetParents(popup);
+						background->SetPosition(0.f, 0.f, 0.f);
+						background->SetScale(WINCX* 0.5f, WINCY * 0.5f);
+						background->GetComponent<CanvasRenderer>()->SetColor(Vector4(0.3f, 0.3f, 0.5f, 0.5f));
 
 
-				// ok button
-				{
-					EventHandler buyFunc = EventHandler([=]() {
-						// popup off
-						UIManager::GetInstance()->BuyItem();
-						UIManager::GetInstance()->BuyPopupOff();
-					});
-					auto okButton = UIFactory::Prefab_Popup_OKButton(buyFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
-					okButton->SetParents(popup);
-					okButton->SetPosition(-background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
+						// notice text
+						auto notice = UIFactory::Prefab_Popup_Text(L"구?매", CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+						notice->SetParents(popup);
+						background->SetPosition(0.f, 0.f, 0.f);
+						notice->SetScale(WINCX* 0.5f, WINCY * 0.5f);
+
+
+						// ok button
+						{
+							EventHandler buyFunc = EventHandler([=]() {
+								// popup off
+								UIManager::GetInstance()->BuyItem();
+								UIManager::GetInstance()->BuyPopupOff();
+							});
+							auto okButton = UIFactory::Prefab_Popup_OKButton(buyFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+							okButton->SetParents(popup);
+							okButton->SetPosition(-background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
+						}
+						// cancel button
+						{
+							EventHandler cancelFunc = EventHandler([=]() {
+								// popup off
+								UIManager::GetInstance()->BuyPopupOff();
+							});
+							auto cancelButton = UIFactory::Prefab_Popup_CancelButton(cancelFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+							cancelButton->SetParents(popup);
+							cancelButton->SetPosition(background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
+						}
+
+
+						// must be last operation
+						popup->SetActive(false);
+					}
 				}
-				// cancel button
+
+
+				// bottom menu
 				{
-					EventHandler cancelFunc = EventHandler([=]() {
-						// popup off
-						UIManager::GetInstance()->BuyPopupOff();
-					});
-					auto cancelButton = UIFactory::Prefab_Popup_CancelButton(cancelFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
-					cancelButton->SetParents(popup);
-					cancelButton->SetPosition(background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
+					/*
+
+
+					*/
 				}
-
-
-				// must be last operation
-				popup->SetActive(false);
 			}
-		}
-
-
-		// bottom menu
-		{
-		/*
-
-
-		*/
 		}
 	}
-
 	static void StageWindow(GameObject* _player)
 	{
 		// reference

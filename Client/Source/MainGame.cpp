@@ -87,7 +87,6 @@ void MainGame::ApplicationSetting()
 	// all resource load in resource directory
 	core.resourceDirectoryPath;
 	core.CANVAS_GROUP_COUNT = CANVAS_GROUP_MAX;
-
 	m_engine->Initialize(g_hWnd, &core);
 }
 

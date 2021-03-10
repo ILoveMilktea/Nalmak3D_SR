@@ -65,6 +65,8 @@ void T::DestroyInstance()							\
 #define COLOR_RGB(r,g,b) RGB((BYTE)(r * 255),(BYTE)(g * 255),(BYTE)(b * 255))
 
 
+#define SOUND_CHANNEL_COUNT_MAX 32
+
 #define ERR_MSG(msg)  MessageBoxW(NULL, msg, L"error", 0)  
 
 

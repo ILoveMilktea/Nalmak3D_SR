@@ -13,7 +13,7 @@ typedef int _OBJECT_TAG;
 typedef int _RENDER_LAYER;
 typedef int _RENDER_QUEUE;
 typedef int _COLLISION_LAYER;
-
+typedef int _SOUND_CHANNEL;
 typedef int _CANVAS_GROUP;
 
 

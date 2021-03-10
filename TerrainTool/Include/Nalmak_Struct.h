@@ -232,5 +232,16 @@ struct Line
 	Vector3 start, end;
 };
 
+class AudioClip;
+
+struct AudioChannel
+{
+	FMOD_CHANNEL* channel = nullptr;
+	AudioClip* currentClip = nullptr;
+
+	// if 3D Use
+	Vector3* position = nullptr;
+	////////////////////////////////
+};
 
 #endif
