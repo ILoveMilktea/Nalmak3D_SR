@@ -28,7 +28,7 @@ void Scripter::Initialize()
 
 	// state
 	m_gameObject->AddComponent<StateControl>();
-	m_state = GetComponent<StateControl>();
+	m_state = m_gameObject->GetComponent<StateControl>();
 
 	m_state->AddState<ScriptReady>(L"Ready");
 	m_state->AddState<ScriptPlay>(L"Play");
@@ -68,6 +68,11 @@ void Scripter::SetDialogue(vector<Dialogue> _dialogueList)
 int Scripter::Get_DialogueIndex()
 {
 	return m_dialogueIndex;
+}
+
+int Scripter::Get_DialogueSize()
+{
+	return m_dialogueList.size();
 }
 
 bool Scripter::LoadNextScript()

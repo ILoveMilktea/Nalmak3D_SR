@@ -714,7 +714,7 @@ void EnemyManager::Spawn_S1P1_Normal()
 		BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 
 		Vector2 vRand = Nalmak_Math::Rand(Vector2(0.f, 0.f), Vector2((float)WINCX, (float)WINCY));
-		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, 400.f);
+		Vector3 vPos = Pos_ScreenToWorld(vRand.x, vRand.y, 200.f);
 
 
 		Enemy_Spawn(vPos, Vector3(0.2f, 0.2f, 0.2f), ENEMY_STATE::IDLE, tStatus, tGun);
@@ -726,7 +726,7 @@ void EnemyManager::Spawn_S1P1_Huge()
 	ENEMY_STATUS tStatus(10, 15, 1);
 	BULLET_STATUS tGun(0, 10, 50, 3, 180, 100, 0);
 
-	Vector3 vPos = Pos_ScreenToWorld(WINCX / 2.f, WINCY / 2.f, 400.f);
+	Vector3 vPos = Pos_ScreenToWorld(WINCX / 2.f, WINCY / 2.f, 200.f);
 
 	Enemy_Spawn(vPos, Vector3(0.7f, 0.7f, 0.7f), ENEMY_STATE::IDLE, tStatus, tGun);
 

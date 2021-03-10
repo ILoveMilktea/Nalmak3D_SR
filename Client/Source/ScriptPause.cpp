@@ -23,18 +23,20 @@ void ScriptPause::Initialize()
 
 void ScriptPause::EnterState()
 {
+	
 }
 
 void ScriptPause::UpdateState()
 {
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_K))
-	{
-		SetState(GetString(L"PrevState"));
-		SetString(L"PrevState", L"Pause");
-		return;
-	}
+	//if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_K))
+	//{
+	//	SetState(GetString(L"PrevState"));
+	//	SetString(L"PrevState", L"Pause");
+	//	return;
+	//}
 }
 
 void ScriptPause::ExitState()
 {
+	m_scripter->ScriptOff();
 }

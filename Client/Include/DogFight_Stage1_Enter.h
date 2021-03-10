@@ -1,12 +1,13 @@
 #pragma once
+
 #include "IState.h"
 
-class DogFight_Stage1_3 :
+class DogFight_Stage1_Enter :
 	public IState
 {
 public:
-	DogFight_Stage1_3();
-	virtual ~DogFight_Stage1_3();
+	DogFight_Stage1_Enter();
+	virtual ~DogFight_Stage1_Enter();
 
 	// IState을(를) 통해 상속됨
 	virtual void Initialize() override;
@@ -18,11 +19,11 @@ public:
 
 public:
 
-private:	
+private:
 	Camera*			m_pMainCam = nullptr;
 	GameObject*		m_pPlayer = nullptr;
 	GameObject*		m_pScripter = nullptr;
-	class StageManager*	m_pStageMgr = nullptr;
+	class StageManager*	m_pStageMgr =nullptr;
 
 };
 

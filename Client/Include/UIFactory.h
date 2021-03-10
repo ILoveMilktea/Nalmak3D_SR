@@ -440,7 +440,7 @@ public:
 		menu->GetComponent<Toggle>()->ChangeDisableColor(0.2f, 0.2f, 0.2f, 0.5f);*/
 
 		//menu->GetComponent<CanvasRenderer>()->SetActive(false);
-		menu->SetScale(160.f, 60.f);
+		menu->SetScale(200.f, 80.f);
 		return menu;
 	}
 	
@@ -461,7 +461,7 @@ public:
 		auto text = INSTANTIATE(OBJECT_TAG_UI, L"ItemStat_Text");
 		text->AddComponent<CanvasRenderer>(&desc_cr);
 		text->AddComponent<Text>(&desc);
-		text->SetScale(120.f, 30.f);
+		text->SetScale(200.f, 30.f);
 		return text;
 	}
 	static GameObject* Prefab_ItemStat_Slider(CANVAS_GROUP _group = CANVAS_GROUP_NONE, float _maxValue = 100.f, float _minValue = 0.f)
@@ -470,9 +470,9 @@ public:
 
 		auto background = CreateImage(_group, L"ui_statslider_bg");
 		background->SetPosition(0.f, 0.f, 0.f);
-		background->SetScale(360.f, 25.f);
+		background->SetScale(220.f, 25.f);
 		auto fill = CreateImage(_group, L"ui_statslider_fill");
-		fill->SetPosition(80.f, 5.f, 0.f);
+		//fill->SetPosition(0.f, 0.f, 0.f);
 		fill->SetScale(200.f, 10.f);
 
 		CanvasRenderer::Desc desc_cr;
@@ -490,7 +490,6 @@ public:
 
 		slider->AddComponent<SliderAnimator>();
 		slider->GetComponent<SliderAnimator>()->SetFill(fill);
-		
 
 		background->SetParents(slider);
 		fill->SetParents(slider);

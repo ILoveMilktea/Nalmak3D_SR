@@ -37,8 +37,8 @@ public: /* Get */
 		return m_stateControl->GetState<T>(_name)->Get_Score();
 	};
 
-	float Get_DogTime() const;
-	float Get_DogScore()const;
+	//float Get_DogTime() const;
+	//float Get_DogScore()const;
 
 	float Get_EvasionTime()const;
 	float Get_EvasionScore()const;
@@ -63,8 +63,8 @@ public: /* Set */
 		return m_stateControl->GetState<T>(_name)->Add_Score(_score);
 	};
 
-	void Set_DogScore(float _score);
-	void Add_DogScore(float _score);
+	//void Set_DogScore(float _score);
+	//void Add_DogScore(float _score);
 
 	void Set_EvasionScore(float _score);
 	void Add_EvasionScore(float _score);

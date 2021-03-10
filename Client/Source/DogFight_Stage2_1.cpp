@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Include\DogFightState.h"
+#include "..\Include\DogFight_Stage2_1.h"
 
 #include "PlayerInfoManager.h"
 #include "PlayerIdle.h"
@@ -29,22 +29,22 @@
 
 #include "Stage2_Mainstream_Define.h"
 
-DogFightState::DogFightState()
+DogFight_Stage2_1::DogFight_Stage2_1()
 {
 
 }
 
 
-DogFightState::~DogFightState()
+DogFight_Stage2_1::~DogFight_Stage2_1()
 {
 }
 
-void DogFightState::Initialize()
+void DogFight_Stage2_1::Initialize()
 {
 
 }
 
-void DogFightState::EnterState()
+void DogFight_Stage2_1::EnterState()
 {
 	//INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	//INSTANTIATE()->AddComponent<Grid>();
@@ -77,7 +77,7 @@ void DogFightState::EnterState()
 }
 
 
-void DogFightState::UpdateState()
+void DogFight_Stage2_1::UpdateState()
 {
 
 		m_fDogFightTime += dTime;
@@ -160,7 +160,7 @@ void DogFightState::UpdateState()
 	DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
 }
 
-void DogFightState::ExitState()
+void DogFight_Stage2_1::ExitState()
 {
 	//DESTROY(Core::GetInstance()->FindObjectByName(0, L"SmoothFollow"));
 
@@ -169,22 +169,22 @@ void DogFightState::ExitState()
 
 }
 
-float DogFightState::Get_Time() const
+float DogFight_Stage2_1::Get_Time() const
 {
 	return m_fDogFightTime;
 }
 
-float DogFightState::Get_Score() const
+float DogFight_Stage2_1::Get_Score() const
 {
 	return m_fDogFightScore;
 }
 
-void DogFightState::Set_Score(float _score)
+void DogFight_Stage2_1::Set_Score(float _score)
 {
 	m_fDogFightScore = _score;
 }
 
-void DogFightState::Add_Score(float _score)
+void DogFight_Stage2_1::Add_Score(float _score)
 {
 	m_fDogFightScore += _score;
 }

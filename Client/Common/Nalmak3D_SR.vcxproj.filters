@@ -64,21 +64,6 @@
     <ClInclude Include="..\Include\PhantomScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\GarageScene.h">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Stage2Scene.h">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\StageScene.h">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\StageSelectScene.h">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\TitleScene.h">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\UILabScene.h">
       <Filter>01.Scene\01.Test</Filter>
     </ClInclude>
@@ -118,21 +103,6 @@
     </ClInclude>
     <ClInclude Include="..\Include\UIFactory.h">
       <Filter>97.Factory</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ScriptReady.h">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ScriptEnd.h">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ScriptPause.h">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ScriptPlay.h">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\ScriptWait.h">
-      <Filter>02.Component\03.Script\State</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\ItemManager.h">
       <Filter>02.Component\00.Manager\ItemManger</Filter>
@@ -278,7 +248,7 @@
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Ground.h">
-      <Filter>02.Component\07.StageScene</Filter>
+      <Filter>02.Component\07.Ground</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Player_Missile.h" />
     <ClInclude Include="..\Include\Player_AimMissile.h" />
@@ -330,17 +300,11 @@
     <ClInclude Include="..\Include\ParticleDead_IfCount0.h" />
     <ClInclude Include="..\Include\GeunHee_Fps_Shoot.h" />
     <ClInclude Include="..\Include\Player_WindEffect.h" />
-    <ClInclude Include="..\Include\ResultScene.h">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\UIWindowFactory.h">
       <Filter>97.Factory</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\GameManager.h">
       <Filter>02.Component\00.Manager\GameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\EndingScene.h">
-      <Filter>01.Scene\00.Game</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\UI_Alarm.h">
       <Filter>02.Component\02.UI</Filter>
@@ -521,7 +485,7 @@
     </ClInclude>
     <ClInclude Include="..\Include\State_Evasion_Enter.h">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Include\DogFight_Stage1.h">
       <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
     </ClInclude>
@@ -554,6 +518,78 @@
     </ClInclude>
     <ClInclude Include="..\Include\MoveDebuger.h">
       <Filter>96.Debuger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage2_Enter.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\00.Enter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage2_Exit.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\05.Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage2_1.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\01.Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage2_2.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\02.Phase2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage2_3.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\03.Phase3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage2_4.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\04.Phase4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TitleScene.h">
+      <Filter>01.Scene\00.Game\00.Title</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\StageSelectScene.h">
+      <Filter>01.Scene\00.Game\01.Stage_Select</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\GarageScene.h">
+      <Filter>01.Scene\00.Game\02.Garage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage2Scene.h">
+      <Filter>01.Scene\00.Game\03.Stage\01.Stage2_All</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ResultScene.h">
+      <Filter>01.Scene\00.Game\04.Result</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\EndingScene.h">
+      <Filter>01.Scene\00.Game\05.Ending_Credit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_Enter.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\00.Enter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_1.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\01.Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_2.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\02.Phase2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_3.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\03.Phase3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_Exit.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\04.Exit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Stage1Scene.h">
+      <Filter>01.Scene\00.Game\03.Stage\00.Stage1_Tutorial</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptReady.h">
+      <Filter>02.Component\03.Script\State\00.Ready</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPlay.h">
+      <Filter>02.Component\03.Script\State\01.Play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptWait.h">
+      <Filter>02.Component\03.Script\State\02.Wait</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptEnd.h">
+      <Filter>02.Component\03.Script\State\03.End</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\ScriptPause.h">
+      <Filter>02.Component\03.Script\State\04.Pause</Filter>
+   </ClInclude>
+    <ClInclude Include="..\Include\TitleAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -608,21 +644,6 @@
     <ClCompile Include="..\Source\PhantomScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\GarageScene.cpp">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\Stage2Scene.cpp">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\StageScene.cpp">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\StageSelectScene.cpp">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\TitleScene.cpp">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\UILabScene.cpp">
       <Filter>01.Scene\01.Test</Filter>
     </ClCompile>
@@ -653,21 +674,6 @@
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_Falling.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Falling</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ScriptEnd.cpp">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ScriptPause.cpp">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ScriptPlay.cpp">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ScriptReady.cpp">
-      <Filter>02.Component\03.Script\State</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\ScriptWait.cpp">
-      <Filter>02.Component\03.Script\State</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy.cpp">
       <Filter>02.Component\00.Manager\Enemy\01%29Enemy\Normal</Filter>
@@ -810,7 +816,7 @@
       <Filter>02.Component\04.StageSelectScene</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Ground.cpp">
-      <Filter>02.Component\07.StageScene</Filter>
+      <Filter>02.Component\07.Ground</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Player_Missile.cpp" />
     <ClCompile Include="..\Source\Player_AimMissile.cpp" />
@@ -862,14 +868,8 @@
     <ClCompile Include="..\Source\ParticleDead_IfCount0.cpp" />
     <ClCompile Include="..\Source\GeunHee_Fps_Shoot.cpp" />
     <ClCompile Include="..\Source\Player_WindEffect.cpp" />
-    <ClCompile Include="..\Source\ResultScene.cpp">
-      <Filter>01.Scene\00.Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\GameManager.cpp">
       <Filter>02.Component\00.Manager\GameManager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\EndingScene.cpp">
-      <Filter>01.Scene\00.Game</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\UI_Alarm.cpp">
       <Filter>02.Component\02.UI</Filter>
@@ -1039,27 +1039,6 @@
     <ClCompile Include="..\Source\State_Evasion_Enter.cpp">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\DogFight_Stage1.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DogFight_Stage1_2.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage1\Phase2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DogFight_Stage1_3.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage1\Phase3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DogFightState.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DogFightState_2.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase2</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DogFightState_3.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase3</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Source\DogFightState_4.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase4</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\Enemy_BulletProof.cpp">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClCompile>
@@ -1071,6 +1050,78 @@
     </ClCompile>
     <ClCompile Include="..\Source\MoveDebuger.cpp">
       <Filter>96.Debuger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage2_Enter.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\00.Enter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage2_Exit.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\05.Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage2_1.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\01.Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage2_2.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\02.Phase2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage2_3.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\03.Phase3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage2_4.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\04.Phase4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\TitleScene.cpp">
+      <Filter>01.Scene\00.Game\00.Title</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\StageSelectScene.cpp">
+      <Filter>01.Scene\00.Game\01.Stage_Select</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\GarageScene.cpp">
+      <Filter>01.Scene\00.Game\02.Garage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Stage2Scene.cpp">
+      <Filter>01.Scene\00.Game\03.Stage\01.Stage2_All</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ResultScene.cpp">
+      <Filter>01.Scene\00.Game\04.Result</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\EndingScene.cpp">
+      <Filter>01.Scene\00.Game\05.Ending_Credit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1_Enter.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1\00.Enter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1_1.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1\01.Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1_2.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1\02.Phase2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1_3.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1\03.Phase3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1_Exit.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1\04.Exit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Stage1Scene.cpp">
+      <Filter>01.Scene\00.Game\03.Stage\00.Stage1_Tutorial</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptReady.cpp">
+      <Filter>02.Component\03.Script\State\00.Ready</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptPlay.cpp">
+      <Filter>02.Component\03.Script\State\01.Play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptWait.cpp">
+      <Filter>02.Component\03.Script\State\02.Wait</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptEnd.cpp">
+      <Filter>02.Component\03.Script\State\03.End</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\ScriptPause.cpp">
+      <Filter>02.Component\03.Script\State\04.Pause</Filter>
+   </ClCompile>
+    <ClCompile Include="..\Source\TitleAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1241,9 +1292,6 @@
     <Filter Include="02.Component\06.GarageScene">
       <UniqueIdentifier>{92693aba-9f7a-4342-ad51-d5a5bdfa1b27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\07.StageScene">
-      <UniqueIdentifier>{7bf2b31f-80f5-4054-b8ce-d2c5c9ad31db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Component\00.Manager\Player">
       <UniqueIdentifier>{5098e947-8ec3-495e-8bb1-bb2273f1e12f}</UniqueIdentifier>
     </Filter>
@@ -1370,9 +1418,6 @@
     <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging">
       <UniqueIdentifier>{e6a58e28-b6f8-4f06-b36e-e9a8e783f00c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\NewFilter1">
-      <UniqueIdentifier>{12936101-c3ef-476a-9928-2c95b650c811}</UniqueIdentifier>
-    </Filter>
     <Filter Include="__Phase2_Lab\phaseFSM\Bullet">
       <UniqueIdentifier>{84520be7-9a80-4e03-9a61-c52dd5756f00}</UniqueIdentifier>
     </Filter>
@@ -1388,35 +1433,92 @@
     <Filter Include="__Phase2_Lab\phaseFSM\MainStream\03.MidBossDead">
       <UniqueIdentifier>{ece57446-3b9b-485f-b708-dbbdb6966042}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage1">
-      <UniqueIdentifier>{71d019b8-a324-4c20-a273-88af85ed78c1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.Combat State\00%29DogFight\Stage2">
       <UniqueIdentifier>{3f61db9f-d7b5-4162-a94c-38e33c8fd638}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage1\Phase1">
-      <UniqueIdentifier>{34fefa55-d038-4874-bb20-eb81e53a0a15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage1\Phase2">
-      <UniqueIdentifier>{fdfe4006-33e2-4f97-803b-09825020a081}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage1\Phase3">
-      <UniqueIdentifier>{a654beb3-0566-46e9-a398-703d10f7753a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase4">
-      <UniqueIdentifier>{e71debe6-87b6-49bc-a3b1-b8f75746db69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase3">
-      <UniqueIdentifier>{a5c29d70-82df-4002-8680-91d3822d5f1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase2">
-      <UniqueIdentifier>{bf07f576-657e-4b58-9974-f1d66b05284e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase1">
-      <UniqueIdentifier>{9ee6eea0-9642-4951-8118-e9dcbb9d5b6c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="__Phase2_Lab\Enemy_MidBoss">
       <UniqueIdentifier>{586f917a-aefb-4e67-917c-c02ff6489455}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Run">
+      <UniqueIdentifier>{12936101-c3ef-476a-9928-2c95b650c811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\00.Enter">
+      <UniqueIdentifier>{94746423-01a3-4ffd-aa6e-3dc95d175c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\01.Phase1">
+      <UniqueIdentifier>{9ee6eea0-9642-4951-8118-e9dcbb9d5b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\02.Phase2">
+      <UniqueIdentifier>{bf07f576-657e-4b58-9974-f1d66b05284e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\03.Phase3">
+      <UniqueIdentifier>{a5c29d70-82df-4002-8680-91d3822d5f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\04.Phase4">
+      <UniqueIdentifier>{e71debe6-87b6-49bc-a3b1-b8f75746db69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\05.Exit">
+      <UniqueIdentifier>{9351cf9c-689b-4afb-b867-8e39e4fcc881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\00.Title">
+      <UniqueIdentifier>{6b1c5f1c-7a8b-42e6-aaa0-00bc84042f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\01.Stage_Select">
+      <UniqueIdentifier>{e448c672-1f07-489f-8d05-be7870a7b2f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\02.Garage">
+      <UniqueIdentifier>{adb206b4-e2f0-43f3-9c1b-fa9fc71391ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\03.Stage">
+      <UniqueIdentifier>{657415a0-e951-407a-817f-bc10f54cc119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\03.Stage\00.Stage1_Tutorial">
+      <UniqueIdentifier>{a032f942-426f-4df6-80d7-f12e0b161eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\03.Stage\01.Stage2_All">
+      <UniqueIdentifier>{e3015917-e94d-46e2-aec9-f63b1544fec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\04.Result">
+      <UniqueIdentifier>{91284184-b247-4c5f-b726-11874c9346f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\00.Game\05.Ending_Credit">
+      <UniqueIdentifier>{d93c3d6b-5ee4-426d-870f-62e6ef56a6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\07.Ground">
+      <UniqueIdentifier>{7bf2b31f-80f5-4054-b8ce-d2c5c9ad31db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1">
+      <UniqueIdentifier>{a9ebcdb3-4f9f-4f8a-a15d-eb6d5fe83e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\00.Enter">
+      <UniqueIdentifier>{fbc48dd0-a488-44ae-9462-d7b161785c72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\01.Phase1">
+      <UniqueIdentifier>{594c2884-2d74-40ca-937f-84f13620ba44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\02.Phase2">
+      <UniqueIdentifier>{a5a4db2e-ff1a-48c4-9c53-ab4cfd09cc16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\03.Phase3">
+      <UniqueIdentifier>{998f1dd2-7eb5-492f-be82-3cd5270c17b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\04.Exit">
+      <UniqueIdentifier>{a327f61b-6bc6-46e0-8758-f2f5221b0152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State\00.Ready">
+      <UniqueIdentifier>{7873c6f3-c6a3-422d-a211-8abbc54cc6c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State\01.Play">
+      <UniqueIdentifier>{e9b9051d-9f2f-4dd2-9944-6fb193dcd2e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State\02.Wait">
+      <UniqueIdentifier>{fc862ee9-fc4f-429d-aa84-580665adab3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State\03.End">
+      <UniqueIdentifier>{63a9f96b-c5fd-456e-9e4d-20eb35c45a22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Component\03.Script\State\04.Pause">
+      <UniqueIdentifier>{be30c562-c9c2-4107-b349-69d3abfe4d27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1526,6 +1628,5 @@
     <FxCompile Include="..\..\Resource\Shader\postprocess_bloom.fx">
       <Filter>03.Resource\02.Shader</Filter>
     </FxCompile>
-
   </ItemGroup>
 </Project>

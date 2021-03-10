@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\Stage2Scene.h"
 #include "StageManager.h"
-#include "DogFight_Stage1.h"
-#include "DogFightState.h"
+
 #include "EvasionState.h"
 #include "BossState.h"
 
@@ -21,6 +20,12 @@
 #include "Stage2_Mainstream_Headers.h"
 
 #include "UIFactory.h"
+#include "DogFight_Stage2_Enter.h"
+#include "DogFight_Stage2_1.h"
+#include "DogFight_Stage2_Exit.h"
+#include "DogFight_Stage2_2.h"
+#include "DogFight_Stage2_3.h"
+#include "DogFight_Stage2_4.h"
 
 Stage2Scene::Stage2Scene()
 {
@@ -79,7 +84,15 @@ void Stage2Scene::Initialize()
 	m_StageManager = StageManager::GetInstance()->GetGameObject();
 	StageManager::GetInstance()->Set_StateControl();
 	auto stateControl = StageManager::GetInstance()->Get_StateControl();
-	stateControl->AddState<DogFightState>(L"Dog_Fight");
+	
+	stateControl->AddState<DogFight_Stage2_Enter>(L"DogFight_Enter");
+	stateControl->AddState<DogFight_Stage2_1>(L"DogFight_1");
+	stateControl->AddState<DogFight_Stage2_2>(L"DogFight_2");
+	stateControl->AddState<DogFight_Stage2_3>(L"DogFight_3");
+	stateControl->AddState<DogFight_Stage2_4>(L"DogFight_4");
+	stateControl->AddState<DogFight_Stage2_Exit>(L"DogFight_Exit");
+
+
 	stateControl->AddState<EvasionState>(L"Evasion");
 	stateControl->AddState<BossState>(L"Boss");
 	stateControl->AddState<State_Evasion_Airfire>(_sn_airfire);

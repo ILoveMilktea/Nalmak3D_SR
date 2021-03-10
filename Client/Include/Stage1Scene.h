@@ -1,13 +1,15 @@
 #pragma once
 #include "Scene.h"
-class StageScene :
+class Stage1Scene :
 	public Scene
 {
 public:
 	virtual void Initialize() override;
 
 private:
-	GameObject* m_StageManager = nullptr;
+	
 	Camera* m_pMainCamera = nullptr;
+
+	class StageManager* m_StageManager = nullptr;
 };
 

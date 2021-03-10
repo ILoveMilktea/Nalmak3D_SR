@@ -21,6 +21,7 @@ void ScriptPlay::Initialize()
 
 void ScriptPlay::EnterState()
 {
+	
 	m_timer = 0;
 }
 
@@ -28,15 +29,15 @@ void ScriptPlay::UpdateState()
 {
 	// 원래 여기서 typing 처리입니다
 
-	m_timer += m_timeManager->GetdeltaTime();
+	m_timer += dTime;
 
-	if (m_timeManager->IsPause())
-	{
-		SetFloat(L"Timer", m_timer);
-		SetString(L"PrevState", L"Play");
-		SetState(L"Pause");
-		return;
-	}
+	//if (m_timeManager->IsPause())
+	//{
+	//	SetFloat(L"Timer", m_timer);
+	//	SetString(L"PrevState", L"Play");
+	//	SetState(L"Pause");
+	//	return;
+	//}
 
 	if (m_timer > 1.f)
 	{

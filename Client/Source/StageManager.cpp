@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "..\Include\StageManager.h"
 
-#include "DogFight_Stage1.h"
-#include "DogFightState.h"
+
 #include "EvasionState.h"
 #include "BossState.h"
 
@@ -44,27 +43,6 @@ StageManager::~StageManager()
 
 void StageManager::Initialize()
 {
-	//m_gameObject->AddComponent<StateControl>();
-	//
-	//m_stateControl->AddState<NoneState>(L"none");
-	//m_stateControl->AddState<DogFight_Stage1>(L"Tutorial");
-	//m_stateControl->AddState<DogFightState>(L"Dog_Fight");
-	//m_stateControl->AddState<EvasionState>(L"Evasion");
-	//m_stateControl->AddState<BossState>(L"Boss");
-	//
-
-
-	//m_gameObject->AddComponent<StateControl>();
-	//m_stateControl = GetComponent<StateControl>();
-	//m_stateControl->AddState<DogFight_Stage1>(L"Tutorial");
-	//m_stateControl->AddState<DogFightState>(L"Dog_Fight");
-	//m_stateControl->AddState<EvasionState>(L"Evasion");
-	//m_stateControl->AddState<BossState>(L"Boss");
-
-
-	//m_stateControl->InitState(L"Dog_Fight");
-
-	//m_stateControl->InitState(L"");
 
 }
 
@@ -81,15 +59,15 @@ StateControl * StageManager::Get_StateControl() const
 	return m_stateControl;
 }
 
-float StageManager::Get_DogTime() const
-{
-	return m_stateControl->GetState<DogFightState>(L"Dog_Fight")->Get_Time();
-}
-
-float StageManager::Get_DogScore() const
-{
-	return m_stateControl->GetState<DogFightState>(L"Dog_Fight")->Get_Score();
-}
+//float StageManager::Get_DogTime() const
+//{
+//	return 0.f;
+//}
+//
+//float StageManager::Get_DogScore() const
+//{
+//	return 0.f;
+//}
 
 float StageManager::Get_EvasionTime() const
 {
@@ -133,15 +111,15 @@ void StageManager::Set_StateControl()
 
 
 
-void StageManager::Set_DogScore(float _score)
-{
-	m_stateControl->GetState<DogFightState>(L"Dog_Fight")->Set_Score(_score);
-}
-
-void StageManager::Add_DogScore(float _score)
-{
-	m_stateControl->GetState<DogFightState>(L"Dog_Fight")->Add_Score(_score);
-}
+//void StageManager::Set_DogScore(float _score)
+//{
+//	m_stateControl->GetState<DogFightState>(L"Dog_Fight")->Set_Score(_score);
+//}
+//
+//void StageManager::Add_DogScore(float _score)
+//{
+//	m_stateControl->GetState<DogFightState>(L"Dog_Fight")->Add_Score(_score);
+//}
 
 void StageManager::Set_EvasionScore(float _score)
 {

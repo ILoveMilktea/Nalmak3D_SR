@@ -68,6 +68,9 @@ public:
 	void SetVector3(wstring _key, const Vector3& _value);
 	void SetString(wstring _key, const wstring& _value);
 
+	void AddInteger(wstring _key, float _addValue);
+	void AddFloat(wstring _key, float _addValue);
+
 	int GetInteger(wstring _key);
 	float GetFloat(wstring _key);
 	const Vector3& GetVector3(wstring _key);
@@ -75,10 +78,10 @@ public:
 private:
 	IState* m_state;
 	map<wstring, IState*> m_stateList;
-	map<wstring, int> m_blackBoardInteger;
-	map<wstring, float> m_blackBoardFloat;
-	map<wstring, Vector3> m_blackBoardVector3;
-	map<wstring, wstring> m_blackBoardString;
+	map<wstring, int>		m_blackBoardInteger;
+	map<wstring, float>		m_blackBoardFloat;
+	map<wstring, Vector3>	m_blackBoardVector3;
+	map<wstring, wstring>	m_blackBoardString;
 };
 
 #endif // ! __STATECONTROL_H__

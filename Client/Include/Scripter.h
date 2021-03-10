@@ -34,7 +34,8 @@ public: /* Set */
 
 public: /* Get */
 	int Get_DialogueIndex();
-
+	int	Get_DialogueSize();
+	
 public:
 	bool LoadNextScript();
 	void LoadScriptByIndex(int _index);

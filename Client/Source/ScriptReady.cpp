@@ -25,10 +25,10 @@ void ScriptReady::Initialize()
 
 void ScriptReady::EnterState()
 {
-	if (GetString(L"PrevState") == L"Pause")
-		m_timer = GetFloat(L"Timer");
-	else
-		m_timer = 0;
+	//if (GetString(L"PrevState") == L"Pause")
+	//	m_timer = GetFloat(L"Timer");
+	//else
+	m_timer = 0;
 	
 	if (!m_scripter->LoadNextScript())
 	{
@@ -40,14 +40,14 @@ void ScriptReady::EnterState()
 void ScriptReady::UpdateState()
 {
 	m_timer += m_timeManager->GetdeltaTime();
-
-	if (m_timeManager->IsPause())
-	{
-		SetFloat(L"Timer", m_timer);
-		SetString(L"PrevState", L"Ready");
-		SetState(L"Pause");
-		return;
-	}
+	
+	//if (m_timeManager->IsPause())
+	//{
+	//	SetFloat(L"Timer", m_timer);
+	//	SetString(L"PrevState", L"Ready");
+	//	SetState(L"Pause");
+	//	return;
+	//}
 
 	if (m_timer > 1.f)
 	{

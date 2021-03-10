@@ -112,6 +112,16 @@ void StateControl::SetString(wstring _key, const wstring& _value)
 	m_blackBoardString[_key] = _value;
 }
 
+void StateControl::AddInteger(wstring _key, float _addValue)
+{
+	m_blackBoardInteger[_key] += _addValue;
+}
+
+void StateControl::AddFloat(wstring _key, float _addValue)
+{
+	m_blackBoardFloat[_key] += _addValue;
+}
+
 
 
 int StateControl::GetInteger(wstring _key)
