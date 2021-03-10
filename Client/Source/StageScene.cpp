@@ -63,7 +63,7 @@ void StageScene::Initialize()
 		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraStartState>(L"CameraStart");
 		m_pMainCamera->GetComponent<StateControl>()->AddState<FieldCameraNearEnemyState>(L"CameraNearEnemy");
 		m_pMainCamera->GetComponent<StateControl>()->AddState<Camera_Evasion>(L"CameraEvasion");
-		m_pMainCamera->GetComponent<StateControl>()->InitState(L"CameraEvasion");
+		m_pMainCamera->GetComponent<StateControl>()->InitState(L"CameraFollow");
 	}
 
 
