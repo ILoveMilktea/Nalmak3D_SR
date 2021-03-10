@@ -32,7 +32,7 @@ void BossState::EnterState()
 
 
 	// ==== UI ====
-	//UIWindowFactory::BossUI();
+	UIWindowFactory::BossUI();
 	m_bossui = false;
 	// ==== UI ====
 
