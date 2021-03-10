@@ -5,8 +5,31 @@
 		-> Indicator의 작동을 일단 다 LateUpdate로 옮기고 서로 nullptr일때는 작동안되도록 하긴 했는데,,, 몰르겠다. 잘 될지..
 		-> 화면 밖에 나가면 플레이어와의 거리를 좀 더 줄이기 추가하자.
 2. 에너미 체력비례에 따라서 연기나게 => 17:35 2021-03-10 수 컽
-3. 에너미 생성패턴 + ui랑 연동
+2.5 체력 일정 이하로 떨어지면 일정거리 유지하면서 존나게 튀는 패턴 (어느 패턴에서 넘어가도 안 어색한.
+	-> 이왕 만드는 김에 일정거리 이상 넘어가면 플레이어 쪽으로 좀 오바 스피드로 넘어가는 
+3. 에너미 생성패턴 + ui랑 연동 -> 20:42 2021-03-10 수 구조 파악완료. 공장 on
 	-> Dogfight_stage1_1 / Dogfight_stage1_2 /Dogfight_stage1_3 이렇게 나눠서 만들자.
+ 
+발표할때 무기들 다 한꺼번에 설명하지말고 해당 페이즈에서 해당무기 쓰면서 설정 설명
+Stage1 : DogFight 설정
+1. 스몰캐논 연습 - phase1 한곳에서 가만히 있는 잡몹 2~3마리 잡아보기 {DogFight_Stage1}
+2. 미사일 연습 - phase2 aim Missile로 좀 큰 넘 한 마리 잡아보기 {DogFight_Stage1_2}
+3. DogFight 연습 - Chase 패턴 가진 몹 1~2마리 잡아보기. {DogFight_Stage1_3}
+
+Stage1 : DogFight 설정
+1. 호밍(한발씩 나가는 작은 유도탄환?) - phase1  {DogFightState}
+2. 클러스터(존나 여러발 나가서 다줘패는 유도 탄환) - phase2 {DogFightState_2}
+3. Dogfight 전투신 모든 패턴 다 소환 - phase3 걍 다 써보면서 전투 ㄱㄱ {DogFightState_3}
+4. Emp(주변 위치 무력화 시키는거.) & 쉴드 - phase4 갑자기 많은 몬스터 몰려오고 집중포화당할 때 쉴드 써보고 하고, Emp로 무력화 하기. {DogFightState_4}
+이러고 Stage2 넘어가기 
+
+Scripter state 설명
+<ScriptReady>(L"Ready") ->
+<ScriptPlay>(L"Play") ->
+<ScriptWait>(L"Wait") ->
+<ScriptEnd>(L"End") ->
+<ScriptPause>(L"Pause") -> 
+
 
 10:30 2021-03-09 화 근희
 1. 에너미 위치 인디케이터

@@ -65,6 +65,11 @@ void Scripter::SetDialogue(vector<Dialogue> _dialogueList)
 	m_dialogueList = _dialogueList;
 }
 
+int Scripter::Get_DialogueIndex()
+{
+	return m_dialogueIndex;
+}
+
 bool Scripter::LoadNextScript()
 {
 	++m_dialogueIndex;

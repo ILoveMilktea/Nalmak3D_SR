@@ -29,12 +29,13 @@ public:
 private:
 	GameObject* m_Player = nullptr;
 	Camera* m_pMainCamera = nullptr;
-
+	GameObject* m_pScripter = nullptr;
 
 	Vector3 vPlayerOrigin;
 	bool	m_bSceneChange = false;
 	float	m_fSpd = 0.f;
 
+	bool bTest = false;
 							//생성	//클리어
 	bool	m_bPattern1[2] = { false, false };
 	bool	m_bPattern2[2] = { false, false };

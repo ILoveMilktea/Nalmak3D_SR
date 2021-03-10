@@ -955,7 +955,7 @@ public:
 
 	}
 
-	static void DogfightScript()
+	static GameObject* DogfightScript()
 	{
 		// dialogue title
 		auto titleText = UIFactory::Prefab_Stage_DialogueTitle(L"", CANVAS_GROUP_STAGE1);
@@ -967,25 +967,34 @@ public:
 		vector<Dialogue> list;
 
 		{
-			wstring title = L"SPEAKER";
-			wstring script = L"<< SCRIPT1 >>";
+			wstring title = L"<<SPEAKER>>";
+			wstring script = L"어 왔니?";
 
 			Dialogue dialogue;
 			dialogue.first = title;
 			dialogue.second = script;
-
 			list.emplace_back(dialogue);
 
-			script = L"MooGi Test gogo!\nJotBoBs 4Mari Cut";
+
+			script = L"어 왔니?";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"The Big one cant damaged Machinegun, use Missile!";
+			script = L"거 왔으면 인사를 해야지?";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"Faster is Die faster. show what u got";
+			script = L"어 그래 반갑다.";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"<< SCRIPT5 >>";
+			script = L"어,째,, 자네는,, 거,,, 총 좀 쏘나,,?";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"어 한번 쏴보렴,\n마우스 오른쪽 키를 눌러 기관총을 발사하십쇼. 싫음말고 ㅋㅋ;";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"어 그걸로 아프기나 하겠니?";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"얘, 봄 미사일이 맛있다더라\n큰걸루다가 한번 쏴보렴,";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 		}
@@ -995,9 +1004,11 @@ public:
 		desc_scr.title = titleText->GetComponent<Text>();
 		desc_scr.script = scriptText->GetComponent<Text>();
 		desc_scr.startDialogue = list;
-		auto scripter =
+		GameObject* scripter =
 			INSTANTIATE()->
 			AddComponent<Scripter>(&desc_scr);
+
+		return scripter;
 	}
 
 	static void EvasionAirFireScript()
@@ -1028,6 +1039,52 @@ public:
 			menu->GetComponent<MenuAnimator>()->AddStartDelay(1.5f);
 			menu->SetPosition(960.f, 540.f);
 		}
+	}
+
+	// ------------------------------- //
+	/* For Stage1 DogFight */
+	static void Stage1_HelloWorld()
+	{
+		auto titleText = UIFactory::Prefab_Stage_DialogueTitle(L"", CANVAS_GROUP_STAGE1);
+		titleText->SetPosition(960.f, 60.f);
+
+		auto scriptText = UIFactory::Prefab_Stage_DialogueScript(L"", CANVAS_GROUP_STAGE1);
+		scriptText->SetPosition(960.f, 120.f);
+
+		vector<Dialogue> list;
+
+		{
+			wstring title = L"SPEAKER";
+			wstring script = L"<< SCRIPT1 >>";
+
+			Dialogue dialogue;
+			dialogue.first = title;
+			dialogue.second = script;
+
+			list.emplace_back(dialogue);
+
+			script = L"테스트 1번";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"Test 2번 ";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"asdf 3번";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			script = L"<< SCRIPT5 >>";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+		}
+
+		// scripter
+		Scripter::Desc desc_scr;
+		desc_scr.title = titleText->GetComponent<Text>();
+		desc_scr.script = scriptText->GetComponent<Text>();
+		desc_scr.startDialogue = list;
+		auto scripter =
+			INSTANTIATE()->
+			AddComponent<Scripter>(&desc_scr);
 	}
 
 };

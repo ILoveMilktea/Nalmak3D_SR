@@ -23,6 +23,7 @@
 
 #include "PlayerEscapeState.h"
 #include "GameManager.h"
+#include "Scripter.h"
 
 
 DogFight_Stage1::DogFight_Stage1()
@@ -56,38 +57,37 @@ void DogFight_Stage1::EnterState()
 
 
 #pragma endregion
-
-
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+	assert(L"Can't find MainCam" && m_pMainCamera);
 
 	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
-
-
+	assert(L"Can't find Player" && m_Player);
 
 	PlayerInfoManager::GetInstance()->SetTimeLimit(m_fTutorialTime);
 	PlayerInfoManager::GetInstance()->SetScore(m_fTutorialScore);
-
 
 	EnemyManager::GetInstance();
 
 	//EnemyManager::GetInstance()->Spawn_S1P1_Normal();
 	//EnemyManager::GetInstance()->Enemy_Spawn_Test(ENEMY_STATE::CHASE , { 0,0,50 });
 	
-	float dis = 30.f;
-
-	for (int i = 0; i < 5; ++i)
-	{
-		EnemyManager::GetInstance()->Enemy_Spawn({ 50 + (dis  * i),0,200 });
-	}
-
-	//EnemyManager::GetInstance()->Enemy_Spawn({ 25,25,50 }, { 0.2f,0.2f,0.f }, ENEMY_STATE::CHASE);
+	m_pScripter = UIWindowFactory::DogfightScript();
+	assert(L"Can't find Scripter" && m_pScripter);
 
 	m_bPattern1[0] = true;
 }
 
 void DogFight_Stage1::UpdateState()
 {
-	m_fTutorialTime += dTime;
+	m_fTutorialTime += dTime;	
+
+	if (m_pScripter->GetComponent<Scripter>()->Get_DialogueIndex() == 5 && !bTest)
+	{
+		EnemyManager::GetInstance()->Spawn_S1P1_Normal();
+		bTest = true;
+	}
+
+
 
 	//if (m_bPattern1[0] == true && m_bPattern1[1] == false
 	//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
@@ -158,7 +158,6 @@ void DogFight_Stage1::UpdateState()
 
 void DogFight_Stage1::ExitState()
 {
-	int i = 0;
 }
 
 float DogFight_Stage1::Get_Time() const
