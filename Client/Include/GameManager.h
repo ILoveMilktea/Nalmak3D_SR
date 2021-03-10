@@ -24,15 +24,13 @@ public:
 	virtual void Initialize() override;
 	virtual void Update() override;
 
-	
-
 public: /* Get */
 	bool Get_StageClear(int _i) const;
 	const wstring& Get_NextStage() const;
 
 public: /* Set */
 	void Set_StageClear(int _i);
-	void Set_NestStage(const wstring& _selectStage);
+	void Set_NextStage(const wstring& _selectStage);
 
 private:
 	bool			m_bStageClear[2] = { false, false };

@@ -970,34 +970,61 @@ public:
 		vector<Dialogue> list;
 
 		{
-			wstring title = L"<<SPEAKER>>";
-			wstring script = L"어 왔니?";
+			wstring title = L"<<관제탑>>";
+			wstring script = L"아아, 마이크 테스트, 내 손안의 Mic, 고동치는 심박수. 원투췍";
 
 			Dialogue dialogue;
 			dialogue.first = title;
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 
+			//1
+			script = L"어 왔니? \n Press Enter or Space";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			
+			//2
+			script = L"거 왔으면 인사를 해야지?\n Press Enter or Space";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			
+			//3
+			script = L"어 그래 반갑다.\n Press Enter or Space";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			
+			//4
+			script = L"어,째,, 거,,, 총 좀 쏘나,,?\n Press Enter or Space";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
+			
+			//5
+			script = L"어 그래 한번 쏴보렴,\n우클릭으로 맛 좀 보여주렴.\n적 다 잡으삼";
+			dialogue.second = script;
+			list.emplace_back(dialogue);
 
-			script = L"어 왔니?";
+			//6
+			script = L"잘하누ㅋㅋ 다음 ㄱㄱ\n Press Enter or Space";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"거 왔으면 인사를 해야지?";
+
+			//7
+			script = L"거구의 전투기가 나오자 바짝 쫄아버린 전근희씨\n기본공격으로 몬스터를 공격해 보삼";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"어 그래 반갑다.";
+
+			//8
+			script = L"어 그걸로 아프기나 하겠니?\n Press Enter or Space";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"어,째,, 자네는,, 거,,, 총 좀 쏘나,,?";
+			
+			//9
+			script = L"얘, 봄 미사일이 맛있다더라\n좌클릭으로 큰걸루다가 한번 쏴보렴,\n 미사일 ㄱㄱ";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
-			script = L"어 한번 쏴보렴,\n마우스 오른쪽 키를 눌러 기관총을 발사하십쇼. 싫음말고 ㅋㅋ;";
-			dialogue.second = script;
-			list.emplace_back(dialogue);
-			script = L"어 그걸로 아프기나 하겠니?";
-			dialogue.second = script;
-			list.emplace_back(dialogue);
-			script = L"얘, 봄 미사일이 맛있다더라\n큰걸루다가 한번 쏴보렴,";
+
+			//10
+			script = L"뭐 대충 관제탑에서 플레이어보고 뒤에 몬스터 나왔으니 조심하라는 말.";
 			dialogue.second = script;
 			list.emplace_back(dialogue);
 		}
@@ -1007,9 +1034,9 @@ public:
 		desc_scr.title = titleText->GetComponent<Text>();
 		desc_scr.script = scriptText->GetComponent<Text>();
 		desc_scr.startDialogue = list;
-		GameObject* scripter =
-			INSTANTIATE()->
-			AddComponent<Scripter>(&desc_scr);
+		
+		GameObject* scripter = INSTANTIATE(OBJECT_TAG_SCRIPT, L"Tutorial_Script");
+		scripter->AddComponent<Scripter>(&desc_scr);
 
 		return scripter;
 	}

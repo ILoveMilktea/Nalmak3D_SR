@@ -25,7 +25,7 @@ void MoveStageByMeshPicking::Update()
 		if (m_meshPicking->IsMousePicking())
 		{
 			Core::GetInstance()->LoadScene(L"garage");
-			GameManager::GetInstance()->Set_NestStage(m_targetScene);
+			GameManager::GetInstance()->Set_NextStage(m_targetScene);
 			return;
 		}
 	}

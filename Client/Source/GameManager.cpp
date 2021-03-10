@@ -61,7 +61,7 @@ void GameManager::Set_StageClear(int _i)
 	m_bStageClear[_i - 1] = true;
 }
 
-void GameManager::Set_NestStage(const wstring & _selectStage)
+void GameManager::Set_NextStage(const wstring & _selectStage)
 {
 	m_strSelectStage = _selectStage;
 }

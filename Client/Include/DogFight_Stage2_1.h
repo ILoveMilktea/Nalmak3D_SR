@@ -1,13 +1,11 @@
 #pragma once
 #include "IState.h"
-class DogFight_Stage1 :
-	public IState
+class DogFight_Stage2_1: public IState
 {
 public:
-	DogFight_Stage1();
-	virtual ~DogFight_Stage1();
+	DogFight_Stage2_1();
+	~DogFight_Stage2_1();
 
-	// IState¿ª(∏¶) ≈Î«ÿ ªÛº”µ 
 	virtual void Initialize() override;
 	virtual void EnterState() override;
 	virtual void UpdateState() override;
@@ -22,29 +20,30 @@ public: /* Set */
 	void Add_Score(float _score);
 
 public:
+	//void SceneToEvasion();
 
-	void Player_Faraway();
-	void Accelerate();
+	//void Player_Faraway();
+	//void Accelerate();
 
 private:
-	GameObject* m_Player = nullptr;
+	GameObject* m_pPlayer = nullptr;
+	GameObject* m_pBoss = nullptr;
 	Camera* m_pMainCamera = nullptr;
-	GameObject* m_pScripter = nullptr;
 
-	Vector3 vPlayerOrigin;
-	bool	m_bSceneChange = false;
-	float	m_fSpd = 0.f;
 
-	bool bTest = false;
-							//ª˝º∫	//≈¨∏ÆæÓ
+	//Vector3 vPlayerOrigin;
+
+	bool	m_bNextPhase = false;
+	bool	m_bProduce = false;
+	float	m_fProduceDelta = 0.f;
+							//ÏÉùÏÑ±	//ÌÅ¥Î¶¨Ïñ¥
 	bool	m_bPattern1[2] = { false, false };
 	bool	m_bPattern2[2] = { false, false };
 	bool	m_bPattern3[2] = { false, false };
+	
 
-	float	m_fTutorialTime = 0.f;
-	float	m_fTutorialScore = 0.f;
+	float	m_fDogFightTime = 0.f;
+	float	m_fDogFightScore = 0.f;
 
 	int		m_iFrame = 0;
-	float	m_fProduceDelta = 0.f;
 };
-

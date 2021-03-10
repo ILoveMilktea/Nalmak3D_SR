@@ -1,35 +1,39 @@
 #include "stdafx.h"
-#include "..\Include\StageScene.h"
+#include "..\Include\Stage1Scene.h"
 #include "Nalmak_Include.h"
 
 #include "NextSceneLoad.h"
 #include "StageManager.h"
-#include "DogFight_Stage1.h"
-#include "DogFightState.h"
-#include "EvasionState.h"
-#include "BossState.h"
+
 #include "SmoothFollow.h"
 #include "FieldCameraInfo.h"
 #include "FieldCameraSmoothFollowState.h"
 #include "FieldCameraStartState.h"
 #include "FieldCameraNearEnemyState.h"
-#include "Camera_Evasion.h"
-#include "UIFactory.h"
 
-void StageScene::Initialize()
+#include "Camera_Evasion.h"
+
+#include "UIFactory.h"
+#include "DogFight_Stage1_1.h"
+#include "DogFight_Stage1_Enter.h"
+#include "DogFight_Stage1_2.h"
+#include "DogFight_Stage1_3.h"
+#include "DogFight_Stage1_Exit.h"
+
+void Stage1Scene::Initialize()
 {
 	srand((unsigned int)time(NULL));
 
-	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
-	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
-	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal", CANVAS_GROUP_G1);
-	window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
-	auto window3 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Depth", CANVAS_GROUP_G1);
-	window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
-	auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
-	window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
-	auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Debug", CANVAS_GROUP_G1);
-	window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
+	//auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
+	//window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
+	//auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal", CANVAS_GROUP_G1);
+	//window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
+	//auto window3 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Depth", CANVAS_GROUP_G1);
+	//window3->SetPosition(100, 500, 0)->SetScale(200, 200, 0);
+	//auto window4 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Light", CANVAS_GROUP_G1);
+	//window4->SetPosition(100, 700, 0)->SetScale(200, 200, 0);
+	//auto window5 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Debug", CANVAS_GROUP_G1);
+	//window5->SetPosition(100, 900, 0)->SetScale(200, 200, 0);
 
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 	
@@ -38,6 +42,9 @@ void StageScene::Initialize()
 	light.ambientIntensity = 0.02f;
 	INSTANTIATE()->AddComponent<DirectionalLight>(&light)->SetRotation(70, 180, 0);
 
+	INSTANTIATE(OBJECT_TAG_DEBUG, L"systemInfo")->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
+	INSTANTIATE()->AddComponent<Grid>();
+
 	VIBufferRenderer::Desc ground;
 	ground.mtrlName = L"ground";
 	ground.meshName = L"ground";
@@ -45,8 +52,8 @@ void StageScene::Initialize()
 	groundObj->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 
 	INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>();
+
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
-	
 	if (m_pMainCamera)
 	{
 		SmoothFollow::Desc follow_desc;
@@ -67,11 +74,15 @@ void StageScene::Initialize()
 	}
 
 
-	m_StageManager = StageManager::GetInstance()->GetGameObject();
-	StageManager::GetInstance()->Set_StateControl();
-	StageManager::GetInstance()->Get_StateControl()->AddState<DogFight_Stage1>(L"Tutorial");
-	StageManager::GetInstance()->Get_StateControl()->InitState(L"Tutorial");
-	
-
-
+	m_StageManager = StageManager::GetInstance();
+	if (m_StageManager)
+	{
+		m_StageManager->Set_StateControl();
+		m_StageManager->Get_StateControl()->AddState<DogFight_Stage1_Enter>(L"Tutorial_Enter");
+		m_StageManager->Get_StateControl()->AddState<DogFight_Stage1_1>(L"Tutorial_1");
+		m_StageManager->Get_StateControl()->AddState<DogFight_Stage1_2>(L"Tutorial_2");
+		m_StageManager->Get_StateControl()->AddState<DogFight_Stage1_3>(L"Tutorial_3");
+		m_StageManager->Get_StateControl()->AddState<DogFight_Stage1_Exit>(L"Tutorial_Exit");
+		m_StageManager->Get_StateControl()->InitState(L"Tutorial_Enter");
+	}
 }

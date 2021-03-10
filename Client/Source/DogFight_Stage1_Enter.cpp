@@ -1,51 +1,52 @@
 #include "stdafx.h"
-#include "..\Include\DogFight_Stage1_3.h"
+#include "..\Include\DogFight_Stage1_Enter.h"
 #include "PlayerInfoManager.h"
-#include "StageManager.h"
-#include "EnemyManager.h"
+#include "UIWindowFactory.h"
+#include "Scripter.h"
 
 
-DogFight_Stage1_3::DogFight_Stage1_3()
+DogFight_Stage1_Enter::DogFight_Stage1_Enter()
 {
 }
 
 
-DogFight_Stage1_3::~DogFight_Stage1_3()
+DogFight_Stage1_Enter::~DogFight_Stage1_Enter()
 {
 }
 
-void DogFight_Stage1_3::Initialize()
+void DogFight_Stage1_Enter::Initialize()
 {
+
 }
 
-void DogFight_Stage1_3::EnterState()
+void DogFight_Stage1_Enter::EnterState()
 {
 	m_pMainCam = Core::GetInstance()->GetMainCamera();
 	assert(L"Can't Find MainCam at DogfightStage1Enter" && m_pMainCam);
 
 	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
 	assert(L"Cant't Find Player at DogfightStage1Enter" && m_pPlayer);
-
+	
 	m_pScripter = Core::GetInstance()->FindObjectByName(OBJECT_TAG_SCRIPT, L"Tutorial_Script");
 	assert(L"Can't Find Scripter at DogfightStage1Enter" && m_pScripter);
-
+	
 	m_pStageMgr = StageManager::GetInstance();
 	assert(L"Can't Find m_pStageMgr  at DogfightStage1Enter" && m_pStageMgr);
 
-	EnemyManager::GetInstance()->Spawn_S1P1_Quick();
-
-	m_pScripter->GetComponent<StateControl>()->SetState(L"Pause"); 
 }
 
-void DogFight_Stage1_3::UpdateState()
+void DogFight_Stage1_Enter::UpdateState()
 {
-	if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+	m_pStageMgr->Get_StateControl()->AddFloat(L"DogFight_Stage1_fTime", dTime);
+
+	if (m_pScripter->GetComponent<Scripter>()->Get_DialogueIndex() == 5)
 	{
-		m_pScripter->GetComponent<StateControl>()->SetState(L"Ready");
-		m_stateControl->SetState(L"Tutorial_Exit");
+		m_pStageMgr->ToScene(L"Tutorial_1");
 	}
+
+	DEBUG_LOG(L"Current Scene", L"Stage1-Enter");
 }
 
-void DogFight_Stage1_3::ExitState()
+void DogFight_Stage1_Enter::ExitState()
 {
 }

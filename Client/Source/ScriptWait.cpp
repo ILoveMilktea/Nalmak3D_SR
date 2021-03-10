@@ -27,18 +27,22 @@ void ScriptWait::EnterState()
 
 void ScriptWait::UpdateState()
 {
-	if (m_timeManager->IsPause())
-	{
-		SetString(L"PrevState", L"Wait");
-		SetState(L"Pause");
-		return;
-	}
-
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_ENTER))
+	//if (m_timeManager->IsPause())
+	//{
+	//	SetString(L"PrevState", L"Wait");
+	//	SetState(L"Pause");
+	//	return;
+	//}
+	//else 
+	//{
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_ENTER)
+		|| InputManager::GetInstance()->GetKeyDown(KEY_STATE_SPACE))
 	{
 		SetState(L"Ready");
 		return;
 	}
+	//}
+		
 }
 
 void ScriptWait::ExitState()
