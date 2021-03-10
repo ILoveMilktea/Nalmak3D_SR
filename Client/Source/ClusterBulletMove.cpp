@@ -39,11 +39,11 @@ ClusterBulletMove::~ClusterBulletMove()
 void ClusterBulletMove::Initialize()
 {
 
-	ParticleRenderer::Desc render;
-	render.particleDataName = L"missile_smoke";
-	auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
-	m_smokeParticle = obj->GetComponent<ParticleRenderer>();
-	obj->SetParents(m_gameObject);
+	//ParticleRenderer::Desc render;
+	//render.particleDataName = L"missile_smoke";
+	//auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render);
+	//m_smokeParticle = obj->GetComponent<ParticleRenderer>();
+	//obj->SetParents(m_gameObject);
 
 
 	m_player = PlayerInfoManager::GetInstance()->GetPlayer();
@@ -85,6 +85,8 @@ void ClusterBulletMove::LateUpdate()
 		D3DXVec3Normalize(&dir, &dir);
 		m_firstDir = Nalmak_Math::Lerp(m_firstDir, m_player->GetTransform()->GetForward(), dTime);
 		m_transform->position += ((dir + m_firstDir)  * 45.f * dTime);
+		m_transform->LookAt(dir + m_transform->position, 2.5f);
+
 
 		float EnemyPlayerLenght = Nalmak_Math::Distance(m_player->GetTransform()->position, m_target->GetTransform()->position);
 		float fromEnemyLenght = Nalmak_Math::Distance(m_target->GetTransform()->position, m_gameObject->GetTransform()->position);
@@ -92,7 +94,7 @@ void ClusterBulletMove::LateUpdate()
 		if (ratioValue <= 0.5f)
 		{
 
-			Boom();
+			//Boom();
 			DESTROY(m_gameObject);
 			m_deadCheck = true;
 		}
@@ -105,7 +107,7 @@ void ClusterBulletMove::LateUpdate()
 
 	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 250.f)
 	{
-		Boom();
+		//Boom();
 		DESTROY(m_gameObject);
 		m_gameObject = nullptr;
 	}
@@ -168,7 +170,7 @@ void ClusterBulletMove::Release()
 		SAFE_DELETE_ARR(axis);
 		m_deadCheck = false;
 
-		Boom();
+		//Boom();
 		m_gameObject = nullptr;
 	}
 	
@@ -176,12 +178,12 @@ void ClusterBulletMove::Release()
 
 void ClusterBulletMove::Boom()
 {
-	Vector3 pos = m_transform->GetWorldPosition();
+	/*Vector3 pos = m_transform->GetWorldPosition();
 	ParticleRenderer::Desc particle;
 	particle.particleDataName = L"explosion_Flame";
 	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
 	particle.particleDataName = L"explosion_smokeBomb";
 	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
 	particle.particleDataName = L"explosion_spark";
-	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);*/
 }

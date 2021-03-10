@@ -22,12 +22,12 @@ Player_NearGuideBullet::Player_NearGuideBullet(Desc * _desc)
 
 Player_NearGuideBullet::~Player_NearGuideBullet()
 {
-	if (m_smokeParticle)
+	/*if (m_smokeParticle)
 	{
 		m_smokeParticle->AddComponent<ParticleDead_IfCount0>();
 		m_smokeParticle->StopEmit();
 		m_smokeParticle = nullptr;
-	}
+	}*/
 	Release();
 
 	m_gameObject = nullptr;
@@ -37,11 +37,11 @@ void Player_NearGuideBullet::Initialize()
 {
 	//effect Start!
 
-	ParticleRenderer::Desc render;
-	render.particleDataName = L"missile_smokeLaunch";
-	auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render)->AddComponent<ParticleDead_IfCount0>();
-	obj->GetComponent<ParticleRenderer>()->Play();
-	obj->SetParents(m_gameObject);
+	//ParticleRenderer::Desc render;
+	//render.particleDataName = L"missile_smokeLaunch";
+	//auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render)->AddComponent<ParticleDead_IfCount0>();
+	//obj->GetComponent<ParticleRenderer>()->Play();
+	//obj->SetParents(m_gameObject);
 
 
 	m_firstDir = m_firstTarget - m_transform->position;
@@ -62,12 +62,12 @@ void Player_NearGuideBullet::Initialize()
 void Player_NearGuideBullet::Update()
 {
 
-	SmokeCreate(); //awke
+	//SmokeCreate(); //awke
 	
 	 // 데드 조건
-	if (Nalmak_Math::Distance(m_player->GetTransform()->position, m_transform->position) > 500.f)
+	if (Nalmak_Math::Distance(m_firstTarget, m_transform->position) > 300.f)
 	{
-		Boom();
+		//Boom();
 		DESTROY(m_gameObject);
 		m_gameObject = nullptr;
 	}
@@ -140,7 +140,7 @@ void Player_NearGuideBullet::OnTriggerEnter(Collisions & _collision)
 		{
 			obj.GetGameObject()->GetComponent<Boss>()->Damaged(m_dmg);
 
-			Boom();
+			//Boom();
 			DESTROY(m_gameObject);
 			m_gameObject = nullptr;
 
@@ -158,19 +158,19 @@ void Player_NearGuideBullet::OnTriggerExit(Collisions & _collision)
 
 void Player_NearGuideBullet::Boom()
 {
-	Vector3 pos = m_transform->GetWorldPosition();
+	/*Vector3 pos = m_transform->GetWorldPosition();
 	ParticleRenderer::Desc particle;
 	particle.particleDataName = L"explosion_Flame";
 	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
 	particle.particleDataName = L"explosion_smokeBomb";
 	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
 	particle.particleDataName = L"explosion_spark";
-	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);
+	INSTANTIATE()->AddComponent<ParticleRenderer>(&particle)->AddComponent<ParticleDead_IfCount0>()->SetPosition(pos);*/
 }
 
 void Player_NearGuideBullet::SmokeCreate()
 {
-	if (!m_bState)
+	/*if (!m_bState)
 	{
 		ParticleRenderer::Desc render;
 		render.particleDataName = L"missile_smoke";
@@ -179,7 +179,7 @@ void Player_NearGuideBullet::SmokeCreate()
 		obj->SetParents(m_gameObject);
 
 		m_bState = true;
-	}
+	}*/
 }
 
 
