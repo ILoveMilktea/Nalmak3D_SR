@@ -925,7 +925,6 @@ public:
 
 			}
 
-
 			// skill rolling center
 			auto pivot = INSTANTIATE(OBJECT_TAG_UI, L"SkiilRollPivot");
 			pivot->AddComponent<CanvasRenderer>();

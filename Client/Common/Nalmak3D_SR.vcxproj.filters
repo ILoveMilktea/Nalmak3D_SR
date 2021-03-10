@@ -531,6 +531,7 @@
     <ClInclude Include="..\Include\Enemy_MidBoss.h">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\SliderAnimator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -1024,6 +1025,7 @@
     <ClCompile Include="..\Source\Enemy_MidBoss.cpp">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\SliderAnimator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">
