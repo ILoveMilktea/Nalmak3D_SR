@@ -566,6 +566,8 @@
     <FxCompile Include="..\..\Resource\Shader\20mmCannon.fx" />
     <FxCompile Include="..\..\Resource\Shader\BackGround.fx" />
     <FxCompile Include="..\..\Resource\Shader\billboard3DUI.fx" />
+    <FxCompile Include="..\..\Resource\Shader\brightHorizontalBlur.fx" />
+    <FxCompile Include="..\..\Resource\Shader\brightVerticalBlur.fx" />
     <FxCompile Include="..\..\Resource\Shader\default.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
@@ -574,14 +576,13 @@
     </FxCompile>
     <FxCompile Include="..\..\Resource\Shader\defaultDebug.fx" />
     <FxCompile Include="..\..\Resource\Shader\defaultUI.fx" />
+    <FxCompile Include="..\..\Resource\Shader\deferred_bright.fx" />
     <FxCompile Include="..\..\Resource\Shader\deferred_emission.fx" />
     <FxCompile Include="..\..\Resource\Shader\deferred_geometry.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_Debug.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_DirectionalLight.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_FullScreen.fx" />
     <FxCompile Include="..\..\Resource\Shader\D_PointLight_Stencil.fx" />
-    <FxCompile Include="..\..\Resource\Shader\emissionHorizontalBlur.fx" />
-    <FxCompile Include="..\..\Resource\Shader\emissionVerticalBlur.fx" />
     <FxCompile Include="..\..\Resource\Shader\ground.fx" />
     <FxCompile Include="..\..\Resource\Shader\H_common.fx">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -607,6 +608,7 @@
     <FxCompile Include="..\..\Resource\Shader\D_PointLight.fx" />
     <FxCompile Include="..\..\Resource\Shader\particleDistortion.fx" />
     <FxCompile Include="..\..\Resource\Shader\particleDistortionMask.fx" />
+    <FxCompile Include="..\..\Resource\Shader\postprocess_bloom.fx" />
     <FxCompile Include="..\..\Resource\Shader\screenDistortion.fx" />
     <FxCompile Include="..\..\Resource\Shader\shieldEffect.fx" />
     <FxCompile Include="..\..\Resource\Shader\skyBox.fx" />

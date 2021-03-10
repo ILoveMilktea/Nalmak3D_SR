@@ -195,7 +195,7 @@ void EnemyManager::Destroy_AllEnemy()
 {
 	for (auto& enemy : Get_EnemyList())
 	{
-		DESTROY(enemy);
+		enemy->GetComponent<Enemy>()->Set_CurHp(0);
 	}
 	m_iEnemyCount = 0;
 }
@@ -288,9 +288,9 @@ void EnemyManager::Enemy_Spawn(Vector3 _pos, Vector3 _scale,
 #pragma region EnemyIndicatorForPlayer
 	GameObject* Indicator = INSTANTIATE();
 	//Indicator->SetScale(Vector3(0.08f,0.08f, 0.2f));
-	Indicator->SetScale(Vector3(40.f, 20.f, 60.f));
+	Indicator->SetScale(Vector3(30.f, 15.f, 40.f));
 	//Indicator->SetScale(Vector3(1.f, 1.f, 5.f));
-	Indicator->SetPosition(Vector3(0.f, 0.f, 0.f));
+	//Indicator->SetPosition(Vector3(0.f, 0.f, 0.f));
 
 	//VIBufferRenderer::Desc Arrow;
 	//Arrow.meshName = L"box";

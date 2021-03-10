@@ -2,13 +2,12 @@
 ##  Material Data Setting
 #########################################################
 
-shader "deferred_emission"
+shader "deferred_bright"
 
 textureRT "g_final" "GBuffer_Final"
-textureRT "g_emission" "GBuffer_Emission"
 
 
-renderQueue "4002"
+renderQueue "4003"
 
 blendingMode "0"
 
@@ -36,6 +35,7 @@ fillMode "0"
 ##    RENDER_QUEUE_OPAQUE          :    1000 
 ##    RENDER_QUEUE_CUTOUT          :    2000
 ##    RENDER_QUEUE_TRANSPARENT  :    3000
+##    RENDER_QUEUE_OVERLAY  :    4000
 ##  ---------------------------------------------------------------------------------------
 ##   4. BLENDING_MODE 
 ##  ---------------------------------------------------------------------------------------
@@ -50,7 +50,4 @@ fillMode "0"
 ##    FILL_MODE_WIREFRAME     : 1
 ##    FILL_MODE_POINT             : 2
 #########################################################
-
-
-
 

@@ -97,7 +97,7 @@ void PhantomScene::Initialize()
 
 	m_Player = PlayerInfoManager::GetInstance()->GetPlayer();
 
-	EnemyManager::GetInstance()->Enemy_Spawn_Test(IDLE,Vector3(50.f,50.f,100.f));
+	EnemyManager::GetInstance()->Enemy_Spawn_Test(IDLE, Vector3(50.f, 50.f, 100.f));
 	//EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(0.f, 0.f, 0.f));
 
 	//EnemyManager::GetInstance()->Enemy_Spawn_Test(CHASE, Vector3(150.f, 50.f, 200.f));

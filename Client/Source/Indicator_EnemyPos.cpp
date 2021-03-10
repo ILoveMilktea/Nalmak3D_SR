@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "..\Include\Indicator_EnemyPos.h"
 #include "PlayerInfoManager.h"
+#include "Enemy.h"
 
 Indicator_EnemyPos::Indicator_EnemyPos(Desc * _desc)
 {
 	m_pTarget = _desc->Target;
+	m_fDist = _desc->fDist;
 }
 
 Indicator_EnemyPos::~Indicator_EnemyPos()
@@ -18,22 +20,24 @@ void Indicator_EnemyPos::Initialize()
 	m_pPlayer = PlayerInfoManager::GetInstance()->GetPlayer();
 	assert(L"Cant' find Player" && m_pPlayer);
 
-	m_pAlpha = GetComponent<MeshRenderer>()->GetMaterial();
-	
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
+	assert(L"Can't find MainCam" && m_pMainCamera);
+
+	m_pAlpha = GetComponent<MeshRenderer>()->GetMaterial();
+	assert(L"Can't find material" && m_pAlpha);
 
 }
 
 void Indicator_EnemyPos::Update()
 {
-//1. 3D Obejct·Î ¶ç¿ï °æ¿ì : 
+//1. 3D Obejctï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ :
 
 
 
-	
+
 	//if (targetPos.x > playerPos.x)
 	//{//righter than player
-	//	
+	//
 	//}
 	//else if (targetPos.x < playerPos.x)
 	//{//leftter than player
@@ -46,7 +50,7 @@ void Indicator_EnemyPos::Update()
 
 	//}
 	//else if (targetPos.y < playerPos.y)
-	//{//lower than player 
+	//{//lower than player
 
 	//}
 
@@ -56,68 +60,77 @@ void Indicator_EnemyPos::Update()
 
 void Indicator_EnemyPos::LateUpdate()
 {
-	if (!m_pPlayer || !m_pTarget)
+	if (m_pTarget == nullptr || m_pTarget->GetComponent<Enemy>()->Get_CurHp() <= 0)
+	{
 		return;
-
-
+	}
 
 	Vector3 playerPos = m_pPlayer->GetTransform()->position;
 	Vector3 targetPos = m_pTarget->GetTransform()->position;
-	
+
 	m_transform->position = playerPos;
-	
-	float GapX = targetPos.x - playerPos.x;
-	float GapY = targetPos.y - playerPos.y;
 
-	m_transform->position.x += GapX / 25.f;
-	m_transform->position.y += GapY / 25.f;
+	//ï¿½ï¿½,,, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½Ç¥ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ ï¿½Ò²ï¿½ï¿½ï¿½
+	//ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½Î°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­
+	//ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	Vector3 Cam = m_pMainCamera->GetTransform()->position;
-	float Z = m_transform->position.z - Cam.z;
-
-	Vector2 vScreen = m_pMainCamera->WorldToScreenPos(m_transform->position);
-	DEBUG_LOG(L"Cursor Screen Pos", vScreen);
-
-	Vector2 vClampScreen;
-	vClampScreen.x = Nalmak_Math::Clamp(vScreen.x, WINCX / 2.f * -1.f +160.f, WINCX / 2.f - 160.f);
-	vClampScreen.y = Nalmak_Math::Clamp(vScreen.y, WINCY / 2.f * -1.f +140.f, WINCY / 2.f - 140.f);
-	DEBUG_LOG(L"Cursor Screen Clamp Pos", vClampScreen);
-
-	Vector3 vWolrd = m_pMainCamera->ScreenPosToWorld(vClampScreen, m_transform->position.z);
-	DEBUG_LOG(L"Screen To World", vWolrd);
-
-	////limit => first=min \ second=max
-	////pair<float, float> Limit_Left;
-	////Limit_Left.first = WINCX / 2.f * -1.f;
-	////Limit_Left.second = TARGET_RANGE / 2.f * -1.f;
-	//
-	//pair<float, float> Limit_Right;
-	//Limit_Right.first = WINCX / 2.f;
-	//Limit_Right.second = TARGET_RANGE / 2.f;
-
-	//pair <float, float> Limit_Up;
-	//Limit_Up.first = WINCY / 2.f;
-	//Limit_Up.second = TARGET_RANGE / 2.f;
-	//
-	///* for x Limit */
-	//vScreen.x = Nalmak_Math::Clamp(vScreen.x, Limit_Right.first, Limit_Right.second);
-	//vScreen.x = Nalmak_Math::Clamp(vScreen.x, Limit_Right.first * -1.f, Limit_Right.second * -1.f);
-	///* for y Limit */
-	//vScreen.y = Nalmak_Math::Clamp(vScreen.y, Limit_Up.first, Limit_Up.second);
-	//vScreen.y = Nalmak_Math::Clamp(vScreen.y, Limit_Up.first * -1.f, Limit_Up.second * -1.f);
+	Vector3 vDistance = targetPos - playerPos;
+	D3DXVec3Normalize(&vDistance, &vDistance);
 
 
+	m_transform->position += vDistance * m_fDist;
+	//float GapX = targetPos.x - playerPos.x;
+	//float GapY = targetPos.y - playerPos.y;
 
-	//m_transform->position = vWolrd;
+	//m_transform->position.x += GapX / 25.f;
+	//m_transform->position.y += GapY / 25.f;
+
+	//Vector3 Cam = m_pMainCamera->GetTransform()->position;
+	////float Z = m_transform->position.z - Cam.z;
+
+	//Vector2 vScreen = m_pMainCamera->WorldToScreenPos(m_transform->position);
+	//DEBUG_LOG(L"Cursor Screen Pos", vScreen);
+
+	//Vector2 vClampScreen;
+	//vClampScreen.x = Nalmak_Math::Clamp(vScreen.x, WINCX / 2.f * -1.f + 160.f, WINCX / 2.f - 160.f);
+	//vClampScreen.y = Nalmak_Math::Clamp(vScreen.y, WINCY / 2.f * -1.f + 140.f, WINCY / 2.f - 140.f);
+	//DEBUG_LOG(L"Cursor Screen Clamp Pos", vClampScreen);
+
+	//Vector3 vWolrd = m_pMainCamera->ScreenPosToWorld(vClampScreen, m_transform->position.z);
+	//DEBUG_LOG(L"Screen To World", vWolrd);
+
+	//////limit => first=min \ second=max
+	//////pair<float, float> Limit_Left;
+	//////Limit_Left.first = WINCX / 2.f * -1.f;
+	//////Limit_Left.second = TARGET_RANGE / 2.f * -1.f;
+	////
+	////pair<float, float> Limit_Right;
+	////Limit_Right.first = WINCX / 2.f;
+	////Limit_Right.second = TARGET_RANGE / 2.f;
+
+	////pair <float, float> Limit_Up;
+	////Limit_Up.first = WINCY / 2.f;
+	////Limit_Up.second = TARGET_RANGE / 2.f;
+	////
+	/////* for x Limit */
+	////vScreen.x = Nalmak_Math::Clamp(vScreen.x, Limit_Right.first, Limit_Right.second);
+	////vScreen.x = Nalmak_Math::Clamp(vScreen.x, Limit_Right.first * -1.f, Limit_Right.second * -1.f);
+	/////* for y Limit */
+	////vScreen.y = Nalmak_Math::Clamp(vScreen.y, Limit_Up.first, Limit_Up.second);
+	////vScreen.y = Nalmak_Math::Clamp(vScreen.y, Limit_Up.first * -1.f, Limit_Up.second * -1.f);
+
+
+
+	////m_transform->position = vWolrd;
 
 	m_transform->LookAt(m_pTarget, 1.f);
-	//m_pAlpha->SetVector() ÀÌ°É·Î Åõ¸íµµ Á¶Àý°¡´É. »ç¸£¸¤ ¾ø¾îÁö°Ô ÇØº¸ÀÚ.
+	//m_pAlpha->SetVector() ï¿½Ì°É·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ç¸£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½.
 
 	DEBUG_LOG(L"Arrow Pos", m_transform->position);
 
 
 
-	/* Á¤ ¾ÈµÇ¸é ±×³É ¶ô¿Â ¹üÀ§¿¡´Ù°¡ À§, ¾Æ·¡¸¸ ÆÇ´ÜÇØ¼­ À§Ä¡ Á¤ÇØÁÖ°í LookAt¸¸ ÇØÁÖÀÚ*/
+	/* ï¿½ï¿½ ï¿½ÈµÇ¸ï¿½ ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½, ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ LookAtï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 }
 
 void Indicator_EnemyPos::Release_Target()

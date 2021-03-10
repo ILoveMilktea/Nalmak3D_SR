@@ -187,7 +187,6 @@ void Enemy::Death_Check()
 			DESTROY(m_pArrow_Indicator);
 			m_pArrow_Indicator = nullptr;
 
-
 		 //death State ->
 			m_gameObject->GetComponent<StateControl>()
 				->SetState(Nalmak_Math::Random<wstring>(L"Explosion", L"Falling"));
@@ -351,6 +350,11 @@ void Enemy::Set_Accel(bool _onoff)
 void Enemy::Set_LookSpd(float _lookSpd)
 {
 	m_tStatus.m_fLookSpd = _lookSpd;
+}
+
+void Enemy::Set_CurHp(int _hp)
+{
+	m_tStatus.m_iCurHp = _hp;
 }
 
 void Enemy::Horizontally()
