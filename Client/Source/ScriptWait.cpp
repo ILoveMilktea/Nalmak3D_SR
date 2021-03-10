@@ -34,7 +34,7 @@ void ScriptWait::UpdateState()
 		return;
 	}
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_L))
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_ENTER))
 	{
 		SetState(L"Ready");
 		return;

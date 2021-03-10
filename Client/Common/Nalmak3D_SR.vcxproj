@@ -200,7 +200,12 @@
     <ClInclude Include="..\Include\Camera_Boss.h" />
     <ClInclude Include="..\Include\Camera_Boss_Appear.h" />
     <ClInclude Include="..\Include\Camera_Evasion.h" />
+    <ClInclude Include="..\Include\DogFightState_2.h" />
+    <ClInclude Include="..\Include\DogFightState_3.h" />
+    <ClInclude Include="..\Include\DogFightState_4.h" />
     <ClInclude Include="..\Include\DogFight_Stage1.h" />
+    <ClInclude Include="..\Include\DogFight_Stage1_2.h" />
+    <ClInclude Include="..\Include\DogFight_Stage1_3.h" />
     <ClInclude Include="..\Include\EndingScene.h" />
     <ClInclude Include="..\Include\Enemy_AirFire_Evasion.h" />
     <ClInclude Include="..\Include\Enemy_Boss.h" />
@@ -387,7 +392,12 @@
     <ClCompile Include="..\Source\Camera_Boss.cpp" />
     <ClCompile Include="..\Source\Camera_Boss_Appear.cpp" />
     <ClCompile Include="..\Source\Camera_Evasion.cpp" />
+    <ClCompile Include="..\Source\DogFightState_2.cpp" />
+    <ClCompile Include="..\Source\DogFightState_3.cpp" />
+    <ClCompile Include="..\Source\DogFightState_4.cpp" />
     <ClCompile Include="..\Source\DogFight_Stage1.cpp" />
+    <ClCompile Include="..\Source\DogFight_Stage1_2.cpp" />
+    <ClCompile Include="..\Source\DogFight_Stage1_3.cpp" />
     <ClCompile Include="..\Source\EndingScene.cpp" />
     <ClCompile Include="..\Source\Enemy_AirFire_Evasion.cpp" />
     <ClCompile Include="..\Source\Enemy_Boss.cpp" />

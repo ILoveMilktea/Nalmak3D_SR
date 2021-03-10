@@ -498,7 +498,6 @@
     <ClInclude Include="..\Include\Enemy_Debugging.h">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Indicator_EnemyPos.h" />
     <ClInclude Include="..\Include\Bullet_Laser.h">
       <Filter>__Phase2_Lab\phaseFSM\Bullet</Filter>
     </ClInclude>
@@ -507,6 +506,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\MidBoss_RotateAccel.h">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Indicator_EnemyPos.h">
+      <Filter>02.Component\02.UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\State_Evasion_Airfire.h">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\01.AirFire</Filter>
@@ -521,10 +523,25 @@
       <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
       </ClInclude>
     <ClInclude Include="..\Include\DogFight_Stage1.h">
-      <Filter>04.Combat State\00%29DogFight\Stage1</Filter>
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_2.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_3.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase3</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\DogFightState.h">
-      <Filter>04.Combat State\00%29DogFight\Stage2</Filter>
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState_2.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState_3.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState_4.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase4</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Enemy_BulletProof.h">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
@@ -998,7 +1015,6 @@
     <ClCompile Include="..\Source\Enemy_Debugging.cpp">
       <Filter>02.Component\00.Manager\Enemy\02%29Enemy_Patterns\Debugging</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Indicator_EnemyPos.cpp" />
     <ClCompile Include="..\Source\Bullet_Laser.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Bullet</Filter>
     </ClCompile>
@@ -1007,6 +1023,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\MidBoss_RotateAccel.cpp">
       <Filter>__Phase2_Lab\phaseFSM\Actor\Midboss\00. Static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\Indicator_EnemyPos.cpp">
+      <Filter>02.Component\02.UI</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\State_Evasion_Airfire.cpp">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\01.AirFire</Filter>
@@ -1021,10 +1040,25 @@
       <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\DogFight_Stage1.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage1</Filter>
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1_2.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFight_Stage1_3.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase3</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\DogFightState.cpp">
-      <Filter>04.Combat State\00%29DogFight\Stage2</Filter>
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFightState_2.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFightState_3.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\DogFightState_4.cpp">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase4</Filter>
     </ClCompile>
     <ClCompile Include="..\Source\Enemy_BulletProof.cpp">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
@@ -1359,6 +1393,27 @@
     </Filter>
     <Filter Include="04.Combat State\00%29DogFight\Stage2">
       <UniqueIdentifier>{3f61db9f-d7b5-4162-a94c-38e33c8fd638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\Phase1">
+      <UniqueIdentifier>{34fefa55-d038-4874-bb20-eb81e53a0a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\Phase2">
+      <UniqueIdentifier>{fdfe4006-33e2-4f97-803b-09825020a081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage1\Phase3">
+      <UniqueIdentifier>{a654beb3-0566-46e9-a398-703d10f7753a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase4">
+      <UniqueIdentifier>{e71debe6-87b6-49bc-a3b1-b8f75746db69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase3">
+      <UniqueIdentifier>{a5c29d70-82df-4002-8680-91d3822d5f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase2">
+      <UniqueIdentifier>{bf07f576-657e-4b58-9974-f1d66b05284e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase1">
+      <UniqueIdentifier>{9ee6eea0-9642-4951-8118-e9dcbb9d5b6c}</UniqueIdentifier>
     </Filter>
     <Filter Include="__Phase2_Lab\Enemy_MidBoss">
       <UniqueIdentifier>{586f917a-aefb-4e67-917c-c02ff6489455}</UniqueIdentifier>
