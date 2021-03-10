@@ -1026,6 +1026,7 @@
     </ClCompile>
     <ClCompile Include="..\Source\Indicator_EnemyPos.cpp">
       <Filter>02.Component\02.UI</Filter>
+    </ClCompile>
     <ClCompile Include="..\Source\State_Evasion_Airfire.cpp">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\01.AirFire</Filter>
     </ClCompile>
@@ -1413,6 +1414,7 @@
     </Filter>
     <Filter Include="04.Combat State\00%29DogFight\Stage2\Phase1">
       <UniqueIdentifier>{9ee6eea0-9642-4951-8118-e9dcbb9d5b6c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="__Phase2_Lab\Enemy_MidBoss">
       <UniqueIdentifier>{586f917a-aefb-4e67-917c-c02ff6489455}</UniqueIdentifier>
     </Filter>
