@@ -31,7 +31,11 @@ ClusterBulletMove::~ClusterBulletMove()
 		m_smokeParticle->StopEmit();
 		m_smokeParticle = nullptr;
 	}
-
+	if (m_finalPos)
+	{
+		delete m_finalPos;
+		m_finalPos = nullptr;
+	}
 	m_gameObject = nullptr;
 
 }
@@ -53,8 +57,11 @@ void ClusterBulletMove::Initialize()
 	Vector3 dirY = { worldMat._21, worldMat._22, worldMat._23 };
 	Vector3 dirZ = { worldMat._31, worldMat._32, worldMat._33 };
 
+	if (!Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector"))
+		return;
 
 	m_enemyDetector = Core::GetInstance()->FindObjectByName(OBJECT_TAG_UI, L"detector");
+
 	if (m_enemyDetector)
 		m_target = m_enemyDetector->GetComponent<EnemyDetector>()->GetLockOnTarget();
 
@@ -67,6 +74,8 @@ void ClusterBulletMove::Initialize()
 		Vector3 screenDir = dirX * enemyScreenPos.x + dirY * enemyScreenPos.y;
 		D3DXVec3Normalize(&screenDir, &screenDir);
 		m_firstDir = dirZ + screenDir;
+
+		m_finalPos = new Vector3(m_target->GetTransform()->position);
 	}
 
 }
@@ -78,18 +87,18 @@ void ClusterBulletMove::Update()
 
 void ClusterBulletMove::LateUpdate()
 {
-	if (m_target)
+	if (m_finalPos)
 	{
 		// screen Pos Set, for.VERTICAL Range
-		Vector3 dir = m_target->GetTransform()->position - m_transform->position;
+		Vector3 dir = *m_finalPos -  m_transform->position;
 		D3DXVec3Normalize(&dir, &dir);
 		m_firstDir = Nalmak_Math::Lerp(m_firstDir, m_player->GetTransform()->GetForward(), dTime);
 		m_transform->position += ((dir + m_firstDir)  * 45.f * dTime);
 		m_transform->LookAt(dir + m_transform->position, 2.5f);
 
 
-		float EnemyPlayerLenght = Nalmak_Math::Distance(m_player->GetTransform()->position, m_target->GetTransform()->position);
-		float fromEnemyLenght = Nalmak_Math::Distance(m_target->GetTransform()->position, m_gameObject->GetTransform()->position);
+		float EnemyPlayerLenght = Nalmak_Math::Distance(m_player->GetTransform()->position, *m_finalPos);
+		float fromEnemyLenght = Nalmak_Math::Distance(*m_finalPos, m_gameObject->GetTransform()->position);
 		float ratioValue = fromEnemyLenght / EnemyPlayerLenght;
 		if (ratioValue <= 0.5f)
 		{
@@ -132,7 +141,7 @@ void ClusterBulletMove::Release()
 		sphereColInfo.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
 		
 
-		Vector3 dir = m_target->GetTransform()->position - m_transform->position;
+		Vector3 dir = *m_finalPos - m_transform->position;
 		D3DXVec3Normalize(&dir, &dir);
 
 		Vector3* axis = new Vector3[m_bulletCount];

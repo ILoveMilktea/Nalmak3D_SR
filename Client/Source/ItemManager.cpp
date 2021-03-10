@@ -104,7 +104,7 @@ void ItemManager::CreateItem()
 		info.costGold = 0;
 		info.delay = 1.f;
 		info.weaponSpeed = 100.f;
-		info.modelName = L"su34_weapon3";
+		info.modelName = L"emp";
 		m_mapShopItem[L"Weapon"].emplace_back(new Player_EmpMissile(info));
 	}
 

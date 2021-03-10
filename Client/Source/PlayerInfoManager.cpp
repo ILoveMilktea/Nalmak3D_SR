@@ -220,7 +220,14 @@ void PlayerInfoManager::SetWeaponSpawnPos(PARTS_NUM eID, bool _gargeCheck)
 		}
 
 		meshInfo.meshName = findItem->GetItmeInfo().modelName;
-		meshInfo.mtrlName = L"kfir";
+
+		if (L"emp" == findItem->GetItmeInfo().modelName)
+		{
+			meshInfo.mtrlName = L"emp";
+		}
+		else 
+			meshInfo.mtrlName = L"kfir";
+
 		findItem->SetCreatePos(Vector3(0.f, -0.1f, -1.0f));
 		findItem->SetMtrlName(meshInfo.mtrlName);
 

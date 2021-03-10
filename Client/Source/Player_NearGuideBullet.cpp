@@ -106,7 +106,7 @@ void Player_NearGuideBullet::LateUpdate()
 	}
 	else
 	{
-		m_transform->position += m_transform->GetForward() * 45 * dTime;
+		m_transform->position += m_transform->GetForward() * (m_speed * 2.f) * dTime;
 		m_transform->LookAt(m_transform->GetForward() + m_transform->position, 5.5f);
 	}
 }

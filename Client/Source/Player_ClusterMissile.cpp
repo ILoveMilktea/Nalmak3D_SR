@@ -5,6 +5,7 @@
 
 #include "ParticleRenderer.h"
 #include "ParticleDead_IfCount0.h"
+#include "EnemyDetector.h"
 
 Player_ClusterMissile::Player_ClusterMissile(const ITEMINFO & copy)
 	:PlayerItem(copy)
@@ -19,24 +20,24 @@ Player_ClusterMissile::~Player_ClusterMissile()
 void Player_ClusterMissile::ItemShot()
 {
 	//effect Start!
+	// object check 
 
-	/*ParticleRenderer::Desc render;
-	render.particleDataName = L"missile_smokeLaunch";
-	auto obj = INSTANTIATE()->AddComponent<ParticleRenderer>(&render)->AddComponent<ParticleDead_IfCount0>();
-	obj->GetComponent<ParticleRenderer>()->Play();
-	obj->SetParents(m_bullet);*/
+	m_bullet->GetTransform()->DeleteParent();
 
 	//colision;
 	SphereCollider::Desc sphereColInfo;
 	sphereColInfo.collisionLayer = COLLISION_LAYER_BULLET_PLAYER;
+	m_bullet->AddComponent<SphereCollider>(&sphereColInfo);
 
-	m_bullet->GetTransform()->DeleteParent();
+
+
 	ClusterBulletMove::Desc bulletinfo;
 	bulletinfo.speed = m_itemInfo.weaponSpeed;
 	bulletinfo.accAngle = bulletinfo.speed;
-
+	//bulletinfo.target = lockonTarget;
+	
+	
 	m_bullet->AddComponent<ClusterBulletMove>(&bulletinfo);
-	m_bullet->AddComponent<SphereCollider>(&sphereColInfo);
 
 	m_bullet = nullptr;
 

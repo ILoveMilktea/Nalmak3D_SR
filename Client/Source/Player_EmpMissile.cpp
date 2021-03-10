@@ -68,7 +68,7 @@ void Player_EmpMissile::CreateBullet()
 	{
 		return;
 	}
-
+	
 	Emp = INSTANTIATE(OBJECT_TAG_BULLET_PLAYER, L"Emp_Missile");
 	Emp->SetScale(Vector3(0.2f, 0.2f, 0.3f));
 	Emp->SetParents(Core::GetInstance()->FindFirstObject(OBJECT_TAG_PLAYER));
@@ -76,7 +76,7 @@ void Player_EmpMissile::CreateBullet()
 
 	MeshRenderer::Desc Emp_render;
 	Emp_render.meshName = m_itemInfo.modelName;
-	Emp_render.mtrlName = L"su34";
+	Emp_render.mtrlName = L"emp";
 	Emp->AddComponent<MeshRenderer>(&Emp_render);
 
 	SphereCollider::Desc Emp_col;

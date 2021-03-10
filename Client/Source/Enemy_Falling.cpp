@@ -88,7 +88,7 @@ void Enemy_Falling::UpdateState()
 	//		//아까 달아놨기 때매 남은거 아라가 정리되면 삭제됨.
 	//	}
 
-	//	m_gameObject->GetComponent<StateControl>()->SetState(L"Explosion");
+		m_gameObject->GetComponent<StateControl>()->SetState(L"Explosion");
 	//}
 
 	DEBUG_LOG(L"Falling Inner", fInner);

@@ -31,10 +31,11 @@ private:
 	GameObject* m_target = nullptr;
 	GameObject* m_Neartarget = nullptr;
 
-	GameObject* m_enemyDetector;
+GameObject* m_enemyDetector = nullptr;
 	class ParticleRenderer* m_smokeParticle;
 	Vector2 m_screenPos = {};
 	Vector3 m_firstDir = {};
+	Vector3* m_finalPos = nullptr;
 private:
 	float m_accAngle;
 	float m_speed;

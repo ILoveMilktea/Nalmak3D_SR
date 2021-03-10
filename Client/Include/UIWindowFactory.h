@@ -552,7 +552,7 @@ public:
 
 									//L"kfir_weapon1", //L"su34_weapon1" //L"su34_weapon2" // L"su34_weapon3 //L"su34_weapon3"
 			wstring itemNames[5] = { L"AimMissile" ,  L"HomingMissile" , L"ClusterMissile" , L"Emp" };
-			wstring itmeMtrl[5] = { L"kfir" , L"su34" , L"su34" , L"su34" , L"su34" };
+			wstring itmeMtrl[5] = { L"kfir" , L"su34" , L"su34" , L"su34" , L"emp" };
 
 			for (int i = 0; i < slotCount; ++i)
 			{

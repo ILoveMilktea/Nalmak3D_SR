@@ -40,6 +40,7 @@ void BulletEffect_StretchBillboard::Update()
 	if (m_lifeTime < 0)
 	{
 		DESTROY(m_gameObject);
+		m_gameObject = nullptr;
 		return;
 	}
 	m_lifeTime -= dTime;
@@ -83,6 +84,8 @@ void BulletEffect_StretchBillboard::OnTriggerEnter(Collisions & _collision)
 			effect->SetPosition(obj.GetGameObject()->GetTransform()->GetWorldPosition());
 
 			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
+
 		}
 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BOSS)
@@ -95,6 +98,8 @@ void BulletEffect_StretchBillboard::OnTriggerEnter(Collisions & _collision)
 			effect->SetPosition(obj.GetGameObject()->GetTransform()->GetWorldPosition());
 
 			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
+
 		}
 
 		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_ENEMYSHIELD)
@@ -107,6 +112,8 @@ void BulletEffect_StretchBillboard::OnTriggerEnter(Collisions & _collision)
 			effect->SetPosition(obj.GetGameObject()->GetTransform()->GetWorldPosition());
 
 			DESTROY(m_gameObject);
+			m_gameObject = nullptr;
+
 		}
 
 	}
