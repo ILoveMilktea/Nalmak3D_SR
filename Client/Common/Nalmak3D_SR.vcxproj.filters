@@ -486,6 +486,27 @@
     <ClInclude Include="..\Include\State_Evasion_Enter.h">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_2.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_3.h">
+      <Filter>04.Combat State\00%29DogFight\Stage1\Phase3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState_2.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState_3.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\DogFightState_4.h">
+      <Filter>04.Combat State\00%29DogFight\Stage2\Phase4</Filter>
+    </ClInclude>
     <ClInclude Include="..\Include\Enemy_BulletProof.h">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClInclude>
@@ -566,6 +587,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\ScriptPause.h">
       <Filter>02.Component\03.Script\State\04.Pause</Filter>
+   </ClInclude>
+    <ClInclude Include="..\Include\TitleAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1095,6 +1119,9 @@
     </ClCompile>
     <ClCompile Include="..\Source\ScriptPause.cpp">
       <Filter>02.Component\03.Script\State\04.Pause</Filter>
+   </ClCompile>
+    <ClCompile Include="..\Source\TitleAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

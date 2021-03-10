@@ -371,6 +371,7 @@
     <ClInclude Include="..\Include\State_Player_Evasion.h" />
     <ClInclude Include="..\Include\State_Player_Wait.h" />
     <ClInclude Include="..\Include\Struct.h" />
+    <ClInclude Include="..\Include\TitleAnimator.h" />
     <ClInclude Include="..\Include\TitleScene.h" />
     <ClInclude Include="..\Include\UIFactory.h" />
     <ClInclude Include="..\Include\UILabScene.h" />
@@ -559,6 +560,7 @@
     <ClCompile Include="..\Source\State_Evasion_MidbossDead.cpp" />
     <ClCompile Include="..\Source\State_Player_Evasion.cpp" />
     <ClCompile Include="..\Source\State_Player_Wait.cpp" />
+    <ClCompile Include="..\Source\TitleAnimator.cpp" />
     <ClCompile Include="..\Source\TitleScene.cpp" />
     <ClCompile Include="..\Source\UILabScene.cpp" />
     <ClCompile Include="..\Source\UIManager.cpp" />

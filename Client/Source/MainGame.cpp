@@ -126,7 +126,7 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"Hee", Scene::Instantiate<HeeTestScene>());
 	m_engine->AddScene(L"nalmak", Scene::Instantiate<NalmakScene>());
 #pragma endregion
-	
+
 
 	m_engine->SetStartScene(L"stage1");
 

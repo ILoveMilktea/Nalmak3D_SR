@@ -25,6 +25,8 @@ public:
 	void SetInOutAnim(float _amount, float _duration, float _delay, Vector3 _startPos);
 	
 	void SetFill(GameObject* _fill);
+	void SetFillOriginLeft(Vector3 _leftPos) { m_fill_originLeft = _leftPos; }
+	void SetFillOriginWidth(float _width) { m_fill_originWidth = _width; }
 private:
 	GameObject* m_fill;
 

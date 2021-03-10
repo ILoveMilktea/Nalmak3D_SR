@@ -32,6 +32,32 @@ private:
 	float m_rotateTimer		= 0.f;
 	float m_nextAngle		= 0.f;
 
+
+	//=====================
+	// title
+public:
+	void SetTitle(GameObject* _text) { m_titleText = _text; }
+	GameObject* GetTitle() { return m_titleText; }
+
+private:
+	GameObject* m_titleText;
+
+	//=====================
+	// weapon slider
+public:
+	void SetSingleDPM(GameObject* _slider) { m_singleDpm = _slider; }
+	void SetMultiDPM(GameObject* _slider) { m_multiDpm = _slider; }
+
+	void Refill();
+
+	GameObject* GetSingleDPM() { return m_singleDpm; }
+	GameObject* GetMultiDPM() { return m_multiDpm; }
+
+private:
+	GameObject* m_singleDpm;
+	GameObject* m_multiDpm;
+
+
 	//=====================
 	// alarm
 public:
