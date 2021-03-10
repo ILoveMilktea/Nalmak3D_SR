@@ -8,6 +8,7 @@
 #include "EnemyManager.h"
 #include "StageManager.h"
 #include "FieldCameraInfo.h"
+#include "CustomDebuger.h"
 
 State_Evasion_Enter::State_Evasion_Enter()
 {
@@ -59,7 +60,8 @@ void State_Evasion_Enter::UpdateState()
 	m_player->SetPosition(Vector3(0.f, 0.f, -10.f));
 	m_player->SetScale(0.4f, 0.4f, 0.4f);
 	m_player->SetRotation(0.f, 0.f, 0.f);
-
+	
+	m_player->AddComponent<CustomDebuger>();
 	m_stateControl->SetState(_sn_airfire);
 }
 

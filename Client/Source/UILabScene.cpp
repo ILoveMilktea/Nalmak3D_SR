@@ -5,6 +5,8 @@
 #include "SplineCurve.h"
 #include "CustomDebuger.h"
 #include "UIFactory.h"
+#include "MoveDebuger.h"
+
 void UILabScene::Initialize()
 {
 	INSTANTIATE()->AddComponent<Grid>();
@@ -18,17 +20,43 @@ void UILabScene::Initialize()
 		mainCam->SetRotation(30, 0, 0);
 	}
 
-	PlayerUIPatitial();
+	GameObject* sphere = INSTANTIATE();
 
-	//CreatePauseButton();
+	VIBufferRenderer::Desc desc_vi;
+	desc_vi.mtrlName = L"boss";
+	desc_vi.meshName = L"sphere";
+	sphere->AddComponent<VIBufferRenderer>(&desc_vi);
 
-	//CreateRader();
-	//CreateSplineCurve();
-	//GarageMainWindow();
+	SphereCollider::Desc sphere_col;
+	float colRadius = sphere->GetTransform()->scale.x * 0.5f;
+	sphere_col.radius = colRadius;
+	sphere_col.collisionLayer = COLLISION_LAYER_PLAYER;
+	sphere->AddComponent<SphereCollider>(&sphere_col);
+	sphere->AddComponent<MoveDebuger>();
+	
 
-	// meshName 
-	// box, line, quad, sphere, triangle, quadNoneNormal
-	UIFactory::CreateEditController();
+
+	float len = 10.f;
+	float width = 1.f;
+	GameObject* laser = INSTANTIATE(OBJECT_TAG_BULLET_ENEMY, L"Bullet_Laser");
+	Vector3 laserDir = Vector3(0.f,1.f,0.f);
+	laser->SetPosition(Vector3(0.f, 0.f, 0.f));
+
+	laser->SetScale(width, len, width);
+
+
+	VIBufferRenderer::Desc desc_renderer;
+	desc_renderer.meshName = L"cylinder";
+	desc_renderer.mtrlName = L"default_green";
+	laser->AddComponent<VIBufferRenderer>(&desc_renderer);
+
+	LineCollider::Desc desc_col;
+	desc_col.startPoint = Vector3(0.f, 0.f, 0.f);
+	desc_col.endPoint = Vector3(0.f, len, 0.f);
+	desc_col.collisionLayer = COLLISION_LAYER_BULLET_ENEMY;
+	desc_col.radius = width * 0.5f;
+	laser->AddComponent<LineCollider>(&desc_col);
+
 }
 
 void UILabScene::CreatePauseButton()

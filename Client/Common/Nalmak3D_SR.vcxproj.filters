@@ -531,7 +531,12 @@
     <ClInclude Include="..\Include\Enemy_MidBoss.h">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\SliderAnimator.h" />
+    <ClInclude Include="..\Include\SliderAnimator.h">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\MoveDebuger.h">
+      <Filter>96.Debuger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -1025,7 +1030,12 @@
     <ClCompile Include="..\Source\Enemy_MidBoss.cpp">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\SliderAnimator.cpp" />
+    <ClCompile Include="..\Source\SliderAnimator.cpp">
+      <Filter>02.Component\05.Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source\MoveDebuger.cpp">
+      <Filter>96.Debuger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Nalmak3D_SR.ico">

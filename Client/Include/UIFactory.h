@@ -13,6 +13,7 @@
 #include "BossUIAnimator.h"
 #include "ItemButton.h"
 #include "UI_Alarm.h"
+#include "SliderAnimator.h"
 
 class GameObject;
 
@@ -485,8 +486,11 @@ public:
 
 		slider->AddComponent<CanvasRenderer>(&desc_cr);
 		slider->AddComponent<Slider>(&desc);
-
 		slider->GetComponent<Slider>()->SetCurrentValue(_maxValue);
+
+		slider->AddComponent<SliderAnimator>();
+		slider->GetComponent<SliderAnimator>()->SetFill(fill);
+		
 
 		background->SetParents(slider);
 		fill->SetParents(slider);

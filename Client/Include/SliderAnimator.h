@@ -4,7 +4,11 @@ class SliderAnimator :
 	public Component
 {
 public:
-	SliderAnimator();
+	struct Desc {
+
+	};
+
+	SliderAnimator(Desc* _desc);
 	~SliderAnimator();
 
 	virtual void Initialize() override;
@@ -20,7 +24,10 @@ public:
 	
 	void SetInOutAnim(float _amount, float _duration, float _delay, Vector3 _startPos);
 	
+	void SetFill(GameObject* _fill);
 private:
+	GameObject* m_fill;
+
 	MoveAnimation m_moveAnim_Slider;
 
 	MoveAnimation m_moveAnim_Fill;
@@ -30,6 +37,8 @@ private:
 	float m_inout_Duration;
 	float m_inout_Delay;
 
+	Vector3 m_fill_originLeft;
+	float m_fill_originWidth;
 	float m_fill_curValue;
 	float m_fill_maxValue;
 	float m_fill_Duration;
