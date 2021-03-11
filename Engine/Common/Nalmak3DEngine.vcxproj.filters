@@ -545,6 +545,9 @@
     <ClCompile Include="..\Source\TrailRenderer.cpp">
       <Filter>05.Component\01.Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Source\AudioListener.cpp">
+      <Filter>05.Component\12.Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Core.h">
@@ -867,6 +870,9 @@
     </ClInclude>
     <ClInclude Include="..\Include\TrailRenderer.h">
       <Filter>05.Component\01.Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\AudioListener.h">
+      <Filter>05.Component\12.Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

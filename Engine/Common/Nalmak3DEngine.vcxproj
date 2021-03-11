@@ -22,6 +22,7 @@
     <ClCompile Include="..\Include\Nalmak_String.cpp" />
     <ClCompile Include="..\Source\Animator.cpp" />
     <ClCompile Include="..\Source\AudioClip.cpp" />
+    <ClCompile Include="..\Source\AudioListener.cpp" />
     <ClCompile Include="..\Source\AudioSource.cpp" />
     <ClCompile Include="..\Source\AutoRotate.cpp" />
     <ClCompile Include="..\Source\Bezier.cpp" />
@@ -123,6 +124,7 @@
     <ClInclude Include="..\..\Client\Include\MenuAnimator.h" />
     <ClInclude Include="..\Include\Animator.h" />
     <ClInclude Include="..\Include\AudioClip.h" />
+    <ClInclude Include="..\Include\AudioListener.h" />
     <ClInclude Include="..\Include\AudioSource.h" />
     <ClInclude Include="..\Include\AutoRotate.h" />
     <ClInclude Include="..\Include\Bezier.h" />

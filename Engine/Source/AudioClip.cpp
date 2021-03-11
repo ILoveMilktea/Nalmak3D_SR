@@ -5,6 +5,8 @@
 
 AudioClip::AudioClip()
 {
+	channel = 0;
+	minDistance = 0;
 }
 
 
@@ -84,19 +86,6 @@ void AudioClip::Initialize(wstring _fp)
 				loop = false;
 		}
 
-		// 2. channel
-		if (strcmp(memberName.c_str(), "channel") == 0)
-		{
-			size_t handleNameEnd;
-			for (handleNameEnd = firstWordEnd; handleNameEnd < buffer.size(); ++handleNameEnd)
-			{
-				if ('\"' == buffer[handleNameEnd])
-					break;
-			}
-			string handleName = buffer.substr(firstWordEnd, handleNameEnd - firstWordEnd);
-			channel = atoi(handleName.c_str());
-		}
-
 		// 3. volume
 		if (strcmp(memberName.c_str(), "volume") == 0)
 		{
@@ -109,6 +98,20 @@ void AudioClip::Initialize(wstring _fp)
 			}
 			string handleName = buffer.substr(firstWordEnd, handleNameEnd - firstWordEnd);
 			volume = (float)atof(handleName.c_str());
+		}
+		// 3. max distance
+		if (strcmp(memberName.c_str(), "minDistance") == 0)
+		{
+			// handle name
+			size_t handleNameEnd;
+			for (handleNameEnd = firstWordEnd; handleNameEnd < buffer.size(); ++handleNameEnd)
+			{
+				if ('\"' == buffer[handleNameEnd])
+					break;
+			}
+			string handleName = buffer.substr(firstWordEnd, handleNameEnd - firstWordEnd);
+			minDistance = (float)atof(handleName.c_str());
+			break;
 		}
 		// 3. max distance
 		if (strcmp(memberName.c_str(), "maxDistance") == 0)
@@ -144,15 +147,21 @@ void AudioClip::Initialize(wstring _fp)
 	//FMOD_3D
 	size_t targetNum = path.find_last_of(".");
 	string fileName = path.substr(0, targetNum);
-	fileName = fileName + ".wav";
 
-	auto fmodeSystem = SoundManager::GetInstance()->GetFModSystem();
-	assert(L"fmode system is nullptr! " && fmodeSystem);
-	FMOD_RESULT eRes = FMOD_System_CreateSound(fmodeSystem, fileName.c_str(), FMOD_HARDWARE, 0, &m_audio);
-	if (eRes != FMOD_OK)
+	for (int i = 0; i < 5; ++i)
 	{
-		assert(L"Failed to Create AudioClip! " && 0);
+		string audioPath = fileName + extention[i];
+
+		auto fmodeSystem = SoundManager::GetInstance()->GetFModSystem();
+		assert(L"fmode system is nullptr! " && fmodeSystem);
+		FMOD_RESULT eRes = FMOD_System_CreateSound(fmodeSystem, audioPath.c_str(), FMOD_HARDWARE | FMOD_3D, 0, &m_audio);
+		if (eRes == FMOD_OK)
+		{
+			return;
+			//assert(L"Failed to Create AudioClip! " && 0);
+		}
 	}
+	
 }
 
 void AudioClip::Release()

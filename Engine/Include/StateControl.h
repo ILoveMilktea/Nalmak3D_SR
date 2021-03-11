@@ -68,7 +68,7 @@ public:
 	void SetVector3(wstring _key, const Vector3& _value);
 	void SetString(wstring _key, const wstring& _value);
 
-	void AddInteger(wstring _key, float _addValue);
+	void AddInteger(wstring _key, int _addValue);
 	void AddFloat(wstring _key, float _addValue);
 
 	int GetInteger(wstring _key);

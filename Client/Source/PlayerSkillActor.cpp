@@ -39,11 +39,6 @@ void PlayerSkillActor::Update()
 			meshInfo.mtrlName = L"default_red";
 			meshInfo.meshName = L"sphere";
 
-			ScaleDampingDeffender::Desc scaleDamping;
-			//scaleDamping.
-			scaleDamping.dampingSpeed = 3.f;
-			scaleDamping.maximumScale = 5.0f;
-			scaleDamping.axisDir = Vector3(0.f, 1.f, 0.f);
 
 			SphereCollider::Desc sphereColliderInfo;
 			sphereColliderInfo.collisionLayer = COLLISION_LAYER_SHIELD;
@@ -51,7 +46,7 @@ void PlayerSkillActor::Update()
 
 			auto shield = INSTANTIATE(OBJECT_TAG_PLAYER_SHIELD, L"playerNormalShield")->
 				AddComponent<VIBufferRenderer>(&meshInfo)->
-				AddComponent<ScaleDampingDeffender>(&scaleDamping)->
+				AddComponent<ScaleDampingDeffender>()->
 				AddComponent<SphereCollider>(&sphereColliderInfo);
 			shield->SetParents(m_gameObject);
 

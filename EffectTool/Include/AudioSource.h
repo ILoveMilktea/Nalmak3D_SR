@@ -7,6 +7,7 @@ public:
 	struct Desc
 	{
 		wstring audioClipName = L"";
+		bool playOnAwake = false;
 	};
 public:
 	AudioSource(Desc* _desc);
@@ -28,5 +29,6 @@ private:
 	class SoundManager* m_soundManager = nullptr;
 	_SOUND_CHANNEL m_channelIndex;
 	bool m_isPlay;
+	bool m_isPlayOnAwake;
 };
 

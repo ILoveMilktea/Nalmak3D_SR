@@ -6,10 +6,6 @@
 
 ScaleDampingDeffender::ScaleDampingDeffender(Desc * _desc)
 {
-	m_dampingSpeed = _desc->dampingSpeed;
-	m_maximumScale = _desc->maximumScale ;
-	m_axis = _desc->axisDir;
-	m_retainTime = _desc->m_retainTime;
 }
 
 ScaleDampingDeffender::~ScaleDampingDeffender()
@@ -18,52 +14,40 @@ ScaleDampingDeffender::~ScaleDampingDeffender()
 
 void ScaleDampingDeffender::Initialize()
 {
-	// 
 	m_spherCollider = m_gameObject->GetComponent<SphereCollider>();
 	m_material = GetComponent<VIBufferRenderer>()->GetMaterial();
 
 	assert(L"NULL" && m_spherCollider);
 
+	m_activeTimer = 0;
+	m_currentScale = 0.f;
+	m_targetScale = 3.f;
 }
 
 void ScaleDampingDeffender::Update()
 {
 
-
-	if (m_retainTime > 0 && m_maximumScale >= m_transform->scale.x
-		&& m_maximumScale >= m_transform->scale.y
-		&& m_maximumScale >= m_transform->scale.z ) // 커지기
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_5))
 	{
-		 m_transform->scale.x += dTime * m_dampingSpeed;
-		m_transform->scale.y += dTime * m_dampingSpeed;
-		m_transform->scale.z += dTime * m_dampingSpeed;
-
-		//m_material->SetFloat("g_strength",  0.1f);
+		ActiveShield();
 	}
-	else
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_6))
 	{
-		m_retainTime -= dTime;
+		ShakeShield();
 	}
-		
+	m_activeTimer += dTime;
 
-	if (m_retainTime <= 0.f) // 작아지기
-	{
-		m_transform->scale.x -= dTime * m_dampingSpeed;
-		m_transform->scale.y -= dTime * m_dampingSpeed;
-		m_transform->scale.z -= dTime * m_dampingSpeed;
-	}
-	else if (m_retainTime > 0.f)
-	{
-		AxisRotate(m_axis);
-	}
+	m_currentScale = Nalmak_Math::Lerp(m_currentScale, m_targetScale, dTime * 3);
+	Vector3 scale = Vector3(1, 1, 1) * m_currentScale;
 
-	if (0 >= m_transform->scale.x
-		|| 0 >= m_transform->scale.y
-		|| 0 >= m_transform->scale.z)
+	m_transform->scale = scale;
+	m_spherCollider->SetScale(scale);
+
+	m_transform->RotateY(dTime);
+
+	if (m_activeTimer > 5.f)
 	{
-		m_gameObject->GetTransform()->DeleteParent();
-		DESTROY(m_gameObject);
-		m_gameObject = nullptr;
+		m_targetScale = 0.f;
 	}
 }
 
@@ -72,11 +56,15 @@ void ScaleDampingDeffender::LateUpdate()
 	m_spherCollider->SetRadius(m_transform->scale.x * 0.5f);
 }
 
-void ScaleDampingDeffender::AxisRotate(Vector3 _axis)
+void ScaleDampingDeffender::ActiveShield()
 {
-	Quaternion quaterRotY;
-	D3DXQuaternionRotationAxis(&quaterRotY, &_axis,  dTime );
-	m_transform->rotation *= quaterRotY;
+	m_targetScale = 3.f;
+	m_activeTimer = 0.f;
+}
+
+void ScaleDampingDeffender::ShakeShield()
+{
+	m_currentScale = 3.3f;
 }
 
 void ScaleDampingDeffender::OnTriggerEnter(Collisions & _collision)

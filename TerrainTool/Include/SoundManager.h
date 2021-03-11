@@ -6,8 +6,8 @@
 #define __SOUNDMANAGER_H__
 
 class AudioClip;
-
-class NALMAK_DLL SoundManager
+class AudioListener;
+class SoundManager
 {
 	DECLARE_SINGLETON(SoundManager)
 public:
@@ -42,8 +42,9 @@ public:
 //	void SetMaterVolume(float _v);
 //	bool CompareCurrentClip(_SOUND_CHANNEL  _channel, const wstring& pSoundKey);
 	//AudioClip* GetAudioClip(const wstring& _pSoundKey);
-
-	void SetListenerPosition(float _x, float _y, float _z);
+	void AddAudioListener(AudioListener* _listener);
+	void DeleteAudioListener(AudioListener* _listener);
+	void SetListenerPosition(const Matrix& _worldMat);
 private:
 	int GetAvailableChannel();
 	// Store all sound file from file path at SoundList
@@ -63,6 +64,7 @@ private:
 	bool m_b3DSound;
 private:
 	class ResourceManager* m_resourceManager;
+	class AudioListener* m_listener;
 };
 
 #endif

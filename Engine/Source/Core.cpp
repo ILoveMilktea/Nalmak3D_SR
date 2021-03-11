@@ -14,6 +14,7 @@
 #include "Triangle.h"
 #include "Core.h"
 
+#define  __SOUND_ON__
 USING(Nalmak)
 
 IMPLEMENT_SINGLETON(Core)

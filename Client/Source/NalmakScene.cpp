@@ -22,26 +22,26 @@ void NalmakScene::Initialize()
 
 	Core::GetInstance()->SetSkyBox(L"SkyBox1");
 
-	VIBufferRenderer::Desc laser;
-	laser.mtrlName = L"fx_shield";
-	laser.meshName = L"cylinder";
-	INSTANTIATE()->AddComponent<VIBufferRenderer>(&laser)->SetPosition(3,0,0);
-
-	INSTANTIATE()->AddComponent<VIBufferRenderer>()->SetPosition(4, 0, 0);
-
-	laser.meshName = L"sphere";
-	laser.mtrlName = L"standard";
-	INSTANTIATE()->AddComponent<VIBufferRenderer>(&laser)->SetPosition(2, 0, 0);
 
 
-	/*MeshRenderer::Desc renderss;
-	renderss.meshName = L"indicator_arrow";
-	renderss.mtrlName = L"stage_arrowIndicator";
-	INSTANTIATE()->AddComponent<MeshRenderer>(&renderss)->SetPosition(0, 0, 5)->SetScale(30,60,80);*/
+	INSTANTIATE()->AddComponent<VIBufferRenderer>()->SetPosition(0, 0, 0);
 
-	ItemManager::GetInstance()->BuyItem(L"Weapon", L"Emp");
-	PlayerInfoManager::GetInstance()->EquipItem(PARTS_NUM::FIRST_PARTS, L"Weapon", L"Emp");
 
+
+	{
+		AudioSource::Desc audio;
+		audio.audioClipName = L"sfx_buttonMove";
+		INSTANTIATE()->AddComponent<AudioSource>(&audio)->SetPosition(0, 10, 0);
+	}
+	
+
+	{
+		AudioSource::Desc audio;
+		audio.audioClipName = L"bgm_title";
+		audio.playOnAwake = true;
+		INSTANTIATE()->AddComponent<AudioSource>(&audio)->SetPosition(0, 0, 0);
+	}
+	
 	{
 		/*MeshRenderer::Desc render;
 		render.meshName = L"f15";
@@ -53,7 +53,7 @@ void NalmakScene::Initialize()
 		plane->AddComponent<PlayerSkillActor>();*/
 	}
 
-	PlayerInfoManager::GetInstance()->GetPlayer();
+	//PlayerInfoManager::GetInstance()->GetPlayer();
 
 	DirectionalLight::Desc light;
 	light.diffuseIntensity = 0.6f;
@@ -66,15 +66,17 @@ void NalmakScene::Initialize()
 		INSTANTIATE(OBJECT_TAG_CAMERA, L"mainCamera")->AddComponent<Camera>()
 			->AddComponent<PrintInfo>()
 			->AddComponent<FreeMove>()
+			->AddComponent<AudioListener>()
 			->SetPosition(0, 10, 15)
 			->SetRotation(30, 50, 0);
 	}
 
+	AudioSource::Desc audio;
+	auto test= INSTANTIATE()->AddComponent<AudioSource>();
 
+	//test->GetComponent<AudioSource>()->PlayOneShot
 
-
-
-	auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
+	/*auto window1 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Diffuse", CANVAS_GROUP_G1);
 	window1->SetPosition(100, 100, 0)->SetScale(200, 200, 0);
 	auto window2 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Normal", CANVAS_GROUP_G1);
 	window2->SetPosition(100, 300, 0)->SetScale(200, 200, 0);
@@ -91,7 +93,7 @@ void NalmakScene::Initialize()
 	auto window8 = UIFactory::CreateRenderTargetWindow(L"Bright_HorizontalBlur", CANVAS_GROUP_G1);
 	window8->SetPosition(300, 500, 0)->SetScale(200, 200, 0);
 	auto window10 = UIFactory::CreateRenderTargetWindow(L"GBuffer_Bright", CANVAS_GROUP_G1);
-	window10->SetPosition(500, 100, 0)->SetScale(200, 200, 0);
+	window10->SetPosition(500, 100, 0)->SetScale(200, 200, 0);*/
 
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);
 	/*{
@@ -102,24 +104,6 @@ void NalmakScene::Initialize()
 		temp->GetComponent<VIBufferRenderer>()->SetFrustumCulling(false);
 	}*/
 
-	{
-		ParticleRenderer::Desc	distortion;
-		distortion.particleDataName = L"player_zet_distortion";
-		INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(0.15f, 0.1f, -0.7f);
-	}
-	{
-		ParticleRenderer::Desc	distortion;
-		distortion.particleDataName = L"player_zet_distortion";
-		INSTANTIATE()->AddComponent<ParticleRenderer>(&distortion)->SetPosition(-0.15f, 0.1f, -0.7f);
-	}
-
-	{
-		VIBufferRenderer::Desc vibuffer;
-		vibuffer.meshName = L"screenQuad";
-		vibuffer.mtrlName = L"particleDistortion";
-		INSTANTIATE()->AddComponent<VIBufferRenderer>(&vibuffer);
-	}
-	
 
 	{
 		VIBufferRenderer::Desc ground;
@@ -130,15 +114,12 @@ void NalmakScene::Initialize()
 	}
 
 	{
-		ScaleDampingDeffender::Desc scaleDamping;
-		scaleDamping.dampingSpeed = 3.f;
-		scaleDamping.maximumScale = 15.0f;
-		scaleDamping.axisDir = Vector3(0.f, 1.f, 0.f);
+		
 
 		VIBufferRenderer::Desc shield;
 		shield.meshName = L"sphere";
 		shield.mtrlName = L"fx_shield";
-		INSTANTIATE()->AddComponent<VIBufferRenderer>(&shield)->SetPosition(0, 0, 5)->AddComponent<ScaleDampingDeffender>(&scaleDamping)->AddComponent<SphereCollider>();
+		INSTANTIATE()->AddComponent<VIBufferRenderer>(&shield)->SetPosition(0, 0, 5)->AddComponent<ScaleDampingDeffender>()->AddComponent<SphereCollider>();
 	}
 
 }

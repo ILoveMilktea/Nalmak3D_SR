@@ -160,6 +160,7 @@ void ParticleRenderer::BindingStreamSource()
 	if (m_currentCount == 0)
 		return;
 
+	// 1 : stream num    3: buffer start index      4 : memory size
 	ThrowIfFailed(m_device->SetStreamSourceFreq(0, D3DSTREAMSOURCE_INDEXEDDATA | m_currentCount));
 	ThrowIfFailed(m_device->SetStreamSource(0, m_viBuffer->GetVertexBuffer(), 0, sizeof(INPUT_LAYOUT_POSITION_UV)));
 

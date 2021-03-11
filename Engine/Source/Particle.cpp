@@ -2,6 +2,14 @@
 #include "Transform.h"
 #include "TimeManager.h"
 
+Matrix rotationX90 =
+{
+	1, 0, 0, 0,
+	0, 0, 1, 0,
+	0,-1, 0, 0,
+	0, 0, 0, 1
+};
+
 Particle::Particle()
 {
 }
@@ -62,9 +70,8 @@ void Particle::Update(INPUT_LAYOUT_PARTICLE * _info, const Matrix & _billboard, 
 	{
 		Matrix rotX, rotY;
 		D3DXMatrixScaling(&scale, curScale, curScale, curScale);
-		D3DXMatrixRotationAxis(&rotX, &Vector3(1, 0, 0), Deg2Rad * 90);// 0.157079632f); // 90µµ 
 		D3DXMatrixRotationAxis(&rotY, &Vector3(0, 1, 0), Deg2Rad * angle); // 90µµ 
-		rot = rotX * rotY;
+		rot = rotationX90 * rotY;
 		if (parents)
 			_info->worldMatrix =  scale * rot * trans * parents->GetWorldMatrix();
 		else

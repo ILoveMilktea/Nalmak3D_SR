@@ -6,8 +6,14 @@
 
 AudioSource::AudioSource(Desc * _desc)
 {
+	m_isPlay = false;
+	m_soundManager = SoundManager::GetInstance();
+
 	if(_desc->audioClipName != L"")
 		m_audioClip = ResourceManager::GetInstance()->GetResource<AudioClip>(_desc->audioClipName);
+
+	m_isPlayOnAwake = _desc->playOnAwake;
+	
 }
 
 AudioSource::~AudioSource()
@@ -16,23 +22,12 @@ AudioSource::~AudioSource()
 
 void AudioSource::Initialize()
 {
-	m_soundManager = SoundManager::GetInstance();
-
+	if(m_isPlayOnAwake)
+		Play();
 }
 
 void AudioSource::Update()
 {
-	DEBUG_LOG(L"Playing ", IsPlay());
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_C))
-	{
-		Play();
-	}
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_D))
-	{
-		PlayOneShot(L"sfx_titleToStage");
-	}
-
-
 	if (m_isPlay)
 	{
 		if (!IsPlay())

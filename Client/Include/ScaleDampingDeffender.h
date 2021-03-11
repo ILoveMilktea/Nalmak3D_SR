@@ -6,10 +6,7 @@ class ScaleDampingDeffender :
 public:
 	struct Desc
 	{
-		float dampingSpeed;
-		float maximumScale;
-		Vector3 axisDir;
-		float	m_retainTime = 5.f;
+	
 	};
 
 public:
@@ -24,14 +21,14 @@ public:
 	virtual void OnTriggerEnter(Collisions& _collision)override;
 	virtual void OnTriggerStay(Collisions& _collision)override;
 	virtual void OnTriggerExit(Collisions& _collision)override;
-	
-	void AxisRotate(Vector3 _axis);
+public:
+	void ActiveShield();
 private:
-	float	m_dampingSpeed = 0.f;
-	float	m_maximumScale = 0.f;
-	float	m_retainTime = 0.f;
-
-	Vector3	 m_axis;
+	void ShakeShield();
+private:
+	float m_activeTimer;
+	float m_currentScale;
+	float m_targetScale;
 private:
 	SphereCollider* m_spherCollider;
 	Material* m_material;

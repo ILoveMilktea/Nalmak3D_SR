@@ -4,11 +4,12 @@
 #include "Nalmak_Struct.h"
 #include "SoundManager.h"
 #include "ResourceManager.h"
+#include "Transform.h"
 
 IMPLEMENT_SINGLETON(SoundManager)
 
 SoundManager::SoundManager()
-	:m_volumeRatio(1), m_b3DSound(false)
+	:m_volumeRatio(1), m_b3DSound(true)
 {
 }
 SoundManager::~SoundManager()
@@ -17,8 +18,6 @@ SoundManager::~SoundManager()
 }
 void SoundManager::Initialize()
 {
-
-
 	m_resourceManager = ResourceManager::GetInstance();
 
 	for (int i = 0; i < SOUND_CHANNEL_COUNT_MAX; ++i)
@@ -41,20 +40,15 @@ void SoundManager::Initialize()
 	}
 
 
-	//if (m_b3DSound)
-	//{
-	//	// Set Listner Position
-	//	eRes = FMOD_System_Set3DListenerAttributes(m_pSystem, 0, 0, 0, 0, 0);
-	//	if (eRes != FMOD_OK)
-	//	{
-	//		assert(L"Failed to Create 3D Listener Attribute! " && 0);
-	//	}
-
-	//	for (auto& c : m_pChannelArr)
-	//	{
-	//		c.position = new Vector3(0, 0, 0);
-	//	}
-	//}
+	if (m_b3DSound)
+	{
+		// Set Listner Position
+		eRes = FMOD_System_Set3DListenerAttributes(m_pSystem, 0, 0, 0, 0, 0);
+		if (eRes != FMOD_OK)
+		{
+			assert(L"Failed to Create 3D Listener Attribute! " && 0);
+		}
+	}
 
 
 }
@@ -62,7 +56,6 @@ void SoundManager::Initialize()
 void SoundManager::Update()
 {
 	FMOD_System_Update(m_pSystem);
-
 	//PrintInfo();
 
 }
@@ -81,12 +74,27 @@ void SoundManager::Play(AudioSource * _source, const _SOUND_CHANNEL & _channel)
 
 	FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, audioClip->m_audio, FALSE, &m_pChannelArr[_channel].second);
 
+
 	FMOD_Channel_SetVolume(m_pChannelArr[_channel].second, audioClip->volume * m_volumeRatio);
 
 	if (audioClip->loop)
 		FMOD_Channel_SetMode(m_pChannelArr[_channel].second, FMOD_LOOP_NORMAL);
 	else
 		FMOD_Channel_SetMode(m_pChannelArr[_channel].second, FMOD_LOOP_OFF);
+
+	if (m_b3DSound)
+	{
+		auto worldPos = _source->GetTransform()->GetWorldPosition();
+		FMOD_Channel_Set3DSpread(m_pChannelArr[_channel].second, 360);
+
+		FMOD_VECTOR vec = { worldPos.x,  worldPos.y,  worldPos.z };
+		
+		FMOD_Channel_Set3DAttributes(m_pChannelArr[_channel].second, &vec, 0);
+
+		FMOD_Channel_Set3DMinMaxDistance(m_pChannelArr[_channel].second, audioClip->minDistance, audioClip->maxDistance);
+	}
+
+
 
 	FMOD_System_Update(m_pSystem);
 }
@@ -100,10 +108,23 @@ void SoundManager::PlayOneShot(AudioSource * _source, AudioClip * _audioClip)
 	m_pChannelArr[availAbleIndex].first = true;
 
 	FMOD_System_PlaySound(m_pSystem, FMOD_CHANNEL_FREE, _audioClip->m_audio, FALSE, &m_pChannelArr[availAbleIndex].second);
-
 	FMOD_Channel_SetVolume(m_pChannelArr[availAbleIndex].second, _audioClip->volume * m_volumeRatio);
 
 	FMOD_Channel_SetMode(m_pChannelArr[availAbleIndex].second, FMOD_LOOP_OFF);
+
+	if (m_b3DSound)
+	{
+		auto worldPos = _source->GetTransform()->GetWorldPosition();
+		FMOD_Channel_Set3DSpread(m_pChannelArr[availAbleIndex].second, 360);
+
+		FMOD_VECTOR vec = { worldPos.x,  worldPos.y,  worldPos.z };
+
+		FMOD_Channel_Set3DAttributes(m_pChannelArr[availAbleIndex].second, &vec, 0);
+
+		FMOD_Channel_Set3DMinMaxDistance(m_pChannelArr[availAbleIndex].second, _audioClip->minDistance, _audioClip->maxDistance);
+	}
+
+
 		
 }
 
@@ -123,6 +144,18 @@ void SoundManager::PlayOneShot(AudioSource * _clip, const wstring & _clipName)
 	FMOD_Channel_SetVolume(m_pChannelArr[availAbleIndex].second, audioclip->volume * m_volumeRatio);
 
 	FMOD_Channel_SetMode(m_pChannelArr[availAbleIndex].second, FMOD_LOOP_OFF);
+
+	if (m_b3DSound)
+	{
+		auto worldPos = _clip->GetTransform()->GetWorldPosition();
+		FMOD_Channel_Set3DSpread(m_pChannelArr[availAbleIndex].second, 360);
+
+		FMOD_VECTOR vec = { worldPos.x,  worldPos.y,  worldPos.z };
+
+		FMOD_Channel_Set3DAttributes(m_pChannelArr[availAbleIndex].second, &vec, 0);
+
+		FMOD_Channel_Set3DMinMaxDistance(m_pChannelArr[availAbleIndex].second, audioclip->minDistance, audioclip->maxDistance);
+	}
 }
 
 bool SoundManager::IsPlay(const _SOUND_CHANNEL & _channel)
@@ -311,6 +344,32 @@ bool SoundManager::IsPlay(const _SOUND_CHANNEL & _channel)
 //	return false;
 //}
 
+void SoundManager::AddAudioListener(AudioListener * _listener)
+{
+	if (m_listener)
+	{
+		assert(L"Audio Listener can exist only one!" && 0);
+	}
+	m_listener = _listener;
+}
+
+void SoundManager::DeleteAudioListener(AudioListener * _listener)
+{
+	m_listener = nullptr;
+}
+
+void SoundManager::SetListenerPosition(const Matrix& _worldMat)
+{
+	FMOD_VECTOR vec = FMOD_VECTOR{ _worldMat._41 * 0.2f,_worldMat._42 * 0.2f,_worldMat._43  * 0.2f } ;
+	FMOD_VECTOR forward = FMOD_VECTOR{ _worldMat._31,_worldMat._32,_worldMat._33 };
+	FMOD_VECTOR up = FMOD_VECTOR{ -_worldMat._21,-_worldMat._22,-_worldMat._23 };
+
+	//FMOD_System_Set3DListenerAttributes(m_pSystem, 0, &vec, 0, &forward, &up);
+	FMOD_System_Set3DListenerAttributes(m_pSystem, 0, &vec, 0, &forward, &up);
+
+	FMOD_System_Update(m_pSystem);
+}
+
 int SoundManager::GetAvailableChannel()
 {
 	for (int i = 0; i < SOUND_CHANNEL_COUNT_MAX; ++i)
@@ -373,8 +432,3 @@ void SoundManager::DeAllocChannel(_SOUND_CHANNEL _channel)
 //	return iter->second;
 //}
 
-void SoundManager::SetListenerPosition(float _x, float _y, float _z)
-{
-	FMOD_VECTOR* vec = new FMOD_VECTOR{ _x,_y,_z };
-	FMOD_System_Set3DListenerAttributes(m_pSystem, 0, vec, 0, 0, 0);
-}
