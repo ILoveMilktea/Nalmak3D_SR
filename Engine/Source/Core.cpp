@@ -72,7 +72,10 @@ void Core::Initialize(HWND handle, Desc * _desc)
 	DeviceManager::GetInstance()->Initialize(_desc->wincx, _desc->wincy, handle, _desc->windowMode);
 
 	m_collisionManager->Initialize(_desc->COLLISION_LAYER_COUNT);
+#ifdef __SOUND_ON__
 	m_soundManager->Initialize();
+#endif // __SOUND_ON__
+
 	m_resourceManager->Initialize(_desc->resourceDirectoryPath);
 	m_resourceManager->CreateDefaultResource();
 
@@ -91,7 +94,9 @@ void Core::Run()
 	
 	m_timeManager->Tick();
 	m_systemManager->Update();
+#ifdef __SOUND_ON__
 	m_soundManager->Update();
+#endif // __SOUND_ON__
 	m_inputManager->Update();
 
 	m_sceneManager->Update();

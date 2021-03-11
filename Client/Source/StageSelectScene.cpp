@@ -56,11 +56,6 @@ void StageSelectScene::Initialize()
 		render.interval = 3.f;
 		INSTANTIATE()->AddComponent<Terrain>(&render)->SetPosition(-150,0,0);
 	}
-
-	AudioSource::Desc audio;
-	audio.audioClipName = L"sfx_buttonMove";
-	INSTANTIATE()->AddComponent<AudioSource>(&audio);
-	
 	
 
 	INSTANTIATE()->AddComponent<SystemInfo>()->SetPosition(50, 50, 0);

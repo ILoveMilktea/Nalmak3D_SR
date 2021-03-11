@@ -35,10 +35,10 @@ HRESULT ResourceManager::Initialize(const wstring& _path)
 	m_directoryPath = _path;
 
 	//LoadMeshes<FBXLoader>(L"fbx");
-
+	
 	LoadResources<VIBuffer,ObjMesh>(L"obj");
 	LoadResources<StaticMesh, StaticMesh>(L"X");
-	LoadResources<AudioClip, AudioClip>(L"aud");
+	//LoadResources<AudioClip, AudioClip>(L"aud");
 
 	LoadTextures(L"jpg");
 	LoadTextures(L"png");

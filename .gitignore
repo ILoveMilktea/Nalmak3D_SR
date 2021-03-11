@@ -37,6 +37,7 @@
 *.ipch
 *.db
 *.opendb
+*.ilk
 
 # Log files
 *.tlog
@@ -56,5 +57,4 @@ x64/
 x86/
 build/
 bld/
-[Bb]in/
 [Oo]bj/

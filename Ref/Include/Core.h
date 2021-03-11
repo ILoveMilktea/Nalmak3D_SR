@@ -73,6 +73,9 @@
 
 #pragma endregion
 
+//#define __SOUND_ON__
+
+
 class CollisionManager;
 class SystemManager;
 BEGIN(Nalmak)
