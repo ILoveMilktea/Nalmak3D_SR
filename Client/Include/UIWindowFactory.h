@@ -472,6 +472,18 @@ public:
 					background->GetComponent<UI_ShopWnd_Animator>()->
 						SetAnimator(animAmount, animAmount * 0.1f, animSpeed, 0.f
 							, Vector3(WINCX + background->GetTransform()->scale.x * 0.5f, WINCY * 0.5f - 100.f, 0.f));
+
+					// button
+					{
+						EventHandler openPopupFunc = EventHandler([=]() {
+							UIManager::GetInstance()->BuyPopupOn();
+						});
+						auto buyButton = UIFactory::Prefab_ItemBuy_Button(openPopupFunc, L"BUY", CANVAS_GROUP_MAINWND_SHOP_NOANIM);
+
+						buyButton->SetParents(background);
+						buyButton->SetPosition(Vector3(0.f, 180.f, 0.f));
+
+					}
 				}
 
 				// Model
@@ -610,39 +622,30 @@ public:
 							background->SetPosition(0.f, 0.f, 0.f);
 							notice->SetScale(WINCX* 0.5f, WINCY * 0.5f);
 
-							// Buy button
+							// ok button
 							{
-								EventHandler openPopupFunc = EventHandler([=]() {
-									UIManager::GetInstance()->BuyPopupOn();
+								EventHandler buyFunc = EventHandler([=]() {
+									// popup off
+									UIManager::GetInstance()->BuyItem();
+									UIManager::GetInstance()->BuyPopupOff();
 								});
-								auto buyButton = UIFactory::Prefab_ItemBuy_Button(openPopupFunc, L"BUY", CANVAS_GROUP_MAINWND_SHOP_NOANIM);
-
-								// ok button
-								{
-									EventHandler buyFunc = EventHandler([=]() {
-										// popup off
-										UIManager::GetInstance()->BuyItem();
-										UIManager::GetInstance()->BuyPopupOff();
-									});
-									auto okButton = UIFactory::Prefab_Popup_OKButton(buyFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
-									okButton->SetParents(popup);
-									okButton->SetPosition(-background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
-								}
-								// cancel button
-								{
-									EventHandler cancelFunc = EventHandler([=]() {
-										// popup off
-										UIManager::GetInstance()->BuyPopupOff();
-									});
-									auto cancelButton = UIFactory::Prefab_Popup_CancelButton(cancelFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
-									cancelButton->SetParents(popup);
-									cancelButton->SetPosition(background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
-								}
-
-
-								// must be last operation
-								popup->SetActive(false);
+								auto okButton = UIFactory::Prefab_Popup_OKButton(buyFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+								okButton->SetParents(popup);
+								okButton->SetPosition(-background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
 							}
+							// cancel button
+							{
+								EventHandler cancelFunc = EventHandler([=]() {
+									// popup off
+									UIManager::GetInstance()->BuyPopupOff();
+								});
+								auto cancelButton = UIFactory::Prefab_Popup_CancelButton(cancelFunc, CANVAS_GROUP_MAINWND_SHOP_BUYPOPUP);
+								cancelButton->SetParents(popup);
+								cancelButton->SetPosition(background->GetTransform()->scale.x * 0.25f, background->GetTransform()->scale.y * 0.25f, 0.f);
+							}
+
+							// must be last operation
+							popup->SetActive(false);
 						}
 
 					}
