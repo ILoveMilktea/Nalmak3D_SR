@@ -72,7 +72,7 @@ int Scripter::Get_DialogueIndex()
 
 int Scripter::Get_DialogueSize()
 {
-	return m_dialogueList.size();
+	return (int)m_dialogueList.size();
 }
 
 bool Scripter::LoadNextScript()

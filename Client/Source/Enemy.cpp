@@ -30,7 +30,7 @@ void Enemy::Initialize()
 	m_vOriginForward = m_transform->GetForward();
 
 	m_pMainCamera = Core::GetInstance()->GetMainCamera();
-	assert(L"거 에너미에서 메인카메라 못찾았다 이말이야"&&m_pMainCamera);
+	assert(L"can't find main camera"&&m_pMainCamera);
 
 
 	if (m_pDamagedSmoke == nullptr)
@@ -39,7 +39,7 @@ void Enemy::Initialize()
 
 		ParticleRenderer::Desc smoke_desc;
 		smoke_desc.particleDataName = L"enemy_smoke_Damaged";
-		smoke_desc.PlayOnAwake = false; //객체 생성과 동시에 파티클 on!
+		smoke_desc.PlayOnAwake = false; 
 
 		if (m_pDamagedSmoke != nullptr)
 		{
@@ -76,41 +76,12 @@ void Enemy::Update()
 	DEBUG_LOG(L"FullHP", m_tStatus.m_iFullHp);
 	DEBUG_LOG(L"CurHP", m_tStatus.m_iCurHp);
 	DEBUG_LOG(L"test", (1.f -(float)m_tStatus.m_iCurHp / m_tStatus.m_iFullHp));
-	//DEBUG_LOG(L"Ÿ�� ������ �Ÿ�",		m_fDist_Target);
-	//DEBUG_LOG(L"forward���Ϳ� ���̺����� ����",		m_fInner);
-	//DEBUG_LOG(L"Player is in the Enemy Fov", m_bFov);
-	//DEBUG_LOG(L"Enemy Current Speed", m_tStatus.m_fCurSpd);
-	//DEBUG_LOG(L"Enemy Max Spd", m_tStatus.m_fMaxSpd);
-	//DEBUG_LOG(L"Remain Gun Round", m_tMachineGun.m_iRound_Cur);
-	//DEBUG_LOG(L"Remain Missile Round", m_tMissile.m_iRound_Cur);
 	DEBUG_LOG(L"Current Pattern", m_gameObject->GetComponent<StateControl>()->GetCurStateString());
 #pragma endregion
 }
 
 void Enemy::OnTriggerEnter(Collisions & _collision)
 {
-	for (auto& obj : _collision)
-	{
-		if (obj.GetGameObject()->GetTag() == OBJECT_TAG_BULLET_PLAYER)
-		{
-			//������ �Դ°� �� Player bullet���� ����.
-
-			//if (m_pSmokeParticle == nullptr)
-			//{
-			//	m_pSmokeParticle = INSTANTIATE();
-			//
-			//	ParticleRenderer::Desc smoke_desc;
-			//	smoke_desc.particleDataName = L"enemy_smoke_0";
-			//	smoke_desc.PlayOnAwake = true; //���� ��ü ������ ���ÿ� ��ƼŬ on
-			//	//��ƼŬ ������ EnemyDeath�� �ڼ��� ��������.
-
-			//	if (m_pSmokeParticle != nullptr)
-			//	{
-			//		m_pSmokeParticle->AddComponent<ParticleRenderer>(&smoke_desc);
-			//	}
-			//}
-		}
-	}
 }
 
 
