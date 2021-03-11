@@ -29,6 +29,8 @@
 #define _sn_sweepMoveToForward	L"MidBoss_SweepMoveToForward"	
 
 // --- state control global variable
+#define _NEXT_STATE_KEY KEY_STATE_TAB
+
 #define _MIDBOSS_SPAWNPOS	Vector3(0.f,500.f,50.f)
 #define _MIDBOSS_CENTERROT	Quaternion(0.f,0.f,0.f,1.f)
 #define _MIDBOSS_CENTERPOS	Vector3(0.f,0.f,50.f)

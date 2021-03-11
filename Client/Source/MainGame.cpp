@@ -11,7 +11,6 @@
 #include "StageSelectScene.h"
 
 #include "Stage1Scene.h"
-#include "Stage2Scene.h"
 
 #include "ResultScene.h"
 
@@ -115,7 +114,6 @@ void MainGame::SystemSetting()
 	m_engine->AddScene(L"garage", Scene::Instantiate<GarageScene>());
 
 	m_engine->AddScene(L"stage1", Scene::Instantiate<Stage1Scene>());
-	m_engine->AddScene(L"stage2", Scene::Instantiate<Stage2Scene>());
 
 	m_engine->AddScene(L"result", Scene::Instantiate<ResultScene>());
 	m_engine->AddScene(L"labo", Scene::Instantiate<UILabScene>());
@@ -127,7 +125,7 @@ void MainGame::SystemSetting()
 #pragma endregion
 
 
-	m_engine->SetStartScene(L"garage");
+	m_engine->SetStartScene(L"stageSelect");
 
 
 }

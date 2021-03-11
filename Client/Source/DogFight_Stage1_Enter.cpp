@@ -37,7 +37,7 @@ void DogFight_Stage1_Enter::EnterState()
 
 void DogFight_Stage1_Enter::UpdateState()
 {
-	m_pStageMgr->Get_StateControl()->AddFloat(L"DogFight_Stage1_fTime", dTime);
+	m_pStageMgr->GetComponent<StateControl>()->AddFloat(L"DogFight_Stage1_fTime", dTime);
 
 	if (m_pScripter->GetComponent<Scripter>()->Get_DialogueIndex() == 5)
 	{

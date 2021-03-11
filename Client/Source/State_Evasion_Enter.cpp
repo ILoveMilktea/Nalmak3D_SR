@@ -26,8 +26,6 @@ void State_Evasion_Enter::Initialize()
 
 void State_Evasion_Enter::EnterState()
 {
-
-
 	m_mainCamera = Core::GetInstance()->GetMainCamera()->GetGameObject();
 	m_mainCamera->GetComponent<StateControl>()->AddState<State_Camera_Wait>(_sn_camera_wait);
 	m_mainCamera->GetComponent<StateControl>()->AddState<State_Camera_Evasion>(_sn_camera_evasion);
@@ -41,24 +39,16 @@ void State_Evasion_Enter::EnterState()
 	// phase 1 ui off
 	CanvasGroup::GetInstance()->SetObjectActive(CANVAS_GROUP_STAGE1, false);
 
-
 	// Cloud
 	ParticleRenderer::Desc desc;
 	desc.particleDataName = L"phase2_cloud";
 	auto cloudFloor = INSTANTIATE()->AddComponent<ParticleRenderer>(&desc);
 	cloudFloor->SetPosition(0.f, -10.f, 170.f);
-
-	//// Cloud
-	//desc.particleDataName = L"phase2_cloud2";
-	//auto cloudLayer = INSTANTIATE()->AddComponent<ParticleRenderer>(&desc);
-	//cloudLayer->SetPosition(0.f, 0.f, 50.f);
-
+	
 	// player change info
 	m_player->DeleteComponent<Player_WindEffect>();
-}
 
-void State_Evasion_Enter::UpdateState()
-{
+
 	// camera
 	m_mainCamera->GetComponent<FieldCameraInfo>()->SetActive(false);
 	m_mainCamera->SetPosition(Vector3(0.f, 42.f, -70.f));
@@ -70,11 +60,27 @@ void State_Evasion_Enter::UpdateState()
 	m_player->SetRotation(0.f, 0.f, 0.f);
 
 	m_player->AddComponent<CustomDebuger>();
-	m_stateControl->SetState(_sn_airfire);
+
+	m_timer = 0.f;
+}
+
+void State_Evasion_Enter::UpdateState()
+{
+	DEBUG_LOG(L"time", dTime);
+	m_timer += dTime;
+
+	if (m_timer > 1.f)
+	{
+		m_stateControl->SetState(_sn_airfire);
+		return;
+	}
 }
 
 void State_Evasion_Enter::ExitState()
 {
-	m_mainCamera->GetComponent<StateControl>()->SetState(_sn_camera_evasion);
+	// for debug
+	m_mainCamera->AddComponent<FreeMove>();
+	m_mainCamera->GetComponent<StateControl>()->SetActive(false);
+	//m_mainCamera->GetComponent<StateControl>()->SetState(_sn_camera_evasion);
 	m_player->GetComponent<StateControl>()->SetState(_sn_player_evasion);
 }

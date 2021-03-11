@@ -75,7 +75,7 @@ void MidBoss_Idle::UpdateState()
 		return;
 	}
 
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	if (InputManager::GetInstance()->GetKeyDown(_NEXT_STATE_KEY))
 	{
 		SetState(*m_curOrder);
 		return;

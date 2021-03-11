@@ -352,7 +352,6 @@
     <ClInclude Include="..\Include\Rader.h" />
     <ClInclude Include="..\Include\SingleLine.h" />
     <ClInclude Include="..\Include\SmoothFollow.h" />
-    <ClInclude Include="..\Include\Stage2Scene.h" />
     <ClInclude Include="..\Include\StageManager.h" />
     <ClInclude Include="..\Include\Stage1Scene.h" />
     <ClInclude Include="..\Include\StageSelectCamera.h" />
@@ -542,7 +541,6 @@
     <ClCompile Include="..\Source\Rader.cpp" />
     <ClCompile Include="..\Source\SingleLine.cpp" />
     <ClCompile Include="..\Source\SmoothFollow.cpp" />
-    <ClCompile Include="..\Source\Stage2Scene.cpp" />
     <ClCompile Include="..\Source\StageManager.cpp" />
     <ClCompile Include="..\Source\Stage1Scene.cpp" />
     <ClCompile Include="..\Source\StageSelectCamera.cpp" />

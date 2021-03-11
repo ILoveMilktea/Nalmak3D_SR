@@ -16,5 +16,8 @@ public:
 private:
 	GameObject* m_mainCamera;
 	GameObject* m_player;
+
+	float m_timer;
+
 };
 

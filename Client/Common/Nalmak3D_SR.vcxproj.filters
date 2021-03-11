@@ -486,27 +486,6 @@
     <ClInclude Include="..\Include\State_Evasion_Enter.h">
       <Filter>__Phase2_Lab\phaseFSM\MainStream\00.Enter</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\DogFight_Stage1.h">
-      <Filter>04.Combat State\00%29DogFight\Stage1\Phase1</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\DogFight_Stage1_2.h">
-      <Filter>04.Combat State\00%29DogFight\Stage1\Phase2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\DogFight_Stage1_3.h">
-      <Filter>04.Combat State\00%29DogFight\Stage1\Phase3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\DogFightState.h">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase1</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\DogFightState_2.h">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\DogFightState_3.h">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase3</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\DogFightState_4.h">
-      <Filter>04.Combat State\00%29DogFight\Stage2\Phase4</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\Enemy_BulletProof.h">
       <Filter>__Phase2_Lab\Enemy_MidBoss</Filter>
     </ClInclude>
@@ -546,9 +525,6 @@
     <ClInclude Include="..\Include\GarageScene.h">
       <Filter>01.Scene\00.Game\02.Garage</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Stage2Scene.h">
-      <Filter>01.Scene\00.Game\03.Stage\01.Stage2_All</Filter>
-    </ClInclude>
     <ClInclude Include="..\Include\ResultScene.h">
       <Filter>01.Scene\00.Game\04.Result</Filter>
     </ClInclude>
@@ -587,10 +563,12 @@
     </ClInclude>
     <ClInclude Include="..\Include\ScriptPause.h">
       <Filter>02.Component\03.Script\State\04.Pause</Filter>
-   </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Include\TitleAnimator.h">
       <Filter>02.Component\05.Animator</Filter>
     </ClInclude>
+    <ClInclude Include="..\Include\DogFight_Stage1_2.h" />
+    <ClInclude Include="..\Include\DogFight_Stage1_3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Nalmak3D_SR.cpp">
@@ -1078,9 +1056,6 @@
     <ClCompile Include="..\Source\GarageScene.cpp">
       <Filter>01.Scene\00.Game\02.Garage</Filter>
     </ClCompile>
-    <ClCompile Include="..\Source\Stage2Scene.cpp">
-      <Filter>01.Scene\00.Game\03.Stage\01.Stage2_All</Filter>
-    </ClCompile>
     <ClCompile Include="..\Source\ResultScene.cpp">
       <Filter>01.Scene\00.Game\04.Result</Filter>
     </ClCompile>
@@ -1119,7 +1094,7 @@
     </ClCompile>
     <ClCompile Include="..\Source\ScriptPause.cpp">
       <Filter>02.Component\03.Script\State\04.Pause</Filter>
-   </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Source\TitleAnimator.cpp">
       <Filter>02.Component\05.Animator</Filter>
     </ClCompile>
@@ -1474,9 +1449,6 @@
     </Filter>
     <Filter Include="01.Scene\00.Game\03.Stage\00.Stage1_Tutorial">
       <UniqueIdentifier>{a032f942-426f-4df6-80d7-f12e0b161eb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\00.Game\03.Stage\01.Stage2_All">
-      <UniqueIdentifier>{e3015917-e94d-46e2-aec9-f63b1544fec7}</UniqueIdentifier>
     </Filter>
     <Filter Include="01.Scene\00.Game\04.Result">
       <UniqueIdentifier>{91284184-b247-4c5f-b726-11874c9346f2}</UniqueIdentifier>

@@ -44,7 +44,7 @@ void MidBoss_Appear::UpdateState()
 	}
 
 #ifdef _DEBUG
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	if (InputManager::GetInstance()->GetKeyDown(_NEXT_STATE_KEY))
 	{
 		m_transform->position = m_centerPosition;
 		SetState(_sn_idle);
