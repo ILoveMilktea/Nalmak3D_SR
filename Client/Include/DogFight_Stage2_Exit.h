@@ -13,6 +13,8 @@ public:
 	virtual void UpdateState() override;
 	virtual void ExitState() override;
 
+private:
+	int m_timer;
 	
 };
 

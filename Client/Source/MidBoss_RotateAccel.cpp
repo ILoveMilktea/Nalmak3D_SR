@@ -38,7 +38,7 @@ void MidBoss_RotateAccel::UpdateState()
 	SetState(_sn_idle);
 
 #ifdef _DEBUG
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	if (InputManager::GetInstance()->GetKeyDown(_NEXT_STATE_KEY))
 	{
 		SetState(_sn_idle);
 		return;

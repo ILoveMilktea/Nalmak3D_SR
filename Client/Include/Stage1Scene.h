@@ -5,7 +5,6 @@ class Stage1Scene :
 {
 public:
 	virtual void Initialize() override;
-
 private:
 	
 	Camera* m_pMainCamera = nullptr;

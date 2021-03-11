@@ -70,8 +70,9 @@ public:
 			{
 				EventHandler eventFunc;
 
-				wstring temp = GameManager::GetInstance()->Get_NextStage();
-				eventFunc = EventHandler([=]() {Core::GetInstance()->LoadScene(temp); });
+				eventFunc = EventHandler([=]() {
+					Core::GetInstance()->LoadScene(L"stage1");
+				});
 
 
 				auto menu = UIFactory::Prefab_MenuButton(eventFunc, L"START STAGE", CANVAS_GROUP_MAINWND_MAIN);

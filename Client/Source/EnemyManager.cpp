@@ -196,13 +196,13 @@ void EnemyManager::Destroy_AllEnemy()
 	for (auto& enemy : Get_EnemyList())
 	{
 		enemy->GetComponent<Enemy>()->Set_CurHp(0);
-		--m_iEnemyCount;
+		//--m_iEnemyCount;
 	}
 	
-	if (m_iEnemyCount > 0)
-	{
-		assert(L"Enemy has Left" && 0);
-	}
+	//if (m_iEnemyCount > 0)
+	//{
+	//	assert(L"Enemy has Left" && 0);
+	//}
 }
 
 void EnemyManager::Enemy_Spawn_Debug(Vector3 _scale,

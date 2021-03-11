@@ -71,77 +71,78 @@ void DogFight_Stage2_1::EnterState()
 	infoManager->SetScore(0.f);
 
 
-	EnemyManager::GetInstance()->Spawn_S1P1_Normal();
-	m_bPattern1[0] = true;
+	//EnemyManager::GetInstance()->Spawn_S1P1_Normal();
+	//m_bPattern1[0] = true;
 
 }
 
 
 void DogFight_Stage2_1::UpdateState()
 {
+	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_TAB))
+		SetState(_sn_enter);
 
-		m_fDogFightTime += dTime;
+		//m_fDogFightTime += dTime;
 
-		if (m_bPattern1[0] == true && m_bPattern1[1] == false
-			&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0 )
-		{
-			m_bPattern1[1] = true;
-		}
+		//if (m_bPattern1[0] == true && m_bPattern1[1] == false
+		//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0 )
+		//{
+		//	m_bPattern1[1] = true;
+		//}
 
-		if (m_bPattern1[1] == true && m_bPattern2[0] == false)
-		{
-			EnemyManager::GetInstance()->Spawn_S1P1_Huge();
-			m_bPattern2[0] = true;
-		}
+		//if (m_bPattern1[1] == true && m_bPattern2[0] == false)
+		//{
+		//	EnemyManager::GetInstance()->Spawn_S1P1_Huge();
+		//	m_bPattern2[0] = true;
+		//}
 
-		if (m_bPattern2[0] == true && m_bPattern2[1] == false
-			&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-		{
-			m_bPattern2[1] = true;
-		}
+		//if (m_bPattern2[0] == true && m_bPattern2[1] == false
+		//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+		//{
+		//	m_bPattern2[1] = true;
+		//}
 
-		if (m_bPattern2[1] == true && m_bPattern3[0] == false
-			&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-		{
-			EnemyManager::GetInstance()->Spawn_S1P1_Quick();
-			m_bPattern3[0] = true;
-		}
+		//if (m_bPattern2[1] == true && m_bPattern3[0] == false
+		//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+		//{
+		//	EnemyManager::GetInstance()->Spawn_S1P1_Quick();
+		//	m_bPattern3[0] = true;
+		//}
 
-		if (m_bPattern3[0] == true && m_bPattern3[1] == false
-			&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
-		{
-			m_bPattern3[1] = true;
-			m_bProduce = true;
-		}
-
-
-
-
+		//if (m_bPattern3[0] == true && m_bPattern3[1] == false
+		//	&& EnemyManager::GetInstance()->Get_EnemyCount() <= 0)
+		//{
+		//	m_bPattern3[1] = true;
+		//	m_bProduce = true;
+		//}
 
 
-		if (m_bProduce && m_bNextPhase == false)
-		{
-			m_pPlayer->GetComponent<StateControl>()->SetState(L"playerFarAway");
-			m_pMainCamera->GetComponent<SmoothFollow>()->SetActive(false);
-			m_bNextPhase = true;
-		}
 
 
-		if (m_bNextPhase)
-		{
-			m_fProduceDelta += dTime;
 
-			if (m_fProduceDelta >= 2.f)
-			{
-				//StageManager::GetInstance()->ToScene(L"Evasion");
-				
-				StageManager::GetInstance()->ToScene(_sn_enter);
-				m_fProduceDelta = 0.f;
+
+		//if (m_bProduce && m_bNextPhase == false)
+		//{
+		//	m_pPlayer->GetComponent<StateControl>()->SetState(L"playerFarAway");
+		//	m_pMainCamera->GetComponent<SmoothFollow>()->SetActive(false);
+		//	m_bNextPhase = true;
+		//	return;
+		//}
+
+
+		//if (m_bNextPhase)
+		//{
+		//	m_fProduceDelta += dTime;
+
+		//	if (m_fProduceDelta >= 2.f)
+		//	{
+		//		//StageManager::GetInstance()->ToScene(L"Evasion");
+
+	/*			m_fProduceDelta = 0.f;
 				m_bNextPhase = false;
+				return;
 			}
-		}
-
-
+		}*/
 		//if (m_bProduce)
 		//{
 		//	Accelerate();
@@ -157,7 +158,7 @@ void DogFight_Stage2_1::UpdateState()
 
 
 
-	DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
+	//DEBUG_LOG(L"Current Combat State : ", L"Dog Fight State");
 }
 
 void DogFight_Stage2_1::ExitState()

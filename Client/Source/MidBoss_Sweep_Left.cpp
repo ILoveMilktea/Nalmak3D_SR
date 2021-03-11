@@ -76,7 +76,7 @@ void MidBoss_Sweep_Left::UpdateState()
 	}
 
 #ifdef _DEBUG
-	if (InputManager::GetInstance()->GetKeyDown(KEY_STATE_F9))
+	if (InputManager::GetInstance()->GetKeyDown(_NEXT_STATE_KEY))
 	{
 		GetComponent<Enemy_MidBoss>()->SetRotateSpeed(_SPEED_LOW);
 		SetState(_sn_idle);

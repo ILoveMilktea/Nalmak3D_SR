@@ -14,7 +14,7 @@ StageManager * StageManager::GetInstance()
 {
 	if (m_instance == nullptr)
 	{
-		auto instance = INSTANTIATE()->AddComponent<StageManager>();
+		auto instance = INSTANTIATE()->AddComponent<StageManager>()->AddComponent<StateControl>();
 		m_instance = instance->GetComponent<StageManager>();
 		instance->SetDontDestroy(true);
 	}
@@ -52,12 +52,7 @@ void StageManager::Update()
 
 }
 
-StateControl * StageManager::Get_StateControl() const
-{
-	assert(L"state Control hasn't exit" && m_stateControl);
 
-	return m_stateControl;
-}
 
 //float StageManager::Get_DogTime() const
 //{
@@ -89,22 +84,7 @@ float StageManager::Get_BossSocre() const
 	return m_stateControl->GetState<BossState>(L"Boss")->Get_Score();
 }
 
-void StageManager::Set_StateControl()
-{
-	if (m_stateControl == nullptr)
-	{
-		m_gameObject->AddComponent<StateControl>();
-		m_stateControl = m_gameObject->GetComponent<StateControl>();
-	}
-	else 
-	{
-		m_gameObject->DeleteComponent<StateControl>();
 
-		m_gameObject->AddComponent<StateControl>();
-		m_stateControl = m_gameObject->GetComponent<StateControl>();
-	}
-
-}
 
 
 

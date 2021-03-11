@@ -42,7 +42,7 @@ void StageSelectCamera_Stage1::Initialize()
 		render.mtrlName = L"default_red";
 		render.meshName = L"box";
 		MoveStageByMeshPicking::Desc target;
-		target.targetStage = L"stage1";
+		target.targetStage = L"Tutorial_Enter";
 		INSTANTIATE()->AddComponent<VIBufferRenderer>(&render)->AddComponent<MeshPicking>()
 			->AddComponent<MoveStageByMeshPicking>(&target)->SetPosition(m_stage1_position);
 	}

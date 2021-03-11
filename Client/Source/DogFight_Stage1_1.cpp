@@ -61,7 +61,7 @@ void DogFight_Stage1_1::EnterState()
 
 void DogFight_Stage1_1::UpdateState()
 {
-	m_pStageMgr->Get_StateControl()->AddFloat(L"DogFight_Stage1_fTime", dTime);
+	m_pStageMgr->GetComponent<StateControl>()->AddFloat(L"DogFight_Stage1_fTime", dTime);
 
 	
 	if (EnemyManager::GetInstance()->Get_EnemyCount() <= 0
