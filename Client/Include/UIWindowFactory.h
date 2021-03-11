@@ -687,6 +687,7 @@ public:
 						popup->SetActive(false);
 					}
 				}
+<<<<<<< HEAD
 
 
 				// bottom menu
@@ -697,6 +698,10 @@ public:
 					*/
 				}
 			}
+=======
+			}
+			
+>>>>>>> parent of a57461b (Merge branch 'Ver_2' of https://github.com/ILoveMilktea/Nalmak3D_SR into Ver_2)
 		}
 	}
 	static void StageWindow(GameObject* _player)

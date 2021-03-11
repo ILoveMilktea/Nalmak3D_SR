@@ -199,9 +199,9 @@ bool BossState::EnterProduce()
 
 		if (m_pMainCamera->GetTransform()->position.y <= 0.02f)
 		{
-			m_bCameraProduce = false;
+ 			m_bCameraProduce = false;
 
-			m_pMainCamera->GetTransform()->position = Vector3(0.f, 0.f, -100.f);
+			m_pMainCamera->GetTransform()->position = Vector3( 0.f,0.f,-100.f);
 			m_pPlayer->GetTransform()->position = Vector3(0.f, 0.f, -50.f);
 
 
